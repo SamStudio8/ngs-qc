@@ -1,0 +1,79 @@
+%\chapter{Initial Project Specification}
+
+%\ifpdf
+%    \graphicspath{{Chapter1/Figs/Raster/}{Chapter1/Figs/PDF/}{Chapter1/Figs/}}
+%\else
+%    \graphicspath{{Chapter1/Figs/Vector/}{Chapter1/Figs/}}
+%\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Background}
+Over the past few years advances in genetic sequencing hardware have introduced the concept of massively parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing both time and cost required to perform genetic analysis\citep{HMG}. However, these "next-generation" processes are complex and open to error\citep{Illumina}, thus quality control is an essential step to assure confidence in any downstream analyses performed.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Description}
+During sample sequencing a large number of quality control metrics are generated to determine the quality of the reads from the sequencing hardware itself. At the Wellcome Trust Sanger Institute, the automated QC system currently relies on hard thresholds to make such quality control decisions with individual hard-coded values on particular metrics determining whether a lane has reached a level that requires a warning, or has exceeded the threshold and failed entirely. Whilst this does catch most of the very poor quality lanes, a large number of lanes are flagged for manual inspection at the warning level; a time consuming task which invites inefficiency and error.
+
+In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests that a machine learning classifier could potentially be trained on the combinations of quality control statistics available to make these conclusions without the need for much human intervention.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proposed Tasks}
+    \subsection{Research}
+        Due to my unfamiliarity with the problem space and the experimental nature of the end-goal; the project invites various elements of research. I foresee needing to investigate the following:
+        \begin{description}
+            \item[Problem Domain] \hfill \\
+                Understand terminology related to the problem and environment; what terms are used by QC team members to describe possible reasons for failure? What might cause these failure modes, how badly does this affect the readings from the sample?
+            \item[Quality Control Procedures] \hfill \\
+                Detail what QC procedures are currently in place; what are the hard thresholds used to define a failure or a warning? What manual methods are applied to samples that cannot be automatically processed?
+            \item[Output and Statistics] \hfill \\
+                Decipher the output files from the sequencing and current automatic QC process; what lines are relevant to quality and what can be safely discarded and ignored? What could turn out to be a useful indicator of quality? What statistics are available at QC level and how are they used by QC staff?
+            \item[Information Theory] \hfill \\
+                Investigate potential applications of information theory to QC metrics.
+            \item[Collect Data Sets] \hfill \\
+                Collect and catalogue available data for training. Investigate relationships between attributes and possible sources of noise. Construct or locate useful tools for manipulation and management of these data sets.
+        \end{description}
+
+    \subsection{Development}
+        \begin{description}
+            \item[Define Problem] \hfill \\
+                What exactly will the classifier attempt to learn? How will the problem be represented?
+            \item[Machine Learning Classifiers] \hfill \\
+                Evaluate algorithm options and select an appropriate learning strategy to implement for the final classifier.
+        \end{description}
+
+    \subsection{Testing}
+        \begin{description}
+            \item[Test Suite] \hfill \\
+                Develop an easy to configure and deploy test suite that measures and stores the performance of the learning algorithm at the current time. It will be critical to be able to identify if changes impact the performance of the classifier and measure performance gain over time.
+            \item[Continuous Integration] \hfill \\
+                Cloud solutions such as Wercker or Travis may provide a simple to deploy and use system. Standalone systems like Jenkins could offer more control if required.
+        \end{description}
+
+    \subsection{Deployment}
+        It may be necessary to provide additional configuration options, interfaces or minor changes once the software has been deployed at the institute as part of their QC pipeline.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Deliverables}
+    \begin{description}
+        \item[Outline Project Specification, Start of February] An initial outline of the project, tasks and expected deliverables
+        \item[Progress Reports] Provide weekly status reports in the form of a diary or blog
+        \item[Project Specification, Mid February] Document the problem in greater detail, providing answers to the research questions posed previously. Consider learning goal and possibly strategies, outline the implementation
+        \item[Data Sets, Mid February] Collate the data sets to be used for training and validation
+        \item[Initial Classifier, End of February] Commit the initial classifier
+        \item[Mid-Project Demo, March] Perform a demonstration of the classifier's current capabilities
+        \item[Test Report] Complete analysis on the classifier's ability to generalise
+        \item[Final Submission, May] Submit the classifier itself along with the final report and documentation
+    \end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Annotated Bibliography Section
+\cleardoublepage
+\begin{spacing}{0.8}
+    \nocite{*} % Display all references regardless of use as citation
+    \bibliographystyle{IEEEannot}
+    \bibliography{References/references}
+\end{spacing}
+
