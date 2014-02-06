@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Version 0.1-D
 
-February 5, 2014
+February 6, 2014
 
 0.1 Introduction and Background
 
@@ -24,7 +24,7 @@ Introduction and Background
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[6]. However, these "next-generation" processes are
+both time and cost required to perform genetic analysis[8]. However, these "next-generation" processes are
 complex and open to error[2], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
@@ -127,7 +127,7 @@ process control procedures,” Decision Support Systems, vol. 29, no. 1, pp. 59�
 Available: http://www.sciencedirect.com/science/article/pii/S0167923600000634
 Summary of machine learning techniques and brief examples of their applicability to statistical
 process control.
-[2] Kircher, M., Stenzel, U., Kelso, J., “Improved base calling for the Illumina Genome Analyzer using
+[2] M. Kircher, U. Stenzel and J. Kelso, “Improved base calling for the Illumina Genome Analyzer using
 machine learning strategies,” Genome Biology, vol. 10, no. 8, p. R83, 2009.
 Useful introduction to relevant Illumina hardware and the errors that can occur during
 sequencing.
@@ -137,16 +137,25 @@ Discussing the possible implementation options with my supervisor, we are intere
 investigating whether information theory topics such as compression and gain could provide
 solutions to the problem of deciding whether removing samples will affect variant calling
 downstream.
-[4] J. Shendure and H. Ji, “Next-generation DNA sequencing,” Nature Biotechnology, vol. 26, no. 10, pp.
+[4] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
+R. Weiss, V. Dubourg, J. Vanderplas, A. Passos, D. Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay,
+“Scikit-learn: Machine learning in Python,” Journal of Machine Learning Research, vol. 12, pp.
+2825–2830, 2011.
+A machine learning framework for Python.
+[5] S. Russell and P. Norvig, Artificial Intelligence: A Modern Approach. Prentice Hall, 2010. [Online].
+Available: http://books.google.co.uk/books?id=8jZBksh-bUMC 9780136042594.
+Recommended reading for last semester’s Machine Learning module, providing an in-depth
+explanation of various machine learning algorithms that are available.
+[6] J. Shendure and H. Ji, “Next-generation DNA sequencing,” Nature Biotechnology, vol. 26, no. 10, pp.
 1135–1145, 2008.
 In-depth review of next-generation sequencing hardware, including the history of sequencing
 technology, a comparison of current hardware and their advantages and disadvantages, and an
 outline of available tools for post-processing.
-[5] M. Shewhart, “Interpreting statistical process control (SPC) charts using machine learning and expert
+[7] M. Shewhart, “Interpreting statistical process control (SPC) charts using machine learning and expert
 system techniques,” in Aerospace and Electronics Conference, 1992. NAECON 1992., Proceedings of the
 IEEE 1992 National, vol. 3, May 1992, pp. 1001–1006.
 Relevant as a case study of the application of machine learning to statistical quality control.
-[6] T. Strachan and A. Read, Human Molecular Genetics, 4th ed. Garland Science, 2011, pp. 214–254.
+[8] T. Strachan and A. Read, Human Molecular Genetics, 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes involved in massively parallel DNA sequencing.
 
 3
