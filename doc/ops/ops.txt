@@ -12,9 +12,9 @@ Sam Nicholls msn
 Supervisor:
 Dr. Amanda Clare afc
 
-Version 0.1-D
+Version 1.0
 
-February 6, 2014
+February 7, 2014
 
 0.1 Introduction and Background
 
