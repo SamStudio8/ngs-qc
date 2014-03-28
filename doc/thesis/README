@@ -1,2 +1,2 @@
 # Install
-sudo yum install texlive-minted texlive-tocbibind texlive-stdclsdv texlive-nomencl
+sudo yum install texlive-minted texlive-tocbibind texlive-stdclsdv texlive-nomencl texlive-appendix
