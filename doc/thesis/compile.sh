@@ -31,6 +31,7 @@ if [ $1 = $clean ]; then
 	rm -rf *.out*
 	rm -rf *.nlo
 	rm -rf *.nls
+	rm -rf *.pyg
 	rm -rf $filename.pdf
 	rm -rf $filename.ps
 	rm -rf $filename.dvi
@@ -66,6 +67,7 @@ if [ $1 = $clean ]; then
 	rm -rf *.out*
 	rm -rf *.nlo
 	rm -rf *.nls
+	rm -rf *.pyg
 	rm -rf $filename.pdf
 	rm -rf $filename.ps
 	rm -rf $filename.dvi
@@ -74,14 +76,15 @@ if [ $1 = $clean ]; then
 	exit
 elif [ $1 = $compile ]; then
 	echo "Compiling your PhD Thesis...please wait...!"
-	pdflatex -interaction=nonstopmode $filename.tex
-	bibtex $filename.aux 	
+	pdflatex -shell-escape $filename.tex
+	bibtex $filename.aux
 	makeindex $filename.aux
 	makeindex $filename.idx
 	makeindex $filename.nlo -s nomencl.ist -o $filename.nls
-	pdflatex -interaction=nonstopmode $filename.tex
+	pdflatex -shell-escape -interaction=nonstopmode $filename.tex
 	makeindex $filename.nlo -s nomencl.ist -o $filename.nls
-	pdflatex -interaction=nonstopmode $filename.tex
+	pdflatex -shell-escape -interaction=nonstopmode $filename.tex
+	rm -rf *.pyg
 	echo "Success!"
     pdftotext $filename.pdf
 

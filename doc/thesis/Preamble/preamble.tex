@@ -63,13 +63,36 @@
 
 %\usepackage{algpseudocode} 
 
+% https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#Style_definition
+\usepackage{listings}
+
+%\definecolor{mygreen}{rgb}{0,0.6,0}
+%\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+%\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+%\lstset{ %
+%    belowcaptionskip=1\baselineskip,
+%    breaklines=true,
+%    frame=L,
+%    xleftmargin=\parindent,
+%    language=Python,
+%    showstringspaces=false,
+%    basicstyle=\footnotesize\ttfamily,
+%    keywordstyle=\bfseries\color{green!40!black},
+%    commentstyle=\itshape\color{purple!40!black},
+%    identifierstyle=\color{blue},
+%    stringstyle=\color{orange},
+%}
+
+\usepackage{minted}
+
 
 % ********************Captions and Hyperreferencing / URL **********************
 
 % Captions: This makes captions of figures use a boldfaced small font. 
 %\RequirePackage[small,bf]{caption}
 
-\RequirePackage[labelsep=space,tableposition=top]{caption} 
+\RequirePackage[labelsep=space,tableposition=top]{caption}
 \renewcommand{\figurename}{Fig.} %to support older versions of captions.sty
 
 % ************************ Formatting / Footnote *******************************
