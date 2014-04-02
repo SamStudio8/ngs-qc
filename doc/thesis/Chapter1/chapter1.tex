@@ -1,20 +1,106 @@
+%******************************************************************************
 \chapter{Introduction}
-
-%\ifpdf
-%    \graphicspath{{Chapter1/Figs/Raster/}{Chapter1/Figs/PDF/}{Chapter1/Figs/}}
-%\else
-%    \graphicspath{{Chapter1/Figs/Vector/}{Chapter1/Figs/}}
-%\fi
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction and Background}
-Over the past few years advances in genetic sequencing hardware have introduced the concept of massively parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing both time and cost required to perform genetic analysis\citep{HMG}. However, these "next-generation" processes are complex and open to error\citep{Illumina}, thus quality control is an essential step to assure confidence in any downstream analyses performed.
-
+\ifpdf
+    \graphicspath{{Chapter1/Figs/Raster/}{Chapter1/Figs/PDF/}{Chapter1/Figs/}}
+\else
+    \graphicspath{{Chapter1/Figs/Vector/}{Chapter1/Figs/}}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Description}
-During sample sequencing a large number of quality control metrics are generated to determine the quality of the reads from the sequencing hardware itself. At the Wellcome Trust Sanger Institute, the automated QC system currently relies on hard thresholds to make such quality control decisions with individual hard-coded values on particular metrics determining whether a lane has reached a level that requires a warning, or has exceeded the threshold and failed entirely. Whilst this does catch most of the very poor quality lanes, a large number of lanes are flagged for manual inspection at the warning level; a time consuming task which invites inefficiency and error.
 
-In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests that a machine learning classifier could potentially be trained on the combinations of quality control statistics available to make these conclusions without the need for much human intervention.
+Over the past few years advances in genetic sequencing hardware have introduced
+the concept of massively parallel DNA sequencing; allowing potentially billions
+of chemical reactions to occur simultaneously, reducing both time and cost
+required to perform genetic analysis\citep{HMG}. However, these
+"next-generation" processes are complex and open to error\citep{Illumina}, thus
+quality control is an essential step to assure confidence in any downstream
+analyses performed.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Project Aims}
+
+The project consists of two sub-projects;
+
+\begin{itemize}
+    \item Analysis of a current quality control system in place
+    \item Identification of quantifiable sample properties that affect downstream analysis
+\end{itemize}
+
+
+%TODO Samples or lanelets?
+%TODO Github link in footnote rather than reference?
+%TODO Cite Josh as the source for auto_qc catching most poor quality inputs
+%TODO Cite internal paper as source for inspecting diagnostic plots
+\subsection{Analysis of Current System}
+% Lanes and lanelets have not been introduced yet and I think this works better
+% as an introduction to the project rather than getting too heavy with
+% terminology first.
+With the support of the Wellcome Trust Sanger Institute in Cambridge, this
+project works with the Human Genetics Informatics team to investigate
+\textbf{auto\_qc}, the institute's current automated quality control tool.
+
+During genetic sequencing a large number of metrics are generated to determine
+the quality of the data read from the sequencing hardware itself. As part of the
+current vertebrate sequencing pipeline\citep{vr-pipe:github} at the institute,
+\textbf{auto\_qc} is responsible for applying quality control to samples within
+the pipeline by comparing a modest subset of these metrics to simple hard-coded
+hard thresholds; determining whether a particular sample has reached a level that
+requires a warning, or has exceeded the threshold and failed entirely. Whilst
+this does catch most of the very poor quality outputs, a large number of samples
+are flagged for manual inspection at the warning level; a time consuming task
+which invites both inefficiency and error.
+
+In practise most of these manual decisions are based on inspecting a range of
+diagnostic plots which suggests that a machine learning classifier could
+potentially be trained on the combinations of quality control statistics
+available to make these conclusions without the need for much human
+intervention.
+
+The first part of the project aims to apply machine learning techniques to
+replicate the current \textbf{auto\_qc} rule set by training a decision tree
+classifier on a large set of these quality metrics. The idea is to investigate
+whether these simple threshold based rules can be recovered from such data, or
+whether a new classifier would produce different rules entirely. During this
+analysis it is hoped the classifier may be able to identify currently unused
+quality metrics that improve labelling accuracy. An investigation on the
+possibility of aggregating or otherwise reducing the dimensions of some of the
+more detailed quality statistics to create new parameters will also be
+conducted.
+
+The goal is to improve efficiency of quality control classification, whether by
+improving accuracy of pass and fail predictions over the current system or
+merely being able to provide additional information to a lab technician
+inspecting samples labelled with a warning to reduce arbitrary decisions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Identification of Properties that affect Downstream Analysis}
+
+The other half of this project is motivated by the question "What \textit{is}
+good and bad in terms of quality?"
+
+To be able to classify samples as a pass or a fail with understanding, we need
+an idea of what actually constitutes a good or bad quality sample and must look
+at the effects quality has on analysis performed downstream from sequencing.
+An example of such is \textbf{variant calling} --- the process of identifying
+differences between a DNA sample (such as your own) and a known reference
+sequence.
+
+%TODO Need to improve explanation here, don't like the simplification and feel
+% it might just be hindering understanding of what we're doing
+%TODO Difficult to discuss this without the word lanelets, samples vs.
+% sub-samples isn't making as much sense as I'd like
+Given two high quality data sources where DNA sequences from individuals were
+identified in two different ways (one of which being next-generation sequencing)
+it would be possible to measure the difference between each corresponding pair.
+Using this, we could investigate the effect of leaving out part of the
+next-generation sample during the variant calling process.
+If we were to leave a part of a sample out of the variant calling
+pipeline would the variants found be more (or less) accurate than if it had been
+included? Would they agree more (or less) with the variants called after using
+the non next-generation sequencing method?
+
+Having identified such sub-samples, can quality control metrics from the
+previous part be found in common? If so, such parameters would identify "good"
+or "bad" samples straight out of the machine! Samples that exhibit these quality
+variables will go on to improve or detriment analysis.
 
