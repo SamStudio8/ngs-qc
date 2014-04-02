@@ -1,0 +1,45 @@
+%*****************************************************************************************
+\chapter{Analysis of Current System}
+\ifpdf
+    \graphicspath{{Chapter2/Figs/Raster/}{Chapter2/Figs/PDF/}{Chapter2/Figs/}}
+\else
+    \graphicspath{{Chapter2/Figs/Vector/}{Chapter2/Figs/}}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Data Collection and Format}
+
+%NOTE Assuming lanelets have been described by this point...
+%TODO samtools stats actually generates this data rather than "the seq process"
+As part of the project I've been granted access to significant data sets at the
+Sanger Institute, unlocking quality control data for two of the largest studies
+currently undergoing analysis. A wide array of quality metrics are available for
+each and every lanelet that forms part of either of the two studies; totalling
+13,455 files.
+
+%9154 (68\%), 1542 (11\%), 2759 (21\%)...
+
+%TODO Citation for samtools?
+%TODO Explain a BAM file
+The files are created by \textbf{samtools stats} --- part of a collection of
+widely used open-source utilities for post processing and manipulation of large
+alignments such as those produced by next-generation sequencers that are
+released under the umbrella name of "SAMtools" (Sequence Alignment and Map
+Tools). \textbf{samtools stats} collects statistics from sequence data files %BAM
+and produces key-value summary numbers as well as more complex tab delimited
+dataframes tabulating several metrics over time.
+
+%TODO Was samtools stats known as bamcheck, or did it replace it?
+The output of \textbf{samtools stats} is then parsed by an in-house tool called
+\textbf{bamcheckr}, named so as \textbf{samtools stats} was once known as
+\textbf{bamcheck} and the tool is written in R. \textbf{bamcheckr} supplements
+the summary numbers section of the \textbf{samtools stats} output with
+additional metrics that are later used by \textbf{auto\_qc} for classification.
+This process does not change the file other than adding a few additional
+key-value pairs in the summary numbers section. An truncated example of a 
+"bamcheckr'd" file can be found in Appendix~\ref{AppendixA}.
+
+
