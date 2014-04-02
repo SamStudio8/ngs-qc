@@ -64,17 +64,8 @@ Analysis of Current System . . . . . . . . . . . . . . . . . . . . . . . . . . .
 1
 
 1.1.2
-1.1.3
 
 Identification of Properties that affect Downstream Analysis . . . . . . . . . . . . . .
-Description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-2
-2
-
-1.1.4
-
-Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 2
 
@@ -145,34 +136,7 @@ Having identified such sub-samples, can quality control metrics from the previou
 If so, such parameters would identify "good" or "bad" samples straight out of the machine! Samples that
 exhibit these quality variables will go on to improve or detriment analysis.
 
-1.1.3
-
-Description
-
-1.1.4
-
-Samples, Lanes and Lanelets
-
-A sample is a distinct DNA specimen from a particular human such as yourself. Samples are then inserted in
-to a flowcell, which is essentially a series of very thin glass tubules, each tubule is described as a lane. It is
-throughout these lanes that the chemical reactions involved in sequencing will take place. Before the process
-
 2
-
-1.1 Project Aims
-
-Fig. 1.1 Example of flowcell with some lanelets highlighted
-begins, the samples are amplified in situ inside the flowcell itself (see Fig 1.2) whereby samples multiply in
-magnitude to form millions of dense clusters.
-Note that a lane can contain more than one sample and a sample can appear in more than one lane; this is
-"sample multiplexing" and helps to ensure that the failure of a particular lane does not hinder analysis of a
-sample.
-A lanelet is the aggregate read of all clusters of a particular sample in a single lane. Figure 1.1 attempts to
-highlight examples of a this (circled in blue - not all lanelets are highlighted). For example lane 5 shows the
-four clusters (in reality there would actually be millions) of Sample A combine to represent a lanelet. A lane
-will have as many lanelets as it does samples.
-
-3
 
 References
 [1] vr-pipe, a generic pipeline system [Github]. [Online]. Available: https://github.com/wtsi-hgi/vr-pipe/
@@ -183,6 +147,6 @@ sequencing.
 [3] T. Strachan and A. Read, Human Molecular Genetics, 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes involved in massively parallel DNA sequencing.
 
-4
+3
 
 
