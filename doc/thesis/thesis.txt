@@ -139,13 +139,20 @@ exhibit these quality variables will go on to improve or detriment analysis.
 2
 
 References
-[1] vr-pipe, a generic pipeline system [Github]. [Online]. Available: https://github.com/wtsi-hgi/vr-pipe/
-[2] M. Kircher, U. Stenzel and J. Kelso, “Improved base calling for the Illumina Genome Analyzer using
-machine learning strategies,” Genome Biology, vol. 10, no. 8, p. R83, 2009.
-Useful introduction to relevant Illumina hardware and the errors that can occur during
+[1] vr-pipe, a generic pipeline system [Github]. [Online].
+Available: https://github.com/wtsi-hgi/vr-pipe/
+[2] M. Kircher, U. Stenzel and J. Kelso, “Improved
+base calling for the Illumina Genome Analyzer using
+machine learning strategies,” Genome Biology, vol. 10,
+no. 8, p. R83, 2009.
+Useful introduction to relevant Illumina
+hardware and the errors that can occur
+during sequencing.
+[3] T. Strachan and A. Read, Human Molecular Genetics,
+4th ed. Garland Science, 2011, pp. 214–254.
+A concise introduction to the processes
+involved in massively parallel DNA
 sequencing.
-[3] T. Strachan and A. Read, Human Molecular Genetics, 4th ed. Garland Science, 2011, pp. 214–254.
-A concise introduction to the processes involved in massively parallel DNA sequencing.
 
 3
 
