@@ -94,7 +94,7 @@ elif [ $1 = $compile ]; then
     for file in $(find -name "*.tex" -not -path "./Classes/*" -not -path "./Preamble/*"); do
         echo ""
         echo "$file"
-        hunspell -l -t -i utf-8 "$file" | sort -u
+        hunspell -p thesis.dict -l -t -i utf-8 "$file" | sort -u
     done
     echo ""
 
