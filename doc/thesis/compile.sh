@@ -89,6 +89,10 @@ elif [ $1 = $compile ]; then
     pdftotext $filename.pdf
 
     echo ""
+    echo "TODO:"
+    grep -rniI "TODO" .
+
+    echo
     echo "Spell Check:"
 
     for file in $(find -name "*.tex" -not -path "./Classes/*" -not -path "./Preamble/*"); do
