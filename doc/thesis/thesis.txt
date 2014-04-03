@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 2, 2014
+April 3, 2014
 
 Declaration
 
@@ -49,6 +49,8 @@ Contents
 Introduction
 1.1
 
+1.2
+
 2
 
 iii
@@ -64,31 +66,72 @@ Analysis of Current System . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 1
 
-1.1.2
-
-Identification of Properties that affect Downstream Analysis . . . . . . . . . . . . . .
+1.1.2 Identification of Properties that affect Downstream Analysis . . . . . . . . . . . . . .
+Project Methodology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 2
+2
+
+1.2.1
+
+Task and Time Management . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4
+
+1.2.2
+
+Time Considerations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4
 
 Analysis of Current System
 
-3
+5
 
 2.1
 
 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-3
+5
 
-2.1.1
+2.2
 
-3
+Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-Data Collection and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+
+2.2.1
+
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+5
+
+2.2.2
+2.3
+
+Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+8
+
+2.3.1
+
+Frontier . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+8
+
+2.3.2
+
+R Plots . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+8
 
 Appendix A samtools stats example output
 
-5
+10
 
 Chapter 1
 
@@ -123,7 +166,7 @@ the warning level; a time consuming task which invites both inefficiency and err
 
 1
 
-1.1 Project Aims
+1.2 Project Methodology
 In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests
 that a machine learning classifier could potentially be trained on the combinations of quality control statistics
 available to make these conclusions without the need for much human intervention.
@@ -157,22 +200,112 @@ Having identified such sub-samples, can quality control metrics from the previou
 If so, such parameters would identify "good" or "bad" samples straight out of the machine! Samples that
 exhibit these quality variables will go on to improve or detriment analysis.
 
+1.2
+
+Project Methodology
+
+Clearly some team-based practices invited by agile methodologies — pair programming immediately comes
+to mind — are not applicable in a solo project. It is also unreasonable to expect an "on-site" customer for
+this particular project. In The Case Against Extreme Programming, Matt Stephens describes a "self referential
+safety net" where the perceived traps in each practice are supported and "made safe" by other XP practices.
+This would seem to rule out XP as a viable methodology for a solo-project as cutting out some of the
 2
+
+1.2 Project Methodology
+processes that allow this form of evolutionary design to work (and flatten that cost-of-change curve) can
+introduce serious flaws to the management of a project and potentially result in failure. In the same breath it
+is important to remember that not all agile processes need be discarded just because XP seems incompatible.
+Indeed, some processes seem like common sense, for example; frequent refactoring, simple design, continuous
+integration and version control. Test driven development could also prove a useful process to consider as part
+of a methodology for this project, setting up a framework that allows for quick and frequent testing (before
+coding) and ensuring that any refactoring has a positive (or at least non-negative) effect on the system could
+be a worthwhile contribution to efficiency.
+Could a more plan driven approach or form of agile-plan hybrid be considered appropriate here? In Balancing
+Agility and Discipline, Boehm and Turner introduce the idea of "homegrounds" for both agile and plan driven
+approaches; I note here that for projects that require high reliability and feature a non-collocated "CRACK
+customer" in fact align with some of these homegrounds for plan driven development. Combined with the
+thought that the project requirements will also be relatively stable it would seem that there may be no reason
+to switch to a more agile methodology as its primary feature is the welcoming of change that is not even
+needed? Perhaps this is the naivety of an optimist!
+Personally I think I would approach this with a form of agile-plan hybrid; I like the idea of quick iterations
+and getting feedback as opposed to leaving acceptance testing until the very end of the project, but I also
+want a somewhat detailed feedback process. Whilst through Neil Taylor’s course Agile Methodologies it was
+suggested that it is dangerous to pick and choose processes (don’t anger the Ring of Snakes!) and also merely
+paying "lip service" to agile must be avoided (otherwise what’s the point?), I feel that on this occasion it can
+be justified by the size of the project itself.
+This project will consist of many research steps, each requiring some form of computational process to prepare
+the data for the next step. Whilst the implementations of the algorithms themselves pose computational
+complexity, there appears to be little challenge from a planning perspective and in fact a looser overall plan
+should probably be considered as we must account for unforseen and unexpected outcomes from each research
+step.
+The most important part of ensuring this project stays on track will be the development of a sensible testing
+methodology to ensure we are not only moving in the right direction in terms of which algorithm and parameters
+to use but also in terms of reliably measuring performance over time in a way that allows justification of such
+design choices.
+Despite this trail of thought, given the research grounding this project entails it might be required to look
+beyond traditional and even modern software development methodologies and investigate a more scientific
+approach. A simple "scientific method" would involve establishing a null hypothesis that can be proven false
+by testing (eg: "auto_qc classifier is more accurate than the new classifier") and executing experiments that
+attempt to prove this null hypothesis false in favour of an alternative hypothesis (typically the opposite, eg:
+"The new classifier is more accurate than the old classifier"). This form of hypothesis testing could essentially
+become the project’s acceptance tests (providing we have an empirical definition of what "more accurate"
+means in terms of this system) and any modification can be classed as an experiment ("Do these parameters
+allow us to reject the null hypothesis?"). Although care must be taken not to let this descend into unstructured
+cycles of mere hack-and-test, code-and-fix style programming.
+3
+
+1.2 Project Methodology
+Overall it is rather difficult to select a methodology for a project such as this, the research element makes it
+almost impossible to draw on previous personal experience for ideas of what development processes may or
+may not be effective.
+
+1.2.1
+
+Task and Time Management
+
+Shortly before embarking on this dissertation project, I had written my own todo list web application; Triage.
+
+1.2.2
+
+Time Considerations
+
+It must be remembered that this is supposed to be a minor project completed alongside the study of other
+modules that have their own assignments...
+
+4
 
 Chapter 2
 
 Analysis of Current System
 2.1
-2.1.1
 
 Introduction
-Data Collection and Format
+
+This part of the project can be outlined as follows:
+• Collect data sets on which a machine learning classifier is to be trained
+• Construct a program capable of processing and storing such data sets such that required subsets of the
+data can be quickly and easily returned for further analysis
+• Select a suitable machine learning framework to handle the training and validation of a classifier
+• Ensure a robust validation methodology exists for assuring quality of our own results
+• Set up an environment capable of allowing results from such a classifier to be stored and compared
+• Training a suitable classifier on the collected data sets
+• Perform experiments by selecting subsets of the variables and observations and measure whether classification
+accuracy is improved
+
+2.2
+2.2.1
+
+Materials and Methods
+Input Data and Format
 
 As part of the project I’ve been granted access to significant data sets at the Sanger Institute, unlocking quality
 control data for two of the largest studies currently undergoing analysis. A wide array of quality metrics are
 available for each and every lanelet that forms part of either of the two studies; totalling 13,455 files.
 The files are created by samtools stats — part of a collection of widely used open-source utilities for post
 processing and manipulation of large alignments such as those produced by next-generation sequencers that
+5
+
+2.2 Materials and Methods
 are released under the umbrella name of "SAMtools" (Sequence Alignment and Map Tools). samtools stats
 collects statistics from sequence data files and produces key-value summary numbers as well as more complex
 tab delimited dataframes tabulating several metrics over time.
@@ -180,9 +313,95 @@ The output of samtools stats is then parsed by an in-house tool called bamcheckr
 was once known as bamcheck and the tool is written in R. bamcheckr supplements the summary numbers
 section of the samtools stats output with additional metrics that are later used by auto_qc for classification.
 This process does not change the file other than adding a few additional key-value pairs in the summary
-numbers section. An truncated example of a "bamcheckr’d" file can be found in Appendix A.
+numbers section. A truncated example of a "bamcheckr’d" file can be found in Appendix A.
 
-3
+2.2.2
+
+Development Environment
+
+Language
+For the language of the program designed to handle this vast array of input data, Python was selected, more
+out of personal taste rather than a detailed analysis of required performance and features. From previous
+experience I was happy with the performance of Python when processing large datasets in terms of both I/O
+file handling operations and storing the data in memory for later use. Python’s generous choice of both built-in
+and third-party libraries have proven useful on many occasions. Due to its concise and flexible nature it is
+possible to rapidly develop applications and its readability eases ongoing maintenance; useful given the short
+time-span allocated for this project and the possibility of others wishing to contribute to the project codebase
+after completion.
+Whilst the choice was made primarily on preference, this is not to say other options were not considered: a
+highly popular Java-based collection of data mining tools, WEKA would certainly have provided a framework
+for building decision tree classifiers but at the same time did not appear to offer any significant features that
+were unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual machine to be
+installed which could be undesirable from a performance or even security standpoint when the application is
+deployed to servers at the Sanger Institute.
+Difficulty was also encountered finding example implementations for WEKA with most documentation and
+tutorials providing information for performing analysis via the graphical "Explorer" interface instead, which
+would not be appropriate for quickly setting up and repeating experiments automatically.
+Given the quality data we’ll be using to train a machine learning classifier is output from the previously
+mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
+potential of integrating the learning and predicting functions right in to the same process that outputs the data
+seemed convenient.
+...Whilst the tree and rpart packages are available for constructing decision trees in R but (and actually
+RWeka provides an R interface to WEKA)...they did not appear to be as robust as other more well-known
+frameworks. Putting it politely, the programming paradigm of R is rather different to other languages and
+can significantly increase development time if one is not very well versed in the patterns and grammar of the
+language and it seemed best to stick to one’s comfort zone.
+6
+
+2.2 Materials and Methods
+...C and C++ also a possibility, however dlib didn’t support tree-based classifiers although Shark did, Python
+chosen in the end for ease of use...
+
+Framework
+...Having studied the Machine Learning module in final year the prospect of getting stuck in to the deep of a
+machine learning algorithm was exciting, however the reality is a lot of time and effort has gone in to proper
+optimisation of a framework which is unlikely to be surpassed successfully by a short-term one-person project.
+It is therefore only natural that a library seems a wise investment for the codebase...
+...There are numerous machine learning frameworks available in many languages, some described above...
+however it seemed counter-intuitive to select a framework in another language for the introduction of an
+additional arbitrary output and input steps to switch between the two environments.
+...A mixed bag of such frameworks exist in Python, two in particular scikit-learn and Orange were main
+contenders, partly on their recommendation from the project supervisor...
+...scikit integrates the "big names" in Python: numpy, scipy and matplotlib ...put off from Orange due to
+difficulties in reading in data ...it did however later appear to ship with features that were not in scikit (pruning
+and printing) ...with more time I’d certainly like to investigate using other libraries such as Orange or even
+outside Python and take at look at WEKA or Shark...
+
+Libraries
+numpy, scipy... Fast and reliable implementations of mathematical functions... ggplot2 for beautiful graphing...
+
+Testing
+Investigated the possibility of using Jenkins but just didn’t have the time to set up and tweak all the plugins
+and options of the platform to do what I wanted... Would still have been poor in terms of searching through
+logs to track what parameters led to improvements in cross validation... ...Quite likely I’d have needed to
+author a Java or Groovy plugin to keep good track of cross-validation...
+Briefly considered online solutions such as Travis and Wercker which I use for some personal projects,
+whilst quicker to set up would probably have not been able to handle artifacts such as dot files without some
+convoluted solution of uploading them to dropbox or adding them to a private git repository from the build
+node... ...also would have needed to upload a very large quantity of training data repeatedly which would be
+inefficient (and more than likely against reasonable use of the platform)
+Really wanted to write my own solution for this but had to settle for well formatted log files that could be
+searched and processed with some command line fu...
+
+7
+
+2.3 Implementation
+Additional Tools
+Version control is critical, git!
+
+2.3
+
+Implementation
+
+2.3.1
+
+Frontier
+
+2.3.2
+
+R Plots
+
+8
 
 References
 [1] vr-pipe, a generic pipeline system [Github]. [Online].
@@ -200,7 +419,7 @@ A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
 
-4
+9
 
 Appendix A
 
@@ -332,7 +551,7 @@ contiguous cycle dropoff count:
 fwd.percent.insertions.above.baseline:
 1.43135383851191
 
-5
+10
 
 SN
 fwd.percent.insertions.below.baseline:
@@ -591,7 +810,7 @@ FFQ
 0
 0
 
-6
+11
 
 1609
 
@@ -1062,7 +1281,7 @@ GCC
 23.45
 26.23
 
-7
+12
 
 GCC
 75
@@ -1352,7 +1571,7 @@ COV
 1000
 4
 
-8
+13
 
 COV
 [1000<]
@@ -1441,6 +1660,6 @@ GCD
 1.219
 1.219
 
-9
+14
 
 
