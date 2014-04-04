@@ -489,7 +489,10 @@ Contributions to bamcheckr
 
 install.packages("devtools")
 library(devtools)
+# Install directly from github repository
 install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
+# Install from local directory
+install("/home/sam/Projects/seq_autoqc/bamcheckr")
 ...R CMD BATCH issue
 ...Fixed a graph plotting failure. ...Writing additional routines...
 

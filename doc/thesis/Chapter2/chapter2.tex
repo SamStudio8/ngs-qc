@@ -275,7 +275,12 @@ which a very large dataset.
                framesep=2mm]{r}
     install.packages("devtools")
     library(devtools)
+
+    # Install directly from github repository
     install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
+
+    # Install from local directory
+    install("/home/sam/Projects/seq_autoqc/bamcheckr")
 \end{minted}
 
 ...R CMD BATCH issue
