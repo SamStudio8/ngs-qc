@@ -452,12 +452,11 @@ Frontier is the programmatic output for this part of the project... providing an
 itself... ...allowing simple commands to pull the data out from memory in to formats aceptable by the machine
 learning framework...
 ...provides a class to read from the "bamcheck files" as seen in Appendix A...
-...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more general
-purpose tool; if we were to add another class label, the definition would merely need to be included to the
-CLASSES (Fig ??) variable passed when the Statplexer is constructed. But use is therefore not merely limited
-to our problem but rather any machine learning problem where you’d like to simplify your interactions which
-a very large dataset.
-
+...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more
+general purpose tool; if we were to add another class label, the definition would merely need to be included to
+the CLASSES (Listing 1) variable passed when the Statplexer is constructed. But use is therefore not merely
+limited to our problem but rather any machine learning problem where you’d like to simplify your interactions
+which a very large dataset.
 CLASSES = {
 "pass": {
 "class": ["pass"],
@@ -475,7 +474,7 @@ CLASSES = {
 "code": 0,
 },
 }
-
+Listing 1 Class definitions for auto_qc as passed to Frontier
 9
 
 2.5 Results
