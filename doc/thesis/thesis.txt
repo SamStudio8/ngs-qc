@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 3, 2014
+April 4, 2014
 
 Declaration
 
@@ -108,30 +108,52 @@ Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 2.2.2
 2.3
+2.4
+
+2.5
 
 Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 6
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Pre-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 8
 
 2.3.1
 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+8
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+9
+
+2.4.1
+
 Frontier . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-8
+9
 
-2.3.2
+2.4.2
 
-R Plots . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
 
-8
+Classification Correlation
+
+Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+2.5.1
+
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+2.5.2
+
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
 
 Appendix A samtools stats example output
 
-10
+12
 
 Chapter 1
 
@@ -385,23 +407,106 @@ searched and processed with some command line fu...
 
 7
 
-2.3 Implementation
+2.3 Pre-Implementation
 Additional Tools
 Version control is critical, git!
 
 2.3
-
-Implementation
-
 2.3.1
 
-Frontier
+Pre-Implementation
+Classification Correlation
 
-2.3.2
+...An important consideration for statistical analysis is the relation between the observations. The quality data
+files we have are per lanelet, however a lane can house more than one lanelet... and so herein lies the trouble,
+if during a run, the flow cell is somehow subjected to abnormal temperatures (air conditioning failure) or the
+sequencing device is depleted of reagents, every lane (and thus lanelet within) will be of very poor quality.
+Thus there would appear to exist a relationship between the respective qualities of each lanelet in a lane as
+well as each lane in a sequencing run!
 
-R Plots
+Fig. 2.1 Heatmap of Lanelet QC Status by Lane
+...Figure 2.1 displays a plot of auto_qc classification for each lanelet (y) versus lane (x). ...The plot was
+designed to be a diagnostic test to see whether this was the case. I should mention that it seems there are few
+conditions under which a lanelet would fail irrespective of the auto_qc status of the rest of the lanelets in the
+lane; which mostly involve the preparation of the sample (which is easy to spot given it will cause poor quality
+across all lanelets using that library sample).
+...an unbroken vertical red bar indicates that all the lanelets inside a particular lane failed. Likewise yellow
+represents a warning. Grey areas are passes and were desaturated to make the other outcomes immediately
 
 8
+
+2.4 Implementation
+obvious. It is clear that there are patches where lanelets have failed where entire lanes have not, but there does
+appear to be some correlation.
+Having discussed this with the supervisor and contacts at the Sanger Institute we decided to continue...
+Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
+identified so the red bars of thicker-width arguably display some failures across entire flow cells.
+
+2.4
+2.4.1
+
+Implementation
+Frontier
+
+Frontier is the programmatic output for this part of the project... providing an API-like interface to the data
+itself... ...allowing simple commands to pull the data out from memory in to formats aceptable by the machine
+learning framework...
+...provides a class to read from the "bamcheck files" as seen in Appendix A...
+...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more general
+purpose tool; if we were to add another class label, the definition would merely need to be included to the
+CLASSES (Fig ??) variable passed when the Statplexer is constructed. But use is therefore not merely limited
+to our problem but rather any machine learning problem where you’d like to simplify your interactions which
+a very large dataset.
+
+CLASSES = {
+"pass": {
+"class": ["pass"],
+"names": ["pass", "passed"],
+"code": 1,
+},
+"fail": {
+"class": ["fail"],
+"names": ["fail", "failed"],
+"code": -1,
+},
+"warn": {
+"class": ["warn"],
+"names": ["warn", "warning"],
+"code": 0,
+},
+}
+
+9
+
+2.5 Results
+Cross Validation
+...K fold cross validation ...stratified cross validation...
+
+Confusion Matrices
+
+2.4.2
+
+Contributions to bamcheckr
+
+install.packages("devtools")
+library(devtools)
+install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
+...R CMD BATCH issue
+...Fixed a graph plotting failure. ...Writing additional routines...
+
+2.5
+
+Results
+
+2.5.1
+
+Initial Trees
+
+2.5.2
+
+Parameter Sets
+
+10
 
 References
 [1] vr-pipe, a generic pipeline system [Github]. [Online].
@@ -419,7 +524,7 @@ A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
 
-9
+11
 
 Appendix A
 
@@ -551,7 +656,7 @@ contiguous cycle dropoff count:
 fwd.percent.insertions.above.baseline:
 1.43135383851191
 
-10
+12
 
 SN
 fwd.percent.insertions.below.baseline:
@@ -810,7 +915,7 @@ FFQ
 0
 0
 
-11
+13
 
 1609
 
@@ -1281,7 +1386,7 @@ GCC
 23.45
 26.23
 
-12
+14
 
 GCC
 75
@@ -1571,7 +1676,7 @@ COV
 1000
 4
 
-13
+15
 
 COV
 [1000<]
@@ -1660,6 +1765,6 @@ GCD
 1.219
 1.219
 
-14
+16
 
 

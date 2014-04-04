@@ -169,6 +169,117 @@ Version control is critical, \textbf{git}!
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TODO Rubbish section title
+\section{Pre-Implementation}
+\subsection{Classification Correlation}
+...An important consideration for statistical analysis is the relation between the
+observations. The quality data files we have are per lanelet, however a lane can
+house more than one lanelet...  and so herein lies the trouble, if during a run,
+the flow cell is somehow subjected to abnormal temperatures (air conditioning
+failure) or the sequencing device is depleted of reagents, every lane (and thus
+lanelet within) will be of very poor quality. Thus there would appear to exist a
+relationship between the respective qualities of each lanelet in a lane as well
+as each lane in a sequencing run!
+
+%TODO Probably mention in the text this is a very dense heatmap...
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1.0\textwidth]{classcorr}
+    \caption[ClassCorr]{Heatmap of Lanelet QC Status by Lane}
+    \label{fig:classcorr}
+\end{figure}
+
+%TODO Throwing in the word library
+...Figure~\ref{fig:classcorr} displays a plot of auto\_qc classification for
+each lanelet (y) versus lane (x). ...The plot was designed to be a diagnostic
+test to see whether this was the case. I should mention that it seems there are
+few conditions under which a lanelet would fail irrespective of the auto\_qc
+status of the rest of the lanelets in the lane; which mostly involve the
+preparation of the sample (which is easy to spot given it will cause poor
+quality across all lanelets using that library sample).
+
+...an unbroken vertical red bar indicates that all the lanelets inside a
+particular lane failed. Likewise yellow represents a warning. Grey areas are
+passes and were desaturated to make the other outcomes immediately obvious. It
+is clear that there are patches where lanelets have failed where entire lanes
+have not, but there does appear to be some correlation.
+
+%TODO
+Having discussed this with the supervisor and contacts at the Sanger Institute
+we decided to continue...
+
+Note the plot does not make a particular distinction between lanes in the same
+flow cell but they are sequentially identified so the red bars of thicker-width
+arguably display some failures across entire flow cells.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
 \subsection{Frontier}
-\subsection{R Plots}
+\textbf{Frontier} is the programmatic output for this part of the project...
+providing an API-like interface to the data itself... ...allowing simple
+commands to pull the data out from memory in to formats aceptable by the machine
+learning framework...
+
+...provides a class to read from the "bamcheck files" as seen in
+Appendix~\ref{AppendixA}...
+
+...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
+enable it to be used as a more general purpose tool; if we were to add another
+class label, the definition would merely need to be included to the CLASSES
+(Fig~\ref{fig:FrontierClasses}) variable passed when the Statplexer is
+constructed. But use is therefore not merely limited to our problem but rather
+any machine learning problem where you'd like to simplify your interactions
+which a very large dataset.
+
+\begin{minted}[mathescape,
+               %linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{python}
+    CLASSES = {
+            "pass": {
+                "class": ["pass"],
+                "names": ["pass", "passed"],
+                "code": 1,
+            },
+            "fail": {
+                "class": ["fail"],
+                "names": ["fail", "failed"],
+                "code": -1,
+            },
+            "warn": {
+                "class": ["warn"],
+                "names": ["warn", "warning"],
+                "code": 0,
+            },
+    }
+\end{minted}
+
+\subsubsection{Cross Validation}
+...K fold cross validation
+...stratified cross validation...
+
+\subsubsection{Confusion Matrices}
+
+\subsection{Contributions to bamcheckr}
+\begin{minted}[mathescape,
+               %linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{r}
+    install.packages("devtools")
+    library(devtools)
+    install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
+\end{minted}
+
+...R CMD BATCH issue
+
+...Fixed a graph plotting failure.
+...Writing additional routines...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+\subsection{Initial Trees}
+\subsection{Parameter Sets}
