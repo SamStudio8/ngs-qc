@@ -282,6 +282,9 @@ which a very large dataset.
 
     # Install from local directory
     install("/home/sam/Projects/seq_autoqc/bamcheckr")
+
+    # Takes 5.5s on average, 16.1s with ratio due to inefficient implementation
+    # for overlapping_base_duplicate_percentage
 \end{minted}
 
 ...R CMD BATCH issue
