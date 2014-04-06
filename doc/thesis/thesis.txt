@@ -170,17 +170,17 @@ Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 3.3
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 3.2.1
 3.3.1
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
-Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 Appendix A samtools stats example output
 
-16
+17
 
 Chapter 1
 
@@ -583,14 +583,44 @@ It is for this reason we’re looking for what Josh at Sanger described as a “
 The candidate must not have too many variants, or too few; a sort of “Goldilocks genome”.
 
 3.2
-
-Materials and Methods
-
 3.2.1
 
-3.3
+Materials and Methods
+Input Data: Variant Call Format
 
-Input Data and Format
+# Install
+git clone htslib
+git clone bcftools
+make #(requires htslib to be above samtools/bcftools dir)
+sudo cp bcftools usr/local/bin
+# Tabix
+# Download from sourceforge
+# http://sourceforge.net/projects/samtools/files/tabix/
+make
+sudo cp tabix /usr/local/bin
+# Generate an index (vcfidx) (not necessary)
+vcftools --gzvcf cd.ichip.vcf.gz
+# Query VCF (can be done with awk, cut etc.)
+vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
+# ! A faster alternative to using vcftools exists in bcftools ! #
+bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
+# Complains about lack of tabix index but still makes the file...
+# Index with tabix
+
+12
+
+3.3 Implementation
+# "The input data file must be position sorted and compressed by bgzip
+# which has a gzip(1) like interface"
+tabix -p vcf file.vcf.gz
+diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
+# Shows no difference! :)
+# http://samtools.sourceforge.net/tabix.shtml
+# http://vcftools.sourceforge.net/perl_module.html
+# http://www.biostars.org/p/51076/
+# http://vcftools.sourceforge.net/htslib.html#query
+
+3.3
 
 Implementation
 
@@ -615,15 +645,14 @@ for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
 if position in variant_position_list:
 # Do something...
-
-12
-
-3.3 Implementation
 This of course is rather dumb. Looking up a list has O(n) performance where n is the number of variants (and
 there are a lot of variants). Combining this with the sheer number of lookups performed; with the default
 parameters the list would be queried half a billion times for the first chromosome alone.
 You could improve this somewhat by dividing the variant_position_list in to a list of variants for each chromosome,
 so at least n is smaller. It is pretty doubtful that this would make any useful impact given the number of lookups.
+13
+
+3.3 Implementation
 I’m happy to say I bypassed this option but thought it would be fun to consider it’s performance.
 A far more sensible solution would be to replace the list with a dictionary whose lookup is amortized to a
 constant time. The number of lookups is still incredibly substantial but a constant lookup is starting to make
@@ -655,15 +684,15 @@ looking up with a list). Was it the allocation of memory? Perhaps I had run out 
 was going in to fetching and storing data in swap?
 I switched out the comparison (== 1) step for the previous dictionary based lookup and the performance
 improved considerably. What was going on? There must be more to looking at a given element in the numpy
-
-13
-
-3.3 Implementation
 chromosome array, but what?
 After a brief spell of playing with Python profilers and crashing my laptop by allocating considerably more
 memory than I had with numpy.zeroes, I read the manual (!) and discovered that numpy.zeroes returns an
 ndarray which uses “advanced indexing” even for single element access, effectively copying the element to a
 Python scalar for comparison.
+
+14
+
+3.3 Implementation
 That’s a lot of memory action!
 It then occurred to me that we’re interested in just how many variants are inside each region and our chromosome
 is handily encapsulated in a numpy array! Why don’t we just sum together the elements in each region?
@@ -686,7 +715,7 @@ the variant locations in the first place)!
 Testing
 ...particularly difficult!
 
-14
+15
 
 References
 [1] vr-pipe, a generic pipeline system [Github]. [Online].
@@ -704,7 +733,7 @@ A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
 
-15
+16
 
 Appendix A
 
@@ -836,7 +865,7 @@ contiguous cycle dropoff count:
 fwd.percent.insertions.above.baseline:
 1.43135383851191
 
-16
+17
 
 SN
 fwd.percent.insertions.below.baseline:
@@ -1095,7 +1124,7 @@ FFQ
 0
 0
 
-17
+18
 
 1609
 
@@ -1566,7 +1595,7 @@ GCC
 23.45
 26.23
 
-18
+19
 
 GCC
 75
@@ -1856,7 +1885,7 @@ COV
 1000
 4
 
-19
+20
 
 COV
 [1000<]
@@ -1945,6 +1974,6 @@ GCD
 1.219
 1.219
 
-20
+21
 
 
