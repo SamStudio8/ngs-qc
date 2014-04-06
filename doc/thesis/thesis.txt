@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 4, 2014
+April 6, 2014
 
 Declaration
 
@@ -53,7 +53,6 @@ Introduction
 
 2
 
-iii
 1
 
 Project Aims . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -112,6 +111,10 @@ Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 2.5
 
+3
+
+iii
+
 Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 6
@@ -151,9 +154,31 @@ Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
 
+Identification of Qualitative Sample Properties
+
+11
+
+3.1
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+3.2
+
+Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+3.2.1
+
+3.3
+
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+3.3.1
+
+Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
 Appendix A samtools stats example output
 
-12
+13
 
 Chapter 1
 
@@ -449,7 +474,7 @@ Implementation
 Frontier
 
 Frontier is the programmatic output for this part of the project... providing an API-like interface to the data
-itself... ...allowing simple commands to pull the data out from memory in to formats aceptable by the machine
+itself... ...allowing simple commands to pull the data out from memory in to formats acceptable by the machine
 learning framework...
 ...provides a class to read from the "bamcheck files" as seen in Appendix A...
 ...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more
@@ -482,6 +507,7 @@ Cross Validation
 ...K fold cross validation ...stratified cross validation...
 
 Confusion Matrices
+"Normal" confusion matrix and "Warnings" confusion matrix...
 
 2.4.2
 
@@ -510,6 +536,34 @@ Parameter Sets
 
 10
 
+Chapter 3
+
+Identification of Qualitative Sample
+Properties
+3.1
+
+Introduction
+
+This part of the project can be outlined as follows:
+• ...
+
+3.2
+3.2.1
+
+3.3
+3.3.1
+
+Materials and Methods
+Input Data and Format
+
+Implementation
+Goldilocks
+
+Testing
+...particularly difficult!
+
+11
+
 References
 [1] vr-pipe, a generic pipeline system [Github]. [Online].
 Available: https://github.com/wtsi-hgi/vr-pipe/
@@ -526,7 +580,7 @@ A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
 
-11
+12
 
 Appendix A
 
@@ -658,7 +712,7 @@ contiguous cycle dropoff count:
 fwd.percent.insertions.above.baseline:
 1.43135383851191
 
-12
+13
 
 SN
 fwd.percent.insertions.below.baseline:
@@ -917,7 +971,7 @@ FFQ
 0
 0
 
-13
+14
 
 1609
 
@@ -1388,7 +1442,7 @@ GCC
 23.45
 26.23
 
-14
+15
 
 GCC
 75
@@ -1678,7 +1732,7 @@ COV
 1000
 4
 
-15
+16
 
 COV
 [1000<]
@@ -1767,6 +1821,6 @@ GCD
 1.219
 1.219
 
-16
+17
 
 
