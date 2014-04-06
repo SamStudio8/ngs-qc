@@ -39,9 +39,9 @@ if [ $1 = $clean ]; then
 	echo "Cleaning complete!"
 	exit
 else
-	echo "Shell scrip for compiling the PhD Thesis"
+	echo "Shell scrip for compiling your thesis"
 	echo "Usage: sh ./compile-thesis.sh [OPTIONS] [filename]"
-	echo "[option]  compile: Compiles the PhD Thesis"
+	echo "[option]  compile: Compiles your thesis"
 	echo "[option]  clean: removes temporary files no filename required"
 	exit
 fi
@@ -75,7 +75,7 @@ if [ $1 = $clean ]; then
 	echo "Cleaning complete!"
 	exit
 elif [ $1 = $compile ]; then
-	echo "Compiling your PhD Thesis...please wait...!"
+	echo "Compiling your thesis...please wait...!"
 	pdflatex -shell-escape $filename.tex
 	bibtex $filename.aux
 	makeindex $filename.aux
