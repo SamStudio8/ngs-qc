@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 13, 2014
+April 14, 2014
 
 Declaration
 
@@ -46,12 +46,12 @@ available to make these conclusions without the need for much human intervention
 Contents
 1
 
+iii
+
 Introduction
 1.1
 
 1.2
-
-2
 
 1
 
@@ -83,112 +83,122 @@ Time Considerations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 4
 
+I
+
 Analysis of Current System
 
 5
 
+2
+
+Introduction
+
+6
+
 2.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Introduction and Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-5
+6
 
 2.2
 
 Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-5
+6
 
 2.2.1
 
 Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-5
+6
 
 2.2.2
-2.3
-2.4
-
-2.5
-
-3
-
-iii
 
 Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-6
+7
 
 Pre-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-8
+9
 
 2.3.1
 
+9
+
+2.3
+
+3
+
+II
+5
+
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-8
+Frontier
+3.1
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-9
-
-2.4.1
-
-Frontier . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-9
-
-2.4.2
-
-Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
-
-2.4.3
-
-SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+4
 
 Classification Correlation
 
-Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
-2.5.1
+11
 
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
-
-2.5.2
-
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
-
-Identification of Qualitative Sample Properties
-3.1
-
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 3.1.1
 
-3.2
+Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+3.1.2
 
-Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
-3.2.1
+SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
-3.3
+Results
 
-12
+14
 
-Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+4.0.3
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
-3.3.1
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
-Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+4.0.4
+
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+Identification of Qualitative Sample Properties
+Introduction and Motivation
+
+15
+16
 
 Contents
+5.1
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+5.2
+
+Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+5.1.1
+5.2.1
+5.3
+
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+5.3.1
+
+Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
 Appendix A Input Examples
 
-18
+22
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
 iv
 
@@ -333,12 +343,18 @@ modules that have their own assignments...
 
 4
 
-Chapter 2
+Part I
 
 Analysis of Current System
-2.1
+
+5
+
+Chapter 2
 
 Introduction
+2.1
+
+Introduction and Background
 
 This part of the project can be outlined as follows:
 • Collect data sets on which a machine learning classifier is to be trained
@@ -357,12 +373,12 @@ accuracy is improved
 Materials and Methods
 Input Data and Format
 
-"BAMcheckeR’d" Data
+"BAMcheckR’d" Data
 As part of the project I’ve been granted access to significant data sets at the Sanger Institute, unlocking quality
 control data for two of the largest studies currently undergoing analysis. A wide array of quality metrics are
 available for each and every lanelet that forms part of either of the two studies; totalling 13,455 files.
 
-5
+6
 
 2.2 Materials and Methods
 The files are created by samtools stats — part of a collection of widely used open-source utilities for post
@@ -404,7 +420,7 @@ Difficulty was also encountered finding example implementations for WEKA with mo
 tutorials providing information for performing analysis via the graphical "Explorer" interface instead, which
 would not be appropriate for quickly setting up and repeating experiments automatically.
 
-6
+7
 
 2.2 Materials and Methods
 Given the quality data we’ll be using to train a machine learning classifier is output from the previously
@@ -442,7 +458,7 @@ Testing
 Investigated the possibility of using Jenkins but just didn’t have the time to set up and tweak all the plugins
 and options of the platform to do what I wanted... Would still have been poor in terms of searching through
 
-7
+8
 
 2.3 Pre-Implementation
 logs to track what parameters led to improvements in cross validation... ...Quite likely I’d have needed to
@@ -483,17 +499,20 @@ Having discussed this with the supervisor and contacts at the Sanger Institute w
 Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
 identified so the red bars of thicker-width arguably display some failures across entire flow cells.
 
-8
+9
 
-2.4 Implementation
+2.3 Pre-Implementation
 
 Fig. 2.1 Heatmap of Lanelet QC Status by Lane
 
-2.4
-2.4.1
+10
+
+Chapter 3
+
+Frontier
+3.1
 
 Implementation
-Frontier
 
 Frontier is the programmatic output for this part of the project... providing an API-like interface to the data
 itself... ...allowing simple commands to pull the data out from memory in to formats acceptable by the machine
@@ -506,9 +525,9 @@ the CLASSES (Listing 1) variable passed when the Statplexer is constructed. But 
 limited to our problem but rather any machine learning problem where you’d like to simplify your interactions
 which a very large dataset.
 
-9
+11
 
-2.4 Implementation
+3.1 Implementation
 
 CLASSES = {
 "pass": {
@@ -535,7 +554,7 @@ Cross Validation
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
-2.4.2
+3.1.1
 
 Contributions to bamcheckr
 
@@ -546,15 +565,15 @@ install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 # Install from local directory
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
 
-10
+12
 
-2.5 Results
+3.1 Implementation
 Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
 re-wrote in Python...
 ...R CMD BATCH issue
 ...Fixed a graph plotting failure. ...Writing additional routines...
 
-2.4.3
+3.1.2
 
 SelectKBest
 
@@ -562,32 +581,39 @@ SelectKBest
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
 version from master * needed use force np.float64 ...actually data was 0... gg :(
 
-2.5
+13
+
+Chapter 4
 
 Results
-
-2.5.1
+4.0.3
 
 Initial Trees
 
-2.5.2
+4.0.4
 
 Parameter Sets
 
-11
+14
 
-Chapter 3
+Part II
 
 Identification of Qualitative Sample
 Properties
-3.1
+
+15
+
+Chapter 5
+
+Introduction and Motivation
+5.1
 
 Introduction
 
 This part of the project can be outlined as follows:
 • ...
 
-3.1.1
+5.1.1
 
 Why Goldilocks?
 
@@ -605,13 +631,12 @@ leaving a lanelet out, performing variant calling and then comparing the result 
 and the corresponding variant call on our “SNP chip” data.
 The basic idea is to answer the question of what actually constitutes “good” or “bad” lanelet quality? Does
 leaving out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or
-
-12
-
-3.2 Materials and Methods
 cause the correspondence between the two sets to decrease? In which case, having identified such lanelets,
 can we look back to the quality parameters we’ve been analysing so far and find whether they have something
 in common in those cases?
+16
+
+5.2 Materials and Methods
 If we can, these parameters can be used to identify “good” or “bad” lanelets straight out of the machine! We
 know that lanelets that exhibit these quality variables will go on to improve or detriment analysis.
 However, variant calling is both computationally and time intensive. Whilst the Sanger Institute have significant
@@ -620,8 +645,8 @@ leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
 The candidate must not have too many variants, or too few; a sort of “Goldilocks genome”.
 
-3.2
-3.2.1
+5.2
+5.2.1
 
 Materials and Methods
 Input Data: Variant Call Format
@@ -644,25 +669,24 @@ vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # Complains about lack of tabix index but still makes the file...
 # Index with tabix
-
-13
-
-3.3 Implementation
 # "The input data file must be position sorted and compressed by bgzip
 # which has a gzip(1) like interface"
 tabix -p vcf file.vcf.gz
 diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
+17
+
+5.3 Implementation
 # Shows no difference! :)
 # http://samtools.sourceforge.net/tabix.shtml
 # http://vcftools.sourceforge.net/perl_module.html
 # http://www.biostars.org/p/51076/
 # http://vcftools.sourceforge.net/htslib.html#query
 
-3.3
+5.3
 
 Implementation
 
-3.3.1
+5.3.1
 
 Goldilocks
 
@@ -688,12 +712,13 @@ there are a lot of variants). Combining this with the sheer number of lookups pe
 parameters the list would be queried half a billion times for the first chromosome alone.
 You could improve this somewhat by dividing the variant_position_list in to a list of variants for each chromosome,
 so at least n is smaller. It is pretty doubtful that this would make any useful impact given the number of lookups.
-14
-
-3.3 Implementation
 I’m happy to say I bypassed this option but thought it would be fun to consider it’s performance.
 A far more sensible solution would be to replace the list with a dictionary whose lookup is amortized to a
 constant time. The number of lookups is still incredibly substantial but a constant lookup is starting to make
+
+18
+
+5.3 Implementation
 this sound viable. Using the variant positions as keys of a dictionary (in fact let’s use the previous minor
 suggestion and have a dictionary for each chromosome) we have:
 
@@ -727,13 +752,12 @@ After a brief spell of playing with Python profilers and crashing my laptop by a
 memory than I had with numpy.zeroes, I read the manual (!) and discovered that numpy.zeroes returns an
 ndarray which uses “advanced indexing” even for single element access, effectively copying the element to a
 Python scalar for comparison.
-
-15
-
-3.3 Implementation
 That’s a lot of memory action!
 It then occurred to me that we’re interested in just how many variants are inside each region and our chromosome
 is handily encapsulated in a numpy array! Why don’t we just sum together the elements in each region?
+19
+
+5.3 Implementation
 Remember variant positive base positions are 1 and 0 otherwise, useful! So the work boils down to some
 clever vector mathematics calculated by numpy!
 We don’t even lose any detail because the actual list of variants inside a region can be recovered in a small
@@ -757,7 +781,7 @@ Memory Leaks...
 Testing
 ...particularly difficult!
 
-16
+20
 
 [9] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
@@ -820,7 +844,7 @@ vol. 12, pp. 2825–2830, 2011.
 A machine learning framework for
 Python.
 
-17
+21
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -955,7 +979,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-18
+22
 
 A.1 BAMcheckR’d Example Output
 
@@ -1187,7 +1211,7 @@ FFQ
 0
 65507
 
-19
+23
 
 1609
 
@@ -1674,7 +1698,7 @@ GCC
 23.45
 26.2
 
-20
+24
 
 A.1 BAMcheckR’d Example Output
 
@@ -1974,7 +1998,7 @@ COV
 6716815
 [...]
 
-21
+25
 
 A.2 auto_qc Decision Matrix
 
@@ -2139,7 +2163,7 @@ passed
 warning
 passed
 
-22
+26
 
 ...
 ...

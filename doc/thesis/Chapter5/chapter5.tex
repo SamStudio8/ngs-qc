@@ -1,0 +1,278 @@
+%*****************************************************************************************
+\part{Identification of Qualitative Sample Properties}
+\chapter{Introduction and Motivation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+This part of the project can be outlined as follows:
+
+\begin{itemize}
+    \item ...
+\end{itemize}
+
+\subsection{Why Goldilocks?}
+%TODO Tidy dumped blog pasta
+Having recovered from the miscommunication that led me to attempt to find
+reverse strands in VCF files with already known errors, I’ve been making
+performance improvements to the script that finds candidate genomic regions.
+
+The task poses an interesting problem in terms of complexity and memory, as the
+human genome is over three billion bases long in total which can easily lead to
+data handling impracticalities.
+
+For the next step of the project we’re looking to document what effects quality
+has on analysis that occurs downstream from sequencing, for example; variant
+calling - the process of identifying bases in a sample that differ from the
+reference genome (this is a little simple as you also need to discern as
+whether the difference is actually a polymorphism or not).
+
+To investigate this I’ll be performing leave-one-out analysis on the
+whole-genome data we have; consisting of leaving a lanelet out, performing
+variant calling and then comparing the result of the left-one-out variant call
+and the corresponding variant call on our “SNP chip” data.
+
+The basic idea is to answer the question of what actually constitutes “good” or
+“bad” lanelet quality? Does leaving out a lanelet from the full-sequence data
+lead to variant calls that better match the SNP chip data, or cause the
+correspondence between the two sets to decrease? In which case, having
+identified such lanelets, can we look back to the quality parameters we’ve been
+analysing so far and find whether they have something in common in those cases?
+
+If we can, these parameters can be used to identify “good” or “bad” lanelets
+straight out of the machine! We know that lanelets that exhibit these quality
+variables will go on to improve or detriment analysis.
+
+However, variant calling is both computationally and time intensive.  Whilst
+the Sanger Institute have significant computing resources available, my
+dissertation has an end date and with the time I have we must focus the
+leave-one-out analysis on a subsection of the whole genome.
+
+It is for this reason we’re looking for what Josh at Sanger described as a
+“representative autosomal region”. The candidate must not have too many
+variants, or too few; a sort of “Goldilocks genome”.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Materials and Methods}
+\subsection{Input Data: Variant Call Format}
+
+\begin{minted}[mathescape,
+            %linenos,
+            numbersep=5pt,
+            gobble=4,
+            frame=lines,
+            framesep=2mm]{bash}
+    # Install
+    git clone htslib
+    git clone bcftools
+    make #(requires htslib to be above samtools/bcftools dir)
+    sudo cp bcftools usr/local/bin
+
+    # Tabix
+    # Download from sourceforge
+    # http://sourceforge.net/projects/samtools/files/tabix/
+    make
+    sudo cp tabix /usr/local/bin
+
+    # Generate an index (vcfidx) (not necessary)
+    vcftools --gzvcf cd.ichip.vcf.gz
+
+    # Query VCF (can be done with awk, cut etc.)
+    vcf-query cd.ichip.vcf.gz -f '%CHROM:%POS\t%REF\t%ALT\n'
+
+    # ! A faster alternative to using vcftools exists in bcftools ! #
+    bcftools query -f '%CHROM:%POS\t%REF\t%ALT\n' cd-seq.vcf.gz > cd-seq.vcf.gz.q
+    # Complains about lack of tabix index but still makes the file...
+
+    # Index with tabix
+    # "The input data file must be position sorted and compressed by bgzip 
+    # which has a gzip(1) like interface"
+    tabix -p vcf file.vcf.gz
+    diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
+    # Shows no difference! :)
+    # http://samtools.sourceforge.net/tabix.shtml
+
+    # http://vcftools.sourceforge.net/perl_module.html
+    # http://www.biostars.org/p/51076/
+    # http://vcftools.sourceforge.net/htslib.html#query
+\end{minted}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Implementation}
+\subsection{Goldilocks}
+
+As I discussed previously, on the hunt for my Goldilocks genomic region, it’s
+important to consider both time and memory as it is simple to deliver a poor
+performing solution.
+
+Searching for candidates regions over the entire genome at once is probably
+unwise. Luckily, since our candidate must not span chromosomes (the ends of
+chromosomes are not very good for reads) then we can easily yield a great
+improvement from processing chromosomes individually.
+
+The process is to extract the locations of all the variants across the genome
+from the SNP chip VCF files (these files list the alleles for each detected
+variant for each sample), load them in to some sort of structure, “stride” over
+each chromosome (with some stride offset) and finally list the variants present
+between the stride start and stride start plus the desired length of the
+candidate. These are our regions!
+
+Due to the use of striding, one does not simply walk the chromosome! A quick
+and dirty solution would be to just look up variants in a list:
+
+\begin{minted}[mathescape,
+            %linenos,
+            numbersep=5pt,
+            gobble=4,
+            frame=lines,
+            framesep=2mm]{python}
+    for chromosome in autosomes:
+        for start in range(1, len(chromosome), STRIDE):
+            for position in range(start, start+LENGTH):
+                if position in variant_position_list:
+                    # Do something...
+\end{minted}
+
+This of course is rather dumb. Looking up a list has O(n) performance where n
+is the number of variants (and there are a lot of variants). Combining this
+with the sheer number of lookups performed; with the default parameters the
+list would be queried half a billion times for the first chromosome alone.
+
+You could improve this somewhat by dividing the variant\_position\_list in to a
+list of variants for each chromosome, so at least n is smaller. It is pretty
+doubtful that this would make any useful impact given the number of lookups.
+I’m happy to say I bypassed this option but thought it would be fun to consider
+it’s performance.
+
+A far more sensible solution would be to replace the list with a dictionary
+whose lookup is amortized to a constant time. The number of lookups is still
+incredibly substantial but a constant lookup is starting to make this sound
+viable. Using the variant positions as keys of a dictionary (in fact let’s use
+the previous minor suggestion and have a dictionary for each chromosome) we
+have:
+
+\begin{minted}[mathescape,
+            %linenos,
+            numbersep=5pt,
+            gobble=4,
+            frame=lines,
+            framesep=2mm]{python}
+    for chromosome in autosomes:
+        for start in range(1, len(chromosome), STRIDE):
+            for position in range(start, start+LENGTH):
+                if position in variant_position_dict[chromosome]:
+                    # Do something...
+\end{minted}
+
+Great! This still takes half an hour to run on my laptop though, surely there
+is a better way!  I wondered if whether dropping the lookup would improve
+things. Instead, how about an area of memory is allocated to house the current
+chromosome and act as a variant “mask”; essentially an array where each element
+is a base of the current chromosome and the value of 1 represents a variant at
+that position and a 0 represents no variant.
+
+\begin{minted}[mathescape,
+            %linenos,
+            numbersep=5pt,
+            gobble=4,
+            frame=lines,
+            framesep=2mm]{python}
+    for chromosome in autosomes:
+        chro = np.zeros(len(chromosome), np.int8)
+        for variant_loc in snps_by_chromosome[chromosome]:
+            chro[variant_loc] = 1
+
+        for start in range(1, len(chromosome), STRIDE):
+            for position in range(start, start+LENGTH):
+                if chro[position] == 1:
+                    # Do something...
+\end{minted}
+
+We of course have to initially load the variants in to the chromosome array,
+but this need only be done once (per chromosome) and is nothing compared to the
+billions of lookups of the previous implementation.
+
+Rather to my surprise this was slow, very slow (maybe if I have time I should
+check how it compared to looking up with a list). Was it the allocation of
+memory? Perhaps I had run out of RAM and most of the work was going in to
+fetching and storing data in swap?
+
+I switched out the comparison (== 1) step for the previous dictionary based
+lookup and the performance improved considerably. What was going on? There must
+be more to looking at a given element in the numpy chromosome array, but what?
+
+After a brief spell of playing with Python profilers and crashing my laptop by
+allocating considerably more memory than I had with numpy.zeroes, I read the
+manual (!) and discovered that numpy.zeroes returns an ndarray which uses
+“advanced indexing” even for single element access, effectively copying the
+element to a Python scalar for comparison.
+
+That’s a lot of memory action!
+
+It then occurred to me that we’re interested in just how many variants are
+inside each region and our chromosome is handily encapsulated in a numpy array!
+Why don’t we just sum together the elements in each region? Remember variant
+positive base positions are 1 and 0 otherwise, useful! So the work boils down
+to some clever vector mathematics calculated by numpy!
+
+We don’t even lose any detail because the actual list of variants inside a
+region can be recovered in a small amount of time just given the start and end
+position of the region.
+
+\begin{minted}[mathescape,
+            %linenos,
+            numbersep=5pt,
+            gobble=4,
+            frame=lines,
+            framesep=2mm]{python}
+    for chromosome in autosomes:
+        chro = np.zeros(len(chromosome), np.int8)
+        for variant_loc in snps_by_chromosome[chromosome]:
+            chro[variant_loc] = 1
+
+        for start in range(1, len(chromosome), STRIDE):
+            num_variants = np.sum(chro[start:start+LENGTH])
+            # Do something...
+\end{minted}
+
+With conservative testing this runs at least 60 times faster than before, the
+entirety of the human genome can be analysed for candidate regions in less than
+twenty seconds (with the first few seconds taken reading in all the variant
+locations in the first place)!
+
+Ignoring empty regions etc.
+
+\begin{minted}{bash}
+    bsub -o ../../../goldilocks/joblog/samtools_mpileup.%J.o -e ../../../goldilocks/joblog/samtools_mpileup.%J.e -G hgi -J "samtools_mpileup" -M1000 -R "select[mem>1000] rusage[mem=1000]" bash -c 'samtools mpileup -b ../goldilocks-3:46000001-47000000.fofn -g -I -f /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa > ../../../goldilocks/all.withref.bcf'
+\end{minted}
+% Needed -q long to submit to 48 hour queue instead of 12
+
+Memory Leaks...
+\begin{minted}{txt} 
+C symbol: bam_destroy1
+
+  File          Function          Line
+  0 bam.c         bam_fetch           64 bam_destroy1(b);
+  1 bam_mate.c    bam_mating_core    269 bam_destroy1(b[0]);
+  2 bam_mate.c    bam_mating_core    270 bam_destroy1(b[1]);
+  3 bam_md.c      bam_fillmd         383 bam_destroy1(b);
+  4 bam_rmdup.c   dump_best           41 bam_destroy1(stack->a[i]);
+  5 bam_rmdup.c   bam_rmdup_core     174 bam_destroy1(b);
+  6 bam_rmdupse.c __free_elem         14 #define __free_elem(p) bam_destroy1((p)->data.b)
+  7 bam_rmdupse.c bam_rmdupse_core   157 bam_destroy1(b);
+  8 bam_stat.c    bam_flagstat_core   44 bam_destroy1(b);
+  9 bam_tview.c   sam_fetch           47 bam_destroy1(b);
+  a bamshuf.c     bamshuf             80 bam_destroy1(b);
+  b bamshuf.c     bamshuf            111 bam_destroy1(a[j].b);
+  c padding.c     bam_pad2unpad      318 bam_destroy1(b);
+  d phase.c       dump_aln           341 bam_destroy1(b);
+  e sam.c         sampileup           61 bam_destroy1(b);
+  f sam_view.c    main_samview       356 bam_destroy1(b);
+  g sam_view.c    main_samview       390 bam_destroy1(b);
+  h sam_view.c    main_bam2fq        560 bam_destroy1(b);
+  i stats.c       main_stats        1504 bam_destroy1(bam_line);
+\end{minted}
+
+\subsubsection{Testing}
+...particularly difficult!

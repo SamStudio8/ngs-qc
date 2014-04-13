@@ -1,5 +1,6 @@
 %*****************************************************************************************
-\chapter{Analysis of Current System}
+\part{Analysis of Current System}
+\chapter{Introduction}
 \ifpdf
     \graphicspath{{Chapter2/Figs/Raster/}{Chapter2/Figs/PDF/}{Chapter2/Figs/}}
 \else
@@ -7,7 +8,7 @@
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
+\section{Introduction and Background}
 
 This part of the project can be outlined as follows:
 
@@ -30,7 +31,7 @@ This part of the project can be outlined as follows:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Materials and Methods}
 \subsection{Input Data and Format}
-\subsubsection{"BAMcheckeR'd" Data}
+\subsubsection{"BAMcheckR'd" Data}
 
 %NOTE Assuming lanelets have been described by this point...
 %TODO samtools stats actually generates this data rather than "the seq process"
@@ -222,99 +223,3 @@ Note the plot does not make a particular distinction between lanes in the same
 flow cell but they are sequentially identified so the red bars of thicker-width
 arguably display some failures across entire flow cells.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Implementation}
-\subsection{Frontier}
-\textbf{Frontier} is the programmatic output for this part of the project...
-providing an API-like interface to the data itself... ...allowing simple
-commands to pull the data out from memory in to formats acceptable by the machine
-learning framework...
-
-...provides a class to read from the "bamcheckr'd files" as seen in
-Appendix~\ref{app:bamcheckr}... as well as the auto\_qc output matrix briefly
-demonstrated in Appendix~\ref{app:aqc_matrix}...
-
-...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
-enable it to be used as a more general purpose tool; if we were to add another
-class label, the definition would merely need to be included to the CLASSES
-(Listing~\ref{fig:FrontierClasses}) variable passed when the Statplexer is
-constructed. But use is therefore not merely limited to our problem but rather
-any machine learning problem where you'd like to simplify your interactions
-which a very large dataset.
-
-\begin{listing}[H]
-    \caption[FrontierClasses]{Class definitions for auto\_qc as passed to Frontier}
-    \label{fig:FrontierClasses}
-    \begin{minted}[mathescape,
-                %linenos,
-                numbersep=5pt,
-                gobble=8,
-                frame=lines,
-                framesep=2mm]{python}
-        CLASSES = {
-                "pass": {
-                    "class": ["pass"],
-                    "names": ["pass", "passed"],
-                    "code": 1,
-                },
-                "fail": {
-                    "class": ["fail"],
-                    "names": ["fail", "failed"],
-                    "code": -1,
-                },
-                "warn": {
-                    "class": ["warn"],
-                    "names": ["warn", "warning"],
-                    "code": 0,
-                },
-        }
-    \end{minted}
-\end{listing}
-
-
-
-\subsubsection{Cross Validation}
-...K fold cross validation
-...stratified cross validation...
-
-\subsubsection{Confusion Matrices}
-"Normal" confusion matrix and "Warnings" confusion matrix...
-
-\subsection{Contributions to bamcheckr}
-\begin{minted}[mathescape,
-               %linenos,
-               numbersep=5pt,
-               gobble=4,
-               frame=lines,
-               framesep=2mm]{r}
-    install.packages("devtools")
-    library(devtools)
-
-    # Install directly from github repository
-    install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
-
-    # Install from local directory
-    install("/home/sam/Projects/seq_autoqc/bamcheckr")
-
-\end{minted}
-Takes 5.5s on average, 16.1s with ratio due to inefficient implementation
-for overlapping\_base\_duplicate\_percentage
-re-wrote in Python...
-
-
-...R CMD BATCH issue
-
-...Fixed a graph plotting failure.
-...Writing additional routines...
-
-\subsection{SelectKBest}
-* incorect degrees of freedom
-* warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
-* Replaced univariate\_selection with version from master
-* needed use force np.float64
-...actually data was 0... gg :(
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Results}
-\subsection{Initial Trees}
-\subsection{Parameter Sets}
