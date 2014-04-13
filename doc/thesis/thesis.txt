@@ -28,8 +28,8 @@ Sam Nicholls
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[4]. However, these "next-generation" processes are
-complex and open to error[3], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[5]. However, these "next-generation" processes are
+complex and open to error[4], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 During sample sequencing a large number of quality control metrics are generated to determine the quality
 of the reads from the sequencing hardware itself. At the Wellcome Trust Sanger Institute, the automated QC
@@ -194,8 +194,8 @@ iv
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[4]. However, these "next-generation" processes are
-complex and open to error[3], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[5]. However, these "next-generation" processes are
+complex and open to error[4], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
 1.1
@@ -357,14 +357,14 @@ Input Data and Format
 As part of the project I’ve been granted access to significant data sets at the Sanger Institute, unlocking quality
 control data for two of the largest studies currently undergoing analysis. A wide array of quality metrics are
 available for each and every lanelet that forms part of either of the two studies; totalling 13,455 files.
-The files are created by samtools stats[2] — part of a collection of widely used open-source utilities for post
+The files are created by samtools stats — part of a collection of widely used open-source utilities for post
 processing and manipulation of large alignments such as those produced by next-generation sequencers that
 5
 
 2.2 Materials and Methods
-are released under the umbrella name of "SAMtools" (Sequence Alignment and Map Tools). samtools stats
-collects statistics from sequence data files and produces key-value summary numbers as well as more complex
-tab delimited dataframes tabulating several metrics over time.
+are released under the umbrella name of "SAMtools"[3] (Sequence Alignment and Map Tools). samtools
+stats collects statistics from sequence data files and produces key-value summary numbers as well as more
+complex tab delimited dataframes tabulating several metrics over time.
 The output of samtools stats is then parsed by an in-house tool called bamcheckr, named so as samtools stats
 was once known as bamcheck and the tool is written in R. bamcheckr supplements the summary numbers
 section of the samtools stats output with additional metrics that are later used by auto_qc for classification.
@@ -384,12 +384,12 @@ and third-party libraries have proven useful on many occasions. Due to its conci
 possible to rapidly develop applications and its readability eases ongoing maintenance; useful given the short
 time-span allocated for this project and the possibility of others wishing to contribute to the project codebase
 after completion.
-Whilst the choice was made primarily on preference, this is not to say other options were not considered: a
-highly popular Java-based collection of data mining tools, WEKA would certainly have provided a framework
-for building decision tree classifiers but at the same time did not appear to offer any significant features that
-were unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual machine to be
-installed which could be undesirable from a performance or even security standpoint when the application is
-deployed to servers at the Sanger Institute.
+Whilst the choice was made primarily on preference, this is not to say other options were not considered:
+a highly popular Java-based collection of data mining tools, WEKA[2] would certainly have provided a
+framework for building decision tree classifiers but at the same time did not appear to offer any significant
+features that were unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual
+machine to be installed which could be undesirable from a performance or even security standpoint when the
+application is deployed to servers at the Sanger Institute.
 Difficulty was also encountered finding example implementations for WEKA with most documentation and
 tutorials providing information for performing analysis via the graphical "Explorer" interface instead, which
 would not be appropriate for quickly setting up and repeating experiments automatically.
@@ -741,18 +741,26 @@ Testing
 References
 [1] vr-pipe, a generic pipeline system [Github]. [Online].
 Available: https://github.com/wtsi-hgi/vr-pipe/
-[2] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
+[2] M. Hall, E. Frank, G. Holmes, B. Pfahringer,
+P. Reutemann, and I. H. Witten, “The WEKA
+Data Mining Software: An Update,” SIGKDD
+Explorations Newsletter, vol. 11, no. 1, pp.
+10–18, Nov. 2009. [Online]. Available:
+http:
+//doi.acm.org/10.1145/1656274.1656278
+[3] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
 N. Homer, G. Marth, G. Abecasis, R. Durbin, and
-G. Subgroup, “The sequence alignment/map format
-and samtools.” Bioinformatics, vol. 25, p. 2078, 2009.
-[3] M. Kircher, U. Stenzel and J. Kelso, “Improved
+G. Subgroup, “ The Sequence Alignment/Map format
+and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
+2009.
+[4] M. Kircher, U. Stenzel and J. Kelso, “Improved
 base calling for the Illumina Genome Analyzer using
 machine learning strategies,” Genome Biology, vol. 10,
 no. 8, p. R83, 2009.
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
 during sequencing.
-[4] T. Strachan and A. Read, Human Molecular Genetics,
+[5] T. Strachan and A. Read, Human Molecular Genetics,
 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes
 involved in massively parallel DNA
