@@ -424,8 +424,8 @@ and printing) ...with more time I’d certainly like to investigate using other 
 outside Python and take at look at WEKA or Shark...
 
 Libraries
-numpy[7] and scipy[4]... Fast and reliable implementations of mathematical functions... ggplot2 for beautiful
-graphing...
+numpy[7] and scipy[4]... Fast and reliable implementations of mathematical functions... ggplot2[12] for
+beautiful graphing...
 
 Testing
 Investigated the possibility of using Jenkins but just didn’t have the time to set up and tweak all the plugins
@@ -801,6 +801,13 @@ A machine learning framework for
 Python.
 
 16
+
+[12] H. Wickham, ggplot2:
+elegant graphics for
+data analysis.
+Springer New York, 2009.
+[Online]. Available: http://had.co.nz/ggplot2/book
+978-0-387-98140-6.
 
 Appendix A
 
