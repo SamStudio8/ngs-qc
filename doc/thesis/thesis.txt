@@ -28,7 +28,7 @@ Sam Nicholls
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[5]. However, these "next-generation" processes are
+both time and cost required to perform genetic analysis[6]. However, these "next-generation" processes are
 complex and open to error[4], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 During sample sequencing a large number of quality control metrics are generated to determine the quality
@@ -194,7 +194,7 @@ iv
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[5]. However, these "next-generation" processes are
+both time and cost required to perform genetic analysis[6]. However, these "next-generation" processes are
 complex and open to error[4], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
@@ -397,7 +397,7 @@ Given the quality data we’ll be using to train a machine learning classifier i
 mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
 seemed convenient.
-...Whilst the tree and rpart packages are available for constructing decision trees in R but (and actually
+...Whilst the tree[5] and rpart[7] packages are available for constructing decision trees in R but (and actually
 RWeka provides an R interface to WEKA)...they did not appear to be as robust as other more well-known
 frameworks. Putting it politely, the programming paradigm of R is rather different to other languages and
 can significantly increase development time if one is not very well versed in the patterns and grammar of the
@@ -760,11 +760,18 @@ no. 8, p. R83, 2009.
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
 during sequencing.
-[5] T. Strachan and A. Read, Human Molecular Genetics,
+[5] B. Ripley, tree: Classification and regression trees,
+2014, r package version 1.0-35. [Online]. Available:
+http://CRAN.R-project.org/package=tree
+[6] T. Strachan and A. Read, Human Molecular Genetics,
 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
+[7] T. Therneau, B. Atkinson, and B. Ripley, rpart:
+Recursive Partitioning, 2013, r package version
+4.1-3. [Online]. Available: http://CRAN.R-project.org/
+package=rpart
 
 16
 
