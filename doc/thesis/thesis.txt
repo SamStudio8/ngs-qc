@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 6, 2014
+April 13, 2014
 
 Declaration
 
@@ -28,8 +28,8 @@ Sam Nicholls
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[3]. However, these "next-generation" processes are
-complex and open to error[2], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[4]. However, these "next-generation" processes are
+complex and open to error[3], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 During sample sequencing a large number of quality control metrics are generated to determine the quality
 of the reads from the sequencing hardware itself. At the Wellcome Trust Sanger Institute, the automated QC
@@ -143,6 +143,10 @@ Frontier . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
 
+2.4.3
+
+SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
 Classification Correlation
 
 Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
@@ -157,38 +161,41 @@ Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Identification of Qualitative Sample Properties
 3.1
 
-11
-
 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 3.1.1
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
-
 3.2
 
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
 Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+3.2.1
 
 3.3
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
-
-3.2.1
-3.3.1
+11
 
 Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+3.3.1
+
 Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
+Contents
 Appendix A samtools stats example output
 
 17
+
+iv
 
 Chapter 1
 
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[3]. However, these "next-generation" processes are
-complex and open to error[2], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[4]. However, these "next-generation" processes are
+complex and open to error[3], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
 1.1
@@ -350,7 +357,7 @@ Input Data and Format
 As part of the project I’ve been granted access to significant data sets at the Sanger Institute, unlocking quality
 control data for two of the largest studies currently undergoing analysis. A wide array of quality metrics are
 available for each and every lanelet that forms part of either of the two studies; totalling 13,455 files.
-The files are created by samtools stats — part of a collection of widely used open-source utilities for post
+The files are created by samtools stats[2] — part of a collection of widely used open-source utilities for post
 processing and manipulation of large alignments such as those produced by next-generation sequencers that
 5
 
@@ -521,10 +528,18 @@ library(devtools)
 install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 # Install from local directory
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
-# Takes 5.5s on average, 16.1s with ratio due to inefficient implementation
-# for overlapping_base_duplicate_percentage
+Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
+re-wrote in Python...
 ...R CMD BATCH issue
 ...Fixed a graph plotting failure. ...Writing additional routines...
+
+2.4.3
+
+SelectKBest
+
+* incorect degrees of freedom * warnings: /usr/lib64/python2.7/site-packages/sklearn/feature_selection/univariate_selection.py:2
+RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
+version from master * needed use force np.float64 ...actually data was 0... gg :(
 
 2.5
 
@@ -713,6 +728,10 @@ num_variants = np.sum(chro[start:start+LENGTH])
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
 be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
 the variant locations in the first place)!
+Ignoring empty regions etc.
+
+bsub -o ../../../goldilocks/joblog/samtools_mpileup.%J.o -e ../../../goldilocks/joblog/samtool
+Memory Leaks...
 
 Testing
 ...particularly difficult!
@@ -722,14 +741,18 @@ Testing
 References
 [1] vr-pipe, a generic pipeline system [Github]. [Online].
 Available: https://github.com/wtsi-hgi/vr-pipe/
-[2] M. Kircher, U. Stenzel and J. Kelso, “Improved
+[2] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
+N. Homer, G. Marth, G. Abecasis, R. Durbin, and
+G. Subgroup, “The sequence alignment/map format
+and samtools.” Bioinformatics, vol. 25, p. 2078, 2009.
+[3] M. Kircher, U. Stenzel and J. Kelso, “Improved
 base calling for the Illumina Genome Analyzer using
 machine learning strategies,” Genome Biology, vol. 10,
 no. 8, p. R83, 2009.
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
 during sequencing.
-[3] T. Strachan and A. Read, Human Molecular Genetics,
+[4] T. Strachan and A. Read, Human Molecular Genetics,
 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes
 involved in massively parallel DNA

@@ -43,7 +43,7 @@ each and every lanelet that forms part of either of the two studies; totalling
 
 %TODO Citation for samtools?
 %TODO Explain a BAM file
-The files are created by \textbf{samtools stats} --- part of a collection of
+The files are created by \textbf{samtools stats}\citep{samtools} --- part of a collection of
 widely used open-source utilities for post processing and manipulation of large
 alignments such as those produced by next-generation sequencers that are
 released under the umbrella name of "SAMtools" (Sequence Alignment and Map
@@ -283,14 +283,23 @@ which a very large dataset.
     # Install from local directory
     install("/home/sam/Projects/seq_autoqc/bamcheckr")
 
-    # Takes 5.5s on average, 16.1s with ratio due to inefficient implementation
-    # for overlapping_base_duplicate_percentage
 \end{minted}
+Takes 5.5s on average, 16.1s with ratio due to inefficient implementation
+for overlapping\_base\_duplicate\_percentage
+re-wrote in Python...
+
 
 ...R CMD BATCH issue
 
 ...Fixed a graph plotting failure.
 ...Writing additional routines...
+
+\subsection{SelectKBest}
+* incorect degrees of freedom
+* warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
+* Replaced univariate\_selection with version from master
+* needed use force np.float64
+...actually data was 0... gg :(
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
