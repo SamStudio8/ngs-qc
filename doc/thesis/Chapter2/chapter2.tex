@@ -30,6 +30,7 @@ This part of the project can be outlined as follows:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Materials and Methods}
 \subsection{Input Data and Format}
+\subsubsection{"BAMcheckeR'd" Data}
 
 %NOTE Assuming lanelets have been described by this point...
 %TODO samtools stats actually generates this data rather than "the seq process"
@@ -58,7 +59,14 @@ the summary numbers section of the \textbf{samtools stats} output with
 additional metrics that are later used by \textbf{auto\_qc} for classification.
 This process does not change the file other than adding a few additional
 key-value pairs in the summary numbers section. A truncated example of a
-"bamcheckr'd" file can be found in Appendix~\ref{AppendixA}.
+"bamcheckr'd" file can be found in Appendix~\ref{app:bamcheckr}.
+
+\subsubsection{auto\_qc Decision Data}
+...the one-to-one mapping between each input file and the result of its
+classification by the current auto\_qc system...
+A truncated example of such file can be found in Appendix~\ref{app:aqc_matrix}.
+...the true files carry many various columns that cannot be detailed for
+confidentiality (and indeed brevity)....
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -222,8 +230,9 @@ providing an API-like interface to the data itself... ...allowing simple
 commands to pull the data out from memory in to formats acceptable by the machine
 learning framework...
 
-...provides a class to read from the "bamcheck files" as seen in
-Appendix~\ref{AppendixA}...
+...provides a class to read from the "bamcheckr'd files" as seen in
+Appendix~\ref{app:bamcheckr}... as well as the auto\_qc output matrix briefly
+demonstrated in Appendix~\ref{app:aqc_matrix}...
 
 ...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
 enable it to be used as a more general purpose tool; if we were to add another

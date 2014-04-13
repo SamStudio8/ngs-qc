@@ -145,47 +145,50 @@ Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 2.4.3
 
-SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 
 Classification Correlation
 
-Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 2.5.1
 
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 
 2.5.2
 
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 
 Identification of Qualitative Sample Properties
 3.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 3.1.1
 
 3.2
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 
-Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 3.2.1
 
 3.3
 
-11
+12
 
-Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 3.3.1
 
-Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
 Contents
-Appendix A samtools stats example output
+Appendix A Input Examples
 
-17
+18
+
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 iv
 
@@ -354,14 +357,16 @@ accuracy is improved
 Materials and Methods
 Input Data and Format
 
+"BAMcheckeR’d" Data
 As part of the project I’ve been granted access to significant data sets at the Sanger Institute, unlocking quality
 control data for two of the largest studies currently undergoing analysis. A wide array of quality metrics are
 available for each and every lanelet that forms part of either of the two studies; totalling 13,455 files.
-The files are created by samtools stats — part of a collection of widely used open-source utilities for post
-processing and manipulation of large alignments such as those produced by next-generation sequencers that
+
 5
 
 2.2 Materials and Methods
+The files are created by samtools stats — part of a collection of widely used open-source utilities for post
+processing and manipulation of large alignments such as those produced by next-generation sequencers that
 are released under the umbrella name of "SAMtools"[5] (Sequence Alignment and Map Tools). samtools
 stats collects statistics from sequence data files and produces key-value summary numbers as well as more
 complex tab delimited dataframes tabulating several metrics over time.
@@ -369,7 +374,12 @@ The output of samtools stats is then parsed by an in-house tool called bamcheckr
 was once known as bamcheck and the tool is written in R. bamcheckr supplements the summary numbers
 section of the samtools stats output with additional metrics that are later used by auto_qc for classification.
 This process does not change the file other than adding a few additional key-value pairs in the summary
-numbers section. A truncated example of a "bamcheckr’d" file can be found in Appendix A.
+numbers section. A truncated example of a "bamcheckr’d" file can be found in Appendix A.1.
+
+auto_qc Decision Data
+...the one-to-one mapping between each input file and the result of its classification by the current auto_qc
+system... A truncated example of such file can be found in Appendix A.2. ...the true files carry many various
+columns that cannot be detailed for confidentiality (and indeed brevity)....
 
 2.2.2
 
@@ -393,6 +403,10 @@ application is deployed to servers at the Sanger Institute.
 Difficulty was also encountered finding example implementations for WEKA with most documentation and
 tutorials providing information for performing analysis via the graphical "Explorer" interface instead, which
 would not be appropriate for quickly setting up and repeating experiments automatically.
+
+6
+
+2.2 Materials and Methods
 Given the quality data we’ll be using to train a machine learning classifier is output from the previously
 mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
@@ -402,9 +416,6 @@ actually RWeka provides an R interface to WEKA)...they did not appear to be as r
 well-known frameworks. Putting it politely, the programming paradigm of R[9] is rather different to other
 languages and can significantly increase development time if one is not very well versed in the patterns and
 grammar of the language and it seemed best to stick to one’s comfort zone.
-6
-
-2.2 Materials and Methods
 ...C and C++ also a possibility, however dlib didn’t support tree-based classifiers although Shark did, Python
 chosen in the end for ease of use...
 
@@ -430,6 +441,10 @@ beautiful graphing...
 Testing
 Investigated the possibility of using Jenkins but just didn’t have the time to set up and tweak all the plugins
 and options of the platform to do what I wanted... Would still have been poor in terms of searching through
+
+7
+
+2.3 Pre-Implementation
 logs to track what parameters led to improvements in cross validation... ...Quite likely I’d have needed to
 author a Java or Groovy plugin to keep good track of cross-validation...
 Briefly considered online solutions such as Travis and Wercker which I use for some personal projects,
@@ -440,9 +455,6 @@ inefficient (and more than likely against reasonable use of the platform)
 Really wanted to write my own solution for this but had to settle for well formatted log files that could be
 searched and processed with some command line fu...
 
-7
-
-2.3 Pre-Implementation
 Additional Tools
 Version control is critical, git!
 
@@ -458,8 +470,6 @@ if during a run, the flow cell is somehow subjected to abnormal temperatures (ai
 sequencing device is depleted of reagents, every lane (and thus lanelet within) will be of very poor quality.
 Thus there would appear to exist a relationship between the respective qualities of each lanelet in a lane as
 well as each lane in a sequencing run!
-
-Fig. 2.1 Heatmap of Lanelet QC Status by Lane
 ...Figure 2.1 displays a plot of auto_qc classification for each lanelet (y) versus lane (x). ...The plot was
 designed to be a diagnostic test to see whether this was the case. I should mention that it seems there are few
 conditions under which a lanelet would fail irrespective of the auto_qc status of the rest of the lanelets in the
@@ -467,15 +477,17 @@ lane; which mostly involve the preparation of the sample (which is easy to spot 
 across all lanelets using that library sample).
 ...an unbroken vertical red bar indicates that all the lanelets inside a particular lane failed. Likewise yellow
 represents a warning. Grey areas are passes and were desaturated to make the other outcomes immediately
-
-8
-
-2.4 Implementation
 obvious. It is clear that there are patches where lanelets have failed where entire lanes have not, but there does
 appear to be some correlation.
 Having discussed this with the supervisor and contacts at the Sanger Institute we decided to continue...
 Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
 identified so the red bars of thicker-width arguably display some failures across entire flow cells.
+
+8
+
+2.4 Implementation
+
+Fig. 2.1 Heatmap of Lanelet QC Status by Lane
 
 2.4
 2.4.1
@@ -486,12 +498,18 @@ Frontier
 Frontier is the programmatic output for this part of the project... providing an API-like interface to the data
 itself... ...allowing simple commands to pull the data out from memory in to formats acceptable by the machine
 learning framework...
-...provides a class to read from the "bamcheck files" as seen in Appendix A...
+...provides a class to read from the "bamcheckr’d files" as seen in Appendix A.1... as well as the auto_qc
+output matrix briefly demonstrated in Appendix A.2...
 ...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more
 general purpose tool; if we were to add another class label, the definition would merely need to be included to
 the CLASSES (Listing 1) variable passed when the Statplexer is constructed. But use is therefore not merely
 limited to our problem but rather any machine learning problem where you’d like to simplify your interactions
 which a very large dataset.
+
+9
+
+2.4 Implementation
+
 CLASSES = {
 "pass": {
 "class": ["pass"],
@@ -510,9 +528,7 @@ CLASSES = {
 },
 }
 Listing 1 Class definitions for auto_qc as passed to Frontier
-9
 
-2.5 Results
 Cross Validation
 ...K fold cross validation ...stratified cross validation...
 
@@ -529,6 +545,10 @@ library(devtools)
 install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 # Install from local directory
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
+
+10
+
+2.5 Results
 Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
 re-wrote in Python...
 ...R CMD BATCH issue
@@ -554,7 +574,7 @@ Initial Trees
 
 Parameter Sets
 
-10
+11
 
 Chapter 3
 
@@ -586,7 +606,7 @@ and the corresponding variant call on our “SNP chip” data.
 The basic idea is to answer the question of what actually constitutes “good” or “bad” lanelet quality? Does
 leaving out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or
 
-11
+12
 
 3.2 Materials and Methods
 cause the correspondence between the two sets to decrease? In which case, having identified such lanelets,
@@ -625,7 +645,7 @@ bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.
 # Complains about lack of tabix index but still makes the file...
 # Index with tabix
 
-12
+13
 
 3.3 Implementation
 # "The input data file must be position sorted and compressed by bgzip
@@ -668,7 +688,7 @@ there are a lot of variants). Combining this with the sheer number of lookups pe
 parameters the list would be queried half a billion times for the first chromosome alone.
 You could improve this somewhat by dividing the variant_position_list in to a list of variants for each chromosome,
 so at least n is smaller. It is pretty doubtful that this would make any useful impact given the number of lookups.
-13
+14
 
 3.3 Implementation
 I’m happy to say I bypassed this option but thought it would be fun to consider it’s performance.
@@ -708,7 +728,7 @@ memory than I had with numpy.zeroes, I read the manual (!) and discovered that n
 ndarray which uses “advanced indexing” even for single element access, effectively copying the element to a
 Python scalar for comparison.
 
-14
+15
 
 3.3 Implementation
 That’s a lot of memory action!
@@ -737,7 +757,7 @@ Memory Leaks...
 Testing
 ...particularly difficult!
 
-15
+16
 
 [9] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
@@ -800,7 +820,7 @@ vol. 12, pp. 2825–2830, 2011.
 A machine learning framework for
 Python.
 
-16
+17
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -815,12 +835,12 @@ Springer New York, 2009.
 
 Appendix A
 
-samtools stats example output
+Input Examples
+A.1
+
+BAMcheckR’d Example Output
+
 # Summary
-SN
-SN
-SN
-SN
 SN
 SN
 SN
@@ -934,18 +954,24 @@ rev percent insertions above baseline:
 1.08264446659241
 rev percent insertions below baseline:
 0.457290262062496
+
+18
+
+A.1 BAMcheckR’d Example Output
+
+SN
 rev percent deletions above baseline:
 1.15931214598243
+SN
 rev percent deletions below baseline:
 0.413119424753248
+SN
 contiguous cycle dropoff count:
 36
+SN
 fwd.percent.insertions.above.baseline:
 1.43135383851191
-
-17
-
-SN
+SN
 fwd.percent.insertions.below.baseline:
 0.686265539012562
 SN
@@ -1160,49 +1186,8 @@ FFQ
 0
 0
 65507
-FFQ
-73
-3894
-2
-0
-0
-0
-0
-4931
-53483
-FFQ
-74
-3697
-39
-0
-919
-4933
-0
-0
-56866
-FFQ
-75
-4542
-0
-0
-0
-0
-0
-4634
-77822
-FFQ
-76
-0
-0
-0
-0
-0
-0
-0
-0
-0
 
-18
+19
 
 1609
 
@@ -1214,28 +1199,26 @@ FFQ
 0
 0
 
+4208
+0
+
+0
+
 0
 
 0
 10874
 
 0
+
 0
 
 0
-0
-1524
 
-0
-0
-
-4208
-0
-
+26
 0
 0
 
-0
 0
 
 14277
@@ -1243,27 +1226,69 @@ FFQ
 
 0
 0
-0
-0
 
 0
-0
 
-26
-0
+A.1 BAMcheckR’d Example Output
 
+FFQ
+73
+3894
+2
 0
 0
 0
-
+0
+4931
+53483
 0
 0
-
+0
+0
+FFQ
+74
+3697
+39
+0
+919
+4933
+0
+0
+56866
+1524
+0
+0
 22
+FFQ
+75
+4542
 0
 0
-
-# Last Fragment Qualitites. Use ‘grep ^LFQ | cut -f 2-‘ to extract this part.
+0
+0
+0
+4634
+77822
+0
+0
+0
+0
+FFQ
+76
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# Last Fragment Qualitites. Use ‘grep ^LFQ | cut -f 2-‘ to extract this part.
 # Columns correspond to qualities and rows to cycles. First column is the cycle number.
 LFQ
 1
@@ -1648,6 +1673,11 @@ GCC
 24.26
 23.45
 26.2
+
+20
+
+A.1 BAMcheckR’d Example Output
+
 GCC
 71
 26.07
@@ -1672,10 +1702,7 @@ GCC
 24.24
 23.45
 26.23
-
-19
-
-GCC
+GCC
 75
 26.01
 24.31
@@ -1946,6 +1973,11 @@ COV
 5
 6716815
 [...]
+
+21
+
+A.2 auto_qc Decision Matrix
+
 COV
 [996-996]
 996
@@ -1962,10 +1994,7 @@ COV
 [1000-1000]
 1000
 4
-
-20
-
-COV
+COV
 [1000<]
 1000
 116
@@ -2052,6 +2081,74 @@ GCD
 1.219
 1.219
 
-21
+A.2
+lanelet
+9999_9#1
+9999_9#3
+9999_9#2
+9999_9#5
+9999_9#4
+9999_9#7
+9999_9#6
+9999_9#9
+9999_9#8
+
+auto_qc Decision Matrix
+sample
+study
+AQCTest000000
+AQCTest000002
+AQCTest000001
+AQCTest000004
+AQCTest000003
+AQCTest000006
+AQCTest000005
+AQCTest000008
+AQCTest000007
+
+npg
+AQCTest
+AQCTest
+AQCTest
+AQCTest
+AQCTest
+AQCTest
+AQCTest
+AQCTest
+AQCTest
+
+aqc
+pass
+fail
+pass
+warn
+warn
+fail
+pass
+warn
+pass
+
+...
+passed
+failed
+pass
+warn
+warning
+fail
+passed
+warning
+passed
+
+22
+
+...
+...
+...
+...
+...
+...
+...
+...
+...
 
 
