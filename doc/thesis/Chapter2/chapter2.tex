@@ -1,6 +1,6 @@
 %*****************************************************************************************
 \part{Analysis of Current System}
-\chapter{Introduction}
+\chapter{Introduction and Background}
 \ifpdf
     \graphicspath{{Chapter2/Figs/Raster/}{Chapter2/Figs/PDF/}{Chapter2/Figs/}}
 \else
@@ -8,7 +8,7 @@
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction and Background}
+\section{Introduction}
 
 This part of the project can be outlined as follows:
 
@@ -27,6 +27,39 @@ This part of the project can be outlined as follows:
     \item Perform experiments by selecting subsets of the variables and
         observations and measure whether classification accuracy is improved
 \end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Concepts and Terminology}
+\subsection{Samples, Lanes and Lanelets}
+
+%TODO Draw a vector of the lanelets diagram
+%TODO Illumina DNA Synthesis Image
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{lanelets}
+    \caption[lanelets]{Example of flowcell with some lanelets highlighted}
+    \label{fig:lanelets}
+\end{figure}
+A \textbf{sample} is a distinct DNA specimen from a particular human such as
+yourself. Samples are then inserted in to a flowcell, which is essentially a
+series of very thin glass tubules, each tubule is described as a \textbf{lane}.
+It is throughout these lanes that the chemical reactions involved in sequencing
+will take place. Before the process begins, the samples are amplified in situ
+inside the flowcell itself (see Fig 1.2) whereby samples multiply in magnitude
+to form millions of dense clusters.
+
+Note that a lane can contain more than one sample and a sample can appear in
+more than one lane; this is "sample multiplexing" and helps to ensure that the
+failure of a particular lane does not hinder analysis of a sample.
+
+A \textbf{lanelet} is the aggregate read of all clusters of a particular sample
+in a single lane. Figure~\ref{fig:lanelets} attempts to highlight examples of a
+this (circled in blue - not all lanelets are highlighted). For example lane 5
+shows the four clusters (in reality there would actually be millions) of Sample
+A combine to represent a lanelet. A lane will have as many lanelets as it does
+samples.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Materials and Methods}
@@ -197,8 +230,12 @@ Version control is critical, \textbf{git}!
 \section{Pre-Implementation}
 \subsection{Classification Correlation}
 
-...An important consideration for statistical analysis is the relation between
-the observations. The quality data files we have are per lanelet, however a lane
+%TODO Lanelet...
+An important consideration for statistical analysis is the relation between 
+observations. 
+
+
+The quality data files we have are per lanelet, however a lane
 can house more than one lanelet...  and so herein lies the trouble, if during a
 run, the flow cell is somehow subjected to abnormal temperatures (air
 conditioning failure) or the sequencing device is depleted of reagents, every

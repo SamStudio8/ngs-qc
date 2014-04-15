@@ -66,18 +66,24 @@ Analysis of Current System . . . . . . . . . . . . . . . . . . . . . . . . . . .
 1
 
 1.1.2 Identification of Properties that affect Downstream Analysis . . . . . . . . . . . . . .
-Project Methodology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Project Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 2
 2
 
 1.2.1
 
+Methodology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2
+
+1.2.2
+
 Task and Time Management . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 4
 
-1.2.2
+1.2.3
 
 Time Considerations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
@@ -91,43 +97,50 @@ Analysis of Current System
 
 2
 
-Introduction
+Introduction and Background
 
 6
 
 2.1
 
-Introduction and Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 6
 
 2.2
 
-Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 6
 
 2.2.1
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 6
 
-2.2.2
-
-Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 7
 
-Pre-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-9
-
 2.3.1
 
-9
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+7
+
+2.3.2
+
+Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+8
 
 2.3
+
+2.4
+
+Pre-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+2.4.1
 
 3
 
@@ -137,79 +150,78 @@ Implementation
 
 3.3
 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+12
 
-11
-
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 3.1.1
 
 4
 
 Classification Correlation
 
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 3.2.1
 
-Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 3.2.2
 
-SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
 Results
 
-14
-
-4.0.1
-
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
-
-4.0.2
-
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+15
 
 Contents
 
 II
 5
 
+4.0.1
+
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+
+4.0.2
+
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+
 Identification of Qualitative Sample Properties
 Introduction and Motivation
 
-15
 16
+17
 
 5.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 5.2
 
-Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
 5.1.1
 5.2.1
 5.3
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
-Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 5.3.1
 
-Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 Appendix A Input Examples
 
-22
+23
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
 iv
 
@@ -246,7 +258,7 @@ the warning level; a time consuming task which invites both inefficiency and err
 
 1
 
-1.2 Project Methodology
+1.2 Project Method
 In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests
 that a machine learning classifier could potentially be trained on the combinations of quality control statistics
 available to make these conclusions without the need for much human intervention[10].
@@ -281,17 +293,19 @@ If so, such parameters would identify "good" or "bad" samples straight out of th
 exhibit these quality variables will go on to improve or detriment analysis.
 
 1.2
+1.2.1
 
-Project Methodology
+Project Method
+Methodology
 
 Clearly some team-based practices invited by agile methodologies — pair programming immediately comes
 to mind — are not applicable in a solo project. It is also unreasonable to expect an "on-site" customer for
 this particular project. In The Case Against Extreme Programming, Matt Stephens describes a "self referential
-safety net" where the perceived traps in each practice are supported and "made safe" by other XP practices.
-This would seem to rule out XP as a viable methodology for a solo-project as cutting out some of the
 2
 
-1.2 Project Methodology
+1.2 Project Method
+safety net" where the perceived traps in each practice are supported and "made safe" by other XP practices.
+This would seem to rule out XP as a viable methodology for a solo-project as cutting out some of the
 processes that allow this form of evolutionary design to work (and flatten that cost-of-change curve) can
 introduce serious flaws to the management of a project and potentially result in failure. In the same breath it
 is important to remember that not all agile processes need be discarded just because XP seems incompatible.
@@ -330,16 +344,16 @@ attempt to prove this null hypothesis false in favour of an alternative hypothes
 "The new classifier is more accurate than the old classifier"). This form of hypothesis testing could essentially
 become the project’s acceptance tests (providing we have an empirical definition of what "more accurate"
 means in terms of this system) and any modification can be classed as an experiment ("Do these parameters
-allow us to reject the null hypothesis?"). Although care must be taken not to let this descend into unstructured
-cycles of mere hack-and-test, code-and-fix style programming.
 3
 
-1.2 Project Methodology
+1.2 Project Method
+allow us to reject the null hypothesis?"). Although care must be taken not to let this descend into unstructured
+cycles of mere hack-and-test, code-and-fix style programming.
 Overall it is rather difficult to select a methodology for a project such as this, the research element makes it
 almost impossible to draw on previous personal experience for ideas of what development processes may or
 may not be effective.
 
-1.2.1
+1.2.2
 
 Task and Time Management
 
@@ -347,7 +361,7 @@ Shortly before embarking on this dissertation project, I had written my own todo
 This will be useful in keeping track of current objectives and allow prioritisation. The list used to organise my
 project is also publicly available[2].
 
-1.2.2
+1.2.3
 
 Time Considerations
 
@@ -366,10 +380,10 @@ Analysis of Current System
 
 Chapter 2
 
-Introduction
+Introduction and Background
 2.1
 
-Introduction and Background
+Introduction
 
 This part of the project can be outlined as follows:
 • Collect data sets on which a machine learning classifier is to be trained
@@ -385,6 +399,31 @@ accuracy is improved
 2.2
 2.2.1
 
+Concepts and Terminology
+Samples, Lanes and Lanelets
+
+A sample is a distinct DNA specimen from a particular human such as yourself. Samples are then inserted in
+to a flowcell, which is essentially a series of very thin glass tubules, each tubule is described as a lane. It is
+throughout these lanes that the chemical reactions involved in sequencing will take place. Before the process
+begins, the samples are amplified in situ inside the flowcell itself (see Fig 1.2) whereby samples multiply in
+magnitude to form millions of dense clusters.
+
+6
+
+2.3 Materials and Methods
+
+Fig. 2.1 Example of flowcell with some lanelets highlighted
+Note that a lane can contain more than one sample and a sample can appear in more than one lane; this is
+"sample multiplexing" and helps to ensure that the failure of a particular lane does not hinder analysis of a
+sample.
+A lanelet is the aggregate read of all clusters of a particular sample in a single lane. Figure 2.1 attempts to
+highlight examples of a this (circled in blue - not all lanelets are highlighted). For example lane 5 shows the
+four clusters (in reality there would actually be millions) of Sample A combine to represent a lanelet. A lane
+will have as many lanelets as it does samples.
+
+2.3
+2.3.1
+
 Materials and Methods
 Input Data and Format
 
@@ -392,15 +431,15 @@ Input Data and Format
 As part of the project I’ve been granted access to significant data sets at the Sanger Institute, unlocking quality
 control data for two of the largest studies currently undergoing analysis. A wide array of quality metrics are
 available for each and every lanelet that forms part of either of the two studies; totalling 13,455 files.
-
-6
-
-2.2 Materials and Methods
 The files are created by samtools stats — part of a collection of widely used open-source utilities for post
 processing and manipulation of large alignments such as those produced by next-generation sequencers that
 are released under the umbrella name of "SAMtools"[8] (Sequence Alignment and Map Tools). samtools
 stats collects statistics from sequence data files and produces key-value summary numbers as well as more
 complex tab delimited dataframes tabulating several metrics over time.
+
+7
+
+2.3 Materials and Methods
 The output of samtools stats is then parsed by an in-house tool called bamcheckr, named so as samtools stats
 was once known as bamcheck and the tool is written in R. bamcheckr supplements the summary numbers
 section of the samtools stats output with additional metrics that are later used by auto_qc for classification.
@@ -417,7 +456,7 @@ indeed we are only interested in the lanelet and aqc which provide an identifier
 input file and its classification by auto_qc respectively. Latter columns pertain to a breakdown of decisions
 made by auto_qc which are not included in the example for confidentiality (and brevity).
 
-2.2.2
+2.3.2
 
 Development Environment
 
@@ -436,12 +475,13 @@ framework for building decision tree classifiers but at the same time did not ap
 features that were unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual
 machine to be installed which could be undesirable from a performance or even security standpoint when the
 application is deployed to servers at the Sanger Institute.
-7
-
-2.2 Materials and Methods
 Difficulty was also encountered finding example implementations for WEKA with most documentation and
 tutorials providing information for performing analysis via the graphical "Explorer" interface instead, which
 would not be appropriate for quickly setting up and repeating experiments automatically.
+
+8
+
+2.3 Materials and Methods
 Given the quality data we’ll be using to train a machine learning classifier is output from the previously
 mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
@@ -474,13 +514,13 @@ difficulties in reading in data ...it did however later appear to ship with feat
 and printing) ...with more time I’d certainly like to investigate using other libraries such as Orange or even
 outside Python and take at look at WEKA or Shark...
 
-8
-
-2.3 Pre-Implementation
-Libraries
+Additional External Libraries
 numpy[11] and scipy[7]... Fast and reliable implementations of mathematical functions... ggplot2[18] for
 beautiful graphing...
 
+9
+
+2.4 Pre-Implementation
 Testing
 Investigated the possibility of using Jenkins but just didn’t have the time to set up and tweak all the plugins
 and options of the platform to do what I wanted... Would still have been poor in terms of searching through
@@ -494,41 +534,41 @@ inefficient (and more than likely against reasonable use of the platform)
 Really wanted to write my own solution for this but had to settle for well formatted log files that could be
 searched and processed with some command line fu...
 
-Additional Tools
+Tools
 Version control is critical, git!
 
-2.3
-2.3.1
+2.4
+2.4.1
 
 Pre-Implementation
 Classification Correlation
 
-...An important consideration for statistical analysis is the relation between the observations. The quality data
-files we have are per lanelet, however a lane can house more than one lanelet... and so herein lies the trouble,
-if during a run, the flow cell is somehow subjected to abnormal temperatures (air conditioning failure) or the
-sequencing device is depleted of reagents, every lane (and thus lanelet within) will be of very poor quality.
-Thus there would appear to exist a relationship between the respective qualities of each lanelet in a lane as
-well as each lane in a sequencing run!
-...Figure 2.1 displays a plot of auto_qc classification for each lanelet (y) versus lane (x). ...The plot was
+An important consideration for statistical analysis is the relation between observations.
+The quality data files we have are per lanelet, however a lane can house more than one lanelet... and so herein
+lies the trouble, if during a run, the flow cell is somehow subjected to abnormal temperatures (air conditioning
+failure) or the sequencing device is depleted of reagents, every lane (and thus lanelet within) will be of very
+poor quality. Thus there would appear to exist a relationship between the respective qualities of each lanelet
+in a lane as well as each lane in a sequencing run!
+...Figure 2.2 displays a plot of auto_qc classification for each lanelet (y) versus lane (x). ...The plot was
 designed to be a diagnostic test to see whether this was the case. I should mention that it seems there are few
 conditions under which a lanelet would fail irrespective of the auto_qc status of the rest of the lanelets in the
 lane; which mostly involve the preparation of the sample (which is easy to spot given it will cause poor quality
 across all lanelets using that library sample).
-
-9
-
-2.3 Pre-Implementation
-
-Fig. 2.1 Heatmap of Lanelet QC Status by Lane
 ...an unbroken vertical red bar indicates that all the lanelets inside a particular lane failed. Likewise yellow
 represents a warning. Grey areas are passes and were desaturated to make the other outcomes immediately
 obvious. It is clear that there are patches where lanelets have failed where entire lanes have not, but there does
 appear to be some correlation.
+
+10
+
+2.4 Pre-Implementation
+
+Fig. 2.2 Heatmap of Lanelet QC Status by Lane
 Having discussed this with the supervisor and contacts at the Sanger Institute we decided to continue...
 Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
 identified so the red bars of thicker-width arguably display some failures across entire flow cells.
 
-10
+11
 
 Chapter 3
 
@@ -561,7 +601,7 @@ the CLASSES (Listing 1) variable passed when the Statplexer is constructed. But 
 limited to our problem but rather any machine learning problem where you’d like to simplify your interactions
 which a very large dataset.
 
-11
+12
 
 3.2 Implementation
 
@@ -601,7 +641,7 @@ install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 # Install from local directory
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
 
-12
+13
 
 3.3 Testing
 Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
@@ -621,7 +661,7 @@ version from master * needed use force np.float64 ...actually data was 0... gg :
 
 Testing
 
-13
+14
 
 Chapter 4
 
@@ -634,14 +674,14 @@ Initial Trees
 
 Parameter Sets
 
-14
+15
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-15
+16
 
 Chapter 5
 
@@ -674,7 +714,7 @@ leaving out a lanelet from the full-sequence data lead to variant calls that bet
 cause the correspondence between the two sets to decrease? In which case, having identified such lanelets,
 can we look back to the quality parameters we’ve been analysing so far and find whether they have something
 in common in those cases?
-16
+17
 
 5.2 Materials and Methods
 If we can, these parameters can be used to identify “good” or “bad” lanelets straight out of the machine! We
@@ -713,7 +753,7 @@ bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.
 # which has a gzip(1) like interface"
 tabix -p vcf file.vcf.gz
 diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
-17
+18
 
 5.3 Implementation
 # Shows no difference! :)
@@ -756,7 +796,7 @@ I’m happy to say I bypassed this option but thought it would be fun to conside
 A far more sensible solution would be to replace the list with a dictionary whose lookup is amortized to a
 constant time. The number of lookups is still incredibly substantial but a constant lookup is starting to make
 
-18
+19
 
 5.3 Implementation
 this sound viable. Using the variant positions as keys of a dictionary (in fact let’s use the previous minor
@@ -795,7 +835,7 @@ Python scalar for comparison.
 That’s a lot of memory action!
 It then occurred to me that we’re interested in just how many variants are inside each region and our chromosome
 is handily encapsulated in a numpy array! Why don’t we just sum together the elements in each region?
-19
+20
 
 5.3 Implementation
 Remember variant positive base positions are 1 and 0 otherwise, useful! So the work boils down to some
@@ -821,7 +861,7 @@ Memory Leaks...
 Testing
 ...particularly difficult!
 
-20
+21
 
 [12] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
@@ -881,7 +921,7 @@ unpublished.
 Computing in Science & Engineering, vol. 9, no. 3,
 pp. 10–20, 2007.
 
-21
+22
 
 [13] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
@@ -1032,7 +1072,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-22
+23
 
 A.1 BAMcheckR’d Example Output
 
@@ -1264,7 +1304,7 @@ FFQ
 0
 0
 
-23
+24
 
 1609
 
@@ -1606,7 +1646,7 @@ IS
 2
 0
 
-24
+25
 
 A.1 BAMcheckR’d Example Output
 
@@ -1885,7 +1925,7 @@ GCD
 0.101
 0.101
 
-25
+26
 
 A.2 auto_qc Decision Matrix
 
@@ -2020,7 +2060,7 @@ passed
 warning
 passed
 
-26
+27
 
 ...
 ...
