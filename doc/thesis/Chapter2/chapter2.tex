@@ -46,26 +46,24 @@ This part of the project can be outlined as follows:
 \end{figure}
 
 A \textbf{sample} is a distinct DNA specimen extracted from a particular person.
-For the purpose of sequencing, samples are then inserted in to a
-\textit{flowcell} such as the one in Figure~\ref{fig:flowcell} ---
-a glass slide containing a series of very thin tubles known as \textbf{lanes}.
-It is throughout these lanes that the chemical reactions involved in sequencing
-will take place.
+For the purpose of sequencing, samples are then pipetted in to a
+\textit{flowcell} such as the one in Figure~\ref{fig:flowcell} --- a glass slide
+containing a series of very thin tubules known as \textbf{lanes}.  It is
+throughout these lanes that the chemical reactions involved in sequencing will
+take place.
 
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width=0.5\textwidth]{NHGRI-80102}
+    \includegraphics[width=0.4\textwidth]{NHGRI-80102}
     \caption[flowcell]{An Illumina HiSeq Flowcell\citep{img:flowcell}}
     \label{fig:flowcell}
 \end{figure}
 
-Before the process begins, the samples are amplified in situ
-inside the flowcell itself (see Fig 1.2) whereby samples multiply in magnitude
-to form millions of dense clusters.
-
-Note that a lane can contain more than one sample and a sample can appear in
-more than one lane; this is "sample multiplexing" and helps to ensure that the
-failure of a particular lane does not hinder analysis of a sample.
+Once inserted, samples are amplified in situ inside the flowcell itself whereby
+samples multiply in magnitude to form millions of dense clusters. Note that a
+lane can contain more than one sample and a sample can appear in more than one
+lane; this is "sample multiplexing" and helps to ensure that the failure of a
+particular lane does not hinder analysis of a sample.
 
 A \textbf{lanelet} is the aggregate read of all clusters of a particular sample
 in a single lane. Figure~\ref{fig:lanelets} attempts to highlight examples of a
@@ -113,7 +111,7 @@ key-value pairs in the summary numbers section. A truncated example of a
 To use these "bamcheckr'd" files for training and testing a machine learning
 classifier, it is necessary to map each file to a classification result from
 \textbf{auto\_qc}. The one-to-one mapping between each input file and its label
-are provided by the Sanger Institute in a seperate file hereafter referred to as
+are provided by the Sanger Institute in a separate file hereafter referred to as
 the \textit{AQC Decision Matrix} or \textit{AQC (Decision) File}.
 
 A truncated example of such a file can be found in Appendix~\ref{app:aqc_matrix}.
@@ -219,7 +217,7 @@ mathematical functions...  ggplot2\citep{ggplot2} for beautiful graphing...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Testing}
 Investigated the possibility of using \textbf{Jenkins}
-but just didn't have the time to set up and tweak all the plugins and options of
+but did not have the time to set up and tweak all the plugins and options of
 the platform to do what I wanted... Would still have been poor in terms of
 searching through logs to track what parameters led to improvements in cross
 validation... ...Quite likely I'd have needed to author a Java or Groovy plugin
