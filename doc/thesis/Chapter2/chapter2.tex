@@ -31,6 +31,9 @@ This part of the project can be outlined as follows:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concepts and Terminology}
+\subsection{Whole Genome Sequencing}
+...the process of recovering the sequence of bases called nucleotides...
+
 \subsection{Samples, Lanes and Lanelets}
 
 %TODO Draw a vector of the lanelets diagram
@@ -41,11 +44,22 @@ This part of the project can be outlined as follows:
     \caption[lanelets]{Example of flowcell with some lanelets highlighted}
     \label{fig:lanelets}
 \end{figure}
-A \textbf{sample} is a distinct DNA specimen from a particular human such as
-yourself. Samples are then inserted in to a flowcell, which is essentially a
-series of very thin glass tubules, each tubule is described as a \textbf{lane}.
+
+A \textbf{sample} is a distinct DNA specimen extracted from a particular person.
+For the purpose of sequencing, samples are then inserted in to a
+\textit{flowcell} such as the one in Figure~\ref{fig:flowcell} ---
+a glass slide containing a series of very thin tubles known as \textbf{lanes}.
 It is throughout these lanes that the chemical reactions involved in sequencing
-will take place. Before the process begins, the samples are amplified in situ
+will take place.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{NHGRI-80102}
+    \caption[flowcell]{An Illumina HiSeq Flowcell\citep{img:flowcell}}
+    \label{fig:flowcell}
+\end{figure}
+
+Before the process begins, the samples are amplified in situ
 inside the flowcell itself (see Fig 1.2) whereby samples multiply in magnitude
 to form millions of dense clusters.
 
@@ -62,9 +76,9 @@ samples.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Materials and Methods}
-\subsection{Input Data and Format}
-\subsubsection{"BAMcheckR'd" Data}
+\chapter{Materials and Methods}
+\section{Input Data and Format}
+\subsection{"BAMcheckR'd" Data}
 
 %NOTE Assuming lanelets have been described by this point...
 %TODO samtools stats actually generates this data rather than "the seq process"
@@ -95,7 +109,7 @@ This process does not change the file other than adding a few additional
 key-value pairs in the summary numbers section. A truncated example of a
 "bamcheckr'd" file can be found in Appendix~\ref{app:bamcheckr}.
 
-\subsubsection{auto\_qc Decision Data}
+\subsection{auto\_qc Decision Data}
 To use these "bamcheckr'd" files for training and testing a machine learning
 classifier, it is necessary to map each file to a classification result from
 \textbf{auto\_qc}. The one-to-one mapping between each input file and its label
@@ -111,8 +125,8 @@ which are not included in the example for confidentiality (and brevity).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Development Environment}
-\subsubsection{Language}
+\section{Development Environment}
+\subsection{Language}
 %TODO Better opening
 %TODO Do I need to ramble about why vim is great and so on?
 For the language of the program designed to handle this vast array of input
@@ -166,7 +180,7 @@ available for C in particular; \textbf{dlib} did not support tree-based
 classifiers although an alternative, \textbf{Shark} did.
 
 
-\subsubsection{Framework}
+\subsection{Framework}
 
 Having studied the \textit{Machine and Intelligent Learning} module in final
 year, the prospect of getting stuck in to the deep of a machine learning
@@ -196,12 +210,14 @@ printing) ...with more time I'd certainly like to investigate using other
 libraries such as \textbf{Orange} or even outside Python and take at look at WEKA
 or Shark...
 
-\subsubsection{Additional External Libraries}
+\subsection{Additional External Libraries}
 %TODO Ref num,sci,matplot
 numpy\citep{numpyscipy} and scipy\citep{scipy}... Fast and reliable implementations of
 mathematical functions...  ggplot2\citep{ggplot2} for beautiful graphing...
 
-\subsubsection{Testing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Testing}
 Investigated the possibility of using \textbf{Jenkins}
 but just didn't have the time to set up and tweak all the plugins and options of
 the platform to do what I wanted... Would still have been poor in terms of
@@ -221,21 +237,18 @@ Really wanted to write my own solution for this but had to settle for well
 formatted log files that could be searched and processed with some command line
 fu...
 
-\subsubsection{Tools}
+\subsection{Tools}
 Version control is critical, \textbf{git}!
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %TODO Rubbish section title
-\section{Pre-Implementation}
-\subsection{Classification Correlation}
+\chapter{Pre-Implementation}
+\section{Classification Correlation}
 
 %TODO Lanelet...
-An important consideration for statistical analysis is the relation between 
-observations. 
-
-
-The quality data files we have are per lanelet, however a lane
+An important consideration for statistical analysis is the relation between
+observations. The quality data files we have are per lanelet, however a lane
 can house more than one lanelet...  and so herein lies the trouble, if during a
 run, the flow cell is somehow subjected to abnormal temperatures (air
 conditioning failure) or the sequencing device is depleted of reagents, every

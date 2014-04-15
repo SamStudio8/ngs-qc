@@ -28,7 +28,7 @@ Sam Nicholls
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[16]. However, these "next-generation" processes are
+both time and cost required to perform genetic analysis[17]. However, these "next-generation" processes are
 complex and open to error[9], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 During sample sequencing a large number of quality control metrics are generated to determine the quality
@@ -79,7 +79,7 @@ Methodology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 1.2.2
 
-Task and Time Management . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Task Management . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 4
 
@@ -115,113 +115,146 @@ Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 2.2.1
 
-Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Whole Genome Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 6
 
-Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2.2
+
+Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 7
-
-2.3.1
-
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-7
-
-2.3.2
-
-Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-8
-
-2.3
-
-2.4
-
-Pre-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
-2.4.1
 
 3
 
-Implementation
+Materials and Methods
+
+9
+
 3.1
-3.2
 
-3.3
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
-12
+9
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 3.1.1
+
+"BAMcheckR’d" Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+9
+
+3.1.2
+
+auto_qc Decision Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+9
+
+3.2
 
 4
 
-Classification Correlation
-
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
-
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
 3.2.1
 
-Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
 
 3.2.2
 
-SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Framework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+3.2.3
 
-Results
+Additional External Libraries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 
-15
+3.2.4
+
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+3.2.5
+
+Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+Pre-Implementation
+4.1
+
+13
+
+Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 Contents
-
-II
 5
 
-4.0.1
-
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
-
-4.0.2
-
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
-
-Identification of Qualitative Sample Properties
-Introduction and Motivation
-
-16
-17
-
+Implementation
 5.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+5.1.1
 
 5.2
 
-Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
-
-5.1.1
-5.2.1
 5.3
+6
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
-Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+II
+7
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
-5.3.1
+15
 
-Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+5.2.1
+
+Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+5.2.2
+
+SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+Results
+
+18
+
+6.0.1
+
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
+6.0.2
+
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
+Identification of Qualitative Sample Properties
+Introduction and Motivation
+7.1
+
+19
+20
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+7.1.1
+
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+
+7.2
+
+Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+7.2.1 Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+
+7.3
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+7.3.1
+
+Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 Appendix A Input Examples
 
-23
+26
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 iv
 
@@ -230,7 +263,7 @@ iv
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[16]. However, these "next-generation" processes are
+both time and cost required to perform genetic analysis[17]. However, these "next-generation" processes are
 complex and open to error[9], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
@@ -261,7 +294,7 @@ the warning level; a time consuming task which invites both inefficiency and err
 1.2 Project Method
 In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests
 that a machine learning classifier could potentially be trained on the combinations of quality control statistics
-available to make these conclusions without the need for much human intervention[10].
+available to make these conclusions without the need for much human intervention[11].
 The first part of the project aims to apply machine learning techniques to replicate the current auto_qc rule set
 by training a decision tree classifier on a large set of these quality metrics. The idea is to investigate whether
 these simple threshold based rules can be recovered from such data, or whether a new classifier would produce
@@ -355,7 +388,7 @@ may not be effective.
 
 1.2.2
 
-Task and Time Management
+Task Management
 
 Shortly before embarking on this dissertation project, I had written my own todo list web application; Triage[3].
 This will be useful in keeping track of current objectives and allow prioritisation. The list used to organise my
@@ -400,34 +433,50 @@ accuracy is improved
 2.2.1
 
 Concepts and Terminology
-Samples, Lanes and Lanelets
+Whole Genome Sequencing
 
-A sample is a distinct DNA specimen from a particular human such as yourself. Samples are then inserted in
-to a flowcell, which is essentially a series of very thin glass tubules, each tubule is described as a lane. It is
-throughout these lanes that the chemical reactions involved in sequencing will take place. Before the process
-begins, the samples are amplified in situ inside the flowcell itself (see Fig 1.2) whereby samples multiply in
-magnitude to form millions of dense clusters.
+...the process of recovering the sequence of bases called nucleotides...
 
 6
 
-2.3 Materials and Methods
+2.2 Concepts and Terminology
 
 Fig. 2.1 Example of flowcell with some lanelets highlighted
+
+2.2.2
+
+Samples, Lanes and Lanelets
+
+A sample is a distinct DNA specimen extracted from a particular person. For the purpose of sequencing,
+samples are then inserted in to a flowcell such as the one in Figure 2.2 — a glass slide containing a series of
+very thin tubles known as lanes. It is throughout these lanes that the chemical reactions involved in sequencing
+will take place.
+
+Fig. 2.2 An Illumina HiSeq Flowcell[10]
+Before the process begins, the samples are amplified in situ inside the flowcell itself (see Fig 1.2) whereby
+samples multiply in magnitude to form millions of dense clusters.
 Note that a lane can contain more than one sample and a sample can appear in more than one lane; this is
 "sample multiplexing" and helps to ensure that the failure of a particular lane does not hinder analysis of a
 sample.
 A lanelet is the aggregate read of all clusters of a particular sample in a single lane. Figure 2.1 attempts to
+7
+
+2.2 Concepts and Terminology
 highlight examples of a this (circled in blue - not all lanelets are highlighted). For example lane 5 shows the
 four clusters (in reality there would actually be millions) of Sample A combine to represent a lanelet. A lane
 will have as many lanelets as it does samples.
 
-2.3
-2.3.1
+8
+
+Chapter 3
 
 Materials and Methods
-Input Data and Format
+3.1
+3.1.1
 
+Input Data and Format
 "BAMcheckR’d" Data
+
 As part of the project I’ve been granted access to significant data sets at the Sanger Institute, unlocking quality
 control data for two of the largest studies currently undergoing analysis. A wide array of quality metrics are
 available for each and every lanelet that forms part of either of the two studies; totalling 13,455 files.
@@ -436,31 +485,35 @@ processing and manipulation of large alignments such as those produced by next-g
 are released under the umbrella name of "SAMtools"[8] (Sequence Alignment and Map Tools). samtools
 stats collects statistics from sequence data files and produces key-value summary numbers as well as more
 complex tab delimited dataframes tabulating several metrics over time.
-
-7
-
-2.3 Materials and Methods
 The output of samtools stats is then parsed by an in-house tool called bamcheckr, named so as samtools stats
 was once known as bamcheck and the tool is written in R. bamcheckr supplements the summary numbers
 section of the samtools stats output with additional metrics that are later used by auto_qc for classification.
 This process does not change the file other than adding a few additional key-value pairs in the summary
 numbers section. A truncated example of a "bamcheckr’d" file can be found in Appendix A.1.
 
+3.1.2
+
 auto_qc Decision Data
+
 To use these "bamcheckr’d" files for training and testing a machine learning classifier, it is necessary to map
 each file to a classification result from auto_qc. The one-to-one mapping between each input file and its label
 are provided by the Sanger Institute in a seperate file hereafter referred to as the AQC Decision Matrix or AQC
 (Decision) File.
+
+9
+
+3.2 Development Environment
 A truncated example of such a file can be found in Appendix A.2. Only the first few columns are included —
 indeed we are only interested in the lanelet and aqc which provide an identifier that maps the row to a given
 input file and its classification by auto_qc respectively. Latter columns pertain to a breakdown of decisions
 made by auto_qc which are not included in the example for confidentiality (and brevity).
 
-2.3.2
+3.2
+3.2.1
 
 Development Environment
-
 Language
+
 For the language of the program designed to handle this vast array of input data, Python was selected, more
 out of personal taste rather than a detailed analysis of required performance and features. From previous
 experience I was happy with the performance of Python when processing large datasets in terms of both I/O
@@ -478,25 +531,28 @@ application is deployed to servers at the Sanger Institute.
 Difficulty was also encountered finding example implementations for WEKA with most documentation and
 tutorials providing information for performing analysis via the graphical "Explorer" interface instead, which
 would not be appropriate for quickly setting up and repeating experiments automatically.
-
-8
-
-2.3 Materials and Methods
 Given the quality data we’ll be using to train a machine learning classifier is output from the previously
 mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
 seemed convenient.
-Whilst the tree[14] and rpart[17] packages are available for constructing decision trees in R (and actually
+Whilst the tree[15] and rpart[18] packages are available for constructing decision trees in R (and actually
 RWeka provides an R interface to WEKA) neither appeared to be as robust as other more well-known
-frameworks. Also putting it politely, the programming paradigm of R[13] is rather different to other languages
-and can significantly increase development time (and frustration[15]) if one is not very well versed in the
+frameworks. Also putting it politely, the programming paradigm of R[14] is rather different to other languages
+and can significantly increase development time (and frustration[16]) if one is not very well versed in the
 patterns and grammar of the language and it seemed best to stick to one’s comfort zone given the brief
 timescale for the project.
 Had performance been a critical decision factor, lower level languages such as C, C++ or even Fortran could be
 used. Briefly looking at two popular frameworks available for C in particular; dlib did not support tree-based
+
+10
+
+3.2 Development Environment
 classifiers although an alternative, Shark did.
 
+3.2.2
+
 Framework
+
 Having studied the Machine and Intelligent Learning module in final year, the prospect of getting stuck in to
 the deep of a machine learning algorithm was exciting. However the reality is that a lot of cumulative time and
 effort has gone in to creation and optimisation of a framework which is unlikely to be surpassed successfully
@@ -507,21 +563,24 @@ above and formed part of the development environment decisions. Whilst it is obv
 a framework which uses the same language as the project, it seemed counter-intuitive to select otherwise, for
 the establishing of additional arbitrary output and input steps to move data between the two environments
 could impede quick experiment repeatability and introduce error.
-A mixed bag of machine learning frameworks exist in Python, two in particular scikit-learn[12] and Orange[5]
+A mixed bag of machine learning frameworks exist in Python, two in particular scikit-learn[13] and Orange[5]
 were main contenders, partly on their recommendation from the project supervisor.
 ...scikit integrates the "big names" in Python: numpy, scipy and matplotlib ...put off from Orange due to
 difficulties in reading in data ...it did however later appear to ship with features that were not in scikit (pruning
 and printing) ...with more time I’d certainly like to investigate using other libraries such as Orange or even
 outside Python and take at look at WEKA or Shark...
 
+3.2.3
+
 Additional External Libraries
-numpy[11] and scipy[7]... Fast and reliable implementations of mathematical functions... ggplot2[18] for
+
+numpy[12] and scipy[7]... Fast and reliable implementations of mathematical functions... ggplot2[19] for
 beautiful graphing...
 
-9
+3.2.4
 
-2.4 Pre-Implementation
 Testing
+
 Investigated the possibility of using Jenkins but just didn’t have the time to set up and tweak all the plugins
 and options of the platform to do what I wanted... Would still have been poor in terms of searching through
 logs to track what parameters led to improvements in cross validation... ...Quite likely I’d have needed to
@@ -531,25 +590,41 @@ whilst quicker to set up would probably have not been able to handle artifacts s
 convoluted solution of uploading them to dropbox or adding them to a private git repository from the build
 node... ...also would have needed to upload a very large quantity of training data repeatedly which would be
 inefficient (and more than likely against reasonable use of the platform)
+
+11
+
+3.2 Development Environment
 Really wanted to write my own solution for this but had to settle for well formatted log files that could be
 searched and processed with some command line fu...
 
+3.2.5
+
 Tools
+
 Version control is critical, git!
 
-2.4
-2.4.1
+12
+
+Chapter 4
 
 Pre-Implementation
+4.1
+
 Classification Correlation
 
-An important consideration for statistical analysis is the relation between observations.
-The quality data files we have are per lanelet, however a lane can house more than one lanelet... and so herein
-lies the trouble, if during a run, the flow cell is somehow subjected to abnormal temperatures (air conditioning
-failure) or the sequencing device is depleted of reagents, every lane (and thus lanelet within) will be of very
-poor quality. Thus there would appear to exist a relationship between the respective qualities of each lanelet
-in a lane as well as each lane in a sequencing run!
-...Figure 2.2 displays a plot of auto_qc classification for each lanelet (y) versus lane (x). ...The plot was
+An important consideration for statistical analysis is the relation between observations. The quality data files
+we have are per lanelet, however a lane can house more than one lanelet... and so herein lies the trouble, if
+during a run, the flow cell is somehow subjected to abnormal temperatures (air conditioning failure) or the
+sequencing device is depleted of reagents, every lane (and thus lanelet within) will be of very poor quality.
+Thus there would appear to exist a relationship between the respective qualities of each lanelet in a lane as
+well as each lane in a sequencing run!
+
+Fig. 4.1 Heatmap of Lanelet QC Status by Lane
+
+13
+
+4.1 Classification Correlation
+...Figure 4.1 displays a plot of auto_qc classification for each lanelet (y) versus lane (x). ...The plot was
 designed to be a diagnostic test to see whether this was the case. I should mention that it seems there are few
 conditions under which a lanelet would fail irrespective of the auto_qc status of the rest of the lanelets in the
 lane; which mostly involve the preparation of the sample (which is easy to spot given it will cause poor quality
@@ -558,22 +633,16 @@ across all lanelets using that library sample).
 represents a warning. Grey areas are passes and were desaturated to make the other outcomes immediately
 obvious. It is clear that there are patches where lanelets have failed where entire lanes have not, but there does
 appear to be some correlation.
-
-10
-
-2.4 Pre-Implementation
-
-Fig. 2.2 Heatmap of Lanelet QC Status by Lane
 Having discussed this with the supervisor and contacts at the Sanger Institute we decided to continue...
 Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
 identified so the red bars of thicker-width arguably display some failures across entire flow cells.
 
-11
+14
 
-Chapter 3
+Chapter 5
 
 Implementation
-3.1
+5.1
 
 Introduction
 
@@ -581,7 +650,7 @@ This chapter introduces Frontier; the main programming effort for this part of t
 package that serves as a data manager, providing both interfaces to read inputs into structures in memory and
 to retrieve them in formats acceptable to a machine learning framework.
 
-3.1.1
+5.1.1
 
 Concepts
 
@@ -589,7 +658,7 @@ Classes and Labels
 API Access
 Cross Validation
 
-3.2
+5.2
 
 Implementation
 
@@ -601,9 +670,9 @@ the CLASSES (Listing 1) variable passed when the Statplexer is constructed. But 
 limited to our problem but rather any machine learning problem where you’d like to simplify your interactions
 which a very large dataset.
 
-12
+15
 
-3.2 Implementation
+5.2 Implementation
 
 CLASSES = {
 "pass": {
@@ -630,7 +699,7 @@ Cross Validation
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
-3.2.1
+5.2.1
 
 Contributions to bamcheckr
 
@@ -641,15 +710,15 @@ install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 # Install from local directory
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
 
-13
+16
 
-3.3 Testing
+5.3 Testing
 Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
 re-wrote in Python...
 ...R CMD BATCH issue
 ...Fixed a graph plotting failure. ...Writing additional routines...
 
-3.2.2
+5.2.2
 
 SelectKBest
 
@@ -657,43 +726,43 @@ SelectKBest
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
 version from master * needed use force np.float64 ...actually data was 0... gg :(
 
-3.3
+5.3
 
 Testing
 
-14
+17
 
-Chapter 4
+Chapter 6
 
 Results
-4.0.1
+6.0.1
 
 Initial Trees
 
-4.0.2
+6.0.2
 
 Parameter Sets
 
-15
+18
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-16
+19
 
-Chapter 5
+Chapter 7
 
 Introduction and Motivation
-5.1
+7.1
 
 Introduction
 
 This part of the project can be outlined as follows:
 • ...
 
-5.1.1
+7.1.1
 
 Why Goldilocks?
 
@@ -714,9 +783,9 @@ leaving out a lanelet from the full-sequence data lead to variant calls that bet
 cause the correspondence between the two sets to decrease? In which case, having identified such lanelets,
 can we look back to the quality parameters we’ve been analysing so far and find whether they have something
 in common in those cases?
-17
+20
 
-5.2 Materials and Methods
+7.2 Materials and Methods
 If we can, these parameters can be used to identify “good” or “bad” lanelets straight out of the machine! We
 know that lanelets that exhibit these quality variables will go on to improve or detriment analysis.
 However, variant calling is both computationally and time intensive. Whilst the Sanger Institute have significant
@@ -725,8 +794,8 @@ leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
 The candidate must not have too many variants, or too few; a sort of “Goldilocks genome”.
 
-5.2
-5.2.1
+7.2
+7.2.1
 
 Materials and Methods
 Input Data: Variant Call Format
@@ -753,20 +822,20 @@ bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.
 # which has a gzip(1) like interface"
 tabix -p vcf file.vcf.gz
 diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
-18
+21
 
-5.3 Implementation
+7.3 Implementation
 # Shows no difference! :)
 # http://samtools.sourceforge.net/tabix.shtml
 # http://vcftools.sourceforge.net/perl_module.html
 # http://www.biostars.org/p/51076/
 # http://vcftools.sourceforge.net/htslib.html#query
 
-5.3
+7.3
 
 Implementation
 
-5.3.1
+7.3.1
 
 Goldilocks
 
@@ -796,9 +865,9 @@ I’m happy to say I bypassed this option but thought it would be fun to conside
 A far more sensible solution would be to replace the list with a dictionary whose lookup is amortized to a
 constant time. The number of lookups is still incredibly substantial but a constant lookup is starting to make
 
-19
+22
 
-5.3 Implementation
+7.3 Implementation
 this sound viable. Using the variant positions as keys of a dictionary (in fact let’s use the previous minor
 suggestion and have a dictionary for each chromosome) we have:
 
@@ -835,9 +904,9 @@ Python scalar for comparison.
 That’s a lot of memory action!
 It then occurred to me that we’re interested in just how many variants are inside each region and our chromosome
 is handily encapsulated in a numpy array! Why don’t we just sum together the elements in each region?
-20
+23
 
-5.3 Implementation
+7.3 Implementation
 Remember variant positive base positions are 1 and 0 otherwise, useful! So the work boils down to some
 clever vector mathematics calculated by numpy!
 We don’t even lose any detail because the actual list of variants inside a region can be recovered in a small
@@ -861,17 +930,13 @@ Memory Leaks...
 Testing
 ...particularly difficult!
 
-21
+24
 
-[12] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
-B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
-R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
-D. Cournapeau, M. Brucher, M. Perrot, and
-E. Duchesnay, “Scikit-learn: Machine learning in
-Python,” Journal of Machine Learning Research,
-vol. 12, pp. 2825–2830, 2011.
-A machine learning framework for
-Python.
+[11] M. Niemi, “Internal QC Summary Report,” 09 2012,
+unpublished.
+[12] T. E. Oliphant, “Python for Scientific Computing,”
+Computing in Science & Engineering, vol. 9, no. 3,
+pp. 10–20, 2007.
 
 References
 [1] auto_qc: Additional high-throughput sequencing
@@ -915,35 +980,44 @@ vol. 10, no. 8, p. R83, 2009.
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
 during sequencing.
-[10] M. Niemi, “Internal QC Summary Report,” 09 2012,
-unpublished.
-[11] T. E. Oliphant, “Python for Scientific Computing,”
-Computing in Science & Engineering, vol. 9, no. 3,
-pp. 10–20, 2007.
+[10] Maggie Bartlett. (2011) Illumina HiSeq Flow
+Cell. National Human Genome Research Institute.
+Image. [Online]. Available: http://www.genome.gov/
+dmd/img.cfm?node=Photos/Technology/Genome%
+20analysis%20technology&id=80102
 
-22
+25
 
-[13] R Core Team, R: A Language and Environment for
+[13] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
+B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
+R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
+D. Cournapeau, M. Brucher, M. Perrot, and
+E. Duchesnay, “Scikit-learn: Machine learning in
+Python,” Journal of Machine Learning Research,
+vol. 12, pp. 2825–2830, 2011.
+A machine learning framework for
+Python.
+[14] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
 Computing, Vienna, Austria, 2013. [Online].
 Available: http://www.R-project.org/
-[14] B. Ripley, tree: Classification and regression trees,
+[15] B. Ripley, tree: Classification and regression trees,
 2014, r package version 1.0-35. [Online]. Available:
 http://CRAN.R-project.org/package=tree
-[15] T. Smith. (2012–2013) aRrgh:
+[16] T. Smith. (2012–2013) aRrgh:
 a newcomer’s
 (angry) guide to R. [Online]. Available: http:
 //tim-smith.us/arrgh/
-[16] T. Strachan and A. Read, Human Molecular Genetics,
+[17] T. Strachan and A. Read, Human Molecular Genetics,
 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
-[17] T. Therneau, B. Atkinson, and B. Ripley, rpart:
+[18] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
 4.1-3. [Online]. Available: http://CRAN.R-project.
 org/package=rpart
-[18] H. Wickham, ggplot2:
+[19] H. Wickham, ggplot2:
 elegant graphics for
 data analysis.
 Springer New York, 2009.
@@ -1072,7 +1146,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-23
+26
 
 A.1 BAMcheckR’d Example Output
 
@@ -1304,7 +1378,7 @@ FFQ
 0
 0
 
-24
+27
 
 1609
 
@@ -1646,7 +1720,7 @@ IS
 2
 0
 
-25
+28
 
 A.1 BAMcheckR’d Example Output
 
@@ -1925,7 +1999,7 @@ GCD
 0.101
 0.101
 
-26
+29
 
 A.2 auto_qc Decision Matrix
 
@@ -2060,7 +2134,7 @@ passed
 warning
 passed
 
-27
+30
 
 ...
 ...
