@@ -94,7 +94,6 @@ maintenance; useful given the short time-span allocated for this project and the
 possibility of others wishing to contribute to the project codebase after
 completion.
 
-%TODO Pushing WEKA too much with "certainly"?
 Whilst the choice was made primarily on preference, this is not to say other
 options were not considered: a highly popular Java-based collection of data
 mining tools, \textbf{WEKA}\citep{weka} would certainly have provided a
@@ -111,25 +110,26 @@ with most documentation and tutorials providing information for performing
 analysis via the graphical "Explorer" interface instead, which would not be
 appropriate for quickly setting up and repeating experiments automatically.
 
-%TODO Link to http://cran.r-project.org/web/packages/tree/tree.pdf
 Given the quality data we'll be using to train a machine learning classifier is
 output from the previously mentioned R script; \textbf{bamcheckr}, it was worth
 briefly investigating the options available for R itself as the potential of
 integrating the learning and predicting functions right in to the same process
 that outputs the data seemed convenient.
 
-...Whilst the \textbf{tree}\citep{man:rtree} and
-\textbf{rpart}\citep{man:rpart} packages are available for constructing
-decision trees in R but (and actually \textbf{RWeka} provides an R interface to
-\textbf{WEKA})...they did not appear to be as robust as other more well-known
-frameworks. Putting it politely, the programming paradigm of R\citep{man:R} is rather
-different to other languages and can significantly increase development time if
-one is not very well versed in the patterns and grammar of the language and it
-seemed best to stick to one's comfort zone.
+Whilst the \textbf{tree}\citep{man:rtree} and \textbf{rpart}\citep{man:rpart}
+packages are available for constructing decision trees in R (and actually
+\textbf{RWeka} provides an R interface to \textbf{WEKA}) neither appeared to be
+as robust as other more well-known frameworks. Also putting it politely, the
+programming paradigm of R\citep{man:R} is rather different to other languages
+and can significantly increase development time (and frustration\citep{argh}) if
+one is not very well versed in the patterns and grammar of the language  and it
+seemed best to stick to one's comfort zone given the brief timescale for the
+project.
 
-...C and C++ also a possibility, however \textbf{dlib} didn't support tree-based
-classifiers although \textbf{Shark} did, Python chosen in the end for ease of
-use...
+Had performance been a critical decision factor, lower level languages such as
+C, C++ or even Fortran could be used. Briefly looking at two popular frameworks
+available for C in particular; \textbf{dlib} did not support tree-based
+classifiers although an alternative, \textbf{Shark} did.
 
 
 \subsubsection{Framework}
