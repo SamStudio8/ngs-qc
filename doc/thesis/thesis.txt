@@ -28,8 +28,8 @@ Sam Nicholls
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[13]. However, these "next-generation" processes are
-complex and open to error[7], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[15]. However, these "next-generation" processes are
+complex and open to error[9], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 During sample sequencing a large number of quality control metrics are generated to determine the quality
 of the reads from the sequencing hardware itself. At the Wellcome Trust Sanger Institute, the automated QC
@@ -218,8 +218,8 @@ iv
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[13]. However, these "next-generation" processes are
-complex and open to error[7], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[15]. However, these "next-generation" processes are
+complex and open to error[9], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
 1.1
@@ -237,7 +237,7 @@ Analysis of Current System
 With the support of the Wellcome Trust Sanger Institute in Cambridge, this project works with the Human
 Genetics Informatics team to investigate auto_qc[1], the institute’s current automated quality control tool.
 During genetic sequencing a large number of metrics are generated to determine the quality of the data read
-from the sequencing hardware itself. As part of the current vertebrate sequencing pipeline[2] at the institute,
+from the sequencing hardware itself. As part of the current vertebrate sequencing pipeline[4] at the institute,
 auto_qc is responsible for applying quality control to samples within the pipeline by comparing a modest
 subset of these metrics to simple hard-coded hard thresholds; determining whether a particular sample has
 reached a level that requires a warning, or has exceeded the threshold and failed entirely. Whilst this does
@@ -249,7 +249,7 @@ the warning level; a time consuming task which invites both inefficiency and err
 1.2 Project Methodology
 In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests
 that a machine learning classifier could potentially be trained on the combinations of quality control statistics
-available to make these conclusions without the need for much human intervention[8].
+available to make these conclusions without the need for much human intervention[10].
 The first part of the project aims to apply machine learning techniques to replicate the current auto_qc rule set
 by training a decision tree classifier on a large set of these quality metrics. The idea is to investigate whether
 these simple threshold based rules can be recovered from such data, or whether a new classifier would produce
@@ -343,14 +343,18 @@ may not be effective.
 
 Task and Time Management
 
-Shortly before embarking on this dissertation project, I had written my own todo list web application; Triage.
+Shortly before embarking on this dissertation project, I had written my own todo list web application; Triage[3].
+This will be useful in keeping track of current objectives and allow prioritisation. The list used to organise my
+project is also publicly available[2].
 
 1.2.2
 
 Time Considerations
 
-It must be remembered that this is supposed to be a minor project completed alongside the study of other
-modules that have their own assignments...
+It must be remembered that this project needs to meet the requirements for a minor project and is to be
+completed alongside the study of several other modules which each have their own assignments and obligations.
+It would be easy to become overly ambitious and thus aims and goals will need to be revised as both obstacles
+and breakthroughs are encountered.
 
 4
 
@@ -394,7 +398,7 @@ available for each and every lanelet that forms part of either of the two studie
 2.2 Materials and Methods
 The files are created by samtools stats — part of a collection of widely used open-source utilities for post
 processing and manipulation of large alignments such as those produced by next-generation sequencers that
-are released under the umbrella name of "SAMtools"[6] (Sequence Alignment and Map Tools). samtools
+are released under the umbrella name of "SAMtools"[8] (Sequence Alignment and Map Tools). samtools
 stats collects statistics from sequence data files and produces key-value summary numbers as well as more
 complex tab delimited dataframes tabulating several metrics over time.
 The output of samtools stats is then parsed by an in-house tool called bamcheckr, named so as samtools stats
@@ -422,7 +426,7 @@ possible to rapidly develop applications and its readability eases ongoing maint
 time-span allocated for this project and the possibility of others wishing to contribute to the project codebase
 after completion.
 Whilst the choice was made primarily on preference, this is not to say other options were not considered:
-a highly popular Java-based collection of data mining tools, WEKA[4] would certainly have provided a
+a highly popular Java-based collection of data mining tools, WEKA[6] would certainly have provided a
 framework for building decision tree classifiers but at the same time did not appear to offer any significant
 features that were unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual
 machine to be installed which could be undesirable from a performance or even security standpoint when the
@@ -438,9 +442,9 @@ Given the quality data we’ll be using to train a machine learning classifier i
 mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
 seemed convenient.
-...Whilst the tree[12] and rpart[14] packages are available for constructing decision trees in R but (and
+...Whilst the tree[14] and rpart[16] packages are available for constructing decision trees in R but (and
 actually RWeka provides an R interface to WEKA)...they did not appear to be as robust as other more
-well-known frameworks. Putting it politely, the programming paradigm of R[11] is rather different to other
+well-known frameworks. Putting it politely, the programming paradigm of R[13] is rather different to other
 languages and can significantly increase development time if one is not very well versed in the patterns and
 grammar of the language and it seemed best to stick to one’s comfort zone.
 ...C and C++ also a possibility, however dlib didn’t support tree-based classifiers although Shark did, Python
@@ -454,7 +458,7 @@ It is therefore only natural that a library seems a wise investment for the code
 ...There are numerous machine learning frameworks available in many languages, some described above...
 however it seemed counter-intuitive to select a framework in another language for the introduction of an
 additional arbitrary output and input steps to switch between the two environments.
-...A mixed bag of such frameworks exist in Python, two in particular scikit-learn[10] and Orange[3] were
+...A mixed bag of such frameworks exist in Python, two in particular scikit-learn[12] and Orange[5] were
 main contenders, partly on their recommendation from the project supervisor...
 ...scikit integrates the "big names" in Python: numpy, scipy and matplotlib ...put off from Orange due to
 difficulties in reading in data ...it did however later appear to ship with features that were not in scikit (pruning
@@ -462,7 +466,7 @@ and printing) ...with more time I’d certainly like to investigate using other 
 outside Python and take at look at WEKA or Shark...
 
 Libraries
-numpy[9] and scipy[5]... Fast and reliable implementations of mathematical functions... ggplot2[15] for
+numpy[11] and scipy[7]... Fast and reliable implementations of mathematical functions... ggplot2[17] for
 beautiful graphing...
 
 Testing
@@ -811,79 +815,83 @@ Testing
 
 20
 
-Python,” Journal of Machine Learning Research,
+[12] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
+B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
+R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
+D. Cournapeau, M. Brucher, M. Perrot, and
+E. Duchesnay, “Scikit-learn: Machine learning in
+Python,” Journal of Machine Learning Research,
 vol. 12, pp. 2825–2830, 2011.
 A machine learning framework for
 Python.
-[11] R Core Team, R: A Language and Environment for
-Statistical Computing, R Foundation for Statistical
-Computing, Vienna, Austria, 2013. [Online].
-Available: http://www.R-project.org/
 
 References
-
-[12] B. Ripley, tree: Classification and regression trees,
-2014, r package version 1.0-35. [Online]. Available:
-http://CRAN.R-project.org/package=tree
-
 [1] auto_qc: Additional high-throughput sequencing
 autoQC steps [Github]. [Online]. Available:
 https://github.com/wtsi-hgi/seq_autoqc
-[2] vr-pipe: A generic pipeline system [Github]. [Online].
+[2] sam/Dissertation | Triage. [Online]. Available:
+https://triage.ironowl.io/sam/dissertation/
+[3] Triage:
+A todo manager for the disaster
+that is your day [Github]. [Online]. Available:
+https://github.com/SamStudio8/triage
+[4] vr-pipe: A generic pipeline system [Github]. [Online].
 Available: https://github.com/wtsi-hgi/vr-pipe/
 ˇ Gorup, T. Hoˇcevar,
-[3] J. Demšar, T. Curk, A. Erjavec, Crt
+[5] J. Demšar, T. Curk, A. Erjavec, Crt
 M. Milutinoviˇc, M. Možina, M. Polajnar, M. Toplak,
 A. Stariˇc, M. Štajdohar, L. Umek, L. Žagar, J. Žbontar,
 M. Žitnik, and B. Zupan, “Orange: Data Mining
 Toolbox in Python,” Journal of Machine Learning
 Research, vol. 14, pp. 2349–2353, 2013. [Online].
 Available: http://jmlr.org/papers/v14/demsar13a.html
-[4] M. Hall, E. Frank, G. Holmes, B. Pfahringer,
+[6] M. Hall, E. Frank, G. Holmes, B. Pfahringer,
 P. Reutemann, and I. H. Witten, “The WEKA
 Data Mining Software: An Update,” SIGKDD
 Explorations Newsletter, vol. 11, no. 1, pp.
 10–18, Nov. 2009. [Online]. Available:
 http:
 //doi.acm.org/10.1145/1656274.1656278
-[5] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
+[7] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
 source scientific tools for Python,” 2001–. [Online].
 Available: http://www.scipy.org/
-[6] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
+[8] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
 N. Homer, G. Marth, G. Abecasis, R. Durbin, and
 G. Subgroup, “ The Sequence Alignment/Map format
 and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
 2009.
-[7] M. Kircher, U. Stenzel and J. Kelso, “Improved
+[9] M. Kircher, U. Stenzel and J. Kelso, “Improved
 base calling for the Illumina Genome Analyzer
 using machine learning strategies,” Genome Biology,
 vol. 10, no. 8, p. R83, 2009.
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
 during sequencing.
-[8] M. Niemi, “Internal QC Summary Report,” 09 2012,
+[10] M. Niemi, “Internal QC Summary Report,” 09 2012,
 unpublished.
-[9] T. E. Oliphant, “Python for Scientific Computing,”
+[11] T. E. Oliphant, “Python for Scientific Computing,”
 Computing in Science & Engineering, vol. 9, no. 3,
 pp. 10–20, 2007.
-[10] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
-B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
-R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
-D. Cournapeau, M. Brucher, M. Perrot, and
-E. Duchesnay, “Scikit-learn: Machine learning in
 
 21
 
-[13] T. Strachan and A. Read, Human Molecular Genetics,
+[13] R Core Team, R: A Language and Environment for
+Statistical Computing, R Foundation for Statistical
+Computing, Vienna, Austria, 2013. [Online].
+Available: http://www.R-project.org/
+[14] B. Ripley, tree: Classification and regression trees,
+2014, r package version 1.0-35. [Online]. Available:
+http://CRAN.R-project.org/package=tree
+[15] T. Strachan and A. Read, Human Molecular Genetics,
 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
-[14] T. Therneau, B. Atkinson, and B. Ripley, rpart:
+[16] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
 4.1-3. [Online]. Available: http://CRAN.R-project.
 org/package=rpart
-[15] H. Wickham, ggplot2:
+[17] H. Wickham, ggplot2:
 elegant graphics for
 data analysis.
 Springer New York, 2009.
