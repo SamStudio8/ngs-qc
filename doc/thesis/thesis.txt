@@ -493,8 +493,8 @@ available for each and every lanelet that forms part of either of the two studie
 The files are created by samtools stats — part of a collection of widely used open-source utilities for post
 processing and manipulation of large alignments such as those produced by next-generation sequencers that
 are released under the umbrella name of "SAMtools"[10] (Sequence Alignment and Map Tools). samtools
-stats collects statistics from sequence data files and produces key-value summary numbers as well as more
-complex tab delimited dataframes tabulating several metrics over time.
+stats collects statistics from sequence data files complex tab delimited dataframes tabulating several metrics
+over time.
 The output of samtools stats is then parsed by an in-house tool called bamcheckr, named so as samtools stats
 was once known as bamcheck and the tool is written in R. bamcheckr supplements the summary numbers
 section of the samtools stats output with additional metrics that are later used by auto_qc for classification.
@@ -651,19 +651,30 @@ Figure 4.1 displays a plot of auto_qc classification for each lanelet in a lane.
 where each lane stands as a vertical bar, broken in to horizontal cells, each of which represents a lanelet that
 was sequenced in that particular lane. These lanelets are colour coded using; red for failures, yellow for
 warnings and grey for passes (to allow the other two classes to be more easily seen).
-Therefore an unbroken vertical red line indicates that all lanelets that comprise of that line failed to pass
-auto_qc. In reality there are few conditions under which a lanelet would fail irrespective of the auto
-I should mention that it seems there are few conditions under which a lanelet would fail irrespective of the
-auto_qc status of the rest of the lanelets in the lane; which mostly involve the preparation of the sample (which
-is easy to spot given it will cause poor quality across all lanelets using that library sample). for each lanelet
-(y) versus lane (x).
-...an unbroken vertical red bar indicates that all the lanelets inside a particular lane failed. Likewise yellow
-represents a warning. Grey areas are passes and were desaturated to make the other outcomes immediately
-obvious. It is clear that there are patches where lanelets have failed where entire lanes have not, but there does
-appear to be some correlation.
-Having discussed this with the supervisor and contacts at the Sanger Institute we decided to continue...
-Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
-identified so the red bars of thicker-width arguably display some failures across entire flow cells.
+Therefore an unbroken vertical red line indicates that all lanelets that comprise of that line failed to pass some
+aspect of the current auto_qc thresholds. In reality there are few conditions under which a lanelet would fail
+irrespective of the status of the rest of the lanelets in the same lane which typically involve an error during
+the preparation of the sample (an easy to spot result as it will cause poor quality across all lanelets using that
+sample).
+Overall there are a series of instances appearing to support correlation for whole-lane failures and warnings
+but despite this there do appear to be occasions where a lanelet has failed where the remainder of the lane
+has not. Having discussed this with the project supervisor and contacts at the Sanger Institute we decided to
+continue to the implementation stage, agreeing that whilst some evidence of correlation between lanelets in
+the same lane has emerged, we will still be able to recover parameters that will be useful to quality control and
+statistical testing may be required following this analysis to describe how powerful such parameters are taking
+this possible correlation in to account.
+It should be noted that the proportion of failures and warnings is considerably smaller than passes and so care
+will need to be taken to find a balance; for example it would not be feasible to merely discard lanelets from
+lanes that have failed entirely as there’d hardly be any data on which to train a classifier! Indeed other solutions
+may be possible, perhaps weighting observations which exhibit similar behaviour to other lanelets in their lane
+so as to give their parameter values less priority during the construction of the classifier itself.
+It may be worth nothing that although the plot does not make a particular distinction between lanes in the
+same flow cell, lanes are sequentially identified so the red bars of thicker-width arguably display some failures
+across entire flow cells.
+As a final note it should be stressed that this plot should be regarded as a diagnostic rather than an experiment
+with a direct conclusion. Given more time it would be useful to investigate the nature of these possible
+correlations, given a lane that has failed across all lanelets, do those lanelets actually express similar quality
+metrics?
 
 14
 
@@ -692,9 +703,10 @@ Implementation
 
 ...provides a class to read from the "bamcheckr’d files" as seen in Appendix A.1... as well as the auto_qc
 output matrix briefly demonstrated in Appendix A.2...
-...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more
-general purpose tool; if we were to add another class label, the definition would merely need to be included to
-the CLASSES (Listing 1) variable passed when the Statplexer is constructed. But use is therefore not merely
+...initially designed specically for the given learning problem, with hard coded classes and encodings... ...a
+major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more general
+purpose tool; if we were to add another class label, the definition would merely need to be included to the
+CLASSES (Listing 1) variable passed when the Statplexer is constructed. But use is therefore not merely
 limited to our problem but rather any machine learning problem where you’d like to simplify your interactions
 which a very large dataset.
 
@@ -722,7 +734,9 @@ CLASSES = {
 Listing 1 Class definitions for auto_qc as passed to Frontier
 
 Cross Validation
-...K fold cross validation ...stratified cross validation...
+...method in which to measure classification accuracy... ...potentially use a weighting to penalise mistakes in
+smaller classes...
+...K fold cross validation ...using stratified K fold cross validation...
 
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
@@ -735,12 +749,12 @@ install.packages("devtools")
 library(devtools)
 # Install directly from github repository
 install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
-# Install from local directory
-install("/home/sam/Projects/seq_autoqc/bamcheckr")
 
 16
 
 5.3 Testing
+# Install from local directory
+install("/home/sam/Projects/seq_autoqc/bamcheckr")
 Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
 re-wrote in Python...
 ...R CMD BATCH issue

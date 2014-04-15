@@ -30,6 +30,8 @@ retrieve them in formats acceptable to a machine learning framework.
 Appendix~\ref{app:bamcheckr}... as well as the auto\_qc output matrix briefly
 demonstrated in Appendix~\ref{app:aqc_matrix}...
 
+...initially designed specically for the given learning problem, with hard coded
+classes and encodings...
 ...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
 enable it to be used as a more general purpose tool; if we were to add another
 class label, the definition would merely need to be included to the CLASSES
@@ -69,8 +71,12 @@ which a very large dataset.
 
 
 \subsubsection{Cross Validation}
+
+...method in which to measure classification accuracy...
+...potentially use a weighting to penalise mistakes in smaller classes...
+
 ...K fold cross validation
-...stratified cross validation...
+...using stratified K fold cross validation...
 
 \subsubsection{Confusion Matrices}
 "Normal" confusion matrix and "Warnings" confusion matrix...
@@ -111,3 +117,4 @@ re-wrote in Python...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Testing}
+
