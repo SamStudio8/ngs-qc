@@ -129,62 +129,57 @@ Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Materials and Methods
 
-8
+9
 
 3.1
 
 Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-8
+9
 
 3.1.1
 
 "BAMcheckR’d" Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-8
+9
 
 3.1.2
 
 auto_qc Decision Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-8
-
-Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
 9
-
-3.2.1
-
-Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-9
-
-3.2.2
-
-Framework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
-
-3.2.3
-
-Additional External Libraries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
-
-3.2.4
-
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
-
-3.2.5
-
-Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 
 3.2
 
 4
 
+Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+3.2.1
+
+Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+3.2.2
+
+Framework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+3.2.3
+
+Additional External Libraries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+3.2.4
+
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+3.2.5
+
+Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
 Pre-Implementation
 4.1
 
-12
+13
 
-Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 Contents
 5
@@ -192,7 +187,7 @@ Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Implementation
 5.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
 5.1.1
 
 5.2
@@ -203,63 +198,63 @@ Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 II
 7
 
-14
+15
 
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
 5.2.1
 
-Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
 
 5.2.2
 
-SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 Results
 
-17
+18
 
 6.0.1
 
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
 6.0.2
 
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
 7.1
 
-18
 19
+20
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 7.1.1
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 
 7.2
 
-Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
-7.2.1 Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+7.2.1 Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
 7.3
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 7.3.1
 
-Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 Appendix A Input Examples
 
-25
+26
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 iv
 
@@ -459,23 +454,29 @@ Whole Genome Sequencing
 Samples, Lanes and Lanelets
 
 A sample is a distinct DNA specimen extracted from a particular person. For the purpose of sequencing,
-samples are then pipetted in to a flowcell such as the one in Figure 2.1 — a glass slide containing a series
-of very thin tubules known as lanes. It is throughout these lanes that the chemical reactions involved in
-sequencing will take place.
+samples are pipetted in to a flowcell such as the one in Figure 2.1 — a glass slide containing a series of very
+thin tubules known as lanes. It is throughout these lanes that the chemical reactions involved in sequencing
+will take place.
 
 Fig. 2.1 An Illumina HiSeq Flowcell[12]
-Once inserted, samples are amplified in situ inside the flowcell itself whereby samples multiply in magnitude
-to form millions of dense clusters. Note that a lane can contain more than one sample and a sample can appear
-in more than one lane; this is "sample multiplexing" and helps to ensure that the failure of a particular lane
-does not hinder analysis of a sample.
-A lanelet is the aggregate read of all clusters of a particular sample in a single lane. Figure 2.2 attempts to
-highlight examples of a this (circled in blue - not all lanelets are highlighted). For example lane 5 shows the
-four clusters (in reality there would actually be millions) of Sample A combine to represent a lanelet. A lane
-will have as many lanelets as it does samples.
+Once inserted, samples are amplified in situ, in the flowcell itself. A process in which the genetic material
+of each sample is caused to multiply in magnitude to form a dense cluster of the sample around the original.
+Millions of clusters will be created throughout each lane of the flowcell.
+Note that a lane can contain more than one sample and a sample can appear in more than one lane; this is
+known as sample multiplexing and helps to ensure that the failure of a particular lane does not hinder analysis
+of a sample (as it will still be sequenced as part of another lane).
+The more abstract of the definitions; a lanelet is the aggregate read of all clusters of a particular sample in a
+single lane. Figure 2.2 attempts to highlight examples of a this (circled in blue - not all lanelets are highlighted).
+For example lane 5 shows the four clusters (in reality there would actually be millions) of Sample A combine
+to represent a lanelet. A lane will have as many lanelets as it does samples.
+
+7
+
+2.2 Concepts and Terminology
 
 Fig. 2.2 Example of flowcell with some lanelets highlighted
 
-7
+8
 
 Chapter 3
 
@@ -509,7 +510,7 @@ each file to a classification result from auto_qc. The one-to-one mapping betwee
 are provided by the Sanger Institute in a separate file hereafter referred to as the AQC Decision Matrix or AQC
 (Decision) File.
 
-8
+9
 
 3.2 Development Environment
 A truncated example of such a file can be found in Appendix A.2. Only the first few columns are included —
@@ -553,7 +554,7 @@ timescale for the project.
 Had performance been a critical decision factor, lower level languages such as C, C++ or even Fortran could be
 used. Briefly looking at two popular frameworks available for C in particular; dlib did not support tree-based
 
-9
+10
 
 3.2 Development Environment
 classifiers although an alternative, Shark did.
@@ -600,7 +601,7 @@ access[7]. Whilst in this scenario there will be much less "risk" from integrati
 team size, the themes of automated building and self-testing code can be taken on board.
 Jenkins is a highly popular[2] example of such a platform with which I am familiar. Although an out-of-the-box
 Jenkins set-up is suitable for variety of software engineering projects, it would be necessary to invest some
-10
+11
 
 3.2 Development Environment
 time to install and tweak plugins to perform actions on test results (such as failing a build that causes accuracy
@@ -623,7 +624,7 @@ Tools
 
 Version control is critical, git!
 
-11
+12
 
 Chapter 4
 
@@ -641,7 +642,7 @@ depleted of reagents then every lane (and thus all lanelets within) will be of v
 Fig. 4.1 Heatmap of Lanelet QC Status by Lane: Lanes are Vertical bars with each lanelet cell coloured red
 to represent a failure, yellow for a warning and grey for a pass.
 In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
-12
+13
 
 4.1 Classification Correlation
 a lane as well as each lane in a sequencing run. To examine this further, an R script utilising ggplot2 was
@@ -664,7 +665,7 @@ Having discussed this with the supervisor and contacts at the Sanger Institute w
 Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
 identified so the red bars of thicker-width arguably display some failures across entire flow cells.
 
-13
+14
 
 Chapter 5
 
@@ -697,7 +698,7 @@ the CLASSES (Listing 1) variable passed when the Statplexer is constructed. But 
 limited to our problem but rather any machine learning problem where you’d like to simplify your interactions
 which a very large dataset.
 
-14
+15
 
 5.2 Implementation
 
@@ -737,7 +738,7 @@ install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 # Install from local directory
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
 
-15
+16
 
 5.3 Testing
 Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
@@ -757,7 +758,7 @@ version from master * needed use force np.float64 ...actually data was 0... gg :
 
 Testing
 
-16
+17
 
 Chapter 6
 
@@ -770,14 +771,14 @@ Initial Trees
 
 Parameter Sets
 
-17
+18
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-18
+19
 
 Chapter 7
 
@@ -810,7 +811,7 @@ leaving out a lanelet from the full-sequence data lead to variant calls that bet
 cause the correspondence between the two sets to decrease? In which case, having identified such lanelets,
 can we look back to the quality parameters we’ve been analysing so far and find whether they have something
 in common in those cases?
-19
+20
 
 7.2 Materials and Methods
 If we can, these parameters can be used to identify “good” or “bad” lanelets straight out of the machine! We
@@ -849,7 +850,7 @@ bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.
 # which has a gzip(1) like interface"
 tabix -p vcf file.vcf.gz
 diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
-20
+21
 
 7.3 Implementation
 # Shows no difference! :)
@@ -892,7 +893,7 @@ I’m happy to say I bypassed this option but thought it would be fun to conside
 A far more sensible solution would be to replace the list with a dictionary whose lookup is amortized to a
 constant time. The number of lookups is still incredibly substantial but a constant lookup is starting to make
 
-21
+22
 
 7.3 Implementation
 this sound viable. Using the variant positions as keys of a dictionary (in fact let’s use the previous minor
@@ -931,7 +932,7 @@ Python scalar for comparison.
 That’s a lot of memory action!
 It then occurred to me that we’re interested in just how many variants are inside each region and our chromosome
 is handily encapsulated in a numpy array! Why don’t we just sum together the elements in each region?
-22
+23
 
 7.3 Implementation
 Remember variant positive base positions are 1 and 0 otherwise, useful! So the work boils down to some
@@ -957,7 +958,7 @@ Memory Leaks...
 Testing
 ...particularly difficult!
 
-23
+24
 
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
@@ -1057,7 +1058,7 @@ base calling for the Illumina Genome Analyzer
 using machine learning strategies,” Genome Biology,
 vol. 10, no. 8, p. R83, 2009.
 
-24
+25
 
 Appendix A
 
@@ -1181,7 +1182,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-25
+26
 
 A.1 BAMcheckR’d Example Output
 
@@ -1413,7 +1414,7 @@ FFQ
 0
 0
 
-26
+27
 
 1609
 
@@ -1755,7 +1756,7 @@ IS
 2
 0
 
-27
+28
 
 A.1 BAMcheckR’d Example Output
 
@@ -2034,7 +2035,7 @@ GCD
 0.101
 0.101
 
-28
+29
 
 A.2 auto_qc Decision Matrix
 
@@ -2169,7 +2170,7 @@ passed
 warning
 passed
 
-29
+30
 
 ...
 ...

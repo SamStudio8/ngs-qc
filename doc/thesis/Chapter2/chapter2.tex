@@ -40,8 +40,8 @@ This part of the project can be outlined as follows:
 %TODO Draw a vector of the lanelets diagram
 %TODO Illumina DNA Synthesis Image
 A \textbf{sample} is a distinct DNA specimen extracted from a particular person.
-For the purpose of sequencing, samples are then pipetted in to a
-\textit{flowcell} such as the one in Figure~\ref{fig:flowcell} --- a glass slide
+For the purpose of sequencing, samples are pipetted in to a \textit{flowcell}
+such as the one in Figure~\ref{fig:flowcell} --- a glass slide
 containing a series of very thin tubules known as \textbf{lanes}.  It is
 throughout these lanes that the chemical reactions involved in sequencing will
 take place.
@@ -53,18 +53,22 @@ take place.
     \label{fig:flowcell}
 \end{figure}
 
-Once inserted, samples are amplified in situ inside the flowcell itself whereby
-samples multiply in magnitude to form millions of dense clusters. Note that a
-lane can contain more than one sample and a sample can appear in more than one
-lane; this is "sample multiplexing" and helps to ensure that the failure of a
-particular lane does not hinder analysis of a sample.
+Once inserted, samples are amplified in situ, in the flowcell itself. A
+process in which the genetic material of each sample is caused to multiply in
+magnitude to form a dense cluster of the sample around the original. Millions of
+clusters will be created throughout each lane of the flowcell.
 
-A \textbf{lanelet} is the aggregate read of all clusters of a particular sample
-in a single lane. Figure~\ref{fig:lanelets} attempts to highlight examples of a
-this (circled in blue - not all lanelets are highlighted). For example lane 5
-shows the four clusters (in reality there would actually be millions) of Sample
-A combine to represent a lanelet. A lane will have as many lanelets as it does
-samples.
+Note that a lane can contain more than one sample and a sample can appear in
+more than one lane; this is known as \textit{sample multiplexing} and helps to
+ensure that the failure of a particular lane does not hinder analysis of a
+sample (as it will still be sequenced as part of another lane).
+
+The more abstract of the definitions; a \textbf{lanelet} is the aggregate read
+of all clusters of a particular sample in a single lane.
+Figure~\ref{fig:lanelets} attempts to highlight examples of a this (circled in
+blue - not all lanelets are highlighted). For example lane 5 shows the four
+clusters (in reality there would actually be millions) of Sample A combine to
+represent a lanelet. A lane will have as many lanelets as it does samples.
 
 \begin{figure}[htbp!]
     \centering
@@ -94,10 +98,10 @@ each and every lanelet that forms part of either of the two studies; totalling
 The files are created by \textbf{samtools stats} --- part of a collection of
 widely used open-source utilities for post processing and manipulation of large
 alignments such as those produced by next-generation sequencers that are
-released under the umbrella name of "SAMtools"\citep{samtools} (Sequence Alignment and Map
-Tools). \textbf{samtools stats} collects statistics from sequence data files %BAM
-and produces key-value summary numbers as well as more complex tab delimited
-dataframes tabulating several metrics over time.
+released under the umbrella name of "SAMtools"\citep{samtools} (Sequence
+Alignment and Map Tools). \textbf{samtools stats} collects statistics from
+sequence data files %BAM and produces key-value summary numbers as well as more
+complex tab delimited dataframes tabulating several metrics over time.
 
 %TODO Was samtools stats known as bamcheck, or did it replace it?
 The output of \textbf{samtools stats} is then parsed by an in-house tool called
