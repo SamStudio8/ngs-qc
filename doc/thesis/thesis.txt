@@ -28,7 +28,7 @@ Sam Nicholls
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[12]. However, these "next-generation" processes are
+both time and cost required to perform genetic analysis[13]. However, these "next-generation" processes are
 complex and open to error[7], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 During sample sequencing a large number of quality control metrics are generated to determine the quality
@@ -218,7 +218,7 @@ iv
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[12]. However, these "next-generation" processes are
+both time and cost required to perform genetic analysis[13]. However, these "next-generation" processes are
 complex and open to error[7], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
@@ -249,7 +249,7 @@ the warning level; a time consuming task which invites both inefficiency and err
 1.2 Project Methodology
 In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests
 that a machine learning classifier could potentially be trained on the combinations of quality control statistics
-available to make these conclusions without the need for much human intervention.
+available to make these conclusions without the need for much human intervention[8].
 The first part of the project aims to apply machine learning techniques to replicate the current auto_qc rule set
 by training a decision tree classifier on a large set of these quality metrics. The idea is to investigate whether
 these simple threshold based rules can be recovered from such data, or whether a new classifier would produce
@@ -438,9 +438,9 @@ Given the quality data we’ll be using to train a machine learning classifier i
 mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
 seemed convenient.
-...Whilst the tree[11] and rpart[13] packages are available for constructing decision trees in R but (and
+...Whilst the tree[12] and rpart[14] packages are available for constructing decision trees in R but (and
 actually RWeka provides an R interface to WEKA)...they did not appear to be as robust as other more
-well-known frameworks. Putting it politely, the programming paradigm of R[10] is rather different to other
+well-known frameworks. Putting it politely, the programming paradigm of R[11] is rather different to other
 languages and can significantly increase development time if one is not very well versed in the patterns and
 grammar of the language and it seemed best to stick to one’s comfort zone.
 ...C and C++ also a possibility, however dlib didn’t support tree-based classifiers although Shark did, Python
@@ -454,15 +454,15 @@ It is therefore only natural that a library seems a wise investment for the code
 ...There are numerous machine learning frameworks available in many languages, some described above...
 however it seemed counter-intuitive to select a framework in another language for the introduction of an
 additional arbitrary output and input steps to switch between the two environments.
-...A mixed bag of such frameworks exist in Python, two in particular scikit-learn[9] and Orange[3] were main
-contenders, partly on their recommendation from the project supervisor...
+...A mixed bag of such frameworks exist in Python, two in particular scikit-learn[10] and Orange[3] were
+main contenders, partly on their recommendation from the project supervisor...
 ...scikit integrates the "big names" in Python: numpy, scipy and matplotlib ...put off from Orange due to
 difficulties in reading in data ...it did however later appear to ship with features that were not in scikit (pruning
 and printing) ...with more time I’d certainly like to investigate using other libraries such as Orange or even
 outside Python and take at look at WEKA or Shark...
 
 Libraries
-numpy[8] and scipy[5]... Fast and reliable implementations of mathematical functions... ggplot2[14] for
+numpy[9] and scipy[5]... Fast and reliable implementations of mathematical functions... ggplot2[15] for
 beautiful graphing...
 
 Testing
@@ -811,16 +811,18 @@ Testing
 
 20
 
-A machine learning framework for
+Python,” Journal of Machine Learning Research,
+vol. 12, pp. 2825–2830, 2011.
+A machine learning framework for
 Python.
-[10] R Core Team, R: A Language and Environment for
+[11] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
 Computing, Vienna, Austria, 2013. [Online].
 Available: http://www.R-project.org/
 
 References
 
-[11] B. Ripley, tree: Classification and regression trees,
+[12] B. Ripley, tree: Classification and regression trees,
 2014, r package version 1.0-35. [Online]. Available:
 http://CRAN.R-project.org/package=tree
 
@@ -859,29 +861,29 @@ vol. 10, no. 8, p. R83, 2009.
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
 during sequencing.
-[8] T. E. Oliphant, “Python for Scientific Computing,”
+[8] M. Niemi, “Internal QC Summary Report,” 09 2012,
+unpublished.
+[9] T. E. Oliphant, “Python for Scientific Computing,”
 Computing in Science & Engineering, vol. 9, no. 3,
 pp. 10–20, 2007.
-[9] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
+[10] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
 R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
 D. Cournapeau, M. Brucher, M. Perrot, and
 E. Duchesnay, “Scikit-learn: Machine learning in
-Python,” Journal of Machine Learning Research,
-vol. 12, pp. 2825–2830, 2011.
 
 21
 
-[12] T. Strachan and A. Read, Human Molecular Genetics,
+[13] T. Strachan and A. Read, Human Molecular Genetics,
 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
-[13] T. Therneau, B. Atkinson, and B. Ripley, rpart:
+[14] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
 4.1-3. [Online]. Available: http://CRAN.R-project.
 org/package=rpart
-[14] H. Wickham, ggplot2:
+[15] H. Wickham, ggplot2:
 elegant graphics for
 data analysis.
 Springer New York, 2009.
