@@ -1,4 +1,4 @@
-\chapter{Frontier}
+\chapter{Implementation}
 \ifpdf
     \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
 \else
@@ -6,12 +6,25 @@
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+%TODO Better description of Frontier
+This chapter introduces \textbf{Frontier}; the main programming effort for this
+part of the project. Frontier is a Python package that serves as a data manager,
+providing both interfaces to read inputs into structures in memory and to
+retrieve them in formats acceptable to a machine learning framework.
+
+\subsection{Concepts}
+
+\subsubsection{Classes and Labels}
+
+\subsubsection{API Access}
+
+\subsubsection{Cross Validation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
 
-\textbf{Frontier} is the programmatic output for this part of the project...
-providing an API-like interface to the data itself... ...allowing simple
-commands to pull the data out from memory in to formats acceptable by the machine
-learning framework...
 
 ...provides a class to read from the "bamcheckr'd files" as seen in
 Appendix~\ref{app:bamcheckr}... as well as the auto\_qc output matrix briefly
@@ -55,7 +68,6 @@ which a very large dataset.
 \end{listing}
 
 
-
 \subsubsection{Cross Validation}
 ...K fold cross validation
 ...stratified cross validation...
@@ -97,3 +109,5 @@ re-wrote in Python...
 * needed use force np.float64
 ...actually data was 0... gg :(
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Testing}

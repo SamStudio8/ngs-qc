@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 14, 2014
+April 15, 2014
 
 Declaration
 
@@ -28,8 +28,8 @@ Sam Nicholls
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[11]. However, these "next-generation" processes are
-complex and open to error[6], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[12]. However, these "next-generation" processes are
+complex and open to error[7], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 During sample sequencing a large number of quality control metrics are generated to determine the quality
 of the reads from the sequencing hardware itself. At the Wellcome Trust Sanger Institute, the automated QC
@@ -131,40 +131,52 @@ Pre-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 3
 
-II
-5
+Implementation
+3.1
+3.2
+
+3.3
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-Frontier
-3.1
+11
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+3.1.1
 
 4
 
 Classification Correlation
 
-11
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 
 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
-3.1.1
+3.2.1
 
 Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 
-3.1.2
+3.2.2
 
 SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 Results
 
 14
 
-4.0.3
+4.0.1
 
 Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
-4.0.4
+4.0.2
 
 Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+Contents
+
+II
+5
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
@@ -172,7 +184,6 @@ Introduction and Motivation
 15
 16
 
-Contents
 5.1
 
 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
@@ -207,8 +218,8 @@ iv
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[11]. However, these "next-generation" processes are
-complex and open to error[6], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[12]. However, these "next-generation" processes are
+complex and open to error[7], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
 1.1
@@ -224,9 +235,9 @@ The project consists of two sub-projects;
 Analysis of Current System
 
 With the support of the Wellcome Trust Sanger Institute in Cambridge, this project works with the Human
-Genetics Informatics team to investigate auto_qc, the institute’s current automated quality control tool.
+Genetics Informatics team to investigate auto_qc[1], the institute’s current automated quality control tool.
 During genetic sequencing a large number of metrics are generated to determine the quality of the data read
-from the sequencing hardware itself. As part of the current vertebrate sequencing pipeline[1] at the institute,
+from the sequencing hardware itself. As part of the current vertebrate sequencing pipeline[2] at the institute,
 auto_qc is responsible for applying quality control to samples within the pipeline by comparing a modest
 subset of these metrics to simple hard-coded hard thresholds; determining whether a particular sample has
 reached a level that requires a warning, or has exceeded the threshold and failed entirely. Whilst this does
@@ -383,7 +394,7 @@ available for each and every lanelet that forms part of either of the two studie
 2.2 Materials and Methods
 The files are created by samtools stats — part of a collection of widely used open-source utilities for post
 processing and manipulation of large alignments such as those produced by next-generation sequencers that
-are released under the umbrella name of "SAMtools"[5] (Sequence Alignment and Map Tools). samtools
+are released under the umbrella name of "SAMtools"[6] (Sequence Alignment and Map Tools). samtools
 stats collects statistics from sequence data files and produces key-value summary numbers as well as more
 complex tab delimited dataframes tabulating several metrics over time.
 The output of samtools stats is then parsed by an in-house tool called bamcheckr, named so as samtools stats
@@ -411,7 +422,7 @@ possible to rapidly develop applications and its readability eases ongoing maint
 time-span allocated for this project and the possibility of others wishing to contribute to the project codebase
 after completion.
 Whilst the choice was made primarily on preference, this is not to say other options were not considered:
-a highly popular Java-based collection of data mining tools, WEKA[3] would certainly have provided a
+a highly popular Java-based collection of data mining tools, WEKA[4] would certainly have provided a
 framework for building decision tree classifiers but at the same time did not appear to offer any significant
 features that were unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual
 machine to be installed which could be undesirable from a performance or even security standpoint when the
@@ -427,9 +438,9 @@ Given the quality data we’ll be using to train a machine learning classifier i
 mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
 seemed convenient.
-...Whilst the tree[10] and rpart[12] packages are available for constructing decision trees in R but (and
+...Whilst the tree[11] and rpart[13] packages are available for constructing decision trees in R but (and
 actually RWeka provides an R interface to WEKA)...they did not appear to be as robust as other more
-well-known frameworks. Putting it politely, the programming paradigm of R[9] is rather different to other
+well-known frameworks. Putting it politely, the programming paradigm of R[10] is rather different to other
 languages and can significantly increase development time if one is not very well versed in the patterns and
 grammar of the language and it seemed best to stick to one’s comfort zone.
 ...C and C++ also a possibility, however dlib didn’t support tree-based classifiers although Shark did, Python
@@ -443,7 +454,7 @@ It is therefore only natural that a library seems a wise investment for the code
 ...There are numerous machine learning frameworks available in many languages, some described above...
 however it seemed counter-intuitive to select a framework in another language for the introduction of an
 additional arbitrary output and input steps to switch between the two environments.
-...A mixed bag of such frameworks exist in Python, two in particular scikit-learn[8] and Orange[2] were main
+...A mixed bag of such frameworks exist in Python, two in particular scikit-learn[9] and Orange[3] were main
 contenders, partly on their recommendation from the project supervisor...
 ...scikit integrates the "big names" in Python: numpy, scipy and matplotlib ...put off from Orange due to
 difficulties in reading in data ...it did however later appear to ship with features that were not in scikit (pruning
@@ -451,7 +462,7 @@ and printing) ...with more time I’d certainly like to investigate using other 
 outside Python and take at look at WEKA or Shark...
 
 Libraries
-numpy[7] and scipy[4]... Fast and reliable implementations of mathematical functions... ggplot2[13] for
+numpy[8] and scipy[5]... Fast and reliable implementations of mathematical functions... ggplot2[14] for
 beautiful graphing...
 
 Testing
@@ -509,14 +520,27 @@ Fig. 2.1 Heatmap of Lanelet QC Status by Lane
 
 Chapter 3
 
-Frontier
+Implementation
 3.1
+
+Introduction
+
+This chapter introduces Frontier; the main programming effort for this part of the project. Frontier is a Python
+package that serves as a data manager, providing both interfaces to read inputs into structures in memory and
+to retrieve them in formats acceptable to a machine learning framework.
+
+3.1.1
+
+Concepts
+
+Classes and Labels
+API Access
+Cross Validation
+
+3.2
 
 Implementation
 
-Frontier is the programmatic output for this part of the project... providing an API-like interface to the data
-itself... ...allowing simple commands to pull the data out from memory in to formats acceptable by the machine
-learning framework...
 ...provides a class to read from the "bamcheckr’d files" as seen in Appendix A.1... as well as the auto_qc
 output matrix briefly demonstrated in Appendix A.2...
 ...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more
@@ -527,7 +551,7 @@ which a very large dataset.
 
 11
 
-3.1 Implementation
+3.2 Implementation
 
 CLASSES = {
 "pass": {
@@ -554,7 +578,7 @@ Cross Validation
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
-3.1.1
+3.2.1
 
 Contributions to bamcheckr
 
@@ -567,13 +591,13 @@ install("/home/sam/Projects/seq_autoqc/bamcheckr")
 
 12
 
-3.1 Implementation
+3.3 Testing
 Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
 re-wrote in Python...
 ...R CMD BATCH issue
 ...Fixed a graph plotting failure. ...Writing additional routines...
 
-3.1.2
+3.2.2
 
 SelectKBest
 
@@ -581,16 +605,20 @@ SelectKBest
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
 version from master * needed use force np.float64 ...actually data was 0... gg :(
 
+3.3
+
+Testing
+
 13
 
 Chapter 4
 
 Results
-4.0.3
+4.0.1
 
 Initial Trees
 
-4.0.4
+4.0.2
 
 Parameter Sets
 
@@ -783,74 +811,77 @@ Testing
 
 20
 
-[9] R Core Team, R: A Language and Environment for
+A machine learning framework for
+Python.
+[10] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
 Computing, Vienna, Austria, 2013. [Online].
 Available: http://www.R-project.org/
-[10] B. Ripley, tree: Classification and regression trees,
-2014, r package version 1.0-35. [Online]. Available:
-http://CRAN.R-project.org/package=tree
 
 References
 
-[11] T. Strachan and A. Read, Human Molecular Genetics,
-4th ed. Garland Science, 2011, pp. 214–254.
-A concise introduction to the processes
-involved in massively parallel DNA
-sequencing.
+[11] B. Ripley, tree: Classification and regression trees,
+2014, r package version 1.0-35. [Online]. Available:
+http://CRAN.R-project.org/package=tree
 
-[1] vr-pipe, a generic pipeline system [Github]. [Online].
+[1] auto_qc: Additional high-throughput sequencing
+autoQC steps [Github]. [Online]. Available:
+https://github.com/wtsi-hgi/seq_autoqc
+[2] vr-pipe: A generic pipeline system [Github]. [Online].
 Available: https://github.com/wtsi-hgi/vr-pipe/
 ˇ Gorup, T. Hoˇcevar,
-[2] J. Demšar, T. Curk, A. Erjavec, Crt
+[3] J. Demšar, T. Curk, A. Erjavec, Crt
 M. Milutinoviˇc, M. Možina, M. Polajnar, M. Toplak,
 A. Stariˇc, M. Štajdohar, L. Umek, L. Žagar, J. Žbontar,
 M. Žitnik, and B. Zupan, “Orange: Data Mining
 Toolbox in Python,” Journal of Machine Learning
 Research, vol. 14, pp. 2349–2353, 2013. [Online].
 Available: http://jmlr.org/papers/v14/demsar13a.html
-[3] M. Hall, E. Frank, G. Holmes, B. Pfahringer,
+[4] M. Hall, E. Frank, G. Holmes, B. Pfahringer,
 P. Reutemann, and I. H. Witten, “The WEKA
 Data Mining Software: An Update,” SIGKDD
 Explorations Newsletter, vol. 11, no. 1, pp.
 10–18, Nov. 2009. [Online]. Available:
 http:
 //doi.acm.org/10.1145/1656274.1656278
-[4] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
+[5] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
 source scientific tools for Python,” 2001–. [Online].
 Available: http://www.scipy.org/
-[5] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
+[6] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
 N. Homer, G. Marth, G. Abecasis, R. Durbin, and
 G. Subgroup, “ The Sequence Alignment/Map format
 and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
 2009.
-[6] M. Kircher, U. Stenzel and J. Kelso, “Improved
+[7] M. Kircher, U. Stenzel and J. Kelso, “Improved
 base calling for the Illumina Genome Analyzer
 using machine learning strategies,” Genome Biology,
 vol. 10, no. 8, p. R83, 2009.
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
 during sequencing.
-[7] T. E. Oliphant, “Python for Scientific Computing,”
+[8] T. E. Oliphant, “Python for Scientific Computing,”
 Computing in Science & Engineering, vol. 9, no. 3,
 pp. 10–20, 2007.
-[8] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
+[9] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
 R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
 D. Cournapeau, M. Brucher, M. Perrot, and
 E. Duchesnay, “Scikit-learn: Machine learning in
 Python,” Journal of Machine Learning Research,
 vol. 12, pp. 2825–2830, 2011.
-A machine learning framework for
-Python.
 
 21
 
-[12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
+[12] T. Strachan and A. Read, Human Molecular Genetics,
+4th ed. Garland Science, 2011, pp. 214–254.
+A concise introduction to the processes
+involved in massively parallel DNA
+sequencing.
+[13] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
 4.1-3. [Online]. Available: http://CRAN.R-project.
 org/package=rpart
-[13] H. Wickham, ggplot2:
+[14] H. Wickham, ggplot2:
 elegant graphics for
 data analysis.
 Springer New York, 2009.
@@ -1178,97 +1209,7 @@ FFQ
 0
 0
 0
-FFQ
-4
-0
-0
-0
-0
-65
-0
-0
-0
-272
-FFQ
-5
-1917
-173
-1249
-0
-1890
-0
-0
-0
 [...]
-FFQ
-72
-4098
-0
-0
-4806
-0
-0
-0
-65507
-
-23
-
-1609
-
-4673
-1885
-
-0
-
-0
-0
-
-4208
-0
-
-0
-
-0
-
-0
-10874
-
-0
-
-0
-
-0
-
-26
-0
-0
-
-0
-
-14277
-0
-
-0
-0
-
-0
-
-A.1 BAMcheckR’d Example Output
-
-FFQ
-73
-3894
-2
-0
-0
-0
-0
-4931
-53483
-0
-0
-0
-0
 FFQ
 74
 3697
@@ -1279,10 +1220,6 @@ FFQ
 0
 0
 56866
-1524
-0
-0
-22
 FFQ
 75
 4542
@@ -1293,10 +1230,6 @@ FFQ
 0
 4634
 77822
-0
-0
-0
-0
 FFQ
 76
 0
@@ -1308,10 +1241,30 @@ FFQ
 0
 0
 0
+
+23
+
+1609
+
+4673
+1885
+
 0
+
+...
+1524
+
 0
-0
-0
+...
+
+...
+...
+
+...
+...
+
+A.1 BAMcheckR’d Example Output
+
 # Last Fragment Qualitites. Use ‘grep ^LFQ | cut -f 2-‘ to extract this part.
 # Columns correspond to qualities and rows to cycles. First column is the cycle number.
 LFQ
@@ -1326,8 +1279,7 @@ LFQ
 0
 0
 1156
-616
-173
+...
 LFQ
 2
 3300
@@ -1340,9 +1292,7 @@ LFQ
 0
 0
 0
-389
-0
-0
+...
 LFQ
 3
 6816
@@ -1354,62 +1304,8 @@ LFQ
 83
 0
 7011
-1171
-107134
-0
-LFQ
-4
-5492
-0
-0
-13
-0
-66
-730
-708
-8134
-2422
-84052
-LFQ
-5
-3512
-0
-0
-0
-1023
-185
-0
-8653
-1995
-0
-115559
+...
 [...]
-LFQ
-72
-5135
-166
-0
-0
-2872
-13643
-0
-59649
-4249
-11351
-3460
-LFQ
-73
-6025
-229
-0
-86
-1042
-13417
-0
-66093
-3741
-8151
-3546
 LFQ
 74
 5980
@@ -1421,8 +1317,7 @@ LFQ
 1340
 9696
 72939
-4924
-304090
+...
 LFQ
 75
 4314
@@ -1434,8 +1329,7 @@ LFQ
 8591
 0
 70358
-3827
-352180
+...
 LFQ
 76
 0
@@ -1448,9 +1342,7 @@ LFQ
 0
 0
 0
-0
-0
-0
+...
 # Mismatches per cycle and quality. Use ‘grep ^MPC | cut -f 2-‘ to extract this part.
 # Columns correspond to qualities, rows to cycles. First column is the cycle number, second
 # is the number of N’s and the rest is the number of mismatches
@@ -1464,9 +1356,7 @@ MPC
 1919
 0
 2222
-352
-987
-537
+...
 MPC
 2
 21407
@@ -1479,9 +1369,7 @@ MPC
 0
 0
 5
-223
-19
-0
+...
 MPC
 3
 3205
@@ -1493,65 +1381,8 @@ MPC
 0
 12
 0
-691
-71
-6984
-MPC
-4
-1774
-0
-0
-0
-2
-29
-4
-65
-73
-863
-192
-6749
-MPC
-5
-1913
-0
-94
-885
-0
-969
-23
-0
-959
-213
-1203
-844
+...
 [...]
-MPC
-72
-361
-0
-13
-0
-573
-276
-934
-0
-16376
-426
-1066
-MPC
-73
-1005
-0
-11
-0
-4
-79
-777
-539
-15025
-363
-699
-3
 MPC
 74
 779
@@ -1563,9 +1394,7 @@ MPC
 0
 93
 7485
-6589
-387
-241
+...
 MPC
 75
 136
@@ -1577,9 +1406,7 @@ MPC
 47
 704
 9302
-5886
-260
-26506
+...
 MPC
 76
 0
@@ -1591,10 +1418,7 @@ MPC
 0
 0
 0
-0
-0
-0
-0
+...
 # GC Content of first fragments. Use ‘grep ^GCF | cut -f 2-‘ to extract this part.
 GCF
 0.5
@@ -1697,11 +1521,6 @@ GCC
 24.26
 23.45
 26.2
-
-24
-
-A.1 BAMcheckR’d Example Output
-
 GCC
 71
 26.07
@@ -1732,7 +1551,8 @@ GCC
 24.31
 23.51
 26.18
-# Insert sizes. Use ‘grep ^IS | cut -f 2-‘ to extract this part. The columns are: pairs total, inward oriented pairs, outward oriented pai
+# Insert sizes. Use ‘grep ^IS | cut -f 2-‘ to extract this part.
+# The columns are: pairs total, inward oriented pairs, outward oriented pairs, other pairs
 IS
 0
 10
@@ -1763,6 +1583,11 @@ IS
 0
 2
 0
+
+24
+
+A.1 BAMcheckR’d Example Output
+
 IS
 5
 3
@@ -1871,7 +1696,8 @@ IS
 RL
 75
 41400090
-# Indel distribution. Use ‘grep ^ID | cut -f 2-‘ to extract this part. The columns are: length, number of insertions, number of deletions
+# Indel distribution. Use ‘grep ^ID | cut -f 2-‘ to extract this part.
+# The columns are: length, number of insertions, number of deletions
 ID
 1
 128650
@@ -1913,7 +1739,8 @@ ID
 40
 0
 2
-# Indels per cycle. Use ‘grep ^IC | cut -f 2-‘ to extract this part. The columns are: cycle, number of insertions (fwd), .. (rev) , number
+# Indels per cycle. Use ‘grep ^IC | cut -f 2-‘ to extract this part.
+# The columns are: cycle, number of insertions (fwd), .. (rev) , number of deletions (fwd), .. (rev)
 IC
 1
 0
@@ -1997,11 +1824,6 @@ COV
 5
 6716815
 [...]
-
-25
-
-A.2 auto_qc Decision Matrix
-
 COV
 [996-996]
 996
@@ -2022,7 +1844,8 @@ COV
 [1000<]
 1000
 116
-# GC-depth. Use ‘grep ^GCD | cut -f 2-‘ to extract this part. The columns are: GC%, unique sequence percentiles, 10th, 25th, 50th, 75th an
+# GC-depth. Use ‘grep ^GCD | cut -f 2-‘ to extract this part.
+# The columns are: GC%, unique sequence percentiles, 10th, 25th, 50th, 75th and 90th depth percentile
 GCD
 0
 0.001
@@ -2039,71 +1862,20 @@ GCD
 0.101
 0.101
 0.101
+
+25
+
+A.2 auto_qc Decision Matrix
+
 GCD
-19
-0.003
-0.049
-0.049
-0.049
-0.049
-0.049
 GCD
-20
-0.004
-0.06
-0.06
-0.06
-0.06
-0.06
 GCD
-21
-0.004
-0.045
-0.045
-0.045
-0.045
-0.045
 [...]
 GCD
-66
-99.99
-0.244
-2.693
-6.746
-11.794
-15.885
 GCD
-67
-99.994
-1.279
-1.279
-4.305
-9.667
-11.483
 GCD
-68
-99.997
-4.148
-4.148
-4.463
-5.741
-7.354
 GCD
-69
-99.999
-0.499
-0.499
-0.499
-1.935
-1.935
 GCD
-72
-100
-0.476
-0.476
-0.476
-1.219
-1.219
 
 A.2
 lanelet
@@ -2116,6 +1888,69 @@ lanelet
 9999_9#6
 9999_9#9
 9999_9#8
+
+19
+20
+21
+
+0.003
+0.004
+0.004
+
+0.049
+0.06
+0.045
+
+0.049
+0.06
+0.045
+
+0.049
+0.06
+0.045
+
+66
+67
+68
+69
+72
+
+99.99
+99.994
+99.997
+99.999
+100
+
+0.244
+1.279
+4.148
+0.499
+0.476
+
+2.693
+1.279
+4.148
+0.499
+0.476
+
+6.746
+4.305
+4.463
+0.499
+0.476
+
+0.049
+0.06
+0.045
+
+0.049
+0.06
+
+11.794
+9.667
+5.741
+1.935
+1.219
 
 auto_qc Decision Matrix
 sample
@@ -2174,5 +2009,12 @@ passed
 ...
 ...
 ...
+
+0.045
+15.885
+11.483
+7.354
+1.935
+1.219
 
 
