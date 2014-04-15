@@ -395,9 +395,17 @@ may not be effective.
 
 Task Management
 
-Shortly before embarking on this dissertation project, I had written my own todo list web application; Triage[4].
-This will be useful in keeping track of current objectives and allow prioritisation. The list used to organise my
-project is also publicly available[3].
+It is useful to be able to keep track of current tasks preferably via a medium that would allow some method of
+sorting and filtering. For various personal projects and the second year group project I have used Redmine, a
+Ruby-based web application designed for bug tracking. However over time I have come to find keeping the
+task information stored in Redmine a task in itself. Attempts to extend the platform to implement additional
+functionality have been fruitless.
+Out of frustration with thus and other alternatives — including TaskWarrior whose simple but effective
+command line interface was overshadowed by its occasional storage corruptions, I wrote and open sourced
+my own web based task management application; Triage[4]. This will be useful in keeping track of current
+objectives and allow prioritisation in a quick and simple manner.
+The list used to organise my project is also publicly available[3] for transparent progress tracking by my
+supervisor and those interested at the Sanger Institute.
 
 1.2.3
 
@@ -406,7 +414,7 @@ Time Considerations
 It must be remembered that this project needs to meet the requirements for a minor project and is to be
 completed alongside the study of several other modules which each have their own assignments and obligations.
 It would be easy to become overly ambitious and thus aims and goals will need to be revised as both obstacles
-and breakthroughs are encountered.
+and breakthroughs are encountered over the lifetime of the project.
 
 4
 
