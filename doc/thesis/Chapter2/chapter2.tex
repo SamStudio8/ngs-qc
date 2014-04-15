@@ -63,11 +63,18 @@ key-value pairs in the summary numbers section. A truncated example of a
 "bamcheckr'd" file can be found in Appendix~\ref{app:bamcheckr}.
 
 \subsubsection{auto\_qc Decision Data}
-...the one-to-one mapping between each input file and the result of its
-classification by the current auto\_qc system...
-A truncated example of such file can be found in Appendix~\ref{app:aqc_matrix}.
-...the true files carry many various columns that cannot be detailed for
-confidentiality (and indeed brevity)....
+To use these "bamcheckr'd" files for training and testing a machine learning
+classifier, it is necessary to map each file to a classification result from
+\textbf{auto\_qc}. The one-to-one mapping between each input file and its label
+are provided by the Sanger Institute in a seperate file hereafter referred to as
+the \textit{AQC Decision Matrix} or \textit{AQC (Decision) File}.
+
+A truncated example of such a file can be found in Appendix~\ref{app:aqc_matrix}.
+Only the first few columns are included --- indeed we are only interested in the
+\textit{lanelet} and \textit{aqc} which provide an identifier that maps the row
+to a given input file and its classification by \textbf{auto\_qc} respectively.
+Latter columns pertain to a breakdown of decisions made by \textbf{auto\_qc}
+which are not included in the example for confidentiality (and brevity).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -90,12 +97,12 @@ completion.
 %TODO Pushing WEKA too much with "certainly"?
 Whilst the choice was made primarily on preference, this is not to say other
 options were not considered: a highly popular Java-based collection of data
-mining tools, \textbf{WEKA}\citep{weka} would certainly have provided a framework for
-building decision tree classifiers but at the same time did not appear to offer
-any significant features that were unavailable elsewhere, whilst Java itself has
-the added constraint of requiring a virtual machine to be installed which could
-be undesirable from a performance or even security standpoint when the
-application is deployed to servers at the Sanger Institute.
+mining tools, \textbf{WEKA}\citep{weka} would certainly have provided a
+framework for building decision tree classifiers but at the same time did not
+appear to offer any significant features that were unavailable elsewhere, whilst
+Java itself has the added constraint of requiring a virtual machine to be
+installed which could be undesirable from a performance or even security
+standpoint when the application is deployed to servers at the Sanger Institute.
 
 %...although performance has improved considerably from previous Java versions\citep{Bouckaert}
 

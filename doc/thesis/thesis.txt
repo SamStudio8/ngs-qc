@@ -408,9 +408,14 @@ This process does not change the file other than adding a few additional key-val
 numbers section. A truncated example of a "bamcheckr’d" file can be found in Appendix A.1.
 
 auto_qc Decision Data
-...the one-to-one mapping between each input file and the result of its classification by the current auto_qc
-system... A truncated example of such file can be found in Appendix A.2. ...the true files carry many various
-columns that cannot be detailed for confidentiality (and indeed brevity)....
+To use these "bamcheckr’d" files for training and testing a machine learning classifier, it is necessary to map
+each file to a classification result from auto_qc. The one-to-one mapping between each input file and its label
+are provided by the Sanger Institute in a seperate file hereafter referred to as the AQC Decision Matrix or AQC
+(Decision) File.
+A truncated example of such a file can be found in Appendix A.2. Only the first few columns are included —
+indeed we are only interested in the lanelet and aqc which provide an identifier that maps the row to a given
+input file and its classification by auto_qc respectively. Latter columns pertain to a breakdown of decisions
+made by auto_qc which are not included in the example for confidentiality (and brevity).
 
 2.2.2
 
@@ -431,13 +436,12 @@ framework for building decision tree classifiers but at the same time did not ap
 features that were unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual
 machine to be installed which could be undesirable from a performance or even security standpoint when the
 application is deployed to servers at the Sanger Institute.
-Difficulty was also encountered finding example implementations for WEKA with most documentation and
-tutorials providing information for performing analysis via the graphical "Explorer" interface instead, which
-would not be appropriate for quickly setting up and repeating experiments automatically.
-
 7
 
 2.2 Materials and Methods
+Difficulty was also encountered finding example implementations for WEKA with most documentation and
+tutorials providing information for performing analysis via the graphical "Explorer" interface instead, which
+would not be appropriate for quickly setting up and repeating experiments automatically.
 Given the quality data we’ll be using to train a machine learning classifier is output from the previously
 mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
@@ -469,13 +473,12 @@ Libraries
 numpy[11] and scipy[7]... Fast and reliable implementations of mathematical functions... ggplot2[17] for
 beautiful graphing...
 
-Testing
-Investigated the possibility of using Jenkins but just didn’t have the time to set up and tweak all the plugins
-and options of the platform to do what I wanted... Would still have been poor in terms of searching through
-
 8
 
 2.3 Pre-Implementation
+Testing
+Investigated the possibility of using Jenkins but just didn’t have the time to set up and tweak all the plugins
+and options of the platform to do what I wanted... Would still have been poor in terms of searching through
 logs to track what parameters led to improvements in cross validation... ...Quite likely I’d have needed to
 author a Java or Groovy plugin to keep good track of cross-validation...
 Briefly considered online solutions such as Travis and Wercker which I use for some personal projects,
@@ -511,14 +514,13 @@ represents a warning. Grey areas are passes and were desaturated to make the oth
 obvious. It is clear that there are patches where lanelets have failed where entire lanes have not, but there does
 appear to be some correlation.
 Having discussed this with the supervisor and contacts at the Sanger Institute we decided to continue...
-Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
-identified so the red bars of thicker-width arguably display some failures across entire flow cells.
-
 9
 
 2.3 Pre-Implementation
 
 Fig. 2.1 Heatmap of Lanelet QC Status by Lane
+Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
+identified so the red bars of thicker-width arguably display some failures across entire flow cells.
 
 10
 
