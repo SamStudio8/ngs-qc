@@ -28,8 +28,8 @@ Sam Nicholls
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[17]. However, these "next-generation" processes are
-complex and open to error[9], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[19]. However, these "next-generation" processes are
+complex and open to error[11], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 During sample sequencing a large number of quality control metrics are generated to determine the quality
 of the reads from the sequencing hardware itself. At the Wellcome Trust Sanger Institute, the automated QC
@@ -268,8 +268,8 @@ iv
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[17]. However, these "next-generation" processes are
-complex and open to error[9], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[19]. However, these "next-generation" processes are
+complex and open to error[11], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
 1.1
@@ -287,7 +287,7 @@ Analysis of Current System
 With the support of the Wellcome Trust Sanger Institute in Cambridge, this project works with the Human
 Genetics Informatics team to investigate auto_qc[1], the institute’s current automated quality control tool.
 During genetic sequencing a large number of metrics are generated to determine the quality of the data read
-from the sequencing hardware itself. As part of the current vertebrate sequencing pipeline[4] at the institute,
+from the sequencing hardware itself. As part of the current vertebrate sequencing pipeline[5] at the institute,
 auto_qc is responsible for applying quality control to samples within the pipeline by comparing a modest
 subset of these metrics to simple hard-coded hard thresholds; determining whether a particular sample has
 reached a level that requires a warning, or has exceeded the threshold and failed entirely. Whilst this does
@@ -299,7 +299,7 @@ the warning level; a time consuming task which invites both inefficiency and err
 1.2 Project Method
 In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests
 that a machine learning classifier could potentially be trained on the combinations of quality control statistics
-available to make these conclusions without the need for much human intervention[11].
+available to make these conclusions without the need for much human intervention[13].
 The first part of the project aims to apply machine learning techniques to replicate the current auto_qc rule set
 by training a decision tree classifier on a large set of these quality metrics. The idea is to investigate whether
 these simple threshold based rules can be recovered from such data, or whether a new classifier would produce
@@ -367,9 +367,9 @@ paying "lip service" to agile must be avoided (otherwise what’s the point?), I
 be justified by the size of the project itself.
 This project will consist of many research steps, each requiring some form of computational process to prepare
 the data for the next step. Whilst the implementations of the algorithms themselves pose computational
-complexity, there appears to be little challenge from a planning perspective and in fact a looser overall plan
-should probably be considered as we must account for unforseen and unexpected outcomes from each research
-step.
+complexity, there appears to be little challenge from a planning perspective and in fact a looser overall
+plan should probably be considered as we must account for unforeseen and unexpected outcomes from each
+research step.
 The most important part of ensuring this project stays on track will be the development of a sensible testing
 methodology to ensure we are not only moving in the right direction in terms of which algorithm and parameters
 to use but also in terms of reliably measuring performance over time in a way that allows justification of such
@@ -395,9 +395,9 @@ may not be effective.
 
 Task Management
 
-Shortly before embarking on this dissertation project, I had written my own todo list web application; Triage[3].
+Shortly before embarking on this dissertation project, I had written my own todo list web application; Triage[4].
 This will be useful in keeping track of current objectives and allow prioritisation. The list used to organise my
-project is also publicly available[2].
+project is also publicly available[3].
 
 1.2.3
 
@@ -455,7 +455,7 @@ samples are then pipetted in to a flowcell such as the one in Figure 2.1 — a g
 of very thin tubules known as lanes. It is throughout these lanes that the chemical reactions involved in
 sequencing will take place.
 
-Fig. 2.1 An Illumina HiSeq Flowcell[10]
+Fig. 2.1 An Illumina HiSeq Flowcell[12]
 Once inserted, samples are amplified in situ inside the flowcell itself whereby samples multiply in magnitude
 to form millions of dense clusters. Note that a lane can contain more than one sample and a sample can appear
 in more than one lane; this is "sample multiplexing" and helps to ensure that the failure of a particular lane
@@ -483,7 +483,7 @@ control data for two of the largest studies currently undergoing analysis. A wid
 available for each and every lanelet that forms part of either of the two studies; totalling 13,455 files.
 The files are created by samtools stats — part of a collection of widely used open-source utilities for post
 processing and manipulation of large alignments such as those produced by next-generation sequencers that
-are released under the umbrella name of "SAMtools"[8] (Sequence Alignment and Map Tools). samtools
+are released under the umbrella name of "SAMtools"[10] (Sequence Alignment and Map Tools). samtools
 stats collects statistics from sequence data files and produces key-value summary numbers as well as more
 complex tab delimited dataframes tabulating several metrics over time.
 The output of samtools stats is then parsed by an in-house tool called bamcheckr, named so as samtools stats
@@ -524,7 +524,7 @@ possible to rapidly develop applications and its readability eases ongoing maint
 time-span allocated for this project and the possibility of others wishing to contribute to the project codebase
 after completion.
 Whilst the choice was made primarily on preference, this is not to say other options were not considered:
-a highly popular Java-based collection of data mining tools, WEKA[6] would certainly have provided a
+a highly popular Java-based collection of data mining tools, WEKA[8] would certainly have provided a
 framework for building decision tree classifiers but at the same time did not appear to offer any significant
 features that were unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual
 machine to be installed which could be undesirable from a performance or even security standpoint when the
@@ -536,10 +536,10 @@ Given the quality data we’ll be using to train a machine learning classifier i
 mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
 seemed convenient.
-Whilst the tree[15] and rpart[18] packages are available for constructing decision trees in R (and actually
+Whilst the tree[17] and rpart[20] packages are available for constructing decision trees in R (and actually
 RWeka provides an R interface to WEKA) neither appeared to be as robust as other more well-known
-frameworks. Also putting it politely, the programming paradigm of R[14] is rather different to other languages
-and can significantly increase development time (and frustration[16]) if one is not very well versed in the
+frameworks. Also putting it politely, the programming paradigm of R[16] is rather different to other languages
+and can significantly increase development time (and frustration[18]) if one is not very well versed in the
 patterns and grammar of the language and it seemed best to stick to one’s comfort zone given the brief
 timescale for the project.
 Had performance been a critical decision factor, lower level languages such as C, C++ or even Fortran could be
@@ -564,7 +564,7 @@ above and formed part of the development environment decisions. Whilst it is obv
 a framework which uses the same language as the project, it seemed counter-intuitive to select otherwise, for
 the establishing of additional arbitrary output and input steps to move data between the two environments
 could impede quick experiment repeatability and introduce error.
-A mixed bag of machine learning frameworks exist in Python, two in particular scikit-learn[13] and Orange[5]
+...A mixed bag of machine learning frameworks exist in Python, two in particular scikit-learn[15] and Orange[6]
 were main contenders, partly on their recommendation from the project supervisor.
 ...scikit integrates the "big names" in Python: numpy, scipy and matplotlib ...put off from Orange due to
 difficulties in reading in data ...it did however later appear to ship with features that were not in scikit (pruning
@@ -575,26 +575,37 @@ outside Python and take at look at WEKA or Shark...
 
 Additional External Libraries
 
-numpy[12] and scipy[7]... Fast and reliable implementations of mathematical functions... ggplot2[19] for
+numpy[14] and scipy[9]... Fast and reliable implementations of mathematical functions... ggplot2[21] for
 beautiful graphing...
 
 3.2.4
 
 Testing
 
-Investigated the possibility of using Jenkins but did not have the time to set up and tweak all the plugins and
-options of the platform to do what I wanted... Would still have been poor in terms of searching through logs
-to track what parameters led to improvements in cross validation... ...Quite likely I’d have needed to author a
-Java or Groovy plugin to keep good track of cross-validation...
-Briefly considered online solutions such as Travis and Wercker which I use for some personal projects,
-whilst quicker to set up would probably have not been able to handle artifacts such as dot files without some
-convoluted solution of uploading them to dropbox or adding them to a private git repository from the build
-node... ...also would have needed to upload a very large quantity of training data repeatedly which would be
-inefficient (and more than likely against reasonable use of the platform)
-
+As discussed in Chapter 1.2.1, testing forms a critical part of the project given the need to monitor the impact
+of changes to classification accuracy as well as to ensure the program is working correctly. Ideally, execution
+of a test suite should be simple and easily repeatable, results that pertain to accuracy should also be stored for
+future reference to monitor ongoing performance of the classifier.
+Such requirements could be fulfilled by a continuous integration platform; a server dedicated to the building
+and testing of the code contained in a centralised repository typically to which an entire team will have write
+access[7]. Whilst in this scenario there will be much less "risk" from integration issues due to the single person
+team size, the themes of automated building and self-testing code can be taken on board.
+Jenkins is a highly popular[2] example of such a platform with which I am familiar. Although an out-of-the-box
+Jenkins set-up is suitable for variety of software engineering projects, it would be necessary to invest some
 10
 
 3.2 Development Environment
+time to install and tweak plugins to perform actions on test results (such as failing a build that causes accuracy
+to decrease). However, previous experience found that highly specific tasks will often require a plugin to be
+authored to overcome limitations in the feature set of a more generic plugin, which given the intricacies of the
+Jenkins package layout could easily turn in to a project of its own. Unfortunately, other features that would be
+useful to the project including the indexing and searching of build logs are somewhat lacking in Jenkins.
+Online solutions such as Travis and Wercker could potentially offer a quicker set up as both merely requires
+a small configuration file in the root of the repository and a hook to be registered... ...however such services
+would not have been able to handle artifacts such as dot files without some convoluted solution of uploading
+them to dropbox or adding them to a private git repository from the build node... ...also would have needed
+to upload a very large quantity of training data repeatedly which would be inefficient (and more than likely
+against reasonable use of the platform)
 Really wanted to write my own solution for this but had to settle for well formatted log files that could be
 searched and processed with some command line fu...
 
@@ -613,23 +624,30 @@ Pre-Implementation
 
 Classification Correlation
 
-An important consideration for statistical analysis is the relation between observations. The quality data files
-we have are per lanelet, however a lane can house more than one lanelet... and so herein lies the trouble, if
-during a run, the flow cell is somehow subjected to abnormal temperatures (air conditioning failure) or the
-sequencing device is depleted of reagents, every lane (and thus lanelet within) will be of very poor quality.
-Thus there would appear to exist a relationship between the respective qualities of each lanelet in a lane as
-well as each lane in a sequencing run!
+An important consideration for statistical analysis is the relation between observations. The "bamcheckr’d"
+input data described in Chapter 3.1.1 is available per lanelet, however as shown in Chapter 2.2.2 a lane may
+contain more than one lanelet. Herein lies the trouble; if during a sequencing run the flowcell is somehow
+subjected to abnormal conditions (a temperature increase due to an air conditioning failure) or the device is
+depleted of reagents then every lane (and thus all lanelets within) will be of very poor quality.
 
-Fig. 4.1 Heatmap of Lanelet QC Status by Lane
-
+Fig. 4.1 Heatmap of Lanelet QC Status by Lane: Lanes are Vertical bars with each lanelet cell coloured red
+to represent a failure, yellow for a warning and grey for a pass.
+In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
 12
 
 4.1 Classification Correlation
-...Figure 4.1 displays a plot of auto_qc classification for each lanelet (y) versus lane (x). ...The plot was
-designed to be a diagnostic test to see whether this was the case. I should mention that it seems there are few
-conditions under which a lanelet would fail irrespective of the auto_qc status of the rest of the lanelets in the
-lane; which mostly involve the preparation of the sample (which is easy to spot given it will cause poor quality
-across all lanelets using that library sample).
+a lane as well as each lane in a sequencing run. To examine this further, an R script utilising ggplot2 was
+authored to visually inspect whether correlation existed and if so to what degree that data is affected.
+Figure 4.1 displays a plot of auto_qc classification for each lanelet in a lane. The plot itself is a dense heatmap
+where each lane stands as a vertical bar, broken in to horizontal cells, each of which represents a lanelet that
+was sequenced in that particular lane. These lanelets are colour coded using; red for failures, yellow for
+warnings and grey for passes (to allow the other two classes to be more easily seen).
+Therefore an unbroken vertical red line indicates that all lanelets that comprise of that line failed to pass
+auto_qc. In reality there are few conditions under which a lanelet would fail irrespective of the auto
+I should mention that it seems there are few conditions under which a lanelet would fail irrespective of the
+auto_qc status of the rest of the lanelets in the lane; which mostly involve the preparation of the sample (which
+is easy to spot given it will cause poor quality across all lanelets using that library sample). for each lanelet
+(y) versus lane (x).
 ...an unbroken vertical red bar indicates that all the lanelets inside a particular lane failed. Likewise yellow
 represents a warning. Grey areas are passes and were desaturated to make the other outcomes immediately
 obvious. It is clear that there are patches where lanelets have failed where entire lanes have not, but there does
@@ -723,7 +741,7 @@ re-wrote in Python...
 
 SelectKBest
 
-* incorect degrees of freedom * warnings: /usr/lib64/python2.7/site-packages/sklearn/feature_selection/univariate_selection.py:2
+* incorrect degrees of freedom * warnings: /usr/lib64/python2.7/site-packages/sklearn/feature_selection/univariate_selection.py:2
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
 version from master * needed use force np.float64 ...actually data was 0... gg :(
 
@@ -933,63 +951,56 @@ Testing
 
 23
 
-[11] M. Niemi, “Internal QC Summary Report,” 09 2012,
-unpublished.
-[12] T. E. Oliphant, “Python for Scientific Computing,”
-Computing in Science & Engineering, vol. 9, no. 3,
-pp. 10–20, 2007.
+Useful introduction to relevant Illumina
+hardware and the errors that can occur
+during sequencing.
+[12] Maggie Bartlett. (2011) Illumina HiSeq Flow
+Cell. National Human Genome Research Institute.
+Image. [Online]. Available: http://www.genome.gov/
+dmd/img.cfm?node=Photos/Technology/Genome%
+20analysis%20technology&id=80102
 
 References
+
+[13] M. Niemi, “Internal QC Summary Report,” 09 2012,
+unpublished.
+
 [1] auto_qc: Additional high-throughput sequencing
 autoQC steps [Github]. [Online]. Available:
 https://github.com/wtsi-hgi/seq_autoqc
-[2] sam/Dissertation | Triage. [Online]. Available:
+[2] Jenkins Usage Statistics. [Online]. Available:
+http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
+[3] sam/Dissertation | Triage. [Online]. Available:
 https://triage.ironowl.io/sam/dissertation/
-[3] Triage:
+[4] Triage:
 A todo manager for the disaster
 that is your day [Github]. [Online]. Available:
 https://github.com/SamStudio8/triage
-[4] vr-pipe: A generic pipeline system [Github]. [Online].
+[5] vr-pipe: A generic pipeline system [Github]. [Online].
 Available: https://github.com/wtsi-hgi/vr-pipe/
 ˇ Gorup, T. Hoˇcevar,
-[5] J. Demšar, T. Curk, A. Erjavec, Crt
+[6] J. Demšar, T. Curk, A. Erjavec, Crt
 M. Milutinoviˇc, M. Možina, M. Polajnar, M. Toplak,
 A. Stariˇc, M. Štajdohar, L. Umek, L. Žagar, J. Žbontar,
 M. Žitnik, and B. Zupan, “Orange: Data Mining
 Toolbox in Python,” Journal of Machine Learning
 Research, vol. 14, pp. 2349–2353, 2013. [Online].
 Available: http://jmlr.org/papers/v14/demsar13a.html
-[6] M. Hall, E. Frank, G. Holmes, B. Pfahringer,
+[7] M. Fowler, “Continuous Integration,” 2006.
+[Online]. Available: http://www.martinfowler.com/
+articles/continuousIntegration.html
+[8] M. Hall, E. Frank, G. Holmes, B. Pfahringer,
 P. Reutemann, and I. H. Witten, “The WEKA
 Data Mining Software: An Update,” SIGKDD
 Explorations Newsletter, vol. 11, no. 1, pp.
 10–18, Nov. 2009. [Online]. Available:
 http:
 //doi.acm.org/10.1145/1656274.1656278
-[7] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
-source scientific tools for Python,” 2001–. [Online].
-Available: http://www.scipy.org/
-[8] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
-N. Homer, G. Marth, G. Abecasis, R. Durbin, and
-G. Subgroup, “ The Sequence Alignment/Map format
-and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
-2009.
-[9] M. Kircher, U. Stenzel and J. Kelso, “Improved
-base calling for the Illumina Genome Analyzer
-using machine learning strategies,” Genome Biology,
-vol. 10, no. 8, p. R83, 2009.
-Useful introduction to relevant Illumina
-hardware and the errors that can occur
-during sequencing.
-[10] Maggie Bartlett. (2011) Illumina HiSeq Flow
-Cell. National Human Genome Research Institute.
-Image. [Online]. Available: http://www.genome.gov/
-dmd/img.cfm?node=Photos/Technology/Genome%
-20analysis%20technology&id=80102
 
-24
-
-[13] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
+[14] T. E. Oliphant, “Python for Scientific Computing,”
+Computing in Science & Engineering, vol. 9, no. 3,
+pp. 10–20, 2007.
+[15] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
 R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
 D. Cournapeau, M. Brucher, M. Perrot, and
@@ -998,32 +1009,47 @@ Python,” Journal of Machine Learning Research,
 vol. 12, pp. 2825–2830, 2011.
 A machine learning framework for
 Python.
-[14] R Core Team, R: A Language and Environment for
+[16] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
 Computing, Vienna, Austria, 2013. [Online].
 Available: http://www.R-project.org/
-[15] B. Ripley, tree: Classification and regression trees,
+[17] B. Ripley, tree: Classification and regression trees,
 2014, r package version 1.0-35. [Online]. Available:
 http://CRAN.R-project.org/package=tree
-[16] T. Smith. (2012–2013) aRrgh:
+[18] T. Smith. (2012–2013) aRrgh:
 a newcomer’s
 (angry) guide to R. [Online]. Available: http:
 //tim-smith.us/arrgh/
-[17] T. Strachan and A. Read, Human Molecular Genetics,
+[19] T. Strachan and A. Read, Human Molecular Genetics,
 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
-[18] T. Therneau, B. Atkinson, and B. Ripley, rpart:
+[20] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
 4.1-3. [Online]. Available: http://CRAN.R-project.
 org/package=rpart
-[19] H. Wickham, ggplot2:
+[21] H. Wickham, ggplot2:
 elegant graphics for
 data analysis.
 Springer New York, 2009.
 [Online]. Available: http://had.co.nz/ggplot2/book
 978-0-387-98140-6.
+
+[9] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
+source scientific tools for Python,” 2001–. [Online].
+Available: http://www.scipy.org/
+[10] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
+N. Homer, G. Marth, G. Abecasis, R. Durbin, and
+G. Subgroup, “ The Sequence Alignment/Map format
+and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
+2009.
+[11] M. Kircher, U. Stenzel and J. Kelso, “Improved
+base calling for the Illumina Genome Analyzer
+using machine learning strategies,” Genome Biology,
+vol. 10, no. 8, p. R83, 2009.
+
+24
 
 Appendix A
 
