@@ -452,32 +452,35 @@ frameworks. Also putting it politely, the programming paradigm of R[13] is rathe
 and can significantly increase development time (and frustration[15]) if one is not very well versed in the
 patterns and grammar of the language and it seemed best to stick to one’s comfort zone given the brief
 timescale for the project.
-Whilst performance was not a critical decision factor, it was undetermined whether R could offer ...C and C++
-also a possibility, however dlib didn’t support tree-based classifiers although Shark did, Python chosen in the
-end for ease of use...
+Had performance been a critical decision factor, lower level languages such as C, C++ or even Fortran could be
+used. Briefly looking at two popular frameworks available for C in particular; dlib did not support tree-based
+classifiers although an alternative, Shark did.
 
 Framework
-...Having studied the Machine Learning module in final year the prospect of getting stuck in to the deep of a
-machine learning algorithm was exciting, however the reality is a lot of time and effort has gone in to proper
-optimisation of a framework which is unlikely to be surpassed successfully by a short-term one-person project.
-It is therefore only natural that a library seems a wise investment for the codebase...
-...There are numerous machine learning frameworks available in many languages, some described above...
-however it seemed counter-intuitive to select a framework in another language for the introduction of an
-additional arbitrary output and input steps to switch between the two environments.
-...A mixed bag of such frameworks exist in Python, two in particular scikit-learn[12] and Orange[5] were
-main contenders, partly on their recommendation from the project supervisor...
+Having studied the Machine and Intelligent Learning module in final year, the prospect of getting stuck in to
+the deep of a machine learning algorithm was exciting. However the reality is that a lot of cumulative time and
+effort has gone in to creation and optimisation of a framework which is unlikely to be surpassed successfully
+by a short-term one-person project. Thus utilisation of a third party machine learning library would seem a
+wise investment for the project’s codebase.
+There are numerous machine learning frameworks available in many languages, some of which were described
+above and formed part of the development environment decisions. Whilst it is obviously not necessary to select
+a framework which uses the same language as the project, it seemed counter-intuitive to select otherwise, for
+the establishing of additional arbitrary output and input steps to move data between the two environments
+could impede quick experiment repeatability and introduce error.
+A mixed bag of machine learning frameworks exist in Python, two in particular scikit-learn[12] and Orange[5]
+were main contenders, partly on their recommendation from the project supervisor.
 ...scikit integrates the "big names" in Python: numpy, scipy and matplotlib ...put off from Orange due to
 difficulties in reading in data ...it did however later appear to ship with features that were not in scikit (pruning
 and printing) ...with more time I’d certainly like to investigate using other libraries such as Orange or even
 outside Python and take at look at WEKA or Shark...
 
+8
+
+2.3 Pre-Implementation
 Libraries
 numpy[11] and scipy[7]... Fast and reliable implementations of mathematical functions... ggplot2[18] for
 beautiful graphing...
 
-8
-
-2.3 Pre-Implementation
 Testing
 Investigated the possibility of using Jenkins but just didn’t have the time to set up and tweak all the plugins
 and options of the platform to do what I wanted... Would still have been poor in terms of searching through
@@ -511,16 +514,17 @@ designed to be a diagnostic test to see whether this was the case. I should ment
 conditions under which a lanelet would fail irrespective of the auto_qc status of the rest of the lanelets in the
 lane; which mostly involve the preparation of the sample (which is easy to spot given it will cause poor quality
 across all lanelets using that library sample).
-...an unbroken vertical red bar indicates that all the lanelets inside a particular lane failed. Likewise yellow
-represents a warning. Grey areas are passes and were desaturated to make the other outcomes immediately
-obvious. It is clear that there are patches where lanelets have failed where entire lanes have not, but there does
-appear to be some correlation.
-Having discussed this with the supervisor and contacts at the Sanger Institute we decided to continue...
+
 9
 
 2.3 Pre-Implementation
 
 Fig. 2.1 Heatmap of Lanelet QC Status by Lane
+...an unbroken vertical red bar indicates that all the lanelets inside a particular lane failed. Likewise yellow
+represents a warning. Grey areas are passes and were desaturated to make the other outcomes immediately
+obvious. It is clear that there are patches where lanelets have failed where entire lanes have not, but there does
+appear to be some correlation.
+Having discussed this with the supervisor and contacts at the Sanger Institute we decided to continue...
 Note the plot does not make a particular distinction between lanes in the same flow cell but they are sequentially
 identified so the red bars of thicker-width arguably display some failures across entire flow cells.
 

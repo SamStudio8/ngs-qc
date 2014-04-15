@@ -126,6 +126,7 @@ one is not very well versed in the patterns and grammar of the language  and it
 seemed best to stick to one's comfort zone given the brief timescale for the
 project.
 
+%TODO Cite dlib, Shark
 Had performance been a critical decision factor, lower level languages such as
 C, C++ or even Fortran could be used. Briefly looking at two popular frameworks
 available for C in particular; \textbf{dlib} did not support tree-based
@@ -133,22 +134,27 @@ classifiers although an alternative, \textbf{Shark} did.
 
 
 \subsubsection{Framework}
-...Having studied the Machine Learning module in final year the prospect of
-getting stuck in to the deep of a machine learning algorithm was exciting,
-however the reality is a lot of time and effort has gone in to proper
-optimisation of a framework which is unlikely to be surpassed successfully by a
-short-term one-person project. It is therefore only natural that a library seems
-a wise investment for the codebase...
 
-...There are numerous machine learning frameworks available in many languages,
-some described above... however it seemed counter-intuitive to select a
-framework in another language for the introduction of an additional arbitrary
-output and input steps to switch between the two environments.
+Having studied the \textit{Machine and Intelligent Learning} module in final
+year, the prospect of getting stuck in to the deep of a machine learning
+algorithm was exciting. However the reality is that a lot of cumulative time and
+effort has gone in to creation and optimisation of a framework which is unlikely
+to be surpassed successfully by a short-term one-person project. Thus
+utilisation of a third party machine learning library would seem a wise
+investment for the project's codebase.
 
-...A mixed bag of such frameworks exist in Python, two in particular
+There are numerous machine learning frameworks available in many languages, some
+of which were described above and formed part of the development environment
+decisions. Whilst it is obviously not necessary to select a framework which uses
+the same language as the project, it seemed counter-intuitive to select otherwise,
+for the establishing of additional arbitrary output and input steps to move data
+between the two environments could impede quick experiment repeatability and
+introduce error.
+
+A mixed bag of machine learning frameworks exist in Python, two in particular
 \textbf{scikit-learn}\citep{scikit-learn} and \textbf{Orange}\citep{orange}
 were main contenders, partly on their recommendation from the project
-supervisor...
+supervisor.
 
 ...scikit integrates the "big names" in Python: numpy, scipy and matplotlib
 ...put off from Orange due to difficulties in reading in data ...it did however
@@ -157,7 +163,7 @@ printing) ...with more time I'd certainly like to investigate using other
 libraries such as \textbf{Orange} or even outside Python and take at look at WEKA
 or Shark...
 
-\subsubsection{Libraries}
+\subsubsection{Additional External Libraries}
 %TODO Ref num,sci,matplot
 numpy\citep{numpyscipy} and scipy\citep{scipy}... Fast and reliable implementations of
 mathematical functions...  ggplot2\citep{ggplot2} for beautiful graphing...
@@ -182,7 +188,7 @@ Really wanted to write my own solution for this but had to settle for well
 formatted log files that could be searched and processed with some command line
 fu...
 
-\subsubsection{Additional Tools}
+\subsubsection{Tools}
 Version control is critical, \textbf{git}!
 
 
@@ -190,14 +196,15 @@ Version control is critical, \textbf{git}!
 %TODO Rubbish section title
 \section{Pre-Implementation}
 \subsection{Classification Correlation}
-...An important consideration for statistical analysis is the relation between the
-observations. The quality data files we have are per lanelet, however a lane can
-house more than one lanelet...  and so herein lies the trouble, if during a run,
-the flow cell is somehow subjected to abnormal temperatures (air conditioning
-failure) or the sequencing device is depleted of reagents, every lane (and thus
-lanelet within) will be of very poor quality. Thus there would appear to exist a
-relationship between the respective qualities of each lanelet in a lane as well
-as each lane in a sequencing run!
+
+...An important consideration for statistical analysis is the relation between
+the observations. The quality data files we have are per lanelet, however a lane
+can house more than one lanelet...  and so herein lies the trouble, if during a
+run, the flow cell is somehow subjected to abnormal temperatures (air
+conditioning failure) or the sequencing device is depleted of reagents, every
+lane (and thus lanelet within) will be of very poor quality. Thus there would
+appear to exist a relationship between the respective qualities of each lanelet
+in a lane as well as each lane in a sequencing run!
 
 %TODO Probably mention in the text this is a very dense heatmap...
 \begin{figure}[htbp!]
