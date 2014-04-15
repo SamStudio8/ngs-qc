@@ -446,26 +446,27 @@ Whole Genome Sequencing
 
 2.2 Concepts and Terminology
 
-Fig. 2.1 Example of flowcell with some lanelets highlighted
-
 2.2.2
 
 Samples, Lanes and Lanelets
 
 A sample is a distinct DNA specimen extracted from a particular person. For the purpose of sequencing,
-samples are then pipetted in to a flowcell such as the one in Figure 2.2 — a glass slide containing a series
+samples are then pipetted in to a flowcell such as the one in Figure 2.1 — a glass slide containing a series
 of very thin tubules known as lanes. It is throughout these lanes that the chemical reactions involved in
 sequencing will take place.
 
-Fig. 2.2 An Illumina HiSeq Flowcell[10]
+Fig. 2.1 An Illumina HiSeq Flowcell[10]
 Once inserted, samples are amplified in situ inside the flowcell itself whereby samples multiply in magnitude
 to form millions of dense clusters. Note that a lane can contain more than one sample and a sample can appear
 in more than one lane; this is "sample multiplexing" and helps to ensure that the failure of a particular lane
 does not hinder analysis of a sample.
-A lanelet is the aggregate read of all clusters of a particular sample in a single lane. Figure 2.1 attempts to
+A lanelet is the aggregate read of all clusters of a particular sample in a single lane. Figure 2.2 attempts to
 highlight examples of a this (circled in blue - not all lanelets are highlighted). For example lane 5 shows the
 four clusters (in reality there would actually be millions) of Sample A combine to represent a lanelet. A lane
 will have as many lanelets as it does samples.
+
+Fig. 2.2 Example of flowcell with some lanelets highlighted
+
 7
 
 Chapter 3
