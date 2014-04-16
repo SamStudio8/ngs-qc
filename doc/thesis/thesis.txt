@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 15, 2014
+April 16, 2014
 
 Declaration
 
@@ -262,7 +262,7 @@ iv
 
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
-parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
+parallel DNA sequencing, allowing potentially billions of chemical reactions to occur simultaneously, reducing
 both time and cost required to perform genetic analysis[19]. However, these "next-generation" processes are
 complex and open to error[11], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
@@ -282,17 +282,17 @@ Analysis of Current System
 With the support of the Wellcome Trust Sanger Institute in Cambridge, this project works with the Human
 Genetics Informatics team to investigate auto_qc[1], the institute’s current automated quality control tool.
 During genetic sequencing a large number of metrics are generated to determine the quality of the data read
-from the sequencing hardware itself. As part of the current vertebrate sequencing pipeline[5] at the institute,
-auto_qc is responsible for applying quality control to samples within the pipeline by comparing a modest
-subset of these metrics to simple hard-coded hard thresholds; determining whether a particular sample has
-reached a level that requires a warning, or has exceeded the threshold and failed entirely. Whilst this does
-catch most of the very poor quality outputs, a large number of samples are flagged for manual inspection at
-the warning level; a time consuming task which invites both inefficiency and error.
+from the sequencing hardware itself. As part of the institute’s vertebrate sequencing pipeline[5], auto_qc is
+responsible for applying quality control to samples within the pipeline by comparing a modest subset of these
+metrics to simple hard-coded thresholds; determining whether a particular sample has reached a level that
+requires a warning, or has exceeded the threshold and failed entirely. Whilst this catches most of the very
+poor quality outputs, a large number of samples are flagged for manual inspection at the warning level; a time
+consuming task which invites both inefficiency and error.
 
 1
 
 1.2 Project Method
-In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests
+In practice most of these manual decisions are based on inspecting a range of diagnostic plots, which suggest
 that a machine learning classifier could potentially be trained on the combinations of quality control statistics
 available to make these conclusions without the need for much human intervention[13].
 The first part of the project aims to apply machine learning techniques to replicate the current auto_qc rule set
@@ -312,9 +312,9 @@ Identification of Properties that affect Downstream Analysis
 
 The other half of this project is motivated by the question "What is good and bad in terms of quality?"
 To be able to classify samples as a pass or a fail with understanding, we need an idea of what actually
-constitutes a good or bad quality sample and must look at the effects quality has on analysis performed
-downstream from sequencing. An example of such is variant calling — the process of identifying differences
-between a DNA sample (such as your own) and a known reference sequence.
+constitutes a good quality sample and must look at the effects quality has on analysis performed downstream
+from sequencing. An example of such is variant calling – the process of identifying differences between a
+DNA sample (such as your own) and a known reference sequence.
 Given two high quality data sources where DNA sequences from individuals were identified in two different
 ways (one of which being next-generation sequencing) it would be possible to measure the difference between
 each corresponding pair. Using this, we could investigate the effect of leaving out part of the next-generation
@@ -322,7 +322,7 @@ sample during the variant calling process. If we were to leave a part of a sampl
 pipeline would the variants found be more (or less) accurate than if it had been included? Would they agree
 more (or less) with the variants called after using the non next-generation sequencing method?
 Having identified such sub-samples, can quality control metrics from the previous part be found in common?
-If so, such parameters would identify "good" or "bad" samples straight out of the machine! Samples that
+If so, such parameters would identify "good" or "bad" samples straight out of the machine. Samples that
 exhibit these quality variables will go on to improve or detriment analysis.
 
 1.2
@@ -331,60 +331,59 @@ exhibit these quality variables will go on to improve or detriment analysis.
 Project Method
 Methodology
 
-Clearly some team-based practices invited by agile methodologies — pair programming immediately comes
-to mind — are not applicable in a solo project. It is also unreasonable to expect an "on-site" customer for
-this particular project. In The Case Against Extreme Programming, Matt Stephens describes a "self referential
+Clearly some team-based practices invited by agile methodologies – pair programming immediately comes
+to mind – are not applicable in a solo project. It is also unreasonable to expect an "on-site" customer
+for this particular project. In The Case Against Extreme Programming, Matt Stephens describes a "self
 2
 
 1.2 Project Method
-safety net" where the perceived traps in each practice are supported and "made safe" by other XP practices.
-This would seem to rule out XP as a viable methodology for a solo-project as cutting out some of the
-processes that allow this form of evolutionary design to work (and flatten that cost-of-change curve) can
-introduce serious flaws to the management of a project and potentially result in failure. In the same breath it
-is important to remember that not all agile processes need be discarded just because XP seems incompatible.
-Indeed, some processes seem like common sense, for example; frequent refactoring, simple design, continuous
-integration and version control. Test driven development could also prove a useful process to consider as part
-of a methodology for this project, setting up a framework that allows for quick and frequent testing (before
-coding) and ensuring that any refactoring has a positive (or at least non-negative) effect on the system could
-be a worthwhile contribution to efficiency.
+referential safety net" where the perceived traps in each practice are supported and "made safe" by other
+extreme programming (XP) practices. This would rule out XP as a viable methodology for a solo project
+as cutting out some of the processes that allow this form of evolutionary design to work (and flatten that
+cost-of-change curve) can introduce serious flaws to the management of a project and potentially result
+in failure. In the same breath it is important to remember that not all agile processes need be discarded
+just because XP seems incompatible. Indeed, some processes are common sense, for example: frequent
+refactoring, simple design, continuous integration and version control. Test driven development could also
+prove a useful process to consider as part of a methodology for this project as setting up a framework that
+allows for quick and frequent testing (before coding) and ensuring that any refactoring has a positive (or at
+least non-negative) effect on the system could be a worthwhile contribution to efficiency.
 Could a more plan driven approach or form of agile-plan hybrid be considered appropriate here? In Balancing
 Agility and Discipline, Boehm and Turner introduce the idea of "homegrounds" for both agile and plan driven
-approaches; I note here that for projects that require high reliability and feature a non-collocated "CRACK
+approaches; noting here that for projects that require high reliability and feature a non-collocated "CRACK
 customer" in fact align with some of these homegrounds for plan driven development. Combined with the
 thought that the project requirements will also be relatively stable it would seem that there may be no reason
 to switch to a more agile methodology as its primary feature is the welcoming of change that is not even
-needed? Perhaps this is the naivety of an optimist!
+needed? Perhaps this is the naivety of an optimist.
 Personally I think I would approach this with a form of agile-plan hybrid; I like the idea of quick iterations
-and getting feedback as opposed to leaving acceptance testing until the very end of the project, but I also
-want a somewhat detailed feedback process. Whilst through Neil Taylor’s course Agile Methodologies it was
-suggested that it is dangerous to pick and choose processes (don’t anger the Ring of Snakes!) and also merely
-paying "lip service" to agile must be avoided (otherwise what’s the point?), I feel that on this occasion it can
-be justified by the size of the project itself.
+and getting feedback as opposed to leaving acceptance testing until the end of the project, but I also want a
+somewhat detailed feedback process. In Neil Taylor’s Agile Methodologies course it was suggested that it is
+dangerous to pick and choose processes (don’t anger the Ring of Snakes) and also merely paying "lip service"
+to agile must be avoided (otherwise what’s the point?), I feel that on this occasion it can be justified by the
+size of the project itself.
 This project will consist of many research steps, each requiring some form of computational process to prepare
 the data for the next step. Whilst the implementations of the algorithms themselves pose computational
-complexity, there appears to be little challenge from a planning perspective and in fact a looser overall
-plan should probably be considered as we must account for unforeseen and unexpected outcomes from each
-research step.
+complexity, there appears to be little challenge from a planning perspective and in fact a looser overall plan
+should be considered as we must account for unforeseen and unexpected outcomes from each research step.
 The most important part of ensuring this project stays on track will be the development of a sensible testing
 methodology to ensure we are not only moving in the right direction in terms of which algorithm and parameters
 to use but also in terms of reliably measuring performance over time in a way that allows justification of such
 design choices.
 Despite this trail of thought, given the research grounding this project entails it might be required to look
 beyond traditional and even modern software development methodologies and investigate a more scientific
-approach. A simple "scientific method" would involve establishing a null hypothesis that can be proven false
-by testing (eg: "auto_qc classifier is more accurate than the new classifier") and executing experiments that
-attempt to prove this null hypothesis false in favour of an alternative hypothesis (typically the opposite, eg:
+approach. A simple scientific method would involve establishing a null hypothesis that can be proven false
+by testing (e.g. "auto_qc classifier is more accurate than the new classifier") and executing experiments that
+attempt to prove this null hypothesis false in favour of an alternative hypothesis (typically the opposite, e.g.
 "The new classifier is more accurate than the old classifier"). This form of hypothesis testing could essentially
 become the project’s acceptance tests (providing we have an empirical definition of what "more accurate"
 means in terms of this system) and any modification can be classed as an experiment ("Do these parameters
+allow us to reject the null hypothesis?"). Although care must be taken not to let this descend into unstructured
 3
 
 1.2 Project Method
-allow us to reject the null hypothesis?"). Although care must be taken not to let this descend into unstructured
 cycles of mere hack-and-test, code-and-fix style programming.
-Overall it is rather difficult to select a methodology for a project such as this, the research element makes it
-almost impossible to draw on previous personal experience for ideas of what development processes may or
-may not be effective.
+Overall it is rather difficult to select a methodology for a project such as this as the research element makes it
+almost impossible to draw on previous personal experience for ideas of what development processes would be
+effective.
 
 1.2.2
 
@@ -395,10 +394,10 @@ sorting and filtering. For various personal projects and the second year group p
 Ruby-based web application designed for bug tracking. However over time I have come to find keeping the
 task information stored in Redmine a task in itself. Attempts to extend the platform to implement additional
 functionality have been fruitless.
-Out of frustration with thus and other alternatives — including TaskWarrior whose simple but effective
-command line interface was overshadowed by its occasional storage corruptions, I wrote and open sourced
-my own web based task management application; Triage[4]. This will be useful in keeping track of current
-objectives and allow prioritisation in a quick and simple manner.
+Out of frustration with thus and other alternatives – including TaskWarrior whose simple but effective
+command line interface was overshadowed by its occasional storage corruptions, I wrote my own open source
+web based task management application; Triage[4]. This will be useful in keeping track of current objectives
+and allow prioritisation in a quick and simple manner.
 The list used to organise my project is also publicly available[3] for transparent progress tracking by my
 supervisor and those interested at the Sanger Institute.
 
@@ -454,9 +453,9 @@ Whole Genome Sequencing
 Samples, Lanes and Lanelets
 
 A sample is a distinct DNA specimen extracted from a particular person. For the purpose of sequencing,
-samples are pipetted in to a flowcell such as the one in Figure 2.1 — a glass slide containing a series of very
+samples are pipetted in to a flowcell such as the one in Figure 2.1 – a glass slide containing a series of very
 thin tubules known as lanes. It is throughout these lanes that the chemical reactions involved in sequencing
-will take place.
+take place.
 
 Fig. 2.1 An Illumina HiSeq Flowcell[12]
 Once inserted, samples are amplified in situ, in the flowcell itself. A process in which the genetic material
@@ -465,10 +464,10 @@ Millions of clusters will be created throughout each lane of the flowcell.
 Note that a lane can contain more than one sample and a sample can appear in more than one lane; this is
 known as sample multiplexing and helps to ensure that the failure of a particular lane does not hinder analysis
 of a sample (as it will still be sequenced as part of another lane).
-The more abstract of the definitions; a lanelet is the aggregate read of all clusters of a particular sample in a
-single lane. Figure 2.2 attempts to highlight examples of a this (circled in blue - not all lanelets are highlighted).
-For example lane 5 shows the four clusters (in reality there would actually be millions) of Sample A combine
-to represent a lanelet. A lane will have as many lanelets as it does samples.
+The more abstract of the definitions, a lanelet is the aggregate read of all clusters of a particular sample
+in a single lane. Figure 2.2 attempts to highlight examples of a this (circled in blue – not all lanelets are
+highlighted). For example Lane 5 shows the four clusters (in reality there would be millions) of Sample A
+combine to represent a lanelet. A lane will have as many lanelets as it does samples.
 
 7
 
@@ -487,19 +486,19 @@ Materials and Methods
 Input Data and Format
 "BAMcheckR’d" Data
 
-As part of the project I’ve been granted access to significant data sets at the Sanger Institute, unlocking quality
-control data for two of the largest studies currently undergoing analysis. A wide array of quality metrics are
-available for each and every lanelet that forms part of either of the two studies; totalling 13,455 files.
-The files are created by samtools stats — part of a collection of widely used open-source utilities for post
-processing and manipulation of large alignments such as those produced by next-generation sequencers that
-are released under the umbrella name of "SAMtools"[10] (Sequence Alignment and Map Tools). samtools
-stats collects statistics from sequence data files complex tab delimited dataframes tabulating several metrics
-over time.
-The output of samtools stats is then parsed by an in-house tool called bamcheckr, named so as samtools stats
-was once known as bamcheck and the tool is written in R. bamcheckr supplements the summary numbers
-section of the samtools stats output with additional metrics that are later used by auto_qc for classification.
-This process does not change the file other than adding a few additional key-value pairs in the summary
-numbers section. A truncated example of a "bamcheckr’d" file can be found in Appendix A.1.
+As part of the project I have been granted access to significant data sets at the Sanger Institute, unlocking
+quality control data for two of the largest studies currently undergoing analysis. A wide array of quality
+metrics are available for each and every lanelet that forms part of either of the two studies, totalling 13,455
+files.
+The files are created by samtools stats – part of a collection of widely used open-source utilities for post-processing
+and manipulation of large alignments such as those produced by next-generation sequencers that are released
+under the umbrella name of "SAMtools"[10] (Sequence Alignment and Map Tools). samtools stats collects
+statistics from sequence data files and produces key-value summary numbers as well as more complex tab
+delimited dataframes tabulating several metrics over time.
+The output of samtools stats is then parsed by an in-house tool called bamcheckr1 which supplements
+the summary numbers section of the samtools stats output with additional metrics that are later used by
+auto_qc for classification. This process appends additional key-value pairs in the summary numbers section.
+A truncated example of a "bamcheckr’d" file can be found in Appendix A.1.
 
 3.1.2
 
@@ -509,11 +508,14 @@ To use these "bamcheckr’d" files for training and testing a machine learning c
 each file to a classification result from auto_qc. The one-to-one mapping between each input file and its label
 are provided by the Sanger Institute in a separate file hereafter referred to as the AQC Decision Matrix or AQC
 (Decision) File.
+1 Named
+
+such as samtools stats was once known as bamcheck and the tool is written in R
 
 9
 
 3.2 Development Environment
-A truncated example of such a file can be found in Appendix A.2. Only the first few columns are included —
+A truncated example of such a file can be found in Appendix A.2. Only the first few columns are included –
 indeed we are only interested in the lanelet and aqc which provide an identifier that maps the row to a given
 input file and its classification by auto_qc respectively. Latter columns pertain to a breakdown of decisions
 made by auto_qc which are not included in the example for confidentiality (and brevity).
@@ -524,52 +526,51 @@ made by auto_qc which are not included in the example for confidentiality (and b
 Development Environment
 Language
 
-For the language of the program designed to handle this vast array of input data, Python was selected, more
+Python was selected for the language of the program designed to handle this vast array of input data, more
 out of personal taste rather than a detailed analysis of required performance and features. From previous
-experience I was happy with the performance of Python when processing large datasets in terms of both I/O
-file handling operations and storing the data in memory for later use. Python’s generous choice of both built-in
-and third-party libraries have proven useful on many occasions. Due to its concise and flexible nature it is
-possible to rapidly develop applications and its readability eases ongoing maintenance; useful given the short
-time-span allocated for this project and the possibility of others wishing to contribute to the project codebase
-after completion.
+experience I was happy with the performance of Python when processing large datasets in terms of both file
+handling operations and storing the data in memory for later use. Python’s generous choice of both built-in
+and third-party libraries have proven useful. Due to its concise and flexible nature it is possible to rapidly
+develop applications and its readability eases ongoing maintenance; useful given the short time-span allocated
+for this project and the possibility of others wishing to contribute to the project codebase after completion.
 Whilst the choice was made primarily on preference, this is not to say other options were not considered:
 a highly popular Java-based collection of data mining tools, WEKA[8] would certainly have provided a
-framework for building decision tree classifiers but at the same time did not appear to offer any significant
-features that were unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual
-machine to be installed which could be undesirable from a performance or even security standpoint when the
-application is deployed to servers at the Sanger Institute.
+framework for building decision tree classifiers but did not appear to offer any significant features that were
+unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual machine to be installed
+which could be undesirable from a performance or security standpoint when the application is deployed to
+servers at the Sanger Institute.
 Difficulty was also encountered finding example implementations for WEKA with most documentation and
 tutorials providing information for performing analysis via the graphical "Explorer" interface instead, which
 would not be appropriate for quickly setting up and repeating experiments automatically.
 Given the quality data we’ll be using to train a machine learning classifier is output from the previously
-mentioned R script; bamcheckr, it was worth briefly investigating the options available for R itself as the
+mentioned R script, bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
 seemed convenient.
 Whilst the tree[17] and rpart[20] packages are available for constructing decision trees in R (and actually
 RWeka provides an R interface to WEKA) neither appeared to be as robust as other more well-known
 frameworks. Also putting it politely, the programming paradigm of R[16] is rather different to other languages
-and can significantly increase development time (and frustration[18]) if one is not very well versed in the
-patterns and grammar of the language and it seemed best to stick to one’s comfort zone given the brief
-timescale for the project.
+and can significantly increase development time (and frustration[18]) if one is not well versed in the patterns
+and grammar of the language and it seemed best to stick to one’s comfort zone given the brief timescale for
+the project.
 Had performance been a critical decision factor, lower level languages such as C, C++ or even Fortran could be
 used. Briefly looking at two popular frameworks available for C in particular; dlib did not support tree-based
+classifiers although an alternative, Shark did.
 
 10
 
 3.2 Development Environment
-classifiers although an alternative, Shark did.
 
 3.2.2
 
 Framework
 
 Having studied the Machine and Intelligent Learning module in final year, the prospect of getting stuck in to
-the deep of a machine learning algorithm was exciting. However the reality is that a lot of cumulative time and
+the deep of a machine learning algorithm was exciting. However the reality is a lot of cumulative time and
 effort has gone in to creation and optimisation of a framework which is unlikely to be surpassed successfully
 by a short-term one-person project. Thus utilisation of a third party machine learning library would seem a
 wise investment for the project’s codebase.
 There are numerous machine learning frameworks available in many languages, some of which were described
-above and formed part of the development environment decisions. Whilst it is obviously not necessary to select
+above and formed part of the development environment decisions. Whilst it is obviously unnecessary to select
 a framework which uses the same language as the project, it seemed counter-intuitive to select otherwise, for
 the establishing of additional arbitrary output and input steps to move data between the two environments
 could impede quick experiment repeatability and introduce error.
@@ -593,28 +594,28 @@ Testing
 
 As discussed in Chapter 1.2.1, testing forms a critical part of the project given the need to monitor the impact
 of changes to classification accuracy as well as to ensure the program is working correctly. Ideally, execution
-of a test suite should be simple and easily repeatable, results that pertain to accuracy should also be stored for
-future reference to monitor ongoing performance of the classifier.
-Such requirements could be fulfilled by a continuous integration platform; a server dedicated to the building
+of a test suite should be simple and easily repeatable. Results that pertain to accuracy should also be stored
+for future reference to monitor ongoing performance of the classifier.
+Such requirements could be fulfilled by a continuous integration platform – a server dedicated to the building
 and testing of the code contained in a centralised repository typically to which an entire team will have write
 access[7]. Whilst in this scenario there will be much less "risk" from integration issues due to the single person
 team size, the themes of automated building and self-testing code can be taken on board.
 Jenkins is a highly popular[2] example of such a platform with which I am familiar. Although an out-of-the-box
-Jenkins set-up is suitable for variety of software engineering projects, it would be necessary to invest some
-11
-
-3.2 Development Environment
+Jenkins instance is suitable for variety of software engineering projects, it would be necessary to invest some
 time to install and tweak plugins to perform actions on test results (such as failing a build that causes accuracy
 to decrease). However, previous experience found that highly specific tasks will often require a plugin to be
 authored to overcome limitations in the feature set of a more generic plugin, which given the intricacies of the
+11
+
+3.2 Development Environment
 Jenkins package layout could easily turn in to a project of its own. Unfortunately, other features that would be
 useful to the project including the indexing and searching of build logs are somewhat lacking in Jenkins.
 Online solutions such as Travis and Wercker could potentially offer a quicker set up as both merely requires
 a small configuration file in the root of the repository and a hook to be registered... ...however such services
 would not have been able to handle artifacts such as dot files without some convoluted solution of uploading
 them to dropbox or adding them to a private git repository from the build node... ...also would have needed
-to upload a very large quantity of training data repeatedly which would be inefficient (and more than likely
-against reasonable use of the platform)
+to upload a large quantity of training data repeatedly which would be inefficient (and more than likely against
+reasonable use of the platform)
 Really wanted to write my own solution for this but had to settle for well formatted log files that could be
 searched and processed with some command line fu...
 
@@ -622,7 +623,7 @@ searched and processed with some command line fu...
 
 Tools
 
-Version control is critical, git!
+Version control is critical, git
 
 12
 
@@ -635,12 +636,12 @@ Classification Correlation
 
 An important consideration for statistical analysis is the relation between observations. The "bamcheckr’d"
 input data described in Chapter 3.1.1 is available per lanelet, however as shown in Chapter 2.2.2 a lane may
-contain more than one lanelet. Herein lies the trouble; if during a sequencing run the flowcell is somehow
-subjected to abnormal conditions (a temperature increase due to an air conditioning failure) or the device is
-depleted of reagents then every lane (and thus all lanelets within) will be of very poor quality.
+contain more than one lanelet. Herein lies the trouble: if during a sequencing run the flowcell is somehow
+subjected to abnormal conditions (e.g. a temperature increase due to an air conditioning failure) or the device
+is depleted of reagents then every lane (and thus all lanelets within) will be of considerably poor quality.
 
-Fig. 4.1 Heatmap of Lanelet QC Status by Lane: Lanes are Vertical bars with each lanelet cell coloured red
-to represent a failure, yellow for a warning and grey for a pass.
+Fig. 4.1 Heatmap of lanelet QC status by lane: Lanes are vertical bars with each lanelet cell coloured red to
+represent a failure, yellow for a warning and grey for a pass.
 In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
 13
 
@@ -665,15 +666,15 @@ statistical testing may be required following this analysis to describe how powe
 this possible correlation in to account.
 It should be noted that the proportion of failures and warnings is considerably smaller than passes and so care
 will need to be taken to find a balance; for example it would not be feasible to merely discard lanelets from
-lanes that have failed entirely as there’d hardly be any data on which to train a classifier! Indeed other solutions
+lanes that have failed entirely as there’d hardly be any data on which to train a classifier. Indeed other solutions
 may be possible, perhaps weighting observations which exhibit similar behaviour to other lanelets in their lane
 so as to give their parameter values less priority during the construction of the classifier itself.
-It may be worth nothing that although the plot does not make a particular distinction between lanes in the
-same flow cell, lanes are sequentially identified so the red bars of thicker-width arguably display some failures
-across entire flow cells.
+It is worth noting that although the plot does not make a particular distinction between lanes in the same flow
+cell, lanes are sequentially identified so the red bars of thicker-width arguably display some failures across
+entire flow cells.
 As a final note it should be stressed that this plot should be regarded as a diagnostic rather than an experiment
 with a direct conclusion. Given more time it would be useful to investigate the nature of these possible
-correlations, given a lane that has failed across all lanelets, do those lanelets actually express similar quality
+correlations, given a lane that has failed across all lanelets: do those lanelets actually express similar quality
 metrics?
 
 14
@@ -813,28 +814,28 @@ already known errors, I’ve been making performance improvements to the script 
 regions.
 The task poses an interesting problem in terms of complexity and memory, as the human genome is over three
 billion bases long in total which can easily lead to data handling impracticalities.
-For the next step of the project we’re looking to document what effects quality has on analysis that occurs
-downstream from sequencing, for example; variant calling - the process of identifying bases in a sample that
+For the next step of the project we are looking to document what effects quality has on analysis that occurs
+downstream from sequencing, for example: variant calling - the process of identifying bases in a sample that
 differ from the reference genome (this is a little simple as you also need to discern as whether the difference
 is actually a polymorphism or not).
-To investigate this I’ll be performing leave-one-out analysis on the whole-genome data we have; consisting of
+To investigate this I’ll be performing leave-one-out analysis on the whole-genome data we have, consisting of
 leaving a lanelet out, performing variant calling and then comparing the result of the left-one-out variant call
 and the corresponding variant call on our “SNP chip” data.
-The basic idea is to answer the question of what actually constitutes “good” or “bad” lanelet quality? Does
-leaving out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or
-cause the correspondence between the two sets to decrease? In which case, having identified such lanelets,
-can we look back to the quality parameters we’ve been analysing so far and find whether they have something
-in common in those cases?
+The basic idea is to answer the question of what constitutes “good” or “bad” lanelet quality? Does leaving
+out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or cause the
+correspondence between the two sets to decrease? In which case, having identified such lanelets, can we look
+back to the quality parameters we’ve been analysing so far and find whether they have something in common
+in those cases?
 20
 
 7.2 Materials and Methods
-If we can, these parameters can be used to identify “good” or “bad” lanelets straight out of the machine! We
+If we can, these parameters can be used to identify “good” or “bad” lanelets straight out of the machine. We
 know that lanelets that exhibit these quality variables will go on to improve or detriment analysis.
 However, variant calling is both computationally and time intensive. Whilst the Sanger Institute have significant
 computing resources available, my dissertation has an end date and with the time I have we must focus the
 leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
-The candidate must not have too many variants, or too few; a sort of “Goldilocks genome”.
+The candidate must not have too many variants, or too few: a “Goldilocks genome”.
 
 7.2
 7.2.1
@@ -867,7 +868,7 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 21
 
 7.3 Implementation
-# Shows no difference! :)
+# Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 # http://vcftools.sourceforge.net/perl_module.html
 # http://www.biostars.org/p/51076/
@@ -881,7 +882,7 @@ Implementation
 
 Goldilocks
 
-As I discussed previously, on the hunt for my Goldilocks genomic region, it’s important to consider both time
+As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
 Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
 candidate must not span chromosomes (the ends of chromosomes are not very good for reads) then we can
@@ -889,8 +890,8 @@ easily yield a great improvement from processing chromosomes individually.
 The process is to extract the locations of all the variants across the genome from the SNP chip VCF files (these
 files list the alleles for each detected variant for each sample), load them in to some sort of structure, “stride”
 over each chromosome (with some stride offset) and finally list the variants present between the stride start
-and stride start plus the desired length of the candidate. These are our regions!
-Due to the use of striding, one does not simply walk the chromosome! A quick and dirty solution would be to
+and stride start plus the desired length of the candidate. These are our regions.
+Due to the use of striding, one does not simply walk the chromosome. A quick and dirty solution would be to
 just look up variants in a list:
 
 for chromosome in autosomes:
@@ -898,30 +899,30 @@ for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
 if position in variant_position_list:
 # Do something...
-This of course is rather dumb. Looking up a list has O(n) performance where n is the number of variants (and
-there are a lot of variants). Combining this with the sheer number of lookups performed; with the default
+This is of course rather dumb. Looking up a list has O(n) performance where n is the number of variants
+(and there are a lot of variants). Combining this with the sheer number of lookups performed, with the default
 parameters the list would be queried half a billion times for the first chromosome alone.
 You could improve this somewhat by dividing the variant_position_list in to a list of variants for each chromosome,
 so at least n is smaller. It is pretty doubtful that this would make any useful impact given the number of lookups.
-I’m happy to say I bypassed this option but thought it would be fun to consider it’s performance.
-A far more sensible solution would be to replace the list with a dictionary whose lookup is amortized to a
-constant time. The number of lookups is still incredibly substantial but a constant lookup is starting to make
+I’m happy to say I bypassed this option but thought it would be fun to consider its performance.
+A far more sensible solution is to replace the list with a dictionary whose lookup is amortized to a constant
+time. The number of lookups is still incredibly substantial but a constant lookup is starting to make this sound
 
 22
 
 7.3 Implementation
-this sound viable. Using the variant positions as keys of a dictionary (in fact let’s use the previous minor
-suggestion and have a dictionary for each chromosome) we have:
+viable. Using the variant positions as keys of a dictionary (in fact let us use the previous minor suggestion and
+have a dictionary for each chromosome) we have:
 
 for chromosome in autosomes:
 for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
 if position in variant_position_dict[chromosome]:
 # Do something...
-Great! This still takes half an hour to run on my laptop though, surely there is a better way! I wondered if
-whether dropping the lookup would improve things. Instead, how about an area of memory is allocated to
-house the current chromosome and act as a variant “mask”; essentially an array where each element is a base
-of the current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
+This still takes half an hour to run on my laptop though, surely there is a better way. I wondered if whether
+dropping the lookup would improve things. Instead, how about an area of memory is allocated to house the
+current chromosome and act as a variant “mask” – essentially an array where each element is a base of the
+current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
 for chromosome in autosomes:
 chro = np.zeros(len(chromosome), np.int8)
@@ -933,9 +934,9 @@ if chro[position] == 1:
 # Do something...
 We of course have to initially load the variants in to the chromosome array, but this need only be done once
 (per chromosome) and is nothing compared to the billions of lookups of the previous implementation.
-Rather to my surprise this was slow, very slow (maybe if I have time I should check how it compared to
-looking up with a list). Was it the allocation of memory? Perhaps I had run out of RAM and most of the work
-was going in to fetching and storing data in swap?
+Rather to my surprise this was slow (maybe if I have time I should check how it compared to looking up with
+a list). Was it the allocation of memory? Perhaps I had run out of RAM and most of the work was going in to
+fetching and storing data in swap?
 I switched out the comparison (== 1) step for the previous dictionary based lookup and the performance
 improved considerably. What was going on? There must be more to looking at a given element in the numpy
 chromosome array, but what?
@@ -943,14 +944,14 @@ After a brief spell of playing with Python profilers and crashing my laptop by a
 memory than I had with numpy.zeroes, I read the manual (!) and discovered that numpy.zeroes returns an
 ndarray which uses “advanced indexing” even for single element access, effectively copying the element to a
 Python scalar for comparison.
-That’s a lot of memory action!
+That’s a lot of memory action.
 It then occurred to me that we’re interested in just how many variants are inside each region and our chromosome
-is handily encapsulated in a numpy array! Why don’t we just sum together the elements in each region?
+is handily encapsulated in a numpy array. Why don’t we just sum together the elements in each region?
 23
 
 7.3 Implementation
-Remember variant positive base positions are 1 and 0 otherwise, useful! So the work boils down to some
-clever vector mathematics calculated by numpy!
+Remember variant positive base positions are 1 and 0 otherwise, useful. So the work boils down to some
+clever vector mathematics calculated by numpy.
 We don’t even lose any detail because the actual list of variants inside a region can be recovered in a small
 amount of time just given the start and end position of the region.
 
@@ -963,14 +964,14 @@ num_variants = np.sum(chro[start:start+LENGTH])
 # Do something...
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
 be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
-the variant locations in the first place)!
+the variant locations in the first place).
 Ignoring empty regions etc.
 
 bsub -o ../../../goldilocks/joblog/samtools_mpileup.%J.o -e ../../../goldilocks/joblog/samtool
 Memory Leaks...
 
 Testing
-...particularly difficult!
+...particularly difficult.
 
 24
 

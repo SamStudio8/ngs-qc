@@ -41,10 +41,9 @@ This part of the project can be outlined as follows:
 %TODO Illumina DNA Synthesis Image
 A \textbf{sample} is a distinct DNA specimen extracted from a particular person.
 For the purpose of sequencing, samples are pipetted in to a \textit{flowcell}
-such as the one in Figure~\ref{fig:flowcell} --- a glass slide
+such as the one in Figure~\ref{fig:flowcell} -- a glass slide
 containing a series of very thin tubules known as \textbf{lanes}.  It is
-throughout these lanes that the chemical reactions involved in sequencing will
-take place.
+throughout these lanes that the chemical reactions involved in sequencing take place.
 
 \begin{figure}[htbp!]
     \centering
@@ -53,7 +52,7 @@ take place.
     \label{fig:flowcell}
 \end{figure}
 
-Once inserted, samples are amplified in situ, in the flowcell itself. A
+Once inserted, samples are amplified \textit{in situ}, in the flowcell itself. A
 process in which the genetic material of each sample is caused to multiply in
 magnitude to form a dense cluster of the sample around the original. Millions of
 clusters will be created throughout each lane of the flowcell.
@@ -63,11 +62,11 @@ more than one lane; this is known as \textit{sample multiplexing} and helps to
 ensure that the failure of a particular lane does not hinder analysis of a
 sample (as it will still be sequenced as part of another lane).
 
-The more abstract of the definitions; a \textbf{lanelet} is the aggregate read
+The more abstract of the definitions, a \textbf{lanelet} is the aggregate read
 of all clusters of a particular sample in a single lane.
 Figure~\ref{fig:lanelets} attempts to highlight examples of a this (circled in
-blue - not all lanelets are highlighted). For example lane 5 shows the four
-clusters (in reality there would actually be millions) of Sample A combine to
+blue -- not all lanelets are highlighted). For example Lane 5 shows the four
+clusters (in reality there would be millions) of Sample A combine to
 represent a lanelet. A lane will have as many lanelets as it does samples.
 
 \begin{figure}[htbp!]
@@ -86,32 +85,31 @@ represent a lanelet. A lane will have as many lanelets as it does samples.
 
 %NOTE Assuming lanelets have been described by this point...
 %TODO samtools stats actually generates this data rather than "the seq process"
-As part of the project I've been granted access to significant data sets at the
+As part of the project I have been granted access to significant data sets at the
 Sanger Institute, unlocking quality control data for two of the largest studies
 currently undergoing analysis. A wide array of quality metrics are available for
-each and every lanelet that forms part of either of the two studies; totalling
+each and every lanelet that forms part of either of the two studies, totalling
 13,455 files.
 
 %9154 (68\%), 1542 (11\%), 2759 (21\%)...
 
 %TODO Explain a BAM file
-The files are created by \textbf{samtools stats} --- part of a collection of
-widely used open-source utilities for post processing and manipulation of large
+The files are created by \textbf{samtools stats} -- part of a collection of
+widely used open-source utilities for post-processing and manipulation of large
 alignments such as those produced by next-generation sequencers that are
 released under the umbrella name of "SAMtools"\citep{samtools} (Sequence
 Alignment and Map Tools). \textbf{samtools stats} collects statistics from
-sequence data files %BAM and produces key-value summary numbers as well as more
+sequence data files and produces key-value summary numbers as well as more
 complex tab delimited dataframes tabulating several metrics over time.
 
 %TODO Was samtools stats known as bamcheck, or did it replace it?
 The output of \textbf{samtools stats} is then parsed by an in-house tool called
-\textbf{bamcheckr}, named so as \textbf{samtools stats} was once known as
-\textbf{bamcheck} and the tool is written in R. \textbf{bamcheckr} supplements
-the summary numbers section of the \textbf{samtools stats} output with
-additional metrics that are later used by \textbf{auto\_qc} for classification.
-This process does not change the file other than adding a few additional
-key-value pairs in the summary numbers section. A truncated example of a
-"bamcheckr'd" file can be found in Appendix~\ref{app:bamcheckr}.
+\textbf{bamcheckr}\footnote{Named such as \textbf{samtools stats} was once known
+as \textbf{bamcheck} and the tool is written in R} which supplements the summary
+numbers section of the \textbf{samtools stats} output with additional metrics
+that are later used by \textbf{auto\_qc} for classification.  This process
+appends additional key-value pairs in the summary numbers section.  A truncated
+example of a "bamcheckr'd" file can be found in Appendix~\ref{app:bamcheckr}.
 
 \subsection{auto\_qc Decision Data}
 To use these "bamcheckr'd" files for training and testing a machine learning
@@ -121,7 +119,7 @@ are provided by the Sanger Institute in a separate file hereafter referred to as
 the \textit{AQC Decision Matrix} or \textit{AQC (Decision) File}.
 
 A truncated example of such a file can be found in Appendix~\ref{app:aqc_matrix}.
-Only the first few columns are included --- indeed we are only interested in the
+Only the first few columns are included -- indeed we are only interested in the
 \textit{lanelet} and \textit{aqc} which provide an identifier that maps the row
 to a given input file and its classification by \textbf{auto\_qc} respectively.
 Latter columns pertain to a breakdown of decisions made by \textbf{auto\_qc}
@@ -133,25 +131,24 @@ which are not included in the example for confidentiality (and brevity).
 \subsection{Language}
 %TODO Better opening
 %TODO Do I need to ramble about why vim is great and so on?
-For the language of the program designed to handle this vast array of input
-data, Python was selected, more out of personal taste rather than a
-detailed analysis of required performance and features. From previous experience
-I was happy with the performance of Python when processing large datasets in
-terms of both I/O file handling operations and storing the data in memory for
-later use. Python's generous choice of both built-in and third-party libraries
-have proven useful on many occasions. Due to its concise and flexible nature it
-is possible to rapidly develop applications and its readability eases ongoing
-maintenance; useful given the short time-span allocated for this project and the
-possibility of others wishing to contribute to the project codebase after
-completion.
+Python was selected for the language of the program designed to handle this vast
+array of input data, more out of personal taste rather than a detailed analysis
+of required performance and features. From previous experience I was happy with
+the performance of Python when processing large datasets in terms of both
+file handling operations and storing the data in memory for later use. Python's
+generous choice of both built-in and third-party libraries have proven useful.
+Due to its concise and flexible nature it is possible to rapidly
+develop applications and its readability eases ongoing maintenance; useful given
+the short time-span allocated for this project and the possibility of others
+wishing to contribute to the project codebase after completion.
 
 Whilst the choice was made primarily on preference, this is not to say other
 options were not considered: a highly popular Java-based collection of data
 mining tools, \textbf{WEKA}\citep{weka} would certainly have provided a
-framework for building decision tree classifiers but at the same time did not
+framework for building decision tree classifiers but did not
 appear to offer any significant features that were unavailable elsewhere, whilst
 Java itself has the added constraint of requiring a virtual machine to be
-installed which could be undesirable from a performance or even security
+installed which could be undesirable from a performance or security
 standpoint when the application is deployed to servers at the Sanger Institute.
 
 %...although performance has improved considerably from previous Java versions\citep{Bouckaert}
@@ -162,7 +159,7 @@ analysis via the graphical "Explorer" interface instead, which would not be
 appropriate for quickly setting up and repeating experiments automatically.
 
 Given the quality data we'll be using to train a machine learning classifier is
-output from the previously mentioned R script; \textbf{bamcheckr}, it was worth
+output from the previously mentioned R script, \textbf{bamcheckr}, it was worth
 briefly investigating the options available for R itself as the potential of
 integrating the learning and predicting functions right in to the same process
 that outputs the data seemed convenient.
@@ -173,7 +170,7 @@ packages are available for constructing decision trees in R (and actually
 as robust as other more well-known frameworks. Also putting it politely, the
 programming paradigm of R\citep{man:R} is rather different to other languages
 and can significantly increase development time (and frustration\citep{argh}) if
-one is not very well versed in the patterns and grammar of the language  and it
+one is not well versed in the patterns and grammar of the language  and it
 seemed best to stick to one's comfort zone given the brief timescale for the
 project.
 
@@ -188,7 +185,7 @@ classifiers although an alternative, \textbf{Shark} did.
 
 Having studied the \textit{Machine and Intelligent Learning} module in final
 year, the prospect of getting stuck in to the deep of a machine learning
-algorithm was exciting. However the reality is that a lot of cumulative time and
+algorithm was exciting. However the reality is a lot of cumulative time and
 effort has gone in to creation and optimisation of a framework which is unlikely
 to be surpassed successfully by a short-term one-person project. Thus
 utilisation of a third party machine learning library would seem a wise
@@ -196,7 +193,7 @@ investment for the project's codebase.
 
 There are numerous machine learning frameworks available in many languages, some
 of which were described above and formed part of the development environment
-decisions. Whilst it is obviously not necessary to select a framework which uses
+decisions. Whilst it is obviously unnecessary to select a framework which uses
 the same language as the project, it seemed counter-intuitive to select otherwise,
 for the establishing of additional arbitrary output and input steps to move data
 between the two environments could impede quick experiment repeatability and
@@ -226,12 +223,12 @@ mathematical functions...  ggplot2\citep{ggplot2} for beautiful graphing...
 As discussed in Chapter~\ref{chap:methodology}, testing forms a critical part of
 the project given the need to monitor the impact of changes to classification
 accuracy as well as to ensure the program is working correctly. Ideally,
-execution of a test suite should be simple and easily repeatable, results that
+execution of a test suite should be simple and easily repeatable. Results that
 pertain to accuracy should also be stored for future reference to monitor
 ongoing performance of the classifier.
 
 %TODO Cite Jenkins, Travis, Wercker
-Such requirements could be fulfilled by a continuous integration platform; a
+Such requirements could be fulfilled by a continuous integration platform -- a
 server dedicated to the building and testing of the code contained in a
 centralised repository typically to which an entire team will have write
 access\citep{fowler-ci}. Whilst in this scenario there will be much less "risk"
@@ -239,7 +236,7 @@ from integration issues due to the single person team size, the themes of
 automated building and self-testing code can be taken on board.
 
 \textbf{Jenkins} is a highly popular\cite{jenkins-stats} example of such a
-platform with which I am familiar. Although an out-of-the-box Jenkins set-up is
+platform with which I am familiar. Although an out-of-the-box Jenkins instance is
 suitable for variety of software engineering projects, it would be necessary to
 invest some time to install and tweak plugins to perform actions on test results
 (such as failing a build that causes accuracy to decrease). However, previous
@@ -256,7 +253,7 @@ root of the repository and a hook to be registered...
 ...however such services would
 not have been able to handle artifacts such as dot files without some convoluted
 solution of uploading them to dropbox or adding them to a private git repository
-from the build node...  ...also would have needed to upload a very large
+from the build node...  ...also would have needed to upload a large
 quantity of training data repeatedly which would be inefficient (and more than
 likely against reasonable use of the platform)
 
@@ -265,7 +262,7 @@ formatted log files that could be searched and processed with some command line
 fu...
 
 \subsection{Tools}
-Version control is critical, \textbf{git}!
+Version control is critical, \textbf{git}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -278,17 +275,17 @@ An important consideration for statistical analysis is the relation between
 observations. The "bamcheckr'd" input data described in
 Chapter~\ref{chap:bamcheckr-data} is available per lanelet, however as shown in
 Chapter~\ref{chap:samplelanelanelets} a lane may contain more than one lanelet.
-Herein lies the trouble; if during a sequencing run the flowcell is somehow
-subjected to abnormal conditions (a temperature increase due to an air
+Herein lies the trouble: if during a sequencing run the flowcell is somehow
+subjected to abnormal conditions (\textit{e.g.} a temperature increase due to an air
 conditioning failure) or the device is depleted of reagents then every lane (and
-thus all lanelets within) will be of very poor quality.
+thus all lanelets within) will be of considerably poor quality.
 
 %TODO Probably mention in the text this is a very dense heatmap...
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=1.0\textwidth]{classcorr}
-    \caption[ClassCorr]{\textbf{Heatmap of Lanelet QC Status by Lane}: Lanes are
-    Vertical bars with each lanelet cell coloured red to represent a failure,
+    \caption[ClassCorr]{\textbf{Heatmap of lanelet QC status by lane}: Lanes are
+    vertical bars with each lanelet cell coloured red to represent a failure,
 yellow for a warning and grey for a pass.}
     \label{fig:classcorr}
 \end{figure}
@@ -330,12 +327,12 @@ It should be
 noted that the proportion of failures and warnings is considerably smaller than
 passes and so care will need to be taken to find a balance; for example it would
 not be feasible to merely discard lanelets from lanes that have failed entirely
-as there'd hardly be any data on which to train a classifier! Indeed other
+as there'd hardly be any data on which to train a classifier. Indeed other
 solutions may be possible, perhaps weighting observations which exhibit similar
 behaviour to other lanelets in their lane so as to give their parameter values
 less priority during the construction of the classifier itself.
 
-It may be worth nothing that although the plot does not make a particular
+It is worth noting that although the plot does not make a particular
 distinction between lanes in the same flow cell, lanes are sequentially
 identified so the red bars of thicker-width arguably display some failures
 across entire flow cells.
@@ -343,6 +340,6 @@ across entire flow cells.
 As a final note it should be stressed that this plot should be regarded as a
 diagnostic rather than an experiment with a direct conclusion. Given more time it
 would be useful to investigate the nature of these possible correlations, given
-a lane that has failed across all lanelets, do those lanelets actually express
+a lane that has failed across all lanelets: do those lanelets actually express
 similar quality metrics?
 

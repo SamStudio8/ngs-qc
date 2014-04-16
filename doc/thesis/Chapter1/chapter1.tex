@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Over the past few years advances in genetic sequencing hardware have introduced
-the concept of massively parallel DNA sequencing; allowing potentially billions
+the concept of massively parallel DNA sequencing, allowing potentially billions
 of chemical reactions to occur simultaneously, reducing both time and cost
 required to perform genetic analysis\citep{HMG}. However, these
 "next-generation" processes are complex and open to error\citep{Illumina}, thus
@@ -35,21 +35,22 @@ The project consists of two sub-projects;
 % terminology first.
 With the support of the Wellcome Trust Sanger Institute in Cambridge, this
 project works with the Human Genetics Informatics team to investigate
-\textbf{auto\_qc}\citep{github:autoqc}, the institute's current automated quality control tool.
+\textbf{auto\_qc}\citep{github:autoqc}, the institute's current automated
+quality control tool.
 
 During genetic sequencing a large number of metrics are generated to determine
 the quality of the data read from the sequencing hardware itself. As part of the
-current vertebrate sequencing pipeline\citep{github:vr-pipe} at the institute,
+institute's vertebrate sequencing pipeline\citep{github:vr-pipe},
 \textbf{auto\_qc} is responsible for applying quality control to samples within
 the pipeline by comparing a modest subset of these metrics to simple hard-coded
-hard thresholds; determining whether a particular sample has reached a level that
+thresholds; determining whether a particular sample has reached a level that
 requires a warning, or has exceeded the threshold and failed entirely. Whilst
-this does catch most of the very poor quality outputs, a large number of samples
+this catches most of the very poor quality outputs, a large number of samples
 are flagged for manual inspection at the warning level; a time consuming task
 which invites both inefficiency and error.
 
-In practise most of these manual decisions are based on inspecting a range of
-diagnostic plots which suggests that a machine learning classifier could
+In practice most of these manual decisions are based on inspecting a range of
+diagnostic plots, which suggest that a machine learning classifier could
 potentially be trained on the combinations of quality control statistics
 available to make these conclusions without the need for much human
 intervention\citep{marireport}.
@@ -77,9 +78,9 @@ The other half of this project is motivated by the question "What \textit{is}
 good and bad in terms of quality?"
 
 To be able to classify samples as a pass or a fail with understanding, we need
-an idea of what actually constitutes a good or bad quality sample and must look
+an idea of what actually constitutes a good quality sample and must look
 at the effects quality has on analysis performed downstream from sequencing.
-An example of such is \textbf{variant calling} --- the process of identifying
+An example of such is \textbf{variant calling} -- the process of identifying
 differences between a DNA sample (such as your own) and a known reference
 sequence.
 
@@ -100,7 +101,7 @@ the non next-generation sequencing method?
 
 Having identified such sub-samples, can quality control metrics from the
 previous part be found in common? If so, such parameters would identify "good"
-or "bad" samples straight out of the machine! Samples that exhibit these quality
+or "bad" samples straight out of the machine. Samples that exhibit these quality
 variables will go on to improve or detriment analysis.
 
 
@@ -112,46 +113,48 @@ variables will go on to improve or detriment analysis.
 %TODO More coherant waffling needed
 %TODO Explain CRACK customer?
 %TODO Do I need to reference this section as my Assignment 3 report?
-Clearly some team-based practices invited by agile methodologies ---
-pair programming immediately comes to mind --- are not applicable in a solo
-project. It is also unreasonable to expect an "on-site" customer for this
-particular project. In \textit{The Case Against Extreme Programming}, Matt Stephens
+%TODO Explain homeground etc..
+Clearly some team-based practices invited by agile methodologies -- pair
+programming immediately comes to mind -- are not applicable in a solo project.
+It is also unreasonable to expect an "on-site" customer for this particular
+project. In \textit{The Case Against Extreme Programming}, Matt Stephens
 describes a "self referential safety net" where the perceived traps in each
-practice are supported and "made safe" by other XP practices.  This would seem
-to rule out XP as a viable methodology for a solo-project as cutting out some
-of the processes that allow this form of evolutionary design to work (and
-flatten that cost-of-change curve) can introduce serious flaws to the
-management of a project and potentially result in failure. In the same breath
-it is important to remember that not all agile processes need be discarded just
-because XP seems incompatible. Indeed, some processes seem like common sense,
-for example; frequent refactoring, simple design, continuous integration and
-version control. Test driven development could also prove a useful process to
-consider as part of a methodology for this project, setting up a framework that
-allows for quick and frequent testing (before coding) and ensuring that any
-refactoring has a positive (or at least non-negative) effect on the system
-could be a worthwhile contribution to efficiency.
+practice are supported and "made safe" by other extreme programming (XP)
+practices.  This would rule out XP as a viable methodology for a
+solo project as cutting out some of the processes that allow this form of
+evolutionary design to work (and flatten that cost-of-change curve) can
+introduce serious flaws to the management of a project and potentially result in
+failure. In the same breath it is important to remember that not all agile
+processes need be discarded just because XP seems incompatible. Indeed, some
+processes are common sense, for example: frequent refactoring, simple
+design, continuous integration and version control. Test driven development
+could also prove a useful process to consider as part of a methodology for this
+project as setting up a framework that allows for quick and frequent testing
+(before coding) and ensuring that any refactoring has a positive (or at least
+non-negative) effect on the system could be a worthwhile contribution to
+efficiency.
 
 Could a more plan driven approach or form of agile-plan hybrid be considered
 appropriate here? In \textit{Balancing Agility and Discipline}, Boehm
 and Turner introduce the idea of "homegrounds" for both agile and plan driven
-approaches; I note here that for projects that require high reliability and
+approaches; noting here that for projects that require high reliability and
 feature a non-collocated "CRACK customer" in fact align with some of these
 homegrounds for plan driven development. Combined with the thought that the
 project requirements will also be relatively stable it would seem that there
 may be no reason to switch to a more agile methodology as its primary feature
 is the welcoming of change that is not even needed? Perhaps this is the naivety
-of an optimist!
+of an optimist.
 
 %TODO Using I
 %TODO Ring of Snakes probably needs elaboration
 Personally I think I would approach this with a form of agile-plan hybrid; I
 like the idea of quick iterations and getting feedback as opposed to leaving
-acceptance testing until the very end of the project, but I also want a somewhat
-detailed feedback process. Whilst through Neil Taylor's course \textit{Agile
-Methodologies} it was suggested that it is dangerous to pick and choose
-processes (don’t anger the Ring of Snakes!) and also merely paying "lip service"
-to agile must be avoided (otherwise what's the point?), I feel that on this
-occasion it can be justified by the size of the project itself.
+acceptance testing until the end of the project, but I also want a somewhat
+detailed feedback process. In Neil Taylor's \textit{Agile Methodologies} course
+it was suggested that it is dangerous to pick and choose processes (don’t anger
+the Ring of Snakes) and also merely paying "lip service" to agile must be
+avoided (otherwise what's the point?), I feel that on this occasion it can be
+justified by the size of the project itself.
 
 %TODO Opportunity to drop the word pipeline and describe what it is for future
 %use
@@ -159,8 +162,8 @@ This project will consist of many research steps, each requiring some form of
 computational process to prepare the data for the next step. Whilst the
 implementations of the algorithms themselves pose computational complexity,
 there appears to be little challenge from a planning perspective and in fact a
-looser overall plan should probably be considered as we must account for
-unforeseen and unexpected outcomes from each research step.
+looser overall plan should be considered as we must account for unforeseen and
+unexpected outcomes from each research step.
 
 The most important part of ensuring this project stays on track will be the
 development of a sensible testing methodology to ensure we are not only moving
@@ -171,11 +174,11 @@ justification of such design choices.
 Despite this trail of thought, given the research grounding this project entails
 it might be required to look beyond traditional and even modern software
 development methodologies and investigate a more scientific approach. A simple
-"scientific method" would involve establishing a null hypothesis that can be
-proven false by testing (eg: "\textbf{auto\_qc} classifier is more
+scientific method would involve establishing a null hypothesis that can be
+proven false by testing (\textit{e.g.} "\textbf{auto\_qc} classifier is more
 accurate than the new classifier") and executing experiments that
 attempt to prove this null hypothesis false in favour of an alternative
-hypothesis (typically the opposite, eg: "The new classifier is more
+hypothesis (typically the opposite, \textit{e.g.} "The new classifier is more
 accurate than the old classifier"). This form of hypothesis testing
 could essentially become the project's acceptance tests (providing we have an
 empirical definition of what "more accurate" means in terms of this
@@ -185,9 +188,8 @@ taken not to let this descend into unstructured cycles of mere hack-and-test,
 code-and-fix style programming.
 
 Overall it is rather difficult to select a methodology for a project such as
-this, the research element makes it almost impossible to draw on previous
-personal experience for ideas of what development processes may or may not be
-effective.
+this as the research element makes it almost impossible to draw on previous
+personal experience for ideas of what development processes would be effective.
 
 
 \subsection{Task Management}
@@ -202,10 +204,10 @@ come to find keeping the task information stored in Redmine a task in itself.
 Attempts to extend the platform to implement additional functionality have been
 fruitless.
 
-Out of frustration with thus and other alternatives --- including
+Out of frustration with thus and other alternatives -- including
 \textbf{TaskWarrior} whose simple but effective command line interface was
-overshadowed by its occasional storage corruptions, I wrote and open sourced my
-own web based task management application; \textbf{Triage}\citep{github:triage}.
+overshadowed by its occasional storage corruptions, I wrote my own open source
+web based task management application; \textbf{Triage}\citep{github:triage}.
 This will be useful in keeping track of current objectives and allow
 prioritisation in a quick and simple manner.
 
