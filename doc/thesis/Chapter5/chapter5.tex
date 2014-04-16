@@ -261,6 +261,10 @@ Ignoring empty regions etc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Analysis Pipeline}
 
+\subsection{Region Extraction}
+
+...regions extracted from IRODS
+
 \subsection{samtools mpileup}
 %TODO Cite mpileup
 
@@ -293,6 +297,8 @@ those extracted Goldilocks regions.
 
 \subsection{samtools merge}
 
+...undocumented feature to use a file of filenames...
+
 ...unfortunately the past few days have been swallowed by a memory leak that
 caused the merge job I submitted to be killed for excess memory consumption.
 
@@ -306,6 +312,9 @@ maximum execution time limit for the queue.
 ...submitting the same job to the "long" (48hr) and "basement" (essentially
 unlimited) queues, it is clear that the job is taking an extraordinary length of
 time to complete...
+
+...during this time I took the opportunity to patch various memory leaks in the
+test harnesses of both merge and split...
 
 % https://github.com/samtools/samtools/pull/200
 % http://valgrind.org/docs/manual/cl-manual.html
