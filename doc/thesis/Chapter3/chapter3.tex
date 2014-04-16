@@ -14,6 +14,17 @@ part of the project. Frontier is a Python package that serves as a data manager,
 providing both interfaces to read inputs into structures in memory and to
 retrieve them in formats acceptable to a machine learning framework.
 
+\subsection{Purpose}
+Frontier's original purpose was to supplement analysis with scikit-learn by
+acting as a wrapper to the framework, allowing the user to pass data to
+scikit-learn in an acceptable format whilst still interacting with the wrapper.
+Frontier also needed to handle the returned classification results, either by
+displaying them directly to users or otherwise logging any textual or graphical
+data as desired...
+
+\subsection{Design}
+Frontier followed an evolutionary design pattern...
+
 \subsection{Concepts}
 
 \subsubsection{Classes and Labels}
@@ -24,16 +35,41 @@ retrieve them in formats acceptable to a machine learning framework.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
+...we investigate the following implementation stories:
 
+\begin{itemize}
+    \item User input, readers, sanity checking
+    \item Storage of read data in memory
+    \item Retrieval
+    \item Interaction with scikit-learn
+\end{itemize}
 
-...provides a class to read from the "bamcheckr'd files" as seen in
-Appendix~\ref{app:bamcheckr}... as well as the auto\_qc output matrix briefly
-demonstrated in Appendix~\ref{app:aqc_matrix}...
+\subsection{Format}
+Frontier is designed as a Python package, allowing a user to import its
+functionality in to other programs. The result of this project's technical
+output could almost be considered as two seperate programs: Frontier itself, the
+package designed to ease user interaction with scikit-learn and \textit{Front},
+a Python script which implements Frontier's functionality to interact with
+scikit-learn.
 
-...initially designed specically for the given learning problem, with hard coded
+It didn't make sense to remove a user's interaction with scikit-learn and thus
+instead of becoming a wrapper, Frontier evolved to supplement its use...
+
+\subsection{Input Handling}
+Frontier's modular nature allows users to write their own Python classes to read
+data from any form of input. Two examples of which are the provided classes used
+to read from the "bamcheckr'd files" as seen in Appendix~\ref{app:bamcheckr}...
+as well as the auto\_qc output matrix briefly demonstrated in Appendix~\ref{app:aqc_matrix}...
+
+Initially designed specically for the given learning problem, with hard coded
 classes and encodings...
+
 ...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
-enable it to be used as a more general purpose tool; if we were to add another
+enable it to be used as a more general purpose tool, users now specify the
+classes and associated labels and encodings (for example those used by Front are
+demonstrated in Listing~\ref{fig:FrontierClasses})...
+
+...if we were to add another
 class label, the definition would merely need to be included to the CLASSES
 (Listing~\ref{fig:FrontierClasses}) variable passed when the Statplexer is
 constructed. But use is therefore not merely limited to our problem but rather
@@ -69,7 +105,66 @@ which a very large dataset.
     \end{minted}
 \end{listing}
 
+...this allows Frontier to be compatable with almost any learning task, you
+merely specify the correct data and target readers, the known classes and call
+the \textbf{Statplexer}...
 
+...Frontier also checks each parameter for variance, warning users when this
+requirement is violated... (a parameter with 0 variance is pretty useless...)
+
+\subsection{Storage}
+
+Frontier provides a class called the \textbf{Statplexer}\footnote{A somewhat
+contrived contraction of Statistics Multiplexer} which houses all read in data.
+...whilst the stored data and targets can be manipulated directly (and indeed
+they are for testing purposes) it is unrecommended and controlled access can be
+gained via Frontier's API...
+
+...data and targets stored in python dictionaries, offering constant lookup
+access...
+...must however be sorted each time data is requested...
+...this seems a fair price to pay (although if desired we could use a
+collection) for having constant lookup speed for checking on dictionary
+membership and indexing by a user-friendly string...(for example a sample could
+be retrieved using its name rather than knowing where in the array it
+resides)...
+
+%TODO Rambling
+...perhaps in future data and targets can be stored in arrays with a dict to
+provide a mapping between a sample name and its location in the array...
+...this allows for lookups to be completed in O(1) time whilst maintaining an
+array under the hood...
+
+
+\subsection{Retrieval}
+The Statplexer is designed to provide the user methods in which to extract
+desired data in a format suitable for parsing with an external framework or
+library, in our case; scikit-learn
+
+...leverages \textbf{numpy}...
+...some of the methods provided include:
+
+\begin{description}
+    \item[list\_regressors] Retrieve a list of all parameters
+    \item[find\_regressors] Retrieve a list of parameters containing any of the
+        input strings as a substring
+    \item[exclude\_regressors] Retrieve a list of parameters which do not
+        contain any of the input strings as a substring, or if needed an exact
+        match
+\end{description}
+
+...data is returned sorted by key, with parameters sorted alphanumerically...
+...targets map 1:1 with the data array...
+
+\begin{description}
+    \item[get\_data\_by\_regressors] Return data for each observation, but only
+        return columns for the parameters in the given list
+    \item[get\_data\_by\_target] Return data for each observation that have been
+        classified in one of the targets specified and additionally only
+        return columns for the parameters in the given list
+\end{description}
+
+\subsection{Interaction with scikit-learn}
 \subsubsection{Cross Validation}
 
 ...method in which to measure classification accuracy...
@@ -108,7 +203,17 @@ re-wrote in Python...
 ...Fixed a graph plotting failure.
 ...Writing additional routines...
 
-\subsection{SelectKBest}
+\subsection{Parameter Selection}
+...important to find the "best" parameters
+...what is best? scikit-learn uses total gini information
+
+...frontier uses two methods:
+\begin{itemize}
+    \item Backward elimination; pruning parameters with the lowest total gini
+    \item Call scikit-learn's SelectKBest
+\end{itemize}
+
+
 * incorrect degrees of freedom
 * warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
 * Replaced univariate\_selection with version from master
