@@ -8,7 +8,7 @@
 This part of the project can be outlined as follows:
 
 \begin{itemize}
-    \item ...
+    \item Selection of a genomic region...
 \end{itemize}
 
 \subsection{Why Goldilocks?}
@@ -55,8 +55,9 @@ It is for this reason we’re looking for what Josh at Sanger described as a
 variants, or too few: a “Goldilocks genome”.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Materials and Methods}
-\subsection{Input Data: Variant Call Format}
+\chapter{Materials and Methods}
+\section{Input Data and Format}
+\subsection{Variant Call Format}
 
 \begin{minted}[mathescape,
             %linenos,
@@ -101,8 +102,9 @@ variants, or too few: a “Goldilocks genome”.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Implementation}
-\subsection{Goldilocks}
+\chapter{Implementation}
+\section{Goldilocks}
+\subsection{Introduction}
 
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is
 important to consider both time and memory as it is simple to deliver a poor
@@ -278,3 +280,15 @@ C symbol: bam_destroy1
 
 \subsubsection{Testing}
 ...particularly difficult.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analysis Pipeline}
+
+\subsection{samtools mpileup}
+\subsection{samtools merge}
+\subsection{bcftools call}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Current Status}
+

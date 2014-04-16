@@ -198,10 +198,6 @@ Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 II
 7
 
-15
-
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
-
 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
 5.2.1
 
@@ -212,9 +208,6 @@ Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . .
 SelectKBest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
-
-Results
-
 18
 
 6.0.1
@@ -227,34 +220,71 @@ Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
-7.1
+
+20
+
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+
+Materials and Methods
+8.1
+
+22
+
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+8.1.1
+
+Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+
+Implementation
+9.1
+
+24
+
+Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+9.1.1
+
+9.2
 
 19
-20
 
 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 7.1.1
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+9
 
-7.2
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
 
-Materials and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
-7.2.1 Input Data: Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Results
 
-7.3
+7.1
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
-7.3.1
+8
 
-Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+15
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+
+Analysis Pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+9.2.1
+9.2.2
+
+samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+9.2.3
+
+bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+10 Current Status
+
+28
 
 Appendix A Input Examples
 
-26
+30
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
 
 iv
 
@@ -271,7 +301,7 @@ analyses performed.
 
 Project Aims
 
-The project consists of two sub-projects;
+The project consists of two sub-projects:
 • Analysis of a current quality control system in place
 • Identification of quantifiable sample properties that affect downstream analysis
 
@@ -686,7 +716,7 @@ Implementation
 
 Introduction
 
-This chapter introduces Frontier; the main programming effort for this part of the project. Frontier is a Python
+This chapter introduces Frontier: the main programming effort for this part of the project. Frontier is a Python
 package that serves as a data manager, providing both interfaces to read inputs into structures in memory and
 to retrieve them in formats acceptable to a machine learning framework.
 
@@ -803,7 +833,7 @@ Introduction and Motivation
 Introduction
 
 This part of the project can be outlined as follows:
-• ...
+• Selection of a genomic region...
 
 7.1.1
 
@@ -828,7 +858,7 @@ back to the quality parameters we’ve been analysing so far and find whether th
 in those cases?
 20
 
-7.2 Materials and Methods
+7.1 Introduction
 If we can, these parameters can be used to identify “good” or “bad” lanelets straight out of the machine. We
 know that lanelets that exhibit these quality variables will go on to improve or detriment analysis.
 However, variant calling is both computationally and time intensive. Whilst the Sanger Institute have significant
@@ -837,11 +867,16 @@ leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
 The candidate must not have too many variants, or too few: a “Goldilocks genome”.
 
-7.2
-7.2.1
+21
+
+Chapter 8
 
 Materials and Methods
-Input Data: Variant Call Format
+8.1
+8.1.1
+
+Input Data and Format
+Variant Call Format
 
 # Install
 git clone htslib
@@ -860,27 +895,33 @@ vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
 # ! A faster alternative to using vcftools exists in bcftools ! #
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # Complains about lack of tabix index but still makes the file...
+
+22
+
+8.1 Input Data and Format
 # Index with tabix
 # "The input data file must be position sorted and compressed by bgzip
 # which has a gzip(1) like interface"
 tabix -p vcf file.vcf.gz
 diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
-21
-
-7.3 Implementation
 # Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 # http://vcftools.sourceforge.net/perl_module.html
 # http://www.biostars.org/p/51076/
 # http://vcftools.sourceforge.net/htslib.html#query
 
-7.3
+23
+
+Chapter 9
 
 Implementation
-
-7.3.1
+9.1
 
 Goldilocks
+
+9.1.1
+
+Introduction
 
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
@@ -902,15 +943,14 @@ if position in variant_position_list:
 This is of course rather dumb. Looking up a list has O(n) performance where n is the number of variants
 (and there are a lot of variants). Combining this with the sheer number of lookups performed, with the default
 parameters the list would be queried half a billion times for the first chromosome alone.
+24
+
+9.1 Goldilocks
 You could improve this somewhat by dividing the variant_position_list in to a list of variants for each chromosome,
 so at least n is smaller. It is pretty doubtful that this would make any useful impact given the number of lookups.
 I’m happy to say I bypassed this option but thought it would be fun to consider its performance.
 A far more sensible solution is to replace the list with a dictionary whose lookup is amortized to a constant
 time. The number of lookups is still incredibly substantial but a constant lookup is starting to make this sound
-
-22
-
-7.3 Implementation
 viable. Using the variant positions as keys of a dictionary (in fact let us use the previous minor suggestion and
 have a dictionary for each chromosome) we have:
 
@@ -942,14 +982,15 @@ improved considerably. What was going on? There must be more to looking at a giv
 chromosome array, but what?
 After a brief spell of playing with Python profilers and crashing my laptop by allocating considerably more
 memory than I had with numpy.zeroes, I read the manual (!) and discovered that numpy.zeroes returns an
+
+25
+
+9.1 Goldilocks
 ndarray which uses “advanced indexing” even for single element access, effectively copying the element to a
 Python scalar for comparison.
 That’s a lot of memory action.
 It then occurred to me that we’re interested in just how many variants are inside each region and our chromosome
 is handily encapsulated in a numpy array. Why don’t we just sum together the elements in each region?
-23
-
-7.3 Implementation
 Remember variant positive base positions are 1 and 0 otherwise, useful. So the work boils down to some
 clever vector mathematics calculated by numpy.
 We don’t even lose any detail because the actual list of variants inside a region can be recovered in a small
@@ -973,7 +1014,33 @@ Memory Leaks...
 Testing
 ...particularly difficult.
 
-24
+26
+
+9.2 Analysis Pipeline
+
+9.2
+
+Analysis Pipeline
+
+9.2.1
+
+samtools mpileup
+
+9.2.2
+
+samtools merge
+
+9.2.3
+
+bcftools call
+
+27
+
+Chapter 10
+
+Current Status
+
+28
 
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
@@ -1073,7 +1140,7 @@ base calling for the Illumina Genome Analyzer
 using machine learning strategies,” Genome Biology,
 vol. 10, no. 8, p. R83, 2009.
 
-25
+29
 
 Appendix A
 
@@ -1197,7 +1264,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-26
+30
 
 A.1 BAMcheckR’d Example Output
 
@@ -1429,7 +1496,7 @@ FFQ
 0
 0
 
-27
+31
 
 1609
 
@@ -1771,7 +1838,7 @@ IS
 2
 0
 
-28
+32
 
 A.1 BAMcheckR’d Example Output
 
@@ -2050,7 +2117,7 @@ GCD
 0.101
 0.101
 
-29
+33
 
 A.2 auto_qc Decision Matrix
 
@@ -2185,7 +2252,7 @@ passed
 warning
 passed
 
-30
+34
 
 ...
 ...
