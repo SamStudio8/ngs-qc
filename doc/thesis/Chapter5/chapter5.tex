@@ -1,6 +1,11 @@
 %*****************************************************************************************
 \part{Identification of Qualitative Sample Properties}
 \chapter{Introduction and Motivation}
+\ifpdf
+    \graphicspath{{Chapter5/Figs/Raster/}{Chapter5/Figs/PDF/}{Chapter5/Figs/}}
+\else
+    \graphicspath{{Chapter5/Figs/Vector/}{Chapter5/Figs/}}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
@@ -9,6 +14,7 @@ This part of the project can be outlined as follows:
 
 \begin{itemize}
     \item Selection of a genomic region...
+    \item Establishment of pipeline...
 \end{itemize}
 
 \subsection{Why Goldilocks?}
@@ -247,36 +253,6 @@ locations in the first place).
 
 Ignoring empty regions etc.
 
-\begin{minted}{bash}
-    bsub -o ../../../goldilocks/joblog/samtools_mpileup.%J.o -e ../../../goldilocks/joblog/samtools_mpileup.%J.e -G hgi -J "samtools_mpileup" -M1000 -R "select[mem>1000] rusage[mem=1000]" bash -c 'samtools mpileup -b ../goldilocks-3:46000001-47000000.fofn -g -I -f /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa > ../../../goldilocks/all.withref.bcf'
-\end{minted}
-% Needed -q long to submit to 48 hour queue instead of 12
-
-Memory Leaks...
-\begin{minted}{txt} 
-C symbol: bam_destroy1
-
-  File          Function          Line
-  0 bam.c         bam_fetch           64 bam_destroy1(b);
-  1 bam_mate.c    bam_mating_core    269 bam_destroy1(b[0]);
-  2 bam_mate.c    bam_mating_core    270 bam_destroy1(b[1]);
-  3 bam_md.c      bam_fillmd         383 bam_destroy1(b);
-  4 bam_rmdup.c   dump_best           41 bam_destroy1(stack->a[i]);
-  5 bam_rmdup.c   bam_rmdup_core     174 bam_destroy1(b);
-  6 bam_rmdupse.c __free_elem         14 #define __free_elem(p) bam_destroy1((p)->data.b)
-  7 bam_rmdupse.c bam_rmdupse_core   157 bam_destroy1(b);
-  8 bam_stat.c    bam_flagstat_core   44 bam_destroy1(b);
-  9 bam_tview.c   sam_fetch           47 bam_destroy1(b);
-  a bamshuf.c     bamshuf             80 bam_destroy1(b);
-  b bamshuf.c     bamshuf            111 bam_destroy1(a[j].b);
-  c padding.c     bam_pad2unpad      318 bam_destroy1(b);
-  d phase.c       dump_aln           341 bam_destroy1(b);
-  e sam.c         sampileup           61 bam_destroy1(b);
-  f sam_view.c    main_samview       356 bam_destroy1(b);
-  g sam_view.c    main_samview       390 bam_destroy1(b);
-  h sam_view.c    main_bam2fq        560 bam_destroy1(b);
-  i stats.c       main_stats        1504 bam_destroy1(bam_line);
-\end{minted}
 
 \subsubsection{Testing}
 ...particularly difficult.
@@ -286,8 +262,189 @@ C symbol: bam_destroy1
 \section{Analysis Pipeline}
 
 \subsection{samtools mpileup}
+%TODO Cite mpileup
+
+Following extraction of the Goldilocks region for each full-genome sample, the
+next stage is to use \textbf{samtools mpileup} to ...
+...each of the various full genome samples we have for processing.  These files
+are then summarised (and likelihoods are calculated) with samtools mpileup...
+
+%TODO merge a list of what? Guess we've introduced BAM/VCF by now?
+\textbf{samtools mpileup} is a rather intensive process especially when in a
+scenario such as ours where there are thousands of input files, one for each of
+the extracted regions. This not only places considerable strain on the cluster's
+file system but is incredibly inefficient given the overhead of file handling.
+As this pipeline will need to be executed once for each leave-one-out
+experiment, it would be required to reduce the strain on the file server before
+the job could be submitted. Usefully another member of the \textbf{samtools}
+collection provides functionality to merge a list of given input files such as
+those extracted Goldilocks regions.
+
+% Needed -q long to submit to 48 hour queue instead of 12
+\begin{minted}{bash}
+    bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o -e
+    ~/goldilocks/joblog/samtools_mpileup.%J.e -G hgi -J "samtools_mpileup"
+    -M1000 -R "select[mem>1000] rusage[mem=1000]" bash -c 'samtools mpileup -b
+    ../goldilocks-3:46000001-47000000.fofn -g -I -f
+    /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa >
+    ~/goldilocks/all.withref.bcf'
+\end{minted}
+
+
 \subsection{samtools merge}
+
+...unfortunately the past few days have been swallowed by a memory leak that
+caused the merge job I submitted to be killed for excess memory consumption.
+
+...100mb (default), 1G, 2G, 4G, 16G
+...initial memory leak fixed by the author, several large variables not being
+freed from memory...
+...following this, further \textbf{samtools merge} jobs were submitted only to
+also be repeatedly terminated by the LSF scheduler , this time for exceeding the
+maximum execution time limit for the queue.
+
+...submitting the same job to the "long" (48hr) and "basement" (essentially
+unlimited) queues, it is clear that the job is taking an extraordinary length of
+time to complete...
+
+% https://github.com/samtools/samtools/pull/200
+% http://valgrind.org/docs/manual/cl-manual.html
+% http://kcachegrind.sourceforge.net/html/Home.html
+% http://www.zlib.net/
+valgrind, the tool I used to track down memory leaks in the test harnesses of
+both samtools merge and samtools split actually consists of more than just
+memcheck.
+
+callgrind is a profiling tool that keeps track of a program’s call stack
+history, a handy feature built in to some development environments such as
+QtCreator.
+
+Having constructed a modest test set of files to merge, I called samtools merge
+from the command line, attaching callgrind and later imported the resulting
+text file to QtCreator’s profiling tool to interpret the results (I usually use
+KCacheGrind for this but I’ve been investigating QtCreator’s feature set for
+reasons unrelated to this project), the result is immediately obvious -
+millions of calls to functions in zlib; a free compression library.
+
+% https://github.com/samtools/htslib/blob/develop/bgzf.c#L220
+Further investigations using the QtCreator Analyze interface revealed that
+these calls all boiled down to one line called not during the process of
+deflating the input files (as I had expected) but actually during the
+compression of the output!
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1.0\textwidth]{callgrind_compressoutput_default}
+    \caption[callgrind-default]{callgrind output following merge with default
+    output compression}
+    \label{fig:callgrind-default}
+\end{figure}
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1.0\textwidth]{callgrind_uncompressoutput}
+    \caption[callgrind-uncompressed]{callgrind output following merge with
+    uncompressed output}
+    \label{fig:callgrind-uncompressed}
+\end{figure}
+
+% http://www.zlib.net/feldspar.html
+Looking at a brief explanation of the deflate algorithm, it seems reasonable to
+conclude the computational cost is rather asymmetric between compressing and
+uncompressing - in that the effort is locating blocks to compress and in
+comparison uncompressing is a reversible function on the known blocks.
+
+Indeed, samtools merge specifies a -u option for uncompressed output and the
+callgrind output (second image) indicates significantly less calls to zlib
+functionality.
+
+It remains to be seen whether this option will cut down the time needed for the
+large merge job, perhaps this is merely a red herring and we’re yet to discover
+the true speed trouble. In the meantime let’s see if sending this job to the
+farm will work.
+
+
+\subsubsection{The Red Herring}
+
+% http://www.cs.utah.edu/dept/old/texinfo/as/gprof.html
+... might be interesting to use gprof which is more
+geared towards finding functions that spend all your execution time as opposed
+to callgrind which I believe counts CPU instructions.
+
+% http://paste.chippy.ch/woj.md
+% https://github.com/samtools/htslib/blob/develop/sam.c#L1031
+After re-compiling htslib and samtools with the -pg flag to enable such
+profiling and executing the same previous merge command on the modest test set,
+the output as parsed by gprof seems to indicate that the trouble lies with
+bam\_aux\_get in htslib, with almost 50\% of the execution time being spent in
+this particular function.
+
+\begin{minted}[mathescape,
+            %linenos,
+            numbersep=5pt,
+            %gobble=4,
+            frame=lines,
+            framesep=2mm]{c++}
+    uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
+    {
+        uint8_t *s;
+        int y = tag[0]<<8 | tag[1];
+        s = bam_get_aux(b);
+        while (s < b->data + b->l_data) {
+            int x = (int)s[0]<<8 | s[1];
+            s += 2;
+            if (x == y) return s;
+            s = skip_aux(s);
+        }
+        return 0;
+    }
+\end{minted}
+
+
+% http://samtools.github.io/hts-specs/SAMv1.pdf
+At a glance it seems that bam\_aux\_get receives a pointer to a BAM record and a
+“tag”, an array of two characters representing an optional field as defined in
+Section 1.5 of the SAM file spec.
+
+The function then appears to fetch all these auxiliary tags and iterates over
+each, comparing a transformation of that tag (x) to a pre-computed
+transformation on the input tag (y).
+
+% https://github.com/samtools/samtools/blob/2917ccdf34cd81b1327532b2db6e522fe871f054/bam_sort.c#L469
+% https://github.com/samtools/samtools/blob/2917ccdf34cd81b1327532b2db6e522fe871f054/bam_sort.c#L484
+% https://github.com/samtools/samtools/blob/2917ccdf34cd81b1327532b2db6e522fe871f054/bam_sort.c#L697
+This would of course be inherently slow for files with many such tags;
+especially given that the function is called twice for potentially each line in
+a BAM file.
+
+
+\subsubsection{The Plot Thickens}
+
+% https://github.com/samtools/samtools/blob/2917ccdf34cd81b1327532b2db6e522fe871f054/bam_sort.c#L207
+...as we increase the number of input files, the time taken to
+read them in becomes non-linearly slower. Currently my money is on the seemingly
+inefficient trans\_tbl\_init that appears to be called for each file, with the
+current table of all previous files as an input.
+
+
 \subsection{bcftools call}
+
+...Unfortunately during the initial testing run of this step with all the
+Goldilocks regions it was discovered that the output only included the standard
+header information and not a single line for the variants themselves.
+%\citep{biostar:bcftools} https://www.biostars.org/p/96425/
+
+...is because the piled up file was not generated with a corresponding reference
+DNA sequence and so the REF (reference) column is set to N (an ambiguity code
+which translates to ‘any base’).  bcftools call does have an -M flag to prevent
+ignoring rows where the REF base is N (apparently called a "masked reference")
+however this is currently causing a segmentation fault.  Having recompiled
+htslib, samtools and bcftools I am now able to run bcftools call on my local
+machine on some test data. I guess I’ll need to have someone recompile the
+source for me on the cluster I’m using....
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Current Status}
