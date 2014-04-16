@@ -265,6 +265,12 @@ Ignoring empty regions etc.
 
 ...regions extracted from IRODS
 
+
+\subsection{samtools index}
+%TODO Cite index
+...index extracted regions
+
+
 \subsection{samtools mpileup}
 %TODO Cite mpileup
 
@@ -443,6 +449,7 @@ Goldilocks regions it was discovered that the output only included the standard
 header information and not a single line for the variants themselves.
 %\citep{biostar:bcftools} https://www.biostars.org/p/96425/
 
+% http://samtools.github.io/bcftools/bcftools.html#call masked ref
 ...is because the piled up file was not generated with a corresponding reference
 DNA sequence and so the REF (reference) column is set to N (an ambiguity code
 which translates to ‘any base’).  bcftools call does have an -M flag to prevent

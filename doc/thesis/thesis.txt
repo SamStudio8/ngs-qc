@@ -269,13 +269,17 @@ Analysis Pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 9.2.2
 
 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
-samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
 9.2.3
 
-samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
 9.2.4
+
+samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+9.2.5
 
 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
@@ -1027,11 +1031,17 @@ Region Extraction
 
 ...regions extracted from IRODS
 
+9.2.2
+
+samtools index
+
+...index extracted regions
+
 26
 
 9.2 Analysis Pipeline
 
-9.2.2
+9.2.3
 
 samtools mpileup
 
@@ -1051,7 +1061,7 @@ bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o -e
 /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa >
 ~/goldilocks/all.withref.bcf’
 
-9.2.3
+9.2.4
 
 samtools merge
 
@@ -1130,7 +1140,7 @@ The Plot Thickens
 Currently my money is on the seemingly inefficient trans_tbl_init that appears to be called for each file, with
 the current table of all previous files as an input.
 
-9.2.4
+9.2.5
 
 bcftools call
 
