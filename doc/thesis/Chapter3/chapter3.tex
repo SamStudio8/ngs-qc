@@ -1,4 +1,4 @@
-\chapter{Implementation}
+\chapter{Frontier}
 \ifpdf
     \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
 \else
@@ -6,7 +6,6 @@
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
 
 %TODO Better description of Frontier
 This chapter introduces \textbf{Frontier}: the main programming effort for this
@@ -14,28 +13,55 @@ part of the project. Frontier is a Python package that serves as a data manager,
 providing both interfaces to read inputs into structures in memory and to
 retrieve them in formats acceptable to a machine learning framework.
 
+\section{Design}
 \subsection{Purpose}
-Frontier's original purpose was to supplement analysis with scikit-learn by
-acting as a wrapper to the framework, allowing the user to pass data to
-scikit-learn in an acceptable format whilst still interacting with the wrapper.
-Frontier also needed to handle the returned classification results, either by
-displaying them directly to users or otherwise logging any textual or graphical
-data as desired...
 
-\subsection{Design}
-Frontier followed an evolutionary design pattern...
+Frontier's purpose is to supplement analysis with \textbf{scikit-learn} by
+allowing a user to read in and parameterise data in a format that can then be
+used for analysis by the \textbf{scikit-learn} library.  Frontier was designed
+to simplify the process of setting up machine learning tasks and enable
+experiment repeatability by removing the need for users to spend time
+constructing classes and functions to parse their input data and to just get on
+with analysis using \textbf{scikit-learn}.
 
-\subsection{Concepts}
+Initially Frontier was to act as a wrapper around \textbf{scikit-learn},
+essentially removing the end user's interaction with the library and merely
+providing an interface for data to be passed in and some sort of classifier to
+be returned. However this quite clearly limited Frontier's audience by tying it
+to a particular framework and would quickly become unmanageable in the task of
+providing wrappers for all aspects of an external library.
 
-\subsubsection{Classes and Labels}
+Instead it was decided that Frontier would be used alongside a user's chosen
+machine learning framework, providing a useful API to parse and extract
+observations and variables from input data and arrange them in structures
+suitable for processing with \textbf{scikit-learn}.
 
-\subsubsection{API Access}
+If possible, Frontier could also handle any objects returned, displaying or
+logging any textual or graphical information pertaining to a returned
+classifier's accuracy to assist a user in the ongoing performance monitoring of
+changes to used data subsets or parameters.
 
-\subsubsection{Cross Validation}
+
+\subsection{Format}
+
+Frontier is designed as a Python package, allowing a user to import its
+functionality in to other programs. The result of this project's technical
+output could almost be considered as two seperate entities: Frontier itself, the
+package designed to ease user interaction with scikit-learn and \textit{Front},
+a Python script which implements Frontier's functionality in order to interact
+with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
+
+
+\subsection{Method}
+
+.. the result of abstracting code and tools created during the use of
+\textbf{scikit-learn} for analysis of the current \textbf{auto\_qc} system
+.. initially hardcoded to suit the specific needs of the project but followed
+an evolutionary design process...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
-...we investigate the following implementation stories:
+...we investigate the following implementation stories...:
 
 \begin{itemize}
     \item User input, readers, sanity checking
@@ -44,16 +70,6 @@ Frontier followed an evolutionary design pattern...
     \item Interaction with scikit-learn
 \end{itemize}
 
-\subsection{Format}
-Frontier is designed as a Python package, allowing a user to import its
-functionality in to other programs. The result of this project's technical
-output could almost be considered as two seperate programs: Frontier itself, the
-package designed to ease user interaction with scikit-learn and \textit{Front},
-a Python script which implements Frontier's functionality to interact with
-scikit-learn.
-
-It didn't make sense to remove a user's interaction with scikit-learn and thus
-instead of becoming a wrapper, Frontier evolved to supplement its use...
 
 \subsection{Input Handling}
 Frontier's modular nature allows users to write their own Python classes to read

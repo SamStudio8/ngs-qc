@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 16, 2014
+April 17, 2014
 
 Declaration
 
@@ -24,36 +24,19 @@ of any other assessed module, or submitted for any other degree or diploma.
 Sam Nicholls
 2014
 
-Abstract
-
-Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
-parallel DNA sequencing; allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[19]. However, these "next-generation" processes are
-complex and open to error[11], thus quality control is an essential step to assure confidence in any downstream
-analyses performed.
-During sample sequencing a large number of quality control metrics are generated to determine the quality
-of the reads from the sequencing hardware itself. At the Wellcome Trust Sanger Institute, the automated QC
-system currently relies on hard thresholds to make such quality control decisions with individual hard-coded
-values on particular metrics determining whether a lane has reached a level that requires a warning, or has
-exceeded the threshold and failed entirely. Whilst this does catch most of the very poor quality lanes, a large
-number of lanes are flagged for manual inspection at the warning level; a time consuming task which invites
-inefficiency and error.
-In practise most of these manual decisions are based on inspecting a range of diagnostic plots which suggests
-that a machine learning classifier could potentially be trained on the combinations of quality control statistics
-available to make these conclusions without the need for much human intervention.
-
 Contents
 Contents
+
+ii
+
 1
 
-iii
+1
 
 Introduction
 1.1
 
 1.2
-
-1
 
 Project Aims . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
@@ -184,7 +167,7 @@ Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Contents
 5
 
-Implementation
+Frontier
 5.1
 
 5.2
@@ -195,49 +178,46 @@ Implementation
 II
 7
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
 5.1.1
 
 Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
 
 5.1.2
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
 
 5.1.3
 
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
 
 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
 5.2.1
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
 
 5.2.2
 
-Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 5.2.3
 5.2.4
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
 5.2.5
 
-Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
-
-5.2.6
-
 Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
-5.2.7
+5.2.6
 
 Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 Results
+6.0.1
 
 Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 
@@ -268,8 +248,6 @@ Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 20
 
-6.0.1
-
 Identification of Qualitative Sample Properties
 
 7.1
@@ -290,43 +268,47 @@ Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 9.2
 
-Analysis Pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
-9.1.1
+9.3
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Analysis Pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 9.2.1
 
-Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
-9.2.2
+9.3.1
 
-samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
-9.2.3
+9.3.2
+
+samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+
+9.3.3
 
 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
-9.2.4
+9.3.4
 
 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
-9.2.5
+9.3.5
 
-bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 10 Current Status
 
-32
+33
 
 Appendix A Input Examples
 
-34
+35
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
-iv
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+iii
 
 Chapter 1
 
@@ -580,7 +562,7 @@ are provided by the Sanger Institute in a separate file hereafter referred to as
 (Decision) File.
 1 Named
 
-such as samtools stats was once known as bamcheck and the tool is written in R
+such as samtools stats now incorporates bamcheck and the tool is written in R
 
 9
 
@@ -751,64 +733,65 @@ metrics?
 
 Chapter 5
 
-Implementation
-5.1
-
-Introduction
-
+Frontier
 This chapter introduces Frontier: the main programming effort for this part of the project. Frontier is a Python
 package that serves as a data manager, providing both interfaces to read inputs into structures in memory and
 to retrieve them in formats acceptable to a machine learning framework.
 
+5.1
 5.1.1
 
+Design
 Purpose
 
-Frontier’s original purpose was to supplement analysis with scikit-learn by acting as a wrapper to the framework,
-allowing the user to pass data to scikit-learn in an acceptable format whilst still interacting with the wrapper.
-Frontier also needed to handle the returned classification results, either by displaying them directly to users or
-otherwise logging any textual or graphical data as desired...
-
-5.1.2
-
-Design
-
-Frontier followed an evolutionary design pattern...
+Frontier’s purpose is to supplement analysis with scikit-learn by allowing a user to read in and parameterise
+data in a format that can then be used for analysis by the scikit-learn library. Frontier was designed to simplify
+the process of setting up machine learning tasks and enable experiment repeatability by removing the need for
+users to spend time constructing classes and functions to parse their input data and to just get on with analysis
+using scikit-learn.
+Initially Frontier was to act as a wrapper around scikit-learn, essentially removing the end user’s interaction
+with the library and merely providing an interface for data to be passed in and some sort of classifier to be
+returned. However this quite clearly limited Frontier’s audience by tying it to a particular framework and
+would quickly become unmanageable in the task of providing wrappers for all aspects of an external library.
+Instead it was decided that Frontier would be used alongside a user’s chosen machine learning framework,
+providing a useful API to parse and extract observations and variables from input data and arrange them in
+structures suitable for processing with scikit-learn.
+If possible, Frontier could also handle any objects returned, displaying or logging any textual or graphical
+information pertaining to a returned classifier’s accuracy to assist a user in the ongoing performance monitoring
+of changes to used data subsets or parameters.
 
 15
 
 5.2 Implementation
 
+5.1.2
+
+Format
+
+Frontier is designed as a Python package, allowing a user to import its functionality in to other programs. The
+result of this project’s technical output could almost be considered as two seperate entities: Frontier itself,
+the package designed to ease user interaction with scikit-learn and Front, a Python script which implements
+Frontier’s functionality in order to interact with scikit-learn to conduct analysis on the auto_qc data.
+
 5.1.3
 
-Concepts
+Method
 
-Classes and Labels
-API Access
-Cross Validation
+.. the result of abstracting code and tools created during the use of scikit-learn for analysis of the current
+auto_qc system .. initially hardcoded to suit the specific needs of the project but followed an evolutionary
+design process...
 
 5.2
 
 Implementation
 
-...we investigate the following implementation stories:
+...we investigate the following implementation stories...:
 • User input, readers, sanity checking
 • Storage of read data in memory
 • Retrieval
 • Interaction with scikit-learn
 
 5.2.1
-
-Format
-
-Frontier is designed as a Python package, allowing a user to import its functionality in to other programs. The
-result of this project’s technical output could almost be considered as two seperate programs: Frontier itself,
-the package designed to ease user interaction with scikit-learn and Front, a Python script which implements
-Frontier’s functionality to interact with scikit-learn.
-It didn’t make sense to remove a user’s interaction with scikit-learn and thus instead of becoming a wrapper,
-Frontier evolved to supplement its use...
-
-5.2.2
 
 Input Handling
 
@@ -821,12 +804,13 @@ purpose tool, users now specify the classes and associated labels and encodings 
 Front are demonstrated in Listing 1)...
 ...if we were to add another class label, the definition would merely need to be included to the CLASSES
 (Listing 1) variable passed when the Statplexer is constructed. But use is therefore not merely limited to our
+problem but rather any machine learning problem where you’d like to simplify your interactions which a very
+large dataset.
 
 16
 
 5.2 Implementation
-problem but rather any machine learning problem where you’d like to simplify your interactions which a very
-large dataset.
+
 CLASSES = {
 "pass": {
 "class": ["pass"],
@@ -851,7 +835,7 @@ target readers, the known classes and call the Statplexer...
 ...Frontier also checks each parameter for variance, warning users when this requirement is violated... (a
 parameter with 0 variance is pretty useless...)
 
-5.2.3
+5.2.2
 
 Storage
 
@@ -863,6 +847,9 @@ each time data is requested... ...this seems a fair price to pay (although if de
 for having constant lookup speed for checking on dictionary membership and indexing by a user-friendly
 string...(for example a sample could be retrieved using its name rather than knowing where in the array it
 resides)...
+...perhaps in future data and targets can be stored in arrays with a dict to provide a mapping between a sample
+name and its location in the array... ...this allows for lookups to be completed in O(1) time whilst maintaining
+an array under the hood...
 1A
 
 somewhat contrived contraction of Statistics Multiplexer
@@ -870,11 +857,10 @@ somewhat contrived contraction of Statistics Multiplexer
 17
 
 5.2 Implementation
-...perhaps in future data and targets can be stored in arrays with a dict to provide a mapping between a sample
-name and its location in the array... ...this allows for lookups to be completed in O(1) time whilst maintaining
-an array under the hood...
+...also storage of classes (used for access to Frontier utils) ...utils to classify a label, encode a class, decode a
+class and count a class...
 
-5.2.4
+5.2.3
 
 Retrieval
 
@@ -892,7 +878,7 @@ given list
 get_data_by_target Return data for each observation that have been classified in one of the targets specified
 and additionally only return columns for the parameters in the given list
 
-5.2.5
+5.2.4
 
 Interaction with scikit-learn
 
@@ -904,15 +890,16 @@ smaller classes...
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
-5.2.6
+5.2.5
 
 Contributions to bamcheckr
 
+install.packages("devtools")
+library(devtools)
 18
 
 5.3 Testing
-install.packages("devtools")
-library(devtools)
+
 # Install directly from github repository
 install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 # Install from local directory
@@ -922,7 +909,7 @@ re-wrote in Python...
 ...R CMD BATCH issue
 ...Fixed a graph plotting failure. ...Writing additional routines...
 
-5.2.7
+5.2.6
 
 Parameter Selection
 
@@ -1057,7 +1044,19 @@ Implementation
 
 Goldilocks
 
-9.1.1
+9.2
+
+Implementation
+
+...we investigate the following implementation stories:
+• Input of data, vcftools query, input groups (ichip, gwas)
+• Loading files, loading variants from each file
+• Storage of read data in memory (and troubles thereof)...
+• Striding and window size and data structures thereof
+• Final output and selection, counters and buckets (avoid chr6)
+• Testing, generate output files, call functions akin to API
+
+9.2.1
 
 Introduction
 
@@ -1068,6 +1067,10 @@ candidate must not span chromosomes (the ends of chromosomes are not very good f
 easily yield a great improvement from processing chromosomes individually.
 The process is to extract the locations of all the variants across the genome from the SNP chip VCF files (these
 files list the alleles for each detected variant for each sample), load them in to some sort of structure, “stride”
+
+26
+
+9.2 Implementation
 over each chromosome (with some stride offset) and finally list the variants present between the stride start
 and stride start plus the desired length of the candidate. These are our regions.
 Due to the use of striding, one does not simply walk the chromosome. A quick and dirty solution would be to
@@ -1081,9 +1084,6 @@ if position in variant_position_list:
 This is of course rather dumb. Looking up a list has O(n) performance where n is the number of variants
 (and there are a lot of variants). Combining this with the sheer number of lookups performed, with the default
 parameters the list would be queried half a billion times for the first chromosome alone.
-26
-
-9.1 Goldilocks
 You could improve this somewhat by dividing the variant_position_list in to a list of variants for each chromosome,
 so at least n is smaller. It is pretty doubtful that this would make any useful impact given the number of lookups.
 I’m happy to say I bypassed this option but thought it would be fun to consider its performance.
@@ -1107,6 +1107,10 @@ chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
 chro[variant_loc] = 1
 for start in range(1, len(chromosome), STRIDE):
+
+27
+
+9.2 Implementation
 for position in range(start, start+LENGTH):
 if chro[position] == 1:
 # Do something...
@@ -1120,10 +1124,6 @@ improved considerably. What was going on? There must be more to looking at a giv
 chromosome array, but what?
 After a brief spell of playing with Python profilers and crashing my laptop by allocating considerably more
 memory than I had with numpy.zeroes, I read the manual (!) and discovered that numpy.zeroes returns an
-
-27
-
-9.2 Analysis Pipeline
 ndarray which uses “advanced indexing” even for single element access, effectively copying the element to a
 Python scalar for comparison.
 That’s a lot of memory action.
@@ -1146,30 +1146,29 @@ be analysed for candidate regions in less than twenty seconds (with the first fe
 the variant locations in the first place).
 Ignoring empty regions etc.
 
+28
+
+9.3 Analysis Pipeline
 Testing
 ...particularly difficult.
 
-9.2
+9.3
 
 Analysis Pipeline
 
-9.2.1
+9.3.1
 
 Region Extraction
 
 ...regions extracted from IRODS
 
-9.2.2
+9.3.2
 
 samtools index
 
 ...index extracted regions
 
-28
-
-9.2 Analysis Pipeline
-
-9.2.3
+9.3.3
 
 samtools mpileup
 
@@ -1189,17 +1188,28 @@ bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o -e
 /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa >
 ~/goldilocks/all.withref.bcf’
 
-9.2.4
+9.3.4
 
 samtools merge
 
+Usage
 ...undocumented feature to use a file of filenames...
+
+29
+
+9.3 Analysis Pipeline
+Memory Leak
 ...unfortunately the past few days have been swallowed by a memory leak that caused the merge job I submitted
 to be killed for excess memory consumption.
 ...100mb (default), 1G, 2G, 4G, 16G ...initial memory leak fixed by the author, several large variables not
 being freed from memory... ...following this, further samtools merge jobs were submitted only to also be
 repeatedly terminated by the LSF scheduler , this time for exceeding the maximum execution time limit for
 the queue.
+
+Memory Leak in Test Harnesses
+...getline ...regcomp
+
+Poor Time Performance
 ...submitting the same job to the "long" (48hr) and "basement" (essentially unlimited) queues, it is clear that
 the job is taking an extraordinary length of time to complete...
 ...during this time I took the opportunity to patch various memory leaks in the test harnesses of both merge
@@ -1210,9 +1220,6 @@ callgrind is a profiling tool that keeps track of a program’s call stack histo
 development environments such as QtCreator.
 Having constructed a modest test set of files to merge, I called samtools merge from the command line,
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
-29
-
-9.2 Analysis Pipeline
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
 library.
@@ -1221,6 +1228,10 @@ line called not during the process of deflating the input files (as I had expect
 compression of the output!
 
 Fig. 9.1 callgrind output following merge with default output compression
+
+30
+
+9.3 Analysis Pipeline
 
 Fig. 9.2 callgrind output following merge with uncompressed output
 Looking at a brief explanation of the deflate algorithm, it seems reasonable to conclude the computational
@@ -1243,9 +1254,6 @@ function.
 uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
-30
-
-9.2 Analysis Pipeline
 int y = tag[0]<<8 | tag[1];
 s = bam_get_aux(b);
 while (s < b->data + b->l_data) {
@@ -1257,6 +1265,10 @@ s = skip_aux(s);
 return 0;
 }
 At a glance it seems that bam_aux_get receives a pointer to a BAM record and a “tag”, an array of two
+
+31
+
+9.3 Analysis Pipeline
 characters representing an optional field as defined in Section 1.5 of the SAM file spec.
 The function then appears to fetch all these auxiliary tags and iterates over each, comparing a transformation
 of that tag (x) to a pre-computed transformation on the input tag (y).
@@ -1268,7 +1280,7 @@ The Plot Thickens
 Currently my money is on the seemingly inefficient trans_tbl_init that appears to be called for each file, with
 the current table of all previous files as an input.
 
-9.2.5
+9.3.5
 
 bcftools call
 
@@ -1281,13 +1293,13 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-31
+32
 
 Chapter 10
 
 Current Status
 
-32
+33
 
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
@@ -1387,7 +1399,7 @@ base calling for the Illumina Genome Analyzer
 using machine learning strategies,” Genome Biology,
 vol. 10, no. 8, p. R83, 2009.
 
-33
+34
 
 Appendix A
 
@@ -1511,7 +1523,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-34
+35
 
 A.1 BAMcheckR’d Example Output
 
@@ -1743,7 +1755,7 @@ FFQ
 0
 0
 
-35
+36
 
 1609
 
@@ -2085,7 +2097,7 @@ IS
 2
 0
 
-36
+37
 
 A.1 BAMcheckR’d Example Output
 
@@ -2364,7 +2376,7 @@ GCD
 0.101
 0.101
 
-37
+38
 
 A.2 auto_qc Decision Matrix
 
@@ -2499,7 +2511,7 @@ passed
 warning
 passed
 
-38
+39
 
 ...
 ...

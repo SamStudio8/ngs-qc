@@ -110,8 +110,20 @@ variants, or too few: a “Goldilocks genome”.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Implementation}
 \section{Goldilocks}
-\subsection{Introduction}
 
+\section{Implementation}
+...we investigate the following implementation stories:
+
+\begin{itemize}
+    \item Input of data, vcftools query, input groups (ichip, gwas)
+    \item Loading files, loading variants from each file
+    \item Storage of read data in memory (and troubles thereof)...
+    \item Striding and window size and data structures thereof
+    \item Final output and selection, counters and buckets (avoid chr6)
+    \item Testing, generate output files, call functions akin to API
+\end{itemize}
+
+\subsection{Introduction}
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is
 important to consider both time and memory as it is simple to deliver a poor
 performing solution.
@@ -303,8 +315,10 @@ those extracted Goldilocks regions.
 
 \subsection{samtools merge}
 
+\subsubsection{Usage}
 ...undocumented feature to use a file of filenames...
 
+\subsubsection{Memory Leak}
 ...unfortunately the past few days have been swallowed by a memory leak that
 caused the merge job I submitted to be killed for excess memory consumption.
 
@@ -315,6 +329,11 @@ freed from memory...
 also be repeatedly terminated by the LSF scheduler , this time for exceeding the
 maximum execution time limit for the queue.
 
+\subsubsection{Memory Leak in Test Harnesses}
+...getline
+...regcomp
+
+\subsubsection{Poor Time Performance}
 ...submitting the same job to the "long" (48hr) and "basement" (essentially
 unlimited) queues, it is clear that the job is taking an extraordinary length of
 time to complete...
