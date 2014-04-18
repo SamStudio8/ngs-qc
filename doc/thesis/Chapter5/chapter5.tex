@@ -108,8 +108,7 @@ variants, or too few: a “Goldilocks genome”.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Implementation}
-\section{Goldilocks}
+\chapter{Goldilocks}
 
 \section{Implementation}
 ...we investigate the following implementation stories:
@@ -123,7 +122,18 @@ variants, or too few: a “Goldilocks genome”.
     \item Testing, generate output files, call functions akin to API
 \end{itemize}
 
-\subsection{Introduction}
+\subsection{Loading File List}
+
+...
+
+
+\subsection{Loading Variants from Input Files}
+
+...
+
+
+\subsection{Storage}
+
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is
 important to consider both time and memory as it is simple to deliver a poor
 performing solution.
@@ -266,13 +276,45 @@ locations in the first place).
 Ignoring empty regions etc.
 
 
-\subsubsection{Testing}
+\subsection{Searching for Regions}
+
+..
+
+
+\subsection{Final Region Selection}
+
+..
+
+
+\subsection{Testing}
 ...particularly difficult.
+...required generation of input files that would contain known regions to test
+were found by the program...
+...needed to re-write large aspects of the scripts to allow unit-like testing to
+take place... ...wanted to avoid a monolithic test class...
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Analysis Pipeline}
+\chapter{Analysis Pipeline}
+%TODO Explain experiment (reintroduce GWAS and SNP)
 
+Following the extraction of the Goldilocks region for each of the samples... we
+need to begin putting together the pipeline that would process the work for the
+leave-one-out analysis...
+
+%TODO Flow chart!
+
+...involving generation of indexes for each sample
+...execute the pipeline and withold one of the Goldilocks samples...
+...using \textbf{samtools} to pileup the variants across all the samples
+(excluding one of course) and then performing variant calling...
+...must then compare the resulting VCF against the SNP VCF and calculate the
+concordance to discover whether leaving out that particular sample has caused a
+change in the accuracy of the variants called...
+
+
+\section{Implementation}
 \subsection{Region Extraction}
 
 ...regions extracted from IRODS
@@ -319,19 +361,86 @@ those extracted Goldilocks regions.
 ...undocumented feature to use a file of filenames...
 
 \subsubsection{Memory Leak}
-...unfortunately the past few days have been swallowed by a memory leak that
-caused the merge job I submitted to be killed for excess memory consumption.
 
-...100mb (default), 1G, 2G, 4G, 16G
+By default the LSF scheduler at the Sanger Institute will issue 100MB to any
+submitted job. Given both the number of input files and their total size it was
+anticipated that this merge job would require more memory. At the very least an
+estimated 35kB for a 64-bit pointer to each input file and approximately 150MB
+to house a 32kB buffer to read data from each file also. Yet executing the job
+with 500MB caused the LSF scheduler to forceably terminate the process for
+exceeding the maximum allocated memory limit.
+
+Assuming that the intermediate structures for storing and sorting the input data
+must have been greater than expected, the job's memory limit was generously
+increased with the syntax demonstrated by Listing~\ref{list:lsf-memory} only to
+meet the same fate, even when reserving 16GB of memory...
+
+This is an absurd amount of memory even considering the vast input...
+It appeared a memory leak had been discovered...
+that drastically increases in severity as more files are provided as input,
+
+%TODO Cite internal slides: Introduction to LSF at Sanger
+% Farm Users Intro: Informatics System Group
+\begin{listing}[H]
+    \caption[lsf-memory]{: Flags required to raise job memory allocation}
+    \label{list:lsf-memory}
+    \begin{minted}[%mathescape,
+                %linenos,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+        bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
+        #                 |                |        | Raise maximum job memory to 4000mb
+        #                 |                | Pre-reserve 4000mb for job before execution
+        #                 | Only run on a node with more than 4000mb memory
+    \end{minted}
+\end{listing}
+
 ...initial memory leak fixed by the author, several large variables not being
 freed from memory...
 ...following this, further \textbf{samtools merge} jobs were submitted only to
 also be repeatedly terminated by the LSF scheduler , this time for exceeding the
-maximum execution time limit for the queue.
+maximum execution time limit for the queue...
 
 \subsubsection{Memory Leak in Test Harnesses}
 ...getline
-...regcomp
+...regcomp...
+
+%TODO I
+...other memory leaks still remained in the tests and wanting to brush up on
+finding memory leaks with \textbf{valgrind}, I volunteered to locate and patch
+these...
+
+% https://github.com/samtools/samtools/pull/200
+% http://valgrind.org/docs/manual/cl-manual.html
+
+\begin{listing}[H]
+    \caption[valgrind-regex]{: Example of \textbf{valgrind} locating a memory
+        leak in one of the \textbf{samtools} test harnesses following the failure
+        to release memory allocated to a compiled regular expression}
+    \label{list:valgrind-regex}
+    \begin{minted}[mathescape,
+                %linenos,
+                gobble=8,
+                fontsize=\footnotesize,
+                frame=lines,
+                framesep=2mm]{bash}
+        ==30464== 416 bytes in 1 blocks are indirectly lost in loss record 85 of 103
+        ==30464==    at 0x4A082F7: realloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+        ==30464==    by 0x3FBCCCA725: duplicate_node (in /usr/lib64/libc-2.17.so)
+        ==30464==    by 0x3FBCCD3ADA: duplicate_node_closure (in /usr/lib64/libc-2.17.so)
+        ==30464==    by 0x3FBCCD415A: calc_eclosure_iter (in /usr/lib64/libc-2.17.so)
+        ==30464==    by 0x3FBCCD79F6: re_compile_internal (in /usr/lib64/libc-2.17.so)
+        ==30464==    at 0x4A08121: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+        ==30464==    by 0x3FBCCCCD88: create_cd_newstate (in /usr/lib64/libc-2.17.so)
+        ==30464==    by 0x3FBCCCD506: re_acquire_state_context.constprop.41 (in /usr/lib64/libc-2.17.so)
+        ==30464==    by 0x3FBCC2132E: build_trtable (in /usr/lib64/libc-2.17.so)
+        ==30464==    by 0x3FBCCD3792: re_search_internal (in /usr/lib64/libc-2.17.so)
+        ==30464==    by 0x3FBCCD8E94: regexec@@GLIBC_2.3.4 (in /usr/lib64/libc-2.17.so)
+        ==30464==    by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
+        ==30464==    by 0x402CC4: main (test_trans_tbl_init.c:348)
+    \end{minted}
+\end{listing}
 
 \subsubsection{Poor Time Performance}
 ...submitting the same job to the "long" (48hr) and "basement" (essentially
@@ -341,8 +450,6 @@ time to complete...
 ...during this time I took the opportunity to patch various memory leaks in the
 test harnesses of both merge and split...
 
-% https://github.com/samtools/samtools/pull/200
-% http://valgrind.org/docs/manual/cl-manual.html
 % http://kcachegrind.sourceforge.net/html/Home.html
 % http://www.zlib.net/
 valgrind, the tool I used to track down memory leaks in the test harnesses of

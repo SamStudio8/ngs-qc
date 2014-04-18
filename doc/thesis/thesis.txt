@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 17, 2014
+April 18, 2014
 
 Declaration
 
@@ -172,7 +172,6 @@ Frontier
 
 5.2
 
-5.3
 6
 
 II
@@ -208,13 +207,15 @@ Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 5.2.5
 
-Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
-5.2.6
-
-Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+5.3
 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+
+5.4
+
+Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 Results
 6.0.1
@@ -239,11 +240,6 @@ Materials and Methods
 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 7.1.1
 
-24
-
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
-8.1.1
-
 9
 
 20
@@ -256,59 +252,70 @@ Identification of Qualitative Sample Properties
 
 15
 
+24
+
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+8.1.1
+
 Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
-Implementation
+Goldilocks
 
 26
 
 9.1
 
-Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
-
-9.2
-
 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+9.1.1
 
-9.3
+Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
-Analysis Pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+9.1.2
 
-9.2.1
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+9.1.3
 
-9.3.1
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
-Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+9.1.4
 
-9.3.2
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
-samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+9.1.5
 
-9.3.3
+Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
-samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+9.1.6
 
-9.3.4
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
-samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+10 Analysis Pipeline
 
-9.3.5
+30
 
-bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
-10 Current Status
+iii
 
-33
-
-Appendix A Input Examples
+Contents
+10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+11 Current Status
 
 35
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
-iii
+Appendix A Input Examples
+
+37
+
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+
+iv
 
 Chapter 1
 
@@ -778,14 +785,13 @@ Frontier’s functionality in order to interact with scikit-learn to conduct ana
 Method
 
 .. the result of abstracting code and tools created during the use of scikit-learn for analysis of the current
-auto_qc system .. initially hardcoded to suit the specific needs of the project but followed an evolutionary
-design process...
+auto_qc system
 
 5.2
 
 Implementation
 
-...we investigate the following implementation stories...:
+...we investigate the following implementation stories:
 • User input, readers, sanity checking
 • Storage of read data in memory
 • Retrieval
@@ -797,8 +803,9 @@ Input Handling
 
 Frontier’s modular nature allows users to write their own Python classes to read data from any form of
 input. Two examples of which are the provided classes used to read from the "bamcheckr’d files" as seen
-in Appendix A.1... as well as the auto_qc output matrix briefly demonstrated in Appendix A.2...
-Initially designed specically for the given learning problem, with hard coded classes and encodings...
+in Appendix A.1 and the auto_qc output matrix briefly demonstrated in Appendix A.2.
+.. initially hardcoded to suit the specific needs of the project but followed an evolutionary design process...
+designed specically for the given learning problem, with hard coded classes and encodings...
 ...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more general
 purpose tool, users now specify the classes and associated labels and encodings (for example those used by
 Front are demonstrated in Listing 1)...
@@ -892,29 +899,14 @@ Confusion Matrices
 
 5.2.5
 
-Contributions to bamcheckr
-
-install.packages("devtools")
-library(devtools)
-18
-
-5.3 Testing
-
-# Install directly from github repository
-install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
-# Install from local directory
-install("/home/sam/Projects/seq_autoqc/bamcheckr")
-Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
-re-wrote in Python...
-...R CMD BATCH issue
-...Fixed a graph plotting failure. ...Writing additional routines...
-
-5.2.6
-
 Parameter Selection
 
 ...important to find the "best" parameters ...what is best? scikit-learn uses total gini information
 ...frontier uses two methods:
+
+18
+
+5.3 Testing
 • Backward elimination; pruning parameters with the lowest total gini
 • Call scikit-learn’s SelectKBest
 
@@ -925,6 +917,21 @@ version from master * needed use force np.float64 ...actually data was 0... gg :
 5.3
 
 Testing
+
+5.4
+
+Contributions to bamcheckr
+
+install.packages("devtools")
+library(devtools)
+# Install directly from github repository
+install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
+# Install from local directory
+install("/home/sam/Projects/seq_autoqc/bamcheckr")
+Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
+re-wrote in Python...
+...R CMD BATCH issue
+...Fixed a graph plotting failure. ...Writing additional routines...
 
 19
 
@@ -1039,12 +1046,8 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 
 Chapter 9
 
-Implementation
-9.1
-
 Goldilocks
-
-9.2
+9.1
 
 Implementation
 
@@ -1056,21 +1059,33 @@ Implementation
 • Final output and selection, counters and buckets (avoid chr6)
 • Testing, generate output files, call functions akin to API
 
-9.2.1
+9.1.1
 
-Introduction
+Loading File List
+
+...
+
+9.1.2
+
+Loading Variants from Input Files
+
+...
+
+9.1.3
+
+Storage
 
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
+
+26
+
+9.1 Implementation
 Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
 candidate must not span chromosomes (the ends of chromosomes are not very good for reads) then we can
 easily yield a great improvement from processing chromosomes individually.
 The process is to extract the locations of all the variants across the genome from the SNP chip VCF files (these
 files list the alleles for each detected variant for each sample), load them in to some sort of structure, “stride”
-
-26
-
-9.2 Implementation
 over each chromosome (with some stride offset) and finally list the variants present between the stride start
 and stride start plus the desired length of the candidate. These are our regions.
 Due to the use of striding, one does not simply walk the chromosome. A quick and dirty solution would be to
@@ -1103,14 +1118,13 @@ current chromosome and act as a variant “mask” – essentially an array wher
 current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
 for chromosome in autosomes:
+27
+
+9.1 Implementation
 chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
 chro[variant_loc] = 1
 for start in range(1, len(chromosome), STRIDE):
-
-27
-
-9.2 Implementation
 for position in range(start, start+LENGTH):
 if chro[position] == 1:
 # Do something...
@@ -1141,40 +1155,75 @@ chro[variant_loc] = 1
 for start in range(1, len(chromosome), STRIDE):
 num_variants = np.sum(chro[start:start+LENGTH])
 # Do something...
+
+28
+
+9.1 Implementation
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
 be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
 the variant locations in the first place).
 Ignoring empty regions etc.
 
-28
+9.1.4
 
-9.3 Analysis Pipeline
+Searching for Regions
+
+..
+
+9.1.5
+
+Final Region Selection
+
+..
+
+9.1.6
+
 Testing
-...particularly difficult.
 
-9.3
+...particularly difficult. ...required generation of input files that would contain known regions to test were
+found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
+place... ...wanted to avoid a monolithic test class...
+
+29
+
+Chapter 10
 
 Analysis Pipeline
+Following the extraction of the Goldilocks region for each of the samples... we need to begin putting together
+the pipeline that would process the work for the leave-one-out analysis...
+...involving generation of indexes for each sample ...execute the pipeline and withold one of the Goldilocks
+samples... ...using samtools to pileup the variants across all the samples (excluding one of course) and then
+performing variant calling... ...must then compare the resulting VCF against the SNP VCF and calculate the
+concordance to discover whether leaving out that particular sample has caused a change in the accuracy of the
+variants called...
 
-9.3.1
+10.1
+
+Implementation
+
+10.1.1
 
 Region Extraction
 
 ...regions extracted from IRODS
 
-9.3.2
+10.1.2
 
 samtools index
 
 ...index extracted regions
 
-9.3.3
+10.1.3
 
 samtools mpileup
 
 Following extraction of the Goldilocks region for each full-genome sample, the next stage is to use samtools
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
+
+30
+
+10.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
 thousands of input files, one for each of the extracted regions. This not only places considerable strain on
 the cluster’s file system but is incredibly inefficient given the overhead of file handling. As this pipeline will
@@ -1188,26 +1237,85 @@ bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o -e
 /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa >
 ~/goldilocks/all.withref.bcf’
 
-9.3.4
+10.1.4
 
 samtools merge
 
 Usage
 ...undocumented feature to use a file of filenames...
 
-29
-
-9.3 Analysis Pipeline
 Memory Leak
-...unfortunately the past few days have been swallowed by a memory leak that caused the merge job I submitted
-to be killed for excess memory consumption.
-...100mb (default), 1G, 2G, 4G, 16G ...initial memory leak fixed by the author, several large variables not
-being freed from memory... ...following this, further samtools merge jobs were submitted only to also be
-repeatedly terminated by the LSF scheduler , this time for exceeding the maximum execution time limit for
-the queue.
+By default the LSF scheduler at the Sanger Institute will issue 100MB to any submitted job. Given both the
+number of input files and their total size it was anticipated that this merge job would require more memory. At
+the very least an estimated 35kB for a 64-bit pointer to each input file and approximately 150MB to house a
+32kB buffer to read data from each file also. Yet executing the job with 500MB caused the LSF scheduler to
+forceably terminate the process for exceeding the maximum allocated memory limit.
+Assuming that the intermediate structures for storing and sorting the input data must have been greater than
+expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 2 only to
+meet the same fate, even when reserving 16GB of memory...
+This is an absurd amount of memory even considering the vast input... It appeared a memory leak had been
+discovered... that drastically increases in severity as more files are provided as input,
+bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
+#
+
+|
+
+|
+
+| Raise maximum job memory to 4000mb
+
+#
+
+|
+
+| Pre-reserve 4000mb for job before execution
+
+#
+
+| Only run on a node with more than 4000mb memory
+Listing 2 : Flags required to raise job memory allocation
+
+31
+
+10.1 Implementation
+...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
+this, further samtools merge jobs were submitted only to also be repeatedly terminated by the LSF scheduler
+, this time for exceeding the maximum execution time limit for the queue...
 
 Memory Leak in Test Harnesses
-...getline ...regcomp
+...getline ...regcomp...
+...other memory leaks still remained in the tests and wanting to brush up on finding memory leaks with
+valgrind, I volunteered to locate and patch these...
+==30464== 416 bytes in 1 blocks are indirectly lost in loss record 85 of 103
+==30464==
+at 0x4A082F7: realloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30464==
+by 0x3FBCCCA725: duplicate_node (in /usr/lib64/libc-2.17.so)
+==30464==
+by 0x3FBCCD3ADA: duplicate_node_closure (in /usr/lib64/libc-2.17.so)
+==30464==
+by 0x3FBCCD415A: calc_eclosure_iter (in /usr/lib64/libc-2.17.so)
+==30464==
+by 0x3FBCCD79F6: re_compile_internal (in /usr/lib64/libc-2.17.so)
+==30464==
+at 0x4A08121: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30464==
+by 0x3FBCCCCD88: create_cd_newstate (in /usr/lib64/libc-2.17.so)
+==30464==
+by 0x3FBCCCD506: re_acquire_state_context.constprop.41 (in /usr/lib64/libc-2.17.so)
+==30464==
+by 0x3FBCC2132E: build_trtable (in /usr/lib64/libc-2.17.so)
+==30464==
+by 0x3FBCCD3792: re_search_internal (in /usr/lib64/libc-2.17.so)
+==30464==
+by 0x3FBCCD8E94: regexec@@GLIBC_2.3.4 (in /usr/lib64/libc-2.17.so)
+==30464==
+by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
+==30464==
+by 0x402CC4: main (test_trans_tbl_init.c:348)
+
+Listing 3 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
+failure to release memory allocated to a compiled regular expression
 
 Poor Time Performance
 ...submitting the same job to the "long" (48hr) and "basement" (essentially unlimited) queues, it is clear that
@@ -1221,19 +1329,19 @@ development environments such as QtCreator.
 Having constructed a modest test set of files to merge, I called samtools merge from the command line,
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
+
+32
+
+10.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
 library.
 Further investigations using the QtCreator Analyze interface revealed that these calls all boiled down to one
 line called not during the process of deflating the input files (as I had expected) but actually during the
 compression of the output!
 
-Fig. 9.1 callgrind output following merge with default output compression
+Fig. 10.1 callgrind output following merge with default output compression
 
-30
-
-9.3 Analysis Pipeline
-
-Fig. 9.2 callgrind output following merge with uncompressed output
+Fig. 10.2 callgrind output following merge with uncompressed output
 Looking at a brief explanation of the deflate algorithm, it seems reasonable to conclude the computational
 cost is rather asymmetric between compressing and uncompressing - in that the effort is locating blocks to
 compress and in comparison uncompressing is a reversible function on the known blocks.
@@ -1255,6 +1363,9 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
+33
+
+10.1 Implementation
 s = bam_get_aux(b);
 while (s < b->data + b->l_data) {
 int x = (int)s[0]<<8 | s[1];
@@ -1265,10 +1376,6 @@ s = skip_aux(s);
 return 0;
 }
 At a glance it seems that bam_aux_get receives a pointer to a BAM record and a “tag”, an array of two
-
-31
-
-9.3 Analysis Pipeline
 characters representing an optional field as defined in Section 1.5 of the SAM file spec.
 The function then appears to fetch all these auxiliary tags and iterates over each, comparing a transformation
 of that tag (x) to a pre-computed transformation on the input tag (y).
@@ -1280,7 +1387,7 @@ The Plot Thickens
 Currently my money is on the seemingly inefficient trans_tbl_init that appears to be called for each file, with
 the current table of all previous files as an input.
 
-9.3.5
+10.1.5
 
 bcftools call
 
@@ -1293,13 +1400,13 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-32
+34
 
-Chapter 10
+Chapter 11
 
 Current Status
 
-33
+35
 
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
@@ -1399,7 +1506,7 @@ base calling for the Illumina Genome Analyzer
 using machine learning strategies,” Genome Biology,
 vol. 10, no. 8, p. R83, 2009.
 
-34
+36
 
 Appendix A
 
@@ -1523,7 +1630,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-35
+37
 
 A.1 BAMcheckR’d Example Output
 
@@ -1755,7 +1862,7 @@ FFQ
 0
 0
 
-36
+38
 
 1609
 
@@ -2097,7 +2204,7 @@ IS
 2
 0
 
-37
+39
 
 A.1 BAMcheckR’d Example Output
 
@@ -2376,7 +2483,7 @@ GCD
 0.101
 0.101
 
-38
+40
 
 A.2 auto_qc Decision Matrix
 
@@ -2511,7 +2618,7 @@ passed
 warning
 passed
 
-39
+41
 
 ...
 ...

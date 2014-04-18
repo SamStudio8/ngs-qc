@@ -47,7 +47,7 @@ changes to used data subsets or parameters.
 Frontier is designed as a Python package, allowing a user to import its
 functionality in to other programs. The result of this project's technical
 output could almost be considered as two seperate entities: Frontier itself, the
-package designed to ease user interaction with scikit-learn and \textit{Front},
+package designed to ease user interaction with scikit-learn and \textbf{Front},
 a Python script which implements Frontier's functionality in order to interact
 with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
 
@@ -56,12 +56,10 @@ with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
 
 .. the result of abstracting code and tools created during the use of
 \textbf{scikit-learn} for analysis of the current \textbf{auto\_qc} system
-.. initially hardcoded to suit the specific needs of the project but followed
-an evolutionary design process...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
-...we investigate the following implementation stories...:
+...we investigate the following implementation stories:
 
 \begin{itemize}
     \item User input, readers, sanity checking
@@ -72,12 +70,16 @@ an evolutionary design process...
 
 
 \subsection{Input Handling}
+
 Frontier's modular nature allows users to write their own Python classes to read
 data from any form of input. Two examples of which are the provided classes used
-to read from the "bamcheckr'd files" as seen in Appendix~\ref{app:bamcheckr}...
-as well as the auto\_qc output matrix briefly demonstrated in Appendix~\ref{app:aqc_matrix}...
+to read from the "bamcheckr'd files" as seen in Appendix~\ref{app:bamcheckr} and
+the auto\_qc output matrix briefly demonstrated in Appendix~\ref{app:aqc_matrix}.
 
-Initially designed specically for the given learning problem, with hard coded
+.. initially hardcoded to suit the specific needs of the project but followed
+an evolutionary design process...
+
+designed specically for the given learning problem, with hard coded
 classes and encodings...
 
 ...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
@@ -197,7 +199,27 @@ library, in our case; scikit-learn
 \subsubsection{Confusion Matrices}
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
-\subsection{Contributions to bamcheckr}
+\subsection{Parameter Selection}
+...important to find the "best" parameters
+...what is best? scikit-learn uses total gini information
+
+...frontier uses two methods:
+\begin{itemize}
+    \item Backward elimination; pruning parameters with the lowest total gini
+    \item Call scikit-learn's SelectKBest
+\end{itemize}
+
+
+* incorrect degrees of freedom
+* warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
+* Replaced univariate\_selection with version from master
+* needed use force np.float64
+...actually data was 0... gg :(
+
+\section{Testing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Contributions to bamcheckr}
 \begin{minted}[mathescape,
                %linenos,
                numbersep=5pt,
@@ -224,23 +246,6 @@ re-wrote in Python...
 ...Fixed a graph plotting failure.
 ...Writing additional routines...
 
-\subsection{Parameter Selection}
-...important to find the "best" parameters
-...what is best? scikit-learn uses total gini information
-
-...frontier uses two methods:
-\begin{itemize}
-    \item Backward elimination; pruning parameters with the lowest total gini
-    \item Call scikit-learn's SelectKBest
-\end{itemize}
-
-
-* incorrect degrees of freedom
-* warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
-* Replaced univariate\_selection with version from master
-* needed use force np.float64
-...actually data was 0... gg :(
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Testing}
 
