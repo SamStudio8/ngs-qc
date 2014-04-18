@@ -57,6 +57,34 @@ with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
 .. the result of abstracting code and tools created during the use of
 \textbf{scikit-learn} for analysis of the current \textbf{auto\_qc} system
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Concepts}
+
+...introduce some terminology and ideas that will assist understanding of the
+following implemenetation section...
+
+\subsection{Observations and Parameters}
+
+...designed to work in a machine learning environment...
+...\textit{observation} refers to an identifiable "thing" from which we will
+attempt to learn... in the context of this project, a lanelet
+...\textit{parameter} or \textit{regressor} will typically be used
+interchangeably to refer to attributes of an observation which will be analysed
+for potential relationships to the observation target
+...it is expected that each observation will have the same parameters available
+
+
+\subsection{Data and Targets}
+
+...\textit{data} will be used somewhat generically to refer to a matrix in which
+observations act as rows and their parameters act as columns...
+...An observation's \textit{target} is the known classification of that
+observation, depending on the context of the learning problem these may be
+discovered manually (for example if trying to count leaves from images, one may
+have to manually count the leaves in an image) or the output of another system
+may be used; in this case the target's are from auto\_qc...
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
 ...we investigate the following implementation stories:
@@ -133,26 +161,72 @@ requirement is violated... (a parameter with 0 variance is pretty useless...)
 
 \subsection{Storage}
 
-Frontier provides a class called the \textbf{Statplexer}\footnote{A somewhat
-contrived contraction of Statistics Multiplexer} which houses all read in data.
-...whilst the stored data and targets can be manipulated directly (and indeed
-they are for testing purposes) it is unrecommended and controlled access can be
-gained via Frontier's API...
+% TODO Cite tests?
+Frontier specifies a class called the \textbf{Statplexer}\footnote{A somewhat
+contrived contraction of 'Statistics Multiplexer'} which provides users with a
+single point of access to all read in data. The reader interfaces described in
+the previous chapter implement their own loading functions which populate the
+\textbf{\_data} and \textbf{\_targets} class members of the \textbf{Statplexer}
+object.
 
-...data and targets stored in python dictionaries, offering constant lookup
-access...
-...must however be sorted each time data is requested...
-...this seems a fair price to pay (although if desired we could use a
-collection) for having constant lookup speed for checking on dictionary
-membership and indexing by a user-friendly string...(for example a sample could
-be retrieved using its name rather than knowing where in the array it
-resides)...
+Although these attributes can be manipulated directly (and indeed they are for
+testing purposes) the leading underscore follows a popular convention defined in
+Python's style guideline, PEP8\citep{pep8}, where class members with such
+leading underscores should be treated as non-public. Python doesn't have private
+variables such as those that may be found in other languages like Java, indeed
+the Python style guide points out that "no attribute is really private in
+Python"\citep{pep8}. In an interesting StackOverflow answer on the subject, a
+user describes that this is "cultural"\citep{so:pythonprivate} and that Python
+programmers are trusted not "mess around with those private members".
 
-%TODO Rambling
-...perhaps in future data and targets can be stored in arrays with a dict to
-provide a mapping between a sample name and its location in the array...
-...this allows for lookups to be completed in O(1) time whilst maintaining an
-array under the hood...
+Frontier provides functions to allow controlled access to get and set data
+stored in these psuedo-private \textbf{\_data} and \textbf{\_targets} members.
+
+%TODO Find better citation (Python book)
+...\textbf{\_data} and \textbf{\_targets} are Python dictionaries, a structure
+in which hashed keys are mapped to an arbitrary value or object. Python
+dictionaries offer $O$(1) (constant) lookup\citep{py:timecomplexity} access
+...more importantly querying the structure for whether it contains a particular
+key can also be performed in constant $O$(1) as opposed to searching a list for
+membership...
+
+...when input data is parsed, the relevant reader class is expected to locate an
+appropriate id for an observation, in our case, a sample's label...
+...this id is used as a key for both the \textbf{\_data} and \textbf{\_targets}
+dictionaries, which map this id to some structure containing that observation's
+parameter values and classification respectively...
+
+...why not a list?
+...numpy lists also require the length to be known when they are created which
+would not be possible without reading through all the input files first,
+somewhat of a waste of time...
+
+...primarily because the number of inputs is unknown, a list structure is
+represented as a contiguous array in memory, causing very expensive copying
+operations when the list needs to be resized...
+
+...could we not load data in to a list at the end of input file reading?
+...the load\_data function allows data to be loaded in to the
+\textbf{Statplexer} at any time, thus requiring use of the expensive memory
+copying operations when the list once again needs to be resized...
+
+
+...an issue with use of a dictionary however is by default they are unsorted,
+not only this but the order in which the keys are iterated over will be
+undefined...
+...currently this causes the list of keys to require sorting each time a user
+queries the Statplexer API for data... as obviously the parameters and targets
+must map one-to-one in a predictable and repeatable manner.
+%TODO Figure to show mapping between container elements
+
+...through testing of the 13,455 observations it would seem that this sorting
+operation is inexpensive... and indeed seems a fair price to pay for having
+constant lookup speed on membership as well as being able to access an object by
+its id rather than knowing where it is in a list...
+
+...although the latter point is somewhat easily fixed for an array
+implementation by using a dictionary to provide a mapping between a sample name
+and where it is stored in an array...
 
 ...also storage of classes (used for access to Frontier utils)
 ...utils to classify a label, encode a class, decode a class and count a

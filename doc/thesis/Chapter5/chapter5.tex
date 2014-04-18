@@ -322,6 +322,7 @@ change in the accuracy of the variants called...
 
 \subsection{samtools index}
 %TODO Cite index
+
 ...index extracted regions
 
 
@@ -565,15 +566,15 @@ a BAM file.
 ...as we increase the number of input files, the time taken to
 read them in becomes non-linearly slower. Currently my money is on the seemingly
 inefficient trans\_tbl\_init that appears to be called for each file, with the
-current table of all previous files as an input.
+current table of all previous files as an input...
 
 
 \subsection{bcftools call}
 
+%\citep{biostar:bcftools} https://www.biostars.org/p/96425/
 ...Unfortunately during the initial testing run of this step with all the
 Goldilocks regions it was discovered that the output only included the standard
 header information and not a single line for the variants themselves.
-%\citep{biostar:bcftools} https://www.biostars.org/p/96425/
 
 % http://samtools.github.io/bcftools/bcftools.html#call masked ref
 ...is because the piled up file was not generated with a corresponding reference
