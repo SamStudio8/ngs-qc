@@ -344,3 +344,36 @@ would be useful to investigate the nature of these possible correlations, given
 a lane that has failed across all lanelets: do those lanelets actually express
 similar quality metrics?
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Recovering Ratios}
+
+...
+"missing variables"
+...
+
+\begin{minted}[mathescape,
+               %linenos,
+               numbersep=5pt,
+               gobble=4,
+               frame=lines,
+               framesep=2mm]{r}
+    install.packages("devtools")
+    library(devtools)
+
+    # Install directly from github repository
+    install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
+
+    # Install from local directory
+    install("/home/sam/Projects/seq_autoqc/bamcheckr")
+
+\end{minted}
+Takes 5.5s on average, 16.1s with ratio due to inefficient implementation
+for overlapping\_base\_duplicate\_percentage
+re-wrote in Python...
+
+
+...R CMD BATCH issue
+
+...Fixed a graph plotting failure.
+...Writing additional routines...
+

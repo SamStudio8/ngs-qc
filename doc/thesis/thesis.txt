@@ -165,6 +165,7 @@ Pre-Implementation
 Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 Contents
+4.2
 5
 
 Frontier
@@ -174,71 +175,70 @@ Frontier
 
 5.3
 
+5.4
 6
 
 II
 7
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
 5.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
 
 5.1.2
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 5.1.3
 
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 5.2.1
 
-Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 5.2.2
 
-Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
 5.2.3
+
+Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
 5.2.4
 
-Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
-Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 5.3.1
 
-Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 5.3.2
 
-Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 5.3.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
 5.3.4
 
-Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 5.3.5
 
-Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 5.3.6
 
-Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
-
-5.4
+Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
-
-5.5
-
-Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 Results
 6.0.1
@@ -273,7 +273,7 @@ Identification of Qualitative Sample Properties
 
 8
 
-15
+16
 
 28
 
@@ -726,7 +726,7 @@ represent a failure, yellow for a warning and grey for a pass.
 In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
 13
 
-4.1 Classification Correlation
+4.2 Recovering Ratios
 a lane as well as each lane in a sequencing run. To examine this further, an R script utilising ggplot2 was
 authored to visually inspect whether correlation existed and if so to what degree that data is affected.
 Figure 4.1 displays a plot of auto_qc classification for each lanelet in a lane. The plot itself is a dense heatmap
@@ -758,7 +758,28 @@ with a direct conclusion. Given more time it would be useful to investigate the 
 correlations, given a lane that has failed across all lanelets: do those lanelets actually express similar quality
 metrics?
 
+4.2
+
+Recovering Ratios
+
+... "missing variables" ...
+
+install.packages("devtools")
+library(devtools)
+
 14
+
+4.2 Recovering Ratios
+# Install directly from github repository
+install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
+# Install from local directory
+install("/home/sam/Projects/seq_autoqc/bamcheckr")
+Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
+re-wrote in Python...
+...R CMD BATCH issue
+...Fixed a graph plotting failure. ...Writing additional routines...
+
+15
 
 Chapter 5
 
@@ -789,7 +810,7 @@ If possible, Frontier could also handle any objects returned, displaying or logg
 information pertaining to a returned classifier’s accuracy to assist a user in the ongoing performance monitoring
 of changes to used data subsets or parameters.
 
-15
+16
 
 5.2 Concepts
 
@@ -836,7 +857,7 @@ have connotations with discrete data. Early versions of Frontier referred to par
 terminology from statistical modelling. This wording was dropped to remove any confusion between regression
 and classification machine learning problems.
 
-16
+17
 
 5.3 Implementation
 
@@ -882,7 +903,7 @@ This section investigates the implementation of Frontier’s major components:
 • Retrieval
 • Interaction with scikit-learn
 
-17
+18
 
 5.3 Implementation
 
@@ -929,7 +950,7 @@ Input Handling
 
 Frontier’s modular nature allows users to write their own Python classes to read data from any form of input
 file or stream. Two examples of which are the classes used to read from the "bamcheckr’d files" documented
-18
+19
 
 5.3 Implementation
 in Appendix A.1 and the auto_qc decisions matrix briefly demonstrated in Appendix A.2.
@@ -966,7 +987,7 @@ A relative or absolute path to a file from which to extract data or targets
 • CLASSES Dictionary
 A dictionary of user specified learning classes defined as described in Chapter 5.3.1
 • auto_close Boolean, Optional
-19
+20
 
 5.3 Implementation
 Whether or not to close the file handle immediately after executing process_file, this is True by default
@@ -1012,7 +1033,7 @@ those that may be found in other languages like Java, indeed the Python style gu
 a pointer to the address of the extracted data’s dictionary hashmap will be copied to memory inside a Frontier class
 somewhat contrived contraction of ’Statistics Multiplexer’
 
-20
+21
 
 5.3 Implementation
 is really private in Python"[23]. In an interesting StackOverflow answer on the subject, a user describes that
@@ -1053,9 +1074,9 @@ The Statplexer is designed to provide the user methods in which to extract desir
 parsing with an external framework or library, in our case; scikit-learn
 ...leverages numpy... ...some of the methods provided include:
 list_regressors Retrieve a list of all parameters
-21
+22
 
-5.3 Implementation
+5.4 Testing
 find_regressors Retrieve a list of parameters containing any of the input strings as a substring
 exclude_regressors Retrieve a list of parameters which do not contain any of the input strings as a substring,
 or if needed an exact match
@@ -1091,29 +1112,11 @@ Parameter Selection
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
 version from master * needed use force np.float64 ...actually data was 0... gg :(
 
-22
-
-5.4 Testing
-
 5.4
 
 Testing
 
-5.5
-
-Contributions to bamcheckr
-
-install.packages("devtools")
-library(devtools)
-# Install directly from github repository
-install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
-# Install from local directory
-install("/home/sam/Projects/seq_autoqc/bamcheckr")
-Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
-re-wrote in Python...
-...R CMD BATCH issue
-...Fixed a graph plotting failure. ...Writing additional routines...
-
+...
 23
 
 Chapter 6
