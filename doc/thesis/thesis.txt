@@ -350,8 +350,8 @@ iv
 Introduction
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
 parallel DNA sequencing, allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[21]. However, these "next-generation" processes are
-complex and open to error[12], thus quality control is an essential step to assure confidence in any downstream
+both time and cost required to perform genetic analysis[1]. However, these "next-generation" processes are
+complex and open to error[2], thus quality control is an essential step to assure confidence in any downstream
 analyses performed.
 
 1.1
@@ -367,9 +367,9 @@ The project consists of two sub-projects:
 Analysis of Current System
 
 With the support of the Wellcome Trust Sanger Institute in Cambridge, this project works with the Human
-Genetics Informatics team to investigate auto_qc[1], the institute’s current automated quality control tool.
+Genetics Informatics team to investigate auto_qc[3], the institute’s current automated quality control tool.
 During genetic sequencing a large number of metrics are generated to determine the quality of the data read
-from the sequencing hardware itself. As part of the institute’s vertebrate sequencing pipeline[5], auto_qc is
+from the sequencing hardware itself. As part of the institute’s vertebrate sequencing pipeline[4], auto_qc is
 responsible for applying quality control to samples within the pipeline by comparing a modest subset of these
 metrics to simple hard-coded thresholds; determining whether a particular sample has reached a level that
 requires a warning, or has exceeded the threshold and failed entirely. Whilst this catches most of the very
@@ -381,7 +381,7 @@ consuming task which invites both inefficiency and error.
 1.2 Project Method
 In practice most of these manual decisions are based on inspecting a range of diagnostic plots, which suggest
 that a machine learning classifier could potentially be trained on the combinations of quality control statistics
-available to make these conclusions without the need for much human intervention[14].
+available to make these conclusions without the need for much human intervention[5].
 The first part of the project aims to apply machine learning techniques to replicate the current auto_qc rule set
 by training a decision tree classifier on a large set of these quality metrics. The idea is to investigate whether
 these simple threshold based rules can be recovered from such data, or whether a new classifier would produce
@@ -483,9 +483,9 @@ task information stored in Redmine a task in itself. Attempts to extend the plat
 functionality have been fruitless.
 Out of frustration with thus and other alternatives – including TaskWarrior whose simple but effective
 command line interface was overshadowed by its occasional storage corruptions, I wrote my own open source
-web based task management application; Triage[4]. This will be useful in keeping track of current objectives
+web based task management application; Triage[6]. This will be useful in keeping track of current objectives
 and allow prioritisation in a quick and simple manner.
-The list used to organise my project is also publicly available[3] for transparent progress tracking by my
+The list used to organise my project is also publicly available[7] for transparent progress tracking by my
 supervisor and those interested at the Sanger Institute.
 
 1.2.3
@@ -544,7 +544,7 @@ samples are pipetted in to a flowcell such as the one in Figure 2.1 – a glass 
 thin tubules known as lanes. It is throughout these lanes that the chemical reactions involved in sequencing
 take place.
 
-Fig. 2.1 An Illumina HiSeq Flowcell[13]
+Fig. 2.1 An Illumina HiSeq Flowcell[8]
 Once inserted, samples are amplified in situ, in the flowcell itself. A process in which the genetic material
 of each sample is caused to multiply in magnitude to form a dense cluster of the sample around the original.
 Millions of clusters will be created throughout each lane of the flowcell.
@@ -579,7 +579,7 @@ metrics are available for each and every lanelet that forms part of either of th
 files.
 The files are created by samtools stats – part of a collection of widely used open-source utilities for post-processing
 and manipulation of large alignments such as those produced by next-generation sequencers that are released
-under the umbrella name of "SAMtools"[11] (Sequence Alignment and Map Tools). samtools stats collects
+under the umbrella name of "SAMtools"[9] (Sequence Alignment and Map Tools). samtools stats collects
 statistics from sequence data files and produces key-value summary numbers as well as more complex tab
 delimited dataframes tabulating several metrics over time.
 The output of samtools stats is then parsed by an in-house tool called bamcheckr1 which supplements
@@ -621,7 +621,7 @@ and third-party libraries have proven useful. Due to its concise and flexible na
 develop applications and its readability eases ongoing maintenance; useful given the short time-span allocated
 for this project and the possibility of others wishing to contribute to the project codebase after completion.
 Whilst the choice was made primarily on preference, this is not to say other options were not considered:
-a highly popular Java-based collection of data mining tools, WEKA[8] would certainly have provided a
+a highly popular Java-based collection of data mining tools, WEKA[10] would certainly have provided a
 framework for building decision tree classifiers but did not appear to offer any significant features that were
 unavailable elsewhere, whilst Java itself has the added constraint of requiring a virtual machine to be installed
 which could be undesirable from a performance or security standpoint when the application is deployed to
@@ -633,10 +633,10 @@ Given the quality data we’ll be using to train a machine learning classifier i
 mentioned R script, bamcheckr, it was worth briefly investigating the options available for R itself as the
 potential of integrating the learning and predicting functions right in to the same process that outputs the data
 seemed convenient.
-Whilst the tree[19] and rpart[22] packages are available for constructing decision trees in R (and actually
+Whilst the tree[11] and rpart[12] packages are available for constructing decision trees in R (and actually
 RWeka provides an R interface to WEKA) neither appeared to be as robust as other more well-known
-frameworks. Also putting it politely, the programming paradigm of R[18] is rather different to other languages
-and can significantly increase development time (and frustration[20]) if one is not well versed in the patterns
+frameworks. Also putting it politely, the programming paradigm of R[13] is rather different to other languages
+and can significantly increase development time (and frustration[14]) if one is not well versed in the patterns
 and grammar of the language and it seemed best to stick to one’s comfort zone given the brief timescale for
 the project.
 Had performance been a critical decision factor, lower level languages such as C, C++ or even Fortran could be
@@ -661,7 +661,7 @@ above and formed part of the development environment decisions. Whilst it is obv
 a framework which uses the same language as the project, it seemed counter-intuitive to select otherwise, for
 the establishing of additional arbitrary output and input steps to move data between the two environments
 could impede quick experiment repeatability and introduce error.
-...A mixed bag of machine learning frameworks exist in Python, two in particular scikit-learn[16] and Orange[6]
+...A mixed bag of machine learning frameworks exist in Python, two in particular scikit-learn[15] and Orange[16]
 were main contenders, partly on their recommendation from the project supervisor.
 ...scikit integrates the "big names" in Python: numpy, scipy and matplotlib ...put off from Orange due to
 difficulties in reading in data ...it did however later appear to ship with features that were not in scikit (pruning
@@ -672,7 +672,7 @@ outside Python and take at look at WEKA or Shark...
 
 Additional External Libraries
 
-numpy[15] and scipy[9]... Fast and reliable implementations of mathematical functions... ggplot2[24] for
+numpy[17] and scipy[18]... Fast and reliable implementations of mathematical functions... ggplot2[19] for
 beautiful graphing...
 
 3.2.4
@@ -685,9 +685,9 @@ of a test suite should be simple and easily repeatable. Results that pertain to 
 for future reference to monitor ongoing performance of the classifier.
 Such requirements could be fulfilled by a continuous integration platform – a server dedicated to the building
 and testing of the code contained in a centralised repository typically to which an entire team will have write
-access[7]. Whilst in this scenario there will be much less "risk" from integration issues due to the single person
-team size, the themes of automated building and self-testing code can be taken on board.
-Jenkins is a highly popular[2] example of such a platform with which I am familiar. Although an out-of-the-box
+access[20]. Whilst in this scenario there will be much less "risk" from integration issues due to the single
+person team size, the themes of automated building and self-testing code can be taken on board.
+Jenkins is a highly popular[21] example of such a platform with which I am familiar. Although an out-of-the-box
 Jenkins instance is suitable for variety of software engineering projects, it would be necessary to invest some
 time to install and tweak plugins to perform actions on test results (such as failing a build that causes accuracy
 to decrease). However, previous experience found that highly specific tasks will often require a plugin to be
@@ -1063,11 +1063,11 @@ This identifier is then used as a key in both the _data and _targets dictionarie
 another dictionary or an arbitrary class) that stores that observation’s parameters and its known target (encoded
 class label), respectively.
 Although these attributes can be manipulated directly (and indeed they are for testing purposes) the leading
-underscore follows a popular convention defined in Python’s style guideline, PEP8[23], where class members
+underscore follows a popular convention defined in Python’s style guideline, PEP8[22], where class members
 with leading underscores should be treated as non-public. Python doesn’t have private variables such as those
 that may be found in other languages like Java, indeed the Python style guide points out that "no attribute is
-really private in Python"[23]. In an interesting StackOverflow answer on the subject, a user describes that this
-is "cultural"[10] and that Python programmers are trusted not to circumvent convention and "mess around with
+really private in Python"[22]. In an interesting StackOverflow answer on the subject, a user describes that this
+is "cultural"[23] and that Python programmers are trusted not to circumvent convention and "mess around with
 those private members". Users are therefore expected to use the functionality Frontier provides for controlled
 getting and setting of data stored in these pseudo-private _data and _targets members.
 For example, load_data should be used exclusively when populating the two dictionaries and is automatically
@@ -1076,7 +1076,7 @@ called on construction of the Statplexer if the arguments are valid. load_data w
 non-zero whilst also warning users if new observations are overwriting old ones or if an observation does not
 appear to have a corresponding target.
 ...Python dictionaries offer (constant) lookup access and more importantly querying the structure for whether it
-contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[17]...
+contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[24]...
 ...The following section describes the retrieval of data and targets in the form of lists or numpy arrays... so
 why not just store read in data in one of these structures to begin with instead?
 2A
@@ -1086,35 +1086,34 @@ somewhat contrived contraction of ’Statistics Multiplexer’
 22
 
 5.3 Implementation
-This is primarily due to the underlying layout of a list structure, which must be represented in memory as
-a contiguous block. Great expense is therefore incurred if the list grows beyond its bounds and must be
-relocated to resize. Given the unknown nature of input data, the number of observations and their parameters
-are unknown before the input data is read and so memory cannot be reserved to prevent expensive resizing
-operations.
-It is arguable that despite this, the data could be unloaded from the _data and _targets dictionaries in to some
-form of array at the end of the call to load_data. However the Statplexer allows the loading of data at any
-time... ... if the list were to require resizing ... to check for membership in a very large data set (as looking up
-a dict is faster than a list)
-...an issue with use of a dictionary however is by default they are unsorted, not only this but the order in which
-the keys are iterated over will be undefined... ...currently this causes the list of keys to require sorting each
-time a user queries the Statplexer API for data... as obviously the parameters and targets must map one-to-one
-in a predictable and repeatable manner.
-...through testing of the 13,455 observations it would seem that this sorting operation is inexpensive... and
-indeed seems a fair price to pay for having constant lookup speed on membership as well as being able to
-access an object by its id rather than knowing where it is in a list...
+This is primarily due to the underlying layout of a list structure, which must be represented in memory as a
+contiguous block. Great expense is therefore incurred if the list grows beyond its bounds and must be relocated
+to resize. Given the nature of input data, the number of observations and their parameters are unknown before
+the input data is read and so memory cannot be reserved to prevent these operations.
+It is arguable that despite this, the data could be unloaded from the _data and _targets dictionaries in to
+some form of array at the end of the call to load_data. However the Statplexer allows loading of data at any
+time, which would not only risk increasingly expensive resizing operations as the list continues to expand but
+the sanity checking that takes place in load_data involves checking for membership of an ID in _data and
+_targets which is constant for a dictionary and O(n) for a list structure.
 ...although the latter point is somewhat easily fixed for an array implementation by using a dictionary to
 provide a mapping between a sample name and where it is stored in an array...
-...also storage of classes (used for access to Frontier utils)
+...an issue with use of a dictionary however is by default they are unsorted, not only this but the order in which
+the keys are iterated over will be undefined...
+...currently this causes the list of keys to require sorting each time a user queries the Statplexer API for data...
+as obviously the parameters and targets must map one-to-one in a predictable and repeatable manner.
+It should be noted that the Statplexer stores a copy of the user defined CLASSES dictionary, which is an
+argument to its construction, allowing the Statplexer to share this information with any readers or utility
+functions who require it.
 
 5.3.4
 
 Retrieval
 
-The Statplexer is designed to provide the user methods for which to extract desired data in a format suitable
-for parsing with an external framework or library, in our case; scikit-learn...
+The Statplexer is designed to provide functions to an end user for extraction of desired data in a format suitable
+for an external framework or library, in our case; scikit-learn...
 ...leverages numpy...
-...Frontier can be used to inspect the parameter set extracted from the observations... ...some of the methods
-provided include:
+...Frontier can be used to inspect the parameter set extracted from the observations... some of the methods
+provided for this purpose include:
 • list_parameters
 Return a sorted list of all parameters
 • find_parameters
@@ -1122,8 +1121,9 @@ Given a list of input strings, return a list of parameters which contain any of 
 • exclude_parameters
 Given a list of input strings, return a list of parameters which do not contain any of the input strings as
 a substring, or if needed an exact match
-...data is returned sorted by key, with parameters sorted alphanumerically... ...targets map 1:1 with the data
+...data is returned sorted by key, ...with parameters sorted alphanumerically... ...targets map 1:1 with the data
 array...
+
 23
 
 5.3 Implementation
@@ -1684,63 +1684,69 @@ Current Status
 
 42
 
-[12] M. Kircher, U. Stenzel and J. Kelso, “Improved
+[12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
+Recursive Partitioning, 2013, r package version
+4.1-3. [Online]. Available: http://CRAN.R-project.
+org/package=rpart
+[13] R Core Team, R: A Language and Environment for
+Statistical Computing, R Foundation for Statistical
+Computing, Vienna, Austria, 2013. [Online].
+Available: http://www.R-project.org/
+
+References
+
+[14] T. Smith. (2012–2013) aRrgh:
+a newcomer’s
+(angry) guide to R. [Online]. Available: http:
+//tim-smith.us/arrgh/
+
+[1] T. Strachan and A. Read, Human Molecular Genetics,
+4th ed. Garland Science, 2011, pp. 214–254.
+A concise introduction to the processes
+involved in massively parallel DNA
+sequencing.
+[2] M. Kircher, U. Stenzel and J. Kelso, “Improved
 base calling for the Illumina Genome Analyzer
 using machine learning strategies,” Genome Biology,
 vol. 10, no. 8, p. R83, 2009.
 Useful introduction to relevant Illumina
 hardware and the errors that can occur
 during sequencing.
-
-References
-
-[13] Maggie Bartlett. (2011) Illumina HiSeq Flow
+[3] auto_qc: Additional high-throughput sequencing
+autoQC steps [Github]. [Online]. Available:
+https://github.com/wtsi-hgi/seq_autoqc
+[4] vr-pipe: A generic pipeline system [Github]. [Online].
+Available: https://github.com/wtsi-hgi/vr-pipe/
+[5] M. Niemi, “Internal QC Summary Report,” 09 2012,
+unpublished.
+[6] Triage:
+A todo manager for the disaster
+that is your day [Github]. [Online]. Available:
+https://github.com/SamStudio8/triage
+[7] sam/Dissertation | Triage. [Online]. Available:
+https://triage.ironowl.io/sam/dissertation/
+[8] Maggie Bartlett. (2011) Illumina HiSeq Flow
 Cell. National Human Genome Research Institute.
 Image. [Online]. Available: http://www.genome.gov/
 dmd/img.cfm?node=Photos/Technology/Genome%
 20analysis%20technology&id=80102
-
-[1] auto_qc: Additional high-throughput sequencing
-autoQC steps [Github]. [Online]. Available:
-https://github.com/wtsi-hgi/seq_autoqc
-[2] Jenkins Usage Statistics. [Online]. Available:
-http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
-[3] sam/Dissertation | Triage. [Online]. Available:
-https://triage.ironowl.io/sam/dissertation/
-[4] Triage:
-A todo manager for the disaster
-that is your day [Github]. [Online]. Available:
-https://github.com/SamStudio8/triage
-[5] vr-pipe: A generic pipeline system [Github]. [Online].
-Available: https://github.com/wtsi-hgi/vr-pipe/
-ˇ Gorup, T. Hoˇcevar,
-[6] J. Demšar, T. Curk, A. Erjavec, Crt
-M. Milutinoviˇc, M. Možina, M. Polajnar, M. Toplak,
-A. Stariˇc, M. Štajdohar, L. Umek, L. Žagar, J. Žbontar,
-M. Žitnik, and B. Zupan, “Orange: Data Mining
-Toolbox in Python,” Journal of Machine Learning
-Research, vol. 14, pp. 2349–2353, 2013. [Online].
-Available: http://jmlr.org/papers/v14/demsar13a.html
-[7] M. Fowler, “Continuous Integration,” 2006.
-[Online]. Available: http://www.martinfowler.com/
-articles/continuousIntegration.html
-[8] M. Hall, E. Frank, G. Holmes, B. Pfahringer,
+[9] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
+N. Homer, G. Marth, G. Abecasis, R. Durbin, and
+G. Subgroup, “ The Sequence Alignment/Map format
+and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
+2009.
+[10] M. Hall, E. Frank, G. Holmes, B. Pfahringer,
 P. Reutemann, and I. H. Witten, “The WEKA
 Data Mining Software: An Update,” SIGKDD
 Explorations Newsletter, vol. 11, no. 1, pp.
 10–18, Nov. 2009. [Online]. Available:
 http:
 //doi.acm.org/10.1145/1656274.1656278
-[9] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
-source scientific tools for Python,” 2001–. [Online].
-Available: http://www.scipy.org/
+[11] B. Ripley, tree: Classification and regression trees,
+2014, r package version 1.0-35. [Online]. Available:
+http://CRAN.R-project.org/package=tree
 
-[14] M. Niemi, “Internal QC Summary Report,” 09 2012,
-unpublished.
-[15] T. E. Oliphant, “Python for Scientific Computing,”
-Computing in Science & Engineering, vol. 9, no. 3,
-pp. 10–20, 2007.
-[16] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
+[15] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
 R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
 D. Cournapeau, M. Brucher, M. Perrot, and
@@ -1749,29 +1755,36 @@ Python,” Journal of Machine Learning Research,
 vol. 12, pp. 2825–2830, 2011.
 A machine learning framework for
 Python.
-[17] Python Wiki. (2012) Time Complexity.
-[18] R Core Team, R: A Language and Environment for
-Statistical Computing, R Foundation for Statistical
-Computing, Vienna, Austria, 2013. [Online].
-Available: http://www.R-project.org/
-[19] B. Ripley, tree: Classification and regression trees,
-2014, r package version 1.0-35. [Online]. Available:
-http://CRAN.R-project.org/package=tree
-[20] T. Smith. (2012–2013) aRrgh:
-a newcomer’s
-(angry) guide to R. [Online]. Available: http:
-//tim-smith.us/arrgh/
-[21] T. Strachan and A. Read, Human Molecular Genetics,
-4th ed. Garland Science, 2011, pp. 214–254.
-A concise introduction to the processes
-involved in massively parallel DNA
-sequencing.
-
-[22] T. Therneau, B. Atkinson, and B. Ripley, rpart:
-Recursive Partitioning, 2013, r package version
-4.1-3. [Online]. Available: http://CRAN.R-project.
-org/package=rpart
-[10] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
+ˇ Gorup, T. Hoˇcevar,
+[16] J. Demšar, T. Curk, A. Erjavec, Crt
+M. Milutinoviˇc, M. Možina, M. Polajnar, M. Toplak,
+A. Stariˇc, M. Štajdohar, L. Umek, L. Žagar, J. Žbontar,
+M. Žitnik, and B. Zupan, “Orange: Data Mining
+Toolbox in Python,” Journal of Machine Learning
+Research, vol. 14, pp. 2349–2353, 2013. [Online].
+Available: http://jmlr.org/papers/v14/demsar13a.html
+[17] T. E. Oliphant, “Python for Scientific Computing,”
+Computing in Science & Engineering, vol. 9, no. 3,
+pp. 10–20, 2007.
+[18] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
+source scientific tools for Python,” 2001–. [Online].
+Available: http://www.scipy.org/
+[19] H. Wickham, ggplot2:
+elegant graphics for
+data analysis.
+Springer New York, 2009.
+[Online]. Available: http://had.co.nz/ggplot2/book
+978-0-387-98140-6.
+[20] M. Fowler, “Continuous Integration,” 2006.
+[Online]. Available: http://www.martinfowler.com/
+articles/continuousIntegration.html
+[21] Jenkins Usage Statistics. [Online]. Available:
+http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
+[22] W. B. Van Rossum, Guido and N. Coghlan,
+“PEP 8 – Style Guide for Python Code,” Python
+Enhancement Proposals, 2001. [Online]. Available:
+http://legacy.python.org/dev/peps/pep-0008/
+[23] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
 “Does
 python
 have
@@ -1780,22 +1793,10 @@ variables
 in
 classes?”
 [Online].
-Available: [23] W. B. Van Rossum, Guido and N. Coghlan,
-“PEP 8 – Style Guide for Python Code,” Python
+Available:
 http://stackoverflow.com/questions/1641219/
-Enhancement Proposals, 2001. [Online]. Available:
 does-python-have-private-variables-in-classes
-http://legacy.python.org/dev/peps/pep-0008/
-[11] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
-elegant graphics for
-N. Homer, G. Marth, G. Abecasis, R. Durbin, and [24] H. Wickham, ggplot2:
-data analysis.
-Springer New York, 2009.
-G. Subgroup, “ The Sequence Alignment/Map format
-[Online]. Available: http://had.co.nz/ggplot2/book
-and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
-978-0-387-98140-6.
-2009.
+[24] Python Wiki. (2012) Time Complexity.
 
 43
 
