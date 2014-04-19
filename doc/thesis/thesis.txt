@@ -175,7 +175,6 @@ Frontier
 
 5.3
 
-5.4
 6
 
 II
@@ -232,40 +231,47 @@ Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 5.3.5
 
-Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
 5.3.6
 
 Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+5.4
+
+Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+
+5.5
+
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
 Results
-6.0.1
 
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
 6.0.2
 
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
 Introduction and Motivation
 
-27
+29
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 Materials and Methods
 8.1
 
-26
+28
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 7.1.1
 
 9
 
-25
+27
+
+6.0.1
 
 Identification of Qualitative Sample Properties
 
@@ -275,67 +281,67 @@ Identification of Qualitative Sample Properties
 
 16
 
-29
+31
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 8.1.1
 
-Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 Goldilocks
 
-31
+33
 
 9.1
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 9.1.1
 
-Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 9.1.2
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 9.1.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 9.1.4
 
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 9.1.5
 
-Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
-
-9.1.6
-
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 iii
 
 Contents
+9.1.6
+
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+
 10 Analysis Pipeline
 
-35
+37
 
-10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
-10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
-10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
-10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
-10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
-10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 11 Current Status
-
-40
-
-Appendix A Input Examples
 
 42
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Appendix A Input Examples
+
+44
+
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
 
 iv
 
@@ -1007,11 +1013,11 @@ As shown in Listing 2, the initialisation of the AbstractReader allows four argu
 • filepath String
 A relative or absolute path to a file from which to extract data or targets
 • CLASSES Dictionary
-A dictionary of user specified learning classes defined as described in the previous chapter
+A dictionary of user specified class labels defined as described in the previous chapter
 • auto_close Boolean, Optional
 Whether or not to close the file handle immediately after executing process_file, this is True by default
 to prevent either memory leaking when users are reading in a large number of files and are perhaps
-unaware that they require closing or the throwing of IOError caused by having too many file handles
+unaware that they require closing or the throwing of an IOError caused by having too many file handles
 open at once
 • header Integer, Optional
 The number of lines to ignore before the reader should begin passing stripped lines to process_line,
@@ -1047,30 +1053,32 @@ used to automatically determine which readers to use without requiring the user 
 Storage
 
 Frontier specifies a class called the Statplexer2 which provides users with a single point of access to all read
-in data. The reader interfaces described in the previous chapter implement their own loading functions which
+in data. The reader interfaces described in the previous chapter implement their own loading functions to
 populate the _data and _targets class members of the Statplexer object.
+_data and _targets are Python dictionaries, a structure in which hashed keys are mapped to an arbitrary value
+or object. During the parsing of observation data with the relevant reader class, the reader is expected to locate
+an appropriate unique ID for each observation. In the case of processing of auto_qc data, this would be the
+lanelet’s barcode which is collected from the filename of that particular lanelet’s "bamcheckr’d" file.
+This identifier is then used as a key in both the _data and _targets dictionaries to map to a structure (typically
+another dictionary or an arbitrary class) that stores that observation’s parameters and its known target (encoded
+class label), respectively.
 Although these attributes can be manipulated directly (and indeed they are for testing purposes) the leading
 underscore follows a popular convention defined in Python’s style guideline, PEP8[23], where class members
-with such leading underscores should be treated as non-public. Python doesn’t have private variables such as
-those that may be found in other languages like Java, indeed the Python style guide points out that "no attribute
-is really private in Python"[23]. In an interesting StackOverflow answer on the subject, a user describes that
-this is "cultural"[10] and that Python programmers are trusted not "mess around with those private members".
-Frontier provides functions to allow controlled access to get and set data stored in these pseudo-private _data
-and _targets members.
-..._data and _targets are Python dictionaries, a structure in which hashed keys are mapped to an arbitrary
-value or object. Python dictionaries offer O(1) (constant) lookup[17] access ...more importantly querying
-the structure for whether it contains a particular key can also be performed in constant O(1) as opposed to
-searching a list for membership...
-...when input data is parsed, the relevant reader class is expected to locate an appropriate id for an observation,
-in our case, a sample’s label... ...this id is used as a key for both the _data and _targets dictionaries, which
-map this id to some structure containing that observation’s parameter values and classification respectively...
-...why not a list? ...numpy lists also require the length to be known when they are created which would not be
-possible without reading through all the input files first, somewhat of a waste of time...
-...primarily because the number of inputs is unknown, a list structure is represented as a contiguous array in
-memory, causing very expensive copying operations when the list needs to be resized...
-...could we not load data in to a list at the end of input file reading? ...the load_data function allows data to be
-loaded in to the Statplexer at any time, thus requiring use of the expensive memory copying operations when
-the list once again needs to be resized...
+with leading underscores should be treated as non-public. Python doesn’t have private variables such as those
+that may be found in other languages like Java, indeed the Python style guide points out that "no attribute is
+really private in Python"[23]. In an interesting StackOverflow answer on the subject, a user describes that this
+is "cultural"[10] and that Python programmers are trusted not to circumvent convention and "mess around with
+those private members". Users are therefore expected to use the functionality Frontier provides for controlled
+getting and setting of data stored in these pseudo-private _data and _targets members.
+For example, load_data should be used exclusively when populating the two dictionaries and is automatically
+called on construction of the Statplexer if the arguments are valid. load_data will automatically call other
+(pseudo-private) functions of the class including _test_variance which checks that parameter variances are
+non-zero whilst also warning users if new observations are overwriting old ones or if an observation does not
+appear to have a corresponding target.
+...Python dictionaries offer (constant) lookup access and more importantly querying the structure for whether it
+contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[17]...
+...The following section describes the retrieval of data and targets in the form of lists or numpy arrays... so
+why not just store read in data in one of these structures to begin with instead?
 2A
 
 somewhat contrived contraction of ’Statistics Multiplexer’
@@ -1078,6 +1086,15 @@ somewhat contrived contraction of ’Statistics Multiplexer’
 22
 
 5.3 Implementation
+This is primarily due to the underlying layout of a list structure, which must be represented in memory as
+a contiguous block. Great expense is therefore incurred if the list grows beyond its bounds and must be
+relocated to resize. Given the unknown nature of input data, the number of observations and their parameters
+are unknown before the input data is read and so memory cannot be reserved to prevent expensive resizing
+operations.
+It is arguable that despite this, the data could be unloaded from the _data and _targets dictionaries in to some
+form of array at the end of the call to load_data. However the Statplexer allows the loading of data at any
+time... ... if the list were to require resizing ... to check for membership in a very large data set (as looking up
+a dict is faster than a list)
 ...an issue with use of a dictionary however is by default they are unsorted, not only this but the order in which
 the keys are iterated over will be undefined... ...currently this causes the list of keys to require sorting each
 time a user queries the Statplexer API for data... as obviously the parameters and targets must map one-to-one
@@ -1093,19 +1110,28 @@ provide a mapping between a sample name and where it is stored in an array...
 
 Retrieval
 
-The Statplexer is designed to provide the user methods in which to extract desired data in a format suitable for
-parsing with an external framework or library, in our case; scikit-learn
-...leverages numpy... ...some of the methods provided include:
-list_regressors Retrieve a list of all parameters
-find_regressors Retrieve a list of parameters containing any of the input strings as a substring
-exclude_regressors Retrieve a list of parameters which do not contain any of the input strings as a substring,
-or if needed an exact match
+The Statplexer is designed to provide the user methods for which to extract desired data in a format suitable
+for parsing with an external framework or library, in our case; scikit-learn...
+...leverages numpy...
+...Frontier can be used to inspect the parameter set extracted from the observations... ...some of the methods
+provided include:
+• list_parameters
+Return a sorted list of all parameters
+• find_parameters
+Given a list of input strings, return a list of parameters which contain any of those strings as a substring
+• exclude_parameters
+Given a list of input strings, return a list of parameters which do not contain any of the input strings as
+a substring, or if needed an exact match
 ...data is returned sorted by key, with parameters sorted alphanumerically... ...targets map 1:1 with the data
 array...
-get_data_by_regressors Return data for each observation, but only return columns for the parameters in the
-given list
-get_data_by_target Return data for each observation that have been classified in one of the targets specified
-and additionally only return columns for the parameters in the given list
+23
+
+5.3 Implementation
+• get_data_by_parameters
+Return data for each observation, but only include columns for each parameter in the given list
+• get_data_by_target
+Return data for each observation that have been classified in one of the targets specified and additionally
+only return columns for the parameters in the given list
 
 5.3.5
 
@@ -1116,9 +1142,6 @@ Cross Validation
 smaller classes...
 ...K fold cross validation ...using stratified K fold cross validation...
 
-23
-
-5.4 Testing
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
@@ -1133,15 +1156,60 @@ Parameter Selection
 
 * incorrect degrees of freedom * warnings: /usr/lib64/python2.7/site-packages/sklearn/feature_selection/univariate_selection.py:2
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
-version from master * needed use force np.float64 ...actually data was 0... gg :(
+version from master * needed use force np.float64 * ...actually data was 0... gg
+
+24
+
+5.4 Usage Example
 
 5.4
+
+Usage Example
+
+from Frontier import frontier
+from Frontier.IO import DataReader, TargetReader
+data_dir = "/home/sam/Projects/owl_classifier/data/"
+target_path = "/home/sam/Projects/owl_classifier/targets.txt"
+CLASSES = {
+"hoot": {
+"names": ["owl", "owls"],
+"code": 1,
+},
+"unhoot": {
+"names": ["cat", "dog", "pancake"],
+"code": 0,
+},
+}
+statplexer = frontier.Statplexer(data_dir,
+target_path,
+CLASSES,
+DataReader,
+TargetReader)
+Listing 3 : Example usage of Frontier
+
+Constructing the Statplexer requires the following arguments:
+• data_dir String
+Root data directory under which all files will be parsed for observation data
+• target_path String
+Path to file to be parsed for observation targets
+• CLASSES Dictionary
+A dictionary of user specified class labels defined as described in Chapter 5.3.1
+• DataReader Module
+Module containing the class (of the same name) to be used to parse each file in the data_dir tree for
+observation data
+• TargetReader Module
+Module containing the class (of the same name) to be used to parse the target_path file for target data
+25
+
+5.5 Testing
+
+5.5
 
 Testing
 
 ...
 
-24
+26
 
 Chapter 6
 
@@ -1154,14 +1222,14 @@ Initial Trees
 
 Parameter Sets
 
-25
+27
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-26
+28
 
 Chapter 7
 
@@ -1194,7 +1262,7 @@ The basic idea is to answer the question of what constitutes “good” or “ba
 out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or cause the
 correspondence between the two sets to decrease? In which case, having identified such lanelets, can we look
 
-27
+29
 
 7.1 Introduction
 back to the quality parameters we’ve been analysing so far and find whether they have something in common
@@ -1207,7 +1275,7 @@ leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
 The candidate must not have too many variants, or too few: a “Goldilocks genome”.
 
-28
+30
 
 Chapter 8
 
@@ -1236,7 +1304,7 @@ vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # Complains about lack of tabix index but still makes the file...
 
-29
+31
 
 8.1 Input Data and Format
 # Index with tabix
@@ -1250,7 +1318,7 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # http://www.biostars.org/p/51076/
 # http://vcftools.sourceforge.net/htslib.html#query
 
-30
+32
 
 Chapter 9
 
@@ -1286,7 +1354,7 @@ Storage
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
 
-31
+33
 
 9.1 Implementation
 Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
@@ -1326,7 +1394,7 @@ current chromosome and act as a variant “mask” – essentially an array wher
 current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
 for chromosome in autosomes:
-32
+34
 
 9.1 Implementation
 chro = np.zeros(len(chromosome), np.int8)
@@ -1364,7 +1432,7 @@ for start in range(1, len(chromosome), STRIDE):
 num_variants = np.sum(chro[start:start+LENGTH])
 # Do something...
 
-33
+35
 
 9.1 Implementation
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
@@ -1392,7 +1460,7 @@ Testing
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
 
-34
+36
 
 Chapter 10
 
@@ -1429,7 +1497,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-35
+37
 
 10.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -1459,7 +1527,7 @@ the very least an estimated 35kB for a 64-bit pointer to each input file and app
 32kB buffer to read data from each file also. Yet executing the job with 500MB caused the LSF scheduler to
 forceably terminate the process for exceeding the maximum allocated memory limit.
 Assuming that the intermediate structures for storing and sorting the input data must have been greater than
-expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 3 only to
+expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 4 only to
 meet the same fate, even when reserving 16GB of memory...
 This is an absurd amount of memory even considering the vast input... It appeared a memory leak had been
 discovered... that drastically increases in severity as more files are provided as input,
@@ -1481,9 +1549,9 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 #
 
 | Only run on a node with more than 4000mb memory
-Listing 3 : Flags required to raise job memory allocation
+Listing 4 : Flags required to raise job memory allocation
 
-36
+38
 
 10.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -1522,7 +1590,7 @@ by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
 ==30464==
 by 0x402CC4: main (test_trans_tbl_init.c:348)
 
-Listing 4 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
+Listing 5 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
 failure to release memory allocated to a compiled regular expression
 
 Poor Time Performance
@@ -1538,7 +1606,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-37
+39
 
 10.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -1571,7 +1639,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-38
+40
 
 10.1 Implementation
 s = bam_get_aux(b);
@@ -1608,13 +1676,13 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-39
+41
 
 Chapter 11
 
 Current Status
 
-40
+42
 
 [12] M. Kircher, U. Stenzel and J. Kelso, “Improved
 base calling for the Illumina Genome Analyzer
@@ -1729,7 +1797,7 @@ and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
 978-0-387-98140-6.
 2009.
 
-41
+43
 
 Appendix A
 
@@ -1853,7 +1921,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-42
+44
 
 A.1 BAMcheckR’d Example Output
 
@@ -2085,7 +2153,7 @@ FFQ
 0
 0
 
-43
+45
 
 1609
 
@@ -2427,7 +2495,7 @@ IS
 2
 0
 
-44
+46
 
 A.1 BAMcheckR’d Example Output
 
@@ -2706,7 +2774,7 @@ GCD
 0.101
 0.101
 
-45
+47
 
 A.2 auto_qc Decision Matrix
 
@@ -2841,7 +2909,7 @@ passed
 warning
 passed
 
-46
+48
 
 ...
 ...

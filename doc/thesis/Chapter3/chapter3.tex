@@ -257,6 +257,7 @@ implementations for \textbf{process\_line} and \textbf{get\_data}. Failing to do
 so will cause Frontier to throw a \textbf{NotImplementedError} when attempting
 to use the class to read data.
 
+%TODO Better describe process line expectations (locate key, value)?
 \textbf{process\_line} defines the line handling operations that extract and store
 desired data found in a given line. This responsibility includes returning None
 for lines that contain comments and irrelevant data.
@@ -305,13 +306,13 @@ As shown in Listing~\ref{list:superreader}, the initialisation of the
         A relative or absolute path to a file from which to extract data or
         targets
     \item \textbf{CLASSES} \textit{Dictionary}\hfill\\
-        A dictionary of user specified learning classes defined as described in
+        A dictionary of user specified class labels defined as described in
         the previous chapter
     \item \textbf{auto\_close} \textit{Boolean, Optional}\hfill\\
         Whether or not to close the file handle immediately after executing
         \textbf{process\_file}, this is True by default to prevent either memory
         leaking when users are reading in a large number of files and are
-        perhaps unaware that they require closing or the throwing of IOError
+        perhaps unaware that they require closing or the throwing of an IOError
         caused by having too many file handles open at once
     \item \textbf{header} \textit{Integer, Optional}\hfill\\
         The number of lines to ignore before the reader should begin
@@ -360,51 +361,70 @@ without requiring the user to explicitly specify.
 Frontier specifies a class called the \textbf{Statplexer}\footnote{A somewhat
 contrived contraction of 'Statistics Multiplexer'} which provides users with a
 single point of access to all read in data. The reader interfaces described in
-the previous chapter implement their own loading functions which populate the
+the previous chapter implement their own loading functions to populate the
 \textbf{\_data} and \textbf{\_targets} class members of the \textbf{Statplexer}
 object.
 
+%TODO Find better citation (Python book)
+%TODO Introduce Python dictionaries in Concepts ?
+
+\textbf{\_data} and \textbf{\_targets} are Python dictionaries, a structure in
+which hashed keys are mapped to an arbitrary value or object. During the parsing
+of observation data with the relevant reader class, the reader is expected to
+locate an appropriate unique ID for each observation. In the case of processing
+of \textbf{auto\_qc} data, this would be the lanelet's barcode which is
+collected from the filename of that particular lanelet's "bamcheckr'd" file.
+
+This identifier is then used as a key in both the \textbf{\_data} and
+\textbf{\_targets} dictionaries to map to a structure (typically another
+dictionary or an arbitrary class) that stores that observation's parameters
+and its known target (encoded class label), respectively.
+
 Although these attributes can be manipulated directly (and indeed they are for
 testing purposes) the leading underscore follows a popular convention defined in
-Python's style guideline, PEP8\citep{pep8}, where class members with such
-leading underscores should be treated as non-public. Python doesn't have private
+Python's style guideline, PEP8\citep{pep8}, where class members with leading
+underscores should be treated as non-public. Python doesn't have private
 variables such as those that may be found in other languages like Java, indeed
 the Python style guide points out that "no attribute is really private in
 Python"\citep{pep8}. In an interesting StackOverflow answer on the subject, a
 user describes that this is "cultural"\citep{so:pythonprivate} and that Python
-programmers are trusted not "mess around with those private members".
+programmers are trusted not to circumvent convention and "mess around with those
+private members". Users are therefore expected to use the functionality
+Frontier provides for controlled getting and setting of data stored in these
+pseudo-private \textbf{\_data} and \textbf{\_targets} members.
 
-Frontier provides functions to allow controlled access to get and set data
-stored in these pseudo-private \textbf{\_data} and \textbf{\_targets} members.
+For example, \textbf{load\_data} should be used exclusively when populating
+the two dictionaries and is automatically called on construction of the
+\textbf{Statplexer} if the arguments are valid. \textbf{load\_data} will
+automatically call other (pseudo-private) functions of the class including
+\textbf{\_test\_variance} which checks that parameter variances are non-zero
+whilst also warning users if new observations are overwriting old ones or
+if an observation does not appear to have a corresponding target.
 
-%TODO Find better citation (Python book)
-...\textbf{\_data} and \textbf{\_targets} are Python dictionaries, a structure
-in which hashed keys are mapped to an arbitrary value or object. Python
-dictionaries offer $O$(1) (constant) lookup\citep{py:timecomplexity} access
-...more importantly querying the structure for whether it contains a particular
-key can also be performed in constant $O$(1) as opposed to searching a list for
-membership...
+...Python
+dictionaries offer (constant) lookup access and more importantly querying the
+structure for whether it contains a particular key can also be performed in
+constant $O$(1) as opposed to searching a list for
+membership\citep{py:timecomplexity}...
 
-...when input data is parsed, the relevant reader class is expected to locate an
-appropriate id for an observation, in our case, a sample's label...
-...this id is used as a key for both the \textbf{\_data} and \textbf{\_targets}
-dictionaries, which map this id to some structure containing that observation's
-parameter values and classification respectively...
+...The following section describes the retrieval of data and targets in the
+form of lists or \textbf{numpy} arrays... so why not just store read in data
+in one of these structures to begin with instead?
 
-...why not a list?
-...numpy lists also require the length to be known when they are created which
-would not be possible without reading through all the input files first,
-somewhat of a waste of time...
+This is primarily due to the underlying layout of a list structure, which must
+be represented in memory as a contiguous block. Great expense is therefore
+incurred if the list grows beyond its bounds and must be relocated to resize.
+Given the unknown nature of input data, the number of observations and their
+parameters are unknown before the input data is read and so memory cannot be
+reserved to prevent expensive resizing operations.
 
-...primarily because the number of inputs is unknown, a list structure is
-represented as a contiguous array in memory, causing very expensive copying
-operations when the list needs to be resized...
-
-...could we not load data in to a list at the end of input file reading?
-...the load\_data function allows data to be loaded in to the
-\textbf{Statplexer} at any time, thus requiring use of the expensive memory
-copying operations when the list once again needs to be resized...
-
+It is arguable that despite this, the data could be unloaded from the
+\textbf{\_data} and \textbf{\_targets} dictionaries in to some form of array at
+the end of the call to \textbf{load\_data}. However the \textbf{Statplexer}
+allows the loading of data at any time...
+... if the list were to require resizing
+... to check for membership in a very large data set (as looking up a dict is
+faster than a list)
 
 ...an issue with use of a dictionary however is by default they are unsorted,
 not only this but the order in which the keys are iterated over will be
@@ -427,32 +447,41 @@ and where it is stored in an array...
 
 
 \subsection{Retrieval}
-The Statplexer is designed to provide the user methods in which to extract
+
+The Statplexer is designed to provide the user methods for which to extract
 desired data in a format suitable for parsing with an external framework or
-library, in our case; scikit-learn
+library, in our case; scikit-learn...
 
 ...leverages \textbf{numpy}...
+
+...Frontier can be used to inspect the parameter set extracted from the
+observations...
 ...some of the methods provided include:
 
-\begin{description}
-    \item[list\_regressors] Retrieve a list of all parameters
-    \item[find\_regressors] Retrieve a list of parameters containing any of the
-        input strings as a substring
-    \item[exclude\_regressors] Retrieve a list of parameters which do not
+\begin{itemize}
+    \item \textbf{list\_parameters} \hfill\\
+        Return a sorted list of all parameters
+    \item \textbf{find\_parameters} \hfill\\
+        Given a list of input strings, return a list of parameters which contain
+        any of those strings as a substring
+    \item \textbf{exclude\_parameters} \hfill\\
+        Given a list of input strings, return a list of parameters which do not
         contain any of the input strings as a substring, or if needed an exact
         match
-\end{description}
+\end{itemize}
 
 ...data is returned sorted by key, with parameters sorted alphanumerically...
 ...targets map 1:1 with the data array...
 
-\begin{description}
-    \item[get\_data\_by\_regressors] Return data for each observation, but only
-        return columns for the parameters in the given list
-    \item[get\_data\_by\_target] Return data for each observation that have been
-        classified in one of the targets specified and additionally only
-        return columns for the parameters in the given list
-\end{description}
+\begin{itemize}
+    \item \textbf{get\_data\_by\_parameters} \hfill\\
+        Return data for each observation, but only include columns
+        for each parameter in the given list
+    \item \textbf{get\_data\_by\_target} \hfill\\
+        Return data for each observation that have been classified in one of the
+        targets specified and additionally only return columns for the
+        parameters in the given list
+\end{itemize}
 
 \subsection{Interaction with scikit-learn}
 \subsubsection{Cross Validation}
@@ -481,7 +510,64 @@ library, in our case; scikit-learn
 * warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
 * Replaced univariate\_selection with version from master
 * needed use force np.float64
-...actually data was 0... gg :(
+* ...actually data was 0... gg
+
+
+\section{Usage Example}
+
+\begin{listing}[H]
+    \caption[callstatplexer]{: Example usage of Frontier}
+    \label{list:callstatplexer}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{python}
+
+        from Frontier import frontier
+        from Frontier.IO import DataReader, TargetReader
+
+        data_dir = "/home/sam/Projects/owl_classifier/data/"
+        target_path = "/home/sam/Projects/owl_classifier/targets.txt"
+
+        CLASSES = {
+                "hoot": {
+                    "names": ["owl", "owls"],
+                    "code": 1,
+                },
+                "unhoot": {
+                    "names": ["cat", "dog", "pancake"],
+                    "code": 0,
+                },
+        }
+
+        statplexer = frontier.Statplexer(data_dir,
+                                         target_path,
+                                         CLASSES,
+                                         DataReader,
+                                         TargetReader)
+    \end{minted}
+\end{listing}
+
+Constructing the Statplexer requires the following arguments:
+
+\begin{itemize}
+    \item \textbf{data\_dir} \textit{String}\hfill\\
+        Root data directory under which all files will be parsed for observation data
+    \item \textbf{target\_path} \textit{String}\hfill\\
+        Path to file to be parsed for observation targets
+    \item \textbf{CLASSES} \textit{Dictionary}\hfill\\
+        A dictionary of user specified class labels defined as described in
+        Chapter~\ref{chap:classes}
+    \item \textbf{DataReader} \textit{Module}\hfill\\
+        Module containing the class (of the same name) to be used to parse each
+        file in the \textit{data\_dir} tree for observation data
+    \item \textbf{TargetReader} \textit{Module}\hfill\\
+        Module containing the class (of the same name) to be used to parse the
+        \textit{target\_path} file for target data
+\end{itemize}
+
 
 \section{Testing}
 
