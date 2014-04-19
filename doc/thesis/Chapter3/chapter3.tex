@@ -62,11 +62,6 @@ an evolutionary design process...
 designed specifically for the given learning problem, with hard coded
 classes and encodings...
 
-...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
-enable it to be used as a more general purpose tool, users now specify the
-classes and associated labels and encodings (for example those used by Front are
-demonstrated in Listing~\ref{fig:FrontierClasses})...
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concepts}
@@ -115,6 +110,7 @@ observation was labelled as a pass, fail or warn by the current system.
 
 
 \subsection{Class Labels and Codes}
+\label{chap:labelcode}
 
 An observation's target may also be known as its \textbf{label}. A labelled
 observation is said to be a member of that label's \textbf{class}. For example a
@@ -158,20 +154,20 @@ designed for training and testing data from \textbf{auto\_qc} and could only
 support encoding and decoding of the pass, fail and warn classes.
 
 However this implementation was clearly esoteric and held little to no further
-use outside the domain of the project's learning task. What were to happen if
-a class label was added or removed in future? Most likely many lines of code
-would need to be re-written to handle such cases; the package was inflexible.
+use outside the domain of the project's learning task. What would happen if a
+class label were to be added or removed in future? Most likely many lines of
+code would need to be re-written to handle such cases; the package was
+inflexible.
 
-...if we were to add another
-class label, the definition would merely need to be included to the CLASSES
-(Listing~\ref{fig:FrontierClasses}) variable passed when the Statplexer is
-constructed. But use is therefore not merely limited to our problem but rather
-any machine learning problem where you'd like to simplify your interactions
-which a very large dataset.
+To counter this, Frontier was refactored to remove hard coded label definitions
+enabling its use as a more general purpose tool where users can specify the
+domain's classes and their associated labels and encodings.
+Listing~\ref{list:FrontierClasses} shows the definitions used by Front to work
+with the \textbf{auto\_qc} data.
 
 \begin{listing}[H]
-    \caption[FrontierClasses]{Class definitions for auto\_qc as passed to Frontier}
-    \label{fig:FrontierClasses}
+    \caption[FrontierClasses]{: Class definitions for \textbf{auto\_qc} as passed to Frontier}
+    \label{list:FrontierClasses}
     \begin{minted}[mathescape,
                 %linenos,
                 numbersep=5pt,
@@ -180,17 +176,14 @@ which a very large dataset.
                 framesep=2mm]{python}
         CLASSES = {
                 "pass": {
-                    "class": ["pass"],
                     "names": ["pass", "passed"],
                     "code": 1,
                 },
                 "fail": {
-                    "class": ["fail"],
                     "names": ["fail", "failed"],
                     "code": -1,
                 },
                 "warn": {
-                    "class": ["warn"],
                     "names": ["warn", "warning"],
                     "code": 0,
                 },
@@ -198,9 +191,50 @@ which a very large dataset.
     \end{minted}
 \end{listing}
 
-...this allows Frontier to be compatible with almost any learning task, you
-merely specify the correct data and target readers, the known classes and call
-the \textbf{Statplexer}...
+As per Listing~\ref{list:FrontierClasses}, to define classes a user must provide
+a Python dict containing the following for each label:
+
+\begin{itemize}
+    \item \textbf{class} \textit{String}\hfill\\
+        The dictionary key is used as the canonical name of the class label
+    \item \textbf{names} \textit{[String]}\hfill\\
+        A list of labels that denote membership of this class
+    \item \textbf{code} \textit{Integer}\hfill\\
+        The encoded representation of this class (See Chapter~\ref{chap:labelcode})
+    \item \textbf{\_recode} \textit{Boolean, Private}\hfill\\
+        A flag to indicate whether an API action has changed the code of this
+        class, typically used when treating all members of one class as a member
+        of another -- A user should never set this manually
+    \item \textbf{\_count} \textit{Integer, Private}\hfill\\
+        The number of observations with this label, typically used when
+        calculating weightings based on the proportions of class sizes and
+        outputting logging information -- A user should not set this manually
+\end{itemize}
+
+This simple structure allows Frontier to be compatible with almost any
+classification learning task with minimum input from the end user. Additional
+utilities provided by the Frontier utils subpackage use this structure to
+automatically classify and encode labels without user intervention with the
+following functions:
+
+\begin{itemize}
+    \item \textbf{classify\_label} \hfill\\
+        Attempt to classify a label by comparing a given string to each set of
+        \textit{names}, locating an exact match will return the relevant
+        canonical class label
+    \item \textbf{encode\_class} \hfill\\
+        Given a canonical class label, return its \textit{code}
+    \item \textbf{decode\_class} \hfill\\
+        Given a \textit{code}, return the canonical class label unless
+        \textit{\_recode} is True
+    \item \textbf{count\_class} \hfill\\
+        Increment the \textit{\_count} for a particular class given its
+        canonical label
+\end{itemize}
+
+These functions are put to use throughout Frontier and are essential for reader
+classes (detailed in the next chapter) to parse, classify and then encode
+observation targets automatically from relevant files.
 
 
 \subsection{Input Handling}
@@ -272,7 +306,7 @@ As shown in Listing~\ref{list:superreader}, the initialisation of the
         targets
     \item \textbf{CLASSES} \textit{Dictionary}\hfill\\
         A dictionary of user specified learning classes defined as described in
-        Chapter~\ref{chap:classes}
+        the previous chapter
     \item \textbf{auto\_close} \textit{Boolean, Optional}\hfill\\
         Whether or not to close the file handle immediately after executing
         \textbf{process\_file}, this is True by default to prevent either memory
@@ -390,8 +424,6 @@ implementation by using a dictionary to provide a mapping between a sample name
 and where it is stored in an array...
 
 ...also storage of classes (used for access to Frontier utils)
-...utils to classify a label, encode a class, decode a class and count a
-class...
 
 
 \subsection{Retrieval}
