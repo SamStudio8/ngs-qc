@@ -414,49 +414,48 @@ in one of these structures to begin with instead?
 This is primarily due to the underlying layout of a list structure, which must
 be represented in memory as a contiguous block. Great expense is therefore
 incurred if the list grows beyond its bounds and must be relocated to resize.
-Given the unknown nature of input data, the number of observations and their
-parameters are unknown before the input data is read and so memory cannot be
-reserved to prevent expensive resizing operations.
+Given the nature of input data, the number of observations and their parameters
+are unknown before the input data is read and so memory cannot be reserved to
+prevent these operations.
 
 It is arguable that despite this, the data could be unloaded from the
 \textbf{\_data} and \textbf{\_targets} dictionaries in to some form of array at
 the end of the call to \textbf{load\_data}. However the \textbf{Statplexer}
-allows the loading of data at any time...
-... if the list were to require resizing
-... to check for membership in a very large data set (as looking up a dict is
-faster than a list)
-
-...an issue with use of a dictionary however is by default they are unsorted,
-not only this but the order in which the keys are iterated over will be
-undefined...
-...currently this causes the list of keys to require sorting each time a user
-queries the Statplexer API for data... as obviously the parameters and targets
-must map one-to-one in a predictable and repeatable manner.
-%TODO Figure to show mapping between container elements
-
-...through testing of the 13,455 observations it would seem that this sorting
-operation is inexpensive... and indeed seems a fair price to pay for having
-constant lookup speed on membership as well as being able to access an object by
-its id rather than knowing where it is in a list...
+allows loading of data at any time, which would not only risk increasingly
+expensive resizing operations as the list continues to expand but the sanity
+checking that takes place in \textbf{load\_data} involves checking for
+membership of an ID in \textbf{\_data} and \textbf{\_targets} which is constant
+for a dictionary and $O$(n) for a list structure.
 
 ...although the latter point is somewhat easily fixed for an array
 implementation by using a dictionary to provide a mapping between a sample name
 and where it is stored in an array...
 
-...also storage of classes (used for access to Frontier utils)
+...an issue with use of a dictionary however is by default they are unsorted,
+not only this but the order in which the keys are iterated over will be
+undefined...
+
+...currently this causes the list of keys to require sorting each time a user
+queries the Statplexer API for data... as obviously the parameters and targets
+must map one-to-one in a predictable and repeatable manner.
+%TODO Figure to show mapping between container elements
+
+It should be noted that the \textbf{Statplexer} stores a copy of the
+user defined CLASSES dictionary, which is an argument to its construction,
+allowing the \textbf{Statplexer} to share this information with any readers or
+utility functions who require it.
 
 
 \subsection{Retrieval}
 
-The Statplexer is designed to provide the user methods for which to extract
-desired data in a format suitable for parsing with an external framework or
-library, in our case; scikit-learn...
+The Statplexer is designed to provide functions to an end user for extraction
+of desired data in a format suitable for an external framework or library,
+in our case; scikit-learn...
 
 ...leverages \textbf{numpy}...
 
 ...Frontier can be used to inspect the parameter set extracted from the
-observations...
-...some of the methods provided include:
+observations... some of the methods provided for this purpose include:
 
 \begin{itemize}
     \item \textbf{list\_parameters} \hfill\\
@@ -470,7 +469,8 @@ observations...
         match
 \end{itemize}
 
-...data is returned sorted by key, with parameters sorted alphanumerically...
+...data is returned sorted by key,
+...with parameters sorted alphanumerically...
 ...targets map 1:1 with the data array...
 
 \begin{itemize}
