@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 18, 2014
+April 19, 2014
 
 Declaration
 
@@ -201,8 +201,12 @@ Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
-5.3.1 Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+5.2.3 Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+5.3.1
+
+Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
 5.3.2
 
 Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
@@ -213,7 +217,7 @@ Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 5.3.4
 
-Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 
 5.3.5
 
@@ -230,29 +234,29 @@ Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Results
 6.0.1
 
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 6.0.2
 
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 Introduction and Motivation
 
-23
+24
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
 Materials and Methods
 8.1
 
-22
+23
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 7.1.1
 
 9
 
-21
+22
 
 Identification of Qualitative Sample Properties
 
@@ -262,68 +266,68 @@ Identification of Qualitative Sample Properties
 
 15
 
-25
+26
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 8.1.1
 
-Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
 Goldilocks
 
-27
+28
 
 9.1
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 9.1.1
 
-Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
 9.1.2
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
 9.1.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
 9.1.4
 
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 9.1.5
 
-Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 9.1.6
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 10 Analysis Pipeline
 
-31
+32
 
-10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
-10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 iii
 
 Contents
-10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
-10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
-10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
-10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 11 Current Status
 
-36
+37
 
 Appendix A Input Examples
 
-38
+39
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 iv
 
@@ -786,7 +790,7 @@ of changes to used data subsets or parameters.
 Format
 
 Frontier is designed as a Python package, allowing a user to import its functionality in to other programs. The
-result of this project’s technical output could almost be considered as two seperate entities: Frontier itself,
+result of this project’s technical output could almost be considered as two separate entities: Frontier itself,
 the package designed to ease user interaction with scikit-learn and Front, a Python script which implements
 Frontier’s functionality in order to interact with scikit-learn to conduct analysis on the auto_qc data.
 
@@ -801,39 +805,51 @@ auto_qc system
 
 Concepts
 
-...introduce some terminology and ideas that will assist understanding of the following implemenetation
-section...
+In this section we introduce some terminology and ideas that will assist understanding of the application’s
+purpose and terminology used in the following implementation section.
 
 5.2.1
 
 Observations and Parameters
 
-...designed to work in a machine learning environment... ...observation refers to an identifiable "thing" from
-which we will attempt to learn... in the context of this project, a lanelet ...parameter or regressor will
-typically be used interchangeably to refer to attributes of an observation which will be analysed for potential
-relationships to the observation target ...it is expected that each observation will have the same parameters
-available
+An observation refers to a distinct object or "thing" from which we will attempt to understand the relationship
+between its known properties and classification to be able to label future observations with unknown class
+based on those properties. In the context of this project, this would be a lanelet. Other documentation in the
+field may use the term sample but to avoid confusion with the definition of sample introduced in Chapter 2.2.2
+we will use the term observation.
+The aforementioned properties or attributes of an observation will be referred to as the parameters of
+that observation. Traditionally these may be described as features but it was felt that this wording may
+have connotations with discrete data. Early versions of Frontier referred to parameters as regressors, using
+terminology from statistical modelling. This wording was dropped to remove any confusion between regression
+and classification machine learning problems.
 
 5.2.2
 
 Data and Targets
 
-...data will be used somewhat generically to refer to a matrix in which observations act as rows and their
-parameters act as columns... ...An observation’s target is the known classification of that observation, depending
-on the context of the learning problem these may be discovered manually (for example if trying to count leaves
-from images, one may have to manually count the leaves in an image) or the output of another system may be
-used; in this case the target’s are from auto_qc...
+Data will be used somewhat generically to refer to a matrix in which observations act as rows and their
+parameters act as columns. It is expected that all observations will have the same set of parameters.
+An observation’s target is the known classification of that particular observation. Depending on the context
+of the learning problem targets may be discovered manually (e.g. counting leaves from images of plants, one
+will need to manually count all the leaves in the image before being able to use it for learning) or as the output
+from another system such as auto_qc.
+
+16
+
+5.3 Implementation
+In the context this project where the objective is to begin learning the rules of auto_qc the targets refer to
+whether a particular lanelet observation was labelled as a pass, fail or warn by the current system.
+
+5.2.3
 
 5.3
+
+Training and Testing
 
 Implementation
 
 ...we investigate the following implementation stories:
 • User input, readers, sanity checking
-
-16
-
-5.3 Implementation
 • Storage of read data in memory
 • Retrieval
 • Interaction with scikit-learn
@@ -845,8 +861,8 @@ Input Handling
 Frontier’s modular nature allows users to write their own Python classes to read data from any form of
 input. Two examples of which are the provided classes used to read from the "bamcheckr’d files" as seen
 in Appendix A.1 and the auto_qc output matrix briefly demonstrated in Appendix A.2.
-.. initially hardcoded to suit the specific needs of the project but followed an evolutionary design process...
-designed specically for the given learning problem, with hard coded classes and encodings...
+.. initially hard-coded to suit the specific needs of the project but followed an evolutionary design process...
+designed specifically for the given learning problem, with hard coded classes and encodings...
 ...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more general
 purpose tool, users now specify the classes and associated labels and encodings (for example those used by
 Front are demonstrated in Listing 1)...
@@ -854,6 +870,11 @@ Front are demonstrated in Listing 1)...
 (Listing 1) variable passed when the Statplexer is constructed. But use is therefore not merely limited to our
 problem but rather any machine learning problem where you’d like to simplify your interactions which a very
 large dataset.
+
+17
+
+5.3 Implementation
+
 CLASSES = {
 "pass": {
 "class": ["pass"],
@@ -873,10 +894,7 @@ CLASSES = {
 }
 Listing 1 Class definitions for auto_qc as passed to Frontier
 
-17
-
-5.3 Implementation
-...this allows Frontier to be compatable with almost any learning task, you merely specify the correct data and
+...this allows Frontier to be compatible with almost any learning task, you merely specify the correct data and
 target readers, the known classes and call the Statplexer...
 ...Frontier also checks each parameter for variance, warning users when this requirement is violated... (a
 parameter with 0 variance is pretty useless...)
@@ -894,8 +912,15 @@ with such leading underscores should be treated as non-public. Python doesn’t 
 those that may be found in other languages like Java, indeed the Python style guide points out that "no attribute
 is really private in Python"[23]. In an interesting StackOverflow answer on the subject, a user describes that
 this is "cultural"[10] and that Python programmers are trusted not "mess around with those private members".
-Frontier provides functions to allow controlled access to get and set data stored in these psuedo-private _data
+Frontier provides functions to allow controlled access to get and set data stored in these pseudo-private _data
 and _targets members.
+1A
+
+somewhat contrived contraction of ’Statistics Multiplexer’
+
+18
+
+5.3 Implementation
 ..._data and _targets are Python dictionaries, a structure in which hashed keys are mapped to an arbitrary
 value or object. Python dictionaries offer O(1) (constant) lookup[17] access ...more importantly querying
 the structure for whether it contains a particular key can also be performed in constant O(1) as opposed to
@@ -914,13 +939,6 @@ the list once again needs to be resized...
 the keys are iterated over will be undefined... ...currently this causes the list of keys to require sorting each
 time a user queries the Statplexer API for data... as obviously the parameters and targets must map one-to-one
 in a predictable and repeatable manner.
-1A
-
-somewhat contrived contraction of ’Statistics Multiplexer’
-
-18
-
-5.3 Implementation
 ...through testing of the 13,455 observations it would seem that this sorting operation is inexpensive... and
 indeed seems a fair price to pay for having constant lookup speed on membership as well as being able to
 access an object by its id rather than knowing where it is in a list...
@@ -940,6 +958,10 @@ list_regressors Retrieve a list of all parameters
 find_regressors Retrieve a list of parameters containing any of the input strings as a substring
 exclude_regressors Retrieve a list of parameters which do not contain any of the input strings as a substring,
 or if needed an exact match
+
+19
+
+5.4 Testing
 ...data is returned sorted by key, with parameters sorted alphanumerically... ...targets map 1:1 with the data
 array...
 get_data_by_regressors Return data for each observation, but only return columns for the parameters in the
@@ -958,10 +980,6 @@ smaller classes...
 
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
-
-19
-
-5.4 Testing
 
 5.3.5
 
@@ -984,6 +1002,9 @@ Testing
 
 Contributions to bamcheckr
 
+20
+
+5.5 Contributions to bamcheckr
 install.packages("devtools")
 library(devtools)
 # Install directly from github repository
@@ -995,7 +1016,7 @@ re-wrote in Python...
 ...R CMD BATCH issue
 ...Fixed a graph plotting failure. ...Writing additional routines...
 
-20
+21
 
 Chapter 6
 
@@ -1008,14 +1029,14 @@ Initial Trees
 
 Parameter Sets
 
-21
+22
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-22
+23
 
 Chapter 7
 
@@ -1048,7 +1069,7 @@ The basic idea is to answer the question of what constitutes “good” or “ba
 out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or cause the
 correspondence between the two sets to decrease? In which case, having identified such lanelets, can we look
 
-23
+24
 
 7.1 Introduction
 back to the quality parameters we’ve been analysing so far and find whether they have something in common
@@ -1061,7 +1082,7 @@ leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
 The candidate must not have too many variants, or too few: a “Goldilocks genome”.
 
-24
+25
 
 Chapter 8
 
@@ -1090,7 +1111,7 @@ vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # Complains about lack of tabix index but still makes the file...
 
-25
+26
 
 8.1 Input Data and Format
 # Index with tabix
@@ -1104,7 +1125,7 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # http://www.biostars.org/p/51076/
 # http://vcftools.sourceforge.net/htslib.html#query
 
-26
+27
 
 Chapter 9
 
@@ -1140,7 +1161,7 @@ Storage
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
 
-27
+28
 
 9.1 Implementation
 Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
@@ -1180,7 +1201,7 @@ current chromosome and act as a variant “mask” – essentially an array wher
 current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
 for chromosome in autosomes:
-28
+29
 
 9.1 Implementation
 chro = np.zeros(len(chromosome), np.int8)
@@ -1218,7 +1239,7 @@ for start in range(1, len(chromosome), STRIDE):
 num_variants = np.sum(chro[start:start+LENGTH])
 # Do something...
 
-29
+30
 
 9.1 Implementation
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
@@ -1246,7 +1267,7 @@ Testing
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
 
-30
+31
 
 Chapter 10
 
@@ -1283,7 +1304,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-31
+32
 
 10.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -1337,7 +1358,7 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 | Only run on a node with more than 4000mb memory
 Listing 2 : Flags required to raise job memory allocation
 
-32
+33
 
 10.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -1392,7 +1413,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-33
+34
 
 10.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -1425,7 +1446,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-34
+35
 
 10.1 Implementation
 s = bam_get_aux(b);
@@ -1462,13 +1483,13 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-35
+36
 
 Chapter 11
 
 Current Status
 
-36
+37
 
 [12] M. Kircher, U. Stenzel and J. Kelso, “Improved
 base calling for the Illumina Genome Analyzer
@@ -1583,7 +1604,7 @@ and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
 978-0-387-98140-6.
 2009.
 
-37
+38
 
 Appendix A
 
@@ -1707,7 +1728,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-38
+39
 
 A.1 BAMcheckR’d Example Output
 
@@ -1939,7 +1960,7 @@ FFQ
 0
 0
 
-39
+40
 
 1609
 
@@ -2281,7 +2302,7 @@ IS
 2
 0
 
-40
+41
 
 A.1 BAMcheckR’d Example Output
 
@@ -2560,7 +2581,7 @@ GCD
 0.101
 0.101
 
-41
+42
 
 A.2 auto_qc Decision Matrix
 
@@ -2695,7 +2716,7 @@ passed
 warning
 passed
 
-42
+43
 
 ...
 ...

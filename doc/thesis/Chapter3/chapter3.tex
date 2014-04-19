@@ -46,7 +46,7 @@ changes to used data subsets or parameters.
 
 Frontier is designed as a Python package, allowing a user to import its
 functionality in to other programs. The result of this project's technical
-output could almost be considered as two seperate entities: Frontier itself, the
+output could almost be considered as two separate entities: Frontier itself, the
 package designed to ease user interaction with scikit-learn and \textbf{Front},
 a Python script which implements Frontier's functionality in order to interact
 with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
@@ -61,29 +61,50 @@ with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concepts}
 
-...introduce some terminology and ideas that will assist understanding of the
-following implemenetation section...
+In this section we introduce some terminology and ideas that will assist
+understanding of the application's purpose and terminology used in the following
+implementation section.
+
 
 \subsection{Observations and Parameters}
 
-...designed to work in a machine learning environment...
-...\textit{observation} refers to an identifiable "thing" from which we will
-attempt to learn... in the context of this project, a lanelet
-...\textit{parameter} or \textit{regressor} will typically be used
-interchangeably to refer to attributes of an observation which will be analysed
-for potential relationships to the observation target
-...it is expected that each observation will have the same parameters available
+An \textbf{observation} refers to a distinct object or "thing" from which we
+will attempt to understand the relationship between its known properties and
+classification to be able to label future observations with unknown class based
+on those properties. In the context of this project, this would be a lanelet.
+Other documentation in the field may use the term \textit{sample} but to avoid
+confusion with the definition of sample introduced in
+Chapter~\ref{chap:samplelanelanelets} we will use the term observation.
+
+The aforementioned \textit{properties} or \textit{attributes} of an observation
+will be referred to as the \textbf{parameters} of that observation.
+Traditionally these may be described as \textit{features} but it was felt that
+this wording may have connotations with discrete data. Early versions of
+Frontier referred to parameters as \textit{regressors}, using terminology from
+statistical modelling. This wording was dropped to remove any confusion between
+regression and classification machine learning problems.
 
 
 \subsection{Data and Targets}
 
-...\textit{data} will be used somewhat generically to refer to a matrix in which
-observations act as rows and their parameters act as columns...
-...An observation's \textit{target} is the known classification of that
-observation, depending on the context of the learning problem these may be
-discovered manually (for example if trying to count leaves from images, one may
-have to manually count the leaves in an image) or the output of another system
-may be used; in this case the target's are from auto\_qc...
+\textbf{Data} will be used somewhat generically to refer to a matrix in which
+observations act as rows and their parameters act as columns. It is expected
+that all observations will have the same set of parameters.
+
+An observation's \textbf{target} is the known classification of that
+particular observation.
+Depending on the context of the learning problem targets may be discovered
+manually (\textit{e.g.} counting leaves from images of plants, one will need to
+manually count all the leaves in the image before being able to use it for
+learning) or as the output from another system such as \textbf{auto\_qc}.
+
+In the context this project where the objective is to begin learning the rules
+of \textbf{auto\_qc} the targets refer to whether a particular lanelet
+observation was labelled as a pass, fail or warn by the current system.
+
+
+\subsection{Training and Testing}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
@@ -104,10 +125,10 @@ data from any form of input. Two examples of which are the provided classes used
 to read from the "bamcheckr'd files" as seen in Appendix~\ref{app:bamcheckr} and
 the auto\_qc output matrix briefly demonstrated in Appendix~\ref{app:aqc_matrix}.
 
-.. initially hardcoded to suit the specific needs of the project but followed
+.. initially hard-coded to suit the specific needs of the project but followed
 an evolutionary design process...
 
-designed specically for the given learning problem, with hard coded
+designed specifically for the given learning problem, with hard coded
 classes and encodings...
 
 ...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
@@ -151,7 +172,7 @@ which a very large dataset.
     \end{minted}
 \end{listing}
 
-...this allows Frontier to be compatable with almost any learning task, you
+...this allows Frontier to be compatible with almost any learning task, you
 merely specify the correct data and target readers, the known classes and call
 the \textbf{Statplexer}...
 
@@ -180,7 +201,7 @@ user describes that this is "cultural"\citep{so:pythonprivate} and that Python
 programmers are trusted not "mess around with those private members".
 
 Frontier provides functions to allow controlled access to get and set data
-stored in these psuedo-private \textbf{\_data} and \textbf{\_targets} members.
+stored in these pseudo-private \textbf{\_data} and \textbf{\_targets} members.
 
 %TODO Find better citation (Python book)
 ...\textbf{\_data} and \textbf{\_targets} are Python dictionaries, a structure
