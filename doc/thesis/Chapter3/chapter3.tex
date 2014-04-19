@@ -56,6 +56,16 @@ with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
 
 .. the result of abstracting code and tools created during the use of
 \textbf{scikit-learn} for analysis of the current \textbf{auto\_qc} system
+.. initially hard-coded to suit the specific needs of the project but followed
+an evolutionary design process...
+
+designed specifically for the given learning problem, with hard coded
+classes and encodings...
+
+...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
+enable it to be used as a more general purpose tool, users now specify the
+classes and associated labels and encodings (for example those used by Front are
+demonstrated in Listing~\ref{fig:FrontierClasses})...
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,27 +101,28 @@ regression and classification machine learning problems.
 observations act as rows and their parameters act as columns. It is expected
 that all observations will have the same set of parameters.
 
-An observation's \textbf{target} is the known classification of that
-particular observation.
-Depending on the context of the learning problem targets may be discovered
-manually (\textit{e.g.} counting leaves from images of plants, one will need to
-manually count all the leaves in the image before being able to use it for
-learning) or as the output from another system such as \textbf{auto\_qc}.
+An observation's \textbf{target} is the known classification of that particular
+observation.  Depending on the context of the learning problem targets may be
+discovered manually (\textit{e.g.} counting leaves from images of plants, one
+will need to manually count all the leaves in the image before being able to use
+it for learning) or as the output from another system such as \textbf{auto\_qc}.
 
-In the context this project where the objective is to begin learning the rules
-of \textbf{auto\_qc} the targets refer to whether a particular lanelet
+In the context of this project where the objective is to begin learning the
+rules of \textbf{auto\_qc} the targets refer to whether a particular lanelet
 observation was labelled as a pass, fail or warn by the current system.
 
 
 \subsection{Training and Testing}
 
+...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
-...we investigate the following implementation stories:
+
+This section investigates the implementation of Frontier's major components:
 
 \begin{itemize}
-    \item User input, readers, sanity checking
+    \item Handling of input, readers, sanity checking
     \item Storage of read data in memory
     \item Retrieval
     \item Interaction with scikit-learn
@@ -121,20 +132,78 @@ observation was labelled as a pass, fail or warn by the current system.
 \subsection{Input Handling}
 
 Frontier's modular nature allows users to write their own Python classes to read
-data from any form of input. Two examples of which are the provided classes used
-to read from the "bamcheckr'd files" as seen in Appendix~\ref{app:bamcheckr} and
-the auto\_qc output matrix briefly demonstrated in Appendix~\ref{app:aqc_matrix}.
+data from any form of input file or stream. Two examples of which are the
+classes used to read from the "bamcheckr'd files" documented in
+Appendix~\ref{app:bamcheckr} and the \textbf{auto\_qc} decisions matrix briefly
+demonstrated in Appendix~\ref{app:aqc_matrix}.
 
-.. initially hard-coded to suit the specific needs of the project but followed
-an evolutionary design process...
+These classes are described as \textbf{Readers} and implement a common base
+class, \textbf{AbstractReader} which takes care of
+setting up the file handler, including functions to both close and iterate over
+the file's contents. It will also automatically call its own
+\textbf{process\_file} function that skips over any header lines before passing
+each line in the file stripped of any newline characters to \textbf{process\_line}.
 
-designed specifically for the given learning problem, with hard coded
-classes and encodings...
+It is expected that derived classes will at least provide their own
+implementations for \textbf{process\_line} and \textbf{get\_data}. Failing to do
+so will cause Frontier to throw a \textbf{NotImplementedError} when attempting
+to use the class to read data.
 
-...a major refactoring to remove hard-coded classes from \textbf{Frontier} which
-enable it to be used as a more general purpose tool, users now specify the
-classes and associated labels and encodings (for example those used by Front are
-demonstrated in Listing~\ref{fig:FrontierClasses})...
+\textbf{process\_line} defines the line handling operations that extract and store
+desired data found in a given line. This responsibility includes returning None
+for lines that contain comments and irrelevant data.
+
+\textbf{get\_data} must return any read in data in a suitable structure for
+storage by Frontier. Typically this will be a Python dictionary using some
+unique identifier for each observation as a key, mapping to an arbitrary value
+or object containing that observation's parameters. Further discussion on
+Frontier's storage of data and targets is to follow.
+
+The \textbf{AbstractReader} class is designed to simplify the process of reading
+in observations and their targets for end users, however it is still up to the
+author of the dervied class to set up any structures to store data (which cannot
+be done automatically without likely enforcing potentially unhelpful
+constraints) before initialisation of the inherited base class (via the call to
+\textbf{super}) as shown in Listing~\ref{list:superreader}.
+
+\begin{listing}[H]
+    \caption[superreader]{: Extract from \textbf{BamcheckReader} class
+        documenting initialisation of necessary data structures and calling
+        for initialisation of its inherited base class}
+    \label{list:superreader}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{python}
+        class BamcheckReader(AbstractReader):
+            [...]
+
+            def __init__(self, filepath, CLASSES, auto_close=False):
+                self.summary = SummaryNumbers()
+                self.indel = IndelDistribution()
+                super(BamcheckReader, self).__init__(filepath, CLASSES, auto_close, 0)
+
+            [...]
+    \end{minted}
+\end{listing}
+
+Currently it is also the responsibility of the author of a derived class to
+perform relevant sanity checking of any extracted data. For example the
+\textbf{BamcheckReader} class checks for the presence of multiple entries of a
+particular metric which will print a notice if found, unless the entries have
+differing values, upon which an exception is thrown and the process is halted.
+
+%FUTURE
+In future it would be useful to investigate whether it would be feasible to
+perform such sanity checking in a generic manner to ensure it could be applied
+to a wide enough range of scenarios to make it worth including functionality in
+the \textbf{AbstractReader} directly.
+
+%Once the reader has been defined...
+
+
 
 ...if we were to add another
 class label, the definition would merely need to be included to the CLASSES

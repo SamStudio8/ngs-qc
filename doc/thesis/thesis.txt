@@ -209,54 +209,54 @@ Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 5.3.2
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 5.3.3
 
-Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 
 5.3.4
 
-Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
 5.3.5
 
-Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
 5.4
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
 5.5
 
-Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
 Results
 6.0.1
 
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 6.0.2
 
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 Introduction and Motivation
 
-24
+25
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
 
 Materials and Methods
 8.1
 
-23
+24
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
 7.1.1
 
 9
 
-22
+23
 
 Identification of Qualitative Sample Properties
 
@@ -266,68 +266,68 @@ Identification of Qualitative Sample Properties
 
 15
 
-26
+27
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 8.1.1
 
-Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
 Goldilocks
 
-28
+29
 
 9.1
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 9.1.1
 
-Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 9.1.2
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 9.1.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 9.1.4
 
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 9.1.5
 
-Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 9.1.6
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 10 Analysis Pipeline
 
-32
+33
 
-10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 iii
 
 Contents
-10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
-10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
-10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
-10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
-10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 11 Current Status
 
-37
+38
 
 Appendix A Input Examples
 
-39
+40
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
 
 iv
 
@@ -837,19 +837,21 @@ from another system such as auto_qc.
 16
 
 5.3 Implementation
-In the context this project where the objective is to begin learning the rules of auto_qc the targets refer to
+In the context of this project where the objective is to begin learning the rules of auto_qc the targets refer to
 whether a particular lanelet observation was labelled as a pass, fail or warn by the current system.
 
 5.2.3
 
-5.3
-
 Training and Testing
+
+...
+
+5.3
 
 Implementation
 
-...we investigate the following implementation stories:
-• User input, readers, sanity checking
+This section investigates the implementation of Frontier’s major components:
+• Handling of input, readers, sanity checking
 • Storage of read data in memory
 • Retrieval
 • Interaction with scikit-learn
@@ -858,20 +860,58 @@ Implementation
 
 Input Handling
 
-Frontier’s modular nature allows users to write their own Python classes to read data from any form of
-input. Two examples of which are the provided classes used to read from the "bamcheckr’d files" as seen
-in Appendix A.1 and the auto_qc output matrix briefly demonstrated in Appendix A.2.
+Frontier’s modular nature allows users to write their own Python classes to read data from any form of input
+file or stream. Two examples of which are the classes used to read from the "bamcheckr’d files" documented
+in Appendix A.1 and the auto_qc decisions matrix briefly demonstrated in Appendix A.2.
+These classes are described as Readers and implement a common base class, AbstractReader which takes
+care of setting up the file handler, including functions to both close and iterate over the file’s contents. It will
+also automatically call its own process_file function that skips over any header lines before passing each line
+in the file stripped of any newline characters to process_line.
+It is expected that derived classes will at least provide their own implementations for process_line and
+get_data. Failing to do so will cause Frontier to throw a NotImplementedError when attempting to use
+the class to read data.
+process_line defines the line handling operations that extract and store desired data found in a given line. This
+responsibility includes returning None for lines that contain comments and irrelevant data.
+get_data must return any read in data in a suitable structure for storage by Frontier. Typically this will be a
+Python dictionary using some unique identifier for each observation as a key, mapping to an arbitrary value or
+object containing that observation’s parameters. Further discussion on Frontier’s storage of data and targets is
+to follow.
+The AbstractReader class is designed to simplify the process of reading in observations and their targets for
+end users, however it is still up to the author of the dervied class to set up any structures to store data (which
+
+17
+
+5.3 Implementation
+cannot be done automatically without likely enforcing potentially unhelpful constraints) before initialisation
+of the inherited base class (via the call to super) as shown in Listing 1.
+class BamcheckReader(AbstractReader):
+[...]
+def __init__(self, filepath, CLASSES, auto_close=False):
+self.summary = SummaryNumbers()
+self.indel = IndelDistribution()
+super(BamcheckReader, self).__init__(filepath, CLASSES, auto_close, 0)
+[...]
+Listing 1 : Extract from BamcheckReader class documenting initialisation of necessary data structures and
+calling for initialisation of its inherited base class
+
+Currently it is also the responsibility of the author of a derived class to perform relevant sanity checking of
+any extracted data. For example the BamcheckReader class checks for the presence of multiple entries of
+a particular metric which will print a notice if found, unless the entries have differing values, upon which an
+exception is thrown and the process is halted.
+In future it would be useful to investigate whether it would be feasible to perform such sanity checking in a
+generic manner to ensure it could be applied to a wide enough range of scenarios to make it worth including
+functionality in the AbstractReader directly.
 .. initially hard-coded to suit the specific needs of the project but followed an evolutionary design process...
 designed specifically for the given learning problem, with hard coded classes and encodings...
 ...a major refactoring to remove hard-coded classes from Frontier which enable it to be used as a more general
 purpose tool, users now specify the classes and associated labels and encodings (for example those used by
-Front are demonstrated in Listing 1)...
+Front are demonstrated in Listing 2)...
 ...if we were to add another class label, the definition would merely need to be included to the CLASSES
-(Listing 1) variable passed when the Statplexer is constructed. But use is therefore not merely limited to our
+(Listing 2) variable passed when the Statplexer is constructed. But use is therefore not merely limited to our
 problem but rather any machine learning problem where you’d like to simplify your interactions which a very
 large dataset.
 
-17
+18
 
 5.3 Implementation
 
@@ -892,7 +932,7 @@ CLASSES = {
 "code": 0,
 },
 }
-Listing 1 Class definitions for auto_qc as passed to Frontier
+Listing 2 Class definitions for auto_qc as passed to Frontier
 
 ...this allows Frontier to be compatible with almost any learning task, you merely specify the correct data and
 target readers, the known classes and call the Statplexer...
@@ -918,7 +958,7 @@ and _targets members.
 
 somewhat contrived contraction of ’Statistics Multiplexer’
 
-18
+19
 
 5.3 Implementation
 ..._data and _targets are Python dictionaries, a structure in which hashed keys are mapped to an arbitrary
@@ -959,7 +999,7 @@ find_regressors Retrieve a list of parameters containing any of the input string
 exclude_regressors Retrieve a list of parameters which do not contain any of the input strings as a substring,
 or if needed an exact match
 
-19
+20
 
 5.4 Testing
 ...data is returned sorted by key, with parameters sorted alphanumerically... ...targets map 1:1 with the data
@@ -1002,7 +1042,7 @@ Testing
 
 Contributions to bamcheckr
 
-20
+21
 
 5.5 Contributions to bamcheckr
 install.packages("devtools")
@@ -1016,7 +1056,7 @@ re-wrote in Python...
 ...R CMD BATCH issue
 ...Fixed a graph plotting failure. ...Writing additional routines...
 
-21
+22
 
 Chapter 6
 
@@ -1029,14 +1069,14 @@ Initial Trees
 
 Parameter Sets
 
-22
+23
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-23
+24
 
 Chapter 7
 
@@ -1069,7 +1109,7 @@ The basic idea is to answer the question of what constitutes “good” or “ba
 out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or cause the
 correspondence between the two sets to decrease? In which case, having identified such lanelets, can we look
 
-24
+25
 
 7.1 Introduction
 back to the quality parameters we’ve been analysing so far and find whether they have something in common
@@ -1082,7 +1122,7 @@ leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
 The candidate must not have too many variants, or too few: a “Goldilocks genome”.
 
-25
+26
 
 Chapter 8
 
@@ -1111,7 +1151,7 @@ vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # Complains about lack of tabix index but still makes the file...
 
-26
+27
 
 8.1 Input Data and Format
 # Index with tabix
@@ -1125,7 +1165,7 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # http://www.biostars.org/p/51076/
 # http://vcftools.sourceforge.net/htslib.html#query
 
-27
+28
 
 Chapter 9
 
@@ -1161,7 +1201,7 @@ Storage
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
 
-28
+29
 
 9.1 Implementation
 Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
@@ -1201,7 +1241,7 @@ current chromosome and act as a variant “mask” – essentially an array wher
 current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
 for chromosome in autosomes:
-29
+30
 
 9.1 Implementation
 chro = np.zeros(len(chromosome), np.int8)
@@ -1239,7 +1279,7 @@ for start in range(1, len(chromosome), STRIDE):
 num_variants = np.sum(chro[start:start+LENGTH])
 # Do something...
 
-30
+31
 
 9.1 Implementation
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
@@ -1267,7 +1307,7 @@ Testing
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
 
-31
+32
 
 Chapter 10
 
@@ -1304,7 +1344,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-32
+33
 
 10.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -1334,7 +1374,7 @@ the very least an estimated 35kB for a 64-bit pointer to each input file and app
 32kB buffer to read data from each file also. Yet executing the job with 500MB caused the LSF scheduler to
 forceably terminate the process for exceeding the maximum allocated memory limit.
 Assuming that the intermediate structures for storing and sorting the input data must have been greater than
-expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 2 only to
+expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 3 only to
 meet the same fate, even when reserving 16GB of memory...
 This is an absurd amount of memory even considering the vast input... It appeared a memory leak had been
 discovered... that drastically increases in severity as more files are provided as input,
@@ -1356,9 +1396,9 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 #
 
 | Only run on a node with more than 4000mb memory
-Listing 2 : Flags required to raise job memory allocation
+Listing 3 : Flags required to raise job memory allocation
 
-33
+34
 
 10.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -1397,7 +1437,7 @@ by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
 ==30464==
 by 0x402CC4: main (test_trans_tbl_init.c:348)
 
-Listing 3 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
+Listing 4 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
 failure to release memory allocated to a compiled regular expression
 
 Poor Time Performance
@@ -1413,7 +1453,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-34
+35
 
 10.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -1446,7 +1486,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-35
+36
 
 10.1 Implementation
 s = bam_get_aux(b);
@@ -1483,13 +1523,13 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-36
+37
 
 Chapter 11
 
 Current Status
 
-37
+38
 
 [12] M. Kircher, U. Stenzel and J. Kelso, “Improved
 base calling for the Illumina Genome Analyzer
@@ -1604,7 +1644,7 @@ and SAMtools. ,” Bioinformatics, vol. 25, p. 2078,
 978-0-387-98140-6.
 2009.
 
-38
+39
 
 Appendix A
 
@@ -1728,7 +1768,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-39
+40
 
 A.1 BAMcheckR’d Example Output
 
@@ -1960,7 +2000,7 @@ FFQ
 0
 0
 
-40
+41
 
 1609
 
@@ -2302,7 +2342,7 @@ IS
 2
 0
 
-41
+42
 
 A.1 BAMcheckR’d Example Output
 
@@ -2581,7 +2621,7 @@ GCD
 0.101
 0.101
 
-42
+43
 
 A.2 auto_qc Decision Matrix
 
@@ -2716,7 +2756,7 @@ passed
 warning
 passed
 
-43
+44
 
 ...
 ...
