@@ -1,4 +1,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Results}
+\section{Introduction}
+\subsection{Why Decision Trees?}
+
+\section{Parameter Selection}
+...important to find the "best" parameters
+...what is best? scikit-learn uses total gini information
+
+...frontier uses two methods:
+\begin{itemize}
+    \item Backward elimination; pruning parameters with the lowest total gini
+    \item Call scikit-learn's SelectKBest
+\end{itemize}
+
+
+* incorrect degrees of freedom
+* warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
+* Replaced univariate\_selection with version from master
+* needed use force np.float64
+* ...actually data was 0... gg
+
+
+\section{Trees}
 \subsection{Initial Trees}
 \subsection{Parameter Sets}
+\subsection{Ignoring Warnings}

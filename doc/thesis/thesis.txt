@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 19, 2014
+April 20, 2014
 
 Declaration
 
@@ -177,9 +177,6 @@ Frontier
 
 6
 
-II
-7
-
 Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
 Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
@@ -233,10 +230,6 @@ Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
-5.3.6
-
-Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
-
 5.4
 
 Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
@@ -246,38 +239,54 @@ Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
 Results
+6.1
+
+7
+
+Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+6.3
+
+Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+6.3.1
 
 Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
-6.0.2
+6.3.2
 
 Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
+6.3.3
+
+Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+Identification of Qualitative Sample Properties
+
+28
+
 Introduction and Motivation
-
 29
-
+7.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 Materials and Methods
 8.1
 
-28
-
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
-7.1.1
-
 9
+
+Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+6.2
+
+7.1.1
+8
 
 27
 
-6.0.1
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+6.1.1
 
-Identification of Qualitative Sample Properties
-
-7.1
-
-8
+II
 
 16
 
@@ -294,31 +303,45 @@ Goldilocks
 
 9.1
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
-9.1.1
-
-Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
-
-9.1.2
-
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
-
-9.1.3
-
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
-
-9.1.4
-
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
-
-9.1.5
-
-Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+9.1.1 Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 iii
 
 Contents
-9.1.6
+
+9.2
+
+9.1.2
+
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+
+9.1.3
+
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+9.2.1
+
+Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+
+9.2.2
+
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+
+9.2.3
+
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+
+9.2.4
+
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+
+9.2.5
+
+Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+
+9.2.6
 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
@@ -1094,16 +1117,16 @@ It is arguable that despite this, the data could be unloaded from the _data and 
 some form of array at the end of the call to load_data. However the Statplexer allows loading of data at any
 time, which would not only risk increasingly expensive resizing operations as the list continues to expand but
 the sanity checking that takes place in load_data involves checking for membership of an ID in _data and
-_targets which is constant for a dictionary and O(n) for a list structure.
+_targets where performance is constant for dictionaries and O(n) for lists.
 ...although the latter point is somewhat easily fixed for an array implementation by using a dictionary to
 provide a mapping between a sample name and where it is stored in an array...
 ...an issue with use of a dictionary however is by default they are unsorted, not only this but the order in which
 the keys are iterated over will be undefined...
 ...currently this causes the list of keys to require sorting each time a user queries the Statplexer API for data...
 as obviously the parameters and targets must map one-to-one in a predictable and repeatable manner.
-It should be noted that the Statplexer stores a copy of the user defined CLASSES dictionary, which is an
-argument to its construction, allowing the Statplexer to share this information with any readers or utility
-functions who require it.
+It should be noted that the Statplexer stores a copy of the user defined CLASSES dictionary (as the class
+member _classes), which is an argument to its construction, allowing the Statplexer to share this information
+with any readers or utility functions who require it.
 
 5.3.4
 
@@ -1144,19 +1167,6 @@ smaller classes...
 
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
-
-5.3.6
-
-Parameter Selection
-
-...important to find the "best" parameters ...what is best? scikit-learn uses total gini information
-...frontier uses two methods:
-• Backward elimination; pruning parameters with the lowest total gini
-• Call scikit-learn’s SelectKBest
-
-* incorrect degrees of freedom * warnings: /usr/lib64/python2.7/site-packages/sklearn/feature_selection/univariate_selection.py:2
-RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
-version from master * needed use force np.float64 * ...actually data was 0... gg
 
 24
 
@@ -1214,13 +1224,40 @@ Testing
 Chapter 6
 
 Results
-6.0.1
+6.1
+6.1.1
+
+6.2
+
+Introduction
+Why Decision Trees?
+
+Parameter Selection
+
+...important to find the "best" parameters ...what is best? scikit-learn uses total gini information
+...frontier uses two methods:
+• Backward elimination; pruning parameters with the lowest total gini
+• Call scikit-learn’s SelectKBest
+
+* incorrect degrees of freedom * warnings: /usr/lib64/python2.7/site-packages/sklearn/feature_selection/univariate_selection.py:2
+RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
+version from master * needed use force np.float64 * ...actually data was 0... gg
+
+6.3
+
+Trees
+
+6.3.1
 
 Initial Trees
 
-6.0.2
+6.3.2
 
 Parameter Sets
+
+6.3.3
+
+Ignoring Warnings
 
 27
 
@@ -1325,6 +1362,22 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 Goldilocks
 9.1
 
+Design
+
+9.1.1
+
+Purpose
+
+9.1.2
+
+Format
+
+9.1.3
+
+Method
+
+9.2
+
 Implementation
 
 ...we investigate the following implementation stories:
@@ -1335,28 +1388,28 @@ Implementation
 • Final output and selection, counters and buckets (avoid chr6)
 • Testing, generate output files, call functions akin to API
 
-9.1.1
+9.2.1
 
 Loading File List
 
 ...
 
-9.1.2
+33
+
+9.2 Implementation
+
+9.2.2
 
 Loading Variants from Input Files
 
 ...
 
-9.1.3
+9.2.3
 
 Storage
 
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
-
-33
-
-9.1 Implementation
 Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
 candidate must not span chromosomes (the ends of chromosomes are not very good for reads) then we can
 easily yield a great improvement from processing chromosomes individually.
@@ -1386,6 +1439,10 @@ have a dictionary for each chromosome) we have:
 for chromosome in autosomes:
 for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
+
+34
+
+9.2 Implementation
 if position in variant_position_dict[chromosome]:
 # Do something...
 This still takes half an hour to run on my laptop though, surely there is a better way. I wondered if whether
@@ -1394,9 +1451,6 @@ current chromosome and act as a variant “mask” – essentially an array wher
 current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
 for chromosome in autosomes:
-34
-
-9.1 Implementation
 chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
 chro[variant_loc] = 1
@@ -1424,6 +1478,9 @@ clever vector mathematics calculated by numpy.
 We don’t even lose any detail because the actual list of variants inside a region can be recovered in a small
 amount of time just given the start and end position of the region.
 
+35
+
+9.2 Implementation
 for chromosome in autosomes:
 chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
@@ -1431,28 +1488,24 @@ chro[variant_loc] = 1
 for start in range(1, len(chromosome), STRIDE):
 num_variants = np.sum(chro[start:start+LENGTH])
 # Do something...
-
-35
-
-9.1 Implementation
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
 be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
 the variant locations in the first place).
 Ignoring empty regions etc.
 
-9.1.4
+9.2.4
 
 Searching for Regions
 
 ..
 
-9.1.5
+9.2.5
 
 Final Region Selection
 
 ..
 
-9.1.6
+9.2.6
 
 Testing
 
