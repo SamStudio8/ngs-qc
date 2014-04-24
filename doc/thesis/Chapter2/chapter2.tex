@@ -114,7 +114,11 @@ that are later used by \textbf{auto\_qc} for classification.  This process
 appends additional key-value pairs in the summary numbers section.  A truncated
 example of a "bamcheckr'd" file can be found in Appendix~\ref{app:bamcheckr}.
 
+It is these summary numbers that will be the main focus of our learning task.
+
+
 \subsection{auto\_qc Decision Data}
+
 To use these "bamcheckr'd" files for training and testing a machine learning
 classifier, it is necessary to map each file to a classification result from
 \textbf{auto\_qc}. The one-to-one mapping between each input file and its label
@@ -349,9 +353,42 @@ similar quality metrics?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Recovering Ratios}
 
-...
-"missing variables"
-...
+An initial scan of the summary numbers available in the "bamcheckr'd" files
+introduced in Chapter~\ref{chap:bamcheckr-data} revealed 82 different
+parameters. However, when comparing this parameter set to the threshold rules of
+\textbf{auto\_qc}, it appeared that some parameters were "missing".
+
+In the pursuit of replicating the decisions of the
+existing system, it is ideal to have all the parameters used in the making of
+those decisions at hand. In particular, the missing parameters were of a
+normalised nature, typically in the form of a ratio or percentage which should
+make them more valuable than a parameter that just represents a raw count of
+some property.
+
+It was found that these missing parameters are calculated in a step preceeding
+\textbf{auto\_qc} as part of the \textbf{vr-pipe}
+pipeline\footnote{https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack\_auto\_qc\_hgi\_3.pm}.
+
+%...It is actually here that the hard-coded thresholds for warnings and failures
+% are applied and the target decision is made too!
+
+Whilst I could have attempted to set-up my own instance of \textbf{vr-pipe} to
+recover this data, speaking with contacts at the Sanger Institute, it was
+decided that this would prove troublesome work; requiring an involved
+deployment to a cloud based facility such as Amazon's Elastic Compute Cloud and
+installation of various Perl dependencies as well as requiring access to many
+controlled databases within the institute.
+
+Most of the functions that calculated these parameters turned out to be
+straightforward and could easily be ported to another application. At first
+it was intended to add these functions to the program authored for this part of
+the project, but the Sanger Institute suggested it would be more useful to
+implement such functionality in \textbf{bamcheckr} directly, removing some of
+\textbf{auto\_qc}'s dependence on its position in \textbf{vr-pipe}.
+
+
+
+
 
 \begin{minted}[mathescape,
                %linenos,
