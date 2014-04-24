@@ -165,8 +165,16 @@ Pre-Implementation
 Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 Contents
-4.2
+
 5
+
+4.2
+
+Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+4.3
+
+Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
 
 Frontier
 5.1
@@ -179,114 +187,115 @@ Frontier
 
 7
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 5.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 5.1.2
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
 5.1.3
 
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 5.2.1
 
-Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
 5.2.2
 
-Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
 5.2.3
 
-Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 5.2.4
 
-Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 5.3.1
 
-Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 5.3.2
 
-Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
 5.3.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 5.3.4
 
-Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
 5.3.5
 
-Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
 
-Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+5.4
+
+Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
 5.5
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
 Results
+6.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+II
+
 6.1.1
 
-Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
 6.1.2
 
-CART . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+CART . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
-Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
 6.3
 
-Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 6.3.1
 
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 6.3.2
 
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 6.3.3
 
-Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
 
-30
+31
 
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 Materials and Methods
 8.1
 
-29
+30
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 7.1.1
-
-32
-
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
-8.1.1
 
 9
 
-27
+28
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
 6.2
 
@@ -294,83 +303,82 @@ Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 8
 
-16
+17
 
-5.4
+33
 
-6.1
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+8.1.1
 
-II
-
-Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
-
-Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 Goldilocks
-34
-9.1 Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+
+35
 
 iii
 
 Contents
+9.1
 
 9.2
 
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 9.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 9.1.2
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 9.1.3
 
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 9.2.1
 
-Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 9.2.2
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 9.2.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 9.2.4
-
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
-
 9.2.5
+
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+
 9.2.6
 
-Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
 10 Analysis Pipeline
 
-38
+39
 
-10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
-10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
-10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
-10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
-10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
-10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 11 Current Status
 
-43
+44
 
 Appendix A Input Examples
 
-45
+47
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
 
 iv
 
@@ -819,21 +827,36 @@ Most of the functions that calculated these parameters turned out to be straight
 ported to another application. At first it was intended to add these functions to the program authored for this
 part of the project, but the Sanger Institute suggested it would be more useful to implement such functionality
 in bamcheckr directly, removing some of auto_qc’s dependence on its position in vr-pipe.
-
+# Install and include the ‘devtools’ package
 install.packages("devtools")
 library(devtools)
-# Install directly from github repository
+# Install package directly from Github repository
 install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
-# Install from local directory
+# Install package from local directory
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
-Takes 5.5s on average, 16.1s with ratio due to inefficient implementation for overlapping_base_duplicate_percentage
-re-wrote in Python...
-...R CMD BATCH issue
-...Fixed a graph plotting failure. ...Writing additional routines...
+Listing 1 : Installing an in-development R package with devtools
 
+With the help of devtools[22] (see Listing 1) it was simple to develop and test contributions to bamcheckr
+locally without needing to re-publish the package after changes. An additional script was added to bamcheckr’s
+NAMESPACE... to recover the missing ratio and percentage based parameters...
+...unfortunately, the performance of the script was poor, taking 5.5s on average and increasing to 16.1s when
+enabling a complex function containing many vector operations (potentially inefficient due to my lack of R
+experience)... for overlapping_base_duplicate_percentage
+...utilising the program designed and implemented in the following chapter... loaded required information and
+used the API to calculate the missing parameters...
 1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm
 
 15
+
+4.3 Contributions to bamcheckr
+
+4.3
+
+Contributions to bamcheckr
+
+...R CMD BATCH issue ...Fixed a graph plotting failure.
+
+16
 
 Chapter 5
 
@@ -864,7 +887,7 @@ If possible, Frontier could also handle any objects returned, displaying or logg
 information pertaining to a returned classifier’s accuracy to assist a user in the ongoing performance monitoring
 of changes to used data subsets or parameters.
 
-16
+17
 
 5.2 Concepts
 
@@ -916,7 +939,7 @@ Data will be used somewhat generically to refer to a matrix in which observation
 parameters act as columns. It is expected that all observations will have the same set of parameters.
 For problems of a classification nature such as ours, an observation’s target is the known classification of that
 particular observation. Depending on the context of the learning problem targets may be discovered manually
-17
+18
 
 5.3 Implementation
 (e.g. counting leaves from images of plants, one will need to manually count all the leaves in the image before
@@ -962,7 +985,7 @@ the package must be aware of each of the possible classes in the problem space. 
 were specifically designed for training and testing data from auto_qc and could only support encoding and
 decoding of the pass, fail and warn classes.
 
-18
+19
 
 5.3 Implementation
 However this implementation was clearly esoteric and held little to no further use outside the domain of the
@@ -970,7 +993,7 @@ project’s learning task. What would happen if a class label were to be added o
 many lines of code would need to be re-written to handle such cases; the package was inflexible.
 To counter this, Frontier was refactored to remove hard coded label definitions enabling its use as a more
 general purpose tool where users can specify the domain’s classes and their associated labels and encodings.
-Listing 1 shows the definitions used by Front to work with the auto_qc data.
+Listing 2 shows the definitions used by Front to work with the auto_qc data.
 CLASSES = {
 "pass": {
 "names": ["pass", "passed"],
@@ -985,9 +1008,9 @@ CLASSES = {
 "code": 0,
 },
 }
-Listing 1 : Class definitions for auto_qc as passed to Frontier
+Listing 2 : Class definitions for auto_qc as passed to Frontier
 
-As per Listing 1, to define classes a user must provide a Python dict containing the following for each label:
+As per Listing 2, to define classes a user must provide a Python dict containing the following for each label:
 • class String
 The dictionary key is used as the canonical name of the class label
 • names [String]
@@ -1002,7 +1025,7 @@ The number of observations with this label, typically used when calculating weig
 proportions of class sizes and outputting logging information – A user should not set this manually
 This simple structure allows Frontier to be compatible with almost any classification learning task with
 minimum input from the end user. Additional utilities provided by the Frontier utils subpackage use this
-19
+20
 
 5.3 Implementation
 structure to automatically classify and encode labels without user intervention with the following functions:
@@ -1041,9 +1064,9 @@ to follow.
 The AbstractReader class is designed to simplify the process of reading in observations and their targets for
 end users, however it is still up to the author of the dervied class to set up any structures to store data (which
 cannot be done automatically without likely enforcing potentially unhelpful constraints) before initialisation
-of the inherited base class (via the call to super) as shown in Listing 2.
+of the inherited base class (via the call to super) as shown in Listing 3.
 
-20
+21
 
 5.3 Implementation
 
@@ -1054,10 +1077,10 @@ self.summary = SummaryNumbers()
 self.indel = IndelDistribution()
 super(BamcheckReader, self).__init__(filepath, CLASSES, auto_close, 0)
 [...]
-Listing 2 : Extract from BamcheckReader class documenting initialisation of necessary data structures and
+Listing 3 : Extract from BamcheckReader class documenting initialisation of necessary data structures and
 calling for initialisation of its inherited base class
 
-As shown in Listing 2, the initialisation of the AbstractReader allows four arguments:
+As shown in Listing 3, the initialisation of the AbstractReader allows four arguments:
 • filepath String
 A relative or absolute path to a file from which to extract data or targets
 • CLASSES Dictionary
@@ -1085,7 +1108,7 @@ much information for successful classification as their values are equal for all
 
 a pointer to the address of the extracted data’s dictionary hashmap will be copied to memory inside a Frontier class
 
-21
+22
 
 5.3 Implementation
 In future it would be useful to investigate whether it would be feasible to perform such sanity checking in a
@@ -1111,11 +1134,11 @@ This identifier is then used as a key in both the _data and _targets dictionarie
 another dictionary or an arbitrary class) that stores that observation’s parameters and its known target (encoded
 class label), respectively.
 Although these attributes can be manipulated directly (and indeed they are for testing purposes) the leading
-underscore follows a popular convention defined in Python’s style guideline, PEP8[22], where class members
+underscore follows a popular convention defined in Python’s style guideline, PEP8[23], where class members
 with leading underscores should be treated as non-public. Python doesn’t have private variables such as those
 that may be found in other languages like Java, indeed the Python style guide points out that "no attribute is
-really private in Python"[22]. In an interesting StackOverflow answer on the subject, a user describes that this
-is "cultural"[23] and that Python programmers are trusted not to circumvent convention and "mess around with
+really private in Python"[23]. In an interesting StackOverflow answer on the subject, a user describes that this
+is "cultural"[24] and that Python programmers are trusted not to circumvent convention and "mess around with
 those private members". Users are therefore expected to use the functionality Frontier provides for controlled
 getting and setting of data stored in these pseudo-private _data and _targets members.
 For example, load_data should be used exclusively when populating the two dictionaries and is automatically
@@ -1124,14 +1147,14 @@ called on construction of the Statplexer if the arguments are valid. load_data w
 non-zero whilst also warning users if new observations are overwriting old ones or if an observation does not
 appear to have a corresponding target.
 ...Python dictionaries offer (constant) lookup access and more importantly querying the structure for whether it
-contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[24]...
+contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[25]...
 ...The following section describes the retrieval of data and targets in the form of lists or numpy arrays... so
 why not just store read in data in one of these structures to begin with instead?
 2A
 
 somewhat contrived contraction of ’Statistics Multiplexer’
 
-22
+23
 
 5.3 Implementation
 This is primarily due to the underlying layout of a list structure, which must be represented in memory as a
@@ -1172,7 +1195,7 @@ a substring, or if needed an exact match
 ...data is returned sorted by key, ...with parameters sorted alphanumerically... ...targets map 1:1 with the data
 array...
 
-23
+24
 
 5.3 Implementation
 • get_data_by_parameters
@@ -1193,7 +1216,7 @@ smaller classes...
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
-24
+25
 
 5.4 Usage Example
 
@@ -1220,7 +1243,7 @@ target_path,
 CLASSES,
 DataReader,
 TargetReader)
-Listing 3 : Example usage of Frontier
+Listing 4 : Example usage of Frontier
 
 Constructing the Statplexer requires the following arguments:
 • data_dir String
@@ -1234,7 +1257,7 @@ Module containing the class (of the same name) to be used to parse each file in 
 observation data
 • TargetReader Module
 Module containing the class (of the same name) to be used to parse the target_path file for target data
-25
+26
 
 5.5 Testing
 
@@ -1244,7 +1267,7 @@ Testing
 
 ...
 
-26
+27
 
 Chapter 6
 
@@ -1274,7 +1297,7 @@ Parameter Selection
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
 version from master * needed use force np.float64 * ...actually data was 0... gg
 
-27
+28
 
 6.3 Trees
 
@@ -1294,14 +1317,14 @@ Parameter Sets
 
 Ignoring Warnings
 
-28
+29
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-29
+30
 
 Chapter 7
 
@@ -1334,7 +1357,7 @@ The basic idea is to answer the question of what constitutes “good” or “ba
 out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or cause the
 correspondence between the two sets to decrease? In which case, having identified such lanelets, can we look
 
-30
+31
 
 7.1 Introduction
 back to the quality parameters we’ve been analysing so far and find whether they have something in common
@@ -1347,7 +1370,7 @@ leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
 The candidate must not have too many variants, or too few: a “Goldilocks genome”.
 
-31
+32
 
 Chapter 8
 
@@ -1376,7 +1399,7 @@ vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # Complains about lack of tabix index but still makes the file...
 
-32
+33
 
 8.1 Input Data and Format
 # Index with tabix
@@ -1390,7 +1413,7 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # http://www.biostars.org/p/51076/
 # http://vcftools.sourceforge.net/htslib.html#query
 
-33
+34
 
 Chapter 9
 
@@ -1429,7 +1452,7 @@ Loading File List
 
 ...
 
-34
+35
 
 9.2 Implementation
 
@@ -1475,7 +1498,7 @@ for chromosome in autosomes:
 for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
 
-35
+36
 
 9.2 Implementation
 if position in variant_position_dict[chromosome]:
@@ -1513,7 +1536,7 @@ clever vector mathematics calculated by numpy.
 We don’t even lose any detail because the actual list of variants inside a region can be recovered in a small
 amount of time just given the start and end position of the region.
 
-36
+37
 
 9.2 Implementation
 for chromosome in autosomes:
@@ -1548,7 +1571,7 @@ Testing
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
 
-37
+38
 
 Chapter 10
 
@@ -1585,7 +1608,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-38
+39
 
 10.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -1615,7 +1638,7 @@ the very least an estimated 35kB for a 64-bit pointer to each input file and app
 32kB buffer to read data from each file also. Yet executing the job with 500MB caused the LSF scheduler to
 forceably terminate the process for exceeding the maximum allocated memory limit.
 Assuming that the intermediate structures for storing and sorting the input data must have been greater than
-expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 4 only to
+expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 5 only to
 meet the same fate, even when reserving 16GB of memory...
 This is an absurd amount of memory even considering the vast input... It appeared a memory leak had been
 discovered... that drastically increases in severity as more files are provided as input,
@@ -1637,9 +1660,9 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 #
 
 | Only run on a node with more than 4000mb memory
-Listing 4 : Flags required to raise job memory allocation
+Listing 5 : Flags required to raise job memory allocation
 
-39
+40
 
 10.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -1678,7 +1701,7 @@ by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
 ==30464==
 by 0x402CC4: main (test_trans_tbl_init.c:348)
 
-Listing 5 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
+Listing 6 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
 failure to release memory allocated to a compiled regular expression
 
 Poor Time Performance
@@ -1694,7 +1717,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-40
+41
 
 10.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -1727,7 +1750,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-41
+42
 
 10.1 Implementation
 s = bam_get_aux(b);
@@ -1764,13 +1787,13 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-42
+43
 
 Chapter 11
 
 Current Status
 
-43
+44
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -1834,6 +1857,8 @@ http:
 2014, r package version 1.0-35. [Online]. Available:
 http://CRAN.R-project.org/package=tree
 
+45
+
 [15] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
 R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
@@ -1868,11 +1893,15 @@ Springer New York, 2009.
 articles/continuousIntegration.html
 [21] Jenkins Usage Statistics. [Online]. Available:
 http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
-[22] W. B. Van Rossum, Guido and N. Coghlan,
+[22] Hadley Wickham and Winston Chang, devtools:
+Tools to make developing R code easier, 2013,
+r package version 1.4.1. [Online]. Available:
+http://CRAN.R-project.org/package=devtools
+[23] W. B. Van Rossum, Guido and N. Coghlan,
 “PEP 8 – Style Guide for Python Code,” Python
 Enhancement Proposals, 2001. [Online]. Available:
 http://legacy.python.org/dev/peps/pep-0008/
-[23] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
+[24] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
 “Does
 python
 have
@@ -1884,9 +1913,11 @@ classes?”
 Available:
 http://stackoverflow.com/questions/1641219/
 does-python-have-private-variables-in-classes
-[24] Python Wiki. (2012) Time Complexity.
 
-44
+References
+[25] Python Wiki. (2012) Time Complexity.
+
+46
 
 Appendix A
 
@@ -2010,7 +2041,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-45
+47
 
 A.1 BAMcheckR’d Example Output
 
@@ -2242,7 +2273,7 @@ FFQ
 0
 0
 
-46
+48
 
 1609
 
@@ -2584,7 +2615,7 @@ IS
 2
 0
 
-47
+49
 
 A.1 BAMcheckR’d Example Output
 
@@ -2863,7 +2894,7 @@ GCD
 0.101
 0.101
 
-48
+50
 
 A.2 auto_qc Decision Matrix
 
@@ -2998,7 +3029,7 @@ passed
 warning
 passed
 
-49
+51
 
 ...
 ...

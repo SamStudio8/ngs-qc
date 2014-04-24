@@ -386,33 +386,47 @@ the project, but the Sanger Institute suggested it would be more useful to
 implement such functionality in \textbf{bamcheckr} directly, removing some of
 \textbf{auto\_qc}'s dependence on its position in \textbf{vr-pipe}.
 
+\begin{listing}[H]
+    \caption[r-dev]{: Installing an in-development R package with \textbf{devtools}}
+    \label{list:r-dev}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{r}
+        # Install and include the `devtools' package
+        install.packages("devtools")
+        library(devtools)
 
+        # Install package directly from Github repository
+        install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 
+        # Install package from local directory
+        install("/home/sam/Projects/seq_autoqc/bamcheckr")
 
+    \end{minted}
+\end{listing}
 
-\begin{minted}[mathescape,
-               %linenos,
-               numbersep=5pt,
-               gobble=4,
-               frame=lines,
-               framesep=2mm]{r}
-    install.packages("devtools")
-    library(devtools)
+With the help of \textbf{devtools}\citep{man:devtools} (see
+Listing~\ref{list:r-dev}) it was simple to develop and test contributions to
+\textbf{bamcheckr} locally without needing to re-publish the package after
+changes. An additional script was added to \textbf{bamcheckr}'s NAMESPACE... to
+recover the missing ratio and percentage based parameters...
 
-    # Install directly from github repository
-    install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
-
-    # Install from local directory
-    install("/home/sam/Projects/seq_autoqc/bamcheckr")
-
-\end{minted}
-Takes 5.5s on average, 16.1s with ratio due to inefficient implementation
+...unfortunately, the performance of the script was poor, taking 5.5s on average
+and increasing to 16.1s when enabling a complex function containing many vector
+operations (potentially inefficient due to my lack of R experience)...
 for overlapping\_base\_duplicate\_percentage
-re-wrote in Python...
+
+...utilising the program designed and implemented in the following chapter...
+loaded required information and used the API to calculate the missing
+parameters...
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Contributions to bamcheckr}
 ...R CMD BATCH issue
-
 ...Fixed a graph plotting failure.
-...Writing additional routines...
 
