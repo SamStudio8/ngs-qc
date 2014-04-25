@@ -10,14 +10,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-This part of the project can be outlined as follows:
+The second part of the project can be outlined as follows:
 
 \begin{itemize}
-    \item Selection of a genomic region...
-    \item Establishment of pipeline...
+    \item Collation of variant locations...
+    \item Construction of script to select a representative genomic region...
+    \item Extraction of such regions...
+    \item Merging of regions to one file...
+    \item Establishment of pipeline... :
+    \begin{itemize}
+        \item Select each sample in turn...
+        \item ...
+        \item Call variants...
+        \item Compare concordance...
+    \end{itemize}
 \end{itemize}
 
-\subsection{Why Goldilocks?}
+\section{Concepts and Terminology}
+
+\subsection{Variants and SNPs}
+...for the purpose of this study we are only interested in single nucleotide
+polymorphisms (SNPs) "snips" ...
+
+...their \textit{position} refers to the index of the base of the chromosome in
+which the polymorphism exists...
+...commonly these are 1-indexed (although this is not always the case) and thus
+care must be taken to ensure this is accounted for at any step where positions
+are considered...
+
+\subsection{The `Goldilocks' Region}
 %TODO Tidy dumped blog pasta
 %TODO What miscomm?
 
@@ -59,6 +80,33 @@ leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a
 “representative autosomal region”. The candidate must not have too many
 variants, or too few: a “Goldilocks genome”.
+
+
+
+\subsection{Groups}
+
+ichip vs gwas...
+...will become clear later
+
+\subsection{Length and Stride}
+
+...\textit{length} will refer to the number of bases included in the region
+...\textit{stride} will refer to the number of bases to be used as an offset
+between the starting base of one region and the beginning of the
+next...
+
+...a length of 1000 and a stride of 500 for example
+...the first region for example will consist of 1:1000, then 501:1500 inclusive
+
+...ensure sensible choices of these parameters!
+
+\subsection{Candidates}
+
+...a \textbf{candidate} is a region of \textit{length}...
+...a candidate will contain a number of variants, counted for each
+\textit{group}...
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Materials and Methods}
@@ -106,14 +154,81 @@ variants, or too few: a “Goldilocks genome”.
     # http://vcftools.sourceforge.net/htslib.html#query
 \end{minted}
 
+\section{Development Environment}
+\subsection{Language}
+
+Once again, Python was the language of choice for this script...
+...for many of the reasons previously discussed in Chapter~\ref{part1:dev:lang}
+...we needed this quickly, Python is useful for fast prototyping...
+...expected reasonable performance without the need for a lower level language
+like C...
+
+
+\subsection{Testing}
+
+...a little more difficult
+...discussed more at length in the following chapter...
+
+
+\subsection{Tools}
+
+As before... (Chapter~\ref{part1:dev:tools})
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Goldilocks}
 
+This chapter introduces \textbf{Goldilocks}; the first programming hurdle for
+this part of the project. \textbf{Goldilocks} is a Python script designed
+specifically to read in and store locations of user-selected variants on the
+human genome and to then find regions of a given size on the genome where
+variants are of a desired density.
+
+
 \section{Design}
 \subsection{Purpose}
+...as described briefly, \textbf{Goldilocks} is responsible for parsing input
+files of the form displayed in ...
+...positions are stored in memory per chromosome...
+
+...once all the variants are loaded, \textbf{Goldilocks} is designed to search
+over each chromosome... creating candiates as defined in the previous section...
+
+..candidates are then ranked by criteria:
+
+...for the purpose of this project we're looking at:
+...the median of the GWAS (representative)
+...the maximum of the iCHIP (enriching for maximum comparisons between data
+sets)
+
+
+
 \subsection{Format}
+
+\textbf{Goldilocks} is a modestly sized but elegantly
+complex Python script which can also serve as a stand-alone module to be
+imported in to other programs.
+
+...whilst certainly more esoteric than \textbf{Frontier}, I still made the
+choice to provide the option to import it as a module...
+...perhaps a particular function will be of a use to an end user...
+...with more time it would be interesting to research other potential uses for
+such a script...
+
+
 \subsection{Method}
+
+...not quite quick and dirty but the initial codebase was overly complex...
+...testing came second in terms of priority which was possibly unwise...
+
+...with more time some of the functions would be more abstracted
+...currently criteria are still hard coded to meet the needs of the project and
+propose little re-use value unless altered...
+
+...does however allow for repeatable results in future with different data sets
+or additional groups...
+
+
 
 \section{Implementation}
 ...we investigate the following implementation stories:
@@ -129,12 +244,24 @@ variants, or too few: a “Goldilocks genome”.
 
 \subsection{Loading File List}
 
-...
+...simple file as shown in Appendix...
+...groups together related files...
+...all files in a particular group will be considered as a whole (all variants
+from all files in the group will be added to the set of chromosomes for that
+group)
 
 
 \subsection{Loading Variants from Input Files}
 
-...
+...no duplicate checking to avoid needing to check for list membership
+...this is not an issue later...
+
+...however this would suffer from expensive memory moving operations and is ripe
+for alteration...
+...perhaps a set would be more appropriate...
+
+...although the input for this part of the study handles <x> variants in <y>
+seconds and thus time was better spent elsewhere...
 
 
 \subsection{Storage}

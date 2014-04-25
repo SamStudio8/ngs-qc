@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 25, 2014
+April 26, 2014
 
 Declaration
 
@@ -251,6 +251,11 @@ Results
 
 II
 
+17
+
+28
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 6.1.1
 
 Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
@@ -258,6 +263,8 @@ Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 6.1.2
 
 CART . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+
+6.2
 
 Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
@@ -279,121 +286,149 @@ Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
 
-31
-
-Why Goldilocks? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
-
-Materials and Methods
-8.1
-
 30
-
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
-7.1.1
-
-9
-
-28
-
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
-
-6.2
+31
 
 7.1
 
-8
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
-17
+7.2
 
-33
+Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+7.2.1
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
-8.1.1
+Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
-Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+7.2.2
 
-Goldilocks
+The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
-35
+7.2.3
+
+Groups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+
+7.2.4
+
+Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+
+7.2.5
+
+Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 iii
 
 Contents
+8
+
+Materials and Methods
+8.1
+
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+8.1.1
+
+8.2
+
+9
+
+34
+
+Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+
+Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+8.2.1
+
+Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+
+8.2.2
+
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+
+8.2.3
+
+Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+
+Goldilocks
+
+36
+
 9.1
 
 9.2
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 9.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 9.1.2
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 9.1.3
 
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 9.2.1
 
-Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 9.2.2
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 9.2.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
 9.2.4
+
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+
 9.2.5
 
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
-Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 9.2.6
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 10 Analysis Pipeline
 
-39
+41
 
-10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
-10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
-10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
-10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
-10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
-10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
 
 III
 
 Discussions and Conclusions
 
-44
+46
 
 11 Current Status
 
-45
+47
 
 12 Critical Evaluation
 
-46
+48
 
 13 Conclusions
 
-47
+49
 
 Appendix A Input Examples
 
-50
+52
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
 
 iv
 
@@ -1348,13 +1383,34 @@ Introduction and Motivation
 
 Introduction
 
-This part of the project can be outlined as follows:
-• Selection of a genomic region...
-• Establishment of pipeline...
+The second part of the project can be outlined as follows:
+• Collation of variant locations...
+• Construction of script to select a representative genomic region...
+• Extraction of such regions...
+• Merging of regions to one file...
+• Establishment of pipeline... :
+– Select each sample in turn...
+– ...
+– Call variants...
+– Compare concordance...
 
-7.1.1
+7.2
+7.2.1
 
-Why Goldilocks?
+Concepts and Terminology
+Variants and SNPs
+
+...for the purpose of this study we are only interested in single nucleotide polymorphisms (SNPs) "snips" ...
+...their position refers to the index of the base of the chromosome in which the polymorphism exists... ...commonly
+these are 1-indexed (although this is not always the case) and thus care must be taken to ensure this is accounted
+for at any step where positions are considered...
+31
+
+7.2 Concepts and Terminology
+
+7.2.2
+
+The ‘Goldilocks’ Region
 
 Having recovered from the miscommunication that led me to attempt to find reverse strands in VCF files with
 already known errors, I’ve been making performance improvements to the script that finds candidate genomic
@@ -1371,10 +1427,6 @@ and the corresponding variant call on our “SNP chip” data.
 The basic idea is to answer the question of what constitutes “good” or “bad” lanelet quality? Does leaving
 out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or cause the
 correspondence between the two sets to decrease? In which case, having identified such lanelets, can we look
-
-31
-
-7.1 Introduction
 back to the quality parameters we’ve been analysing so far and find whether they have something in common
 in those cases?
 If we can, these parameters can be used to identify “good” or “bad” lanelets straight out of the machine. We
@@ -1385,7 +1437,32 @@ leave-one-out analysis on a subsection of the whole genome.
 It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
 The candidate must not have too many variants, or too few: a “Goldilocks genome”.
 
+7.2.3
+
+Groups
+
+ichip vs gwas... ...will become clear later
+
+7.2.4
+
+Length and Stride
+
+...length will refer to the number of bases included in the region ...stride will refer to the number of bases to
+be used as an offset between the starting base of one region and the beginning of the next...
+...a length of 1000 and a stride of 500 for example ...the first region for example will consist of 1:1000, then
+501:1500 inclusive
 32
+
+7.2 Concepts and Terminology
+...ensure sensible choices of these parameters!
+
+7.2.5
+
+Candidates
+
+...a candidate is a region of length... ...a candidate will contain a number of variants, counted for each group...
+
+33
 
 Chapter 8
 
@@ -1414,9 +1491,9 @@ vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # Complains about lack of tabix index but still makes the file...
 
-33
+34
 
-8.1 Input Data and Format
+8.2 Development Environment
 # Index with tabix
 # "The input data file must be position sorted and compressed by bgzip
 # which has a gzip(1) like interface"
@@ -1428,26 +1505,74 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # http://www.biostars.org/p/51076/
 # http://vcftools.sourceforge.net/htslib.html#query
 
-34
+8.2
+8.2.1
+
+Development Environment
+Language
+
+Once again, Python was the language of choice for this script... ...for many of the reasons previously discussed
+in Chapter 3.2.1 ...we needed this quickly, Python is useful for fast prototyping... ...expected reasonable
+performance without the need for a lower level language like C...
+
+8.2.2
+
+Testing
+
+...a little more difficult ...discussed more at length in the following chapter...
+
+8.2.3
+
+Tools
+
+As before... (Chapter 3.2.5)
+
+35
 
 Chapter 9
 
 Goldilocks
+This chapter introduces Goldilocks; the first programming hurdle for this part of the project. Goldilocks is
+a Python script designed specifically to read in and store locations of user-selected variants on the human
+genome and to then find regions of a given size on the genome where variants are of a desired density.
+
 9.1
-
-Design
-
 9.1.1
 
+Design
 Purpose
+
+...as described briefly, Goldilocks is responsible for parsing input files of the form displayed in ... ...positions
+are stored in memory per chromosome...
+...once all the variants are loaded, Goldilocks is designed to search over each chromosome... creating candiates
+as defined in the previous section...
+..candidates are then ranked by criteria:
+...for the purpose of this project we’re looking at: ...the median of the GWAS (representative) ...the maximum
+of the iCHIP (enriching for maximum comparisons between data sets)
 
 9.1.2
 
 Format
 
+Goldilocks is a modestly sized but elegantly complex Python script which can also serve as a stand-alone
+module to be imported in to other programs.
+...whilst certainly more esoteric than Frontier, I still made the choice to provide the option to import it as
+a module... ...perhaps a particular function will be of a use to an end user... ...with more time it would be
+interesting to research other potential uses for such a script...
+
+36
+
+9.2 Implementation
+
 9.1.3
 
 Method
+
+...not quite quick and dirty but the initial codebase was overly complex... ...testing came second in terms of
+priority which was possibly unwise...
+...with more time some of the functions would be more abstracted ...currently criteria are still hard coded to
+meet the needs of the project and propose little re-use value unless altered...
+...does however allow for repeatable results in future with different data sets or additional groups...
 
 9.2
 
@@ -1465,17 +1590,23 @@ Implementation
 
 Loading File List
 
-...
-
-35
-
-9.2 Implementation
+...simple file as shown in Appendix... ...groups together related files... ...all files in a particular group will be
+considered as a whole (all variants from all files in the group will be added to the set of chromosomes for that
+group)
 
 9.2.2
 
 Loading Variants from Input Files
 
-...
+...no duplicate checking to avoid needing to check for list membership ...this is not an issue later...
+...however this would suffer from expensive memory moving operations and is ripe for alteration... ...perhaps
+a set would be more appropriate...
+...although the input for this part of the study handles <x> variants in <y> seconds and thus time was better
+spent elsewhere...
+
+37
+
+9.2 Implementation
 
 9.2.3
 
@@ -1512,14 +1643,13 @@ have a dictionary for each chromosome) we have:
 for chromosome in autosomes:
 for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
-
-36
-
-9.2 Implementation
 if position in variant_position_dict[chromosome]:
 # Do something...
 This still takes half an hour to run on my laptop though, surely there is a better way. I wondered if whether
 dropping the lookup would improve things. Instead, how about an area of memory is allocated to house the
+38
+
+9.2 Implementation
 current chromosome and act as a variant “mask” – essentially an array where each element is a base of the
 current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
@@ -1551,13 +1681,14 @@ clever vector mathematics calculated by numpy.
 We don’t even lose any detail because the actual list of variants inside a region can be recovered in a small
 amount of time just given the start and end position of the region.
 
-37
-
-9.2 Implementation
 for chromosome in autosomes:
 chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
 chro[variant_loc] = 1
+
+39
+
+9.2 Implementation
 for start in range(1, len(chromosome), STRIDE):
 num_variants = np.sum(chro[start:start+LENGTH])
 # Do something...
@@ -1586,7 +1717,7 @@ Testing
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
 
-38
+40
 
 Chapter 10
 
@@ -1623,7 +1754,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-39
+41
 
 10.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -1677,7 +1808,7 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 | Only run on a node with more than 4000mb memory
 Listing 5 : Flags required to raise job memory allocation
 
-40
+42
 
 10.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -1732,7 +1863,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-41
+43
 
 10.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -1765,7 +1896,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-42
+44
 
 10.1 Implementation
 s = bam_get_aux(b);
@@ -1802,31 +1933,31 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-43
+45
 
 Part III
 
 Discussions and Conclusions
 
-44
+46
 
 Chapter 11
 
 Current Status
 
-45
+47
 
 Chapter 12
 
 Critical Evaluation
 
-46
+48
 
 Chapter 13
 
 Conclusions
 
-47
+49
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -1890,7 +2021,7 @@ http:
 2014, r package version 1.0-35. [Online]. Available:
 http://CRAN.R-project.org/package=tree
 
-48
+50
 
 [15] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
@@ -1950,7 +2081,7 @@ does-python-have-private-variables-in-classes
 References
 [25] Python Wiki. (2012) Time Complexity.
 
-49
+51
 
 Appendix A
 
@@ -2074,7 +2205,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-50
+52
 
 A.1 BAMcheckR’d Example Output
 
@@ -2306,7 +2437,7 @@ FFQ
 0
 0
 
-51
+53
 
 1609
 
@@ -2648,7 +2779,7 @@ IS
 2
 0
 
-52
+54
 
 A.1 BAMcheckR’d Example Output
 
@@ -2927,7 +3058,7 @@ GCD
 0.101
 0.101
 
-53
+55
 
 A.2 auto_qc Decision Matrix
 
@@ -3062,7 +3193,7 @@ passed
 warning
 passed
 
-54
+56
 
 ...
 ...
