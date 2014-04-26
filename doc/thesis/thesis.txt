@@ -376,7 +376,7 @@ Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 9.2.2
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
 9.2.3
 
@@ -392,43 +392,43 @@ Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 9.2.6
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 10 Analysis Pipeline
 
-42
+43
 
-10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
-10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
-10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
-10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
-10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
-10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
 
 III
 
 Discussions and Conclusions
 
-47
+48
 
 11 Current Status
 
-48
+49
 
 12 Critical Evaluation
 
-49
+50
 
 13 Conclusions
 
-50
+51
 
 Appendix A Input Examples
 
-53
+54
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
 
 iv
 
@@ -894,6 +894,9 @@ enabling a complex function containing many vector operations (potentially ineff
 experience)... for overlapping_base_duplicate_percentage
 ...utilising the program designed and implemented in the following chapter... loaded required information and
 used the API to calculate the missing parameters...
+...with such an intriguing difference in performance with significantly more time it would be appealing to
+explore the idiosyncrasies of each implementation ...although such an investigation would quite likely sufficiently
+generate an entire project of its own.
 1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm
 
 15
@@ -1461,6 +1464,7 @@ be used as an offset between the starting base of one region and the beginning o
 Candidates
 
 ...a candidate is a region of length... ...a candidate will contain a number of variants, counted for each group...
+...simple object consisting of start and end base...
 
 33
 
@@ -1542,37 +1546,48 @@ genome and to then find regions of a given size on the genome where variants are
 Design
 Purpose
 
-...as described briefly, Goldilocks is responsible for parsing input files of the form displayed in ... ...positions
-are stored in memory per chromosome...
-...once all the variants are loaded, Goldilocks is designed to search over each chromosome... creating candiates
-as defined in the previous section...
-..candidates are then ranked by criteria:
-...for the purpose of this project we’re looking at: ...the median of the GWAS (representative) ...the maximum
-of the iCHIP (enriching for maximum comparisons between data sets)
+Expanding on the introduction, Goldilocks is responsible for parsing input files that contain line-delimited,
+colon-seperated chromosome and base position entries (e.g. 1:5000 is the base at position 5000 on the first
+chromosome). Input files can be grouped, pooling the set of unique listed variants between the files and
+treating them as one search space.
+For each file group, a list of positions for each chromosome is stored in memory. Once all variants have been
+loaded Goldilocks is designed to iterate over each chromosome1 , load all of the variants from the lists in to
+an array and essentially count the number of variants present (in each group) between a given start and end
+position, determined by the arguments specified by the user as described in Section 7.2.4.
+This combination of a start and end position and the counts of variants present inbetween forms the structure
+of a candidate. Having performed this search over all the autosomes, candidates can then be ranked by
+user-specified criteria regarding the density of the counted variants.
 
 9.1.2
 
 Format
 
 Goldilocks is a modestly sized but elegantly complex Python script which can also serve as a stand-alone
-module to be imported in to other programs.
-...whilst certainly more esoteric than Frontier, I still made the choice to provide the option to import it as
-a module... ...perhaps a particular function will be of a use to an end user... ...with more time it would be
-interesting to research other potential uses for such a script...
+module to be imported in to other programs. Whilst the use case is certainly more esoteric than Frontier, I
+1 Strictly
+
+speaking we are only handling the 22 autosomes and ignoring the remaining 2 sex chromsomes (allosomes)
 
 36
 
 9.2 Implementation
+made the choice to modularise the functionality, in the hope that if an end user were to find some function of
+the script particularly useful they may call it as part of their own program.
+With more time it would be interesting to research other potential uses for such a script...
 
 9.1.3
 
 Method
 
-...not quite quick and dirty but the initial codebase was overly complex... ...testing came second in terms of
-priority which was possibly unwise...
-...with more time some of the functions would be more abstracted ...currently criteria are still hard coded to
-meet the needs of the project and propose little re-use value unless altered...
-...does however allow for repeatable results in future with different data sets or additional groups...
+Development was akin to a more traditional methodology; requirements were simple and available up front,
+testing could wait until all the components had been completed to properly measure whether outcomes were
+as expected.
+Goldilocks had to be constructed quickly but carefully. Although avoiding a quick and dirty solution, the
+initial codebase was arguably cluttered with blocks of repeated code to perform actions for different hard
+coded groups. Testing was not automated and utilised eyeballing of resulting data and occasional checking of
+input files to ensure results were as expected.
+The first completed version consisted of a somewhat monolithic script, prime for breaking up in to a more
+organised set of functions...
 
 9.2
 
@@ -1590,23 +1605,25 @@ Implementation
 
 Loading File List
 
-...simple file as shown in Appendix... ...groups together related files... ...all files in a particular group will be
-considered as a whole (all variants from all files in the group will be added to the set of chromosomes for that
-group)
+...simple file format as shown in Appendix...merely lists locations of input files and groups them together as
+desired ...all files in a particular group will be considered as a whole (all variants from all files in the group
+will be added to the set of chromosomes for that group) ...each group will have a structure created...
+
+37
+
+9.2 Implementation
 
 9.2.2
 
 Loading Variants from Input Files
 
-...no duplicate checking to avoid needing to check for list membership ...this is not an issue later...
-...however this would suffer from expensive memory moving operations and is ripe for alteration... ...perhaps
-a set would be more appropriate...
+...no duplicate checking to avoid needing to check for list membership ...this is not an issue later (setting a flag
+to 1 multiple times will cause no effect)... seemed faster to repeat those actions than to check for membership...
+...however this process of appending variants to a list would suffer from expensive memory moving operations
+and is ripe for alteration... ...perhaps a set would be more appropriate... ...investigating the difference in
+performance would be of interest...
 ...although the input for this part of the study handles <x> variants in <y> seconds and thus time was better
 spent elsewhere...
-
-37
-
-9.2 Implementation
 
 9.2.3
 
@@ -1637,6 +1654,9 @@ so at least n is smaller. It is pretty doubtful that this would make any useful 
 I’m happy to say I bypassed this option but thought it would be fun to consider its performance.
 A far more sensible solution is to replace the list with a dictionary whose lookup is amortized to a constant
 time. The number of lookups is still incredibly substantial but a constant lookup is starting to make this sound
+38
+
+9.2 Implementation
 viable. Using the variant positions as keys of a dictionary (in fact let us use the previous minor suggestion and
 have a dictionary for each chromosome) we have:
 
@@ -1647,9 +1667,6 @@ if position in variant_position_dict[chromosome]:
 # Do something...
 This still takes half an hour to run on my laptop though, surely there is a better way. I wondered if whether
 dropping the lookup would improve things. Instead, how about an area of memory is allocated to house the
-38
-
-9.2 Implementation
 current chromosome and act as a variant “mask” – essentially an array where each element is a base of the
 current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
@@ -1676,6 +1693,9 @@ Python scalar for comparison.
 That’s a lot of memory action.
 It then occurred to me that we’re interested in just how many variants are inside each region and our chromosome
 is handily encapsulated in a numpy array. Why don’t we just sum together the elements in each region?
+39
+
+9.2 Implementation
 Remember variant positive base positions are 1 and 0 otherwise, useful. So the work boils down to some
 clever vector mathematics calculated by numpy.
 We don’t even lose any detail because the actual list of variants inside a region can be recovered in a small
@@ -1685,33 +1705,40 @@ for chromosome in autosomes:
 chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
 chro[variant_loc] = 1
-
-39
-
-9.2 Implementation
 for start in range(1, len(chromosome), STRIDE):
 num_variants = np.sum(chro[start:start+LENGTH])
 # Do something...
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
 be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
 the variant locations in the first place).
-Ignoring empty regions etc.
+...Ignoring empty regions etc.
+...supervisor suggested bloom filters... ...would be a useful experiment to measure what further performance
+gains could be acheived with such a method...
 
 9.2.4
 
 Searching for Regions
 
 ..
+...for the purpose of this project we’re looking at: ...the median of the GWAS (representative) ...the maximum
+of the iCHIP (enriching for maximum comparisons between data sets)
 
 9.2.5
 
 Final Region Selection
 
-..
-
-Fig. 9.1 : ...
+.. ...with more time some of the functions would be more abstracted ...currently criteria are still hard coded to
+meet the needs of the project and propose little re-use value unless altered...
+...in this state does however still allow for repeatable results in future with different data sets or additional
+groups...
 
 40
+
+9.2 Implementation
+
+Fig. 9.1 Megabase Plot: ...
+
+41
 
 9.2 Implementation
 
@@ -1722,8 +1749,10 @@ Testing
 ...particularly difficult. ...required generation of input files that would contain known regions to test were
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
+...tests are still rather modest and with more time it would be appropriate to improve their function but I have
+faith in their results...
 
-41
+42
 
 Chapter 10
 
@@ -1744,7 +1773,7 @@ Implementation
 
 Region Extraction
 
-...regions extracted from IRODS
+...regions extracted from IRODS ...difficulty gaining user access for both IRODS and "the farm"
 
 10.1.2
 
@@ -1760,7 +1789,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-42
+43
 
 10.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -1781,7 +1810,7 @@ bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o -e
 samtools merge
 
 Usage
-...undocumented feature to use a file of filenames...
+...undocumented feature to use a file of filenames... allowing more than two files to be specified at a time...
 
 Memory Leak
 By default the LSF scheduler at the Sanger Institute will issue 100MB to any submitted job. Given both the
@@ -1814,7 +1843,7 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 | Only run on a node with more than 4000mb memory
 Listing 5 : Flags required to raise job memory allocation
 
-43
+44
 
 10.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -1869,7 +1898,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-44
+45
 
 10.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -1902,7 +1931,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-45
+46
 
 10.1 Implementation
 s = bam_get_aux(b);
@@ -1939,31 +1968,31 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-46
+47
 
 Part III
 
 Discussions and Conclusions
 
-47
+48
 
 Chapter 11
 
 Current Status
 
-48
+49
 
 Chapter 12
 
 Critical Evaluation
 
-49
+50
 
 Chapter 13
 
 Conclusions
 
-50
+51
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -2027,7 +2056,7 @@ http:
 2014, r package version 1.0-35. [Online]. Available:
 http://CRAN.R-project.org/package=tree
 
-51
+52
 
 [15] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
@@ -2087,7 +2116,7 @@ does-python-have-private-variables-in-classes
 References
 [25] Python Wiki. (2012) Time Complexity.
 
-52
+53
 
 Appendix A
 
@@ -2211,7 +2240,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-53
+54
 
 A.1 BAMcheckR’d Example Output
 
@@ -2443,7 +2472,7 @@ FFQ
 0
 0
 
-54
+55
 
 1609
 
@@ -2785,7 +2814,7 @@ IS
 2
 0
 
-55
+56
 
 A.1 BAMcheckR’d Example Output
 
@@ -3064,7 +3093,7 @@ GCD
 0.101
 0.101
 
-56
+57
 
 A.2 auto_qc Decision Matrix
 
@@ -3199,7 +3228,7 @@ passed
 warning
 passed
 
-57
+58
 
 ...
 ...
