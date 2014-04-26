@@ -159,6 +159,18 @@ next...
     # http://vcftools.sourceforge.net/htslib.html#query
 \end{minted}
 
+\subsection{Variant Query File}
+\label{sec:vqf}
+
+...named such for the command that creates it, the Variant Query File is the
+proposed input format for \textbf{Goldilocks}...
+
+\subsection{Paths File}
+\label{sec:pathsfile}
+
+...esoteric file format to handle grouping of Variant Query files...
+
+
 \section{Development Environment}
 \subsection{Language}
 
@@ -247,27 +259,30 @@ prime for breaking up in to a more organised set of functions...
 
 
 
-
 \section{Implementation}
 ...we investigate the following implementation stories:
 
 \begin{itemize}
-    \item Input of data, vcftools query, input groups (ichip, gwas)
-    \item Loading files, loading variants from each file
+    \item Handling user input of grouped Variant Query files
+    \item Loading variants from identified Variant Query files
     \item Storage of read data in memory (and troubles thereof)...
     \item Striding and window size and data structures thereof
     \item Final output and selection, counters and buckets (avoid chr6)
     \item Testing, generate output files, call functions akin to API
 \end{itemize}
 
-\subsection{Loading File List}
 
-...simple file format as shown in Appendix...merely lists locations of input
-files and groups them together as desired
+\subsection{Loading Variant Query File List}
+
+\textbf{Goldilocks} requires the user provide their own valid "pathfile" as
+meeting the specification demonstrated in Section~\ref{sec:pathsfile} (an
+example of such a file can be found in Appendix~\ref{app:pathsfile}).
+
+merely lists locations of input files and groups them together as desired
 ...all files in a particular group will be considered as a whole (all variants
 from all files in the group will be added to the set of chromosomes for that
 group)
-...each group will have a structure created...
+...each group will have a three data structures created...
 
 
 \subsection{Loading Variants from Input Files}

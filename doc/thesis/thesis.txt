@@ -324,16 +324,24 @@ iii
 Materials and Methods
 8.1
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
-8.1.1
-
 8.2
 
 9
 
 34
 
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+8.1.1
+
 Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+
+8.1.2
+
+Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+
+8.1.3
+
+Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 8.2.1
@@ -372,7 +380,7 @@ Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 9.2.1
 
-Loading File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 9.2.2
 
@@ -429,6 +437,7 @@ Appendix A Input Examples
 
 A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
 A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+A.3 Goldilocks Pathfile . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
 
 iv
 
@@ -1024,9 +1033,10 @@ Training and Testing
 Implementation
 
 This section investigates the implementation of Frontier’s major components:
-• Handling of input, readers, sanity checking
+• Informing the package of the problem domain...
+• Interfaces provided for reading in data
 • Storage of read data in memory
-• Retrieval
+• Retrieval of stored data
 • Interaction with scikit-learn
 
 5.3.1
@@ -1037,7 +1047,6 @@ Frontier was designed to support classification machine learning problems, to ad
 the package must be aware of each of the possible classes in the problem space. Early versions of Frontier
 were specifically designed for training and testing data from auto_qc and could only support encoding and
 decoding of the pass, fail and warn classes.
-
 19
 
 5.3 Implementation
@@ -1509,6 +1518,19 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # http://www.biostars.org/p/51076/
 # http://vcftools.sourceforge.net/htslib.html#query
 
+8.1.2
+
+Variant Query File
+
+...named such for the command that creates it, the Variant Query File is the proposed input format for
+Goldilocks...
+
+8.1.3
+
+Paths File
+
+...esoteric file format to handle grouping of Variant Query files...
+
 8.2
 8.2.1
 
@@ -1594,8 +1616,8 @@ organised set of functions...
 Implementation
 
 ...we investigate the following implementation stories:
-• Input of data, vcftools query, input groups (ichip, gwas)
-• Loading files, loading variants from each file
+• Handling user input of grouped Variant Query files
+• Loading variants from identified Variant Query files
 • Storage of read data in memory (and troubles thereof)...
 • Striding and window size and data structures thereof
 • Final output and selection, counters and buckets (avoid chr6)
@@ -1603,11 +1625,13 @@ Implementation
 
 9.2.1
 
-Loading File List
+Loading Variant Query File List
 
-...simple file format as shown in Appendix...merely lists locations of input files and groups them together as
-desired ...all files in a particular group will be considered as a whole (all variants from all files in the group
-will be added to the set of chromosomes for that group) ...each group will have a structure created...
+Goldilocks requires the user provide their own valid "pathfile" as meeting the specification demonstrated in
+Section 8.1.3 (an example of such a file can be found in Appendix ??).
+merely lists locations of input files and groups them together as desired ...all files in a particular group will be
+considered as a whole (all variants from all files in the group will be added to the set of chromosomes for that
+group) ...each group will have a three data structures created...
 
 37
 
@@ -3119,6 +3143,14 @@ lanelet
 9999_9#9
 9999_9#8
 
+A.3
+# gwas
+cd-gwas
+uc-gwas
+# ichip
+cd-ichip
+uc-ichip
+
 19
 20
 21
@@ -3227,6 +3259,12 @@ fail
 passed
 warning
 passed
+
+Goldilocks Pathfile
+/pools/encrypted/sanger/vcf/cd-seq.vcf.gz.q
+/pools/encrypted/sanger/vcf/uc-seq.vcf.gz.q
+/pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
+/pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
 58
 
