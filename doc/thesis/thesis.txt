@@ -392,43 +392,43 @@ Final Region Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 9.2.6
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
 10 Analysis Pipeline
 
-41
+42
 
-10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
-10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
-10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
-10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
-10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
-10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+10.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+10.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+10.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+10.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+10.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+10.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
 
 III
 
 Discussions and Conclusions
 
-46
+47
 
 11 Current Status
 
-47
+48
 
 12 Critical Evaluation
 
-48
+49
 
 13 Conclusions
 
-49
+50
 
 Appendix A Input Examples
 
-52
+53
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
 
 iv
 
@@ -1709,6 +1709,12 @@ Final Region Selection
 
 ..
 
+Fig. 9.1 : ...
+
+40
+
+9.2 Implementation
+
 9.2.6
 
 Testing
@@ -1717,7 +1723,7 @@ Testing
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
 
-40
+41
 
 Chapter 10
 
@@ -1754,7 +1760,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-41
+42
 
 10.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -1808,7 +1814,7 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 | Only run on a node with more than 4000mb memory
 Listing 5 : Flags required to raise job memory allocation
 
-42
+43
 
 10.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -1863,7 +1869,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-43
+44
 
 10.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -1896,7 +1902,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-44
+45
 
 10.1 Implementation
 s = bam_get_aux(b);
@@ -1933,31 +1939,31 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-45
+46
 
 Part III
 
 Discussions and Conclusions
 
-46
+47
 
 Chapter 11
 
 Current Status
 
-47
+48
 
 Chapter 12
 
 Critical Evaluation
 
-48
+49
 
 Chapter 13
 
 Conclusions
 
-49
+50
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -2021,7 +2027,7 @@ http:
 2014, r package version 1.0-35. [Online]. Available:
 http://CRAN.R-project.org/package=tree
 
-50
+51
 
 [15] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
@@ -2081,7 +2087,7 @@ does-python-have-private-variables-in-classes
 References
 [25] Python Wiki. (2012) Time Complexity.
 
-51
+52
 
 Appendix A
 
@@ -2205,7 +2211,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-52
+53
 
 A.1 BAMcheckR’d Example Output
 
@@ -2437,7 +2443,7 @@ FFQ
 0
 0
 
-53
+54
 
 1609
 
@@ -2779,7 +2785,7 @@ IS
 2
 0
 
-54
+55
 
 A.1 BAMcheckR’d Example Output
 
@@ -3058,7 +3064,7 @@ GCD
 0.101
 0.101
 
-55
+56
 
 A.2 auto_qc Decision Matrix
 
@@ -3193,7 +3199,7 @@ passed
 warning
 passed
 
-56
+57
 
 ...
 ...
