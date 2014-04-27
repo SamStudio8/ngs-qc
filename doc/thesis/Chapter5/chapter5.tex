@@ -19,9 +19,9 @@ The second part of the project can be outlined as follows:
     \item Merging of regions to one file...
     \item Establishment of pipeline... :
     \begin{itemize}
-        \item Select each sample in turn...
+        \item Select each lanelet in turn...
         \item ...
-        \item Call variants...
+        \item Call variants on k-1 lanelets...
         \item Compare concordance...
     \end{itemize}
 \end{itemize}
@@ -86,6 +86,7 @@ variants, or too few: a “Goldilocks genome”.
 
 ichip vs gwas...
 ...will become clear later
+...interested keeping the variants from the two data sets we have seperate...
 
 
 \subsection{Length and Stride}
@@ -163,12 +164,21 @@ next...
 \label{sec:vqf}
 
 ...named such for the command that creates it, the Variant Query File is the
-proposed input format for \textbf{Goldilocks}...
+proposed input format for \textbf{Goldilocks}...  ...listing z shows the
+commands used to extract this information in the required format...
+...line-delimited, tab-seperated entries with the first field a colon-seperated
+pair of a chromosome and position... (\textit{e.g.} 1:5000 is the base at
+position 5000 on the first chromosome).
 
 \subsection{Paths File}
 \label{sec:pathsfile}
 
 ...esoteric file format to handle grouping of Variant Query files...
+...very simple, lines beginning with a '\#' delimit the desired groups, any line
+following a group line is considered to be a member of that group...
+...entries are tab-delimited, with two fields; a unique slug for simple
+identification of the file and its actual path (relative or absolute)
+respectively...
 
 
 \section{Development Environment}
@@ -204,11 +214,12 @@ variants are of a desired density.
 
 \section{Design}
 \subsection{Purpose}
+\label{sec:goldilocks-purpose}
 
 Expanding on the introduction, \textbf{Goldilocks} is responsible for parsing
-input files that contain line-delimited, colon-seperated chromosome and base
-position entries (\textit{e.g.} 1:5000 is the base at position 5000 on
-the first chromosome). Input files can be grouped, pooling the set of unique listed
+input files that contain chromosome and base
+position entries.. 
+Input files can be grouped, pooling the set of unique listed
 variants between the files and treating them as one search space.
 
 For each file group, a list of positions for each chromosome is stored in
@@ -258,6 +269,11 @@ The first completed version consisted of a somewhat monolithic script,
 prime for breaking up in to a more organised set of functions...
 
 
+\subsection{Pitfalls}
+
+...chromosome six must be ignored...
+...chromosomes are 1-indexed!
+
 
 \section{Implementation}
 ...we investigate the following implementation stories:
@@ -274,18 +290,29 @@ prime for breaking up in to a more organised set of functions...
 
 \subsection{Loading Variant Query File List}
 
-\textbf{Goldilocks} requires the user provide their own valid "pathsfile" as
+\textbf{Goldilocks} requires the user provide their own valid "pathsfile",
 meeting the specification demonstrated in Section~\ref{sec:pathsfile} (an
-example of such a file can be found in Appendix~\ref{app:pathsfile}).
+actual example of such a file can be found in Appendix~\ref{app:pathsfile}).
 
 merely lists locations of input files and groups them together as desired
 ...all files in a particular group will be considered as a whole (all variants
 from all files in the group will be added to the set of chromosomes for that
 group)
+
+\textbf{load\_variant\_files} is a simple function to read the pathsfile and
+initialise the relevant data structures for each group...
 ...each group will have a three data structures created...
 
 
 \subsection{Loading Variants from Input Files}
+
+\textbf{load\_variants\_from\_file} is responsible for loading the file
+referenced by a particular path and adding each valid variant record to the
+correct file group...
+
+...this function also keeps track of the "furthest along" variant for each
+chromosome over all groups, this is used in the search step later to ensure each
+group has the same number of regions...
 
 ...no duplicate checking to avoid needing to check for list membership
 ...this is not an issue later (setting a flag to 1 multiple times will cause no
@@ -293,11 +320,13 @@ effect)... seemed faster to repeat those actions than to check for membership...
 
 ...however this process of appending variants to a list would suffer from
 expensive memory moving operations and is ripe for alteration...
-...perhaps a set would be more appropriate...
+...could use a dictionary...
+...but perhaps a set would be more appropriate...
 ...investigating the difference in performance would be of interest...
 
 ...although the input for this part of the study handles <x> variants in <y>
 seconds and thus time was better spent elsewhere...
+
 
 
 \subsection{Storage}
@@ -307,9 +336,9 @@ important to consider both time and memory as it is simple to deliver a poor
 performing solution.
 
 Searching for candidates regions over the entire genome at once is probably
-unwise. Luckily, since our candidate must not span chromosomes (the ends of
-chromosomes are not very good for reads) then we can easily yield a great
-improvement from processing chromosomes individually.
+unwise. Luckily, since our candidate must not span chromosomes (telomeres --
+the ends of chromosomes are not very good for reads) then we can easily yield a
+great improvement from processing chromosomes individually.
 
 The process is to extract the locations of all the variants across the genome
 from the SNP chip VCF files (these files list the alleles for each detected
@@ -443,6 +472,25 @@ locations in the first place).
 
 ...Ignoring empty regions etc.
 
+\begin{minted}[mathescape,
+            %linenos,
+            numbersep=5pt,
+            gobble=4,
+            frame=lines,
+            framesep=2mm]{python}
+    def load_chromosome(self, size, locations):
+        chro = np.zeros(size+1, np.int8)
+
+        # Populate the chromosome array with 1 for each position a variant exists
+        for variant_loc in locations:
+            chro[variant_loc] = 1
+
+        return chro
+\end{minted}
+
+\textbf{load\_chromosome} returns a \textbf{numpy} array representing the
+chromosome, given its desired length and a list of variants...
+
 %FUTURE
 ...supervisor suggested bloom filters...
 ...would be a useful experiment to measure what further performance gains could
@@ -453,28 +501,33 @@ be acheived with such a method...
 
 ..
 
+
+\textbf{search\_regions}
+...possibly a misnomer as this is more of a census than a search...
+...responsible for the core objective function as outlined in
+Section~\ref{sec:goldilocks-purpose}...
+..each region of \textit{length}, starting at \textit{stride} is checked for the
+number of variants contained therein...
+
+...it is here that chromosome six is discarded...
+
+\subsection{Final Selection}
+
+\textbf{initial\_filter}
+\textbf{enrich}
+
+...provides functions to rank all candidate regions by density of variants
+...currently criteria are still hard coded to meet the needs of the project and
+propose little re-use value unless altered...
 ...for the purpose of this project we're looking at:
 ...the median of the GWAS (representative)
 ...the maximum of the iCHIP (enriching for maximum comparisons between data sets)
 
-
-\subsection{Final Region Selection}
-
-..
-...with more time some of the functions would be more abstracted
-...currently criteria are still hard coded to meet the needs of the project and
-propose little re-use value unless altered...
+...with more time it would be useful to open these functions to input from an
+end user to provide their own criteria...
 
 ...in this state does however still allow for repeatable results in future with
 different data sets or additional groups...
-
-\begin{figure}[htbp!]
-    \centering
-    \includegraphics[width=1.0\textwidth]{megabase_plot}
-    \caption[megabaseplot]{\textbf{Megabase Plot}: ...}
-    \label{fig:megabaseplot}
-\end{figure}
-
 
 \subsection{Testing}
 ...particularly difficult.
@@ -486,6 +539,61 @@ take place... ...wanted to avoid a monolithic test class...
 ...tests are still rather modest and with more time it would be appropriate to
 improve their function but I have faith in their results...
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Results}
+
+%TODO Tabulate
+\begin{listing}[H]
+    \caption[results]{: ...top 25...}
+    \label{list:results}
+    \begin{minted}[%mathescape,
+                %linenos,
+                gobble=8,
+                frame=lines,
+                fontsize=\scriptsize,
+                framesep=2mm]{text}
+        WND	GWAS	iCHIP	CHR	POSITIONS
+        234	297	470	1	 117000001 -  118000000
+        1074	294	1540	3	  46000001 -   47000000
+        3125	298	310	10	  60000001 -   61000000
+        5222	294	336	21	  16500001 -   17500000
+        880	293	344	2	 191500001 -  192500000
+        3560	299	772	12	   9000001 -   10000000
+        4407	299	512	15	  78500001 -   79500000
+        1036	292	300	3	  27000001 -   28000000
+        2734	300	515	9	   5000001 -    6000000
+        3426	300	486	11	  76000001 -   77000000
+        15	291	1029	1	   7500001 -    8500000
+        365	301	487	1	 182500001 -  183500000
+        3415	301	419	11	  70500001 -   71500000
+        1581	290	802	4	 102500001 -  103500000
+        3184	302	449	10	  89500001 -   90500000
+        3554	290	403	12	   6000001 -    7000000
+        1580	289	603	4	 102000001 -  103000000
+        414	288	346	1	 207000001 -  208000000
+        1948	288	1297	5	  96000001 -   97000000
+        2055	304	1377	5	 149500001 -  150500000
+        2215	288	622	7	  49500001 -   50500000
+        384	287	827	1	 192000001 -  193000000
+        959	306	406	2	 231000001 -  232000000
+        4214	286	393	14	  88500001 -   89500000
+        320	307	620	1	 160000001 -  161000000
+    \end{minted}
+\end{listing}
+
+Figure~\ref{fig:megabaseplot} was created quickly in R using \textbf{ggplot2} to
+eyeball the difference in variant distribution across each region (called
+a 'megabase' due to their length of one million bases)..
+...motivated by locating very highly populated regions in the iCHIP group well
+above the mean in the output...
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1.0\textwidth]{megabase_plot}
+    \caption[megabaseplot]{\textbf{Megabase Plot}: ...}
+    \label{fig:megabaseplot}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
