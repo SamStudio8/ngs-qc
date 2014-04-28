@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 27, 2014
+April 28, 2014
 
 Declaration
 
@@ -98,11 +98,23 @@ Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 2.2.1
 
-Whole Genome Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DNA and Bases . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 6
 
 2.2.2
+
+Next Generation Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6
+
+2.2.3
+
+Single Nucleotide Polymorphisms . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+7
+
+2.2.4
 
 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
@@ -134,8 +146,6 @@ auto_qc Decision Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 3.2
 
-4
-
 Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
 3.2.1
 
@@ -157,16 +167,15 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 
+Contents
+4
+
+5
+
 Pre-Implementation
 4.1
 
-13
-
 Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
-
-Contents
-
-5
 
 4.2
 
@@ -186,6 +195,8 @@ Frontier
 6
 
 7
+
+17
 
 Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 5.1.1
@@ -251,7 +262,7 @@ Results
 
 II
 
-17
+13
 
 28
 
@@ -311,14 +322,10 @@ Groups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 7.2.4
 
 Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
-
-7.2.5
-
-Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
-
 iii
 
 Contents
+7.2.5
 8
 
 Materials and Methods
@@ -328,6 +335,7 @@ Materials and Methods
 
 9
 
+Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 34
 
 Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
@@ -370,11 +378,9 @@ Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 9.1.2
-
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
-
 9.1.3
 
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
 9.1.4
@@ -439,14 +445,14 @@ Discussions and Conclusions
 
 53
 
+iv
+
+Contents
 Appendix A Input Examples
 
 56
 
 A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
-iv
-
-Contents
 A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
 A.3 Goldilocks Pathsfile . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
 
@@ -634,15 +640,26 @@ accuracy is improved
 2.2.1
 
 Concepts and Terminology
-Whole Genome Sequencing
+DNA and Bases
 
-...the process of recovering the sequence of bases called nucleotides...
+...DNA is made up of four bases; G, C, T and A...
 
+2.2.2
+
+Next Generation Sequencing
+
+...the process of recovering or extracting the sequence of nucleotide bases...
 6
 
 2.2 Concepts and Terminology
 
-2.2.2
+2.2.3
+
+Single Nucleotide Polymorphisms
+
+...SNPs...
+
+2.2.4
 
 Samples, Lanes and Lanelets
 
@@ -830,7 +847,7 @@ Pre-Implementation
 Classification Correlation
 
 An important consideration for statistical analysis is the relation between observations. The "bamcheckr’d"
-input data described in Chapter 3.1.1 is available per lanelet, however as shown in Chapter 2.2.2 a lane may
+input data described in Chapter 3.1.1 is available per lanelet, however as shown in Chapter 2.2.4 a lane may
 contain more than one lanelet. Herein lies the trouble: if during a sequencing run the flowcell is somehow
 subjected to abnormal conditions (e.g. a temperature increase due to an air conditioning failure) or the device
 is depleted of reagents then every lane (and thus all lanelets within) will be of considerably poor quality.
@@ -914,14 +931,15 @@ enabling a complex function containing many vector operations (potentially ineff
 experience)... for overlapping_base_duplicate_percentage
 ...utilising the program designed and implemented in the following chapter... loaded required information and
 used the API to calculate the missing parameters...
+...Morandat[23]
 ...with such an intriguing difference in performance with significantly more time it would be appealing to
 explore the idiosyncrasies of each implementation ...although such an investigation would quite likely sufficiently
-generate an entire project of its own.
 1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm
 
 15
 
 4.3 Contributions to bamcheckr
+generate an entire project of its own.
 
 4.3
 
@@ -996,7 +1014,7 @@ Observations and Parameters
 An observation refers to a distinct object or "thing" from which we will attempt to understand the relationship
 between its known properties and classification to be able to label future observations with unknown class
 based on those properties. In the context of this project, this would be a lanelet. Other documentation in the
-field may use the term sample but to avoid confusion with the definition of sample introduced in Chapter 2.2.2
+field may use the term sample but to avoid confusion with the definition of sample introduced in Chapter 2.2.4
 we will use the term observation.
 The aforementioned properties or attributes of an observation will be referred to as the parameters of
 that observation. Traditionally these may be described as features but it was felt that this wording may
@@ -1207,11 +1225,11 @@ This identifier is then used as a key in both the _data and _targets dictionarie
 another dictionary or an arbitrary class) that stores that observation’s parameters and its known target (encoded
 class label), respectively.
 Although these attributes can be manipulated directly (and indeed they are for testing purposes) the leading
-underscore follows a popular convention defined in Python’s style guideline, PEP8[23], where class members
+underscore follows a popular convention defined in Python’s style guideline, PEP8[24], where class members
 with leading underscores should be treated as non-public. Python doesn’t have private variables such as those
 that may be found in other languages like Java, indeed the Python style guide points out that "no attribute is
-really private in Python"[23]. In an interesting StackOverflow answer on the subject, a user describes that this
-is "cultural"[24] and that Python programmers are trusted not to circumvent convention and "mess around with
+really private in Python"[24]. In an interesting StackOverflow answer on the subject, a user describes that this
+is "cultural"[25] and that Python programmers are trusted not to circumvent convention and "mess around with
 those private members". Users are therefore expected to use the functionality Frontier provides for controlled
 getting and setting of data stored in these pseudo-private _data and _targets members.
 For example, load_data should be used exclusively when populating the two dictionaries and is automatically
@@ -1220,7 +1238,7 @@ called on construction of the Statplexer if the arguments are valid. load_data w
 non-zero whilst also warning users if new observations are overwriting old ones or if an observation does not
 appear to have a corresponding target.
 ...Python dictionaries offer (constant) lookup access and more importantly querying the structure for whether it
-contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[25]...
+contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[26]...
 ...The following section describes the retrieval of data and targets in the form of lists or numpy arrays... so
 why not just store read in data in one of these structures to begin with instead?
 2A
@@ -2314,11 +2332,17 @@ http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
 Tools to make developing R code easier, 2013,
 r package version 1.4.1. [Online]. Available:
 http://CRAN.R-project.org/package=devtools
-[23] W. B. Van Rossum, Guido and N. Coghlan,
+[23] Morandat, Floréal and Hill, Brandon and Osvald,
+Leo and Vitek, Jan, “Evaluating the design of
+the R language,” in ECOOP 2012–Object-Oriented
+Programming. Springer, 2012, pp. 104–131.
+[24] W. B. Van Rossum, Guido and N. Coghlan,
 “PEP 8 – Style Guide for Python Code,” Python
 Enhancement Proposals, 2001. [Online]. Available:
 http://legacy.python.org/dev/peps/pep-0008/
-[24] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
+
+References
+[25] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
 “Does
 python
 have
@@ -2330,9 +2354,7 @@ classes?”
 Available:
 http://stackoverflow.com/questions/1641219/
 does-python-have-private-variables-in-classes
-
-References
-[25] Python Wiki. (2012) Time Complexity.
+[26] Python Wiki. (2012) Time Complexity.
 
 55
 
