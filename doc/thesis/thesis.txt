@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 28, 2014
+April 29, 2014
 
 Declaration
 
@@ -157,15 +157,15 @@ Framework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 3.2.3
 
-Additional External Libraries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Additional External Libraries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 
 3.2.4
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 
 3.2.5
 
-Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 Contents
 4
@@ -175,15 +175,15 @@ Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 Pre-Implementation
 4.1
 
-Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
 4.2
 
-Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
 
 4.3
 
-Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Contributions to bamcheckr . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 Frontier
 5.1
@@ -196,132 +196,132 @@ Frontier
 
 7
 
-17
+18
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 5.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
 
 5.1.2
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 5.1.3
 
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 5.2.1
 
-Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 5.2.2
 
-Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 5.2.3
 
-Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 
 5.2.4
 
-Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 5.3.1
 
-Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 
 5.3.2
 
-Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 5.3.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
 5.3.4
 
-Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
 
 5.3.5
 
-Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
 5.4
 
-Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
 5.5
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
 Results
 6.1
 
 II
 
-13
+14
 
-28
+29
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 6.1.1
 
-Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 6.1.2
 
-CART . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+CART . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 6.2
 
-Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 6.3
 
-Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 6.3.1
 
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 6.3.2
 
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 6.3.3
 
-Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
 
-30
 31
+32
 
 7.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 7.2
 
-Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 7.2.1
 
-Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 7.2.2
 
-The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 7.2.3
 
-Groups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Groups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 7.2.4
 
-Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 iii
 
 Contents
@@ -335,126 +335,129 @@ Materials and Methods
 
 9
 
-Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
-34
+Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+35
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 8.1.1
 
-Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 8.1.2
 
-Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 8.1.3
 
-Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
-Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 8.2.1
 
-Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 8.2.2
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 8.2.3
 
-Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 Goldilocks
 
-37
+38
 
 9.1
 
 9.2
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 9.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
 9.1.2
 9.1.3
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 9.1.4
 
-Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 9.2.1
 
-Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 9.2.2
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 9.2.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 9.2.4
 
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 9.2.5
 
-Final Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Final Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
-9.2.6
+9.3
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Usage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+
+9.4
+
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 10 Results
 
-43
+45
 
 11 Analysis Pipeline
 
-45
+47
 
-11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
-11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
-11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
-11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
-11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
-11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
 
 III
 
 Discussions and Conclusions
 
-50
+52
 
 12 Current Status
 
-51
+53
 
 13 Critical Evaluation
 
-52
+54
 
 14 Conclusions
 
-53
-
+55
 iv
 
 Contents
 Appendix A Input Examples
 
-56
+58
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
-A.3 Goldilocks Pathsfile . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+A.3 Goldilocks Pathsfile . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
 
 v
 
@@ -487,14 +490,14 @@ responsible for applying quality control to samples within the pipeline by compa
 metrics to simple hard-coded thresholds; determining whether a particular sample has reached a level that
 requires a warning, or has exceeded the threshold and failed entirely. Whilst this catches most of the very
 poor quality outputs, a large number of samples are flagged for manual inspection at the warning level; a time
-consuming task which invites both inefficiency and error.
+consuming task which invites both inefficiency and error[5].
 
 1
 
 1.2 Project Method
 In practice most of these manual decisions are based on inspecting a range of diagnostic plots, which suggest
 that a machine learning classifier could potentially be trained on the combinations of quality control statistics
-available to make these conclusions without the need for much human intervention[5].
+available to make these conclusions without the need for much human intervention.
 The first part of the project aims to apply machine learning techniques to replicate the current auto_qc rule set
 by training a decision tree classifier on a large set of these quality metrics. The idea is to investigate whether
 these simple threshold based rules can be recovered from such data, or whether a new classifier would produce
@@ -727,10 +730,10 @@ such as samtools stats now incorporates bamcheck and the tool is written in R
 3.2 Development Environment
 are provided by the Sanger Institute in a separate file hereafter referred to as the AQC Decision Matrix or AQC
 (Decision) File.
-A truncated example of such a file can be found in Appendix A.2. Only the first few columns are included –
-indeed we are only interested in the lanelet and aqc which provide an identifier that maps the row to a given
-input file and its classification by auto_qc respectively. Latter columns pertain to a breakdown of decisions
-made by auto_qc which are not included in the example for confidentiality (and brevity).
+A truncated example of such a file can be found in Appendix A.2. Only the first few columns are included
+– indeed we are only interested in the lanelet and aqc fields which provide an identifier that maps the row
+to a given input file and its classification by auto_qc respectively. Latter columns pertain to a breakdown of
+decisions made by auto_qc which are not included in the example for confidentiality (and brevity).
 
 3.2
 3.2.1
@@ -768,36 +771,85 @@ Had performance been a critical decision factor, lower level languages such as C
 10
 
 3.2 Development Environment
-used. Briefly looking at two popular frameworks available for C in particular; dlib did not support tree-based
-classifiers although an alternative, Shark did.
+used. Briefly looking at frameworks available for C++ in particular, two popular solutions include: dlib[15],
+which did not support tree-based classifiers but did offer implementations of other potentially useful algorithms
+such as multi-class support vector machines; and Shark[16], which supported both decision tree and random
+forest classifiers. Both packages also provided a series of utility functions for performing mathematical or
+statistical operations on vectors of data.
 
 3.2.2
 
 Framework
 
-Having studied the Machine and Intelligent Learning module in final year, the prospect of getting stuck in to
-the deep of a machine learning algorithm was exciting. However the reality is a lot of cumulative time and
-effort has gone in to creation and optimisation of a framework which is unlikely to be surpassed successfully
-by a short-term one-person project. Thus utilisation of a third party machine learning library would seem a
-wise investment for the project’s codebase.
-There are numerous machine learning frameworks available in many languages, some of which were described
-above and formed part of the development environment decisions. Whilst it is obviously unnecessary to select
-a framework which uses the same language as the project, it seemed counter-intuitive to select otherwise, for
-the establishing of additional arbitrary output and input steps to move data between the two environments
-could impede quick experiment repeatability and introduce error.
-...A mixed bag of machine learning frameworks exist in Python, two in particular scikit-learn[15] and Orange[16]
-were main contenders, partly on their recommendation from the project supervisor.
-...scikit integrates the "big names" in Python: numpy, scipy and matplotlib ...put off from Orange due to
-difficulties in reading in data ...it did however later appear to ship with features that were not in scikit (pruning
-and printing) ...with more time I’d certainly like to investigate using other libraries such as Orange or even
-outside Python and take at look at WEKA or Shark...
+Having studied the Machine and Intelligent Learning module in my final year, the prospect of getting stuck
+in to the deep of a machine learning algorithm was exciting. However the reality is a lot of cumulative time
+and effort has gone in to the creation and optimisation of a framework, which is unlikely to be surpassed
+successfully by a short-term one-person project. Thus utilisation of a third party machine learning library
+seems a wise investment for the project’s codebase.
+There are clearly numerous machine learning frameworks available in many languages, some of which were
+touched upon in the previous section and formed part of the development environment decisions. Whilst
+it is obviously unnecessary to select a framework which uses the same language as the project, it seemed
+counter-intuitive to select otherwise, for the establishing of additional arbitrary output and input steps to move
+data between the two environments could impede prompt experiment repeatability and introduce error.
+A mixed bag of machine learning frameworks exist in Python[17], ranging from several highly active general
+purpose libraries to a multitude of smaller projects that focus on one specific learning task.
+I investigate two of the larger libraries; scikit-learn[18] and Orange[19], primarily as their general purpose
+nature will allow exploration of various classifier solutions (given time) without the need to integrate many
+packages together, but also for their built-in functionality that aids the measuring of classifier performance and
+accuracy. These two packages were also selected for investigation on their recommendation from the project
+supervisor.
+scikit-learn is somewhat the "new kid on the block" in terms of machine learning packages for Python,
+originally starting as a Google Summer of Code project in 2007 under the name of scikits.learn2 the package
+was not officially published until 2010 where it quickly gained popularity and built an international team of
+contributors[20].
+Arguably one of the most useful features of scikit-learn is its seamless integration with the "big names" of
+scientific computing in Python: numpy[21] and scipy[22], making heavy use of the optimised data structures
+and mathematical algorithms these packages offer, not only providing improved performance against packages
+that implement their own structures but also easing interaction by not requiring users to populate abstruse
+structures with their data or implement such algorithms themselves.
+scikit-learn offers support for a wide range of algorithms covering many different machine learning tasks,
+including decision trees and random forests. Also of interest are the various utility subpackages, taking
+particular note of one for measuring the performance of the various classifiers; including functions for executing
+2 Named
+
+as a SciPy Toolkit for Learning Tasks
+
+11
+
+3.2 Development Environment
+cross-validation and generating confusion matrices; and another which assists with the selection of parameters
+(features) to use in a machine learning model.
+The library boasts a growing community of users and a dedicated team of developers3 who submit hundreds
+of commits to the project repository each month according to Github Pulse.
+Orange, like scikit-learn is designed to be a general purpose machine learning framework and provide a wide
+array of tools to work with many different types of problems. Setting it apart from many of the other packages
+is the inclusion of a graphical user interface (GUI) that presents drag-and-drop-eqsue access to widgets from
+which users assemble a workflow to apply to their data. The GUI also allows visualisation of elements such
+as decision trees or confusion matrix plots without any effort from the end user.
+Despite the repository commit history stretching back to mid 90s, only recent improvements including a major
+redesign of the GUI, significant changes to its object hierarchy and its 2013 academic publication have brought
+more attention to the framework.
+At first glance Orange appears to offer a larger collection of functions to work specifically with classification
+tasks when compared to scikit-learn. Indeed it would later be discovered that it ships with features useful to
+the project that have not been implemented in scikit-learn including tree pruning and printing.
+However it does not feature the same integration with Python’s scientific computing packages; numpy and
+scipy and also requires that end users input their data in a structure defined by the framework rather than a
+generic data structure. Thus use of Orange would introduce more data wrangling and munging steps to ensure
+that data is represented in the correct format for a classifier to perform its learning and prediction role and also
+to interpret returned objects.
+Although Orange affords a suitable (and in some cases better) range of functions to use for decision trees,
+I was concerned at the push to use its GUI as opposed to the package API, potentially impeding experiment
+repeatability by having to reset the graphical environment each time.
+Despite the scikit-learn package not yet reaching a major version milestone, its feature set, interaction with
+numpy and scipy and useful built-in subpackages led me to choose scikit-learn as the machine learning
+framework for this part of the project.
 
 3.2.3
 
 Additional External Libraries
 
-numpy[17] and scipy[18]... Fast and reliable implementations of mathematical functions... ggplot2[19] for
-beautiful graphing...
+argparse... numpy[21] scipy[22]... Fast and reliable implementations of mathematical functions... ggplot2[23]
+for beautiful graphing...
 
 3.2.4
 
@@ -805,17 +857,20 @@ Testing
 
 As discussed in Chapter 1.2.1, testing forms a critical part of the project given the need to monitor the impact
 of changes to classification accuracy as well as to ensure the program is working correctly. Ideally, execution
+3 Some
+
+full time developer positions are funded by INRIA, the French Institute for Research in Computer Science and Automation
+
+12
+
+3.2 Development Environment
 of a test suite should be simple and easily repeatable. Results that pertain to accuracy should also be stored
 for future reference to monitor ongoing performance of the classifier.
 Such requirements could be fulfilled by a continuous integration platform – a server dedicated to the building
 and testing of the code contained in a centralised repository typically to which an entire team will have write
-access[20]. Whilst in this scenario there will be much less "risk" from integration issues due to the single
+access[24]. Whilst in this scenario there will be much less "risk" from integration issues due to the single
 person team size, the themes of automated building and self-testing code can be taken on board.
-
-11
-
-3.2 Development Environment
-Jenkins is a highly popular[21] example of such a platform with which I am familiar. Although an out-of-the-box
+Jenkins is a highly popular[25] example of such a platform with which I am familiar. Although an out-of-the-box
 Jenkins instance is suitable for variety of software engineering projects, it would be necessary to invest some
 time to install and tweak plugins to perform actions on test results (such as failing a build that causes accuracy
 to decrease). However, previous experience found that highly specific tasks will often require a plugin to be
@@ -837,7 +892,7 @@ Tools
 
 Version control is critical, git
 
-12
+13
 
 Chapter 4
 
@@ -855,7 +910,7 @@ is depleted of reagents then every lane (and thus all lanelets within) will be o
 Fig. 4.1 Heatmap of lanelet QC status by lane: Lanes are vertical bars with each lanelet cell coloured red to
 represent a failure, yellow for a warning and grey for a pass.
 In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
-13
+14
 
 4.2 Recovering Ratios
 a lane as well as each lane in a sequencing run. To examine this further, an R script utilising ggplot2 was
@@ -898,7 +953,7 @@ revealed 82 different parameters. However, when comparing this parameter set to 
 auto_qc, it appeared that some parameters were "missing".
 In the pursuit of replicating the decisions of the existing system, it is ideal to have all the parameters used
 
-14
+15
 
 4.2 Recovering Ratios
 in the making of those decisions at hand. In particular, the missing parameters were of a normalised nature,
@@ -923,7 +978,7 @@ install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
 Listing 1 : Installing an in-development R package with devtools
 
-With the help of devtools[22] (see Listing 1) it was simple to develop and test contributions to bamcheckr
+With the help of devtools[26] (see Listing 1) it was simple to develop and test contributions to bamcheckr
 locally without needing to re-publish the package after changes. An additional script was added to bamcheckr’s
 NAMESPACE... to recover the missing ratio and percentage based parameters...
 ...unfortunately, the performance of the script was poor, taking 5.5s on average and increasing to 16.1s when
@@ -931,12 +986,12 @@ enabling a complex function containing many vector operations (potentially ineff
 experience)... for overlapping_base_duplicate_percentage
 ...utilising the program designed and implemented in the following chapter... loaded required information and
 used the API to calculate the missing parameters...
-...Morandat[23]
+...Morandat[27]
 ...with such an intriguing difference in performance with significantly more time it would be appealing to
 explore the idiosyncrasies of each implementation ...although such an investigation would quite likely sufficiently
 1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm
 
-15
+16
 
 4.3 Contributions to bamcheckr
 generate an entire project of its own.
@@ -947,7 +1002,7 @@ Contributions to bamcheckr
 
 ...R CMD BATCH issue ...Fixed a graph plotting failure.
 
-16
+17
 
 Chapter 5
 
@@ -978,7 +1033,7 @@ If possible, Frontier could also handle any objects returned, displaying or logg
 information pertaining to a returned classifier’s accuracy to assist a user in the ongoing performance monitoring
 of changes to used data subsets or parameters.
 
-17
+18
 
 5.2 Concepts
 
@@ -1030,7 +1085,7 @@ Data will be used somewhat generically to refer to a matrix in which observation
 parameters act as columns. It is expected that all observations will have the same set of parameters.
 For problems of a classification nature such as ours, an observation’s target is the known classification of that
 particular observation. Depending on the context of the learning problem targets may be discovered manually
-18
+19
 
 5.3 Implementation
 (e.g. counting leaves from images of plants, one will need to manually count all the leaves in the image before
@@ -1076,7 +1131,7 @@ Frontier was designed to support classification machine learning problems, to ad
 the package must be aware of each of the possible classes in the problem space. Early versions of Frontier
 were specifically designed for training and testing data from auto_qc and could only support encoding and
 decoding of the pass, fail and warn classes.
-19
+20
 
 5.3 Implementation
 However this implementation was clearly esoteric and held little to no further use outside the domain of the
@@ -1116,7 +1171,7 @@ The number of observations with this label, typically used when calculating weig
 proportions of class sizes and outputting logging information – A user should not set this manually
 This simple structure allows Frontier to be compatible with almost any classification learning task with
 minimum input from the end user. Additional utilities provided by the Frontier utils subpackage use this
-20
+21
 
 5.3 Implementation
 structure to automatically classify and encode labels without user intervention with the following functions:
@@ -1157,7 +1212,7 @@ end users, however it is still up to the author of the dervied class to set up a
 cannot be done automatically without likely enforcing potentially unhelpful constraints) before initialisation
 of the inherited base class (via the call to super) as shown in Listing 3.
 
-21
+22
 
 5.3 Implementation
 
@@ -1199,7 +1254,7 @@ much information for successful classification as their values are equal for all
 
 a pointer to the address of the extracted data’s dictionary hashmap will be copied to memory inside a Frontier class
 
-22
+23
 
 5.3 Implementation
 In future it would be useful to investigate whether it would be feasible to perform such sanity checking in a
@@ -1225,11 +1280,11 @@ This identifier is then used as a key in both the _data and _targets dictionarie
 another dictionary or an arbitrary class) that stores that observation’s parameters and its known target (encoded
 class label), respectively.
 Although these attributes can be manipulated directly (and indeed they are for testing purposes) the leading
-underscore follows a popular convention defined in Python’s style guideline, PEP8[24], where class members
+underscore follows a popular convention defined in Python’s style guideline, PEP8[28], where class members
 with leading underscores should be treated as non-public. Python doesn’t have private variables such as those
 that may be found in other languages like Java, indeed the Python style guide points out that "no attribute is
-really private in Python"[24]. In an interesting StackOverflow answer on the subject, a user describes that this
-is "cultural"[25] and that Python programmers are trusted not to circumvent convention and "mess around with
+really private in Python"[28]. In an interesting StackOverflow answer on the subject, a user describes that this
+is "cultural"[29] and that Python programmers are trusted not to circumvent convention and "mess around with
 those private members". Users are therefore expected to use the functionality Frontier provides for controlled
 getting and setting of data stored in these pseudo-private _data and _targets members.
 For example, load_data should be used exclusively when populating the two dictionaries and is automatically
@@ -1238,14 +1293,14 @@ called on construction of the Statplexer if the arguments are valid. load_data w
 non-zero whilst also warning users if new observations are overwriting old ones or if an observation does not
 appear to have a corresponding target.
 ...Python dictionaries offer (constant) lookup access and more importantly querying the structure for whether it
-contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[26]...
+contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[30]...
 ...The following section describes the retrieval of data and targets in the form of lists or numpy arrays... so
 why not just store read in data in one of these structures to begin with instead?
 2A
 
 somewhat contrived contraction of ’Statistics Multiplexer’
 
-23
+24
 
 5.3 Implementation
 This is primarily due to the underlying layout of a list structure, which must be represented in memory as a
@@ -1286,7 +1341,7 @@ a substring, or if needed an exact match
 ...data is returned sorted by key, ...with parameters sorted alphanumerically... ...targets map 1:1 with the data
 array...
 
-24
+25
 
 5.3 Implementation
 • get_data_by_parameters
@@ -1307,7 +1362,7 @@ smaller classes...
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
-25
+26
 
 5.4 Usage Example
 
@@ -1348,7 +1403,7 @@ Module containing the class (of the same name) to be used to parse each file in 
 observation data
 • TargetReader Module
 Module containing the class (of the same name) to be used to parse the target_path file for target data
-26
+27
 
 5.5 Testing
 
@@ -1358,7 +1413,7 @@ Testing
 
 ...
 
-27
+28
 
 Chapter 6
 
@@ -1388,7 +1443,7 @@ Parameter Selection
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
 version from master * needed use force np.float64 * ...actually data was 0... gg
 
-28
+29
 
 6.3 Trees
 
@@ -1408,14 +1463,14 @@ Parameter Sets
 
 Ignoring Warnings
 
-29
+30
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-30
+31
 
 Chapter 7
 
@@ -1445,7 +1500,7 @@ Variants and SNPs
 ...their position refers to the index of the base of the chromosome in which the polymorphism exists... ...commonly
 these are 1-indexed (although this is not always the case) and thus care must be taken to ensure this is accounted
 for at any step where positions are considered...
-31
+32
 
 7.2 Concepts and Terminology
 
@@ -1492,7 +1547,7 @@ Length and Stride
 ...length will refer to the number of bases included in the region ...stride will refer to the number of bases to
 be used as an offset between the starting base of one region and the beginning of the next...
 
-32
+33
 
 7.2 Concepts and Terminology
 ...a length of 1000 and a stride of 500 for example ...the first region for example will consist of 1:1000, then
@@ -1506,7 +1561,7 @@ Candidates
 ...a candidate is a region of length... ...a candidate will contain a number of variants, counted for each group...
 ...simple object consisting of start and end base...
 
-33
+34
 
 Chapter 8
 
@@ -1535,7 +1590,7 @@ vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # Complains about lack of tabix index but still makes the file...
 
-34
+35
 
 8.2 Development Environment
 # Index with tabix
@@ -1583,7 +1638,7 @@ Testing
 
 ...a little more difficult ...discussed more at length in the following chapter...
 
-35
+36
 
 8.2 Development Environment
 
@@ -1593,7 +1648,7 @@ Tools
 
 As before... (Chapter 3.2.5)
 
-36
+37
 
 Chapter 9
 
@@ -1629,7 +1684,7 @@ module to be imported in to other programs. Whilst the use case is certainly mor
 
 speaking we are only handling the 22 autosomes and ignoring the remaining 2 sex chromsomes (allosomes)
 
-37
+38
 
 9.2 Implementation
 made the choice to modularise the functionality, in the hope that if an end user were to find some function of
@@ -1675,7 +1730,7 @@ Loading Variant Query File List
 Goldilocks requires the user provide their own valid "pathsfile", meeting the specification demonstrated in
 Section 8.1.3 (an actual example of such a file can be found in Appendix A.3).
 
-38
+39
 
 9.2 Implementation
 merely lists locations of input files and groups them together as desired ...all files in a particular group will be
@@ -1719,7 +1774,7 @@ just look up variants in a list:
 for chromosome in autosomes:
 for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
-39
+40
 
 9.2 Implementation
 if position in variant_position_list:
@@ -1758,7 +1813,7 @@ We of course have to initially load the variants in to the chromosome array, but
 Rather to my surprise this was slow (maybe if I have time I should check how it compared to looking up with
 a list). Was it the allocation of memory? Perhaps I had run out of RAM and most of the work was going in to
 
-40
+41
 
 9.2 Implementation
 fetching and storing data in swap?
@@ -1796,9 +1851,9 @@ for variant_loc in locations:
 chro[variant_loc] = 1
 return chro
 
-41
+42
 
-9.2 Implementation
+9.3 Usage
 load_chromosome returns a numpy array representing the chromosome, given its desired length and a list of
 variants...
 ...supervisor suggested bloom filters... ...would be a useful experiment to measure what further performance
@@ -1828,17 +1883,27 @@ criteria...
 ...in this state does however still allow for repeatable results in future with different data sets or additional
 groups...
 
-9.2.6
+9.3
+
+Usage
+
+...
+
+9.4
 
 Testing
 
 ...particularly difficult. ...required generation of input files that would contain known regions to test were
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
+
+43
+
+9.4 Testing
 ...tests are still rather modest and with more time it would be appropriate to improve their function but I have
 faith in their results...
 
-42
+44
 
 Chapter 10
 
@@ -1984,11 +2049,11 @@ Figure 10.1 was created quickly in R using ggplot2 to eyeball the difference in 
 region (called a ’megabase’ due to their length of one million bases).. ...motivated by locating very highly
 populated regions in the iCHIP group well above the mean in the output...
 
-43
+45
 
 Fig. 10.1 Megabase Plot: ...
 
-44
+46
 
 Chapter 11
 
@@ -2025,7 +2090,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-45
+47
 
 11.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -2079,7 +2144,7 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 | Only run on a node with more than 4000mb memory
 Listing 6 : Flags required to raise job memory allocation
 
-46
+48
 
 11.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -2134,7 +2199,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-47
+49
 
 11.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -2167,7 +2232,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-48
+50
 
 11.1 Implementation
 s = bam_get_aux(b);
@@ -2204,31 +2269,31 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-49
+51
 
 Part III
 
 Discussions and Conclusions
 
-50
+52
 
 Chapter 12
 
 Current Status
 
-51
+53
 
 Chapter 13
 
 Critical Evaluation
 
-52
+54
 
 Chapter 14
 
 Conclusions
 
-53
+55
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -2245,12 +2310,16 @@ References
 a newcomer’s
 (angry) guide to R. [Online]. Available: http:
 //tim-smith.us/arrgh/
-
 [1] T. Strachan and A. Read, Human Molecular Genetics,
 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes
 involved in massively parallel DNA
 sequencing.
+
+[15] D. E. King, “Dlib-ml: A Machine Learning Toolkit,”
+Journal of Machine Learning Research, vol. 10, pp.
+1755–1758, 2009.
+
 [2] M. Kircher, U. Stenzel and J. Kelso, “Improved
 base calling for the Illumina Genome Analyzer
 using machine learning strategies,” Genome Biology,
@@ -2292,9 +2361,11 @@ http:
 2014, r package version 1.0-35. [Online]. Available:
 http://CRAN.R-project.org/package=tree
 
-54
-
-[15] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
+[16] C. Igel, V. Heidrich-Meisner, and T. Glasmachers,
+“Shark,” Journal of Machine Learning Research,
+vol. 9, pp. 993–996, 2008.
+[17] Python Wiki. (2014) Python for Artificial Intelligence.
+[18] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
 R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
 D. Cournapeau, M. Brucher, M. Perrot, and
@@ -2304,45 +2375,49 @@ vol. 12, pp. 2825–2830, 2011.
 A machine learning framework for
 Python.
 ˇ Gorup, T. Hoˇcevar,
-[16] J. Demšar, T. Curk, A. Erjavec, Crt
+[19] J. Demšar, T. Curk, A. Erjavec, Crt
 M. Milutinoviˇc, M. Možina, M. Polajnar, M. Toplak,
 A. Stariˇc, M. Štajdohar, L. Umek, L. Žagar, J. Žbontar,
 M. Žitnik, and B. Zupan, “Orange: Data Mining
 Toolbox in Python,” Journal of Machine Learning
 Research, vol. 14, pp. 2349–2353, 2013. [Online].
 Available: http://jmlr.org/papers/v14/demsar13a.html
-[17] T. E. Oliphant, “Python for Scientific Computing,”
+[20] scikit-learn. About Us. [Online]. Available: http:
+//scikit-learn.org/stable/about.html
+[21] T. E. Oliphant, “Python for Scientific Computing,”
 Computing in Science & Engineering, vol. 9, no. 3,
 pp. 10–20, 2007.
-[18] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
+[22] E. Jones, T. Oliphant, P. Peterson, et al., “SciPy: Open
 source scientific tools for Python,” 2001–. [Online].
 Available: http://www.scipy.org/
-[19] H. Wickham, ggplot2:
+[23] H. Wickham, ggplot2:
 elegant graphics for
 data analysis.
 Springer New York, 2009.
 [Online]. Available: http://had.co.nz/ggplot2/book
 978-0-387-98140-6.
-[20] M. Fowler, “Continuous Integration,” 2006.
+[24] M. Fowler, “Continuous Integration,” 2006.
 [Online]. Available: http://www.martinfowler.com/
 articles/continuousIntegration.html
-[21] Jenkins Usage Statistics. [Online]. Available:
+[25] Jenkins Usage Statistics. [Online]. Available:
 http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
-[22] Hadley Wickham and Winston Chang, devtools:
+
+56
+
+References
+[26] Hadley Wickham and Winston Chang, devtools:
 Tools to make developing R code easier, 2013,
 r package version 1.4.1. [Online]. Available:
 http://CRAN.R-project.org/package=devtools
-[23] Morandat, Floréal and Hill, Brandon and Osvald,
+[27] Morandat, Floréal and Hill, Brandon and Osvald,
 Leo and Vitek, Jan, “Evaluating the design of
 the R language,” in ECOOP 2012–Object-Oriented
 Programming. Springer, 2012, pp. 104–131.
-[24] W. B. Van Rossum, Guido and N. Coghlan,
+[28] W. B. Van Rossum, Guido and N. Coghlan,
 “PEP 8 – Style Guide for Python Code,” Python
 Enhancement Proposals, 2001. [Online]. Available:
 http://legacy.python.org/dev/peps/pep-0008/
-
-References
-[25] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
+[29] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
 “Does
 python
 have
@@ -2354,9 +2429,15 @@ classes?”
 Available:
 http://stackoverflow.com/questions/1641219/
 does-python-have-private-variables-in-classes
-[26] Python Wiki. (2012) Time Complexity.
+[30] Python
+Wiki.
+(2012)
+Time
+Complexity.
+[Online]. Available: https://wiki.python.org/moin/
+TimeComplexity
 
-55
+57
 
 Appendix A
 
@@ -2480,7 +2561,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-56
+58
 
 A.1 BAMcheckR’d Example Output
 
@@ -2712,7 +2793,7 @@ FFQ
 0
 0
 
-57
+59
 
 1609
 
@@ -3054,7 +3135,7 @@ IS
 2
 0
 
-58
+60
 
 A.1 BAMcheckR’d Example Output
 
@@ -3333,7 +3414,7 @@ GCD
 0.101
 0.101
 
-59
+61
 
 A.2 auto_qc Decision Matrix
 
@@ -3482,7 +3563,7 @@ Goldilocks Pathsfile
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-60
+62
 
 ...
 ...

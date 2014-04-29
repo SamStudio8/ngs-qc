@@ -47,13 +47,13 @@ thresholds; determining whether a particular sample has reached a level that
 requires a warning, or has exceeded the threshold and failed entirely. Whilst
 this catches most of the very poor quality outputs, a large number of samples
 are flagged for manual inspection at the warning level; a time consuming task
-which invites both inefficiency and error.
+which invites both inefficiency and error\citep{marireport}.
 
 In practice most of these manual decisions are based on inspecting a range of
 diagnostic plots, which suggest that a machine learning classifier could
 potentially be trained on the combinations of quality control statistics
 available to make these conclusions without the need for much human
-intervention\citep{marireport}.
+intervention.
 
 The first part of the project aims to apply machine learning techniques to
 replicate the current \textbf{auto\_qc} rule set by training a decision tree

@@ -71,6 +71,8 @@ more than one lane; this is known as \textit{sample multiplexing} and helps to
 ensure that the failure of a particular lane does not hinder analysis of a
 sample (as it will still be sequenced as part of another lane).
 
+%TODO Describe lanelet as a Sanger coined term
+
 The more abstract of the definitions, a \textbf{lanelet} is the aggregate read
 of all clusters of a particular sample in a single lane.
 Figure~\ref{fig:lanelets} attempts to highlight examples of a this (circled in
@@ -134,12 +136,13 @@ classifier, it is necessary to map each file to a classification result from
 are provided by the Sanger Institute in a separate file hereafter referred to as
 the \textit{AQC Decision Matrix} or \textit{AQC (Decision) File}.
 
-A truncated example of such a file can be found in Appendix~\ref{app:aqc_matrix}.
-Only the first few columns are included -- indeed we are only interested in the
-\textit{lanelet} and \textit{aqc} which provide an identifier that maps the row
-to a given input file and its classification by \textbf{auto\_qc} respectively.
-Latter columns pertain to a breakdown of decisions made by \textbf{auto\_qc}
-which are not included in the example for confidentiality (and brevity).
+A truncated example of such a file can be found in
+Appendix~\ref{app:aqc_matrix}.  Only the first few columns are included --
+indeed we are only interested in the \textit{lanelet} and \textit{aqc} fields
+which provide an identifier that maps the row to a given input file and its
+classification by \textbf{auto\_qc} respectively.  Latter columns pertain to a
+breakdown of decisions made by \textbf{auto\_qc} which are not included in the
+example for confidentiality (and brevity).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -192,46 +195,122 @@ one is not well versed in the patterns and grammar of the language  and it
 seemed best to stick to one's comfort zone given the brief timescale for the
 project.
 
-%TODO Cite dlib, Shark
 Had performance been a critical decision factor, lower level languages such as
-C, C++ or even Fortran could be used. Briefly looking at two popular frameworks
-available for C in particular; \textbf{dlib} did not support tree-based
-classifiers although an alternative, \textbf{Shark} did.
+C, C++ or even Fortran could be used. Briefly looking at frameworks available
+for C++ in particular, two popular solutions include: \textbf{dlib}\citep{dlib},
+which did not support tree-based classifiers but did offer implementations of
+other potentially useful algorithms such as multi-class support vector machines;
+and \textbf{Shark}\citep{shark}, which supported both decision tree and random
+forest classifiers. Both packages also provided a series of utility functions
+for performing mathematical or statistical operations on vectors of data.
 
 
 \subsection{Framework}
 
-Having studied the \textit{Machine and Intelligent Learning} module in final
+Having studied the \textit{Machine and Intelligent Learning} module in my final
 year, the prospect of getting stuck in to the deep of a machine learning
 algorithm was exciting. However the reality is a lot of cumulative time and
-effort has gone in to creation and optimisation of a framework which is unlikely
-to be surpassed successfully by a short-term one-person project. Thus
-utilisation of a third party machine learning library would seem a wise
-investment for the project's codebase.
+effort has gone in to the creation and optimisation of a framework, which is
+unlikely to be surpassed successfully by a short-term one-person project. Thus
+utilisation of a third party machine learning library seems a wise investment
+for the project's codebase.
 
-There are numerous machine learning frameworks available in many languages, some
-of which were described above and formed part of the development environment
-decisions. Whilst it is obviously unnecessary to select a framework which uses
+There are clearly numerous machine learning frameworks available in many
+languages, some of which were touched upon in the previous section and formed
+part of the development environment decisions.
+Whilst it is obviously unnecessary to select a framework which uses
 the same language as the project, it seemed counter-intuitive to select otherwise,
 for the establishing of additional arbitrary output and input steps to move data
-between the two environments could impede quick experiment repeatability and
+between the two environments could impede prompt experiment repeatability and
 introduce error.
 
-...A mixed bag of machine learning frameworks exist in Python, two in particular
-\textbf{scikit-learn}\citep{scikit-learn} and \textbf{Orange}\citep{orange}
-were main contenders, partly on their recommendation from the project
-supervisor.
+A mixed bag of machine learning frameworks exist in Python\citep{py:for-ai},
+ranging from several highly active general purpose libraries to a multitude of
+smaller projects that focus on one specific learning task.
 
-...scikit integrates the "big names" in Python: numpy, scipy and matplotlib
-...put off from Orange due to difficulties in reading in data ...it did however
-later appear to ship with features that were not in scikit (pruning and
-printing) ...with more time I'd certainly like to investigate using other
-libraries such as \textbf{Orange} or even outside Python and take at look at WEKA
-or Shark...
+I investigate two of the larger libraries;
+\textbf{scikit-learn}\citep{scikit-learn} and \textbf{Orange}\citep{orange},
+primarily as their general purpose nature will allow exploration of various
+classifier solutions (given time) without the need to integrate many packages
+together, but also for their built-in functionality that aids the measuring of
+classifier performance and accuracy. These two packages were also selected for
+investigation on their recommendation from the project supervisor.
+
+
+\textbf{scikit-learn} is somewhat the "new kid on the block" in terms of machine
+learning packages for Python, originally starting as a Google Summer of Code
+project in 2007 under the name of \textbf{scikits.learn}\footnote{Named as a
+\textbf{SciPy} Toolkit for Learning Tasks} the package was not officially
+published until 2010 where it quickly gained popularity and built an
+international team of contributors\citep{about-scikit-learn}.
+
+Arguably one of the most useful features of \textbf{scikit-learn} is its
+seamless integration with the "big names" of scientific computing in Python:
+\textbf{numpy}\citep{numpyscipy} and \textbf{scipy}\citep{scipy}, making heavy
+use of the optimised data structures and mathematical algorithms these packages
+offer, not only providing improved performance against packages that implement
+their own structures but also easing interaction by not requiring users to
+populate abstruse structures with their data or implement such algorithms
+themselves.
+
+\textbf{scikit-learn} offers support for a wide range of algorithms covering
+many different machine learning tasks, including decision trees and random
+forests. Also of interest are the various utility subpackages, taking particular
+note of one for measuring the performance of the various classifiers;
+including functions for executing cross-validation and generating confusion
+matrices; and another which assists with the selection of parameters (features)
+to use in a machine learning model.
+
+The library boasts a growing community of users and a dedicated team of
+developers\footnote{Some full time developer positions are funded by
+\textit{INRIA}, the French Institute for Research in Computer Science and
+Automation} who submit hundreds of commits to the project repository each month
+according to Github Pulse.
+
+
+\textbf{Orange}, like \textbf{scikit-learn} is designed to be a general purpose
+machine learning framework and provide a wide array of tools to work with many
+different types of problems. Setting it apart from many of the other packages is
+the inclusion of a graphical user interface (GUI) that presents
+drag-and-drop-eqsue access to widgets from which users assemble a workflow to
+apply to their data. The GUI also allows visualisation of elements such as
+decision trees or confusion matrix plots without any effort from the end user.
+
+Despite the repository commit history stretching back to mid 90s, only recent
+improvements including a major redesign of the GUI, significant changes to
+its object hierarchy and its 2013 academic publication have brought more
+attention to the framework.
+
+At first glance \textbf{Orange} appears to offer a larger collection of
+functions to work specifically with classification tasks when compared to
+\textbf{scikit-learn}. Indeed it would later be discovered that it ships with
+features useful to the project that have not been implemented in
+\textbf{scikit-learn} including tree pruning and printing.
+
+However it does not feature the same integration with
+Python's scientific computing packages; \textbf{numpy} and \textbf{scipy} and
+also requires that end users input their data in a structure defined by
+the framework rather than a generic data structure.
+Thus use of \textbf{Orange} would introduce more data wrangling and munging
+steps to ensure that data is represented in the correct format for a classifier
+to perform its learning and prediction role and also to interpret returned objects.
+
+Although \textbf{Orange} affords a suitable (and in some cases better) range of
+functions to use for decision trees, I was concerned at the push to use its GUI
+as opposed to the package API, potentially impeding experiment repeatability by
+having to reset the graphical environment each time.
+
+Despite the \textbf{scikit-learn} package not yet reaching a major version
+milestone, its feature set, interaction with \textbf{numpy} and \textbf{scipy}
+and useful built-in subpackages led me to choose \textbf{scikit-learn} as the
+machine learning framework for this part of the project.
+
 
 \subsection{Additional External Libraries}
-%TODO Ref num,sci,matplot
-numpy\citep{numpyscipy} and scipy\citep{scipy}... Fast and reliable implementations of
+
+argparse...
+numpy\citep{numpyscipy}
+scipy\citep{scipy}... Fast and reliable implementations of
 mathematical functions...  ggplot2\citep{ggplot2} for beautiful graphing...
 
 
