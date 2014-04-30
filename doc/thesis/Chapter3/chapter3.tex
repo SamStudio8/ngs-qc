@@ -463,9 +463,11 @@ information with any readers or utility functions who require it.
 
 \subsection{Retrieval}
 
-The Statplexer is designed to provide functions to an end user for extraction
-of desired data in a format suitable for an external framework or library,
-in our case; scikit-learn...
+\textbf{Frontier}'s \textbf{Statplexer} is designed to provide functions to an
+end user for extracting desired data in a format suitable for passing as an
+argument to functions of an external framework or library, such as
+\textbf{scikit-learn}.
+
 
 %TODO Figure to show mapping between container elements
 %...currently this causes the list of keys to require sorting each time a user
@@ -516,6 +518,18 @@ observations... some of the methods provided for this purpose include:
 
 \subsubsection{Confusion Matrices}
 "Normal" confusion matrix and "Warnings" confusion matrix...
+
+
+\subsection{Logging}
+
+Section~\ref{sec:part1:testing} concluded that time constraints would not allow
+significant effort to be invested in building a platform for cataloguing results
+from test runs of the classifier. I decided to settle for populating fields in a
+structured text file, an example of which can be found in
+Appendix~\ref{app:frontier-log}.
+
+
+
 
 \section{Usage Example}
 
