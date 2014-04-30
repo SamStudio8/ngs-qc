@@ -67,7 +67,7 @@ classes and encodings...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concepts}
 
-In this section we introduce some terminology and ideas that will assist
+In this section we introduce some ideas that will assist
 understanding of the application's purpose and terminology used in the following
 implementation section.
 
@@ -133,16 +133,64 @@ Often such labels are \textbf{encoded} in to simpler types such as integers.
 ...
 
 \subsection{Python Data Structures}
-%TODO Find better citation (Python book)
 \label{sec:python-structures}
+%TODO Find better citation (Python book)
 
-...Python dictionaries offer (constant) lookup access and more importantly
-querying the structure for whether it contains a particular key can also be
-performed in constant $O$(1) as opposed to searching a list for
-membership\citep{py:timecomplexity}...
+The Python standard library offers many different data structures each with
+their own properties. I introduce three such structures below to assist the
+reader in understanding some of the implementation decisions made in the
+following section:
 
-a structure in
-which hashed keys are mapped to an arbitrary value or object.
+\subsubsection{List}
+A \textbf{list}\citep{py-list} essentially represents an ordered sequence of
+elements. \textit{Lists} are incredibly versatile, allowing elements of any data
+type, including \textit{lists} and other container structures or arbitrary
+objects. Elements in a \textit{list} are accessed by their index (location)
+in the sequence. \textit{Lists} permit duplicate values.
+
+\textit{Lists} are represented in memory as a contiguous block and so great
+expense is incurred if the \textit{list} grows beyond its bounds and must be
+relocated elsewhere in memory to resize to a larger contiguous block.
+Whilst items can be appended to or popped from anywhere in the container,
+performing those actions on a location that is not at the end of the
+\textit{list} will require the contents of the structure to be moved in memory
+to maintain the contiguous layout.
+
+Checking whether an item is in a \textit{list} requires iterating over all $n$
+elements in the container until either a match is found or there are no elements
+left to check.
+
+
+\subsubsection{Dictionary}
+
+A \textbf{dict}\citep{py-dict} or \textit{dictionary} is a structure containing
+key-value pairs in which string or numeric keys\footnote{Any type can actually
+be used as a dictionary key providing it is immutable, including
+tuples\citep{py-dict}} are mapped to an arbitrary value or object through a
+hashing function. Keys in a \textit{dictionary} are unique; attempting to add a
+key-value pair where the key already exists will overwrite the original entry.
+
+Python \textit{dictionaries} offer constant lookup access and more importantly,
+unlike a list, querying the structure for whether it contains a particular key
+can be performed in constant time\citep{py:timecomplexity}.
+However it is important to note that a \textit{dictionary} does not maintain
+order, keys are not sorted alphanumerically nor are they sorted by insertion
+time. Ordering is determined arbitrarily by the \textbf{dict}'s underlying hash
+table\footnote{This is probably the question I see most often from users new to
+Python on StackOverflow}.
+
+
+\subsubsection{Set}
+
+\textbf{Sets}\citep{py-set} represent a collection of elements and are similar
+to a \textbf{dict} in that they are allowed to contain any immutable (thus
+hashable) elements but entries are not mapped to a value or object.
+\textit{Sets} are forbidden from containing duplicate objects and do not
+maintain order.
+
+Like \textbf{dict}, checking for membership of an item in a \textit{set}
+completes in constant time, making the structure particularly useful for
+membership testing and filtering duplicates out of other structures.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -419,10 +467,8 @@ The following section details the retrieval of data and targets from the
 does \textbf{Frontier} not just store the read in data in such a structure to
 begin with?
 
-This is primarily due to the underlying layout of a list structure, which must
-be represented in memory as a contiguous block. Great expense is therefore
-incurred if the list grows beyond its bounds and must be relocated elsewhere in
-memory to resize to a larger contiguous block. Given the nature of input data,
+This is primarily due to the underlying layout of a list structure as introduced
+in Section~\ref{sec:python-structures}. Given the nature of input data,
 the number of observations and parameters are unknown before the input
 data is actually read and so memory cannot be reserved to prevent these operations.
 The potential number of input files renders reading through the data once to
@@ -659,6 +705,9 @@ instructs the interpreter to load the module named as a script.
 \end{listing}
 
 \subsection{AQCReader and BamcheckReader}
+
+
+
 * Test cleaning of data
 * Test duplicates warning
 * Test duplicates exception
@@ -677,8 +726,6 @@ encountered (as this should not happen!)
 * ...including when parameters are incorrect or unknown
 * ...ensures parameters should be excluded or included...
 * actually found a problem with excluding!
+* Ensures targets map correctly to data
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

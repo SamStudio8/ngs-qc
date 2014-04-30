@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-April 30, 2014
+May 1, 2014
 
 Declaration
 
@@ -232,22 +232,22 @@ Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 5.3.1
 
 Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 5.3.2
 
-Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
 5.3.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
 5.3.4
 
-Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
 5.3.5
 
@@ -255,26 +255,26 @@ Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 5.3.6
 
-Logging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Logging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 5.4
 
-Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 5.5
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 5.5.1
 
-AQCReader and BamcheckReader . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+AQCReader and BamcheckReader . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 5.5.2
 
-Frontier Utilities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Frontier Utilities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 5.5.3
 
-Frontier API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Frontier API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 Results
 6.1
@@ -283,44 +283,44 @@ II
 
 15
 
-31
+32
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 6.1.1
 
-Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 6.1.2
 
-CART . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+CART . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 6.2
 
-Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 6.3
 
-Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 6.3.1
 
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 6.3.2
 
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 6.3.3
 
-Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
 7.1
 
-33
 34
+35
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 iii
 
 Contents
@@ -330,23 +330,23 @@ iii
 
 7.2.1
 
-Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 7.2.2
 
-The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 7.2.3
 
-Groups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Groups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 7.2.4
 
-Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 7.2.5
 
-Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 Materials and Methods
 8.1
@@ -355,101 +355,101 @@ Materials and Methods
 
 9
 
-Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
-37
+38
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 8.1.1
 
-Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
 8.1.2
 
-Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 8.1.3
 
-Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
-Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 8.2.1
 
-Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 8.2.2
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 8.2.3
 
-Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 Goldilocks
-40
-9.1 Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+41
+9.1 Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
 9.2
 
 9.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
 9.1.2
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
 9.1.3
 
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 9.1.4
 
-Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 9.2.1
 
-Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 9.2.2
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 9.2.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 9.2.4
 
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
 
 9.2.5
 
-Final Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Final Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
 
 9.3
 
-Usage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Usage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
 
 9.4
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
 
 10 Results
 
-47
+48
 
 11 Analysis Pipeline
 
-49
+50
 
-11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
-11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
-11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
-11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
-11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
 
 iv
 
@@ -459,32 +459,32 @@ III
 
 Discussions and Conclusions
 
-54
+55
 
 12 Current Status
 
-55
+56
 
 13 Critical Evaluation
 
-56
+57
 
 14 Conclusions
 
-57
+58
 
 Appendix A Input Examples
 
-60
+61
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
-A.3 Goldilocks Pathsfile . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.3 Goldilocks Pathsfile . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
 Appendix B Output Examples
 
-65
+66
 
-B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
 
 v
 
@@ -1113,8 +1113,8 @@ designed specifically for the given learning problem, with hard coded classes an
 
 Concepts
 
-In this section we introduce some terminology and ideas that will assist understanding of the application’s
-purpose and terminology used in the following implementation section.
+In this section we introduce some ideas that will assist understanding of the application’s purpose and terminology
+used in the following implementation section.
 
 5.2.1
 
@@ -1141,7 +1141,7 @@ For problems of a classification nature such as ours, an observation’s target 
 particular observation. Depending on the context of the learning problem targets may be discovered manually
 20
 
-5.3 Implementation
+5.2 Concepts
 (e.g. counting leaves from images of plants, one will need to manually count all the leaves in the image before
 being able to use it for learning) or as the output from another system such as auto_qc.
 In the context of this project where the objective is to begin learning the rules of auto_qc the targets refer to
@@ -1170,9 +1170,39 @@ Training and Testing
 
 Python Data Structures
 
-...Python dictionaries offer (constant) lookup access and more importantly querying the structure for whether it
-contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[34]...
-a structure in which hashed keys are mapped to an arbitrary value or object.
+The Python standard library offers many different data structures each with their own properties. I introduce
+three such structures below to assist the reader in understanding some of the implementation decisions made
+in the following section:
+
+List
+A list[34] essentially represents an ordered sequence of elements. Lists are incredibly versatile, allowing
+elements of any data type, including lists and other container structures or arbitrary objects. Elements in a list
+are accessed by their index (location) in the sequence. Lists permit duplicate values.
+Lists are represented in memory as a contiguous block and so great expense is incurred if the list grows beyond
+its bounds and must be relocated elsewhere in memory to resize to a larger contiguous block. Whilst items can
+be appended to or popped from anywhere in the container, performing those actions on a location that is not at
+the end of the list will require the contents of the structure to be moved in memory to maintain the contiguous
+layout.
+Checking whether an item is in a list requires iterating over all n elements in the container until either a match
+is found or there are no elements left to check.
+21
+
+5.3 Implementation
+Dictionary
+A dict[35] or dictionary is a structure containing key-value pairs in which string or numeric keys1 are mapped
+to an arbitrary value or object through a hashing function. Keys in a dictionary are unique; attempting to add
+a key-value pair where the key already exists will overwrite the original entry.
+Python dictionaries offer constant lookup access and more importantly, unlike a list, querying the structure
+for whether it contains a particular key can be performed in constant time[36]. However it is important to note
+that a dictionary does not maintain order, keys are not sorted alphanumerically nor are they sorted by insertion
+time. Ordering is determined arbitrarily by the dict’s underlying hash table2 .
+
+Set
+Sets[37] represent a collection of elements and are similar to a dict in that they are allowed to contain any
+immutable (thus hashable) elements but entries are not mapped to a value or object. Sets are forbidden from
+containing duplicate objects and do not maintain order.
+Like dict, checking for membership of an item in a set completes in constant time, making the structure
+particularly useful for membership testing and filtering duplicates out of other structures.
 
 5.3
 
@@ -1185,10 +1215,6 @@ This section investigates the implementation of Frontier’s major components:
 • Retrieval of stored data
 • Interaction with scikit-learn
 
-21
-
-5.3 Implementation
-
 5.3.1
 
 Class Definitions
@@ -1197,6 +1223,15 @@ Frontier was designed to support classification machine learning problems, to ad
 the package must be aware of each of the possible classes in the problem space. Early versions of Frontier
 were specifically designed for training and testing data from auto_qc and could only support encoding and
 decoding of the pass, fail and warn classes.
+1 Any
+2 This
+
+type can actually be used as a dictionary key providing it is immutable, including tuples[35]
+is probably the question I see most often from users new to Python on StackOverflow
+
+22
+
+5.3 Implementation
 However this implementation was clearly esoteric and held little to no further use outside the domain of the
 project’s learning task. What would happen if a class label were to be added or removed in future? Most likely
 many lines of code would need to be re-written to handle such cases; the package was inflexible.
@@ -1228,15 +1263,15 @@ A list of labels that denote membership of this class
 The encoded representation of this class (See Chapter 5.2.3)
 • _recode Boolean, Private
 A flag to indicate whether an API action has changed the code of this class, typically used when treating
-22
-
-5.3 Implementation
 all members of one class as a member of another – A user should never set this manually
 • _count Integer, Private
 The number of observations with this label, typically used when calculating weightings based on the
 proportions of class sizes and outputting logging information – A user should not set this manually
 This simple structure allows Frontier to be compatible with almost any classification learning task with
 minimum input from the end user. Additional utilities provided by the Frontier utils subpackage use this
+23
+
+5.3 Implementation
 structure to automatically classify and encode labels without user intervention with the following functions:
 • classify_label
 Attempt to classify a label by comparing a given string to each set of names, locating an exact match
@@ -1268,10 +1303,6 @@ process_line defines the line handling operations that extract and store desired
 responsibility includes returning None for lines that contain comments and irrelevant data and conducting any
 necessary sanitisation (the BamcheckReader for example makes use of a utility function to translate spaces,
 underscores and dots to hyphens).
-
-23
-
-5.3 Implementation
 get_data must return any read in data in a suitable structure for storage by Frontier. Typically this will be a
 Python dictionary using some unique identifier for each observation as a key, mapping to an arbitrary value or
 object containing that observation’s parameters. Further discussion on Frontier’s storage of data and targets is
@@ -1280,6 +1311,10 @@ The AbstractReader class is designed to simplify the process of reading in obser
 end users, however it is still up to the author of the dervied class to set up any structures to store data (which
 cannot be done automatically without likely enforcing potentially unhelpful constraints) before initialisation
 of the inherited base class (via the call to super) as shown in Listing 3.
+24
+
+5.3 Implementation
+
 class BamcheckReader(AbstractReader):
 [...]
 def __init__(self, filepath, CLASSES, auto_close=True):
@@ -1307,16 +1342,20 @@ Currently it is also the responsibility of the author of a derived class to perf
 any extracted data. For example the BamcheckReader class checks for the presence of multiple entries of
 a particular metric which will print a notice if found, unless the entries have differing values, upon which an
 exception is thrown and the process is halted.
-24
-
-5.3 Implementation
 Once a reader has been defined for a particular file format, a user need only provide a directory of files to be
 parsed and the name of the class designed to complete the parsing. Frontier will then take care of executing
 the parsing process on all files in the directory. After a derived reader has completed file handling, Frontier
-will call its get_data function to "move"1 the extracted data to its own storage.
+will call its get_data function to "move"3 the extracted data to its own storage.
 At this point Frontier will also check the integrity of the data, primarily that all parameters have a non-zero
 variance. Users will be warned when this requirement is violated; parameters with no variance cannot provide
 much information for successful classification as their values are equal for all class labels!
+3 Rather,
+
+a pointer to the address of the extracted data’s dictionary hashmap will be copied to memory inside a Frontier class
+
+25
+
+5.3 Implementation
 In future it would be useful to investigate whether it would be feasible to perform such sanity checking in a
 generic manner to ensure it could be applied to a wide enough range of scenarios to make it worth including
 functionality in the AbstractReader directly.
@@ -1329,7 +1368,7 @@ used to automatically determine which readers to use without requiring the user 
 
 Storage
 
-Frontier specifies a class called the Statplexer2 which provides users with a single point of access to all read in
+Frontier specifies a class called the Statplexer4 which provides users with a single point of access to all read in
 data. The reader interfaces described in the previous chapter implement their own loading functions to populate
 the _data and _targets class members of the Statplexer object, both of which are Python dictionaries.
 During the parsing of observation data with the relevant reader class, the reader is expected to locate an
@@ -1339,35 +1378,32 @@ identifier is then used as a key in both the _data and _targets dictionaries to 
 another dictionary or an arbitrary class) that stores that observation’s parameters and its known target (encoded
 class label), respectively.
 Although these attributes can be manipulated directly (and indeed they are for testing purposes) the leading
-underscore follows a popular convention defined in Python’s style guideline, PEP8[35], where class members
+underscore follows a popular convention defined in Python’s style guideline, PEP8[38], where class members
 with leading underscores should be treated as non-public. Python doesn’t have private variables such as those
 that may be found in other languages like Java, indeed the Python style guide points out that "no attribute is
-really private in Python"[35]. In an interesting StackOverflow answer on the subject, a user describes that this
-is "cultural"[36] and that Python programmers are trusted not to circumvent convention and "mess around with
+really private in Python"[38]. In an interesting StackOverflow answer on the subject, a user describes that this
+is "cultural"[39] and that Python programmers are trusted not to circumvent convention and "mess around with
 those private members". Users are therefore expected to use the functionality Frontier provides for controlled
 getting and setting of data stored in these pseudo-private _data and _targets members.
 load_data, for example, should be used exclusively when populating the two dictionaries and is automatically
 called on construction of the Statplexer if the construction arguments are valid. load_data will automatically
 call other necessary (pseudo-private) functions of the class including _test_variance which checks that parameter
-1 Rather,
-2A
-
-a pointer to the address of the extracted data’s dictionary hashmap will be copied to memory inside a Frontier class
-somewhat contrived contraction of ’Statistics Multiplexer’
-
-25
-
-5.3 Implementation
 variances are non-zero and also warns users if new observations are overwriting old ones, or if an observation
 does not appear to have a corresponding target.
 The following section details the retrieval of data and targets from the Statplexer which are returned to the
 user in NumPy arrays. Why does Frontier not just store the read in data in such a structure to begin with?
-This is primarily due to the underlying layout of a list structure, which must be represented in memory as
-a contiguous block. Great expense is therefore incurred if the list grows beyond its bounds and must be
-relocated elsewhere in memory to resize to a larger contiguous block. Given the nature of input data, the
-number of observations and parameters are unknown before the input data is actually read and so memory
-cannot be reserved to prevent these operations. The potential number of input files renders reading through
-the data once to reserve the right amount of memory for a second read-through impractical in terms of time.
+This is primarily due to the underlying layout of a list structure as introduced in Section 5.2.5. Given the nature
+of input data, the number of observations and parameters are unknown before the input data is actually read
+and so memory cannot be reserved to prevent these operations. The potential number of input files renders
+4A
+
+somewhat contrived contraction of ’Statistics Multiplexer’
+
+26
+
+5.3 Implementation
+reading through the data once to reserve the right amount of memory for a second read-through impractical in
+terms of time.
 It is arguable that despite this, the data could be unloaded from the _data and _targets dictionaries in to some
 form of array at the end of the call to load_data. However as the Statplexer allows loading of additional data at
 any time, which would not only risk increasingly expensive resizing operations as the list continues to expand
@@ -1376,12 +1412,12 @@ and _targets which is constant for dictionaries and significantly slower for lar
 It is possible that an implementation could use both a dictionary and an array; appending the observations to
 the array and entering a mapping between the observation ID and its index in the array. Though this would
 still not avoid the issue of relocating the array once it grows beyond its bound in memory.
-Worse still, as results requested from the Statplexer API are returned to the user in a sorted matrix3 (i.e.
+Worse still, as results requested from the Statplexer API are returned to the user in a sorted matrix5 (i.e.
 rows and columns are ordered alphanumerically by the observation ID and parameter name, respectively), if
 observations are not processed in a sorted order (which is not a requirement) then returning results will involve
 accessing the proposed _data and _targets arrays in a non-linear fashion, losing any efficiency that could be
 gained from using an array in the first place.
-Whilst not entirely optimal4 , in terms of a compromise between memory complexity and avoiding expensive
+Whilst not entirely optimal6 , in terms of a compromise between memory complexity and avoiding expensive
 operations on data input and retrieval, dictionaries offer the best balance.
 It should be noted that the Statplexer stores a copy of the user defined CLASSES dictionary (as the class
 member _classes), which is an argument to its construction, allowing the Statplexer to share this information
@@ -1395,16 +1431,6 @@ Frontier’s Statplexer is designed to provide functions to an end user for extr
 suitable for passing as an argument to functions of an external framework or library, such as scikit-learn. As
 specified in Frontier’s purpose, the package must provide user-friendly functions to extract observations and
 parameters of interest from the internal Statplexer representation.
-3A
-
-two-dimensional NumPy array
-still require use of sorted when creating a result matrix via the API
-
-4 Dictionaries
-
-26
-
-5.3 Implementation
 The previous section suggests that directly accessing elements of the Statplexer’s _data and _targets member
 dictionaries, whilst possible, would violate the psuedo-private nature of the variables and even so, this would
 hardly be a user friendly way in which to obtain data from the Statplexer.
@@ -1413,6 +1439,16 @@ requirements of the underlying machine learning problem that this project strive
 in trying many combinations of observation and parameter subsets that Frontier would need to provide not just
 a function to return the contents of _data and _targets but to assist in retreiving similar subsets automatically
 with as little effort from the end user as possible.
+5A
+
+two-dimensional NumPy array
+still require use of sorted when creating a result matrix via the API
+
+6 Dictionaries
+
+27
+
+5.3 Implementation
 But how can a user make an informed decision on parameters to subset? Though this is primarily the role of
 feature selection, which will be discussed later in this chapter, firstly a user will need to have a feeling for what
 parameters are actually present and ideally be offered functionality to allow for quick elementary exploration
@@ -1436,14 +1472,8 @@ only return columns for the parameters in the given list
 The prior section first introduces the format in which data is returned, the two-dimensional NumPy array –
 referred to as the Frontier Results Matrix – in which a row represents a particular observation and each column
 represents a parameter (or feature). By default both dimensions are ordered alphanumerically; rows are sorted
-by their observation ID, columns by the parameter name5 . Targets are also returned in a NumPy array, with
+by their observation ID, columns by the parameter name7 . Targets are also returned in a NumPy array, with
 each index of the target array mapping 1:1 with the observation row of the same index in the Results Matrix.
-5 Typically the ’cleaned’ or otherwise sanitised parameter name, as noted in Section 5.3.2 for example where the BamcheckReader
-class will automatically convert spaces and other predefined characters to hyphens.
-
-27
-
-5.3 Implementation
 
 5.3.5
 
@@ -1455,6 +1485,12 @@ Submitting Data
 Cross Validation
 ...method in which to measure classification accuracy... ...potentially use a weighting to penalise mistakes in
 smaller classes...
+7 Typically the ’cleaned’ or otherwise sanitised parameter name, as noted in Section 5.3.2 for example where the BamcheckReader
+class will automatically convert spaces and other predefined characters to hyphens.
+
+28
+
+5.3 Implementation
 ...K fold cross validation ...using stratified K fold cross validation...
 
 Confusion Matrices
@@ -1474,7 +1510,7 @@ processing language, awk.
 Given the time to create specialised software for storing and comparing different runs of the classifier in future,
 it would be trivial to import old Frontier log files.
 
-28
+29
 
 5.4 Usage Example
 
@@ -1515,7 +1551,7 @@ Module containing the class (of the same name) to be used to parse each file in 
 observation data
 • TargetReader Module
 Module containing the class (of the same name) to be used to parse the target_path file for target data
-29
+30
 
 5.5 Testing
 
@@ -1538,15 +1574,25 @@ Listing 5 Execution of the Frontier Testing Suite
 
 AQCReader and BamcheckReader
 
+* Test cleaning of data * Test duplicates warning * Test duplicates exception * BC Tests that some hardcoded
+expected values are returned * AQC Tests that number of labels were as expected...
+
 5.5.2
 
 Frontier Utilities
+
+* Test both encoding and decoding of class labels and class codes * Ensures that exceptions are thrown when
+unknown class labels or codes are encountered (as this should not happen!)
 
 5.5.3
 
 Frontier API
 
-30
+* More complex * Sets up a series of test observations and parameters * Ensures each API function returns
+the data expected * ...including when parameters are incorrect or unknown * ...ensures parameters should be
+excluded or included... * actually found a problem with excluding! * Ensures targets map correctly to data
+
+31
 
 Chapter 6
 
@@ -1576,7 +1622,7 @@ Parameter Selection
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
 version from master * needed use force np.float64 * ...actually data was 0... gg
 
-31
+32
 
 6.3 Trees
 
@@ -1596,14 +1642,14 @@ Parameter Sets
 
 Ignoring Warnings
 
-32
+33
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-33
+34
 
 Chapter 7
 
@@ -1633,7 +1679,7 @@ Variants and SNPs
 ...their position refers to the index of the base of the chromosome in which the polymorphism exists... ...commonly
 these are 1-indexed (although this is not always the case) and thus care must be taken to ensure this is accounted
 for at any step where positions are considered...
-34
+35
 
 7.2 Concepts and Terminology
 
@@ -1680,7 +1726,7 @@ Length and Stride
 ...length will refer to the number of bases included in the region ...stride will refer to the number of bases to
 be used as an offset between the starting base of one region and the beginning of the next...
 
-35
+36
 
 7.2 Concepts and Terminology
 ...a length of 1000 and a stride of 500 for example ...the first region for example will consist of 1:1000, then
@@ -1694,7 +1740,7 @@ Candidates
 ...a candidate is a region of length... ...a candidate will contain a number of variants, counted for each group...
 ...simple object consisting of start and end base...
 
-36
+37
 
 Chapter 8
 
@@ -1723,7 +1769,7 @@ vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # Complains about lack of tabix index but still makes the file...
 
-37
+38
 
 8.2 Development Environment
 # Index with tabix
@@ -1771,7 +1817,7 @@ Testing
 
 ...a little more difficult ...discussed more at length in the following chapter...
 
-38
+39
 
 8.2 Development Environment
 
@@ -1781,7 +1827,7 @@ Tools
 
 As before... (Chapter 3.2.4)
 
-39
+40
 
 Chapter 9
 
@@ -1817,7 +1863,7 @@ module to be imported in to other programs. Whilst the use case is certainly mor
 
 speaking we are only handling the 22 autosomes and ignoring the remaining 2 sex chromsomes (allosomes)
 
-40
+41
 
 9.2 Implementation
 made the choice to modularise the functionality, in the hope that if an end user were to find some function of
@@ -1863,7 +1909,7 @@ Loading Variant Query File List
 Goldilocks requires the user provide their own valid "pathsfile", meeting the specification demonstrated in
 Section 8.1.3 (an actual example of such a file can be found in Appendix A.3).
 
-41
+42
 
 9.2 Implementation
 merely lists locations of input files and groups them together as desired ...all files in a particular group will be
@@ -1907,7 +1953,7 @@ just look up variants in a list:
 for chromosome in autosomes:
 for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
-42
+43
 
 9.2 Implementation
 if position in variant_position_list:
@@ -1946,7 +1992,7 @@ We of course have to initially load the variants in to the chromosome array, but
 Rather to my surprise this was slow (maybe if I have time I should check how it compared to looking up with
 a list). Was it the allocation of memory? Perhaps I had run out of RAM and most of the work was going in to
 
-43
+44
 
 9.2 Implementation
 fetching and storing data in swap?
@@ -1984,7 +2030,7 @@ for variant_loc in locations:
 chro[variant_loc] = 1
 return chro
 
-44
+45
 
 9.3 Usage
 load_chromosome returns a numpy array representing the chromosome, given its desired length and a list of
@@ -2030,13 +2076,13 @@ Testing
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
 
-45
+46
 
 9.4 Testing
 ...tests are still rather modest and with more time it would be appropriate to improve their function but I have
 faith in their results...
 
-46
+47
 
 Chapter 10
 
@@ -2182,11 +2228,11 @@ Figure 10.1 was created quickly in R using ggplot2 to eyeball the difference in 
 region (called a ’megabase’ due to their length of one million bases).. ...motivated by locating very highly
 populated regions in the iCHIP group well above the mean in the output...
 
-47
+48
 
 Fig. 10.1 Megabase Plot: ...
 
-48
+49
 
 Chapter 11
 
@@ -2223,7 +2269,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-49
+50
 
 11.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -2277,7 +2323,7 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 | Only run on a node with more than 4000mb memory
 Listing 7 : Flags required to raise job memory allocation
 
-50
+51
 
 11.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -2332,7 +2378,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-51
+52
 
 11.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -2365,7 +2411,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-52
+53
 
 11.1 Implementation
 s = bam_get_aux(b);
@@ -2402,19 +2448,19 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-53
+54
 
 Part III
 
 Discussions and Conclusions
 
-54
+55
 
 Chapter 12
 
 Current Status
 
-55
+56
 
 Chapter 13
 
@@ -2427,13 +2473,13 @@ was designed to complement the machine learning experiments and provides
 ...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
 their own data regardless of how esoteric or cryptic the file format is...
 
-56
+57
 
 Chapter 14
 
 Conclusions
 
-57
+58
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -2556,7 +2602,7 @@ parsing library. [Online]. Available:
 https:
 //pypi.python.org/pypi/argparse/1.2.1
 
-58
+59
 
 References
 [27] M. Fowler, “Continuous Integration,” 2006.
@@ -2588,18 +2634,28 @@ http://CRAN.R-project.org/package=devtools
 Leo and Vitek, Jan, “Evaluating the design of
 the R language,” in ECOOP 2012–Object-Oriented
 Programming. Springer, 2012, pp. 104–131.
-[34] Python
+[34] Python Software Foundation. More on Lists.
+[Online]. Available:
+https://docs.python.org/2/
+tutorial/datastructures.html#more-on-lists
+[35] ——. Dictionaries. [Online]. Available: https://docs.
+python.org/2/tutorial/datastructures.html#dictionaries
+[36] Python
 Wiki.
 (2012)
 Time
 Complexity.
 [Online]. Available: https://wiki.python.org/moin/
 TimeComplexity
-[35] W. B. Van Rossum, Guido and N. Coghlan,
+[37] Python Software Foundation. Sets. [Online].
+Available:
+https://docs.python.org/2/tutorial/
+datastructures.html#sets
+[38] W. B. Van Rossum, Guido and N. Coghlan,
 “PEP 8 – Style Guide for Python Code,” Python
 Enhancement Proposals, 2001. [Online]. Available:
 http://legacy.python.org/dev/peps/pep-0008/
-[36] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
+[39] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
 “Does
 python
 have
@@ -2612,7 +2668,7 @@ Available:
 http://stackoverflow.com/questions/1641219/
 does-python-have-private-variables-in-classes
 
-59
+60
 
 Appendix A
 
@@ -2736,7 +2792,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-60
+61
 
 A.1 BAMcheckR’d Example Output
 
@@ -2968,7 +3024,7 @@ FFQ
 0
 0
 
-61
+62
 
 1609
 
@@ -3310,7 +3366,7 @@ IS
 2
 0
 
-62
+63
 
 A.1 BAMcheckR’d Example Output
 
@@ -3589,7 +3645,7 @@ GCD
 0.101
 0.101
 
-63
+64
 
 A.2 auto_qc Decision Matrix
 
@@ -3738,7 +3794,7 @@ Goldilocks Pathsfile
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-64
+65
 
 ...
 ...
@@ -3824,7 +3880,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-65
+66
 
 B.1 Frontier Log Example
 
@@ -3894,7 +3950,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-66
+67
 
 B.1 Frontier Log Example
 
@@ -3920,6 +3976,6 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
-67
+68
 
 
