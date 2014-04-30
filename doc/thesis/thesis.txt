@@ -228,10 +228,14 @@ Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
+5.2.5
+
+Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+
 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 5.3.1
 
-Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 5.3.2
 
@@ -318,15 +322,17 @@ The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . 
 7.2.3
 
 Groups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
-
-7.2.4
-
-Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
 iii
 
 Contents
-7.2.5
+
 8
+
+Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+
+7.2.5
+
+Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 Materials and Methods
 8.1
@@ -335,7 +341,8 @@ Materials and Methods
 
 9
 
-Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+7.2.4
+
 36
 
 Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
@@ -374,13 +381,13 @@ Goldilocks
 
 Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 9.1.1
+9.1.2
 
 Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
-9.1.2
 9.1.3
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 9.1.4
@@ -445,12 +452,13 @@ Discussions and Conclusions
 
 55
 
-14 Conclusions
-
-56
 iv
 
 Contents
+14 Conclusions
+
+56
+
 Appendix A Input Examples
 
 59
@@ -1138,6 +1146,14 @@ Training and Testing
 
 ...
 
+5.2.5
+
+Python Data Structures
+
+...Python dictionaries offer (constant) lookup access and more importantly querying the structure for whether it
+contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[34]...
+a structure in which hashed keys are mapped to an arbitrary value or object.
+
 5.3
 
 Implementation
@@ -1149,6 +1165,10 @@ This section investigates the implementation of Frontier’s major components:
 • Retrieval of stored data
 • Interaction with scikit-learn
 
+21
+
+5.3 Implementation
+
 5.3.1
 
 Class Definitions
@@ -1157,9 +1177,6 @@ Frontier was designed to support classification machine learning problems, to ad
 the package must be aware of each of the possible classes in the problem space. Early versions of Frontier
 were specifically designed for training and testing data from auto_qc and could only support encoding and
 decoding of the pass, fail and warn classes.
-21
-
-5.3 Implementation
 However this implementation was clearly esoteric and held little to no further use outside the domain of the
 project’s learning task. What would happen if a class label were to be added or removed in future? Most likely
 many lines of code would need to be re-written to handle such cases; the package was inflexible.
@@ -1191,15 +1208,15 @@ A list of labels that denote membership of this class
 The encoded representation of this class (See Chapter 5.2.3)
 • _recode Boolean, Private
 A flag to indicate whether an API action has changed the code of this class, typically used when treating
+22
+
+5.3 Implementation
 all members of one class as a member of another – A user should never set this manually
 • _count Integer, Private
 The number of observations with this label, typically used when calculating weightings based on the
 proportions of class sizes and outputting logging information – A user should not set this manually
 This simple structure allows Frontier to be compatible with almost any classification learning task with
 minimum input from the end user. Additional utilities provided by the Frontier utils subpackage use this
-22
-
-5.3 Implementation
 structure to automatically classify and encode labels without user intervention with the following functions:
 • classify_label
 Attempt to classify a label by comparing a given string to each set of names, locating an exact match
@@ -1231,17 +1248,16 @@ process_line defines the line handling operations that extract and store desired
 responsibility includes returning None for lines that contain comments and irrelevant data.
 get_data must return any read in data in a suitable structure for storage by Frontier. Typically this will be a
 Python dictionary using some unique identifier for each observation as a key, mapping to an arbitrary value or
+
+23
+
+5.3 Implementation
 object containing that observation’s parameters. Further discussion on Frontier’s storage of data and targets is
 to follow.
 The AbstractReader class is designed to simplify the process of reading in observations and their targets for
 end users, however it is still up to the author of the dervied class to set up any structures to store data (which
 cannot be done automatically without likely enforcing potentially unhelpful constraints) before initialisation
 of the inherited base class (via the call to super) as shown in Listing 3.
-
-23
-
-5.3 Implementation
-
 class BamcheckReader(AbstractReader):
 [...]
 def __init__(self, filepath, CLASSES, auto_close=True):
@@ -1271,18 +1287,14 @@ a particular metric which will print a notice if found, unless the entries have 
 exception is thrown and the process is halted.
 Once a reader has been defined for a particular file format, a user need only provide a directory of files to be
 parsed and the name of the class designed to complete the parsing. Frontier will then take care of executing
+24
+
+5.3 Implementation
 the parsing process on all files in the directory. After a derived reader has completed file handling, Frontier
 will call its get_data function to "move"1 the extracted data to its own storage.
 At this point Frontier will also check the integrity of the data, primarily that all parameters have a non-zero
 variance. Users will be warned when this requirement is violated; parameters with no variance cannot provide
 much information for successful classification as their values are equal for all class labels!
-1 Rather,
-
-a pointer to the address of the extracted data’s dictionary hashmap will be copied to memory inside a Frontier class
-
-24
-
-5.3 Implementation
 In future it would be useful to investigate whether it would be feasible to perform such sanity checking in a
 generic manner to ensure it could be applied to a wide enough range of scenarios to make it worth including
 functionality in the AbstractReader directly.
@@ -1295,55 +1307,61 @@ used to automatically determine which readers to use without requiring the user 
 
 Storage
 
-Frontier specifies a class called the Statplexer2 which provides users with a single point of access to all read
-in data. The reader interfaces described in the previous chapter implement their own loading functions to
-populate the _data and _targets class members of the Statplexer object.
-_data and _targets are Python dictionaries, a structure in which hashed keys are mapped to an arbitrary value
-or object. During the parsing of observation data with the relevant reader class, the reader is expected to locate
-an appropriate unique ID for each observation. In the case of processing of auto_qc data, this would be the
-lanelet’s barcode which is collected from the filename of that particular lanelet’s "bamcheckr’d" file.
-This identifier is then used as a key in both the _data and _targets dictionaries to map to a structure (typically
+Frontier specifies a class called the Statplexer2 which provides users with a single point of access to all read in
+data. The reader interfaces described in the previous chapter implement their own loading functions to populate
+the _data and _targets class members of the Statplexer object, both of which are Python dictionaries.
+During the parsing of observation data with the relevant reader class, the reader is expected to locate an
+appropriate unique ID for each observation. In the case of processing of auto_qc data, this would be the
+lanelet’s barcode which is collected from the filename of that particular lanelet’s "bamcheckr’d" file. This
+identifier is then used as a key in both the _data and _targets dictionaries to map to a structure (typically
 another dictionary or an arbitrary class) that stores that observation’s parameters and its known target (encoded
 class label), respectively.
 Although these attributes can be manipulated directly (and indeed they are for testing purposes) the leading
-underscore follows a popular convention defined in Python’s style guideline, PEP8[34], where class members
+underscore follows a popular convention defined in Python’s style guideline, PEP8[35], where class members
 with leading underscores should be treated as non-public. Python doesn’t have private variables such as those
 that may be found in other languages like Java, indeed the Python style guide points out that "no attribute is
-really private in Python"[34]. In an interesting StackOverflow answer on the subject, a user describes that this
-is "cultural"[35] and that Python programmers are trusted not to circumvent convention and "mess around with
+really private in Python"[35]. In an interesting StackOverflow answer on the subject, a user describes that this
+is "cultural"[36] and that Python programmers are trusted not to circumvent convention and "mess around with
 those private members". Users are therefore expected to use the functionality Frontier provides for controlled
 getting and setting of data stored in these pseudo-private _data and _targets members.
-For example, load_data should be used exclusively when populating the two dictionaries and is automatically
-called on construction of the Statplexer if the arguments are valid. load_data will automatically call other
-(pseudo-private) functions of the class including _test_variance which checks that parameter variances are
-non-zero whilst also warning users if new observations are overwriting old ones or if an observation does not
-appear to have a corresponding target.
-...Python dictionaries offer (constant) lookup access and more importantly querying the structure for whether it
-contains a particular key can also be performed in constant O(1) as opposed to searching a list for membership[36]...
-...The following section describes the retrieval of data and targets in the form of lists or numpy arrays... so
-why not just store read in data in one of these structures to begin with instead?
+load_data, for example, should be used exclusively when populating the two dictionaries and is automatically
+called on construction of the Statplexer if the construction arguments are valid. load_data will automatically
+call other necessary (pseudo-private) functions of the class including _test_variance which checks that parameter
+variances are non-zero and also warns users if new observations are overwriting old ones, or if an observation
+does not appear to have a corresponding target.
+1 Rather,
 2A
 
+a pointer to the address of the extracted data’s dictionary hashmap will be copied to memory inside a Frontier class
 somewhat contrived contraction of ’Statistics Multiplexer’
 
 25
 
 5.3 Implementation
-This is primarily due to the underlying layout of a list structure, which must be represented in memory as a
-contiguous block. Great expense is therefore incurred if the list grows beyond its bounds and must be relocated
-to resize. Given the nature of input data, the number of observations and their parameters are unknown before
-the input data is read and so memory cannot be reserved to prevent these operations.
-It is arguable that despite this, the data could be unloaded from the _data and _targets dictionaries in to
-some form of array at the end of the call to load_data. However the Statplexer allows loading of data at any
-time, which would not only risk increasingly expensive resizing operations as the list continues to expand but
-the sanity checking that takes place in load_data involves checking for membership of an ID in _data and
-_targets where performance is constant for dictionaries and O(n) for lists.
-...although the latter point is somewhat easily fixed for an array implementation by using a dictionary to
-provide a mapping between a sample name and where it is stored in an array...
-...an issue with use of a dictionary however is by default they are unsorted, not only this but the order in which
-the keys are iterated over will be undefined...
-...currently this causes the list of keys to require sorting each time a user queries the Statplexer API for data...
-as obviously the parameters and targets must map one-to-one in a predictable and repeatable manner.
+The following section details the retrieval of data and targets from the Statplexer which are returned to the
+user in NumPy arrays. Why does Frontier not just store the read in data in such a structure to begin with
+instead?
+This is primarily due to the underlying layout of a list structure, which must be represented in memory as
+a contiguous block. Great expense is therefore incurred if the list grows beyond its bounds and must be
+relocated elsewhere in memory to resize to a larger contiguous block. Given the nature of input data, the
+number of observations and parameters are unknown before the input data is actually read and so memory
+cannot be reserved to prevent these operations. The potential number of input files renders reading through
+the data once to reserve the right amount of memory for a second read-through impractical in terms of time.
+It is arguable that despite this, the data could be unloaded from the _data and _targets dictionaries in to some
+form of array at the end of the call to load_data. However as the Statplexer allows loading of additional data at
+any time, which would not only risk increasingly expensive resizing operations as the list continues to expand
+but the sanity checking that takes place in load_data involves checking for membership of a given ID in _data
+and _targets which is constant for dictionaries and significantly slower for large lists (see Section 5.2.5).
+It is possible that an implementation could use both a dictionary and an array; appending the observations to
+the array and entering a mapping between the observation ID and its index in the array. Though this would
+still not avoid the issue of relocating the array once it grows beyond its bound in memory.
+Worse still, as results requested from the Statplexer API are returned to the user in a sorted matrix3 (i.e.
+rows and columns are ordered alphanumerically by the observation ID and parameter name, respectively), if
+observations are not processed in a sorted order (which is not a requirement) then returning results will involve
+accessing the proposed _data and _targets arrays in a non-linear fashion, losing any efficiency that could be
+gained from using an array in the first place.
+Whilst not entirely optimal4 , in terms of a compromise between memory complexity and avoiding expensive
+operations on data input and retrieval, dictionaries offer the best balance.
 It should be noted that the Statplexer stores a copy of the user defined CLASSES dictionary (as the class
 member _classes), which is an argument to its construction, allowing the Statplexer to share this information
 with any readers or utility functions who require it.
@@ -1357,6 +1375,16 @@ for an external framework or library, in our case; scikit-learn...
 ...leverages numpy...
 ...Frontier can be used to inspect the parameter set extracted from the observations... some of the methods
 provided for this purpose include:
+3A
+
+two-dimensional NumPy array
+still require use of sorted when creating a result matrix via the API
+
+4 Dictionaries
+
+26
+
+5.3 Implementation
 • list_parameters
 Return a sorted list of all parameters
 • find_parameters
@@ -1366,10 +1394,6 @@ Given a list of input strings, return a list of parameters which do not contain 
 a substring, or if needed an exact match
 ...data is returned sorted by key, ...with parameters sorted alphanumerically... ...targets map 1:1 with the data
 array...
-
-26
-
-5.3 Implementation
 • get_data_by_parameters
 Return data for each observation, but only include columns for each parameter in the given list
 • get_data_by_target
@@ -2481,11 +2505,18 @@ http://CRAN.R-project.org/package=devtools
 Leo and Vitek, Jan, “Evaluating the design of
 the R language,” in ECOOP 2012–Object-Oriented
 Programming. Springer, 2012, pp. 104–131.
-[34] W. B. Van Rossum, Guido and N. Coghlan,
+[34] Python
+Wiki.
+(2012)
+Time
+Complexity.
+[Online]. Available: https://wiki.python.org/moin/
+TimeComplexity
+[35] W. B. Van Rossum, Guido and N. Coghlan,
 “PEP 8 – Style Guide for Python Code,” Python
 Enhancement Proposals, 2001. [Online]. Available:
 http://legacy.python.org/dev/peps/pep-0008/
-[35] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
+[36] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
 “Does
 python
 have
@@ -2497,13 +2528,6 @@ classes?”
 Available:
 http://stackoverflow.com/questions/1641219/
 does-python-have-private-variables-in-classes
-[36] Python
-Wiki.
-(2012)
-Time
-Complexity.
-[Online]. Available: https://wiki.python.org/moin/
-TimeComplexity
 
 58
 

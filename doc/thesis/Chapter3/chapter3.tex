@@ -131,6 +131,20 @@ Often such labels are \textbf{encoded} in to simpler types such as integers.
 
 ...
 
+\subsection{Python Data Structures}
+%TODO Find better citation (Python book)
+\label{sec:python-structures}
+
+...Python
+dictionaries offer (constant) lookup access and more importantly querying the
+structure for whether it contains a particular key can also be performed in
+constant $O$(1) as opposed to searching a list for
+membership\citep{py:timecomplexity}...
+
+a structure in
+which hashed keys are mapped to an arbitrary value or object.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
 
@@ -358,24 +372,18 @@ without requiring the user to explicitly specify.
 
 \subsection{Storage}
 
-% TODO Cite tests?
 Frontier specifies a class called the \textbf{Statplexer}\footnote{A somewhat
 contrived contraction of 'Statistics Multiplexer'} which provides users with a
 single point of access to all read in data. The reader interfaces described in
 the previous chapter implement their own loading functions to populate the
 \textbf{\_data} and \textbf{\_targets} class members of the \textbf{Statplexer}
-object.
+object, both of which are Python dictionaries.
 
-%TODO Find better citation (Python book)
-%TODO Introduce Python dictionaries in Concepts ?
-
-\textbf{\_data} and \textbf{\_targets} are Python dictionaries, a structure in
-which hashed keys are mapped to an arbitrary value or object. During the parsing
-of observation data with the relevant reader class, the reader is expected to
-locate an appropriate unique ID for each observation. In the case of processing
-of \textbf{auto\_qc} data, this would be the lanelet's barcode which is
-collected from the filename of that particular lanelet's "bamcheckr'd" file.
-
+During the parsing of observation data with the relevant reader class, the
+reader is expected to locate an appropriate unique ID for each observation. In
+the case of processing of \textbf{auto\_qc} data, this would be the lanelet's
+barcode which is collected from the filename of that particular lanelet's
+"bamcheckr'd" file.
 This identifier is then used as a key in both the \textbf{\_data} and
 \textbf{\_targets} dictionaries to map to a structure (typically another
 dictionary or an arbitrary class) that stores that observation's parameters
@@ -394,52 +402,58 @@ private members". Users are therefore expected to use the functionality
 Frontier provides for controlled getting and setting of data stored in these
 pseudo-private \textbf{\_data} and \textbf{\_targets} members.
 
-For example, \textbf{load\_data} should be used exclusively when populating
+\textbf{load\_data}, for example, should be used exclusively when populating
 the two dictionaries and is automatically called on construction of the
-\textbf{Statplexer} if the arguments are valid. \textbf{load\_data} will
-automatically call other (pseudo-private) functions of the class including
-\textbf{\_test\_variance} which checks that parameter variances are non-zero
-whilst also warning users if new observations are overwriting old ones or
-if an observation does not appear to have a corresponding target.
+\textbf{Statplexer} if the construction arguments are valid.
+\textbf{load\_data} will automatically call other necessary (pseudo-private)
+functions of the class including \textbf{\_test\_variance} which checks that
+parameter variances are non-zero and also warns users if new observations
+are overwriting old ones, or if an observation does not appear to have a
+corresponding target.
 
-...Python
-dictionaries offer (constant) lookup access and more importantly querying the
-structure for whether it contains a particular key can also be performed in
-constant $O$(1) as opposed to searching a list for
-membership\citep{py:timecomplexity}...
-
-...The following section describes the retrieval of data and targets in the
-form of lists or \textbf{numpy} arrays... so why not just store read in data
-in one of these structures to begin with instead?
+The following section details the retrieval of data and targets from the
+\textbf{Statplexer} which are returned to the user in \textbf{NumPy} arrays. Why
+does \textbf{Frontier} not just store the read in data in such a structure to
+begin with instead?
 
 This is primarily due to the underlying layout of a list structure, which must
 be represented in memory as a contiguous block. Great expense is therefore
-incurred if the list grows beyond its bounds and must be relocated to resize.
-Given the nature of input data, the number of observations and their parameters
-are unknown before the input data is read and so memory cannot be reserved to
-prevent these operations.
+incurred if the list grows beyond its bounds and must be relocated elsewhere in
+memory to resize to a larger contiguous block. Given the nature of input data,
+the number of observations and parameters are unknown before the input
+data is actually read and so memory cannot be reserved to prevent these operations.
+The potential number of input files renders reading through the data once to
+reserve the right amount of memory for a second read-through impractical in
+terms of time.
 
 It is arguable that despite this, the data could be unloaded from the
 \textbf{\_data} and \textbf{\_targets} dictionaries in to some form of array at
-the end of the call to \textbf{load\_data}. However the \textbf{Statplexer}
-allows loading of data at any time, which would not only risk increasingly
-expensive resizing operations as the list continues to expand but the sanity
-checking that takes place in \textbf{load\_data} involves checking for
-membership of an ID in \textbf{\_data} and \textbf{\_targets} where performance
-is constant for dictionaries and $O$(n) for lists.
+the end of the call to \textbf{load\_data}. However as the \textbf{Statplexer}
+allows loading of additional data at any time, which would not only risk
+increasingly expensive resizing operations as the list continues to expand but
+the sanity checking that takes place in \textbf{load\_data} involves checking
+for membership of a given ID in \textbf{\_data} and \textbf{\_targets} which is
+constant for dictionaries and significantly slower for large lists (see
+Section~\ref{sec:python-structures}).
 
-...although the latter point is somewhat easily fixed for an array
-implementation by using a dictionary to provide a mapping between a sample name
-and where it is stored in an array...
+It is possible that an implementation could use both a dictionary and an array;
+appending the observations to the array and entering a mapping between the
+observation ID and its index in the array.  Though this would still not avoid
+the issue of relocating the array once it grows beyond its bound in memory.
 
-...an issue with use of a dictionary however is by default they are unsorted,
-not only this but the order in which the keys are iterated over will be
-undefined...
+Worse still, as results requested from the \textbf{Statplexer} API are returned
+to the user in a sorted matrix\footnote{A two-dimensional \textbf{NumPy} array}
+(\textit{i.e.} rows and columns are ordered alphanumerically by the observation
+ID and parameter name, respectively), if observations are not processed in a
+sorted order (which is not a requirement) then returning results will involve
+accessing the proposed \textbf{\_data} and \textbf{\_targets} arrays in a
+non-linear fashion, losing any efficiency that could be gained from using an
+array in the first place.
 
-...currently this causes the list of keys to require sorting each time a user
-queries the Statplexer API for data... as obviously the parameters and targets
-must map one-to-one in a predictable and repeatable manner.
-%TODO Figure to show mapping between container elements
+Whilst not entirely optimal\footnote{Dictionaries still require use of
+\textbf{sorted} when creating a result matrix via the API}, in terms of a
+compromise between memory complexity and avoiding expensive operations on data
+input and retrieval, dictionaries offer the best balance.
 
 It should be noted that the \textbf{Statplexer} stores a copy of the user
 defined CLASSES dictionary (as the class member \textbf{\_classes}), which is an
@@ -452,6 +466,13 @@ information with any readers or utility functions who require it.
 The Statplexer is designed to provide functions to an end user for extraction
 of desired data in a format suitable for an external framework or library,
 in our case; scikit-learn...
+
+%TODO Figure to show mapping between container elements
+%...currently this causes the list of keys to require sorting each time a user
+%queries the Statplexer API for data... as obviously the parameters and targets
+%must map one-to-one in a predictable and repeatable manner.
+
+
 
 ...leverages \textbf{numpy}...
 
