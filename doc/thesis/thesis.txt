@@ -1561,8 +1561,8 @@ Testing
 
 Frontier is bundled with a small testing suite designed to flex the functionality of the two included readers
 (AQCReader and BamcheckReader) as well as both the Frontier utilities and the Frontier API itself. The
-suite consists of three Python scripts which utilise the unittest package in the Python standard library. The
-scripts are located in the tests directory of the Frontier package.
+suite consists of three Python scripts which utilise the unittest[40] package in the Python standard library.
+The scripts are located in the tests directory of the Frontier package.
 Listing 5 displays the commands necessary to execute each test script. Note the -m option to the Python
 command instructs the interpreter to load the module named as a script.
 python -m tests/frontier
@@ -1574,6 +1574,8 @@ Listing 5 Execution of the Frontier Testing Suite
 
 AQCReader and BamcheckReader
 
+Both of Frontier’s included readers are distributed with their own modest test suite, designed to test the
+particular functionality of that reader.
 * Test cleaning of data * Test duplicates warning * Test duplicates exception * BC Tests that some hardcoded
 expected values are returned * AQC Tests that number of labels were as expected...
 
@@ -2667,6 +2669,10 @@ classes?”
 Available:
 http://stackoverflow.com/questions/1641219/
 does-python-have-private-variables-in-classes
+[40] Python Software Foundation. unittest — Unit
+testing framework. [Online]. Available:
+https:
+//docs.python.org/2/library/unittest.html
 
 60
 

@@ -156,6 +156,7 @@ performing those actions on a location that is not at the end of the
 \textit{list} will require the contents of the structure to be moved in memory
 to maintain the contiguous layout.
 
+%TODO Cite time
 Checking whether an item is in a \textit{list} requires iterating over all $n$
 elements in the container until either a match is found or there are no elements
 left to check.
@@ -170,6 +171,7 @@ tuples\citep{py-dict}} are mapped to an arbitrary value or object through a
 hashing function. Keys in a \textit{dictionary} are unique; attempting to add a
 key-value pair where the key already exists will overwrite the original entry.
 
+%TODO Cite time
 Python \textit{dictionaries} offer constant lookup access and more importantly,
 unlike a list, querying the structure for whether it contains a particular key
 can be performed in constant time\citep{py:timecomplexity}.
@@ -188,6 +190,7 @@ hashable) elements but entries are not mapped to a value or object.
 \textit{Sets} are forbidden from containing duplicate objects and do not
 maintain order.
 
+%TODO Cite time
 Like \textbf{dict}, checking for membership of an item in a \textit{set}
 completes in constant time, making the structure particularly useful for
 membership testing and filtering duplicates out of other structures.
@@ -680,9 +683,9 @@ Constructing the Statplexer requires the following arguments:
 functionality of the two included readers (\textbf{AQCReader} and
 \textbf{BamcheckReader}) as well as both the \textbf{Frontier} utilities and
 the \textbf{Frontier} API itself. The suite consists of three Python scripts
-which utilise the \textbf{unittest} package in the Python standard library.
-The scripts are located in the \textit{tests} directory of the
-\textbf{Frontier} package.
+which utilise the \textbf{unittest}\citep{py-unittest} package in the Python
+standard library.  The scripts are located in the \textit{tests} directory of
+the \textbf{Frontier} package.
 
 Listing~\ref{list:frontier-test} displays the commands necessary to execute each
 test script. Note the \texttt{-m} option to the \texttt{Python} command
@@ -706,6 +709,8 @@ instructs the interpreter to load the module named as a script.
 
 \subsection{AQCReader and BamcheckReader}
 
+Both of \textbf{Frontier}'s included readers are distributed with their own
+modest test suite, designed to test the particular functionality of that reader.
 
 
 * Test cleaning of data
@@ -715,6 +720,7 @@ instructs the interpreter to load the module named as a script.
 * AQC Tests that number of labels were as expected...
 
 \subsection{Frontier Utilities}
+
 * Test both encoding and decoding of class labels and class codes
 * Ensures that exceptions are thrown when unknown class labels or codes are
 encountered (as this should not happen!)
