@@ -246,7 +246,7 @@ international team of contributors\citep{about-scikit-learn}.
 
 Arguably one of the most useful features of \textbf{scikit-learn} is its
 seamless integration with the "big names" of scientific computing in Python:
-\textbf{numpy}\citep{numpyscipy} and \textbf{scipy}\citep{scipy}, making heavy
+\textbf{NumPy}\citep{NumPySciPy} and \textbf{SciPy}\citep{SciPy}, making heavy
 use of the optimised data structures and mathematical algorithms these packages
 offer, not only providing improved performance against packages that implement
 their own structures but also easing interaction by not requiring users to
@@ -288,7 +288,7 @@ features useful to the project that have not been implemented in
 \textbf{scikit-learn} including tree pruning and printing.
 
 However it does not feature the same integration with
-Python's scientific computing packages; \textbf{numpy} and \textbf{scipy} and
+Python's scientific computing packages; \textbf{NumPy} and \textbf{SciPy} and
 also requires that end users input their data in a structure defined by
 the framework rather than a generic data structure.
 Thus use of \textbf{Orange} would introduce more data wrangling and munging
@@ -301,17 +301,35 @@ as opposed to the package API, potentially impeding experiment repeatability by
 having to reset the graphical environment each time.
 
 Despite the \textbf{scikit-learn} package not yet reaching a major version
-milestone, its feature set, interaction with \textbf{numpy} and \textbf{scipy}
+milestone, its feature set, interaction with \textbf{NumPy} and \textbf{SciPy}
 and useful built-in subpackages led me to choose \textbf{scikit-learn} as the
 machine learning framework for this part of the project.
 
 
 \subsection{Additional External Libraries}
+\label{sec:additional-libs}
 
-argparse...
-numpy\citep{numpyscipy}
-scipy\citep{scipy}... Fast and reliable implementations of
-mathematical functions...  ggplot2\citep{ggplot2} for beautiful graphing...
+As discussed, the project will make use of the open source\footnote{Components
+of the \textbf{SciPy Stack} are distributed under the 3-clause Modified BSD
+License\citep{scipy-lic}\citep{numpy-lic}} \textbf{SciPy Stack}, consisting of
+several core packages including \textbf{NumPy}\citep{NumPySciPy}: a package for
+efficient numerical computation which defines generic N-dimensional array and
+matrix data containers; and \textbf{SciPy}\citep{SciPy}, which provides a
+multitude of optimised numerical routines.
+
+Whilst the stack also includes \textbf{Matplotlib}, a highly popular graphing
+package, I typically prefer to use the R package \textbf{ggplot2}\citep{ggplot2}
+for creating graphs. However it is useful to note that \textbf{Matplotlib}
+integrates easily with the data structures of \textbf{NumPy} (and thus
+\textbf{scikit-learn} too).
+
+\textbf{argparse} is a third-party Python library\footnote{Although since Python
+2.7, \textbf{argparse} has been included as part of the standard
+library\citep{argparse-pypi}} used for specifying the arguments and options of a
+command line interface via a simple API.  \textbf{argparse} spares the developer
+from having to check the presence and validity of a user's arguments to a Python
+program themselves whilst also automatically generating a friendly interface to
+the program for the end user based on the definitions provided by the developer.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -330,33 +348,46 @@ server dedicated to the building and testing of the code contained in a
 centralised repository typically to which an entire team will have write
 access\citep{fowler-ci}. Whilst in this scenario there will be much less "risk"
 from integration issues due to the single person team size, the themes of
-automated building and self-testing code can be taken on board.
+automated building and self-testing code can still be taken on board.
 
-\textbf{Jenkins} is a highly popular\cite{jenkins-stats} example of such a
-platform with which I am familiar. Although an out-of-the-box Jenkins instance is
-suitable for variety of software engineering projects, it would be necessary to
-invest some time to install and tweak plugins to perform actions on test results
-(such as failing a build that causes accuracy to decrease). However, previous
-experience found that highly specific tasks will often require a plugin to be
-authored to overcome limitations in the feature set of a more generic plugin,
-which given the intricacies of the Jenkins package layout could easily
-turn in to a project of its own. Unfortunately, other features that would be
-useful to the project including the indexing and searching of build logs are
-somewhat lacking in Jenkins.
+\textbf{Jenkins}\citep{Jenkins} is a highly popular\cite{jenkins-stats} example
+of such a platform with which I am familiar. Although an out-of-the-box
+\textbf{Jenkins} instance is suitable for variety of software engineering
+projects, it would be necessary to invest some time to install and tweak plugins
+to perform actions on test results (such as failing a build that causes accuracy
+to decrease).  Previous experience found that more specific tasks will often
+require a plugin to be authored to overcome limitations in the feature set of a
+more generic plugin, which given the intricacies of the \textbf{Jenkins} package
+layout could easily turn in to a project of its own. Unfortunately, other
+features that would be useful to the project including the indexing and
+searching of logs are somewhat lacking in \textbf{Jenkins}.
 
-Online solutions such as \textbf{Travis} and \textbf{Wercker} could potentially
-offer a quicker set up as both merely requires a small configuration file in the
-root of the repository and a hook to be registered...
-...however such services would
-not have been able to handle artifacts such as dot files without some convoluted
-solution of uploading them to dropbox or adding them to a private git repository
-from the build node...  ...also would have needed to upload a large
-quantity of training data repeatedly which would be inefficient (and more than
-likely against reasonable use of the platform)
+Online solutions such as \textbf{Travis}\citep{travis-ci} and
+\textbf{Wercker}\citep{wercker} are free for open source projects and could
+potentially offer a quicker set up, as both services merely require a small
+configuration file in the root of the repository and a hook to be registered
+(allowing builds to be triggered on a code push for example) before being able
+to deploy a build in the cloud.
 
-Really wanted to write my own solution for this but had to settle for well
-formatted log files that could be searched and processed with some command line
-fu...
+However these online services would not have been able to handle the return of
+build artifacts (such as logs, graphs or dot files containing a decision tree)
+without some convoluted solution of uploading them to another service or
+committing them to a private code repository during execution of the job -- the
+non-persistent nature of these nodes would cause any artifacts to be destroyed
+when the node is terminated at the end of the build.
+
+Also, as these virtual nodes are isolated from any sort of persisting file
+system it would be necessary to upload large quantities of training data any
+time a build and test job is to be run. This sounds rather inefficient in terms
+of both bandwidth and time and would more than likely constitute unreasonable
+use in view of the platform's "fair use" terms and conditions too.
+
+It would seem that none of the widely available solutions would provide an
+environment suitable for the testing of this project. I wanted to provide my
+own platform for this problem but given the time constraints of the project this
+was simply not practical and in the end we settled for well formatted log files
+which could be searched and processed with command line tools such as
+\textbf{awk}.
 
 
 \subsection{Tools}
