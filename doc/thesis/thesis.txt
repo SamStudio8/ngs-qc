@@ -161,11 +161,11 @@ Additional External Libraries . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 3.2.4
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 3.2.5
 
-Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 Contents
 4
@@ -251,7 +251,7 @@ Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 5.3.5
 
-Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Interaction with scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 
 5.3.6
 
@@ -264,6 +264,17 @@ Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 5.5
 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+5.5.1
+
+AQCReader and BamcheckReader . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+
+5.5.2
+
+Frontier Utilities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+
+5.5.3
+
+Frontier API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 Results
 6.1
@@ -304,17 +315,19 @@ Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
+7.1
 
 33
 34
 
-7.1
-
 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+iii
 
+Contents
 7.2
 
-Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+8
+
 7.2.1
 
 Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
@@ -322,11 +335,8 @@ Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 7.2.2
 
 The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
-iii
 
-Contents
-
-8
+7.2.3
 
 Groups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
@@ -345,7 +355,7 @@ Materials and Methods
 
 9
 
-7.2.3
+Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
 
 37
 
@@ -376,18 +386,17 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 Goldilocks
-
 40
-
-9.1
+9.1 Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 9.2
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 9.1.1
-9.1.2
 
 Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+
+9.1.2
+
 Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 9.1.3
@@ -442,6 +451,10 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
 11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 
+iv
+
+Contents
+
 III
 
 Discussions and Conclusions
@@ -455,9 +468,7 @@ Discussions and Conclusions
 13 Critical Evaluation
 
 56
-iv
 
-Contents
 14 Conclusions
 
 57
@@ -887,6 +898,13 @@ the program for the end user based on the definitions provided by the developer.
 
 3.2.4
 
+Tools
+
+git
+Keeping your code base inside some form of version control is common sense,
+
+3.2.5
+
 Testing
 
 As discussed in Chapter 1.2.1, testing forms a critical part of the project given the need to monitor the impact
@@ -912,12 +930,6 @@ However these online services would not have been able to handle the return of b
 graphs or dot files containing a decision tree) without some convoluted solution of uploading them to another
 service or committing them to a private code repository during execution of the job – the non-persistent nature
 of these nodes would cause any artifacts to be destroyed when the node is terminated at the end of the build.
-Also, as these virtual nodes are isolated from any sort of persisting file system it would be necessary to upload
-large quantities of training data any time a build and test job is to be run. This sounds rather inefficient in terms
-of both bandwidth and time and would more than likely constitute unreasonable use in view of the platform’s
-"fair use" terms and conditions too.
-It would seem that none of the widely available solutions would provide an environment suitable for the testing
-of this project. I wanted to provide my own platform for this problem but given the time constraints of the
 5 Although
 
 since Python 2.7, argparse has been included as part of the standard library[26]
@@ -925,14 +937,14 @@ since Python 2.7, argparse has been included as part of the standard library[26]
 13
 
 3.2 Development Environment
+Also, as these virtual nodes are isolated from any sort of persisting file system it would be necessary to upload
+large quantities of training data any time a build and test job is to be run. This sounds rather inefficient in terms
+of both bandwidth and time and would more than likely constitute unreasonable use in view of the platform’s
+"fair use" terms and conditions too.
+It would seem that none of the widely available solutions would provide an environment suitable for the testing
+of this project. I wanted to provide my own platform for this problem but given the time constraints of the
 project this was simply not practical and in the end we settled for well formatted log files which could be
 searched and processed with command line tools such as awk.
-
-3.2.5
-
-Tools
-
-Version control is critical, git
 
 14
 
@@ -1253,13 +1265,15 @@ It is expected that derived classes will at least provide their own implementati
 get_data. Failing to do so will cause Frontier to throw a NotImplementedError when attempting to use
 the class to read data.
 process_line defines the line handling operations that extract and store desired data found in a given line. This
-responsibility includes returning None for lines that contain comments and irrelevant data.
-get_data must return any read in data in a suitable structure for storage by Frontier. Typically this will be a
-Python dictionary using some unique identifier for each observation as a key, mapping to an arbitrary value or
+responsibility includes returning None for lines that contain comments and irrelevant data and conducting any
+necessary sanitisation (the BamcheckReader for example makes use of a utility function to translate spaces,
+underscores and dots to hyphens).
 
 23
 
 5.3 Implementation
+get_data must return any read in data in a suitable structure for storage by Frontier. Typically this will be a
+Python dictionary using some unique identifier for each observation as a key, mapping to an arbitrary value or
 object containing that observation’s parameters. Further discussion on Frontier’s storage of data and targets is
 to follow.
 The AbstractReader class is designed to simplify the process of reading in observations and their targets for
@@ -1293,11 +1307,11 @@ Currently it is also the responsibility of the author of a derived class to perf
 any extracted data. For example the BamcheckReader class checks for the presence of multiple entries of
 a particular metric which will print a notice if found, unless the entries have differing values, upon which an
 exception is thrown and the process is halted.
-Once a reader has been defined for a particular file format, a user need only provide a directory of files to be
-parsed and the name of the class designed to complete the parsing. Frontier will then take care of executing
 24
 
 5.3 Implementation
+Once a reader has been defined for a particular file format, a user need only provide a directory of files to be
+parsed and the name of the class designed to complete the parsing. Frontier will then take care of executing
 the parsing process on all files in the directory. After a derived reader has completed file handling, Frontier
 will call its get_data function to "move"1 the extracted data to its own storage.
 At this point Frontier will also check the integrity of the data, primarily that all parameters have a non-zero
@@ -1335,8 +1349,6 @@ getting and setting of data stored in these pseudo-private _data and _targets me
 load_data, for example, should be used exclusively when populating the two dictionaries and is automatically
 called on construction of the Statplexer if the construction arguments are valid. load_data will automatically
 call other necessary (pseudo-private) functions of the class including _test_variance which checks that parameter
-variances are non-zero and also warns users if new observations are overwriting old ones, or if an observation
-does not appear to have a corresponding target.
 1 Rather,
 2A
 
@@ -1346,9 +1358,10 @@ somewhat contrived contraction of ’Statistics Multiplexer’
 25
 
 5.3 Implementation
+variances are non-zero and also warns users if new observations are overwriting old ones, or if an observation
+does not appear to have a corresponding target.
 The following section details the retrieval of data and targets from the Statplexer which are returned to the
-user in NumPy arrays. Why does Frontier not just store the read in data in such a structure to begin with
-instead?
+user in NumPy arrays. Why does Frontier not just store the read in data in such a structure to begin with?
 This is primarily due to the underlying layout of a list structure, which must be represented in memory as
 a contiguous block. Great expense is therefore incurred if the list grows beyond its bounds and must be
 relocated elsewhere in memory to resize to a larger contiguous block. Given the nature of input data, the
@@ -1382,8 +1395,6 @@ Frontier’s Statplexer is designed to provide functions to an end user for extr
 suitable for passing as an argument to functions of an external framework or library, such as scikit-learn. As
 specified in Frontier’s purpose, the package must provide user-friendly functions to extract observations and
 parameters of interest from the internal Statplexer representation.
-The previous section suggests that directly accessing elements of the Statplexer’s _data and _targets member
-dictionaries, whilst possible, would violate the psuedo-private nature of the variables and even so, this would
 3A
 
 two-dimensional NumPy array
@@ -1394,6 +1405,8 @@ still require use of sorted when creating a result matrix via the API
 26
 
 5.3 Implementation
+The previous section suggests that directly accessing elements of the Statplexer’s _data and _targets member
+dictionaries, whilst possible, would violate the psuedo-private nature of the variables and even so, this would
 hardly be a user friendly way in which to obtain data from the Statplexer.
 As described in Section 5.1.3, development of Frontier was evolutionary, growing to meet the needs and
 requirements of the underlying machine learning problem that this project strives to solve. It became clear that
@@ -1412,27 +1425,38 @@ Given a list of input strings, return a list of parameters which contain any of 
 • exclude_parameters
 Given a list of input strings, return a list of parameters which do not contain any of the input strings as
 a substring, or if needed an exact match
-...data is returned sorted by key, ...with parameters sorted alphanumerically... ...targets map 1:1 with the data
-array...
-...leverages numpy...
+Once users have an idea of the parameters they wish to extract from each observation, Frontier maintains an
+additional set of functions that act as a form of API, allowing users to retrieve subsets of data based on both
+parameters and targets:
 • get_data_by_parameters
 Return data for each observation, but only include columns for each parameter in the given list
 • get_data_by_target
 Return data for each observation that have been classified in one of the targets specified and additionally
 only return columns for the parameters in the given list
+The prior section first introduces the format in which data is returned, the two-dimensional NumPy array –
+referred to as the Frontier Results Matrix – in which a row represents a particular observation and each column
+represents a parameter (or feature). By default both dimensions are ordered alphanumerically; rows are sorted
+by their observation ID, columns by the parameter name5 . Targets are also returned in a NumPy array, with
+each index of the target array mapping 1:1 with the observation row of the same index in the Results Matrix.
+5 Typically the ’cleaned’ or otherwise sanitised parameter name, as noted in Section 5.3.2 for example where the BamcheckReader
+class will automatically convert spaces and other predefined characters to hyphens.
+
+27
+
+5.3 Implementation
 
 5.3.5
 
 Interaction with scikit-learn
+
+Submitting Data
+...
 
 Cross Validation
 ...method in which to measure classification accuracy... ...potentially use a weighting to penalise mistakes in
 smaller classes...
 ...K fold cross validation ...using stratified K fold cross validation...
 
-27
-
-5.3 Implementation
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
@@ -1440,7 +1464,7 @@ Confusion Matrices
 
 Logging
 
-Section 3.2.4 concluded that time constraints would not allow significant effort to be invested in building a
+Section 3.2.5 concluded that time constraints would not allow significant effort to be invested in building a
 platform for cataloguing results from test runs of the classifier. I decided to settle for populating fields in a
 structured text file, an example of which can be found in Appendix B.1.
 Frontier provides functions such as write_log to dump Statplexer parameters to a given file path along
@@ -1499,7 +1523,28 @@ Module containing the class (of the same name) to be used to parse the target_pa
 
 Testing
 
-...
+Frontier is bundled with a small testing suite designed to flex the functionality of the two included readers
+(AQCReader and BamcheckReader) as well as both the Frontier utilities and the Frontier API itself. The
+suite consists of three Python scripts which utilise the unittest package in the Python standard library. The
+scripts are located in the tests directory of the Frontier package.
+Listing 5 displays the commands necessary to execute each test script. Note the -m option to the Python
+command instructs the interpreter to load the module named as a script.
+python -m tests/frontier
+python -m tests/aqcreader
+python -m tests/bamcheckreader
+Listing 5 Execution of the Frontier Testing Suite
+
+5.5.1
+
+AQCReader and BamcheckReader
+
+5.5.2
+
+Frontier Utilities
+
+5.5.3
+
+Frontier API
 
 30
 
@@ -1734,7 +1779,7 @@ Testing
 
 Tools
 
-As before... (Chapter 3.2.5)
+As before... (Chapter 3.2.4)
 
 39
 
@@ -2131,7 +2176,7 @@ POSITIONS
 88500001 89500000
 160000001 - 161000000
 
-Listing 5 : ...top 25...
+Listing 6 : ...top 25...
 
 Figure 10.1 was created quickly in R using ggplot2 to eyeball the difference in variant distribution across each
 region (called a ’megabase’ due to their length of one million bases).. ...motivated by locating very highly
@@ -2208,7 +2253,7 @@ the very least an estimated 35kB for a 64-bit pointer to each input file and app
 32kB buffer to read data from each file also. Yet executing the job with 500MB caused the LSF scheduler to
 forceably terminate the process for exceeding the maximum allocated memory limit.
 Assuming that the intermediate structures for storing and sorting the input data must have been greater than
-expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 6 only to
+expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 7 only to
 meet the same fate, even when reserving 16GB of memory...
 This is an absurd amount of memory even considering the vast input... It appeared a memory leak had been
 discovered... that drastically increases in severity as more files are provided as input,
@@ -2230,7 +2275,7 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 #
 
 | Only run on a node with more than 4000mb memory
-Listing 6 : Flags required to raise job memory allocation
+Listing 7 : Flags required to raise job memory allocation
 
 50
 
@@ -2271,7 +2316,7 @@ by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
 ==30464==
 by 0x402CC4: main (test_trans_tbl_init.c:348)
 
-Listing 7 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
+Listing 8 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
 failure to release memory allocated to a compiled regular expression
 
 Poor Time Performance

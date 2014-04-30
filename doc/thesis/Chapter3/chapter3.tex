@@ -136,10 +136,9 @@ Often such labels are \textbf{encoded} in to simpler types such as integers.
 %TODO Find better citation (Python book)
 \label{sec:python-structures}
 
-...Python
-dictionaries offer (constant) lookup access and more importantly querying the
-structure for whether it contains a particular key can also be performed in
-constant $O$(1) as opposed to searching a list for
+...Python dictionaries offer (constant) lookup access and more importantly
+querying the structure for whether it contains a particular key can also be
+performed in constant $O$(1) as opposed to searching a list for
 membership\citep{py:timecomplexity}...
 
 a structure in
@@ -254,6 +253,7 @@ observation targets automatically from relevant files.
 
 
 \subsection{Input Handling}
+\label{sec:frontier-input}
 
 Frontier's modular nature allows users to write their own Python classes to read
 data from any form of input file or stream. Two examples of which are the
@@ -276,7 +276,9 @@ to use the class to read data.
 %TODO Better describe process line expectations (locate key, value)?
 \textbf{process\_line} defines the line handling operations that extract and store
 desired data found in a given line. This responsibility includes returning None
-for lines that contain comments and irrelevant data.
+for lines that contain comments and irrelevant data and conducting any necessary
+sanitisation (the \textbf{BamcheckReader} for example makes use of a utility
+function to translate spaces, underscores and dots to hyphens).
 
 \textbf{get\_data} must return any read in data in a suitable structure for
 storage by Frontier. Typically this will be a Python dictionary using some
@@ -415,7 +417,7 @@ corresponding target.
 The following section details the retrieval of data and targets from the
 \textbf{Statplexer} which are returned to the user in \textbf{NumPy} arrays. Why
 does \textbf{Frontier} not just store the read in data in such a structure to
-begin with instead?
+begin with?
 
 This is primarily due to the underlying layout of a list structure, which must
 be represented in memory as a contiguous block. Great expense is therefore
@@ -506,16 +508,10 @@ functions:
         match
 \end{itemize}
 
-...data is returned sorted by key,
-...with parameters sorted alphanumerically...
-...targets map 1:1 with the data array...
-
-%TODO Figure to show mapping between container elements
-%...currently this causes the list of keys to require sorting each time a user
-%queries the Statplexer API for data... as obviously the parameters and targets
-%must map one-to-one in a predictable and repeatable manner.
-
-...leverages \textbf{numpy}...
+Once users have an idea of the parameters they wish to extract from each
+observation, \textbf{Frontier} maintains an additional set of functions that act
+as a form of API, allowing users to retrieve subsets of data based on both
+parameters and targets:
 
 \begin{itemize}
     \item \textbf{get\_data\_by\_parameters} \hfill\\
@@ -527,7 +523,23 @@ functions:
         parameters in the given list
 \end{itemize}
 
+%TODO Figure to show mapping between container elements
+The prior section first introduces the format in which data is returned, the
+two-dimensional \textbf{NumPy} array -- referred to as the \textit{Frontier Results
+Matrix} -- in which a row represents a particular observation and each column
+represents a parameter (or feature). By default both dimensions are
+ordered alphanumerically; rows are sorted by their observation ID, columns by
+the parameter name\footnote{Typically the 'cleaned' or otherwise sanitised
+    parameter name, as noted in Section~\ref{sec:frontier-input} for example
+where the \textbf{BamcheckReader} class will automatically convert spaces and
+other predefined characters to hyphens.}. Targets are also returned in a
+\textbf{NumPy} array, with each index of the target array mapping 1:1 with the
+observation row of the same index in the \textit{Results Matrix}.
+
+
 \subsection{Interaction with scikit-learn}
+\subsubsection{Submitting Data}
+...
 \subsubsection{Cross Validation}
 
 ...method in which to measure classification accuracy...
@@ -618,7 +630,55 @@ Constructing the Statplexer requires the following arguments:
 
 \section{Testing}
 
-...
+\textbf{Frontier} is bundled with a small testing suite designed to flex the
+functionality of the two included readers (\textbf{AQCReader} and
+\textbf{BamcheckReader}) as well as both the \textbf{Frontier} utilities and
+the \textbf{Frontier} API itself. The suite consists of three Python scripts
+which utilise the \textbf{unittest} package in the Python standard library.
+The scripts are located in the \textit{tests} directory of the
+\textbf{Frontier} package.
+
+Listing~\ref{list:frontier-test} displays the commands necessary to execute each
+test script. Note the \texttt{-m} option to the \texttt{Python} command
+instructs the interpreter to load the module named as a script.
+
+\begin{listing}[H]
+    \caption[frontier-test]{\textbf{Execution of the Frontier Testing Suite}}
+    \label{list:frontier-test}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+
+        python -m tests/frontier
+        python -m tests/aqcreader
+        python -m tests/bamcheckreader
+    \end{minted}
+\end{listing}
+
+\subsection{AQCReader and BamcheckReader}
+* Test cleaning of data
+* Test duplicates warning
+* Test duplicates exception
+* BC Tests that some hardcoded expected values are returned
+* AQC Tests that number of labels were as expected...
+
+\subsection{Frontier Utilities}
+* Test both encoding and decoding of class labels and class codes
+* Ensures that exceptions are thrown when unknown class labels or codes are
+encountered (as this should not happen!)
+
+\subsection{Frontier API}
+* More complex
+* Sets up a series of test observations and parameters
+* Ensures each API function returns the data expected
+* ...including when parameters are incorrect or unknown
+* ...ensures parameters should be excluded or included...
+* actually found a problem with excluding!
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

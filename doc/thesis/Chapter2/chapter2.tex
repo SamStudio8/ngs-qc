@@ -151,7 +151,6 @@ example for confidentiality (and brevity).
 \label{part1:dev:lang}
 
 %TODO Better opening
-%TODO Do I need to ramble about why vim is great and so on?
 Python was selected for the language of the program designed to handle this vast
 array of input data, more out of personal taste rather than a detailed analysis
 of required performance and features. From previous experience I was happy with
@@ -333,6 +332,18 @@ the program for the end user based on the definitions provided by the developer.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Tools}
+\label{part1:dev:tools}
+
+\subsubsection{git}
+
+Keeping your code base inside some form of version control is common sense,
+
+%http://nvie.com/posts/a-successful-git-branching-model/
+
+%...\textbf{vim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Testing}
 \label{sec:part1:testing}
 
@@ -343,7 +354,6 @@ execution of a test suite should be simple and easily repeatable. Results that
 pertain to accuracy should also be stored for future reference to monitor
 ongoing performance of the classifier.
 
-%TODO Cite Jenkins, Travis, Wercker
 Such requirements could be fulfilled by a continuous integration platform -- a
 server dedicated to the building and testing of the code contained in a
 centralised repository typically to which an entire team will have write
@@ -389,12 +399,6 @@ own platform for this problem but given the time constraints of the project this
 was simply not practical and in the end we settled for well formatted log files
 which could be searched and processed with command line tools such as
 \textbf{awk}.
-
-
-\subsection{Tools}
-\label{part1:dev:tools}
-
-Version control is critical, \textbf{git}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
