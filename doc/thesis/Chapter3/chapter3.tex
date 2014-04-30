@@ -53,6 +53,7 @@ with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
 
 
 \subsection{Method}
+\label{sec:frontier-method}
 
 .. the result of abstracting code and tools created during the use of
 \textbf{scikit-learn} for analysis of the current \textbf{auto\_qc} system
@@ -466,20 +467,32 @@ information with any readers or utility functions who require it.
 \textbf{Frontier}'s \textbf{Statplexer} is designed to provide functions to an
 end user for extracting desired data in a format suitable for passing as an
 argument to functions of an external framework or library, such as
-\textbf{scikit-learn}.
+\textbf{scikit-learn}. As specified in \textbf{Frontier}'s purpose, the package
+must provide user-friendly functions to extract observations and parameters of
+interest from the internal \textbf{Statplexer} representation.
 
+The previous section suggests that directly accessing elements of the
+\textbf{Statplexer}'s \textbf{\_data} and \textbf{\_targets} member dictionaries,
+whilst possible, would violate the psuedo-private nature of the variables and even
+so, this would hardly be a user friendly way in which to obtain data from the
+\textbf{Statplexer}.
 
-%TODO Figure to show mapping between container elements
-%...currently this causes the list of keys to require sorting each time a user
-%queries the Statplexer API for data... as obviously the parameters and targets
-%must map one-to-one in a predictable and repeatable manner.
+As described in Section~\ref{sec:frontier-method}, development of
+\textbf{Frontier} was evolutionary, growing to meet the needs and requirements
+of the underlying machine learning problem that this project strives to solve.
+It became clear that in trying many combinations of observation and parameter
+subsets that \textbf{Frontier} would need to provide not just a function to
+return the contents of \textbf{\_data} and \textbf{\_targets} but to assist in
+retreiving similar subsets automatically with as little effort from the end user
+as possible.
 
-
-
-...leverages \textbf{numpy}...
-
-...Frontier can be used to inspect the parameter set extracted from the
-observations... some of the methods provided for this purpose include:
+But how can a user make an informed decision on parameters to subset?
+Though this is primarily the role of feature selection, which will be discussed
+later in this chapter, firstly a user will need to have a feeling for what
+parameters are actually present and ideally be offered functionality to
+allow for quick elementary exploration of that set. For this, \textbf{Frontier}
+can be used to inspect the parameters extracted from the observations via the
+functions:
 
 \begin{itemize}
     \item \textbf{list\_parameters} \hfill\\
@@ -496,6 +509,13 @@ observations... some of the methods provided for this purpose include:
 ...data is returned sorted by key,
 ...with parameters sorted alphanumerically...
 ...targets map 1:1 with the data array...
+
+%TODO Figure to show mapping between container elements
+%...currently this causes the list of keys to require sorting each time a user
+%queries the Statplexer API for data... as obviously the parameters and targets
+%must map one-to-one in a predictable and repeatable manner.
+
+...leverages \textbf{numpy}...
 
 \begin{itemize}
     \item \textbf{get\_data\_by\_parameters} \hfill\\
@@ -528,7 +548,16 @@ from test runs of the classifier. I decided to settle for populating fields in a
 structured text file, an example of which can be found in
 Appendix~\ref{app:frontier-log}.
 
+\textbf{Frontier} provides functions such as \textbf{write\_log} to dump
+\textbf{Statplexer} parameters to a given file path along with cross-validation
+performance associated with a particular training and prediction run of a
+decision tree classifier. Such files can easily be manipulated with common
+command line tools such as \textbf{grep} and the text processing language,
+\textbf{awk}.
 
+Given the time to create specialised software for storing and comparing
+different runs of the classifier in future, it would be trivial to import old
+\textbf{Frontier} log files.
 
 
 \section{Usage Example}
