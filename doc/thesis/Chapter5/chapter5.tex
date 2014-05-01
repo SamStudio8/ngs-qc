@@ -13,42 +13,43 @@
 The second part of the project can be outlined as follows:
 
 \begin{itemize}
-    \item Collation of variant locations...
-    \item Construction of script to select a representative genomic region...
-    \item Extraction of such regions...
-    \item Merging of regions to one file...
-    \item Establishment of pipeline... :
-    \begin{itemize}
-        \item Select each lanelet in turn...
-        \item ...
-        \item Call variants on k-1 lanelets...
-        \item Compare concordance...
-    \end{itemize}
+    \item Collation of variant locations from Sanger data sets
+    \item Construction of script to select a `representative' genomic region
+    \item Extraction of regions from whole-genome sequence data
+    \item Establishment of leave-one-out analysis pipeline
+    \item Comparison of concordance between pipeline results and SNP chip
 \end{itemize}
 
 \section{Concepts and Terminology}
+\subsection{GWAS and iCHIP Data Sets}
 
-\subsection{Variants and SNPs}
-...for the purpose of this study we are only interested in single nucleotide
-polymorphisms (SNPs) "snips" ...
+As briefly explained in Section~\ref{sec:intro-part2} this part of the project
+focuses on measuring the similarity between called variants in pairs of
+samples which have been sequenced in different ways. The Sanger Institute has
+granted access to a set of human samples which have been sequenced twice, once
+with next-generation sequencing (NGS) and the other with SNP genotyping.
+The resultant data sets will hereafter be referred to as:
 
-...their \textit{position} refers to the index of the base of the chromosome in
-which the polymorphism exists...
-...commonly these are 1-indexed (although this is not always the case) and thus
-care must be taken to ensure this is accounted for at any step where positions
-are considered...
+\begin{itemize}
+    \item \textbf{GWAS}\footnote{Genome-Wide Association Study} \textit{NGS}\hfill\\
+        Every base in the genome of the sample has been sequenced with some
+        level of accuracy.
+    \item \textbf{iCHIP} \textit{SNP Genotyping}\hfill\\
+        Only particular bases of interest in the genome of the sample has been
+        sequenced with high accuracy.
+\end{itemize}
+
+%TODO Variant Calling
+Each sample will thus have a corresponding result from each of the two studies.
+A result in this context refers to the output from a \textbf{variant calling}
+pipeline at the Sanger Institute -- a \textbf{VCF} file (introduced in
+Chapter~\ref{chap:part2:input}) detailing variant sites that were located during
+analysis of the sequenced sample.
+
 
 \subsection{The `Goldilocks' Region}
 %TODO Tidy dumped blog pasta
 %TODO What miscomm?
-
-Having recovered from the miscommunication that led me to attempt to find
-reverse strands in VCF files with already known errors, I’ve been making
-performance improvements to the script that finds candidate genomic regions.
-
-The task poses an interesting problem in terms of complexity and memory, as the
-human genome is over three billion bases long in total which can easily lead to
-data handling impracticalities.
 
 For the next step of the project we are looking to document what effects quality
 has on analysis that occurs downstream from sequencing, for example: variant
@@ -117,6 +118,8 @@ next...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Materials and Methods}
 \section{Input Data and Format}
+\label{chap:part2:input}
+
 \subsection{Variant Call Format}
 
 \begin{minted}[mathescape,
@@ -274,6 +277,11 @@ prime for breaking up in to a more organised set of functions...
 ...chromosome six must be ignored...
 ...chromosomes are 1-indexed!
 
+The task poses an interesting problem in terms of complexity and memory, as the
+human genome is over three billion bases long in total which can easily lead to
+data handling impracticalities.
+
+
 
 \section{Implementation}
 ...we investigate the following implementation stories:
@@ -287,6 +295,11 @@ prime for breaking up in to a more organised set of functions...
     \item Testing, generate output files, call functions akin to API
 \end{itemize}
 
+
+\subsection{Input Sanity...?}
+Having recovered from the miscommunication that led me to attempt to find
+reverse strands in VCF files with already known errors, I’ve been making
+performance improvements to the script that finds candidate genomic regions.
 
 \subsection{Loading Variant Query File List}
 

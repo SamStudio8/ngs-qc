@@ -110,7 +110,7 @@ Next Generation Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 2.2.3
 
-Single Nucleotide Polymorphisms . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 7
 
@@ -330,7 +330,7 @@ iii
 
 7.2.1
 
-Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+GWAS and iCHIP Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 7.2.2
 
@@ -410,31 +410,35 @@ Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 9.2.1
 
-Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Input Sanity...? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 9.2.2
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 9.2.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 9.2.4
 
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 9.2.5
+
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+
+9.2.6
 
 Final Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
 
 9.3
 
-Usage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Usage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
 
 9.4
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
 
 10 Results
 
@@ -685,8 +689,12 @@ Next Generation Sequencing
 
 2.2.3
 
-Single Nucleotide Polymorphisms
+Variants and SNPs
 
+...for the purpose of this study we are only interested in single nucleotide polymorphisms (SNPs) "snips" ...
+...their position refers to the index of the base of the chromosome in which the polymorphism exists... ...commonly
+these are 1-indexed (although this is not always the case) and thus care must be taken to ensure this is accounted
+for at any step where positions are considered...
 ...SNPs...
 
 2.2.4
@@ -1661,39 +1669,41 @@ Introduction and Motivation
 Introduction
 
 The second part of the project can be outlined as follows:
-• Collation of variant locations...
-• Construction of script to select a representative genomic region...
-• Extraction of such regions...
-• Merging of regions to one file...
-• Establishment of pipeline... :
-– Select each lanelet in turn...
-– ...
-– Call variants on k-1 lanelets...
-– Compare concordance...
+• Collation of variant locations from Sanger data sets
+• Construction of script to select a ‘representative’ genomic region
+• Extraction of regions from whole-genome sequence data
+• Establishment of leave-one-out analysis pipeline
+• Comparison of concordance between pipeline results and SNP chip
 
 7.2
 7.2.1
 
 Concepts and Terminology
-Variants and SNPs
+GWAS and iCHIP Data Sets
 
-...for the purpose of this study we are only interested in single nucleotide polymorphisms (SNPs) "snips" ...
-...their position refers to the index of the base of the chromosome in which the polymorphism exists... ...commonly
-these are 1-indexed (although this is not always the case) and thus care must be taken to ensure this is accounted
-for at any step where positions are considered...
+As briefly explained in Section 1.1.2 this part of the project focuses on measuring the similarity between called
+variants in pairs of samples which have been sequenced in different ways. The Sanger Institute has granted
+access to a set of human samples which have been sequenced twice, once with next-generation sequencing
+(NGS) and the other with SNP genotyping. The resultant data sets will hereafter be referred to as:
+• GWAS1 NGS
+Every base in the genome of the sample has been sequenced with some level of accuracy.
+• iCHIP SNP Genotyping
+Only particular bases of interest in the genome of the sample has been sequenced with high accuracy.
+1 Genome-Wide
+
+Association Study
+
 35
 
 7.2 Concepts and Terminology
+Each sample will thus have a corresponding result from each of the two studies. A result in this context refers
+to the output from a variant calling pipeline at the Sanger Institute – a VCF file (introduced in Chapter 8.1)
+detailing variant sites that were located during analysis of the sequenced sample.
 
 7.2.2
 
 The ‘Goldilocks’ Region
 
-Having recovered from the miscommunication that led me to attempt to find reverse strands in VCF files with
-already known errors, I’ve been making performance improvements to the script that finds candidate genomic
-regions.
-The task poses an interesting problem in terms of complexity and memory, as the human genome is over three
-billion bases long in total which can easily lead to data handling impracticalities.
 For the next step of the project we are looking to document what effects quality has on analysis that occurs
 downstream from sequencing, for example: variant calling - the process of identifying bases in a sample that
 differ from the reference genome (this is a little simple as you also need to discern as whether the difference
@@ -1727,12 +1737,12 @@ Length and Stride
 
 ...length will refer to the number of bases included in the region ...stride will refer to the number of bases to
 be used as an offset between the starting base of one region and the beginning of the next...
+...a length of 1000 and a stride of 500 for example ...the first region for example will consist of 1:1000, then
+501:1500 inclusive
 
 36
 
 7.2 Concepts and Terminology
-...a length of 1000 and a stride of 500 for example ...the first region for example will consist of 1:1000, then
-501:1500 inclusive
 ...ensure sensible choices of these parameters!
 
 7.2.5
@@ -1891,6 +1901,8 @@ organised set of functions...
 Pitfalls
 
 ...chromosome six must be ignored... ...chromosomes are 1-indexed!
+The task poses an interesting problem in terms of complexity and memory, as the human genome is over three
+billion bases long in total which can easily lead to data handling impracticalities.
 
 9.2
 
@@ -1904,23 +1916,31 @@ Implementation
 • Final output and selection, counters and buckets (avoid chr6)
 • Testing, generate output files, call functions akin to API
 
+42
+
+9.2 Implementation
+
 9.2.1
+
+Input Sanity...?
+
+Having recovered from the miscommunication that led me to attempt to find reverse strands in VCF files with
+already known errors, I’ve been making performance improvements to the script that finds candidate genomic
+regions.
+
+9.2.2
 
 Loading Variant Query File List
 
 Goldilocks requires the user provide their own valid "pathsfile", meeting the specification demonstrated in
 Section 8.1.3 (an actual example of such a file can be found in Appendix A.3).
-
-42
-
-9.2 Implementation
 merely lists locations of input files and groups them together as desired ...all files in a particular group will be
 considered as a whole (all variants from all files in the group will be added to the set of chromosomes for that
 group)
 load_variant_files is a simple function to read the pathsfile and initialise the relevant data structures for each
 group... ...each group will have a three data structures created...
 
-9.2.2
+9.2.3
 
 Loading Variants from Input Files
 
@@ -1936,7 +1956,7 @@ and is ripe for alteration... ...could use a dictionary... ...but perhaps a set 
 ...although the input for this part of the study handles <x> variants in <y> seconds and thus time was better
 spent elsewhere...
 
-9.2.3
+9.2.4
 
 Storage
 
@@ -1945,6 +1965,9 @@ and memory as it is simple to deliver a poor performing solution.
 Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
 candidate must not span chromosomes (telomeres – the ends of chromosomes are not very good for reads)
 then we can easily yield a great improvement from processing chromosomes individually.
+43
+
+9.2 Implementation
 The process is to extract the locations of all the variants across the genome from the SNP chip VCF files (these
 files list the alleles for each detected variant for each sample), load them in to some sort of structure, “stride”
 over each chromosome (with some stride offset) and finally list the variants present between the stride start
@@ -1955,9 +1978,6 @@ just look up variants in a list:
 for chromosome in autosomes:
 for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
-43
-
-9.2 Implementation
 if position in variant_position_list:
 # Do something...
 This is of course rather dumb. Looking up a list has O(n) performance where n is the number of variants
@@ -1985,6 +2005,11 @@ for chromosome in autosomes:
 chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
 chro[variant_loc] = 1
+
+44
+
+9.2 Implementation
+
 for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
 if chro[position] == 1:
@@ -1993,10 +2018,6 @@ We of course have to initially load the variants in to the chromosome array, but
 (per chromosome) and is nothing compared to the billions of lookups of the previous implementation.
 Rather to my surprise this was slow (maybe if I have time I should check how it compared to looking up with
 a list). Was it the allocation of memory? Perhaps I had run out of RAM and most of the work was going in to
-
-44
-
-9.2 Implementation
 fetching and storing data in swap?
 I switched out the comparison (== 1) step for the previous dictionary based lookup and the performance
 improved considerably. What was going on? There must be more to looking at a given element in the numpy
@@ -2023,6 +2044,10 @@ num_variants = np.sum(chro[start:start+LENGTH])
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
 be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
 the variant locations in the first place).
+
+45
+
+9.2 Implementation
 ...Ignoring empty regions etc.
 
 def load_chromosome(self, size, locations):
@@ -2031,16 +2056,12 @@ chro = np.zeros(size+1, np.int8)
 for variant_loc in locations:
 chro[variant_loc] = 1
 return chro
-
-45
-
-9.3 Usage
 load_chromosome returns a numpy array representing the chromosome, given its desired length and a list of
 variants...
 ...supervisor suggested bloom filters... ...would be a useful experiment to measure what further performance
 gains could be acheived with such a method...
 
-9.2.4
+9.2.5
 
 Searching for Regions
 
@@ -2050,7 +2071,7 @@ objective function as outlined in Section 9.1.1... ..each region of length, star
 number of variants contained therein...
 ...it is here that chromosome six is discarded...
 
-9.2.5
+9.2.6
 
 Final Selection
 
@@ -2063,6 +2084,10 @@ maximum comparisons between data sets)
 criteria...
 ...in this state does however still allow for repeatable results in future with different data sets or additional
 groups...
+
+46
+
+9.3 Usage
 
 9.3
 
@@ -2077,10 +2102,6 @@ Testing
 ...particularly difficult. ...required generation of input files that would contain known regions to test were
 found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
 place... ...wanted to avoid a monolithic test class...
-
-46
-
-9.4 Testing
 ...tests are still rather modest and with more time it would be appropriate to improve their function but I have
 faith in their results...
 
