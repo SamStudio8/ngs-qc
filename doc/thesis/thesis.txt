@@ -326,6 +326,8 @@ iii
 Contents
 7.2
 
+7.3
+
 8
 
 7.2.1
@@ -336,15 +338,16 @@ GWAS and iCHIP Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
-7.2.3
+Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+7.3.1
 
-Groups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Group . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
-7.2.4
+7.3.2
 
-Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
-7.2.5
+7.3.3
 
 Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
@@ -355,7 +358,7 @@ Materials and Methods
 
 9
 
-Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 38
 
@@ -386,11 +389,14 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 Goldilocks
+
 41
-9.1 Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+
+9.1
 
 9.2
 
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 9.1.1
 
 Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
@@ -696,6 +702,8 @@ Variants and SNPs
 these are 1-indexed (although this is not always the case) and thus care must be taken to ensure this is accounted
 for at any step where positions are considered...
 ...SNPs...
+variant calling - the process of identifying bases in a sample that differ from the reference genome (this is a
+little simple as you also need to discern as whether the difference is actually a polymorphism or not).
 
 2.2.4
 
@@ -1678,7 +1686,7 @@ The second part of the project can be outlined as follows:
 7.2
 7.2.1
 
-Concepts and Terminology
+Background
 GWAS and iCHIP Data Sets
 
 As briefly explained in Section 1.1.2 this part of the project focuses on measuring the similarity between called
@@ -1695,7 +1703,7 @@ Association Study
 
 35
 
-7.2 Concepts and Terminology
+7.3 Concepts and Terminology
 Each sample will thus have a corresponding result from each of the two studies. A result in this context refers
 to the output from a variant calling pipeline at the Sanger Institute – a VCF file (introduced in Chapter 8.1)
 detailing variant sites that were located during analysis of the sequenced sample.
@@ -1704,52 +1712,58 @@ detailing variant sites that were located during analysis of the sequenced sampl
 
 The ‘Goldilocks’ Region
 
-For the next step of the project we are looking to document what effects quality has on analysis that occurs
-downstream from sequencing, for example: variant calling - the process of identifying bases in a sample that
-differ from the reference genome (this is a little simple as you also need to discern as whether the difference
-is actually a polymorphism or not).
-To investigate this I’ll be performing leave-one-out analysis on the whole-genome data we have, consisting of
-leaving a lanelet out, performing variant calling and then comparing the result of the left-one-out variant call
-and the corresponding variant call on our “SNP chip” data.
-The basic idea is to answer the question of what constitutes “good” or “bad” lanelet quality? Does leaving
-out a lanelet from the full-sequence data lead to variant calls that better match the SNP chip data, or cause the
+For the next step of the project we are looking to document what effects lanelet quality has on analysis that
+occurs downstream from whole-genome sequencing. To investigate this I’ll be performing a leave-one-out
+analysis on the GWAS data set: consisting of leaving a particular lanelet out, re-performing variant calling
+and comparing the resulting variants called for each sample to their corresponding iCHIP variants.
+The basic idea is to answer the question of what constitutes "good" or "bad" lanelet quality. Does leaving out
+a lanelet from the full sequence data lead to variant calls that better match the SNP chip data, or cause the
 correspondence between the two sets to decrease? In which case, having identified such lanelets, can we look
 back to the quality parameters we’ve been analysing so far and find whether they have something in common
 in those cases?
-If we can, these parameters can be used to identify “good” or “bad” lanelets straight out of the machine. We
+If we can, these parameters can be used to identify "good" or "bad" lanelets straight out of the machine. We
 know that lanelets that exhibit these quality variables will go on to improve or detriment analysis.
-However, variant calling is both computationally and time intensive. Whilst the Sanger Institute have significant
-computing resources available, my dissertation has an end date and with the time I have we must focus the
-leave-one-out analysis on a subsection of the whole genome.
-It is for this reason we’re looking for what Josh at Sanger described as a “representative autosomal region”.
-The candidate must not have too many variants, or too few: a “Goldilocks genome”.
+However, variant calling is both computationally and time intensive. Whilst the Sanger Institute has significant
+computing resources available, the project time scale is too small to conduct the analysis on thousands of full
+sequence samples and thus we must focus on a smaller region of the human genome.
+It is for this reason we are looking for what Sanger described as a "representative autosomal region". The
+region must not have too many variants, or too few: a "Goldilocks genome".
 
-7.2.3
+7.3
 
-Groups
+Concepts and Terminology
 
-ichip vs gwas... ...will become clear later ...interested keeping the variants from the two data sets we have
-seperate...
+In the search for the aforementioned "Goldilocks genome", we define the following terminology:
 
-7.2.4
+7.3.1
 
-Length and Stride
+Group
 
-...length will refer to the number of bases included in the region ...stride will refer to the number of bases to
-be used as an offset between the starting base of one region and the beginning of the next...
-...a length of 1000 and a stride of 500 for example ...the first region for example will consist of 1:1000, then
-501:1500 inclusive
+Rather than considering the location of all variants in our samples as a whole, we may wish to consider how
+variants are distributed across the two different data sets we have, namely the GWAS and iCHIP sets. Thus
+variants will be considered as members of a group. The group may be arbitrarily defined but for the purpose
+of our own analysis the set in which a variant appears will be considered as its group.
+A particular variant location may appear in more than one group.
 
 36
 
-7.2 Concepts and Terminology
-...ensure sensible choices of these parameters!
+7.3 Concepts and Terminology
 
-7.2.5
+7.3.2
+
+Length and Stride
+
+The length of a region represents the number of bases included in the region and the stride refers to the
+number of bases to be used as an offset between the first base of one region and the beginning of the next.
+Sensible choices for these parameters will need to be selected after considering both time and memory.
+
+7.3.3
 
 Candidates
 
-...a candidate is a region of length... ...a candidate will contain a number of variants, counted for each group...
+A candidate is a region of length bases whose first base falls on a stride. A candidate region will contain some
+count of variants for each group. In the context of this project we consider the number of variant locations that
+fall within this region for both the GWAS and iCHIP data sets.
 ...simple object consisting of start and end base...
 
 37
@@ -1860,7 +1874,7 @@ and treating them as one search space.
 For each file group, a list of positions for each chromosome is stored in memory. Once all variants have been
 loaded Goldilocks is designed to iterate over each chromosome1 , load all of the variants from the lists in to
 an array and essentially count the number of variants present (in each group) between a given start and end
-position, determined by the arguments specified by the user as described in Section 7.2.4.
+position, determined by the arguments specified by the user as described in Section 7.3.2.
 This combination of a start and end position and the counts of variants present inbetween forms the structure
 of a candidate. Having performed this search over all the autosomes, candidates can then be ranked by
 user-specified criteria regarding the density of the counted variants.
