@@ -260,17 +260,15 @@ variants are of a desired density.
 \label{sec:goldilocks-purpose}
 
 Expanding on the introduction, \textbf{Goldilocks} is responsible for parsing
-input files that contain chromosome and base position entries...
-...
-...
-Input files can be grouped, pooling the set of unique listed
-variants between the files and treating them as one search space.
+input files that contain chromosome and base position entries (in the format
+described in Section~\ref{sec:vqf}). These files can be grouped to pool the set
+of unique variants between each file group to treat them as one search space.
 
 For each group, a list of positions for each chromosome is stored in
 memory. Once all variants have been loaded \textbf{Goldilocks} is designed to
 iterate over each chromosome\footnote{Strictly speaking we are only handling the
 22 \textit{autosomes} and ignoring the remaining 2 sex chromsomes
-(\textit{allosomes})}, load all of the variants from the lists in to an array
+(\textit{allosomes})} and load all of the variants from the lists in to an array
 and essentially count the number of variants present (in each group) between a
 given start and end position, determined by the arguments specified by the user
 as described in Section~\ref{sec:lengthstride}.
@@ -278,8 +276,7 @@ as described in Section~\ref{sec:lengthstride}.
 This combination of a start and end position and the counts of variants present
 inbetween forms the structure of a \textbf{candidate}. Having performed this
 search over all the autosomes, candidates can then be ranked by user-specified
-criteria regarding the density of the counted variants.
-
+criteria related to the density of the counted variants.
 
 
 \subsection{Format}
@@ -291,72 +288,84 @@ I made the choice to modularise the functionality, in the hope that if an end
 user were to find some function of the script particularly useful they may call
 it as part of their own program.
 
-%FUTURE
-With more time it would be interesting to research other potential uses for such
-a script...
-%TODO Cite Kendal 2003 as potential use case
-
 
 \subsection{Method}
-
-Development was akin to a more traditional methodology; requirements were simple
-and available up front, testing could wait until all the components had been
-completed to properly measure whether outcomes were as expected.
+%TODO Add more here?
 
 \textbf{Goldilocks} had to be constructed quickly but carefully. Although
-avoiding a quick and dirty solution, the initial codebase was arguably cluttered
-with blocks of repeated code to perform actions for different hard coded groups.
-Testing was not automated and utilised eyeballing of resulting data and
-occasional checking of input files to ensure results were as expected.
+avoiding a quick and dirty solution, the early codebase was arguably cluttered
+with blocks of repeated code to perform similar actions for different hard coded
+groups. Initial testing was not automated and utilised eyeballing of resulting
+data and occasional checking of input files to ensure results were as expected.
 
-The first completed version consisted of a somewhat monolithic script,
-prime for breaking up in to a more organised set of functions...
+Development was akin to a more traditional methodology; requirements were simple
+and available up front and formal testing was scheduled to be completed
+following the completion of a working prototype.
 
 
-\subsection{Pitfalls}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Implementation}
+...we investigate the following implementation stories:
 
-...chromosome six must be ignored...
-...chromosomes are 1-indexed!
+\begin{itemize}
+    \item Handling user defined Paths File
+    \item Loading variants from specified Variant Query Files
+    \item Storage of variant groups in memory
+    \item Searching for candidates with user specified length and stride
+    \item Ranking suitable candidates based on variant density
+\end{itemize}
 
+\subsection{Input Sanity...?}
+%TODO Where to put this? Have another pre-impl section?
+Having recovered from the miscommunication that led me to attempt to find
+reverse strands in VCF files with already known errors, I’ve been making
+performance improvements to the script that finds candidate genomic regions.
 The task poses an interesting problem in terms of complexity and memory, as the
 human genome is over three billion bases long in total which can easily lead to
 data handling impracticalities.
 
 
+\subsection{Parsing Paths File}
 
-\section{Implementation}
-...we investigate the following implementation stories:
-
-\begin{itemize}
-    \item Handling user input of grouped Variant Query files
-    \item Loading variants from identified Variant Query files
-    \item Storage of read data in memory (and troubles thereof)...
-    \item Striding and window size and data structures thereof
-    \item Final output and selection, counters and buckets (avoid chr6)
-    \item Testing, generate output files, call functions akin to API
-\end{itemize}
-
-
-\subsection{Input Sanity...?}
-Having recovered from the miscommunication that led me to attempt to find
-reverse strands in VCF files with already known errors, I’ve been making
-performance improvements to the script that finds candidate genomic regions.
-
-\subsection{Loading Variant Query File List}
-
-\textbf{Goldilocks} requires the user provide their own valid "paths file",
-meeting the specification demonstrated in Section~\ref{sec:pathsfile} (an
+\textbf{Goldilocks} requires the user provide their own valid \textbf{Paths
+File}, meeting the specification introduced in Section~\ref{sec:pathsfile} (an
 actual example of such a file can be found in Appendix~\ref{app:pathsfile}).
 
-merely lists locations of input files and groups them together as desired
-...all files in a particular group will be considered as a whole (all variants
-from all files in the group will be added to the set of chromosomes for that
-group)
+As previously described the file merely documents the locations of the
+\textbf{Variant Query Files} to be loaded, along with the desired grouping of
+those files. Any variant location that appears in at least one file of a group
+will be added to the pooled set of variants for that group.
 
-\textbf{load\_variant\_files} is a simple function to read the paths file and
-initialise the relevant data structures for each group...
-...each group will have a three data structures created...
+\textbf{Goldilocks} provides the simple \textbf{load\_variant\_files} to parse
+the user's \textbf{Paths File}, where for each group, the following structures are
+initialized and added to a dictionaries encapsulated by \textbf{Goldilocks}
+itself, using the group name as a key:
 
+\begin{itemize}
+    \item \textbf{groups} \textit{Dictionary}\hfill\\
+        Keys refer to a particular allosome number, mapped to a list structure
+        which will later be populated with the positions of all variants that
+        appear on that chromosome in at least one \textbf{Query File} of
+        the group. It is from this structure that chromosome \textbf{NumPy}
+        arrays will be loaded with data.
+    \item \textbf{group\_buckets} \textit{Dictionary}\hfill\\
+        Keys refer to a specific number of variants counted (considering only
+        variants from the group), mapped to a list
+        of all i'th candidate regions which contained that density.
+        This structure eases locating groups which match desired density
+        criteria once summary statistics have been calculated.
+    \item \textbf{group\_counts} \textit{List}\hfill\\
+        The number of variants which appear in each candidate, for this variant
+        group will be appended to this list.  This structure simplifies the
+        gathering of summary data (such as mean, median and variance) of all the
+        candidate regions of the group once the search has completed.
+\end{itemize}
+
+A \textbf{Paths File} which violates the specification will raise an exception
+during execution of this function, informing the end user of their error. This
+was decided to ensure ambiguous input did not cause confusion later, for example
+should defining a file group twice merge or override the first
+definition?
 
 \subsection{Loading Variants from Input Files}
 

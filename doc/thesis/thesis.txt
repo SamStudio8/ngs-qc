@@ -409,18 +409,14 @@ Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
-9.1.4
-
-Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
-
 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 9.2.1
 
-Input Sanity...? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Input Sanity...? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
 9.2.2
 
-Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
 9.2.3
 
@@ -1879,15 +1875,15 @@ Design
 Purpose
 
 Expanding on the introduction, Goldilocks is responsible for parsing input files that contain chromosome and
-base position entries... ... ... Input files can be grouped, pooling the set of unique listed variants between the
-files and treating them as one search space.
+base position entries (in the format described in Section 8.1.2). These files can be grouped to pool the set of
+unique variants between each file group to treat them as one search space.
 For each group, a list of positions for each chromosome is stored in memory. Once all variants have been
-loaded Goldilocks is designed to iterate over each chromosome1 , load all of the variants from the lists in to
-an array and essentially count the number of variants present (in each group) between a given start and end
+loaded Goldilocks is designed to iterate over each chromosome1 and load all of the variants from the lists in
+to an array and essentially count the number of variants present (in each group) between a given start and end
 position, determined by the arguments specified by the user as described in Section 7.3.2.
 This combination of a start and end position and the counts of variants present inbetween forms the structure
 of a candidate. Having performed this search over all the autosomes, candidates can then be ranked by
-user-specified criteria regarding the density of the counted variants.
+user-specified criteria related to the density of the counted variants.
 
 9.1.2
 
@@ -1904,45 +1900,28 @@ speaking we are only handling the 22 autosomes and ignoring the remaining 2 sex 
 9.2 Implementation
 made the choice to modularise the functionality, in the hope that if an end user were to find some function of
 the script particularly useful they may call it as part of their own program.
-With more time it would be interesting to research other potential uses for such a script...
 
 9.1.3
 
 Method
 
-Development was akin to a more traditional methodology; requirements were simple and available up front,
-testing could wait until all the components had been completed to properly measure whether outcomes were
-as expected.
 Goldilocks had to be constructed quickly but carefully. Although avoiding a quick and dirty solution, the
-initial codebase was arguably cluttered with blocks of repeated code to perform actions for different hard
-coded groups. Testing was not automated and utilised eyeballing of resulting data and occasional checking of
-input files to ensure results were as expected.
-The first completed version consisted of a somewhat monolithic script, prime for breaking up in to a more
-organised set of functions...
-
-9.1.4
-
-Pitfalls
-
-...chromosome six must be ignored... ...chromosomes are 1-indexed!
-The task poses an interesting problem in terms of complexity and memory, as the human genome is over three
-billion bases long in total which can easily lead to data handling impracticalities.
+early codebase was arguably cluttered with blocks of repeated code to perform similar actions for different
+hard coded groups. Initial testing was not automated and utilised eyeballing of resulting data and occasional
+checking of input files to ensure results were as expected.
+Development was akin to a more traditional methodology; requirements were simple and available up front
+and formal testing was scheduled to be completed following the completion of a working prototype.
 
 9.2
 
 Implementation
 
 ...we investigate the following implementation stories:
-• Handling user input of grouped Variant Query files
-• Loading variants from identified Variant Query files
-• Storage of read data in memory (and troubles thereof)...
-• Striding and window size and data structures thereof
-• Final output and selection, counters and buckets (avoid chr6)
-• Testing, generate output files, call functions akin to API
-
-41
-
-9.2 Implementation
+• Handling user defined Paths File
+• Loading variants from specified Variant Query Files
+• Storage of variant groups in memory
+• Searching for candidates with user specified length and stride
+• Ranking suitable candidates based on variant density
 
 9.2.1
 
@@ -1950,19 +1929,40 @@ Input Sanity...?
 
 Having recovered from the miscommunication that led me to attempt to find reverse strands in VCF files with
 already known errors, I’ve been making performance improvements to the script that finds candidate genomic
-regions.
+regions. The task poses an interesting problem in terms of complexity and memory, as the human genome is
+over three billion bases long in total which can easily lead to data handling impracticalities.
 
 9.2.2
 
 Loading Variant Query File List
 
-Goldilocks requires the user provide their own valid "paths file", meeting the specification demonstrated in
+Goldilocks requires the user provide their own valid Paths File, meeting the specification introduced in
 Section 8.1.3 (an actual example of such a file can be found in Appendix A.3).
-merely lists locations of input files and groups them together as desired ...all files in a particular group will be
-considered as a whole (all variants from all files in the group will be added to the set of chromosomes for that
-group)
-load_variant_files is a simple function to read the paths file and initialise the relevant data structures for each
-group... ...each group will have a three data structures created...
+As previously described the file merely documents the locations of the Variant Query Files to be loaded,
+along with the desired grouping of those files. Any variant location that appears in at least one file of a group
+will be added to the pooled set of variants for that group.
+
+41
+
+9.2 Implementation
+Goldilocks provides the simple load_variant_files to parse the user’s Paths File, where for each group, the
+following structures are initialized and added to a dictionaries encapsulated by Goldilocks itself, using the
+group name as a key:
+• groups Dictionary
+Keys refer to a particular allosome number, mapped to a list structure which will later be populated with
+the positions of all variants that appear on that chromosome in at least one Query File of the group. It
+is from this structure that chromosome NumPy arrays will be loaded with data.
+• group_buckets Dictionary
+Keys refer to a specific number of variants counted (considering only variants from the group), mapped
+to a list of all i’th candidate regions which contained that density. This structure eases locating groups
+which match desired density criteria once summary statistics have been calculated.
+• group_counts List
+The number of variants which appear in each candidate, for this variant group will be appended to this
+list. This structure simplifies the gathering of summary data (such as mean, median and variance) of all
+the candidate regions of the group once the search has completed.
+A Paths File which violates the specification will raise an exception during execution of this function, informing
+the end user of their error. This was decided to ensure ambiguous input did not cause confusion later, for
+example should defining a file group twice merge or override the first definition?
 
 9.2.3
 
@@ -1986,12 +1986,12 @@ Storage
 
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
-Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
-candidate must not span chromosomes (telomeres – the ends of chromosomes are not very good for reads)
-then we can easily yield a great improvement from processing chromosomes individually.
 42
 
 9.2 Implementation
+Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
+candidate must not span chromosomes (telomeres – the ends of chromosomes are not very good for reads)
+then we can easily yield a great improvement from processing chromosomes individually.
 The process is to extract the locations of all the variants across the genome from the SNP chip VCF files (these
 files list the alleles for each detected variant for each sample), load them in to some sort of structure, “stride”
 over each chromosome (with some stride offset) and finally list the variants present between the stride start
@@ -2026,14 +2026,12 @@ current chromosome and act as a variant “mask” – essentially an array wher
 current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
 for chromosome in autosomes:
-chro = np.zeros(len(chromosome), np.int8)
-for variant_loc in snps_by_chromosome[chromosome]:
-chro[variant_loc] = 1
-
 43
 
 9.2 Implementation
-
+chro = np.zeros(len(chromosome), np.int8)
+for variant_loc in snps_by_chromosome[chromosome]:
+chro[variant_loc] = 1
 for start in range(1, len(chromosome), STRIDE):
 for position in range(start, start+LENGTH):
 if chro[position] == 1:
@@ -2065,13 +2063,13 @@ chro[variant_loc] = 1
 for start in range(1, len(chromosome), STRIDE):
 num_variants = np.sum(chro[start:start+LENGTH])
 # Do something...
-With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
-be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
-the variant locations in the first place).
 
 44
 
 9.2 Implementation
+With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
+be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
+the variant locations in the first place).
 ...Ignoring empty regions etc.
 
 def load_chromosome(self, size, locations):
@@ -2106,12 +2104,12 @@ we’re looking at: ...the median of the GWAS (representative) ...the maximum of
 maximum comparisons between data sets)
 ...with more time it would be useful to open these functions to input from an end user to provide their own
 criteria...
-...in this state does however still allow for repeatable results in future with different data sets or additional
-groups...
 
 45
 
 9.3 Usage
+...in this state does however still allow for repeatable results in future with different data sets or additional
+groups...
 
 9.3
 
@@ -2519,6 +2517,13 @@ of having to switch to a more analysis focused language such as R.
 was designed to complement the machine learning experiments and provides
 ...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
 their own data regardless of how esoteric or cryptic the file format is...
+Whilst a 2003 paper[41]1 that analysed the spread of SNPs across the human genome to assert whether variants
+could be modelled with a statistical distribution, divided chromosomes in to equally sized bins (a concept akin
+to candidates of uniform length)
+
+1 Titled
+
+An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[41]
 
 56
 
@@ -2718,6 +2723,10 @@ does-python-have-private-variables-in-classes
 testing framework. [Online]. Available:
 https:
 //docs.python.org/2/library/unittest.html
+[41] W. S. Kendal, “An Exponential Dispersion Model
+for the Distribution of Human Single Nucleotide
+Polymorphisms,” Molecular Biology and Evolution,
+vol. 20, no. 4, pp. 579–590, 2003.
 
 59
 
