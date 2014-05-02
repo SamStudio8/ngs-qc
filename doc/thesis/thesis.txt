@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-May 1, 2014
+May 2, 2014
 
 Declaration
 
@@ -349,7 +349,11 @@ Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 7.3.3
 
-Candidates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+
+7.3.4
+
+Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 Materials and Methods
 8.1
@@ -369,7 +373,7 @@ Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 8.1.2
 
-Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
 8.1.3
 
@@ -386,115 +390,123 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 8.2.3
 
-Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 Goldilocks
 
-41
+40
 
 9.1
 
 9.2
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 9.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 9.1.2
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 9.1.3
 
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
 9.1.4
 
-Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 9.2.1
 
-Input Sanity...? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Input Sanity...? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 9.2.2
 
-Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 9.2.3
 
-Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 9.2.4
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 9.2.5
 
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
 
 9.2.6
 
-Final Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Final Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
 
 9.3
 
-Usage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+Usage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
 
 9.4
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
 
 10 Results
 
-48
+47
 
 11 Analysis Pipeline
 
-50
+49
 
-11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
-11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
 
 iv
 
 Contents
+11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 
 III
 
 Discussions and Conclusions
 
-55
+54
 
 12 Current Status
 
-56
+55
 
 13 Critical Evaluation
 
-57
+56
 
 14 Conclusions
 
-58
+57
 
 Appendix A Input Examples
 
-61
+60
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
-A.3 Goldilocks Pathsfile . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+A.3 Goldilocks Pathsfile . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
 Appendix B Output Examples
 
-66
+65
 
-B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+Appendix C Tool Installation
+
+68
+
+C.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+C.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+C.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+C.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
 
 v
 
@@ -1759,12 +1771,21 @@ Sensible choices for these parameters will need to be selected after considering
 
 7.3.3
 
-Candidates
+Density
 
-A candidate is a region of length bases whose first base falls on a stride. A candidate region will contain some
-count of variants for each group. In the context of this project we consider the number of variant locations that
-fall within this region for both the GWAS and iCHIP data sets.
-...simple object consisting of start and end base...
+The density of a region represents the number of variants located within that region. Density will be recorded
+for each group of variants.
+
+7.3.4
+
+Candidate Regions
+
+A candidate is a region of length bases whose first base falls on a stride. A candidate region will contain
+some count (described as the density) of variants for each group. In the context of this project we consider the
+number of variant locations that fall within this region for both the GWAS and iCHIP data sets.
+Candidates must meet all (any any additional) criteria to be considered. For example, regions whose first
+position falls on a base in such a way that the chromosome ends before a region of length can be constructed
+will violate the size criteria.
 
 37
 
@@ -1777,46 +1798,35 @@ Materials and Methods
 Input Data and Format
 Variant Call Format
 
-# Install
-git clone htslib
-git clone bcftools
-make #(requires htslib to be above samtools/bcftools dir)
-sudo cp bcftools usr/local/bin
-# Tabix
-# Download from sourceforge
-# http://sourceforge.net/projects/samtools/files/tabix/
-make
-sudo cp tabix /usr/local/bin
-# Generate an index (vcfidx) (not necessary)
-vcftools --gzvcf cd.ichip.vcf.gz
-# Query VCF (can be done with awk, cut etc.)
-vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
-# ! A faster alternative to using vcftools exists in bcftools ! #
-bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
-# Complains about lack of tabix index but still makes the file...
-
-38
-
-8.2 Development Environment
-# Index with tabix
-# "The input data file must be position sorted and compressed by bgzip
-# which has a gzip(1) like interface"
-tabix -p vcf file.vcf.gz
-diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
-# Shows no difference :)
-# http://samtools.sourceforge.net/tabix.shtml
-# http://vcftools.sourceforge.net/perl_module.html
-# http://www.biostars.org/p/51076/
-# http://vcftools.sourceforge.net/htslib.html#query
+Variant Call Format (VCF) is a (typically compressed) text file... ...containing records ...developed for the
+1000 Genomes Project
 
 8.1.2
 
 Variant Query File
 
-...named such for the command that creates it, the Variant Query File is the proposed input format for
-Goldilocks... ...listing z shows the commands used to extract this information in the required format...
-...line-delimited, tab-seperated entries with the first field a colon-seperated pair of a chromosome and position...
+Named such for the command that creates it, the Variant Query File (or Query File) is an input format
+for populating the candidate searching script with variants. The file is formed of line-delimited, tab-seperated
+entries where the first field consists of a colon-delimited pair representing a chromosome and position respectively
 (e.g. 1:5000 is the base at position 5000 on the first chromosome).
+The Query File is generated by the vcf-query command (demonstrated in Listing 6) which is a member of
+the vcftools collection – a tool set designed... specifically... for handling VCF files.
+...although having found this tool, it turns out that bcftools implements a more performance efficient query
+function...with exactly the same as shown in Listing 7.
+Note that information on downloading and installing both tool sets can be found in Appendix C.
+vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
+Listing 6 : Extracting variant positions from a VCF file with vcftools
+
+http://vcftools.sourceforge.net/perl_module.html http://www.biostars.org/p/51076/ http://vcftools.sourceforge.net/htslib.html#qu
+
+38
+
+8.2 Development Environment
+
+bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
+# ! A faster alternative to using vcftools exists in bcftools ! #
+# Complains about lack of tabix index but still makes the file...
+Listing 7 : Extracting variant positions from a VCF file with bcftools
 
 8.1.3
 
@@ -1843,17 +1853,13 @@ Testing
 
 ...a little more difficult ...discussed more at length in the following chapter...
 
-39
-
-8.2 Development Environment
-
 8.2.3
 
 Tools
 
 As before... (Chapter 3.2.4)
 
-40
+39
 
 Chapter 9
 
@@ -1869,9 +1875,9 @@ Design
 Purpose
 
 Expanding on the introduction, Goldilocks is responsible for parsing input files that contain chromosome and
-base position entries.. Input files can be grouped, pooling the set of unique listed variants between the files
-and treating them as one search space.
-For each file group, a list of positions for each chromosome is stored in memory. Once all variants have been
+base position entries... ... ... Input files can be grouped, pooling the set of unique listed variants between the
+files and treating them as one search space.
+For each group, a list of positions for each chromosome is stored in memory. Once all variants have been
 loaded Goldilocks is designed to iterate over each chromosome1 , load all of the variants from the lists in to
 an array and essentially count the number of variants present (in each group) between a given start and end
 position, determined by the arguments specified by the user as described in Section 7.3.2.
@@ -1889,7 +1895,7 @@ module to be imported in to other programs. Whilst the use case is certainly mor
 
 speaking we are only handling the 22 autosomes and ignoring the remaining 2 sex chromsomes (allosomes)
 
-41
+40
 
 9.2 Implementation
 made the choice to modularise the functionality, in the hope that if an end user were to find some function of
@@ -1930,7 +1936,7 @@ Implementation
 • Final output and selection, counters and buckets (avoid chr6)
 • Testing, generate output files, call functions akin to API
 
-42
+41
 
 9.2 Implementation
 
@@ -1979,7 +1985,7 @@ and memory as it is simple to deliver a poor performing solution.
 Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
 candidate must not span chromosomes (telomeres – the ends of chromosomes are not very good for reads)
 then we can easily yield a great improvement from processing chromosomes individually.
-43
+42
 
 9.2 Implementation
 The process is to extract the locations of all the variants across the genome from the SNP chip VCF files (these
@@ -2020,7 +2026,7 @@ chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
 chro[variant_loc] = 1
 
-44
+43
 
 9.2 Implementation
 
@@ -2059,7 +2065,7 @@ With conservative testing this runs at least 60 times faster than before, the en
 be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
 the variant locations in the first place).
 
-45
+44
 
 9.2 Implementation
 ...Ignoring empty regions etc.
@@ -2099,7 +2105,7 @@ criteria...
 ...in this state does however still allow for repeatable results in future with different data sets or additional
 groups...
 
-46
+45
 
 9.3 Usage
 
@@ -2119,7 +2125,7 @@ place... ...wanted to avoid a monolithic test class...
 ...tests are still rather modest and with more time it would be appropriate to improve their function but I have
 faith in their results...
 
-47
+46
 
 Chapter 10
 
@@ -2259,17 +2265,17 @@ POSITIONS
 88500001 89500000
 160000001 - 161000000
 
-Listing 6 : ...top 25...
+Listing 8 : ...top 25...
 
 Figure 10.1 was created quickly in R using ggplot2 to eyeball the difference in variant distribution across each
 region (called a ’megabase’ due to their length of one million bases).. ...motivated by locating very highly
 populated regions in the iCHIP group well above the mean in the output...
 
-48
+47
 
 Fig. 10.1 Megabase Plot: ...
 
-49
+48
 
 Chapter 11
 
@@ -2306,7 +2312,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-50
+49
 
 11.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -2336,7 +2342,7 @@ the very least an estimated 35kB for a 64-bit pointer to each input file and app
 32kB buffer to read data from each file also. Yet executing the job with 500MB caused the LSF scheduler to
 forceably terminate the process for exceeding the maximum allocated memory limit.
 Assuming that the intermediate structures for storing and sorting the input data must have been greater than
-expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 7 only to
+expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 9 only to
 meet the same fate, even when reserving 16GB of memory...
 This is an absurd amount of memory even considering the vast input... It appeared a memory leak had been
 discovered... that drastically increases in severity as more files are provided as input,
@@ -2358,9 +2364,9 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 #
 
 | Only run on a node with more than 4000mb memory
-Listing 7 : Flags required to raise job memory allocation
+Listing 9 : Flags required to raise job memory allocation
 
-51
+50
 
 11.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -2399,7 +2405,7 @@ by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
 ==30464==
 by 0x402CC4: main (test_trans_tbl_init.c:348)
 
-Listing 8 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
+Listing 10 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
 failure to release memory allocated to a compiled regular expression
 
 Poor Time Performance
@@ -2415,7 +2421,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-52
+51
 
 11.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -2448,7 +2454,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-53
+52
 
 11.1 Implementation
 s = bam_get_aux(b);
@@ -2485,19 +2491,19 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-54
+53
 
 Part III
 
 Discussions and Conclusions
 
-55
+54
 
 Chapter 12
 
 Current Status
 
-56
+55
 
 Chapter 13
 
@@ -2510,13 +2516,13 @@ was designed to complement the machine learning experiments and provides
 ...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
 their own data regardless of how esoteric or cryptic the file format is...
 
-57
+56
 
 Chapter 14
 
 Conclusions
 
-58
+57
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -2639,7 +2645,7 @@ parsing library. [Online]. Available:
 https:
 //pypi.python.org/pypi/argparse/1.2.1
 
-59
+58
 
 References
 [27] M. Fowler, “Continuous Integration,” 2006.
@@ -2709,7 +2715,7 @@ testing framework. [Online]. Available:
 https:
 //docs.python.org/2/library/unittest.html
 
-60
+59
 
 Appendix A
 
@@ -2833,7 +2839,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-61
+60
 
 A.1 BAMcheckR’d Example Output
 
@@ -3065,7 +3071,7 @@ FFQ
 0
 0
 
-62
+61
 
 1609
 
@@ -3407,7 +3413,7 @@ IS
 2
 0
 
-63
+62
 
 A.1 BAMcheckR’d Example Output
 
@@ -3686,7 +3692,7 @@ GCD
 0.101
 0.101
 
-64
+63
 
 A.2 auto_qc Decision Matrix
 
@@ -3835,7 +3841,7 @@ Goldilocks Pathsfile
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-65
+64
 
 ...
 ...
@@ -3921,7 +3927,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-66
+65
 
 B.1 Frontier Log Example
 
@@ -3991,7 +3997,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-67
+66
 
 B.1 Frontier Log Example
 
@@ -4017,6 +4023,67 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
+67
+
+Appendix C
+
+Tool Installation
+C.1
+
+htslib
+
+# Download repositories from Github
+git clone htslib
+cd htslib/
+make
+
+C.2
+
+bcftools
+
+Prerequisites: htslib(Appendix C.1)
+# Download repositories from Github
+git clone bcftools
+cd bcftools/
+# Build bcftools
+make #(requires htslib to be above samtools/bcftools dir)
+sudo cp bcftools usr/local/bin
+
 68
+
+C.3 samtools
+
+C.3
+
+samtools
+
+Prerequisites: htslib(Appendix C.1)
+# Download repositories from Github
+git clone samtools
+cd samtools/
+# Build samtools
+make #(requires htslib to be above samtools/samtools dir)
+sudo cp samtools usr/local/bin
+
+C.4
+
+tabix
+
+# Tabix
+# Download from sourceforge
+# http://sourceforge.net/projects/samtools/files/tabix/
+make
+sudo cp tabix /usr/local/bin
+# Generate an index (vcfidx) (not necessary)
+vcftools --gzvcf cd.ichip.vcf.gz
+# Index with tabix
+# "The input data file must be position sorted and compressed by bgzip
+# which has a gzip(1) like interface"
+tabix -p vcf file.vcf.gz
+diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
+# Shows no difference :)
+# http://samtools.sourceforge.net/tabix.shtml
+
+69
 
 
