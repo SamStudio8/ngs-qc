@@ -305,7 +305,9 @@ following the completion of a working prototype.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
-...we investigate the following implementation stories:
+
+This section considers the implementation of the major components of
+\textbf{Goldilocks}:
 
 \begin{itemize}
     \item Handling user defined Paths File
@@ -367,29 +369,46 @@ was decided to ensure ambiguous input did not cause confusion later, for example
 should defining a file group twice merge or override the first
 definition?
 
+
 \subsection{Loading Variants from Input Files}
+%TODO Figure:
+%
+%     groups [ ][ ][ ][ ][ ]...
+%     group  [ ]
+%     chrom   \
+%              [][][][][][]...
+%              |
+%     indexes  [0,1,2,3...]
+%
 
-\textbf{load\_variants\_from\_file} is responsible for loading the file
-referenced by a particular path and adding each valid variant record to the
-correct file group...
+\textbf{load\_variants\_from\_file} is responsible for loading a given
+\textbf{Variant Query File} and adding the position of each record contained
+within to the appropriate group-chromosome list pair in the \textbf{groups}
+structure.
 
-...this function also keeps track of the "furthest along" variant for each
-chromosome over all groups, this is used in the search step later to ensure each
-group has the same number of regions...
+It is important to note that this function is not responsible for
+ensuring the positions added to the list are unique to avoid performance
+penalties in checking whether a variant is already a member of the list (which
+increase proportionally for the size of the list).
+However as examined in Section~\ref{sec:python-structures}, appending a
+significant number of items to a list will likely induce costly memory
+operations as the list is resized. Thus use of a set might have been more
+appropriate (especially considering the container forbids duplicate entries)
+but a set must be constructed from an existing iterable such as a list anyway!
 
-...no duplicate checking to avoid needing to check for list membership
-...this is not an issue later (setting a flag to 1 multiple times will cause no
-effect)... seemed faster to repeat those actions than to check for membership...
+Indeed the container does specify an \textbf{update} function but this could in
+itself be a source of overhead as the structure ensures that the no duplicate
+condition has not been violated on every call. Given more time it would be
+interesting to compare performance differences between container implementations.
 
-...however this process of appending variants to a list would suffer from
-expensive memory moving operations and is ripe for alteration...
-...could use a dictionary...
-...but perhaps a set would be more appropriate...
-...investigating the difference in performance would be of interest...
-
-...although the input for this part of the study handles <x> variants in <y>
-seconds and thus time was better spent elsewhere...
-
+%TODO Sound ok?
+\textbf{load\_variants\_from\_file} has another responsibility in keeping track
+of the "furthest along" variant position for each chromosome across all groups,
+this is used in the search step later, firstly to ensure that candidates are not
+constructed beyond where the last variant on a chromosome lies (as by definition
+they would be empty and searching over them would waste resources) and secondly
+to normalize the candidate regions across all groups to allow for easy
+comparison between them.
 
 
 \subsection{Storage}
@@ -599,6 +618,7 @@ different data sets or additional groups...
 ...
 
 \section{Testing}
+
 ...particularly difficult.
 ...required generation of input files that would contain known regions to test
 were found by the program...

@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-May 2, 2014
+May 3, 2014
 
 Declaration
 
@@ -416,7 +416,7 @@ Input Sanity...? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 9.2.2
 
-Loading Variant Query File List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Parsing Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
 9.2.3
 
@@ -424,7 +424,7 @@ Loading Variants from Input Files . . . . . . . . . . . . . . . . . . . . . . . 
 
 9.2.4
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 9.2.5
 
@@ -1916,7 +1916,7 @@ and formal testing was scheduled to be completed following the completion of a w
 
 Implementation
 
-...we investigate the following implementation stories:
+This section considers the implementation of the major components of Goldilocks:
 • Handling user defined Paths File
 • Loading variants from specified Variant Query Files
 • Storage of variant groups in memory
@@ -1934,7 +1934,7 @@ over three billion bases long in total which can easily lead to data handling im
 
 9.2.2
 
-Loading Variant Query File List
+Parsing Paths File
 
 Goldilocks requires the user provide their own valid Paths File, meeting the specification introduced in
 Section 8.1.3 (an actual example of such a file can be found in Appendix A.3).
@@ -1968,17 +1968,26 @@ example should defining a file group twice merge or override the first definitio
 
 Loading Variants from Input Files
 
-load_variants_from_file is responsible for loading the file referenced by a particular path and adding each
-valid variant record to the correct file group...
-...this function also keeps track of the "furthest along" variant for each chromosome over all groups, this is
-used in the search step later to ensure each group has the same number of regions...
-...no duplicate checking to avoid needing to check for list membership ...this is not an issue later (setting a flag
-to 1 multiple times will cause no effect)... seemed faster to repeat those actions than to check for membership...
-...however this process of appending variants to a list would suffer from expensive memory moving operations
-and is ripe for alteration... ...could use a dictionary... ...but perhaps a set would be more appropriate...
-...investigating the difference in performance would be of interest...
-...although the input for this part of the study handles <x> variants in <y> seconds and thus time was better
-spent elsewhere...
+load_variants_from_file is responsible for loading a given Variant Query File and adding the position of
+each record contained within to the appropriate group-chromosome list pair in the groups structure.
+It is important to note that this function is not responsible for ensuring the positions added to the list are unique
+to avoid performance penalties in checking whether a variant is already a member of the list (which increase
+proportionally for the size of the list). However as examined in Section 5.2.5, appending a significant number
+of items to a list will likely induce costly memory operations as the list is resized. Thus use of a set might
+have been more appropriate (especially considering the container forbids duplicate entries) but a set must be
+constructed from an existing iterable such as a list anyway!
+Indeed the container does specify an update function but this could in itself be a source of overhead as the
+structure ensures that the no duplicate condition has not been violated on every call. Given more time it would
+be interesting to compare performance differences between container implementations.
+load_variants_from_file has another responsibility in keeping track of the "furthest along" variant position
+for each chromosome across all groups, this is used in the search step later, firstly to ensure that candidates
+are not constructed beyond where the last variant on a chromosome lies (as by definition they would be empty
+and searching over them would waste resources) and secondly to normalize the candidate regions across all
+groups to allow for easy comparison between them.
+
+42
+
+9.2 Implementation
 
 9.2.4
 
@@ -1986,9 +1995,6 @@ Storage
 
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
-42
-
-9.2 Implementation
 Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
 candidate must not span chromosomes (telomeres – the ends of chromosomes are not very good for reads)
 then we can easily yield a great improvement from processing chromosomes individually.
@@ -2022,13 +2028,13 @@ if position in variant_position_dict[chromosome]:
 # Do something...
 This still takes half an hour to run on my laptop though, surely there is a better way. I wondered if whether
 dropping the lookup would improve things. Instead, how about an area of memory is allocated to house the
+43
+
+9.2 Implementation
 current chromosome and act as a variant “mask” – essentially an array where each element is a base of the
 current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
 
 for chromosome in autosomes:
-43
-
-9.2 Implementation
 chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
 chro[variant_loc] = 1
@@ -2060,13 +2066,13 @@ for chromosome in autosomes:
 chro = np.zeros(len(chromosome), np.int8)
 for variant_loc in snps_by_chromosome[chromosome]:
 chro[variant_loc] = 1
-for start in range(1, len(chromosome), STRIDE):
-num_variants = np.sum(chro[start:start+LENGTH])
-# Do something...
 
 44
 
 9.2 Implementation
+for start in range(1, len(chromosome), STRIDE):
+num_variants = np.sum(chro[start:start+LENGTH])
+# Do something...
 With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
 be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
 the variant locations in the first place).
@@ -2102,12 +2108,11 @@ initial_filter enrich
 to meet the needs of the project and propose little re-use value unless altered... ...for the purpose of this project
 we’re looking at: ...the median of the GWAS (representative) ...the maximum of the iCHIP (enriching for
 maximum comparisons between data sets)
-...with more time it would be useful to open these functions to input from an end user to provide their own
-criteria...
-
 45
 
 9.3 Usage
+...with more time it would be useful to open these functions to input from an end user to provide their own
+criteria...
 ...in this state does however still allow for repeatable results in future with different data sets or additional
 groups...
 
