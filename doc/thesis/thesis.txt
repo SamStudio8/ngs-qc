@@ -388,10 +388,6 @@ Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
-8.2.3
-
-Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
-
 Goldilocks
 
 40
@@ -463,11 +459,11 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
 11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
 11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 
 iv
 
 Contents
-11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 
 III
 
@@ -1843,27 +1839,30 @@ defines a group more than once or uses a duplicate slug due to the ambiguity thi
 An example can be found in Appendix A.3.
 
 8.2
-8.2.1
 
 Development Environment
+
+Many of the features of the development environment for Part I are just as applicable to Part II. Differences
+and additions to the environment described in Chapter 3.2 are outlined below.
+
+8.2.1
+
 Language
 
-Once again, Python was the language of choice for this script... ...for many of the reasons previously discussed
-in Chapter 3.2.1 ...we needed this quickly, Python is useful for fast prototyping... ...expected reasonable
-performance without the need for a lower level language like C...
+Once again, Python was the language of choice for many of the reasons previously discussed in Chapter 3.2.1.
+Additionally, Python is useful for rapid prototyping, thanks partly to its emphasis on readability; concise
+syntax, its dynamic type system and extensive standard library; making it a suitable choice to author a working
+script in a short time span.
+Although performance was more of a concern, with the use of NumPy (whose mathematical functions are
+typically wrappers around C or Fortran implementations) reasonable efficiency was expected to be obtainable.
 
 8.2.2
 
 Testing
 
-...a little more difficult ...discussed more at length in the following chapter...
-
-8.2.3
-
-Tools
-
-As before... (Chapter 3.2.4)
-
+Given the more traditional development methodology, testing need not follow a continuous integration style
+roadmap. A test suite would need to be written to ensure the components of the script work as intended,
+simulating input variants and ensuring the correct candidate region densities are found.
 39
 
 Chapter 9

@@ -141,6 +141,7 @@ Variant Call Format (\textbf{VCF}) is a (typically compressed) text file...
 
 \subsection{Variant Query File}
 \label{sec:vqf}
+%TODO
 
 Named such for the command that creates it, the \textbf{Variant Query File} (or
 \textit{Query File}) is an input format for populating the candidate searching
@@ -198,7 +199,6 @@ http://vcftools.sourceforge.net/htslib.html\#query
 
 
 
-
 \subsection{Paths File}
 \label{sec:pathsfile}
 
@@ -216,25 +216,33 @@ duplicate slug due to the ambiguity this introduces.
 
 An example can be found in Appendix~\ref{app:pathsfile}.
 
+
 \section{Development Environment}
+
+Many of the features of the development environment for Part I are just as
+applicable to Part II. Differences and additions to the environment described in
+Chapter~\ref{part1:dev} are outlined below.
+
 \subsection{Language}
 
-Once again, Python was the language of choice for this script...
-...for many of the reasons previously discussed in Chapter~\ref{part1:dev:lang}
-...we needed this quickly, Python is useful for fast prototyping...
-...expected reasonable performance without the need for a lower level language
-like C...
+Once again, Python was the language of choice for many of the reasons previously
+discussed in Chapter~\ref{part1:dev:lang}. Additionally, Python is useful for
+rapid prototyping, thanks partly to its emphasis on readability; concise
+syntax, its dynamic type system and extensive standard library; making it a
+suitable choice to author a working script in a short time span.
+
+Although performance was more of a concern, with the use of \textbf{NumPy}
+(whose mathematical functions are typically wrappers around C or Fortran
+implementations) reasonable efficiency was expected to be obtainable.
 
 
 \subsection{Testing}
 
-...a little more difficult
-...discussed more at length in the following chapter...
-
-
-\subsection{Tools}
-
-As before... (Chapter~\ref{part1:dev:tools})
+%TODO
+Given the more traditional development methodology, testing need not follow a
+continuous integration style roadmap. A test suite would need to be written to
+ensure the components of the script work as intended, simulating input variants
+and ensuring the correct candidate region densities are found.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
