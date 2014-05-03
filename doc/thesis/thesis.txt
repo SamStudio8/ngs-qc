@@ -2334,7 +2334,7 @@ bases
 
 i
 0234
-1074
+1074*
 5222
 3125
 0880
@@ -2441,39 +2441,37 @@ CHR
 1
 
 POSITIONS
-117000001 46000001 16500001 60000001 191500001 9000001 78500001 27000001 5000001 76000001 7500001 182500001 70500001 102500001 6000001 89500001 102000001 96000001 49500001 207000001 149500001 192000001 231000001 88500001 160000001 -
-
-118000000
-47000000
-17500000
-61000000
-192500000
-10000000
-79500000
-28000000
-6000000
-77000000
-8500000
-183500000
-71500000
-103500000
-7000000
-90500000
-103000000
-97000000
-50500000
-208000000
-150500000
-193000000
-232000000
-89500000
-161000000
+117000001 - 118000000
+46000001 47000000
+16500001 17500000
+60000001 61000000
+191500001 - 192500000
+9000001 10000000
+78500001 79500000
+27000001 28000000
+5000001 6000000
+76000001 77000000
+7500001 8500000
+182500001 - 183500000
+70500001 71500000
+102500001 - 103500000
+6000001 7000000
+89500001 90500000
+102000001 - 103000000
+96000001 97000000
+49500001 50500000
+207000001 - 208000000
+149500001 - 150500000
+192000001 - 193000000
+231000001 - 232000000
+88500001 89500000
+160000001 - 161000000
 
 Listing 10 Goldilocks Results: "Top 25" Candidate Regions using a length of 1Mnt and a stride of 0.5Mnt.
 Candidates are filtered by median GWAS density and ranked by maximum iCHIP density.
 
-Candidate 1074 was selected as the region with the closest absolute difference between the median GWAS
-density of 297, whilst also offering the highest iCHIP density of the top 25 returned candidates.
+Candidate 1074 (marked by *) was selected as the region with the closest absolute difference between the
+median GWAS density of 297, whilst also offering the highest iCHIP density of the top 25 returned candidates.
 The implementation of the filtering and ranking functions in the previous chapter noted that during final
 ranking, the enrich function will discard candidates if the number of variants in the ranking group is less
 than the filtering group – in this case, if the iCHIP density is lower than the GWAS. This was a crude rule
