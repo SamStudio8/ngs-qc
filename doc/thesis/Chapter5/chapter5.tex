@@ -727,12 +727,67 @@ dictionary via \textbf{search\_regions}), additional tests ensure that all
 candidate regions are of the correct \textit{length} and begin on a valid
 \textit{stride}.
 
+%TODO Center
+\begin{listing}[H]
+    \caption[test-gold]{\textbf{Testing Expected Candidates with Goldilocks}:
+    The test suite defines the locations of variants across many files in two
+groups, the figure represents the expected regions for \textit{GROUP0}. The
+horizontal line represents a particular chromosome on which a \textbf{*} signals
+the location of a variant (\textbf{=} otherwise). The expected size column
+tabulates the number of variants that should appear as a member of region i
+(start-end inclusive).}
+    \label{list:test-gold}
+    \begin{minted}[%mathescape,
+                %linenos,
+                fontsize=\scriptsize,
+                gobble=0,
+                frame=lines,
+                framesep=2mm]{text}
+ GROUP0
+ CHR 1                                                            Expected
+             4     10 13      21  25                                Size    i
+       1 |*==*=====*==*=======*===*========================*| 50
+          |        |                                                 3      0
+               |        |                                            2      1
+                    |        |                                       1      2
+                         |        |                                  2      3
+                              |        |                             2      4
+                                   |        |                        0      5
+                                        |        |                   0      6
+                                             |        |              0      7
+                                                  |        |         1      8
+                                                       |        |    x
 
-...needed to re-write large aspects of the scripts to allow unit-like testing to
-take place... ...wanted to avoid a monolithic test class...
+ GROUP0
+ CHR 2                                                            Expected
+              5                                   91                Size    i
+       1 |====*=================\/...\/===========**********| 100
+          |        |                                                 1      9
+               |        |                                            0      10
+                                  ...                                .      .
+                                             |        |              5      26
+                                                  |        |         10     27
+                                                       |        |    x
 
-...tests are still rather modest and with more time it would be appropriate to
-improve their function but I have faith in their results...
+    \end{minted}
+\end{listing}
+
+As discussed, testing the discovery of correct regions is more complex.
+Listing~\ref{list:test-gold} details the regions expected for the variants
+specified in \textbf{TEST\_DATA}. The test suite checks that the number of
+regions located and their content is correct for each chromosome in each variant
+group. Tests also ensure that the previously mentioned \textbf{group\_counts}
+and \textbf{group\_buckets} structures are populated appropriately.
+
+Finally the \textbf{initial\_filter} and \textbf{enrich} functions can be tested
+(as we are able to manually calculate the expected candidates given the small
+data set) and ensure those candidates are returned.
+
+Admittedly the suite could still be described as modest and with more time it
+would be appropriate to further improve coverage, possibly generating larger (or
+even random) data sets. Results however, have also undergone manual inspection
+both by myself and the Sanger Institute and the regions described in
+the following chapter are considered legitimate.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

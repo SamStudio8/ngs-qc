@@ -444,18 +444,18 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 10 Results
 
-48
+49
 
 11 Analysis Pipeline
 
-50
+51
 
-11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
-11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
 
 iv
 
@@ -465,40 +465,40 @@ III
 
 Discussions and Conclusions
 
-55
+56
 
 12 Current Status
 
-56
+57
 
 13 Critical Evaluation
 
-57
+58
 
 14 Conclusions
 
-58
+59
 
 Appendix A Input Examples
 
-61
+62
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
-A.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+A.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
 Appendix B Output Examples
 
-66
+67
 
-B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
 Appendix C Tool Installation
 
-69
+70
 
-C.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
-C.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
-C.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
-C.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+C.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+C.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+C.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+C.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
 
 v
 
@@ -2206,11 +2206,111 @@ chromosome of the correct group, both in memory and also when loaded in to the N
 Once regions have been searched (or more accurately, once a a candidate census has populated the regions
 dictionary via search_regions), additional tests ensure that all candidate regions are of the correct length and
 begin on a valid stride.
-...needed to re-write large aspects of the scripts to allow unit-like testing to take place... ...wanted to avoid a
-monolithic test class...
-...tests are still rather modest and with more time it would be appropriate to improve their function but I have
-faith in their results...
+
 47
+
+9.3 Testing
+
+GROUP0
+CHR 1
+4
+10 13
+21 25
+1 |*==*=====*==*=======*===*========================*| 50
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+GROUP0
+CHR 2
+5
+91
+1 |====*=================\/...\/===========**********| 100
+|
+|
+|
+|
+...
+|
+|
+|
+|
+|
+|
+
+Expected
+Size
+3
+2
+1
+2
+2
+0
+0
+0
+1
+x
+
+Expected
+Size
+1
+0
+.
+5
+10
+x
+
+i
+0
+1
+2
+3
+4
+5
+6
+7
+8
+
+i
+9
+10
+.
+26
+27
+
+Listing 9 Testing Expected Candidates with Goldilocks: The test suite defines the locations of variants
+across many files in two groups, the figure represents the expected regions for GROUP0. The horizontal line
+represents a particular chromosome on which a * signals the location of a variant (= otherwise). The expected
+size column tabulates the number of variants that should appear as a member of region i (start-end inclusive).
+
+As discussed, testing the discovery of correct regions is more complex. Listing 9 details the regions expected
+for the variants specified in TEST_DATA. The test suite checks that the number of regions located and their
+content is correct for each chromosome in each variant group. Tests also ensure that the previously mentioned
+group_counts and group_buckets structures are populated appropriately.
+Finally the initial_filter and enrich functions can be tested (as we are able to manually calculate the expected
+candidates given the small data set) and ensure those candidates are returned.
+Admittedly the suite could still be described as modest and with more time it would be appropriate to further
+improve coverage, possibly generating larger (or even random) data sets. Results however, have also undergone
+manual inspection both by myself and the Sanger Institute and the regions described in the following chapter
+are considered legitimate.
+
+48
 
 Chapter 10
 
@@ -2350,17 +2450,17 @@ POSITIONS
 88500001 89500000
 160000001 - 161000000
 
-Listing 9 : ...top 25...
+Listing 10 : ...top 25...
 
 Figure 10.1 was created quickly in R using ggplot2 to eyeball the difference in variant distribution across each
 region (called a ’megabase’ due to their length of one million bases).. ...motivated by locating very highly
 populated regions in the iCHIP group well above the mean in the output...
 
-48
+49
 
 Fig. 10.1 Megabase Plot: ...
 
-49
+50
 
 Chapter 11
 
@@ -2397,7 +2497,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-50
+51
 
 11.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -2427,7 +2527,7 @@ the very least an estimated 35kB for a 64-bit pointer to each input file and app
 32kB buffer to read data from each file also. Yet executing the job with 500MB caused the LSF scheduler to
 forceably terminate the process for exceeding the maximum allocated memory limit.
 Assuming that the intermediate structures for storing and sorting the input data must have been greater than
-expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 10 only
+expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 11 only
 to meet the same fate, even when reserving 16GB of memory...
 This is an absurd amount of memory even considering the vast input... It appeared a memory leak had been
 discovered... that drastically increases in severity as more files are provided as input,
@@ -2449,9 +2549,9 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 #
 
 | Only run on a node with more than 4000mb memory
-Listing 10 : Flags required to raise job memory allocation
+Listing 11 : Flags required to raise job memory allocation
 
-51
+52
 
 11.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -2490,7 +2590,7 @@ by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
 ==30464==
 by 0x402CC4: main (test_trans_tbl_init.c:348)
 
-Listing 11 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
+Listing 12 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
 failure to release memory allocated to a compiled regular expression
 
 Poor Time Performance
@@ -2506,7 +2606,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-52
+53
 
 11.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -2539,7 +2639,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-53
+54
 
 11.1 Implementation
 s = bam_get_aux(b);
@@ -2576,19 +2676,19 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-54
+55
 
 Part III
 
 Discussions and Conclusions
 
-55
+56
 
 Chapter 12
 
 Current Status
 
-56
+57
 
 Chapter 13
 
@@ -2608,13 +2708,13 @@ to candidates of uniform length)
 
 An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[44]
 
-57
+58
 
 Chapter 14
 
 Conclusions
 
-58
+59
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -2737,7 +2837,7 @@ parsing library. [Online]. Available:
 https:
 //pypi.python.org/pypi/argparse/1.2.1
 
-59
+60
 
 References
 [27] M. Fowler, “Continuous Integration,” 2006.
@@ -2820,7 +2920,7 @@ Life,” 1987, [Television broadcast].
 HLA Gene Family. [Online]. Available: http:
 //ghr.nlm.nih.gov/geneFamily/hla
 
-60
+61
 
 Appendix A
 
@@ -2944,7 +3044,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-61
+62
 
 A.1 BAMcheckR’d Example Output
 
@@ -3176,7 +3276,7 @@ FFQ
 0
 0
 
-62
+63
 
 1609
 
@@ -3518,7 +3618,7 @@ IS
 2
 0
 
-63
+64
 
 A.1 BAMcheckR’d Example Output
 
@@ -3797,7 +3897,7 @@ GCD
 0.101
 0.101
 
-64
+65
 
 A.2 auto_qc Decision Matrix
 
@@ -3946,7 +4046,7 @@ Goldilocks Paths File
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-65
+66
 
 ...
 ...
@@ -4032,7 +4132,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-66
+67
 
 B.1 Frontier Log Example
 
@@ -4102,7 +4202,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-67
+68
 
 B.1 Frontier Log Example
 
@@ -4128,7 +4228,7 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
-68
+69
 
 Appendix C
 
@@ -4154,7 +4254,7 @@ cd bcftools/
 make #(requires htslib to be above samtools/bcftools dir)
 sudo cp bcftools usr/local/bin
 
-69
+70
 
 C.3 samtools
 
@@ -4189,6 +4289,6 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 
-70
+71
 
 
