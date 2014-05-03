@@ -1,0 +1,95 @@
+\chapter{Tool Installation}
+\label{app:install}
+
+\section{htslib}
+\label{app:install-htslib}
+\begin{listing}[H]
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+        # Download repositories from Github
+        git clone htslib
+
+        cd htslib/
+        make
+
+    \end{minted}
+\end{listing}
+
+\section{bcftools}
+\label{app:install-bcftools}
+
+\textit{Prerequisites}: \textbf{htslib}(Appendix~\ref{app:install-htslib})
+
+\begin{listing}[H]
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+        # Download repositories from Github
+        git clone bcftools
+
+        cd bcftools/
+
+        # Build bcftools
+        make #(requires htslib to be above samtools/bcftools dir)
+        sudo cp bcftools usr/local/bin
+    \end{minted}
+\end{listing}
+
+\section{samtools}
+\label{app:install-samtools}
+
+\textit{Prerequisites}: \textbf{htslib}(Appendix~\ref{app:install-htslib})
+
+\begin{listing}[H]
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+        # Download repositories from Github
+        git clone samtools
+
+        cd samtools/
+
+        # Build samtools
+        make #(requires htslib to be above samtools/samtools dir)
+        sudo cp samtools usr/local/bin
+    \end{minted}
+\end{listing}
+
+\section{tabix}
+\label{app:tabix}
+
+\begin{listing}[H]
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+        # Tabix
+        # Download from sourceforge
+        # http://sourceforge.net/projects/samtools/files/tabix/
+        make
+        sudo cp tabix /usr/local/bin
+
+        # Generate an index (vcfidx) (not necessary)
+        vcftools --gzvcf cd.ichip.vcf.gz
+
+        # Index with tabix
+        # "The input data file must be position sorted and compressed by bgzip 
+        # which has a gzip(1) like interface"
+        tabix -p vcf file.vcf.gz
+        diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
+        # Shows no difference :)
+        # http://samtools.sourceforge.net/tabix.shtml
+    \end{minted}
+\end{listing}
