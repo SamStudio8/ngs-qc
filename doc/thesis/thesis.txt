@@ -448,14 +448,14 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 11 Analysis Pipeline
 
-51
+52
 
-11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
-11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
-11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
-11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
-11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
-11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
 
 iv
 
@@ -465,40 +465,40 @@ III
 
 Discussions and Conclusions
 
-56
+57
 
 12 Current Status
 
-57
+58
 
 13 Critical Evaluation
 
-58
+59
 
 14 Conclusions
 
-59
+60
 
 Appendix A Input Examples
 
-62
+63
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
-A.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+A.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
 Appendix B Output Examples
 
-67
+68
 
-B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
 Appendix C Tool Installation
 
-70
+71
 
-C.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
-C.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
-C.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
-C.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+C.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+C.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+C.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+C.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
 
 v
 
@@ -2315,38 +2315,55 @@ are considered legitimate.
 Chapter 10
 
 Results
-WND
-234
+Listing 10 lists the top 25 candidate regions selected by Goldilocks for inspection. Regions were constructed
+using a length of 1Mnt1 (mega nucleotides) and a stride of 0.5Mnt2 . As detailed in Section 9.2.6, candidates
+for this study were filtered to include regions with a GWAS density within ±12.5% of the median GWAS
+density (i.e. in the middle 25%) before being ranked firstly by absolute difference from the median GWAS,
+then by iCHIP variant density, descending.
+Empty regions were excluded from a variant group’s analysis, including the calculation of any percentiles. This
+was to ensure that we located the most "representative" density from the regions and avoid potential skewing
+from 0 density candidates. However repeating the experiment including empty regions leads to highly similar
+results and the candidate that was actually selected as the Goldilocks region appears in both sets of results.
+1 1,000,000
+2 500,000
+
+bases
+bases
+
+49
+
+i
+0234
 1074
-3125
 5222
-880
+3125
+0880
 3560
 4407
 1036
 2734
 3426
-15
-365
+0015
+0365
 3415
 1581
-3184
 3554
+3184
 1580
-414
 1948
-2055
 2215
-384
-959
+0414
+2055
+0384
+0959
 4214
-320
+0320
 
 GWAS
 297
 294
-298
 294
+298
 293
 299
 299
@@ -2357,13 +2374,13 @@ GWAS
 301
 301
 290
-302
 290
+302
 289
 288
 288
-304
 288
+304
 287
 306
 286
@@ -2372,8 +2389,8 @@ GWAS
 iCHIP
 470
 1540
-310
 336
+310
 344
 772
 512
@@ -2384,13 +2401,13 @@ iCHIP
 487
 419
 802
-449
 403
+449
 603
-346
 1297
-1377
 622
+346
+1377
 827
 406
 393
@@ -2399,8 +2416,8 @@ iCHIP
 CHR
 1
 3
-10
 21
+10
 2
 12
 15
@@ -2411,56 +2428,78 @@ CHR
 1
 11
 4
-10
 12
+10
 4
-1
-5
 5
 7
+1
+5
 1
 2
 14
 1
 
 POSITIONS
-117000001 - 118000000
-46000001 47000000
-60000001 61000000
-16500001 17500000
-191500001 - 192500000
-9000001 10000000
-78500001 79500000
-27000001 28000000
-5000001 6000000
-76000001 77000000
-7500001 8500000
-182500001 - 183500000
-70500001 71500000
-102500001 - 103500000
-89500001 90500000
-6000001 7000000
-102000001 - 103000000
-207000001 - 208000000
-96000001 97000000
-149500001 - 150500000
-49500001 50500000
-192000001 - 193000000
-231000001 - 232000000
-88500001 89500000
-160000001 - 161000000
+117000001 46000001 16500001 60000001 191500001 9000001 78500001 27000001 5000001 76000001 7500001 182500001 70500001 102500001 6000001 89500001 102000001 96000001 49500001 207000001 149500001 192000001 231000001 88500001 160000001 -
 
-Listing 10 : ...top 25...
+118000000
+47000000
+17500000
+61000000
+192500000
+10000000
+79500000
+28000000
+6000000
+77000000
+8500000
+183500000
+71500000
+103500000
+7000000
+90500000
+103000000
+97000000
+50500000
+208000000
+150500000
+193000000
+232000000
+89500000
+161000000
 
-Figure 10.1 was created quickly in R using ggplot2 to eyeball the difference in variant distribution across each
-region (called a ’megabase’ due to their length of one million bases).. ...motivated by locating very highly
-populated regions in the iCHIP group well above the mean in the output...
+Listing 10 Goldilocks Results: "Top 25" Candidate Regions using a length of 1Mnt and a stride of 0.5Mnt.
+Candidates are filtered by median GWAS density and ranked by maximum iCHIP density.
 
-49
-
-Fig. 10.1 Megabase Plot: ...
+Candidate 1074 was selected as the region with the closest absolute difference between the median GWAS
+density of 297, whilst also offering the highest iCHIP density of the top 25 returned candidates.
+The implementation of the filtering and ranking functions in the previous chapter noted that during final
+ranking, the enrich function will discard candidates if the number of variants in the ranking group is less
+than the filtering group – in this case, if the iCHIP density is lower than the GWAS. This was a crude rule
+implemented to prevent candidates with a significantly low iCHIP density (≤100) from being put forward
+following ’enrichment’; these regions would give us little to compare when it comes to measuring the concordance
+between variants called in our leave-one-out study and the original iCHIP data set.
+Curious about the wide range and presence of so many low resolution iCHIP candidates, I authored an R
+script (making use of ggplot2[25] for graphing) to plot figures 10.1 and 10.2 as a means of visual inspection
+to confirm such results should be anticipated.
+Figure 10.1 shows a large range in the densities of variants in the iCHIP regions, between 0 and almost 3000,
+with a significant baseline below 100. Figure 10.2 plots the same data set but also facetting by chromosome,
+again it can be seen that the iCHIP variant group counts are well spread when compared to the rather constant
+variance of their GWAS counterparts.
+This isn’t a surprise when you consider that the GWAS data set represents the variants sequenced from
+whole-genome analysis of our samples, whereas the iCHIP set consists of the variants output from SNP
+genotyping, a process that focuses on particular genomic locations of interest.
 
 50
+
+Fig. 10.1 Goldilocks Candidate Plot A: Candidate regions of one megabase length are arranged along the x
+axis (coloured by chromosome) against the number of variants contained within that region.
+
+Fig. 10.2 Goldilocks Candidate Plot B: Candidates of one megabase length are arranged along the x axis
+(coloured and facetted by allosome) and plotted against the number of variants contained within that region.
+
+51
 
 Chapter 11
 
@@ -2497,7 +2536,7 @@ Following extraction of the Goldilocks region for each full-genome sample, the n
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
 
-51
+52
 
 11.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
@@ -2551,7 +2590,7 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 | Only run on a node with more than 4000mb memory
 Listing 11 : Flags required to raise job memory allocation
 
-52
+53
 
 11.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -2606,7 +2645,7 @@ Having constructed a modest test set of files to merge, I called samtools merge 
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 
-53
+54
 
 11.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
@@ -2639,7 +2678,7 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-54
+55
 
 11.1 Implementation
 s = bam_get_aux(b);
@@ -2676,19 +2715,19 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-55
+56
 
 Part III
 
 Discussions and Conclusions
 
-56
+57
 
 Chapter 12
 
 Current Status
 
-57
+58
 
 Chapter 13
 
@@ -2708,13 +2747,13 @@ to candidates of uniform length)
 
 An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[44]
 
-58
+59
 
 Chapter 14
 
 Conclusions
 
-59
+60
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -2837,7 +2876,7 @@ parsing library. [Online]. Available:
 https:
 //pypi.python.org/pypi/argparse/1.2.1
 
-60
+61
 
 References
 [27] M. Fowler, “Continuous Integration,” 2006.
@@ -2920,7 +2959,7 @@ Life,” 1987, [Television broadcast].
 HLA Gene Family. [Online]. Available: http:
 //ghr.nlm.nih.gov/geneFamily/hla
 
-61
+62
 
 Appendix A
 
@@ -3044,7 +3083,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-62
+63
 
 A.1 BAMcheckR’d Example Output
 
@@ -3276,7 +3315,7 @@ FFQ
 0
 0
 
-63
+64
 
 1609
 
@@ -3618,7 +3657,7 @@ IS
 2
 0
 
-64
+65
 
 A.1 BAMcheckR’d Example Output
 
@@ -3897,7 +3936,7 @@ GCD
 0.101
 0.101
 
-65
+66
 
 A.2 auto_qc Decision Matrix
 
@@ -4046,7 +4085,7 @@ Goldilocks Paths File
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-66
+67
 
 ...
 ...
@@ -4132,7 +4171,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-67
+68
 
 B.1 Frontier Log Example
 
@@ -4202,7 +4241,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-68
+69
 
 B.1 Frontier Log Example
 
@@ -4228,7 +4267,7 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
-69
+70
 
 Appendix C
 
@@ -4254,7 +4293,7 @@ cd bcftools/
 make #(requires htslib to be above samtools/bcftools dir)
 sudo cp bcftools usr/local/bin
 
-70
+71
 
 C.3 samtools
 
@@ -4289,6 +4328,6 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 
-71
+72
 
 

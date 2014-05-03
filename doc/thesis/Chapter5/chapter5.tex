@@ -657,6 +657,7 @@ Section~\ref{sec:parse-path}.
 
 
 \subsection{Filtering and Ranking Candidates for Selection}
+\label{sec:filter-rank}
 
 For the purpose of this project we're looking to filter candidates by their
 absolute distance from the median density of variants located in the
@@ -792,57 +793,119 @@ the following chapter are considered legitimate.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Results}
-
+%TODO Mnt or Mb?
 %TODO Tabulate
+
+Listing~\ref{list:resultsp2} lists the top 25 candidate regions selected by
+\textbf{Goldilocks} for inspection. Regions were constructed using a
+\textit{length} of 1Mnt\footnote{1,000,000 bases}(mega nucleotides) and a
+\textit{stride} of 0.5Mnt\footnote{500,000 bases}. As detailed in
+Section~\ref{sec:filter-rank}, candidates for this study were filtered to
+include regions with a \textbf{GWAS} density within ±12.5\% of the
+median \textbf{GWAS} density (\textit{i.e.} in the middle 25\%) before being
+ranked firstly by absolute difference from the median \textbf{GWAS}, then by
+\textbf{iCHIP} variant density, descending.
+
+Empty regions were excluded from a variant group's analysis, including the
+calculation of any percentiles. This was to ensure that we located the most
+"representative" density from the regions and avoid potential skewing from 0 density
+candidates. However repeating the experiment including empty regions
+leads to highly similar results and the candidate that was actually selected as
+the Goldilocks region appears in both sets of results.
+
+%TODO Results don't actually sub-sort by iCHIP...
 \begin{listing}[H]
-    \caption[results]{: ...top 25...}
-    \label{list:results}
+    \caption[resultsp2]{\textbf{Goldilocks Results}: "Top 25" Candidate Regions
+    using a \textit{length} of 1Mnt and a \textit{stride} of 0.5Mnt. Candidates
+    are filtered by median \textbf{GWAS} density and ranked by maximum
+    \textbf{iCHIP} density.}
+    \label{list:resultsp2}
     \begin{minted}[%mathescape,
                 %linenos,
                 gobble=8,
                 frame=lines,
                 fontsize=\scriptsize,
                 framesep=2mm]{text}
-        WND	GWAS	iCHIP	CHR	POSITIONS
-        234	297	470	1	 117000001 -  118000000
+        i	GWAS	iCHIP	CHR	POSITIONS
+        0234	297	470	1	 117000001 -  118000000
         1074	294	1540	3	  46000001 -   47000000
-        3125	298	310	10	  60000001 -   61000000
         5222	294	336	21	  16500001 -   17500000
-        880	293	344	2	 191500001 -  192500000
+        3125	298	310	10	  60000001 -   61000000
+        0880	293	344	2	 191500001 -  192500000
         3560	299	772	12	   9000001 -   10000000
         4407	299	512	15	  78500001 -   79500000
         1036	292	300	3	  27000001 -   28000000
         2734	300	515	9	   5000001 -    6000000
         3426	300	486	11	  76000001 -   77000000
-        15	291	1029	1	   7500001 -    8500000
-        365	301	487	1	 182500001 -  183500000
+        0015	291	1029	1	   7500001 -    8500000
+        0365	301	487	1	 182500001 -  183500000
         3415	301	419	11	  70500001 -   71500000
         1581	290	802	4	 102500001 -  103500000
-        3184	302	449	10	  89500001 -   90500000
         3554	290	403	12	   6000001 -    7000000
+        3184	302	449	10	  89500001 -   90500000
         1580	289	603	4	 102000001 -  103000000
-        414	288	346	1	 207000001 -  208000000
         1948	288	1297	5	  96000001 -   97000000
-        2055	304	1377	5	 149500001 -  150500000
         2215	288	622	7	  49500001 -   50500000
-        384	287	827	1	 192000001 -  193000000
-        959	306	406	2	 231000001 -  232000000
+        0414	288	346	1	 207000001 -  208000000
+        2055	304	1377	5	 149500001 -  150500000
+        0384	287	827	1	 192000001 -  193000000
+        0959	306	406	2	 231000001 -  232000000
         4214	286	393	14	  88500001 -   89500000
-        320	307	620	1	 160000001 -  161000000
+        0320	307	620	1	 160000001 -  161000000
     \end{minted}
 \end{listing}
 
-Figure~\ref{fig:megabaseplot} was created quickly in R using \textbf{ggplot2} to
-eyeball the difference in variant distribution across each region (called
-a 'megabase' due to their length of one million bases)..
-...motivated by locating very highly populated regions in the iCHIP group well
-above the mean in the output...
+%TODO Possible all returned variants?
+Candidate 1074 was selected as the region with the closest absolute difference
+between the median \textbf{GWAS} density of 297, whilst also offering the
+highest \textbf{iCHIP} density of the top 25 returned candidates.
+
+
+The implementation of the filtering and ranking functions in the previous
+chapter noted that during final ranking, the \textbf{enrich} function will
+discard candidates if the number of variants in the ranking group is less than
+the filtering group -- in this case, if the \textbf{iCHIP} density is lower than
+the \textbf{GWAS}. This was a crude rule implemented to prevent candidates with
+a significantly low \textbf{iCHIP} density ($\le$100) from being put forward following
+'enrichment'; these regions would give us little to compare when it comes to
+measuring the concordance between variants called in our leave-one-out study and
+the original \textbf{iCHIP} data set.
+
+Curious about the wide range and presence of so many low resolution
+\textbf{iCHIP} candidates, I authored an R script (making use of
+\textbf{ggplot2}\citep{ggplot2} for graphing) to plot
+figures~\ref{fig:megabaseplot} and~\ref{fig:megabaseplotsplit} as a means of
+visual inspection to confirm such results should be anticipated.
+
+Figure~\ref{fig:megabaseplot} shows a large range in the densities of
+variants in the \textbf{iCHIP} regions, between 0 and almost 3000, with a
+significant baseline below 100. Figure~\ref{fig:megabaseplotsplit} plots the
+same data set but also facetting by chromosome, again it can be seen that the
+\textbf{iCHIP} variant group counts are well spread when compared to the rather
+constant variance of their \textbf{GWAS} counterparts.
+
+This isn't a surprise when you consider that the \textbf{GWAS} data set
+represents the variants sequenced from whole-genome analysis of our samples,
+whereas the \textbf{iCHIP} set consists of the variants output from SNP
+genotyping, a process that focuses on particular genomic locations of interest.
+
 
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width=1.0\textwidth]{megabase_plot}
-    \caption[megabaseplot]{\textbf{Megabase Plot}: ...}
+    \includegraphics[width=0.8\textwidth]{megabase_plot}
+    \caption[megabaseplot]{\textbf{Goldilocks Candidate Plot A}: Candidate regions
+    of one megabase length are arranged along the x axis (coloured by
+chromosome) against the number of variants contained within that region.}
     \label{fig:megabaseplot}
+\end{figure}
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{megabase_plot_split}
+    \caption[megabaseplotsplit]{\textbf{Goldilocks Candidate Plot B}: Candidates
+        of one megabase length are arranged along the x axis (coloured
+        and facetted by allosome) and plotted against the number of variants contained
+    within that region.}
+    \label{fig:megabaseplotsplit}
 \end{figure}
 
 
