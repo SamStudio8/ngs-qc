@@ -438,7 +438,7 @@ to normalize the candidate regions across all groups to allow for easy
 comparison between them.
 
 
-\subsection{Storage}
+\subsection{Storage and Recall of Variants}
 
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is
 important to consider both time and memory as it is simple to deliver a poor
@@ -606,7 +606,7 @@ chromosome, given its desired length and a list of variants...
 be acheived with such a method...
 
 
-\subsection{Searching for Regions}
+\subsection{Searching for Candidate Regions}
 
 \textbf{search\_regions} is responsible for performing the main task of the
 script, walking over the genome and creating objects who represent candidate
@@ -628,7 +628,8 @@ the current region forward by the user defined \textit{stride}.
 
 Each valid region will be entered in to the \textbf{regions} dictionary using
 the current region counter (\textbf{region\_i}) as the key, mapping to an
-arbitrary object as defined in Listing~\ref{list:candidate-dict} below:
+arbitrary object (a dictionary) as defined in Listing~\ref{list:candidate-dict}
+below:
 
 \begin{listing}[H]
     \caption[candidate-dict]{: Candidate Region Data Structure}
@@ -655,7 +656,7 @@ relevant \textbf{group\_buckets} structure as established in
 Section~\ref{sec:parse-path}.
 
 
-\subsection{Final Selection}
+\subsection{Filtering and Ranking Candidates for Selection}
 
 For the purpose of this project we're looking to filter candidates by their
 absolute distance from the median density of variants located in the
@@ -700,15 +701,33 @@ variant groups.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Usage}
-
-...
 
 \section{Testing}
 
-...particularly difficult.
-...required generation of input files that would contain known regions to test
-were found by the program...
+The testing of \textbf{Goldilocks} presented a challenge; we'd not only like
+to simply ensure that the correct query files are located and loaded in to
+memory but also that the expected candidates are found, filtered and selected.
+It is thus not practical to conduct testing on a large data set such as the two
+we have for analysis, we need a smaller, well defined set with known results.
+
+To acheive this the testing suite is designed to generate valid
+\textbf{Variant Query Files} from a \textbf{TEST\_DATA} dictionary, which
+defines test groups and variant locations on test chromosomes and can easily be
+altered for future testing. Test files are re-generated from this dictionary
+each time the test suite is instantiated using the \textbf{setUpClass}
+classmethod provided by the \textbf{unittest} library.
+
+Checking both the \textbf{Paths File} and generated \textbf{Variant Query Files}
+were loaded successfully is trivial and the suite goes on to test whether the
+input files and all generated variants within are mapped to the specified
+chromosome of the correct group, both in memory and also when loaded in to the
+\textbf{NumPy} array structure. Once regions have been searched (or more
+accurately, once a a candidate census has populated the \textbf{regions}
+dictionary via \textbf{search\_regions}), additional tests ensure that all
+candidate regions are of the correct \textit{length} and begin on a valid
+\textit{stride}.
+
+
 ...needed to re-write large aspects of the scripts to allow unit-like testing to
 take place... ...wanted to avoid a monolithic test class...
 

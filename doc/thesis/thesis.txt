@@ -396,6 +396,8 @@ Goldilocks
 
 9.2
 
+9.3
+
 Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 9.1.1
 
@@ -428,21 +430,15 @@ Loading Variant Query Files . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 9.2.4
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Storage and Recall of Variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 9.2.5
 
-Searching for Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Searching for Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
 
 9.2.6
 
-Final Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
-
-9.3
-
-Usage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
-
-9.4
+Filtering and Ranking Candidates for Selection . . . . . . . . . . . . . . . . . . . . . 46
 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
 
@@ -2015,7 +2011,7 @@ groups to allow for easy comparison between them.
 
 9.2.4
 
-Storage
+Storage and Recall of Variants
 
 As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
 and memory as it is simple to deliver a poor performing solution.
@@ -2120,7 +2116,7 @@ gains could be acheived with such a method...
 
 9.2.5
 
-Searching for Regions
+Searching for Candidate Regions
 
 search_regions is responsible for performing the main task of the script, walking over the genome and creating
 objects who represent candidate regions. The function is possibly a misnomer as it conducts a candidate census
@@ -2133,7 +2129,7 @@ positions. The function will then take slices of these arrays of the user define
 variants contained within by summing across the slice (elements with variants contain a 1, otherwise 0). The
 next region is sliced by moving the first base of the current region forward by the user defined stride.
 Each valid region will be entered in to the regions dictionary using the current region counter (region_i) as
-the key, mapping to an arbitrary object as defined in Listing 8 below:
+the key, mapping to an arbitrary object (a dictionary) as defined in Listing 8 below:
 regions[region_i] = {
 "ichr": i,
 
@@ -2164,7 +2160,7 @@ region_i added to the relevant group_buckets structure as established in Section
 
 9.2.6
 
-Final Selection
+Filtering and Ranking Candidates for Selection
 
 For the purpose of this project we’re looking to filter candidates by their absolute distance from the median
 density of variants located in the GWAS variant group (the median density will give the most representative
@@ -2174,7 +2170,7 @@ Two functions in the Goldilocks API provide a process to rank candidate regions 
 
 46
 
-9.3 Usage
+9.3 Testing
 • initial_filter
 Uses the relevant filtering group’s group_counts list (in this case, GWAS) to calculate a window around
 the median density. The function will then return all candidates inside the group’s group_buckets
@@ -2194,20 +2190,26 @@ with different data sets or additional variant groups.
 
 9.3
 
-Usage
-
-...
-
-9.4
-
 Testing
 
-...particularly difficult. ...required generation of input files that would contain known regions to test were
-found by the program... ...needed to re-write large aspects of the scripts to allow unit-like testing to take
-place... ...wanted to avoid a monolithic test class...
+The testing of Goldilocks presented a challenge; we’d not only like to simply ensure that the correct query
+files are located and loaded in to memory but also that the expected candidates are found, filtered and selected.
+It is thus not practical to conduct testing on a large data set such as the two we have for analysis, we need a
+smaller, well defined set with known results.
+To acheive this the testing suite is designed to generate valid Variant Query Files from a TEST_DATA
+dictionary, which defines test groups and variant locations on test chromosomes and can easily be altered for
+future testing. Test files are re-generated from this dictionary each time the test suite is instantiated using the
+setUpClass classmethod provided by the unittest library.
+Checking both the Paths File and generated Variant Query Files were loaded successfully is trivial and the
+suite goes on to test whether the input files and all generated variants within are mapped to the specified
+chromosome of the correct group, both in memory and also when loaded in to the NumPy array structure.
+Once regions have been searched (or more accurately, once a a candidate census has populated the regions
+dictionary via search_regions), additional tests ensure that all candidate regions are of the correct length and
+begin on a valid stride.
+...needed to re-write large aspects of the scripts to allow unit-like testing to take place... ...wanted to avoid a
+monolithic test class...
 ...tests are still rather modest and with more time it would be appropriate to improve their function but I have
 faith in their results...
-
 47
 
 Chapter 10
