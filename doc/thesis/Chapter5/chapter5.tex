@@ -657,21 +657,46 @@ Section~\ref{sec:parse-path}.
 
 \subsection{Final Selection}
 
-\textbf{initial\_filter}
-\textbf{enrich}
+For the purpose of this project we're looking to filter candidates by their
+absolute distance from the median density of variants located in the
+\textbf{GWAS} variant group (the median density will give the most representative
+regions) and then rank those by their corresponding \textbf{iCHIP} variant group
+densities, descending (enriching the number of comparisons that can be made
+between the \textbf{GWAS} data and \textbf{iCHIP} data).
 
-...provides functions to rank all candidate regions by density of variants
-...currently criteria are still hard coded to meet the needs of the project and
-propose little re-use value unless altered...
-...for the purpose of this project we're looking at:
-...the median of the GWAS (representative)
-...the maximum of the iCHIP (enriching for maximum comparisons between data sets)
+Two functions in the \textbf{Goldilocks} API provide a process to rank candidate
+regions by a desired group's density:
 
-...with more time it would be useful to open these functions to input from an
-end user to provide their own criteria...
+\begin{itemize}
+    \item \textbf{initial\_filter} \hfill\\
+        Uses the relevant filtering group's \textbf{group\_counts} list (in this case,
+        \textbf{GWAS}) to calculate a window around the median density. The
+        function will then return all candidates inside the group's
+        \textbf{group\_buckets} dictionary whose density fall inside the upper
+        and lower bounds of the window around the median.
 
-...in this state does however still allow for repeatable results in future with
-different data sets or additional groups...
+    \item \textbf{enrich} \hfill\\
+        Sorts the output of \textbf{initial\_filter} by the desired ranking
+        variant group (in our case, \textbf{iCHIP}). The function will
+        prioritise candidates with the closest absolute value to the filter group's median
+        and ensure that the density of the ranking group is higher than the
+        filtering group. Returns a ranked list of candidates in the format
+        displayed in Listing~\ref{list:candidate-dict} for manual inspection.
+\end{itemize}
+
+Currently ranking and filtering criteria are still hard coded to meet the needs
+of our analysis.  In future it would be useful to generalise the
+\textbf{Goldilocks} API to allow more operations such as filtering by a given
+percentile rather than only the median and to provide more 'enrichment' options
+such as ranking by minimum.
+
+It would be sensible to consider re-naming the two functions to \textbf{filter}
+and \textbf{rank} respectively and allow users to chain together these methods
+to compound filtering and ranking operations as necessary.
+
+Whilst in this state the script proposes little re-use value, we at least have a
+basis for repeating results in future with different data sets or additional
+variant groups.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
