@@ -2509,6 +2509,7 @@ samples... ...using samtools to pileup the variants across all the samples (excl
 performing variant calling... ...must then compare the resulting VCF against the SNP VCF and calculate the
 concordance to discover whether leaving out that particular sample has caused a change in the accuracy of the
 variants called...
+...this chapter introduces the tools used and difficulties encountered...
 
 11.1
 
