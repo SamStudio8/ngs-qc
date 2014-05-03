@@ -615,15 +615,41 @@ rather than a search, indiscriminately adding all valid candidates to the
 
 \textbf{search\_regions} will iterate over each chromosome and load the listed
 variants in each group-chromosome pair from the \textbf{groups} structure into a
-\textbf{NumPy} array whose length is set to the maximum position seen by
-\textbf{load\_variants\_from\_file}, plus one to account for the 1-indexed
-nature of genome positions.
+\textbf{NumPy} array whose length is set to the last position from which a full
+region can be extracted based on the maximum position seen by
+\textbf{load\_variants\_from\_file} for this chromosome, plus one to account for
+the 1-indexed nature of genome positions. The function will then take slices of
+these arrays of the user defined \textit{length} and count the number of
+variants contained within by summing across the slice (elements with variants
+contain a 1, otherwise 0). The next region is sliced by moving the first base of
+the current region forward by the user defined \textit{stride}.
+
+Each valid region will be entered in to the \textbf{regions} dictionary using
+the current region counter (\textbf{region\_i}) as the key, mapping to an
+arbitrary object as defined in Listing~\ref{list:candidate-dict} below:
+
+\begin{listing}[H]
+    \caption[candidate-dict]{: Candidate Region Data Structure}
+    \label{list:candidate-dict}
+    \begin{minted}[%mathescape,
+                %linenos,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{python}
+        regions[region_i] = {
+            "ichr": i,              # The i'th region on the current chromosome
+            "group_counts": {},     # A dictionary mapping variant group names to
+                                    # the number of variants counted for that group
+            "chr": chrno,           # The allosome number
+            "pos_start": region_s,  # The first base of this region (inclusive)
+            "pos_end": region_e     # The last base on this region (inclusive)
+        }
+    \end{minted}
+\end{listing}
 
 
-..each region of \textit{length}, starting at \textit{stride} is checked for the
-number of variants contained therein...
-
-...it is here that chromosome six is discarded...
+...buckets
+...counts
 
 \subsection{Final Selection}
 
