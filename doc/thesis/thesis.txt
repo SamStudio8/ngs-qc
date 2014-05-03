@@ -2125,13 +2125,13 @@ Searching for Regions
 search_regions is responsible for performing the main task of the script, walking over the genome and creating
 objects who represent candidate regions. The function is possibly a misnomer as it conducts a candidate census
 rather than a search, indiscriminately adding all valid candidates to the regions dictionary.
-search_regions will iterate over each chromosome and load the listed variants in each group-chromosome pair
-from the groups structure into a NumPy array whose length is set to the last position from which a full region
-can be extracted based on the maximum position seen by load_variants_from_file for this chromosome, plus
-one to account for the 1-indexed nature of genome positions. The function will then take slices of these arrays
-of the user defined length and count the number of variants contained within by summing across the slice
-(elements with variants contain a 1, otherwise 0). The next region is sliced by moving the first base of the
-current region forward by the user defined stride.
+search_regions will iterate over each chromosome and load the listed variants in each group-chromosome
+pair from the groups structure (by calling load_chromosome) into a NumPy array whose length is set
+to the last position from which a full region can be extracted based on the maximum position seen by
+load_variants_from_file for this chromosome, plus one to account for the 1-indexed nature of genome
+positions. The function will then take slices of these arrays of the user defined length and count the number of
+variants contained within by summing across the slice (elements with variants contain a 1, otherwise 0). The
+next region is sliced by moving the first base of the current region forward by the user defined stride.
 Each valid region will be entered in to the regions dictionary using the current region counter (region_i) as
 the key, mapping to an arbitrary object as defined in Listing 8 below:
 regions[region_i] = {
@@ -2159,7 +2159,8 @@ regions[region_i] = {
 }
 Listing 8 : Candidate Region Data Structure
 
-...buckets ...counts
+Regions will also have their respective group densities appended to the appropriate group_counts list and its
+region_i added to the relevant group_buckets structure as established in Section 9.2.2.
 
 9.2.6
 

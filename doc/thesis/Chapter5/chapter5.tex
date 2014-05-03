@@ -354,6 +354,7 @@ data handling impracticalities.
 
 
 \subsection{Parsing Paths File}
+\label{sec:parse-path}
 
 \textbf{Goldilocks} requires the user provide their own valid \textbf{Paths
 File}, meeting the specification introduced in Section~\ref{sec:pathsfile} (an
@@ -614,7 +615,8 @@ rather than a search, indiscriminately adding all valid candidates to the
 \textbf{regions} dictionary.
 
 \textbf{search\_regions} will iterate over each chromosome and load the listed
-variants in each group-chromosome pair from the \textbf{groups} structure into a
+variants in each group-chromosome pair from the \textbf{groups} structure (by
+calling \textbf{load\_chromosome}) into a
 \textbf{NumPy} array whose length is set to the last position from which a full
 region can be extracted based on the maximum position seen by
 \textbf{load\_variants\_from\_file} for this chromosome, plus one to account for
@@ -647,9 +649,11 @@ arbitrary object as defined in Listing~\ref{list:candidate-dict} below:
     \end{minted}
 \end{listing}
 
+Regions will also have their respective group densities appended to the
+appropriate \textbf{group\_counts} list and its \textbf{region\_i} added to the
+relevant \textbf{group\_buckets} structure as established in
+Section~\ref{sec:parse-path}.
 
-...buckets
-...counts
 
 \subsection{Final Selection}
 
