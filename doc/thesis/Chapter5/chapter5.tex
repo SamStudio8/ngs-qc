@@ -303,6 +303,32 @@ and available up front and formal testing was scheduled to be completed
 following the completion of a working prototype.
 
 
+\subsection{Pitfalls}
+
+Python lists and other sequence based structures such as \textbf{NumPy} arrays
+are 0-indexed, however base positions in a genome are commonly 1-indexed. These
+differing indices must be normalised in some fashion; for example subtracting 1
+from all positions or simply ignoring the presence of element 0 in
+the structure. The method that is used does not matter so much as consistency;
+it is trivially easy to make 1-base-out mistakes when handling genomic data.
+
+Of note also; after a discussion with the Sanger Institute it has been decided
+to exclude candidates located on chromosome 6 from being utilised as a
+"Goldilocks region". Chromosome 6 contains a system of genes called the
+Human Leukocyte Antigen (HLA)\footnote{A much younger version of me was introduced to
+    this concept via the partwork \textit{How Your Body Works}\citep{bodyworks},
+    which also distributed English dubs of a 1987 French television show titled
+    \textit{Il était une fois... la vie (Once upon a time...
+Life)\citep{oncelife}} a relevant episode can be viewed here:
+http://www.youtube.com/watch?v=yvhU2UyRv-Q} which encode for Major
+Histocompatibility Complex (MHC)\citep{hla-c6}: a critical component of the
+body's immune system and of particular importance to anyone requiring an organ
+transplant. The HLA can cause difficulties during the variant calling process
+due to the high level of variability expressed between samples in these areas
+and could thus give less accurate results if we were to measure concordance
+using candidates that include these genes.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation}
 
@@ -312,7 +338,7 @@ This section considers the implementation of the major components of
 \begin{itemize}
     \item Handling user defined Paths File
     \item Loading variants from specified Variant Query Files
-    \item Storage of variant groups in memory
+    \item Storage and recall of variant groups in memory
     \item Searching for candidates with user specified length and stride
     \item Ranking suitable candidates based on variant density
 \end{itemize}
@@ -370,7 +396,7 @@ should defining a file group twice merge or override the first
 definition?
 
 
-\subsection{Loading Variants from Input Files}
+\subsection{Loading Variant Query Files}
 %TODO Figure:
 %
 %     groups [ ][ ][ ][ ][ ]...
@@ -581,13 +607,19 @@ be acheived with such a method...
 
 \subsection{Searching for Regions}
 
-..
+\textbf{search\_regions} is responsible for performing the main task of the
+script, walking over the genome and creating objects who represent candidate
+regions. The function is possibly a misnomer as it conducts a candidate census
+rather than a search, indiscriminately adding all valid candidates to the
+\textbf{regions} dictionary.
+
+\textbf{search\_regions} will iterate over each chromosome and load the listed
+variants in each group-chromosome pair from the \textbf{groups} structure into a
+\textbf{NumPy} array whose length is set to the maximum position seen by
+\textbf{load\_variants\_from\_file}, plus one to account for the 1-indexed
+nature of genome positions.
 
 
-\textbf{search\_regions}
-...possibly a misnomer as this is more of a census than a search...
-...responsible for the core objective function as outlined in
-Section~\ref{sec:goldilocks-purpose}...
 ..each region of \textit{length}, starting at \textit{stride} is checked for the
 number of variants contained therein...
 
