@@ -1006,14 +1006,31 @@ The pipeline can be divided up in to the following analysis steps:
 
 \section{Region Extraction and Indexing}
 \subsection{iRODS}
+%TODO Worth mentioning having to match the sample IDs?
 
-The \textbf{Integrated Rule-Oriented Data System} (iRODS)...
-...in place at the
-Sanger Institute\citep{irods-sanger}
+Now the Goldilocks region has been found, it must be extracted for each
+\textbf{GWAS} sample in our study. The Sanger Institute currently stores the
+electronic samples in the \textbf{BAM} format at one of their in-house data
+centres, storage and retrieval is managed by \textbf{iRODS}\citep{irods}: the
+\textit{Integrated Rule-Oriented Data System}.
 
-...match samples to correct ID
-...once I had a user added to the relevant access group... it was possible to 
-...extracted the regions from iRODS
+\textbf{iRODS} is a BSD licensed, C++ based data management application,
+describing itself as "middleware for your critical data"\citep{github:irods}.
+The system was deployed at the institute in 2011 to cope with the data deluge
+brought on by constantly improving next-generation sequencing technologies.
+"[T]raditional data management methods [became] saturated" and other more
+advanced file systems did not provide the desired support for customised metadata
+such as project information or sequencing specific fields like sample and
+lanelet ID to be automatically added to files\citep{irods-sanger} which
+\textbf{iRODS} does support, along with improved data replication and access
+control policy management.
+
+Once I had been added to the relevant access group, it was possible to extract
+the regions from \textbf{iRODS} via
+\textbf{samtools\_irods}\citep{github:samtools-irods} which provides wrappers
+around both \textbf{samtools} and \textbf{iRODS} functionality to allow
+\textbf{samtools} commands to directly support interaction with samples stored
+in \textbf{iRODS}.
 
 \begin{listing}[H]
     \caption[bamext]{\textbf{BAM Extraction}: Retrieve Goldilocks region for

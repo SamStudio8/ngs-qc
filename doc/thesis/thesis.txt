@@ -2607,14 +2607,23 @@ Region Extraction and Indexing
 
 iRODS
 
-The Integrated Rule-Oriented Data System (iRODS)... ...in place at the Sanger Institute[44]
-...match samples to correct ID ...once I had a user added to the relevant access group... it was possible to
-...extracted the regions from iRODS
+Now the Goldilocks region has been found, it must be extracted for each GWAS sample in our study. The
+Sanger Institute currently stores the electronic samples in the BAM format at one of their in-house data centres,
+storage and retrieval is managed by iRODS[44]: the Integrated Rule-Oriented Data System.
 
 53
 
 11.4 Pileup
-
+iRODS is a BSD licensed, C++ based data management application, describing itself as "middleware for
+your critical data"[45]. The system was deployed at the institute in 2011 to cope with the data deluge
+brought on by constantly improving next-generation sequencing technologies. "[T]raditional data management
+methods [became] saturated" and other more advanced file systems did not provide the desired support for
+customised metadata such as project information or sequencing specific fields like sample and lanelet ID to be
+automatically added to files[46] which iRODS does support, along with improved data replication and access
+control policy management.
+Once I had been added to the relevant access group, it was possible to extract the regions from iRODS
+via samtools_irods[47] which provides wrappers around both samtools and iRODS functionality to allow
+samtools commands to directly support interaction with samples stored in iRODS.
 samtools_irods view -bh irods:\${file} 3:46000001-47000000
 > \$(basename \${file}).goldilocks.bam
 Listing 12 BAM Extraction: Retrieve Goldilocks region for a particular sample ($file) from iRODS.
@@ -2631,7 +2640,7 @@ not available. The process itself requires little resources in terms of time and
 improve the efficiency of later commands which are capable of reading and using the index.
 Both the commands in Listing 12 and 13 can be executed in parallel for extracting and indexing many samples.
 samtools index \$(basename \${file}).goldilocks.bam
-Listing 13 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[45]
+Listing 13 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[48]
 
 11.4
 
@@ -2645,6 +2654,11 @@ Following extraction and indexing of the Goldilocks region for each whole-genome
 study, the next step is to "pileup" the samples, a process which stacks the bases seen at each variant location
 from all the indexed samples up in a structure before calculating the statistical likelihood of those bases actually
 appearing in each sample given the data overall.
+
+54
+
+11.5 Merge
+
 bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o
 -e ~/goldilocks/joblog/samtools_mpileup.%J.e
 -G hgi -J "samtools_mpileup"
@@ -2652,12 +2666,9 @@ bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o
 bash -c ’samtools mpileup -b ../goldilocks-3:46000001-47000000.fofn -g -I -f
 /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa
 > ~/goldilocks/all.withref.bcf’
-Listing 14 Pileup: Submission of samtools mpileup[46] task to LSF for execution on the Farm. Note the
+Listing 14 Pileup: Submission of samtools mpileup[49] task to LSF for execution on the Farm. Note the
 request to increase the memory allocation and how the pileup command is passed as a string to bash -c.
 
-54
-
-11.5 Merge
 However, performing a pileup is a rather intensive process, with initial test runs requiring 6.5 hours of
 CPU time, with an average memory usage of 905.85MB (920MB max), outputting a 13GB BCF file. In a
 scenario such as ours where there are thousands of input files, one for each of the extracted regions, we place
@@ -2687,6 +2698,10 @@ forceably terminate the process for exceeding the maximum allocated memory limit
 Assuming that the intermediate structures for storing and sorting the input data must have been greater than
 expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 11 only
 to meet the same fate, even when reserving 16GB of memory...
+
+55
+
+11.5 Merge
 This is an absurd amount of memory even considering the vast input... It appeared a memory leak had been
 discovered... that drastically increases in severity as more files are provided as input,
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
@@ -2697,10 +2712,6 @@ Memory Leak in Test Harnesses
 ...getline ...regcomp...
 ...other memory leaks still remained in the tests and wanting to brush up on finding memory leaks with
 valgrind, I volunteered to locate and patch these...
-55
-
-11.5 Merge
-
 ==30464== 416 bytes in 1 blocks are indirectly lost in loss record 85 of 103
 ==30464==
 at 0x4A082F7: realloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
@@ -2743,6 +2754,9 @@ callgrind is a profiling tool that keeps track of a program’s call stack histo
 development environments such as QtCreator.
 Having constructed a modest test set of files to merge, I called samtools merge from the command line,
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
+56
+
+11.5 Merge
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
 library.
@@ -2751,9 +2765,6 @@ line called not during the process of deflating the input files (as I had expect
 compression of the output!
 
 Fig. 11.1 callgrind output following merge with default output compression
-56
-
-11.5 Merge
 
 Fig. 11.2 callgrind output following merge with uncompressed output
 Looking at a brief explanation of the deflate algorithm, it seems reasonable to conclude the computational
@@ -2776,6 +2787,9 @@ function.
 uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
+57
+
+11.6 Calling
 int y = tag[0]<<8 | tag[1];
 s = bam_get_aux(b);
 while (s < b->data + b->l_data) {
@@ -2787,10 +2801,6 @@ s = skip_aux(s);
 return 0;
 }
 At a glance it seems that bam_aux_get receives a pointer to a BAM record and a “tag”, an array of two
-
-57
-
-11.6 Calling
 characters representing an optional field as defined in Section 1.5 of the SAM file spec.
 The function then appears to fetch all these auxiliary tags and iterates over each, comparing a transformation
 of that tag (x) to a pre-computed transformation on the input tag (y).
@@ -2816,20 +2826,9 @@ The genotype likelihoods calculated by samtools mpileup in the previous step of 
 probability distribution of the bases seen across all piledup samples at a particular location (site). This allows
 variant calling algorithms to make an informed decision as to whether particular sites actually contain a SNP
 or if a differing base is statistically unlikely to be a real variant3 with the current data.
-bcftools call[50][51] is the successor to the ’consensus’ variant caller included with the samtools package and
-utilises htslib for improved file handling efficiency with common genomic data formats.
-Unfortunately during the initial testing of this step, using a pileup of all the Goldilocks regions, the output
-contained only the standard header information generated by bcftools and not a single record detailing a
-called variant. I discovered this was due to the samtools mpileup job being completed without including a
-reference sequence, causing the REF (reference) column of the resulting BCF file to be populated with ’N’:
-an ambiguity code which translates to ’any base’[52][53].
-bcftools call does provide the –M flag for this scenario, where the reference is described as a "masked
-reference". However attempting to repeat calling with the flag set merely caused the command to produce
-a segmentation fault instead of an empty output file. This appeared to be due to a compatibility issue between
-the versions of htslib and bcftools I was using on the Farm.
-1 Our analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[47]. hs37d5 extends the b37
+1 Our analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[50]. hs37d5 extends the b37
 genomic reference with "decoy sequences" that are designed to reduce false positives (incorrectly mapping to poorly referenced areas
-around centromeres for example[48]), optimising it for variant calling[49].
+around centromeres for example[51]), optimising it for variant calling[52].
 2 Technically to be confident you have an actual SNP as opposed to a variant (or incorrect read!), you’ll need to see whether such
 variation occurs through a population of different samples rather than just one.
 3 Although it could also be a very low frequency variant...
@@ -2837,6 +2836,17 @@ variation occurs through a population of different samples rather than just one.
 58
 
 11.7 Measuring Concordance
+bcftools call[53][54] is the successor to the ’consensus’ variant caller included with the samtools package and
+utilises htslib for improved file handling efficiency with common genomic data formats.
+Unfortunately during the initial testing of this step, using a pileup of all the Goldilocks regions, the output
+contained only the standard header information generated by bcftools and not a single record detailing a
+called variant. I discovered this was due to the samtools mpileup job being completed without including a
+reference sequence, causing the REF (reference) column of the resulting BCF file to be populated with ’N’:
+an ambiguity code which translates to ’any base’[55][56].
+bcftools call does provide the –M flag for this scenario, where the reference is described as a "masked
+reference". However attempting to repeat calling with the flag set merely caused the command to produce
+a segmentation fault instead of an empty output file. This appeared to be due to a compatibility issue between
+the versions of htslib and bcftools I was using on the Farm.
 Finally this initial test of the calling component of our pipeline was able to be completed in 66 minutes with
 an average memory usage of 11.97MB, resulting in a 114MB compressed VCF file.
 A similar compressed VCF file will be output from each iteration of the leave-one-out analysis, generating
@@ -2863,10 +2873,9 @@ the difficulties encountered in assembling the pipeline (particularly with samto
 to adequately test the pipeline and thus the concordance script with the time that we had. Considering this and
 for the sake of brevity, discussion on the design and implementation is considered outside the scope of this
 write-up.
-Another option for this component was SnpSift Concordance[54], a Java based package which can also
+Another option for this component was SnpSift Concordance[57], a Java based package which can also
 calculate concordances between two VCF files. However I was concerned with the possible performance of
 using Java to process thousands of concordances.
-
 59
 
 Part III
@@ -2891,13 +2900,13 @@ of having to switch to a more analysis focused language such as R.
 was designed to complement the machine learning experiments and provides
 ...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
 their own data regardless of how esoteric or cryptic the file format is...
-Whilst a 2003 paper[55]1 that analysed the spread of SNPs across the human genome to assert whether variants
+Whilst a 2003 paper[58]1 that analysed the spread of SNPs across the human genome to assert whether variants
 could be modelled with a statistical distribution, divided chromosomes in to equally sized bins (a concept akin
 to candidates of uniform length)
 
 1 Titled
 
-An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[55]
+An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[58]
 
 62
 
@@ -3064,21 +3073,50 @@ Programming. Springer, 2012, pp. 104–131.
 [Online]. Available:
 https://docs.python.org/2/
 tutorial/datastructures.html#more-on-lists
+[35] ——. Dictionaries. [Online]. Available: https://docs.
+python.org/2/tutorial/datastructures.html#dictionaries
+[36] Python
+Wiki.
+(2012)
+Time
+Complexity.
+[Online]. Available: https://wiki.python.org/moin/
+TimeComplexity
+[37] Python Software Foundation. Sets. [Online].
+Available:
+https://docs.python.org/2/tutorial/
+datastructures.html#sets
+[38] W. B. Van Rossum, Guido and N. Coghlan,
+“PEP 8 – Style Guide for Python Code,” Python
+Enhancement Proposals, 2001. [Online]. Available:
+http://legacy.python.org/dev/peps/pep-0008/
 
-[44] G.-T. Chiang, P. Clapham, G. Qi, K. Sale,
+[44] iRODS Consortium. iRODS:
+Available: http://irods.org/about/
+
+About.
+
+[Online].
+
+[45] irods: Middleware for your critical data [Github].
+[46] G.-T. Chiang, P. Clapham, G. Qi, K. Sale,
 and G. Coates, “Implementing a genomic data
 management system using iRODS in the Wellcome
 Trust Sanger Institute,” BMC Bioinformatics,
 vol. 12, no. 1, p. 361, 2011. [Online]. Available:
 http://www.biomedcentral.com/1471-2105/12/361
-[45] Manual Reference Pages - samtools (1): Samtools
+[47] K. Lewis. samtools_irods [Github]. WTSI. [Online].
+Available:
+https://github.com/wtsi-npg/samtools_
+irods
+[48] Manual Reference Pages - samtools (1): Samtools
 Commands And Options, SAM tools Project. [Online].
 Available: http://samtools.sourceforge.net/samtools.
 shtml#3
-[46] Calling SNPs/INDELs with SAMtools/BCFtools.
+[49] Calling SNPs/INDELs with SAMtools/BCFtools.
 SAM tools Project. [Online]. Available: http:
 //samtools.sourceforge.net/mpileup.shtml
-[47] 1000
+[50] 1000
 Genomes.
 1000
 Genomes
@@ -3086,10 +3124,10 @@ FAQ:
 Which reference assembly do you use?
 [Online]. Available: http://www.1000genomes.org/
 faq/which-reference-assembly-do-you-use
-[48] zam.iqbal.genome (https://www.biostars.org/u/5152/).
+[51] zam.iqbal.genome (https://www.biostars.org/u/5152/).
 (2013) Decoy In Reference Assembly. [Online].
 Available: https://www.biostars.org/p/73100/#73120
-[49] Heng
+[52] Heng
 Li.
 (2011)
 The
@@ -3099,72 +3137,47 @@ sequences (version 5). [Online]. Available:
 ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/
 reference/phase2_reference_assembly_sequence/
 hs37d5.slides.pdf
-
-[35] ——. Dictionaries. [Online]. Available: https://docs.
-python.org/2/tutorial/datastructures.html#dictionaries
-
-[50] The bcftools/htslib VCF commands:
+[53] The bcftools/htslib VCF commands:
 bcftools
 call, VCFTools Project. [Online]. Available:
 http://vcftools.sourceforge.net/htslib.html#call
-
-[36] Python
-Wiki.
-(2012)
-Time
-Complexity.
-[Online]. Available: https://wiki.python.org/moin/
-TimeComplexity
-
-[51] bcftools call, Genome Research Ltd. [Online].
+[54] bcftools call, Genome Research Ltd. [Online].
 Available: http://samtools.github.io/bcftools/bcftools.
 html#call
 
-[37] Python Software Foundation. Sets. [Online].
-Available:
-https://docs.python.org/2/tutorial/
-datastructures.html#sets
-
-[52] A. Cornish-Bowden, “Nomenclature for Incompletely
-Specified Bases in Nucleic Acid Sequences:
-Recommendations 1984.” Nucleic Acids Research,
-vol. 13, no. 9, p. 3021, 1985.
-
-[38] W. B. Van Rossum, Guido and N. Coghlan,
-“PEP 8 – Style Guide for Python Code,” Python
-Enhancement Proposals, 2001. [Online]. Available:
-http://legacy.python.org/dev/peps/pep-0008/
-
-[53] C. Liébecq, Biochemical Nomenclature and Related
-Documents. Portland Press, 1992.
-
-[54] Pablo Cingolani, SnpSift Concordance, 2013.
 [39] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
-[Online]. Available: http://snpeff.sourceforge.net/
+[55] A. Cornish-Bowden, “Nomenclature for Incompletely
 “Does
 python
 have
 ’private’
 variables
-SnpSift.html#concordance
+Specified Bases in Nucleic Acid Sequences:
 in
 classes?”
 [Online].
 Available:
+Recommendations 1984.” Nucleic Acids Research,
 http://stackoverflow.com/questions/1641219/
-[55] W. S. Kendal, “An Exponential Dispersion Model
+vol. 13, no. 9, p. 3021, 1985.
 does-python-have-private-variables-in-classes
-for the Distribution of Human Single Nucleotide
-Polymorphisms,” Molecular Biology and Evolution,
+[56] C. Liébecq, Biochemical Nomenclature and Related
 [40] Python Software Foundation. unittest — Unit
-vol. 20, no. 4, pp. 579–590, 2003.
+Documents. Portland Press, 1992.
 testing framework. [Online]. Available:
 https:
+[57] Pablo Cingolani, SnpSift Concordance, 2013.
 //docs.python.org/2/library/unittest.html
+[Online]. Available: http://snpeff.sourceforge.net/
 [41] Orbis Play and Learn, Albert Barillé, “How My Body
+SnpSift.html#concordance
 Works,” 1992–1994.
+[58] W. S. Kendal, “An Exponential Dispersion Model
 [42] Procidis and Albert Barillé, “Once upon a time...
+for the Distribution of Human Single Nucleotide
 Life,” 1987, [Television broadcast].
+Polymorphisms,” Molecular Biology and Evolution,
+vol. 20, no. 4, pp. 579–590, 2003.
 [43] U.S. National Library of Medicine. (2009)
 HLA Gene Family. [Online]. Available: http:
 //ghr.nlm.nih.gov/geneFamily/hla
