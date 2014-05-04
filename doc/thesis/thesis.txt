@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-May 3, 2014
+May 4, 2014
 
 Declaration
 
@@ -450,55 +450,58 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 52
 
-11.1 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
-11.1.1 Region Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
-11.1.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
-11.1.3 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
-11.1.4 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.1.5 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+11.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+11.1.1 Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+11.2 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.1 IRODS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.3 Pileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.3.1 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 
 iv
 
 Contents
+11.3.2 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.3.3 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
 
 III
 
 Discussions and Conclusions
 
-57
+58
 
 12 Current Status
 
-58
+59
 
 13 Critical Evaluation
 
-59
+60
 
 14 Conclusions
 
-60
+61
 
 Appendix A Input Examples
 
-63
+64
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
-A.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+A.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
 Appendix B Output Examples
 
-68
+69
 
-B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
 Appendix C Tool Installation
 
-71
+72
 
-C.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
-C.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
-C.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
-C.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+C.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+C.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+C.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+C.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
 
 v
 
@@ -2502,42 +2505,64 @@ Fig. 10.2 Goldilocks Candidate Plot B: Candidates of one megabase length are arr
 Chapter 11
 
 Analysis Pipeline
-Following the extraction of the Goldilocks region for each of the samples... we need to begin putting together
-the pipeline that would process the work for the leave-one-out analysis...
+Having selected the Goldilocks region (Chromosome 3: 46,000,001—47,000,000) via Goldilocks, we must
+now begin constructing the pipeline that will conduct the leave-one-out analysis over all the GWAS lanelets
+and compare the called variants to the appropriate iCHIP sample.
+This chapter introduces the various components of the pipeline, their purpose and any difficulties encountered.
+
+11.1
+
+Introduction
+
+11.1.1
+
+Summary
+
+The pipeline can be divided up in to the following analysis steps:
+• Goldilocks Extraction
+For every whole-genome lanelet from the GWAS study, extract the Goldilocks region.
+• Goldilocks Indexing
+Create indexes for the extracted Goldilocks regions, improving efficiency for tools which require random
+access to variants inside the region.
+• Pileup
+Calculate genotype likelihoods for called variants across all the extracted Goldilocks regions.
 ...involving generation of indexes for each sample ...execute the pipeline and withold one of the Goldilocks
 samples... ...using samtools to pileup the variants across all the samples (excluding one of course) and then
 performing variant calling... ...must then compare the resulting VCF against the SNP VCF and calculate the
 concordance to discover whether leaving out that particular sample has caused a change in the accuracy of the
 variants called...
-...this chapter introduces the tools used and difficulties encountered...
 
-11.1
+52
 
-Implementation
+11.2 Region Extraction and Indexing
 
-11.1.1
+11.2
 
-Region Extraction
+Region Extraction and Indexing
+
+11.2.1
+
+IRODS
 
 ...regions extracted from IRODS ...difficulty gaining user access for both IRODS and "the farm"
 
-11.1.2
+11.2.2
 
 samtools index
 
 ...index extracted regions
 
-11.1.3
+11.3
+
+Pileup
+
+11.3.1
 
 samtools mpileup
 
 Following extraction of the Goldilocks region for each full-genome sample, the next stage is to use samtools
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
-
-52
-
-11.1 Implementation
 samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
 thousands of input files, one for each of the extracted regions. This not only places considerable strain on
 the cluster’s file system but is incredibly inefficient given the overhead of file handling. As this pipeline will
@@ -2551,13 +2576,16 @@ bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o -e
 /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa >
 ~/goldilocks/all.withref.bcf’
 
-11.1.4
+11.3.2
 
 samtools merge
 
 Usage
 ...undocumented feature to use a file of filenames... allowing more than two files to be specified at a time...
 
+53
+
+11.3 Pileup
 Memory Leak
 By default the LSF scheduler at the Sanger Institute will issue 100MB to any submitted job. Given both the
 number of input files and their total size it was anticipated that this merge job would require more memory. At
@@ -2589,9 +2617,6 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 | Only run on a node with more than 4000mb memory
 Listing 11 : Flags required to raise job memory allocation
 
-53
-
-11.1 Implementation
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
 this, further samtools merge jobs were submitted only to also be repeatedly terminated by the LSF scheduler
 , this time for exceeding the maximum execution time limit for the queue...
@@ -2600,6 +2625,11 @@ Memory Leak in Test Harnesses
 ...getline ...regcomp...
 ...other memory leaks still remained in the tests and wanting to brush up on finding memory leaks with
 valgrind, I volunteered to locate and patch these...
+
+54
+
+11.3 Pileup
+
 ==30464== 416 bytes in 1 blocks are indirectly lost in loss record 85 of 103
 ==30464==
 at 0x4A082F7: realloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
@@ -2643,10 +2673,6 @@ development environments such as QtCreator.
 Having constructed a modest test set of files to merge, I called samtools merge from the command line,
 attaching callgrind and later imported the resulting text file to QtCreator’s profiling tool to interpret the results
 (I usually use KCacheGrind for this but I’ve been investigating QtCreator’s feature set for reasons unrelated
-
-54
-
-11.1 Implementation
 to this project), the result is immediately obvious - millions of calls to functions in zlib; a free compression
 library.
 Further investigations using the QtCreator Analyze interface revealed that these calls all boiled down to one
@@ -2654,6 +2680,9 @@ line called not during the process of deflating the input files (as I had expect
 compression of the output!
 
 Fig. 11.1 callgrind output following merge with default output compression
+55
+
+11.3 Pileup
 
 Fig. 11.2 callgrind output following merge with uncompressed output
 Looking at a brief explanation of the deflate algorithm, it seems reasonable to conclude the computational
@@ -2677,9 +2706,6 @@ uint8_t *bam_aux_get(const bam1_t *b, const char tag[2])
 {
 uint8_t *s;
 int y = tag[0]<<8 | tag[1];
-55
-
-11.1 Implementation
 s = bam_get_aux(b);
 while (s < b->data + b->l_data) {
 int x = (int)s[0]<<8 | s[1];
@@ -2690,6 +2716,10 @@ s = skip_aux(s);
 return 0;
 }
 At a glance it seems that bam_aux_get receives a pointer to a BAM record and a “tag”, an array of two
+
+56
+
+11.3 Pileup
 characters representing an optional field as defined in Section 1.5 of the SAM file spec.
 The function then appears to fetch all these auxiliary tags and iterates over each, comparing a transformation
 of that tag (x) to a pre-computed transformation on the input tag (y).
@@ -2701,7 +2731,7 @@ The Plot Thickens
 Currently my money is on the seemingly inefficient trans_tbl_init that appears to be called for each file, with
 the current table of all previous files as an input...
 
-11.1.5
+11.3.3
 
 bcftools call
 
@@ -2714,19 +2744,19 @@ this is currently causing a segmentation fault. Having recompiled htslib, samtoo
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
-56
+57
 
 Part III
 
 Discussions and Conclusions
 
-57
+58
 
 Chapter 12
 
 Current Status
 
-58
+59
 
 Chapter 13
 
@@ -2746,13 +2776,13 @@ to candidates of uniform length)
 
 An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[44]
 
-59
+60
 
 Chapter 14
 
 Conclusions
 
-60
+61
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -2875,7 +2905,7 @@ parsing library. [Online]. Available:
 https:
 //pypi.python.org/pypi/argparse/1.2.1
 
-61
+62
 
 References
 [27] M. Fowler, “Continuous Integration,” 2006.
@@ -2958,7 +2988,7 @@ Life,” 1987, [Television broadcast].
 HLA Gene Family. [Online]. Available: http:
 //ghr.nlm.nih.gov/geneFamily/hla
 
-62
+63
 
 Appendix A
 
@@ -3082,7 +3112,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-63
+64
 
 A.1 BAMcheckR’d Example Output
 
@@ -3314,7 +3344,7 @@ FFQ
 0
 0
 
-64
+65
 
 1609
 
@@ -3656,7 +3686,7 @@ IS
 2
 0
 
-65
+66
 
 A.1 BAMcheckR’d Example Output
 
@@ -3935,7 +3965,7 @@ GCD
 0.101
 0.101
 
-66
+67
 
 A.2 auto_qc Decision Matrix
 
@@ -4084,7 +4114,7 @@ Goldilocks Paths File
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-67
+68
 
 ...
 ...
@@ -4170,7 +4200,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-68
+69
 
 B.1 Frontier Log Example
 
@@ -4240,7 +4270,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-69
+70
 
 B.1 Frontier Log Example
 
@@ -4266,7 +4296,7 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
-70
+71
 
 Appendix C
 
@@ -4292,7 +4322,7 @@ cd bcftools/
 make #(requires htslib to be above samtools/bcftools dir)
 sudo cp bcftools usr/local/bin
 
-71
+72
 
 C.3 samtools
 
@@ -4327,6 +4357,6 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 
-72
+73
 
 

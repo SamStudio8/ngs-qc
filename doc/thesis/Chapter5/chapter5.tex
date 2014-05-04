@@ -912,13 +912,42 @@ chromosome) against the number of variants contained within that region.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Analysis Pipeline}
-%TODO Explain experiment (reintroduce GWAS and SNP)
+%TODO Have we explained pipeline yet?
 
-Following the extraction of the Goldilocks region for each of the samples... we
-need to begin putting together the pipeline that would process the work for the
-leave-one-out analysis...
+Having selected the Goldilocks region (Chromosome 3: 46,000,001---47,000,000)
+via \textbf{Goldilocks}, we must now begin constructing the pipeline that will
+conduct the leave-one-out analysis over all the \textbf{GWAS} lanelets and
+compare the called variants to the appropriate \textbf{iCHIP} sample.
 
+This chapter introduces the various components of the pipeline, their purpose
+and any difficulties encountered.
+
+\section{Introduction}
+%TODO Concepts: BAM ?
+%TODO Concepts: Genotype Likelihood?
+
+\subsection{Summary}
+%TODO Design section?
 %TODO Flow chart!
+
+The pipeline can be divided up in to the following analysis steps:
+
+%TODO Are we taking these from the lanelets?
+%TODO What file formats?
+% http://biobits.org/samtools_primer.html
+\begin{itemize}
+    \item \textbf{Goldilocks Extraction} \hfill\\
+        For every whole-genome lanelet from the \textbf{GWAS} study, extract the
+        Goldilocks region.
+    \item \textbf{Goldilocks Indexing} \hfill\\
+        %TODO Cite performance improvements, better explanation
+        Create indexes for the extracted Goldilocks regions, improving
+        efficiency for tools which require random access to variants inside the
+        region.
+    \item \textbf{Pileup} \hfill\\
+        Calculate genotype likelihoods for called variants across all the
+        extracted Goldilocks regions.
+\end{itemize}
 
 ...involving generation of indexes for each sample
 ...execute the pipeline and withold one of the Goldilocks samples...
@@ -928,11 +957,11 @@ leave-one-out analysis...
 concordance to discover whether leaving out that particular sample has caused a
 change in the accuracy of the variants called...
 
-...this chapter introduces the tools used and difficulties encountered...
 
 
-\section{Implementation}
-\subsection{Region Extraction}
+\section{Region Extraction and Indexing}
+
+\subsection{IRODS}
 
 ...regions extracted from IRODS
 ...difficulty gaining user access for both IRODS and "the farm"
@@ -944,6 +973,7 @@ change in the accuracy of the variants called...
 ...index extracted regions
 
 
+\section{Pileup}
 \subsection{samtools mpileup}
 %TODO Cite mpileup
 
