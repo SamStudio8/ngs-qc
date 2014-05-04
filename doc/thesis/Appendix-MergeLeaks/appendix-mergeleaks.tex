@@ -2,6 +2,11 @@
 \label{app:merge-leak}
 
 \section{Memory Leak}
+\ifpdf
+    \graphicspath{{Chapter5/Figs/Raster/}{Chapter5/Figs/PDF/}{Chapter5/Figs/}}
+\else
+    \graphicspath{{Chapter5/Figs/Vector/}{Chapter5/Figs/}}
+\fi
 
 By default the \textbf{LSF} job scheduler at the Sanger Institute will issue
 100MB to any submitted job. Given both the number of input files and their total

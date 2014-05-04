@@ -31,82 +31,7 @@ This part of the project can be outlined as follows:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concepts and Terminology}
-\subsection{DNA and Bases}
-
-...DNA is made up of four bases; G, C, T and A...
-
-
-\subsection{Next Generation Sequencing}
-
-...the process of recovering or extracting the sequence of nucleotide bases...
-
-
-\subsection{Variants and SNPs}
-\label{sec:p1-concept:variants}
-
-...for the purpose of this study we are only interested in single nucleotide
-polymorphisms (SNPs) "snips" ...
-
-...their \textit{position} refers to the index of the base of the chromosome in
-which the polymorphism exists...
-...commonly these are 1-indexed (although this is not always the case) and thus
-care must be taken to ensure this is accounted for at any step where positions
-are considered...
-
-...SNPs...
-
-\textbf{variant calling} - the process of identifying bases in a sample that
-differ from the reference genome (this is a little simple as you also need to
-discern as whether the difference is actually a polymorphism or not).
-
-
-
-\subsection{Samples, Lanes and Lanelets}
-\label{chap:samplelanelanelets}
-
-%TODO Draw a vector of the lanelets diagram
-%TODO Illumina DNA Synthesis Image
-A \textbf{sample} is a distinct DNA specimen extracted from a particular person.
-For the purpose of sequencing, samples are pipetted in to a \textit{flowcell}
-such as the one in Figure~\ref{fig:flowcell} -- a glass slide
-containing a series of very thin tubules known as \textbf{lanes}.  It is
-throughout these lanes that the chemical reactions involved in sequencing take place.
-
-\begin{figure}[htbp!]
-    \centering
-    \includegraphics[width=0.4\textwidth]{NHGRI-80102}
-    \caption[flowcell]{An Illumina HiSeq Flowcell\citep{img:flowcell}}
-    \label{fig:flowcell}
-\end{figure}
-
-Once inserted, samples are amplified \textit{in situ}, in the flowcell itself. A
-process in which the genetic material of each sample is caused to multiply in
-magnitude to form a dense cluster of the sample around the original. Millions of
-clusters will be created throughout each lane of the flowcell.
-
-Note that a lane can contain more than one sample and a sample can appear in
-more than one lane; this is known as \textit{sample multiplexing} and helps to
-ensure that the failure of a particular lane does not hinder analysis of a
-sample (as it will still be sequenced as part of another lane).
-
-%TODO Describe lanelet as a Sanger coined term
-
-The more abstract of the definitions, a \textbf{lanelet} is the aggregate read
-of all clusters of a particular sample in a single lane.
-Figure~\ref{fig:lanelets} attempts to highlight examples of a this (circled in
-blue -- not all lanelets are highlighted). For example Lane 5 shows the four
-clusters (in reality there would be millions) of Sample A combine to
-represent a lanelet. A lane will have as many lanelets as it does samples.
-
-%TODO Describe lanelet ID
-
-\begin{figure}[htbp!]
-    \centering
-    \includegraphics[width=0.5\textwidth]{lanelets}
-    \caption[lanelets]{Example of flowcell with some lanelets highlighted}
-    \label{fig:lanelets}
-\end{figure}
-
+See Appendix~\ref{app:concepts-p1}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Materials and Methods}
@@ -190,8 +115,6 @@ appear to offer any significant features that were unavailable elsewhere, whilst
 Java itself has the added constraint of requiring a virtual machine to be
 installed which could be undesirable from a performance or security
 standpoint when the application is deployed to servers at the Sanger Institute.
-
-%...although performance has improved considerably from previous Java versions\citep{Bouckaert}
 
 Difficulty was also encountered finding example implementations for \textbf{WEKA}
 with most documentation and tutorials providing information for performing
@@ -579,9 +502,4 @@ time it would be appealing to explore the idiosyncrasies of each implementation
 entire project of its own.
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Contributions to bamcheckr}
-...R CMD BATCH issue
-...Fixed a graph plotting failure.
 

@@ -81,51 +81,8 @@ variants, or too few: a "Goldilocks genome".
 \section{Concepts and Terminology}
 
 In the search for the aforementioned "Goldilocks genome", we define the
-following terminology:
+terminology found in Appendix~\ref{app:concepts-p2-1}.
 
-\subsection{Group}
-%TODO Reads a bit poorly
-
-Rather than considering the location of all variants in our samples as a whole,
-we may wish to consider how variants are distributed across the two different
-data sets we have, namely the \textbf{GWAS} and \textbf{iCHIP} sets. Thus variants
-will be considered as members of a \textbf{group}. The group may be
-arbitrarily defined but for the purpose of our own analysis the set in which a
-variant appears will be considered as its group.
-
-A particular variant location may appear in more than one group.
-
-
-\subsection{Length and Stride}
-\label{sec:lengthstride}
-
-The \textbf{length} of a region represents the number of bases included in the
-region and the \textbf{stride} refers to the number of bases to be used as an
-offset between the first base of one region and the beginning of the next.
-
-Sensible choices for these parameters will need to be selected after considering
-both time and memory.
-
-
-\subsection{Density}
-
-The \textbf{density} of a region represents the number of variants located
-within that region. \textbf{Density} will be recorded for each \textit{group} of
-variants.
-
-
-\subsection{Candidate Regions}
-
-A \textbf{candidate} is a region of \textit{length} bases whose first base falls
-on a \textit{stride}. A \textbf{candidate} region will contain some count
-(described as the \textit{density}) of variants for each group. In the context
-of this project we consider the number of variant locations that fall within
-this region for both the \textbf{GWAS} and \textbf{iCHIP} data sets.
-
-\textbf{Candidates} must meet all (any any additional) criteria to be considered.
-For example, regions whose first position falls on a base in such a way that the
-chromosome ends before a region of \textit{length} can be constructed will
-violate the size criteria.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -961,48 +918,7 @@ The pipeline can be divided up in to the following analysis steps:
 
 %The first two steps need only be conducted once.
 \section{Concepts and Terminology}
-%TODO Concepts: Genotype Likelihood?
-
-\subsection{htslib}
-...high-throughput sequencing library...
-
-\subsection{samtools}
-\subsection{bcftools}
-...spun off from the \textbf{samtools} repository...
-...now using \textbf{htslib}...
-
-\subsection{SAM and BAM Files}
-
-\subsection{"The Farm"}
-%TODO Cite LSF
-
-...Sanger Institute cluster...
-..."the farm"...
-...jobs submitted and managed through \textbf{LSF}
-
-%TODO Cite internal slides: Introduction to LSF at Sanger
-% Farm Users Intro: Informatics System Group
-\begin{listing}[H]
-    \caption[lsf-memory]{\textbf{LSF Resource Syntax}: \textbf{bsub} flags
-        required to raise memory allocation for a job.}
-    \label{list:lsf-memory}
-    \begin{minted}[%mathescape,
-                %linenos,
-                gobble=8,
-                frame=lines,
-                framesep=2mm]{bash}
-        bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
-        #                 |                |        | Raise maximum job memory to 4000mb
-        #                 |                | Pre-reserve 4000mb for job before execution
-        #                 | Only run on a node with more than 4000mb memory
-    \end{minted}
-\end{listing}
-
-\subsection{GWAS Data Set}
-...the \textbf{GWAS} is made up two studies...
-...one of which used 2x, the other 4x
-...due to time constraints we had to discard the smaller 4x study...
-
+See Appendix~\ref{app:concepts-p2-2}
 
 \section{Region Extraction and Indexing}
 \subsection{Extraction}
