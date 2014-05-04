@@ -2544,14 +2544,25 @@ Region Extraction and Indexing
 
 IRODS
 
-The Integrated Rule-Oriented Data System (iRODS) ...in place at the Sanger Institute[44]
-...regions extracted from IRODS ...difficulty gaining user access for both IRODS and "the farm"
+The Integrated Rule-Oriented Data System (iRODS)... ...in place at the Sanger Institute[44]
+...match samples to correct ID ...once I had a user added to the relevant access group... it was possible to
+...extracted the regions from iRODS
+samtools_irods view -bh irods:\${file} 3:46000001-47000000
+> \$(basename \${file}).goldilocks.bam
+Listing 11 BAM Extraction: Retrieve Goldilocks region for a particular sample ($file) from iRODS.
 
 11.2.2
 
 samtools index
 
-...index extracted regions
+An index file provides a mapping between genomic positions and the compressed blocks of a BAM file that
+contain them, affording programs such as members of the samtools collection efficient access to the relevant
+blocks of a BAM file without conducting costly searches.
+Whilst indexing of BAM files is a somewhat optional step, many tools will emit warnings or errors if one is
+not available. The process itself requires little resources in terms of time and memory and can significantly
+improve the efficiency of later commands which are capable of reading and using the index.
+samtools index \$(basename \${file}).goldilocks.bam
+Listing 12 BAM Indexing: Creation of a BAM Index (BAI) for a given sample ($file).
 
 11.3
 
@@ -2564,19 +2575,12 @@ samtools mpileup
 Following extraction of the Goldilocks region for each full-genome sample, the next stage is to use samtools
 mpileup to ... ...each of the various full genome samples we have for processing. These files are then
 summarised (and likelihoods are calculated) with samtools mpileup...
-samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
-thousands of input files, one for each of the extracted regions. This not only places considerable strain on
-the cluster’s file system but is incredibly inefficient given the overhead of file handling. As this pipeline will
-need to be executed once for each leave-one-out experiment, it would be required to reduce the strain on the
-file server before the job could be submitted. Usefully another member of the samtools collection provides
-functionality to merge a list of given input files such as those extracted Goldilocks regions.
 bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o -e
 ~/goldilocks/joblog/samtools_mpileup.%J.e -G hgi -J "samtools_mpileup"
 -M1000 -R "select[mem>1000] rusage[mem=1000]" bash -c ’samtools mpileup -b
 ../goldilocks-3:46000001-47000000.fofn -g -I -f
 /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa >
 ~/goldilocks/all.withref.bcf’
-
 53
 
 11.4 Merge
@@ -2589,6 +2593,13 @@ Merge
 
 samtools merge
 
+samtools mpileup is a rather intensive process especially when in a scenario such as ours where there are
+thousands of input files, one for each of the extracted regions. This not only places considerable strain on
+the cluster’s file system but is incredibly inefficient given the overhead of file handling. As this pipeline will
+need to be executed once for each leave-one-out experiment, it would be required to reduce the strain on the
+file server before the job could be submitted. Usefully another member of the samtools collection provides
+functionality to merge a list of given input files such as those extracted Goldilocks regions.
+
 Usage
 ...undocumented feature to use a file of filenames... allowing more than two files to be specified at a time...
 
@@ -2599,7 +2610,7 @@ the very least an estimated 35kB for a 64-bit pointer to each input file and app
 32kB buffer to read data from each file also. Yet executing the job with 500MB caused the LSF scheduler to
 forceably terminate the process for exceeding the maximum allocated memory limit.
 Assuming that the intermediate structures for storing and sorting the input data must have been greater than
-expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 11 only
+expected, the job’s memory limit was generously increased with the syntax demonstrated by Listing 13 only
 to meet the same fate, even when reserving 16GB of memory...
 This is an absurd amount of memory even considering the vast input... It appeared a memory leak had been
 discovered... that drastically increases in severity as more files are provided as input,
@@ -2621,21 +2632,19 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 #
 
 | Only run on a node with more than 4000mb memory
-Listing 11 : Flags required to raise job memory allocation
+Listing 13 : Flags required to raise job memory allocation
 
 ...initial memory leak fixed by the author, several large variables not being freed from memory... ...following
 this, further samtools merge jobs were submitted only to also be repeatedly terminated by the LSF scheduler
 , this time for exceeding the maximum execution time limit for the queue...
 
+54
+
+11.4 Merge
 Memory Leak in Test Harnesses
 ...getline ...regcomp...
 ...other memory leaks still remained in the tests and wanting to brush up on finding memory leaks with
 valgrind, I volunteered to locate and patch these...
-
-54
-
-11.4 Merge
-
 ==30464== 416 bytes in 1 blocks are indirectly lost in loss record 85 of 103
 ==30464==
 at 0x4A082F7: realloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
@@ -2664,7 +2673,7 @@ by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
 ==30464==
 by 0x402CC4: main (test_trans_tbl_init.c:348)
 
-Listing 12 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
+Listing 14 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
 failure to release memory allocated to a compiled regular expression
 
 Poor Time Performance
@@ -2684,11 +2693,11 @@ library.
 Further investigations using the QtCreator Analyze interface revealed that these calls all boiled down to one
 line called not during the process of deflating the input files (as I had expected) but actually during the
 compression of the output!
-
-Fig. 11.1 callgrind output following merge with default output compression
 55
 
 11.4 Merge
+
+Fig. 11.1 callgrind output following merge with default output compression
 
 Fig. 11.2 callgrind output following merge with uncompressed output
 Looking at a brief explanation of the deflate algorithm, it seems reasonable to conclude the computational
@@ -2717,15 +2726,15 @@ while (s < b->data + b->l_data) {
 int x = (int)s[0]<<8 | s[1];
 s += 2;
 if (x == y) return s;
+
+56
+
+11.5 Calling
 s = skip_aux(s);
 }
 return 0;
 }
 At a glance it seems that bam_aux_get receives a pointer to a BAM record and a “tag”, an array of two
-
-56
-
-11.5 Calling
 characters representing an optional field as defined in Section 1.5 of the SAM file spec.
 The function then appears to fetch all these auxiliary tags and iterates over each, comparing a transformation
 of that tag (x) to a pre-computed transformation on the input tag (y).

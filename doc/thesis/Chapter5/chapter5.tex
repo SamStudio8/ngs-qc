@@ -964,20 +964,62 @@ The pipeline can be divided up in to the following analysis steps:
 %The first two steps need only be conducted once.
 
 \section{Region Extraction and Indexing}
-
 \subsection{IRODS}
 
-The \textbf{Integrated Rule-Oriented Data System} (iRODS) ...in place at the
+The \textbf{Integrated Rule-Oriented Data System} (iRODS)...
+...in place at the
 Sanger Institute\citep{irods-sanger}
 
-...regions extracted from IRODS
-...difficulty gaining user access for both IRODS and "the farm"
+...match samples to correct ID
+...once I had a user added to the relevant access group... it was possible to 
+...extracted the regions from iRODS
+
+\begin{listing}[H]
+    \caption[bamext]{\textbf{BAM Extraction}: Retrieve Goldilocks region for
+        a particular sample (\$file) from \textbf{iRODS}.}
+    \label{list:bamext}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+        samtools_irods view -bh irods:\${file} 3:46000001-47000000
+            > \$(basename \${file}).goldilocks.bam
+    \end{minted}
+\end{listing}
 
 
 \subsection{samtools index}
-%TODO Cite index
+%TODO Cite samtools index
+%TODO Generating index is the "standard way" of checking integrity (Josh)
 
-...index extracted regions
+An index file provides a mapping between genomic positions and the compressed
+blocks of a \textbf{BAM} file that contain them, affording programs such as
+members of the \textbf{samtools} collection efficient access to the relevant
+blocks of a \textbf{BAM} file without conducting costly searches.
+
+%TODO Pretty sure indexing is quick, right? (maybe only for megabase regions?)
+Whilst indexing of \textbf{BAM} files is a somewhat optional step, many tools
+will emit warnings or errors if one is not available. The process itself
+requires little resources in terms of time and memory and can significantly
+improve the efficiency of later commands which are capable of reading and using
+the index.
+
+\begin{listing}[H]
+    \caption[bamindex]{\textbf{BAM Indexing}: Creation of a \textbf{BAM Index} (BAI)
+        for a given sample (\$file).}
+    \label{list:bamindex}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+        samtools index \$(basename \${file}).goldilocks.bam
+    \end{minted}
+\end{listing}
+
 
 
 \section{Pileup}
@@ -989,16 +1031,6 @@ next stage is to use \textbf{samtools mpileup} to ...
 ...each of the various full genome samples we have for processing.  These files
 are then summarised (and likelihoods are calculated) with samtools mpileup...
 
-%TODO merge a list of what? Guess we've introduced BAM/VCF by now?
-\textbf{samtools mpileup} is a rather intensive process especially when in a
-scenario such as ours where there are thousands of input files, one for each of
-the extracted regions. This not only places considerable strain on the cluster's
-file system but is incredibly inefficient given the overhead of file handling.
-As this pipeline will need to be executed once for each leave-one-out
-experiment, it would be required to reduce the strain on the file server before
-the job could be submitted. Usefully another member of the \textbf{samtools}
-collection provides functionality to merge a list of given input files such as
-those extracted Goldilocks regions.
 
 % Needed -q long to submit to 48 hour queue instead of 12
 \begin{minted}{bash}
@@ -1012,7 +1044,18 @@ those extracted Goldilocks regions.
 
 
 \section{Merge}
+
 \subsection{samtools merge}
+%TODO merge a list of what? Guess we've introduced BAM/VCF by now?
+\textbf{samtools mpileup} is a rather intensive process especially when in a
+scenario such as ours where there are thousands of input files, one for each of
+the extracted regions. This not only places considerable strain on the cluster's
+file system but is incredibly inefficient given the overhead of file handling.
+As this pipeline will need to be executed once for each leave-one-out
+experiment, it would be required to reduce the strain on the file server before
+the job could be submitted. Usefully another member of the \textbf{samtools}
+collection provides functionality to merge a list of given input files such as
+those extracted Goldilocks regions.
 
 \subsubsection{Usage}
 ...undocumented feature to use a file of filenames... allowing more than two
