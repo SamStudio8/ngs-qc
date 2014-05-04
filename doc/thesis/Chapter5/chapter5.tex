@@ -1379,15 +1379,27 @@ in Section~\ref{sec:vqf} and should be provided to \textbf{bcftools call}'s
 \texttt{--T} (\texttt{----targets-file}) option.
 
 
-
-
 \section{Measuring Concordance}
 
-The terminal step of the Goldilocks pipeline consists of measuring the
-difference between the results of the pipleline and the \textbf{iCHIP} study.
+The terminal step of the Goldilocks pipeline consists of analysing the
+differences between variants called from the left-one-out \textbf{GWAS} data and
+the \textbf{iCHIP} study. The two data sets will form matched pairs where an
+individual's DNA has been sequenced and processed by our pipeline (possibly with
+one of that sample's lanelets ignored) and alternatively via SNP genotyping.
+The pipeline will measure the concordance between the variants called for each
+individual, this measure will then be used to determine the effect of the
+lanelet that was ignored on that run.
 
-...constructed another Python script...
+For this step I retrofitted a Python script I had authored earlier to sanity
+check the bases seen at the known variant sites were sensible (\textit{i.e.}
+they agreed on the same genotype -- the same sets of bases appeared).  Due to
+the difficulties encountered in assembling the pipeline (particularly with
+\textbf{samtools merge}), it was not possible to adequately test the pipeline
+and thus the concordance script. Considering this and for the sake of brevity,
+discussion on the design and implementation is considered outside the scope of
+this write-up.
+
+\textbf{SnpSift Concordance}\citep{snpeff-concordance}
+
 ...also could have used SNPConcordance Java lib...
 
-...however as it was not possible to reach this stage, discussion on this is
-considered outside the scope of this write-up...

@@ -2851,11 +2851,19 @@ Section 8.1.2 and should be provided to bcftools call’s –T (––targets-fi
 
 Measuring Concordance
 
-The terminal step of the Goldilocks pipeline consists of measuring the difference between the results of the
-pipleline and the iCHIP study.
-...constructed another Python script... ...also could have used SNPConcordance Java lib...
-...however as it was not possible to reach this stage, discussion on this is considered outside the scope of this
-write-up...
+The terminal step of the Goldilocks pipeline consists of analysing the differences between variants called
+from the left-one-out GWAS data and the iCHIP study. The two data sets will form matched pairs where
+an individual’s DNA has been sequenced and processed by our pipeline (possibly with one of that sample’s
+lanelets ignored) and alternatively via SNP genotyping. The pipeline will measure the concordance between
+the variants called for each individual, this measure will then be used to determine the effect of the lanelet that
+was ignored on that run.
+For this step I retrofitted a Python script I had authored earlier to sanity check the bases seen at the known
+variant sites were sensible (i.e. they agreed on the same genotype – the same sets of bases appeared). Due to
+the difficulties encountered in assembling the pipeline (particularly with samtools merge), it was not possible
+to adequately test the pipeline and thus the concordance script. Considering this and for the sake of brevity,
+discussion on the design and implementation is considered outside the scope of this write-up.
+SnpSift Concordance[54]
+...also could have used SNPConcordance Java lib...
 
 59
 
@@ -2881,13 +2889,13 @@ of having to switch to a more analysis focused language such as R.
 was designed to complement the machine learning experiments and provides
 ...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
 their own data regardless of how esoteric or cryptic the file format is...
-Whilst a 2003 paper[54]1 that analysed the spread of SNPs across the human genome to assert whether variants
+Whilst a 2003 paper[55]1 that analysed the spread of SNPs across the human genome to assert whether variants
 could be modelled with a statistical distribution, divided chromosomes in to equally sized bins (a concept akin
 to candidates of uniform length)
 
 1 Titled
 
-An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[54]
+An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[55]
 
 62
 
@@ -3128,23 +3136,26 @@ http://legacy.python.org/dev/peps/pep-0008/
 [53] C. Liébecq, Biochemical Nomenclature and Related
 Documents. Portland Press, 1992.
 
-[54] W. S. Kendal, “An Exponential Dispersion Model
+[54] Pablo Cingolani, SnpSift Concordance, 2013.
 [39] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
-for the Distribution of Human Single Nucleotide
+[Online]. Available: http://snpeff.sourceforge.net/
 “Does
 python
 have
 ’private’
 variables
-Polymorphisms,” Molecular Biology and Evolution,
+SnpSift.html#concordance
 in
 classes?”
 [Online].
 Available:
-vol. 20, no. 4, pp. 579–590, 2003.
 http://stackoverflow.com/questions/1641219/
+[55] W. S. Kendal, “An Exponential Dispersion Model
 does-python-have-private-variables-in-classes
+for the Distribution of Human Single Nucleotide
+Polymorphisms,” Molecular Biology and Evolution,
 [40] Python Software Foundation. unittest — Unit
+vol. 20, no. 4, pp. 579–590, 2003.
 testing framework. [Online]. Available:
 https:
 //docs.python.org/2/library/unittest.html
