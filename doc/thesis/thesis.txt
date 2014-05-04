@@ -366,124 +366,120 @@ Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 9.2.1
 
-Input Sanity...? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Parsing Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 9.2.2
 
-Parsing Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Loading Variant Query Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 9.2.3
 
-Loading Variant Query Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Storage and Recall of Variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
 9.2.4
 
-Storage and Recall of Variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Searching for Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
 9.2.5
 
-Searching for Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Filtering and Ranking Candidates for Selection . . . . . . . . . . . . . . . . . . . . . 39
 
-9.2.6
-
-Filtering and Ranking Candidates for Selection . . . . . . . . . . . . . . . . . . . . . 41
-
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 10 Results
 
-44
+41
 
 11 Analysis Pipeline
 
-47
+44
 
-11.1 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
-11.2 Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
-11.3 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
-11.3.1 Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
-11.3.2 Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
-11.4 Pileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
-11.5 Merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
-11.6 Calling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-11.7 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+11.1 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+11.2 Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+11.3 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+11.3.1 Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+11.3.2 Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+11.4 Pileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+11.5 Merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+11.6 Calling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+11.7 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
 
 III
 
 Discussions and Conclusions
 
-52
+49
 
 12 Current Status
 
-53
+50
 
 13 Critical Evaluation
 
-54
+51
 
 14 Conclusions
 
-55
+52
 
 Appendix A Concept Glossary
 
-58
+55
 
-A.1 Part I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.1.1 Bases, DNA and Variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.1.2 Next Generation Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.1.3 Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+A.1 Part I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+A.1.1 Bases, DNA and Variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+A.1.2 Next Generation Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+A.1.3 Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+A.1.4 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
 iv
 
 Contents
-A.1.4 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.1.5 Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
-A.1.6 Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
-A.1.7 Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
-A.1.8 Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
-A.1.9 Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
-A.2 Part II: Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
-A.2.1 Group . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
-A.2.2 Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
-A.2.3 Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-A.2.4 Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-A.3 Part II: Pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-A.3.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-A.3.2 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-A.3.3 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-A.3.4 SAM and BAM Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-A.3.5 "The Farm" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-A.3.6 GWAS Data Set . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+A.1.5 Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+A.1.6 Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+A.1.7 Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+A.1.8 Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+A.1.9 Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+A.2 Part II: Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+A.2.1 Group . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+A.2.2 Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+A.2.3 Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+A.2.4 Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+A.3 Part II: Pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+A.3.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+A.3.2 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+A.3.3 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+A.3.4 SAM and BAM Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+A.3.5 "The Farm" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+A.3.6 GWAS Data Set . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
 Appendix B Input Examples
 
-64
+61
 
-B.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
-B.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
-B.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+B.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
+B.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+B.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
 Appendix C Output Examples
+
+66
+
+C.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+Appendix D Tool Installation
 
 69
 
-C.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
-Appendix D Tool Installation
-
-72
-
-D.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
-D.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
-D.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
-D.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+D.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+D.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+D.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+D.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
 Appendix E Scaling Difficulties with samtools merge
 
-74
+71
 
-E.1 Memory Leak . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
-E.2 Memory Leak in Test Harnesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
-E.3 Poor Time Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
-E.4 The Red Herring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
-E.5 The Plot Thickens . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+E.1 Memory Leak . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+E.2 Memory Leak in Test Harnesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+E.3 Poor Time Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+E.4 The Red Herring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+E.5 The Plot Thickens . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
 
 v
 
@@ -1053,10 +1049,9 @@ Frontier’s functionality in order to interact with scikit-learn to conduct ana
 
 Method
 
-.. the result of abstracting code and tools created during the use of scikit-learn for analysis of the current
-auto_qc system .. initially hard-coded to suit the specific needs of the project but followed an evolutionary
-design process...
-designed specifically for the given learning problem, with hard coded classes and encodings...
+Frontier was the result of abstracting code and tools created during the use of scikit-learn for analysis of the
+current auto_qc system. Whilst scripts were initially hard-coded to suit the specific needs of the project – with
+hard coded classes and encodings – Frontier followed an evolutionary design process.
 
 5.2
 
@@ -1084,13 +1079,12 @@ Frontier was designed to support classification machine learning problems, to ad
 the package must be aware of each of the possible classes in the problem space. Early versions of Frontier
 were specifically designed for training and testing data from auto_qc and could only support encoding and
 decoding of the pass, fail and warn classes.
-
-18
-
-5.3 Implementation
 However this implementation was clearly esoteric and held little to no further use outside the domain of the
 project’s learning task. What would happen if a class label were to be added or removed in future? Most likely
 many lines of code would need to be re-written to handle such cases; the package was inflexible.
+18
+
+5.3 Implementation
 To counter this, Frontier was refactored to remove hard coded label definitions enabling its use as a more
 general purpose tool where users can specify the domain’s classes and their associated labels and encodings.
 Listing 2 shows the definitions used by Front to work with the auto_qc data.
@@ -1125,12 +1119,12 @@ The number of observations with this label, typically used when calculating weig
 proportions of class sizes and outputting logging information – A user should not set this manually
 This simple structure allows Frontier to be compatible with almost any classification learning task with
 minimum input from the end user. Additional utilities provided by the Frontier utils subpackage use this
-19
-
-5.3 Implementation
 structure to automatically classify and encode labels without user intervention with the following functions:
 • classify_label
 Attempt to classify a label by comparing a given string to each set of names, locating an exact match
+19
+
+5.3 Implementation
 will return the relevant canonical class label
 • encode_class
 Given a canonical class label, return its code
@@ -1167,6 +1161,7 @@ The AbstractReader class is designed to simplify the process of reading in obser
 end users, however it is still up to the author of the dervied class to set up any structures to store data (which
 cannot be done automatically without likely enforcing potentially unhelpful constraints) before initialisation
 of the inherited base class (via the call to super) as shown in Listing 3.
+
 20
 
 5.3 Implementation
@@ -1745,15 +1740,6 @@ viewed here: http://www.youtube.com/watch?v=yvhU2UyRv-Q
 
 9.2.1
 
-Input Sanity...?
-
-Having recovered from the miscommunication that led me to attempt to find reverse strands in VCF files with
-already known errors, I’ve been making performance improvements to the script that finds candidate genomic
-regions. The task poses an interesting problem in terms of complexity and memory, as the human genome is
-over three billion bases long in total which can easily lead to data handling impracticalities.
-
-9.2.2
-
 Parsing Paths File
 
 Goldilocks requires the user provide their own valid Paths File, meeting the specification introduced in
@@ -1780,11 +1766,7 @@ A Paths File which violates the specification will raise an exception during exe
 the end user of their error. This was decided to ensure ambiguous input did not cause confusion later, for
 example should defining a file group twice merge or override the first definition?
 
-37
-
-9.2 Implementation
-
-9.2.3
+9.2.2
 
 Loading Variant Query Files
 
@@ -1796,6 +1778,9 @@ proportionally for the size of the list). However as examined in Section A.1.9, 
 of items to a list will likely induce costly memory operations as the list is resized. Thus use of a set might
 have been more appropriate (especially considering the container forbids duplicate entries) but a set must be
 constructed from an existing iterable such as a list anyway!
+37
+
+9.2 Implementation
 Indeed the container does specify an update function but this could in itself be a source of overhead as the
 structure ensures that the no duplicate condition has not been violated on every call. Given more time it would
 be interesting to compare performance differences between container implementations.
@@ -1805,112 +1790,13 @@ are not constructed beyond where the last variant on a chromosome lies (as by de
 and searching over them would waste resources) and secondly to normalize the candidate regions across all
 groups to allow for easy comparison between them.
 
-9.2.4
+9.2.3
 
 Storage and Recall of Variants
 
-As I discussed previously, on the hunt for my Goldilocks genomic region, it is important to consider both time
-and memory as it is simple to deliver a poor performing solution.
-Searching for candidates regions over the entire genome at once is probably unwise. Luckily, since our
-candidate must not span chromosomes (telomeres – the ends of chromosomes are not very good for reads)
-then we can easily yield a great improvement from processing chromosomes individually.
-The process is to extract the locations of all the variants across the genome from the SNP chip VCF files (these
-files list the alleles for each detected variant for each sample), load them in to some sort of structure, “stride”
-over each chromosome (with some stride offset) and finally list the variants present between the stride start
-and stride start plus the desired length of the candidate. These are our regions.
-Due to the use of striding, one does not simply walk the chromosome. A quick and dirty solution would be to
-just look up variants in a list:
+...
 
-for chromosome in autosomes:
-for start in range(1, len(chromosome), STRIDE):
-for position in range(start, start+LENGTH):
-if position in variant_position_list:
-# Do something...
-
-38
-
-9.2 Implementation
-This is of course rather dumb. Looking up a list has O(n) performance where n is the number of variants
-(and there are a lot of variants). Combining this with the sheer number of lookups performed, with the default
-parameters the list would be queried half a billion times for the first chromosome alone.
-You could improve this somewhat by dividing the variant_position_list in to a list of variants for each chromosome,
-so at least n is smaller. It is pretty doubtful that this would make any useful impact given the number of lookups.
-I’m happy to say I bypassed this option but thought it would be fun to consider its performance.
-A far more sensible solution is to replace the list with a dictionary whose lookup is amortized to a constant
-time. The number of lookups is still incredibly substantial but a constant lookup is starting to make this sound
-viable. Using the variant positions as keys of a dictionary (in fact let us use the previous minor suggestion and
-have a dictionary for each chromosome) we have:
-
-for chromosome in autosomes:
-for start in range(1, len(chromosome), STRIDE):
-for position in range(start, start+LENGTH):
-if position in variant_position_dict[chromosome]:
-# Do something...
-This still takes half an hour to run on my laptop though, surely there is a better way. I wondered if whether
-dropping the lookup would improve things. Instead, how about an area of memory is allocated to house the
-current chromosome and act as a variant “mask” – essentially an array where each element is a base of the
-current chromosome and the value of 1 represents a variant at that position and a 0 represents no variant.
-
-for chromosome in autosomes:
-chro = np.zeros(len(chromosome), np.int8)
-for variant_loc in snps_by_chromosome[chromosome]:
-chro[variant_loc] = 1
-for start in range(1, len(chromosome), STRIDE):
-for position in range(start, start+LENGTH):
-if chro[position] == 1:
-# Do something...
-We of course have to initially load the variants in to the chromosome array, but this need only be done once
-(per chromosome) and is nothing compared to the billions of lookups of the previous implementation.
-Rather to my surprise this was slow (maybe if I have time I should check how it compared to looking up with
-a list). Was it the allocation of memory? Perhaps I had run out of RAM and most of the work was going in to
-fetching and storing data in swap?
-I switched out the comparison (== 1) step for the previous dictionary based lookup and the performance
-improved considerably. What was going on? There must be more to looking at a given element in the numpy
-
-39
-
-9.2 Implementation
-chromosome array, but what?
-After a brief spell of playing with Python profilers and crashing my laptop by allocating considerably more
-memory than I had with numpy.zeroes, I read the manual (!) and discovered that numpy.zeroes returns an
-ndarray which uses “advanced indexing” even for single element access, effectively copying the element to a
-Python scalar for comparison.
-That’s a lot of memory action.
-It then occurred to me that we’re interested in just how many variants are inside each region and our chromosome
-is handily encapsulated in a numpy array. Why don’t we just sum together the elements in each region?
-Remember variant positive base positions are 1 and 0 otherwise, useful. So the work boils down to some
-clever vector mathematics calculated by numpy.
-We don’t even lose any detail because the actual list of variants inside a region can be recovered in a small
-amount of time just given the start and end position of the region.
-
-for chromosome in autosomes:
-chro = np.zeros(len(chromosome), np.int8)
-for variant_loc in snps_by_chromosome[chromosome]:
-chro[variant_loc] = 1
-for start in range(1, len(chromosome), STRIDE):
-num_variants = np.sum(chro[start:start+LENGTH])
-# Do something...
-With conservative testing this runs at least 60 times faster than before, the entirety of the human genome can
-be analysed for candidate regions in less than twenty seconds (with the first few seconds taken reading in all
-the variant locations in the first place).
-...Ignoring empty regions etc.
-
-def load_chromosome(self, size, locations):
-chro = np.zeros(size+1, np.int8)
-# Populate the chromosome array with 1 for each position a variant exists
-for variant_loc in locations:
-chro[variant_loc] = 1
-return chro
-load_chromosome returns a numpy array representing the chromosome, given its desired length and a list of
-variants...
-
-40
-
-9.2 Implementation
-...supervisor suggested bloom filters... ...would be a useful experiment to measure what further performance
-gains could be acheived with such a method...
-
-9.2.5
+9.2.4
 
 Searching for Candidate Regions
 
@@ -1951,10 +1837,13 @@ regions[region_i] = {
 }
 Listing 8 : Candidate Region Data Structure
 
-Regions will also have their respective group densities appended to the appropriate group_counts list and its
-region_i added to the relevant group_buckets structure as established in Section 9.2.2.
+38
 
-9.2.6
+9.3 Testing
+Regions will also have their respective group densities appended to the appropriate group_counts list and its
+region_i added to the relevant group_buckets structure as established in Section 9.2.1.
+
+9.2.5
 
 Filtering and Ranking Candidates for Selection
 
@@ -1963,10 +1852,6 @@ density of variants located in the GWAS variant group (the median density will g
 regions) and then rank those by their corresponding iCHIP variant group densities, descending (enriching the
 number of comparisons that can be made between the GWAS data and iCHIP data).
 Two functions in the Goldilocks API provide a process to rank candidate regions by a desired group’s density:
-
-41
-
-9.3 Testing
 • initial_filter
 Uses the relevant filtering group’s group_counts list (in this case, GWAS) to calculate a window around
 the median density. The function will then return all candidates inside the group’s group_buckets
@@ -1996,17 +1881,15 @@ To acheive this the testing suite is designed to generate valid Variant Query Fi
 dictionary, which defines test groups and variant locations on test chromosomes and can easily be altered for
 future testing. Test files are re-generated from this dictionary each time the test suite is instantiated using the
 setUpClass classmethod provided by the unittest library.
+39
+
+9.3 Testing
 Checking both the Paths File and generated Variant Query Files were loaded successfully is trivial and the
 suite goes on to test whether the input files and all generated variants within are mapped to the specified
 chromosome of the correct group, both in memory and also when loaded in to the NumPy array structure.
 Once regions have been searched (or more accurately, once a a candidate census has populated the regions
 dictionary via search_regions), additional tests ensure that all candidate regions are of the correct length and
 begin on a valid stride.
-
-42
-
-9.3 Testing
-
 GROUP0
 CHR 1
 4
@@ -2106,13 +1989,13 @@ improve coverage, possibly generating larger (or even random) data sets. Results
 manual inspection both by myself and the Sanger Institute and the regions described in the following chapter
 are considered legitimate.
 
-43
+40
 
 Chapter 10
 
 Results
 Listing 10 lists the top 25 candidate regions selected by Goldilocks for inspection. Regions were constructed
-using a length of 1Mnt1 (mega nucleotides) and a stride of 0.5Mnt2 . As detailed in Section 9.2.6, candidates
+using a length of 1Mnt1 (mega nucleotides) and a stride of 0.5Mnt2 . As detailed in Section 9.2.5, candidates
 for this study were filtered to include regions with a GWAS density within ±12.5% of the median GWAS
 density (i.e. in the middle 25%) before being ranked firstly by absolute difference from the median GWAS,
 then by iCHIP variant density, descending.
@@ -2126,7 +2009,7 @@ results and the candidate that was actually selected as the Goldilocks region ap
 bases
 bases
 
-44
+41
 
 i
 0234
@@ -2285,7 +2168,7 @@ This isn’t a surprise when you consider that the GWAS data set represents the 
 whole-genome analysis of our samples, whereas the iCHIP set consists of the variants output from SNP
 genotyping, a process that focuses on particular genomic locations of interest.
 
-45
+42
 
 Fig. 10.1 Goldilocks Candidate Plot A: Candidate regions of one megabase length are arranged along the x
 axis (coloured by chromosome) against the number of variants contained within that region.
@@ -2293,7 +2176,7 @@ axis (coloured by chromosome) against the number of variants contained within th
 Fig. 10.2 Goldilocks Candidate Plot B: Candidates of one megabase length are arranged along the x axis
 (coloured and facetted by allosome) and plotted against the number of variants contained within that region.
 
-46
+43
 
 Chapter 11
 
@@ -2323,7 +2206,7 @@ the Goldilocks regions.
 • Compare
 For each pair of GWAS and iCHIP samples, measure the concordance of called variants.
 
-47
+44
 
 11.2 Concepts and Terminology
 
@@ -2370,7 +2253,7 @@ not available. The process itself requires little resources in terms of time and
 improve the efficiency of later commands which are capable of reading and using the index.
 Both the commands in Listing 11 and 12 can be executed in parallel for extracting and indexing many samples.
 
-48
+45
 
 11.4 Pileup
 
@@ -2414,7 +2297,7 @@ file of filenames to merge rather than being required to list all inputs on the 
 Various issues with use of samtools merge at scale were encountered during the assembly of the analysis
 pipeline. Ultimately I ran out of time attempting to overcome these problems before being able to put the
 pipeline to use. The difficulties experienced with samtools merge specifically are detailed in Appendix ??.
-49
+46
 
 11.6 Calling
 
@@ -2462,7 +2345,7 @@ around centromeres for example[46]), optimising it for variant calling[47].
 variation occurs through a population of different samples rather than just one.
 3 Although it could also be a very low frequency variant...
 
-50
+47
 
 11.7 Measuring Concordance
 an individual’s DNA has been sequenced and processed by our pipeline (possibly with one of that sample’s
@@ -2479,19 +2362,19 @@ Another option for this component was SnpSift Concordance[52], a Java based pack
 calculate concordances between two VCF files. However I was concerned with the possible performance of
 using Java to process thousands of concordances.
 
-51
+48
 
 Part III
 
 Discussions and Conclusions
 
-52
+49
 
 Chapter 12
 
 Current Status
 
-53
+50
 
 Chapter 13
 
@@ -2511,13 +2394,13 @@ to candidates of uniform length)
 
 An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[53]
 
-54
+51
 
 Chapter 14
 
 Conclusions
 
-55
+52
 
 [12] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
@@ -2629,7 +2512,7 @@ Recursive Partitioning, 2013, r package version
 4.1-3. [Online]. Available: http://CRAN.R-project.
 org/package=rpart
 
-56
+53
 
 [26] M. Fowler, “Continuous Integration,” 2006.
 [Online]. Available: http://www.martinfowler.com/
@@ -2779,7 +2662,7 @@ Available:
 https://github.com/wtsi-npg/samtools_
 irods
 
-57
+54
 
 [58] Python Software Foundation. Sets. [Online].
 Available:
@@ -2823,7 +2706,7 @@ Samples, Lanes and Lanelets
 
 A sample is a distinct DNA specimen extracted from a particular person. For the purpose of sequencing,
 samples are pipetted in to a flowcell such as the one in Figure A.1 – a glass slide containing a series of very
-58
+55
 
 A.1 Part I
 thin tubules known as lanes. It is throughout these lanes that the chemical reactions involved in sequencing
@@ -2861,7 +2744,7 @@ Data and Targets
 Data will be used somewhat generically to refer to a matrix in which observations act as rows and their
 parameters act as columns. It is expected that all observations will have the same set of parameters.
 
-59
+56
 
 A.1 Part I
 For problems of a classification nature such as ours, an observation’s target is the known classification of that
@@ -2907,7 +2790,7 @@ its bounds and must be relocated elsewhere in memory to resize to a larger conti
 be appended to or popped from anywhere in the container, performing those actions on a location that is not at
 the end of the list will require the contents of the structure to be moved in memory to maintain the contiguous
 layout.
-60
+57
 
 A.2 Part II: Goldilocks
 Checking whether an item is in a list requires iterating over all n elements in the container until either a match
@@ -2956,7 +2839,7 @@ Sensible choices for these parameters will need to be selected after considering
 type can actually be used as a dictionary key providing it is immutable, including tuples[56]
 is probably the question I see most often from users new to Python on StackOverflow
 
-61
+58
 
 A.3 Part II: Pipeline
 
@@ -3027,7 +2910,7 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 | Only run on a node with more than 4000mb memory
 Listing 14 LSF Resource Syntax: bsub flags required to raise memory allocation for a job.
 
-62
+59
 
 A.3 Part II: Pipeline
 
@@ -3038,7 +2921,7 @@ GWAS Data Set
 ...the GWAS is made up two studies... ...one of which used 2x, the other 4x ...due to time constraints we had
 to discard the smaller 4x study...
 
-63
+60
 
 Appendix B
 
@@ -3160,7 +3043,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-64
+61
 
 B.1 BAMcheckR’d Example Output
 
@@ -3392,7 +3275,7 @@ FFQ
 0
 0
 
-65
+62
 
 1609
 
@@ -3734,7 +3617,7 @@ IS
 2
 0
 
-66
+63
 
 B.1 BAMcheckR’d Example Output
 
@@ -4013,7 +3896,7 @@ GCD
 0.101
 0.101
 
-67
+64
 
 B.2 auto_qc Decision Matrix
 
@@ -4162,7 +4045,7 @@ Goldilocks Paths File
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-68
+65
 
 ...
 ...
@@ -4248,7 +4131,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-69
+66
 
 C.1 Frontier Log Example
 
@@ -4318,7 +4201,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-70
+67
 
 C.1 Frontier Log Example
 
@@ -4344,7 +4227,7 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
-71
+68
 
 Appendix D
 
@@ -4370,7 +4253,7 @@ cd bcftools/
 make #(requires htslib to be above samtools/bcftools dir)
 sudo cp bcftools usr/local/bin
 
-72
+69
 
 D.3 samtools
 
@@ -4405,7 +4288,7 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 
-73
+70
 
 Appendix E
 
@@ -4436,7 +4319,7 @@ Wanting to brush up on finding memory leaks with valgrind, I volunteered to find
 reported leaks. The results of this investigation are detailed in Appendix ??.
 ...getline ...regcomp...
 
-74
+71
 
 E.3 Poor Time Performance
 
@@ -4496,7 +4379,7 @@ line called not during the process of deflating the input files (as I had expect
 compression of the output!
 Looking at a brief explanation of the deflate algorithm, it seems reasonable to conclude the computational
 
-75
+72
 
 E.4 The Red Herring
 
@@ -4532,7 +4415,7 @@ int x = (int)s[0]<<8 | s[1];
 s += 2;
 if (x == y) return s;
 s = skip_aux(s);
-76
+73
 
 E.5 The Plot Thickens
 }
@@ -4553,6 +4436,6 @@ The Plot Thickens
 Currently my money is on the seemingly inefficient trans_tbl_init that appears to be called for each file, with
 the current table of all previous files as an input...
 
-77
+74
 
 
