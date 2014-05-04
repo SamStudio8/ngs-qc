@@ -1005,7 +1005,7 @@ The pipeline can be divided up in to the following analysis steps:
 
 
 \section{Region Extraction and Indexing}
-\subsection{iRODS}
+\subsection{Extraction}
 %TODO Worth mentioning having to match the sample IDs?
 
 Now the Goldilocks region has been found, it must be extracted for each
@@ -1048,7 +1048,7 @@ in \textbf{iRODS}.
 \end{listing}
 
 
-\subsection{samtools index}
+\subsection{Indexing}
 %TODO Generating index is the "standard way" of checking integrity (Josh)
 
 An index file provides a mapping between genomic positions and the compressed
@@ -1084,7 +1084,6 @@ be executed in parallel for extracting and indexing many samples.
 
 
 \section{Pileup}
-\subsection{samtools mpileup}
 %TODO Better explanation of pile up
 %TODO How long did my pileup take? How much memory did it use?
 
@@ -1132,7 +1131,6 @@ Goldilocks regions.
 
 
 \section{Merge}
-\subsection{samtools merge}
 %TODO merge a list of what? Guess we've introduced BAM/VCF by now?
 
 \textbf{samtools merge}\citep{man:samtools} is a utility for merging two or more
@@ -1142,14 +1140,14 @@ a file of filenames to merge rather than being required to list all inputs on
 the command line.
 
 Various issues with use of \textbf{samtools merge} at scale were encountered
-during the assembly of the analysis pipeline. Ultimately we ran out of time
-before being able to put the pipeline to use. The difficulties experienced with
-\textbf{samtools merge} specifically are detailed in Appendix~\ref{app:test-leaks}.
+during the assembly of the analysis pipeline. Ultimately I ran out of time
+attempting to overcome these problems before being able to put the pipeline to
+use. The difficulties experienced with \textbf{samtools merge} specifically are
+detailed in Appendix~\ref{app:test-leaks}.
 
 
 
 \section{Calling}
-\subsection{bcftools call}
 
 Variant calling was briefly introduced as a concept in Part I
 (See Section~\ref{sec:p1-concept:variants}). Calling for variants is the process

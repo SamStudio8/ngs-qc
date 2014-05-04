@@ -463,15 +463,12 @@ iv
 Contents
 11.2.6 GWAS Data Set . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 11.3 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.3.1 iRODS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.3.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+11.3.1 Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.3.2 Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
 11.4 Pileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
-11.4.1 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
 11.5 Merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
-11.5.1 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
-11.6 Calling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
-11.6.1 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
-11.7 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+11.6 Calling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+11.7 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
 
 III
 
@@ -2614,7 +2611,7 @@ Region Extraction and Indexing
 
 11.3.1
 
-iRODS
+Extraction
 
 Now the Goldilocks region has been found, it must be extracted for each GWAS sample in our study. The
 Sanger Institute currently stores the electronic samples in the BAM format at one of their in-house data centres,
@@ -2639,7 +2636,7 @@ Listing 12 BAM Extraction: Retrieve Goldilocks region for a particular sample ($
 
 11.3.2
 
-samtools index
+Indexing
 
 An index file provides a mapping between genomic positions and the compressed blocks of a BAM file that
 contain them, affording programs such as members of the samtools collection efficient access to the relevant
@@ -2654,10 +2651,6 @@ Listing 13 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). wit
 11.4
 
 Pileup
-
-11.4.1
-
-samtools mpileup
 
 Following extraction and indexing of the Goldilocks region for each whole-genome sample from the GWAS
 study, the next step is to "pileup" the samples, a process which stacks the bases seen at each variant location
@@ -2691,33 +2684,30 @@ Goldilocks regions.
 
 Merge
 
-11.5.1
-
-samtools merge
-
 samtools merge[48] is a utility for merging two or more sorted BAM files in to one sorted output. After
 viewing the source of the command I found an undocumented feature that allowed an end user to provide a
 file of filenames to merge rather than being required to list all inputs on the command line.
 Various issues with use of samtools merge at scale were encountered during the assembly of the analysis
-pipeline. Ultimately we ran out of time before being able to put the pipeline to use. The difficulties experienced
-with samtools merge specifically are detailed in Appendix ??.
-
-55
-
-11.6 Calling
+pipeline. Ultimately I ran out of time attempting to overcome these problems before being able to put the
+pipeline to use. The difficulties experienced with samtools merge specifically are detailed in Appendix ??.
 
 11.6
 
 Calling
 
-11.6.1
-
-bcftools call
-
 Variant calling was briefly introduced as a concept in Part I (See Section 2.2.3). Calling for variants is the
 process of finding differences between a reference sequence1 and a given sample2 or set of different samples.
 The genotype likelihoods calculated by samtools mpileup in the previous step of the pipeline represent a
 probability distribution of the bases seen across all piledup samples at a particular location (site). This allows
+1 Our analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[50]. hs37d5 extends the b37
+genomic reference with "decoy sequences" that are designed to reduce false positives (incorrectly mapping to poorly referenced areas
+around centromeres for example[51]), optimising it for variant calling[52].
+2 Technically to be confident you have an actual SNP as opposed to a variant (or incorrect read!), you’ll need to see whether such
+variation occurs through a population of different samples rather than just one.
+
+55
+
+11.7 Measuring Concordance
 variant calling algorithms to make an informed decision as to whether particular sites actually contain a SNP
 or if a differing base is statistically unlikely to be a real variant3 with the current data.
 bcftools call[53][54] is the successor to the ’consensus’ variant caller included with the samtools package and
@@ -2740,18 +2730,6 @@ of variants that appear in both the GWAS and iCHIP Goldilocks regions (as these 
 are interested in anyway), bcftools call will then discard records pertaining to variants that do not appear in
 the targets list. This "targets" file actually uses the same format as the Variant Query Files described in
 Section 8.1.2 and should be provided to bcftools call’s –T (––targets-file) option.
-1 Our
-
-analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[50]. hs37d5 extends the b37
-genomic reference with "decoy sequences" that are designed to reduce false positives (incorrectly mapping to poorly referenced areas
-around centromeres for example[51]), optimising it for variant calling[52].
-2 Technically to be confident you have an actual SNP as opposed to a variant (or incorrect read!), you’ll need to see whether such
-variation occurs through a population of different samples rather than just one.
-3 Although it could also be a very low frequency variant...
-
-56
-
-11.7 Measuring Concordance
 
 11.7
 
@@ -2769,6 +2747,13 @@ the difficulties encountered in assembling the pipeline (particularly with samto
 to adequately test the pipeline and thus the concordance script with the time that we had. Considering this and
 for the sake of brevity, discussion on the design and implementation is considered outside the scope of this
 write-up.
+3 Although
+
+it could also be a very low frequency variant...
+
+56
+
+11.7 Measuring Concordance
 Another option for this component was SnpSift Concordance[57], a Java based package which can also
 calculate concordances between two VCF files. However I was concerned with the possible performance of
 using Java to process thousands of concordances.
