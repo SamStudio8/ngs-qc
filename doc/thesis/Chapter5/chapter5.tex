@@ -963,6 +963,9 @@ The pipeline can be divided up in to the following analysis steps:
 \section{Concepts and Terminology}
 %TODO Concepts: Genotype Likelihood?
 
+\subsection{samtools}
+\subsection{bcftools}
+
 \subsection{SAM and BAM Files}
 
 \subsection{"The Farm"}
@@ -990,6 +993,10 @@ The pipeline can be divided up in to the following analysis steps:
     \end{minted}
 \end{listing}
 
+\subsection{GWAS Data Set}
+...the \textbf{GWAS} is made up two studies...
+...one of which used 2x, the other 4x
+...due to time constraints we had to discard the smaller 4x study...
 
 
 \section{Region Extraction and Indexing}
@@ -1302,6 +1309,30 @@ current table of all previous files as an input...
 
 \section{Calling}
 \subsection{bcftools call}
+
+Variant calling was briefly introduced as a concept in Part I
+(See Section~\ref{sec:p1-concept:variants}). Calling for variants is the process
+of finding differences between a reference sequence\footnote{Our analysis maps
+    to the \textbf{hs37d5} reference sequence, used by the \textit{1000 Genomes
+    Project Phase II}\citep{1k-refs}. \textbf{hs37d5} extends the \textbf{b37} genomic
+    reference with "decoy sequences" that are designed to reduce false
+    positives (incorrectly mapping to poorly referenced areas around centromeres for
+    example\citep{biostar:decoy}), optimising it for variant
+calling\citep{1k-slides}.} and a given sample\footnote{Technically to be confident
+    you have an actual SNP as opposed to a variant (or incorrect read!), you'll
+    need to see whether such variation occurs through a population of different
+samples rather than just one.} or set of different samples.
+
+The genotype likelihoods calculated by \textbf{samtools mpileup} in the previous
+step of the pipeline represent a probability distribution of the bases seen
+across all piledup samples at a particular location (site). This allows variant
+calling algorithms to make an informed decision as to whether particular sites
+actually contain a SNP or if a differing base is statistically unlikely to be a real
+variant\footnote{Although it could also be a very low frequency variant...} with
+the current data.
+
+
+\textbf{bcftools call}\citep{man:bcftools-call}\citep{man:bcftools-call2}
 
 %\citep{biostar:bcftools} https://www.biostars.org/p/96425/
 ...Unfortunately during the initial testing run of this step with all the

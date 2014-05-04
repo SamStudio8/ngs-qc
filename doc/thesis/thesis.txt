@@ -452,61 +452,64 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 11.1 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
 11.2 Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.2.1 SAM and BAM Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.2.2 "The Farm" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.3 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.3.1 iRODS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.3.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.1 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.3 SAM and BAM Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.4 "The Farm" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.5 GWAS Data Set . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 
 iv
 
 Contents
+11.3 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.3.1 iRODS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.3.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
 11.4 Pileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
 11.4.1 samtools mpileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
-11.5 Merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
-11.5.1 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+11.5 Merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+11.5.1 samtools merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
 11.6 Calling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
 11.6.1 bcftools call . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-11.7 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+11.7 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
 
 III
 
 Discussions and Conclusions
 
-59
+60
 
 12 Current Status
 
-60
+61
 
 13 Critical Evaluation
 
-61
+62
 
 14 Conclusions
 
-62
+63
 
 Appendix A Input Examples
 
-65
+66
 
-A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
-A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
-A.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+A.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+A.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+A.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
 Appendix B Output Examples
 
-70
+71
 
-B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+B.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
 Appendix C Tool Installation
 
-73
+74
 
-C.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
-C.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
-C.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
-C.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
+C.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
+C.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
+C.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
+C.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
 
 v
 
@@ -2545,9 +2548,17 @@ Concepts and Terminology
 
 11.2.1
 
-SAM and BAM Files
+samtools
 
 11.2.2
+
+bcftools
+
+11.2.3
+
+SAM and BAM Files
+
+11.2.4
 
 "The Farm"
 
@@ -2559,18 +2570,25 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 
 |
 
-| Raise maximum job memory to 4000mb
-
 #
 
 |
 
 | Pre-reserve 4000mb for job before execution
 
+| Raise maximum job memory to 4000mb
+
 #
 
 | Only run on a node with more than 4000mb memory
 Listing 11 LSF Resource Syntax: bsub flags required to raise memory allocation for a job.
+
+11.2.5
+
+GWAS Data Set
+
+...the GWAS is made up two studies... ...one of which used 2x, the other 4x ...due to time constraints we had
+to discard the smaller 4x study...
 
 11.3
 
@@ -2587,6 +2605,10 @@ samtools_irods view -bh irods:\${file} 3:46000001-47000000
 > \$(basename \${file}).goldilocks.bam
 Listing 12 BAM Extraction: Retrieve Goldilocks region for a particular sample ($file) from iRODS.
 
+53
+
+11.4 Pileup
+
 11.3.2
 
 samtools index
@@ -2598,11 +2620,6 @@ Whilst indexing of BAM files is a somewhat optional step, many tools will emit w
 not available. The process itself requires little resources in terms of time and memory and can significantly
 improve the efficiency of later commands which are capable of reading and using the index.
 Both the commands in Listing 12 and 13 can be executed in parallel for extracting and indexing many samples.
-
-53
-
-11.4 Pileup
-
 samtools index \$(basename \${file}).goldilocks.bam
 Listing 13 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[45]
 
@@ -2634,6 +2651,9 @@ the cluster’s file system but is incredibly inefficient given the overhead of 
 need to be executed once for each leave-one-out experiment, it would be required to reduce the strain on the
 file server before the job could be submitted. Usefully another member of the samtools collection provides
 functionality to merge a list of given input files such as those extracted Goldilocks regions.
+54
+
+11.5 Merge
 
 11.5
 
@@ -2646,9 +2666,6 @@ samtools merge
 Usage
 ...undocumented feature to use a file of filenames... allowing more than two files to be specified at a time...
 
-54
-
-11.5 Merge
 Memory Leak
 By default the LSF scheduler at the Sanger Institute will issue 100MB to any submitted job. Given both the
 number of input files and their total size it was anticipated that this merge job would require more memory. At
@@ -2668,6 +2685,11 @@ Memory Leak in Test Harnesses
 ...getline ...regcomp...
 ...other memory leaks still remained in the tests and wanting to brush up on finding memory leaks with
 valgrind, I volunteered to locate and patch these...
+
+55
+
+11.5 Merge
+
 ==30464== 416 bytes in 1 blocks are indirectly lost in loss record 85 of 103
 ==30464==
 at 0x4A082F7: realloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
@@ -2699,9 +2721,6 @@ by 0x402CC4: main (test_trans_tbl_init.c:348)
 Listing 15 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
 failure to release memory allocated to a compiled regular expression
 
-55
-
-11.5 Merge
 Poor Time Performance
 ...submitting the same job to the "long" (48hr) and "basement" (essentially unlimited) queues, it is clear that
 the job is taking an extraordinary length of time to complete...
@@ -2721,6 +2740,9 @@ line called not during the process of deflating the input files (as I had expect
 compression of the output!
 
 Fig. 11.1 callgrind output following merge with default output compression
+56
+
+11.5 Merge
 
 Fig. 11.2 callgrind output following merge with uncompressed output
 Looking at a brief explanation of the deflate algorithm, it seems reasonable to conclude the computational
@@ -2731,9 +2753,7 @@ indicates significantly less calls to zlib functionality.
 It remains to be seen whether this option will cut down the time needed for the large merge job, perhaps this
 is merely a red herring and we’re yet to discover the true speed trouble. In the meantime let’s see if sending
 this job to the farm will work.
-56
 
-11.5 Merge
 The Red Herring
 ... might be interesting to use gprof which is more geared towards finding functions that spend all your
 execution time as opposed to callgrind which I believe counts CPU instructions.
@@ -2756,6 +2776,10 @@ s = skip_aux(s);
 return 0;
 }
 At a glance it seems that bam_aux_get receives a pointer to a BAM record and a “tag”, an array of two
+
+57
+
+11.6 Calling
 characters representing an optional field as defined in Section 1.5 of the SAM file spec.
 The function then appears to fetch all these auxiliary tags and iterates over each, comparing a transformation
 of that tag (x) to a pre-computed transformation on the input tag (y).
@@ -2767,10 +2791,6 @@ The Plot Thickens
 Currently my money is on the seemingly inefficient trans_tbl_init that appears to be called for each file, with
 the current table of all previous files as an input...
 
-57
-
-11.6 Calling
-
 11.6
 
 Calling
@@ -2779,6 +2799,13 @@ Calling
 
 bcftools call
 
+Variant calling was briefly introduced as a concept in Part I (See Section 2.2.3). Calling for variants is the
+process of finding differences between a reference sequence1 and a given sample2 or set of different samples.
+The genotype likelihoods calculated by samtools mpileup in the previous step of the pipeline represent a
+probability distribution of the bases seen across all piledup samples at a particular location (site). This allows
+variant calling algorithms to make an informed decision as to whether particular sites actually contain a SNP
+or if a differing base is statistically unlikely to be a real variant3 with the current data.
+bcftools call[50][51]
 ...Unfortunately during the initial testing run of this step with all the Goldilocks regions it was discovered that
 the output only included the standard header information and not a single line for the variants themselves.
 ...is because the piled up file was not generated with a corresponding reference DNA sequence and so the REF
@@ -2787,6 +2814,16 @@ the output only included the standard header information and not a single line f
 this is currently causing a segmentation fault. Having recompiled htslib, samtools and bcftools I am now able
 to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
+1 Our analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[47]. hs37d5 extends the b37
+genomic reference with "decoy sequences" that are designed to reduce false positives (incorrectly mapping to poorly referenced areas
+around centromeres for example[48]), optimising it for variant calling[49].
+2 Technically to be confident you have an actual SNP as opposed to a variant (or incorrect read!), you’ll need to see whether such
+variation occurs through a population of different samples rather than just one.
+3 Although it could also be a very low frequency variant...
+
+58
+
+11.7 Measuring Concordance
 
 11.7
 
@@ -2796,19 +2833,19 @@ Measuring Concordance
 ...however as it was not possible to reach this stage, discussion on this is considered outside the scope of this
 write-up...
 
-58
+59
 
 Part III
 
 Discussions and Conclusions
 
-59
+60
 
 Chapter 12
 
 Current Status
 
-60
+61
 
 Chapter 13
 
@@ -2820,21 +2857,21 @@ of having to switch to a more analysis focused language such as R.
 was designed to complement the machine learning experiments and provides
 ...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
 their own data regardless of how esoteric or cryptic the file format is...
-Whilst a 2003 paper[47]1 that analysed the spread of SNPs across the human genome to assert whether variants
+Whilst a 2003 paper[52]1 that analysed the spread of SNPs across the human genome to assert whether variants
 could be modelled with a statistical distribution, divided chromosomes in to equally sized bins (a concept akin
 to candidates of uniform length)
 
 1 Titled
 
-An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[47]
+An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[52]
 
-61
+62
 
 Chapter 14
 
 Conclusions
 
-62
+63
 
 [12] T. Therneau, B. Atkinson, and B. Ripley, rpart:
 Recursive Partitioning, 2013, r package version
@@ -2957,7 +2994,7 @@ parsing library. [Online]. Available:
 https:
 //pypi.python.org/pypi/argparse/1.2.1
 
-63
+64
 
 References
 [27] M. Fowler, “Continuous Integration,” 2006.
@@ -2985,6 +3022,14 @@ http://devcenter.wercker.com/articles/introduction/
 Tools to make developing R code easier, 2013,
 r package version 1.4.1. [Online]. Available:
 http://CRAN.R-project.org/package=devtools
+[33] Morandat, Floréal and Hill, Brandon and Osvald,
+Leo and Vitek, Jan, “Evaluating the design of
+the R language,” in ECOOP 2012–Object-Oriented
+Programming. Springer, 2012, pp. 104–131.
+[34] Python Software Foundation. More on Lists.
+[Online]. Available:
+https://docs.python.org/2/
+tutorial/datastructures.html#more-on-lists
 
 [44] G.-T. Chiang, P. Clapham, G. Qi, K. Sale,
 and G. Coates, “Implementing a genomic data
@@ -2999,21 +3044,36 @@ shtml#3
 [46] Calling SNPs/INDELs with SAMtools/BCFtools.
 SAM tools Project. [Online]. Available: http:
 //samtools.sourceforge.net/mpileup.shtml
-[47] W. S. Kendal, “An Exponential Dispersion Model
-for the Distribution of Human Single Nucleotide
-Polymorphisms,” Molecular Biology and Evolution,
-vol. 20, no. 4, pp. 579–590, 2003.
+[47] 1000
+Genomes.
+1000
+Genomes
+FAQ:
+Which reference assembly do you use?
+[Online]. Available: http://www.1000genomes.org/
+faq/which-reference-assembly-do-you-use
+[48] zam.iqbal.genome (https://www.biostars.org/u/5152/).
+(2013) Decoy In Reference Assembly. [Online].
+Available: https://www.biostars.org/p/73100/#73120
+[49] Heng
+Li.
+(2011)
+The
+missing
+human
+sequences (version 5). [Online]. Available:
+ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/
+reference/phase2_reference_assembly_sequence/
+hs37d5.slides.pdf
 
-[33] Morandat, Floréal and Hill, Brandon and Osvald,
-Leo and Vitek, Jan, “Evaluating the design of
-the R language,” in ECOOP 2012–Object-Oriented
-Programming. Springer, 2012, pp. 104–131.
-[34] Python Software Foundation. More on Lists.
-[Online]. Available:
-https://docs.python.org/2/
-tutorial/datastructures.html#more-on-lists
 [35] ——. Dictionaries. [Online]. Available: https://docs.
 python.org/2/tutorial/datastructures.html#dictionaries
+
+[50] The bcftools/htslib VCF commands:
+bcftools
+call, VCFTools Project. [Online]. Available:
+http://vcftools.sourceforge.net/htslib.html#call
+
 [36] Python
 Wiki.
 (2012)
@@ -3021,14 +3081,26 @@ Time
 Complexity.
 [Online]. Available: https://wiki.python.org/moin/
 TimeComplexity
+
+[51] bcftools call, Genome Research Ltd. [Online].
+Available: http://samtools.github.io/bcftools/bcftools.
+html#call
+
 [37] Python Software Foundation. Sets. [Online].
 Available:
 https://docs.python.org/2/tutorial/
 datastructures.html#sets
+
+[52] W. S. Kendal, “An Exponential Dispersion Model
+for the Distribution of Human Single Nucleotide
+Polymorphisms,” Molecular Biology and Evolution,
+vol. 20, no. 4, pp. 579–590, 2003.
+
 [38] W. B. Van Rossum, Guido and N. Coghlan,
 “PEP 8 – Style Guide for Python Code,” Python
 Enhancement Proposals, 2001. [Online]. Available:
 http://legacy.python.org/dev/peps/pep-0008/
+
 [39] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
 “Does
 python
@@ -3053,7 +3125,7 @@ Life,” 1987, [Television broadcast].
 HLA Gene Family. [Online]. Available: http:
 //ghr.nlm.nih.gov/geneFamily/hla
 
-64
+65
 
 Appendix A
 
@@ -3177,7 +3249,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-65
+66
 
 A.1 BAMcheckR’d Example Output
 
@@ -3409,7 +3481,7 @@ FFQ
 0
 0
 
-66
+67
 
 1609
 
@@ -3751,7 +3823,7 @@ IS
 2
 0
 
-67
+68
 
 A.1 BAMcheckR’d Example Output
 
@@ -4030,7 +4102,7 @@ GCD
 0.101
 0.101
 
-68
+69
 
 A.2 auto_qc Decision Matrix
 
@@ -4179,7 +4251,7 @@ Goldilocks Paths File
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-69
+70
 
 ...
 ...
@@ -4265,7 +4337,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-70
+71
 
 B.1 Frontier Log Example
 
@@ -4335,7 +4407,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-71
+72
 
 B.1 Frontier Log Example
 
@@ -4361,7 +4433,7 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
-72
+73
 
 Appendix C
 
@@ -4387,7 +4459,7 @@ cd bcftools/
 make #(requires htslib to be above samtools/bcftools dir)
 sudo cp bcftools usr/local/bin
 
-73
+74
 
 C.3 samtools
 
@@ -4422,6 +4494,6 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 
-74
+75
 
 
