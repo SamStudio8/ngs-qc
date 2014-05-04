@@ -7,7 +7,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%TODO Better description of Frontier
 This chapter introduces \textbf{Frontier}: the main programming effort for this
 part of the project. Frontier is a Python package that serves as a data manager,
 providing both interfaces to read inputs into structures in memory and to
@@ -79,8 +78,7 @@ This section investigates the implementation of Frontier's major components:
     \item Informing the package of the problem domain...
     \item Interfaces provided for reading in data
     \item Storage of read data in memory
-    \item Retrieval of stored data
-    \item Interaction with scikit-learn
+    \item Retrieval of stored data for interaction with \textbf{scikit-learn}
 \end{itemize}
 
 
@@ -198,7 +196,6 @@ implementations for \textbf{process\_line} and \textbf{get\_data}. Failing to do
 so will cause Frontier to throw a \textbf{NotImplementedError} when attempting
 to use the class to read data.
 
-%TODO Better describe process line expectations (locate key, value)?
 \textbf{process\_line} defines the line handling operations that extract and store
 desired data found in a given line. This responsibility includes returning None
 for lines that contain comments and irrelevant data and conducting any necessary
@@ -458,21 +455,6 @@ where the \textbf{BamcheckReader} class will automatically convert spaces and
 other predefined characters to hyphens.}. Targets are also returned in a
 \textbf{NumPy} array, with each index of the target array mapping 1:1 with the
 observation row of the same index in the \textit{Results Matrix}.
-
-
-\subsection{Interaction with scikit-learn}
-\subsubsection{Submitting Data}
-...
-\subsubsection{Cross Validation}
-
-...method in which to measure classification accuracy...
-...potentially use a weighting to penalise mistakes in smaller classes...
-
-...K fold cross validation
-...using stratified K fold cross validation...
-
-\subsubsection{Confusion Matrices}
-"Normal" confusion matrix and "Warnings" confusion matrix...
 
 
 \subsection{Logging}
