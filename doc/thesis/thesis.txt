@@ -2658,13 +2658,14 @@ request to increase the memory allocation and how the pileup command is passed a
 54
 
 11.5 Merge
-However, performing a pileup is a rather intensive process, with initial test runs requiring 6.5 hours of CPU
-time, with an average memory usage of 905.85MB (920MB max). In a scenario such as ours where there are
-thousands of input files, one for each of the extracted regions, we place considerable strain on the cluster’s file
-system and introduce incredibly inefficiency given the overhead of file handling. As this pipeline will need to
-be executed once for each leave-one-out experiment, it would be required to reduce the strain on the file server
-before the job could be submitted. Usefully another member of the samtools collection provides functionality
-to merge a list of given input files such as those extracted Goldilocks regions.
+However, performing a pileup is a rather intensive process, with initial test runs requiring 6.5 hours of
+CPU time, with an average memory usage of 905.85MB (920MB max), outputting a 13GB BCF file. In a
+scenario such as ours where there are thousands of input files, one for each of the extracted regions, we place
+considerable strain on the cluster’s file system and introduce incredibly inefficiency given the overhead of
+file handling. As this pipeline will need to be executed once for each leave-one-out experiment, it would be
+required to reduce the strain on the file server before the job could be submitted. Usefully another member
+of the samtools collection provides functionality to merge a list of given input files such as those extracted
+Goldilocks regions.
 
 11.5
 
@@ -2696,7 +2697,6 @@ Memory Leak in Test Harnesses
 ...getline ...regcomp...
 ...other memory leaks still remained in the tests and wanting to brush up on finding memory leaks with
 valgrind, I volunteered to locate and patch these...
-
 55
 
 11.5 Merge
@@ -2838,7 +2838,11 @@ variation occurs through a population of different samples rather than just one.
 
 11.7 Measuring Concordance
 Finally this initial test of the calling component of our pipeline was able to be completed in 66 minutes with
-an average memory usage of 11.97MB, resulting in a 114MB compressed VCF file.
+an average memory usage of 11.97MB, resulting in a 114MB compressed VCF file. In future runs, output
+size could be reduced by generating a list of variants that appear in both the GWAS and iCHIP Goldilocks
+regions (as these are the only variants we are interested in anyway). This "targets" file actually uses the same
+format as the Variant Query Files described in Section 8.1.2 and should be provided to bcftools call’s –T
+(––targets-file) option.
 
 11.7
 

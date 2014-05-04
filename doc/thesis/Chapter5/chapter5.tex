@@ -1102,14 +1102,15 @@ of those bases actually appearing in each sample given the data overall.
 
 However, performing a pileup is a rather intensive process, with initial test
 runs requiring 6.5 hours of CPU time, with an average memory usage of 905.85MB
-(920MB max). In a scenario such as ours where there are thousands of input
-files, one for each of the extracted regions, we place considerable strain on
-the cluster's file system and introduce incredibly inefficiency given the
-overhead of file handling.  As this pipeline will need to be executed once for
-each leave-one-out experiment, it would be required to reduce the strain on the
-file server before the job could be submitted. Usefully another member of the
-\textbf{samtools} collection provides functionality to merge a list of given
-input files such as those extracted Goldilocks regions.
+(920MB max), outputting a 13GB \textbf{BCF} file. In a scenario such as ours
+where there are thousands of input files, one for each of the extracted regions,
+we place considerable strain on the cluster's file system and introduce
+incredibly inefficiency given the overhead of file handling.  As this pipeline
+will need to be executed once for each leave-one-out experiment, it would be
+required to reduce the strain on the file server before the job could be
+submitted. Usefully another member of the \textbf{samtools} collection provides
+functionality to merge a list of given input files such as those extracted
+Goldilocks regions.
 
 
 
@@ -1363,7 +1364,13 @@ compatibility issue between the versions of \textbf{htslib} and
 
 Finally this initial test of the calling component of our pipeline was able to
 be completed in 66 minutes with an average memory usage of 11.97MB, resulting in
-a 114MB compressed VCF file.
+a 114MB compressed VCF file. In future runs, output size could be reduced by
+generating a list of variants that appear in both the \textbf{GWAS} and
+\textbf{iCHIP} Goldilocks regions (as these are the only variants we are
+interested in anyway). This "targets" file actually uses the same format as the
+\textbf{Variant Query Files} described in Section~\ref{sec:vqf} and should be
+provided to \textbf{bcftools call}'s \texttt{--T} (\texttt{----targets-file})
+option.
 
 
 \section{Measuring Concordance}
