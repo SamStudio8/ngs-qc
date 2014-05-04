@@ -452,15 +452,16 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 11.1 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
 11.2 Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.2.1 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.2.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.2.3 SAM and BAM Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.2.4 "The Farm" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-11.2.5 GWAS Data Set . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.2 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.3 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.4 SAM and BAM Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+11.2.5 "The Farm" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 
 iv
 
 Contents
+11.2.6 GWAS Data Set . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 11.3 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 11.3.1 iRODS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 11.3.2 samtools index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
@@ -2548,17 +2549,25 @@ Concepts and Terminology
 
 11.2.1
 
-samtools
+htslib
+
+...high-throughput sequencing library...
 
 11.2.2
 
-bcftools
+samtools
 
 11.2.3
 
-SAM and BAM Files
+bcftools
+
+...spun off from the samtools repository... ...now using htslib...
 
 11.2.4
+
+SAM and BAM Files
+
+11.2.5
 
 "The Farm"
 
@@ -2570,20 +2579,20 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 
 |
 
+| Raise maximum job memory to 4000mb
+
 #
 
 |
 
 | Pre-reserve 4000mb for job before execution
 
-| Raise maximum job memory to 4000mb
-
 #
 
 | Only run on a node with more than 4000mb memory
 Listing 11 LSF Resource Syntax: bsub flags required to raise memory allocation for a job.
 
-11.2.5
+11.2.6
 
 GWAS Data Set
 
@@ -2601,13 +2610,14 @@ iRODS
 The Integrated Rule-Oriented Data System (iRODS)... ...in place at the Sanger Institute[44]
 ...match samples to correct ID ...once I had a user added to the relevant access group... it was possible to
 ...extracted the regions from iRODS
-samtools_irods view -bh irods:\${file} 3:46000001-47000000
-> \$(basename \${file}).goldilocks.bam
-Listing 12 BAM Extraction: Retrieve Goldilocks region for a particular sample ($file) from iRODS.
 
 53
 
 11.4 Pileup
+
+samtools_irods view -bh irods:\${file} 3:46000001-47000000
+> \$(basename \${file}).goldilocks.bam
+Listing 12 BAM Extraction: Retrieve Goldilocks region for a particular sample ($file) from iRODS.
 
 11.3.2
 
@@ -2645,15 +2655,15 @@ bash -c ’samtools mpileup -b ../goldilocks-3:46000001-47000000.fofn -g -I -f
 Listing 14 Pileup: Submission of samtools mpileup[46] task to LSF for execution on the Farm. Note the
 request to increase the memory allocation and how the pileup command is passed as a string to bash -c.
 
+54
+
+11.5 Merge
 However, performing a pileup is a rather intensive process, especially in a scenario such as ours where there
 are thousands of input files, one for each of the extracted regions. This not only places considerable strain on
 the cluster’s file system but is incredibly inefficient given the overhead of file handling. As this pipeline will
 need to be executed once for each leave-one-out experiment, it would be required to reduce the strain on the
 file server before the job could be submitted. Usefully another member of the samtools collection provides
 functionality to merge a list of given input files such as those extracted Goldilocks regions.
-54
-
-11.5 Merge
 
 11.5
 
@@ -2805,15 +2815,17 @@ The genotype likelihoods calculated by samtools mpileup in the previous step of 
 probability distribution of the bases seen across all piledup samples at a particular location (site). This allows
 variant calling algorithms to make an informed decision as to whether particular sites actually contain a SNP
 or if a differing base is statistically unlikely to be a real variant3 with the current data.
-bcftools call[50][51]
-...Unfortunately during the initial testing run of this step with all the Goldilocks regions it was discovered that
-the output only included the standard header information and not a single line for the variants themselves.
+bcftools call[50][51] is the successor to the ’consensus’ variant caller included with the samtools package and
+utilises htslib for improved file handling efficiency with common genomic data formats.
+Unfortunately during the initial testing of this step, using a pileup of all the Goldilocks regions, the output
+contained only the standard header information generated by bcftools and not a single record detailing a
+called variant. I discovered this was due to the samtools mpileup job being completed without including
+a reference sequence, causing the REF (reference) column of the resulting file to be populated with ’N’: an
+ambiguity code which translates to ’any base’[52][53]
 ...is because the piled up file was not generated with a corresponding reference DNA sequence and so the REF
 (reference) column is set to N (an ambiguity code which translates to ‘any base’). bcftools call does have an
 -M flag to prevent ignoring rows where the REF base is N (apparently called a "masked reference") however
 this is currently causing a segmentation fault. Having recompiled htslib, samtools and bcftools I am now able
-to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
-source for me on the cluster I’m using....
 1 Our analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[47]. hs37d5 extends the b37
 genomic reference with "decoy sequences" that are designed to reduce false positives (incorrectly mapping to poorly referenced areas
 around centromeres for example[48]), optimising it for variant calling[49].
@@ -2824,6 +2836,8 @@ variation occurs through a population of different samples rather than just one.
 58
 
 11.7 Measuring Concordance
+to run bcftools call on my local machine on some test data. I guess I’ll need to have someone recompile the
+source for me on the cluster I’m using....
 
 11.7
 
@@ -2857,13 +2871,13 @@ of having to switch to a more analysis focused language such as R.
 was designed to complement the machine learning experiments and provides
 ...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
 their own data regardless of how esoteric or cryptic the file format is...
-Whilst a 2003 paper[52]1 that analysed the spread of SNPs across the human genome to assert whether variants
+Whilst a 2003 paper[54]1 that analysed the spread of SNPs across the human genome to assert whether variants
 could be modelled with a statistical distribution, divided chromosomes in to equally sized bins (a concept akin
 to candidates of uniform length)
 
 1 Titled
 
-An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[52]
+An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[54]
 
 62
 
@@ -3091,26 +3105,33 @@ Available:
 https://docs.python.org/2/tutorial/
 datastructures.html#sets
 
-[52] W. S. Kendal, “An Exponential Dispersion Model
-for the Distribution of Human Single Nucleotide
-Polymorphisms,” Molecular Biology and Evolution,
-vol. 20, no. 4, pp. 579–590, 2003.
+[52] A. Cornish-Bowden, “Nomenclature for Incompletely
+Specified Bases in Nucleic Acid Sequences:
+Recommendations 1984.” Nucleic Acids Research,
+vol. 13, no. 9, p. 3021, 1985.
 
 [38] W. B. Van Rossum, Guido and N. Coghlan,
 “PEP 8 – Style Guide for Python Code,” Python
 Enhancement Proposals, 2001. [Online]. Available:
 http://legacy.python.org/dev/peps/pep-0008/
 
+[53] C. Liébecq, Biochemical Nomenclature and Related
+Documents. Portland Press, 1992.
+
+[54] W. S. Kendal, “An Exponential Dispersion Model
 [39] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
+for the Distribution of Human Single Nucleotide
 “Does
 python
 have
 ’private’
 variables
+Polymorphisms,” Molecular Biology and Evolution,
 in
 classes?”
 [Online].
 Available:
+vol. 20, no. 4, pp. 579–590, 2003.
 http://stackoverflow.com/questions/1641219/
 does-python-have-private-variables-in-classes
 [40] Python Software Foundation. unittest — Unit
