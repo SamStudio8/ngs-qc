@@ -2838,16 +2838,21 @@ variation occurs through a population of different samples rather than just one.
 
 11.7 Measuring Concordance
 Finally this initial test of the calling component of our pipeline was able to be completed in 66 minutes with
-an average memory usage of 11.97MB, resulting in a 114MB compressed VCF file. In future runs, output
-size could be reduced by generating a list of variants that appear in both the GWAS and iCHIP Goldilocks
-regions (as these are the only variants we are interested in anyway). This "targets" file actually uses the same
-format as the Variant Query Files described in Section 8.1.2 and should be provided to bcftools call’s –T
-(––targets-file) option.
+an average memory usage of 11.97MB, resulting in a 114MB compressed VCF file.
+A similar compressed VCF file will be output from each iteration of the leave-one-out analysis, generating
+thousands of files. Whilst the Sanger Institute manages petabytes of storage, it is sensible to minimise memory
+and storage resource use if at all possible. In future runs, output size could be reduced by generating a list
+of variants that appear in both the GWAS and iCHIP Goldilocks regions (as these are the only variants we
+are interested in anyway), bcftools call will then discard records pertaining to variants that do not appear in
+the targets list. This "targets" file actually uses the same format as the Variant Query Files described in
+Section 8.1.2 and should be provided to bcftools call’s –T (––targets-file) option.
 
 11.7
 
 Measuring Concordance
 
+The terminal step of the Goldilocks pipeline consists of measuring the difference between the results of the
+pipleline and the iCHIP study.
 ...constructed another Python script... ...also could have used SNPConcordance Java lib...
 ...however as it was not possible to reach this stage, discussion on this is considered outside the scope of this
 write-up...
