@@ -1395,11 +1395,13 @@ check the bases seen at the known variant sites were sensible (\textit{i.e.}
 they agreed on the same genotype -- the same sets of bases appeared).  Due to
 the difficulties encountered in assembling the pipeline (particularly with
 \textbf{samtools merge}), it was not possible to adequately test the pipeline
-and thus the concordance script. Considering this and for the sake of brevity,
-discussion on the design and implementation is considered outside the scope of
-this write-up.
+and thus the concordance script with the time that we had. Considering this and
+for the sake of brevity, discussion on the design and implementation is
+considered outside the scope of this write-up.
 
-\textbf{SnpSift Concordance}\citep{snpeff-concordance}
-
-...also could have used SNPConcordance Java lib...
+Another option for this component was \textbf{SnpSift
+Concordance}\citep{snpeff-concordance}, a Java based package which can also
+calculate concordances between two \textbf{VCF} files. However I was concerned
+with the possible performance of using Java to process thousands of
+concordances.
 
