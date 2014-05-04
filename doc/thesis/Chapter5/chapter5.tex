@@ -923,8 +923,6 @@ This chapter introduces the various components of the pipeline, their purpose
 and any difficulties encountered.
 
 \section{Overview}
-%TODO Concepts: BAM ?
-%TODO Concepts: Genotype Likelihood?
 
 %TODO Design section?
 %TODO Flow chart!
@@ -962,9 +960,40 @@ The pipeline can be divided up in to the following analysis steps:
 \end{itemize}
 
 %The first two steps need only be conducted once.
+\section{Concepts and Terminology}
+%TODO Concepts: Genotype Likelihood?
+
+\subsection{SAM and BAM Files}
+
+\subsection{"The Farm"}
+%TODO Cite LSF
+
+...Sanger Institute cluster...
+..."the farm"...
+...jobs submitted and managed through \textbf{LSF}
+
+%TODO Cite internal slides: Introduction to LSF at Sanger
+% Farm Users Intro: Informatics System Group
+\begin{listing}[H]
+    \caption[lsf-memory]{\textbf{LSF Resource Syntax}: \textbf{bsub} flags
+        required to raise memory allocation for a job.}
+    \label{list:lsf-memory}
+    \begin{minted}[%mathescape,
+                %linenos,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+        bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
+        #                 |                |        | Raise maximum job memory to 4000mb
+        #                 |                | Pre-reserve 4000mb for job before execution
+        #                 | Only run on a node with more than 4000mb memory
+    \end{minted}
+\end{listing}
+
+
 
 \section{Region Extraction and Indexing}
-\subsection{IRODS}
+\subsection{iRODS}
 
 The \textbf{Integrated Rule-Oriented Data System} (iRODS)...
 ...in place at the
@@ -991,7 +1020,6 @@ Sanger Institute\citep{irods-sanger}
 
 
 \subsection{samtools index}
-%TODO Cite samtools index
 %TODO Generating index is the "standard way" of checking integrity (Josh)
 
 An index file provides a mapping between genomic positions and the compressed
@@ -1006,9 +1034,13 @@ requires little resources in terms of time and memory and can significantly
 improve the efficiency of later commands which are capable of reading and using
 the index.
 
+Both the commands in Listing~\ref{list:bamext} and~\ref{list:bamindex} can
+be executed in parallel for extracting and indexing many samples.
+
 \begin{listing}[H]
     \caption[bamindex]{\textbf{BAM Indexing}: Creation of a \textbf{BAM Index} (BAI)
-        for a given sample (\$file).}
+        for a sample (\$file). with \textbf{samtools
+    index}\citep{man:samtools}}
     \label{list:bamindex}
     \begin{minted}[mathescape,
                 %linenos,
@@ -1024,30 +1056,41 @@ the index.
 
 \section{Pileup}
 \subsection{samtools mpileup}
-%TODO Cite mpileup
+%TODO Better explanation of pile up
+%TODO How long did my pileup take? How much memory did it use?
 
-Following extraction of the Goldilocks region for each full-genome sample, the
-next stage is to use \textbf{samtools mpileup} to ...
-...each of the various full genome samples we have for processing.  These files
-are then summarised (and likelihoods are calculated) with samtools mpileup...
+Following extraction and indexing of the Goldilocks region for each whole-genome
+sample from the \textbf{GWAS} study, the next step is to "pileup" the samples,
+a process which stacks the bases seen at each variant location from all the
+indexed samples up in a structure before calculating the statistical likelihood
+of those bases actually appearing in each sample given the data overall.
+
+
+\textbf{samtools mpileup}\citep{samtools-mpileup}...
 
 
 % Needed -q long to submit to 48 hour queue instead of 12
-\begin{minted}{bash}
-    bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o -e
-    ~/goldilocks/joblog/samtools_mpileup.%J.e -G hgi -J "samtools_mpileup"
-    -M1000 -R "select[mem>1000] rusage[mem=1000]" bash -c 'samtools mpileup -b
-    ../goldilocks-3:46000001-47000000.fofn -g -I -f
-    /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa >
-    ~/goldilocks/all.withref.bcf'
-\end{minted}
+\begin{listing}[H]
+    \caption[syn-mpileup]{\textbf{Pileup}: Submission of
+        \textbf{samtools mpileup}\citep{samtools-mpileup} task to \textbf{LSF}
+        for execution on the \textbf{Farm}.}
+    \label{list:syn-mpileup}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{bash}
+        bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o -e
+        ~/goldilocks/joblog/samtools_mpileup.%J.e -G hgi -J "samtools_mpileup"
+        -M1000 -R "select[mem>1000] rusage[mem=1000]" bash -c 'samtools mpileup -b
+        ../goldilocks-3:46000001-47000000.fofn -g -I -f
+        /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa >
+        ~/goldilocks/all.withref.bcf'
+    \end{minted}
+\end{listing}
 
-
-\section{Merge}
-
-\subsection{samtools merge}
-%TODO merge a list of what? Guess we've introduced BAM/VCF by now?
-\textbf{samtools mpileup} is a rather intensive process especially when in a
+However, performing a pileup is a rather intensive process, especially in a
 scenario such as ours where there are thousands of input files, one for each of
 the extracted regions. This not only places considerable strain on the cluster's
 file system but is incredibly inefficient given the overhead of file handling.
@@ -1056,6 +1099,12 @@ experiment, it would be required to reduce the strain on the file server before
 the job could be submitted. Usefully another member of the \textbf{samtools}
 collection provides functionality to merge a list of given input files such as
 those extracted Goldilocks regions.
+
+
+\section{Merge}
+
+\subsection{samtools merge}
+%TODO merge a list of what? Guess we've introduced BAM/VCF by now?
 
 \subsubsection{Usage}
 ...undocumented feature to use a file of filenames... allowing more than two
@@ -1079,23 +1128,6 @@ meet the same fate, even when reserving 16GB of memory...
 This is an absurd amount of memory even considering the vast input...
 It appeared a memory leak had been discovered...
 that drastically increases in severity as more files are provided as input,
-
-%TODO Cite internal slides: Introduction to LSF at Sanger
-% Farm Users Intro: Informatics System Group
-\begin{listing}[H]
-    \caption[lsf-memory]{: Flags required to raise job memory allocation}
-    \label{list:lsf-memory}
-    \begin{minted}[%mathescape,
-                %linenos,
-                gobble=8,
-                frame=lines,
-                framesep=2mm]{bash}
-        bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
-        #                 |                |        | Raise maximum job memory to 4000mb
-        #                 |                | Pre-reserve 4000mb for job before execution
-        #                 | Only run on a node with more than 4000mb memory
-    \end{minted}
-\end{listing}
 
 ...initial memory leak fixed by the author, several large variables not being
 freed from memory...
