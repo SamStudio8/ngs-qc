@@ -922,11 +922,10 @@ compare the called variants to the appropriate \textbf{iCHIP} sample.
 This chapter introduces the various components of the pipeline, their purpose
 and any difficulties encountered.
 
-\section{Introduction}
+\section{Overview}
 %TODO Concepts: BAM ?
 %TODO Concepts: Genotype Likelihood?
 
-\subsection{Summary}
 %TODO Design section?
 %TODO Flow chart!
 
@@ -935,33 +934,41 @@ The pipeline can be divided up in to the following analysis steps:
 %TODO Are we taking these from the lanelets?
 %TODO What file formats?
 % http://biobits.org/samtools_primer.html
+% TODO Improve descriptions here...
 \begin{itemize}
-    \item \textbf{Goldilocks Extraction} \hfill\\
+    \item \textbf{Extraction} \hfill\\
         For every whole-genome lanelet from the \textbf{GWAS} study, extract the
         Goldilocks region.
-    \item \textbf{Goldilocks Indexing} \hfill\\
+    \item \textbf{Indexing} \hfill\\
         %TODO Cite performance improvements, better explanation
         Create indexes for the extracted Goldilocks regions, improving
         efficiency for tools which require random access to variants inside the
         region.
+    \item \textbf{Merge} \hfill\\
+        Merge the data from each extracted region in to one file to reduce file
+        handling overhead in later analysis.
     \item \textbf{Pileup} \hfill\\
-        Calculate genotype likelihoods for called variants across all the
+        %TODO Mention probabilities...
+        Calculate genotype likelihoods based on the reads seen across all the
         extracted Goldilocks regions.
+    \item \textbf{Call} \hfill\\
+        Use the genotype likelihood scores to actually call the variants for
+        each position of interest in each of the Goldilocks regions.
+    \item \textbf{Compare} \hfill\\
+        %TODO Lanelets, samples, what are we doing?
+        % Are lanelets combined in to one sample for comparison?
+        For each pair of \textbf{GWAS} and \textbf{iCHIP} samples, measure the
+        concordance of called variants.
 \end{itemize}
 
-...involving generation of indexes for each sample
-...execute the pipeline and withold one of the Goldilocks samples...
-...using \textbf{samtools} to pileup the variants across all the samples
-(excluding one of course) and then performing variant calling...
-...must then compare the resulting VCF against the SNP VCF and calculate the
-concordance to discover whether leaving out that particular sample has caused a
-change in the accuracy of the variants called...
-
-
+%The first two steps need only be conducted once.
 
 \section{Region Extraction and Indexing}
 
 \subsection{IRODS}
+
+The \textbf{Integrated Rule-Oriented Data System} (iRODS) ...in place at the
+Sanger Institute\citep{irods-sanger}
 
 ...regions extracted from IRODS
 ...difficulty gaining user access for both IRODS and "the farm"
@@ -1004,6 +1011,7 @@ those extracted Goldilocks regions.
 \end{minted}
 
 
+\section{Merge}
 \subsection{samtools merge}
 
 \subsubsection{Usage}
@@ -1218,6 +1226,7 @@ inefficient trans\_tbl\_init that appears to be called for each file, with the
 current table of all previous files as an input...
 
 
+\section{Calling}
 \subsection{bcftools call}
 
 %\citep{biostar:bcftools} https://www.biostars.org/p/96425/
@@ -1235,3 +1244,11 @@ htslib, samtools and bcftools I am now able to run bcftools call on my local
 machine on some test data. I guess I’ll need to have someone recompile the
 source for me on the cluster I’m using....
 
+
+\section{Measuring Concordance}
+
+...constructed another Python script...
+...also could have used SNPConcordance Java lib...
+
+...however as it was not possible to reach this stage, discussion on this is
+considered outside the scope of this write-up...
