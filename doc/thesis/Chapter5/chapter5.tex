@@ -742,10 +742,6 @@ The pipeline can be divided up in to the following analysis steps:
         concordance of called variants.
 \end{itemize}
 
-%The first two steps need only be conducted once.
-\section{Concepts and Terminology}
-See Appendix~\ref{app:concepts-p2-2}
-
 \section{Region Extraction and Indexing}
 \subsection{Extraction}
 %TODO Worth mentioning having to match the sample IDs?
@@ -837,10 +833,10 @@ of those bases actually appearing in each sample given the data overall.
 
 \begin{listing}[H]
     \caption[syn-mpileup]{\textbf{Pileup}: Submission of
-        \textbf{samtools mpileup}\citep{samtools-mpileup} task to \textbf{LSF}
+        \textbf{samtools mpileup}\citep{samtools-mpileup} task
         for execution on the \textbf{Farm}. Note the request to increase the
-        memory allocation and how the pileup command is passed as a string to
-        \texttt{bash -c}.}
+        memory allocation with the \texttt{--R} flag and how the pileup command
+        is passed as a string to \texttt{bash --c}.}
     \label{list:syn-mpileup}
     \begin{minted}[mathescape,
                 %linenos,
@@ -873,7 +869,6 @@ Goldilocks regions.
 
 
 \section{Merge}
-%TODO merge a list of what? Guess we've introduced BAM/VCF by now?
 
 \textbf{samtools merge}\citep{man:samtools} is a utility for merging two or more
 sorted \textbf{BAM} files in to one sorted output. After viewing the source of
@@ -892,7 +887,7 @@ detailed in Appendix~\ref{app:test-leaks}.
 \section{Calling}
 
 Variant calling was briefly introduced as a concept in Part I
-(See Section~\ref{sec:p1-concept:variants}). Calling for variants is the process
+(See Section~\ref{sec:intro-part2}). Calling for variants is the process
 of finding differences between a reference sequence\footnote{Our analysis maps
     to the \textbf{hs37d5} reference sequence, used by the \textit{1000 Genomes
     Project Phase II}\citep{1k-refs}. \textbf{hs37d5} extends the \textbf{b37} genomic
@@ -906,7 +901,7 @@ samples rather than just one.} or set of different samples.
 
 The genotype likelihoods calculated by \textbf{samtools mpileup} in the previous
 step of the pipeline represent a probability distribution of the bases seen
-across all piledup samples at a particular location (site). This allows variant
+across all piled up samples at a particular location (site). This allows variant
 calling algorithms to make an informed decision as to whether particular sites
 actually contain a SNP or if a differing base is statistically unlikely to be a real
 variant\footnote{Although it could also be a very low frequency variant...} with
@@ -914,11 +909,10 @@ the current data.
 
 \textbf{bcftools call}\citep{man:bcftools-call}\citep{man:bcftools-call2} is the
 successor to the 'consensus' variant caller included with the \textbf{samtools}
-package and utilises \textbf{htslib} for improved file handling efficiency with
-common genomic data formats.
+package and utilises \textbf{htslib}: a \textit{high-throughput sequencing
+library} for improved file handling efficiency with common genomic data formats.
 
-%TODO all crohns samples...
-%TODO writing is naff
+%TODO writing is naff?
 
 Unfortunately during the initial testing of this step, using a pileup of all the
 Goldilocks regions, the output contained only the standard header information
@@ -934,7 +928,8 @@ where the reference is described as a "masked reference". However attempting to
 repeat calling with the flag set merely caused the command to produce a
 segmentation fault instead of an empty output file. This appeared to be due to a
 compatibility issue between the versions of \textbf{htslib} and
-\textbf{bcftools} I was using on the \textbf{Farm}.
+\textbf{bcftools} I was using on the \textbf{Farm} -- Sanger's high performance
+computing cluster.
 
 Finally this initial test of the calling component of our pipeline was able to
 be completed in 66 minutes with an average memory usage of 11.97MB, resulting in

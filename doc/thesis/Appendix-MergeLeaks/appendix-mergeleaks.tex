@@ -8,7 +8,7 @@
     \graphicspath{{Chapter5/Figs/Vector/}{Chapter5/Figs/}}
 \fi
 
-By default the \textbf{LSF} job scheduler at the Sanger Institute will issue
+By default the job scheduler at the Sanger Institute will issue
 100MB to any submitted job. Given both the number of input files and their total
 size it was anticipated that this merge job would require more memory. At the
 very least an estimated 35kB for a 64-bit pointer to each input file and
@@ -73,7 +73,7 @@ investigation are detailed in Appendix~\ref{app:test-leaks}.
 \end{listing}
 
 ...following this, further \textbf{samtools merge} jobs were submitted only to
-also be repeatedly terminated by the LSF scheduler , this time for exceeding the
+also be repeatedly terminated by the scheduler , this time for exceeding the
 maximum execution time limit for the queue...
 
 \section{Poor Time Performance}

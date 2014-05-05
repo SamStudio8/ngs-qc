@@ -3,34 +3,36 @@
 
 \section{Part I}
 \label{app:concepts-p1}
-\subsection{Bases, DNA and Variants}
+\subsection{DNA, Bases and Sequencing}
 
-...DNA is made up of four bases; G, C, T and A...
+Practically every cell in a living organism contains deoxyribonucleic acid
+(\textbf{DNA}).
+DNA provides a coded template essential for the construction of proteins vital
+for ongoing development and function of a living organism.
+DNA is a polymer (long molecule) made up of a sequence of just four nucleic acids
+called nucleotides or \textbf{bases}\citep{HMG-DNA}:
 
+\begin{itemize}
+    \item \textbf{G} guanine,
+    \item \textbf{C} cytosine,
+    \item \textbf{T} thymine and
+    \item \textbf{A} adenine.
+\end{itemize}
 
-\subsection{Next Generation Sequencing}
+DNA is arranged in to linear structures called \textbf{chromosomes}, of which
+humans have 23 pairs; consisting of 22 hereditary trait carrying
+\textbf{allosomes} (numbered from 1--22) and a pair of sex-determining
+\textbf{autosomes} (a combination of X and Y)\citep{HMG-Chrom}.  The human
+genome is approximately three billion bases long.
 
-...the process of recovering or extracting the sequence of nucleotide bases...
+\subsection{NGS}
+\textbf{Sequencing} is the process of recovering or extracting the sequence of
+these nucleotide bases that appear in a particular organism's DNA.
 
-
-\subsection{Variants and SNPs}
-\label{sec:p1-concept:variants}
-
-...for the purpose of this study we are only interested in single nucleotide
-polymorphisms (SNPs) "snips" ...
-
-...their \textit{position} refers to the index of the base of the chromosome in
-which the polymorphism exists...
-...commonly these are 1-indexed (although this is not always the case) and thus
-care must be taken to ensure this is accounted for at any step where positions
-are considered...
-
-...SNPs...
-
-\textbf{variant calling} - the process of identifying bases in a sample that
-differ from the reference genome (this is a little simple as you also need to
-discern as whether the difference is actually a polymorphism or not).
-
+Next Generation Sequencing (\textbf{NGS}) is a somewhat generic term used to
+refer to improving sequencing hardware and methods introduced from 2008 onwards,
+bringing a massive decrease in both the time and cost involved in the sequencing
+of an entire human genome\citep{genomegov:costs}.
 
 
 \subsection{Samples, Lanes and Lanelets}
@@ -136,10 +138,6 @@ be members of the same class?
 %TODO Why?
 Often such labels are \textbf{encoded} in to simpler types such as integers.
 
-
-\subsection{Training and Testing}
-
-...
 
 \subsection{Python Data Structures}
 \label{sec:python-structures}
@@ -251,48 +249,4 @@ this region for both the \textbf{GWAS} and \textbf{iCHIP} data sets.
 For example, regions whose first position falls on a base in such a way that the
 chromosome ends before a region of \textit{length} can be constructed will
 violate the size criteria.
-
-\section{Part II: Pipeline}
-\label{app:concepts-p2-2}
-%TODO Concepts: Genotype Likelihood?
-
-\subsection{htslib}
-...high-throughput sequencing library...
-
-\subsection{samtools}
-\subsection{bcftools}
-...spun off from the \textbf{samtools} repository...
-...now using \textbf{htslib}...
-
-\subsection{SAM and BAM Files}
-
-\subsection{"The Farm"}
-%TODO Cite LSF
-
-...Sanger Institute cluster...
-..."the farm"...
-...jobs submitted and managed through \textbf{LSF}
-
-%TODO Cite internal slides: Introduction to LSF at Sanger
-% Farm Users Intro: Informatics System Group
-\begin{listing}[H]
-    \caption[lsf-memory]{\textbf{LSF Resource Syntax}: \textbf{bsub} flags
-        required to raise memory allocation for a job.}
-    \label{list:lsf-memory}
-    \begin{minted}[%mathescape,
-                %linenos,
-                gobble=8,
-                frame=lines,
-                framesep=2mm]{bash}
-        bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
-        #                 |                |        | Raise maximum job memory to 4000mb
-        #                 |                | Pre-reserve 4000mb for job before execution
-        #                 | Only run on a node with more than 4000mb memory
-    \end{minted}
-\end{listing}
-
-\subsection{GWAS Data Set}
-...the \textbf{GWAS} is made up two studies...
-...one of which used 2x, the other 4x
-...due to time constraints we had to discard the smaller 4x study...
 
