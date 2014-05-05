@@ -1400,68 +1400,6 @@ Exclude any parameter which include "baseline" as a substring.
 25
 
 5.3 Parameter Sets and Selection
-Set
-Nº CV ± SD SCV ± SD Depth
-Most Important Feature
-ALL
-86
-90 ± 4
-97 ± 1
-38
-T-percent-max-baseline-deviation (27%)
-27
-87 ± 4
-95 ± 1
-36
-T-percent-max-baseline-deviation (31%)
-AQC
-AQCN
-21
-86 ± 4
-95 ± 1
-39
-max-max-baseline-deviation (31%)
-1
-60 ± 6
-61 ± 2
-53
-error-rate (100%)
-ERROR
-NO_ERROR
-85
-90 ± 4
-97 ± 1
-38
-T-percent-max-above-baseline(27%)
-BASELINE
-34
-82 ± 5
-89 ± 1
-46
-T-percent-max-above-baseline(28%)
-72 ± 10
-91 ± 1
-31
-error-rate (24%)
-NOBASELINE 52
-MARP
-47
-87 ± 4
-95 ± 1
-39
-T-percent-max-above-baseline (27%)
-39
-75 ± 7
-87 ± 1
-38
-max-max-baseline-deviation (34%)
-NO_MARP
-Table 5.1 Parameter Set Cross Validation Scores: Columns left to right; parameter set name, number
-of parameters included, average cross-validation score (max 100) ± std. deviation, average stratified
-cross-validation score (max 100) ± std. deviation, average depth of the generated tree and the most important
-parameter by Gini importance (max 100). Tree depth and parameter importance was estimated on experiments
-using the stratified data.
-
 • MARP
 Include any parameter which includes one of the following substrings: mean, percent, rate or average.
 • NO_MARP
@@ -1474,26 +1412,148 @@ for recovering these parameters for use in our analysis. Ultimately, bamcheckr p
 was possible to use Frontier itself to extract the additional features needed to better represent the decisions
 made by the current system.
 For each parameter set, data and targets were extracted via Frontier’s API before being subset by scikit-learn’s
-StratifiedKFold function. These subsets are referred to as "folds" (of which we used 10) and for each fold
-a DecisionTreeClassifier was trained and tested. Table 5.1 outlines the cross validation scores for each such
-experiment.
+StratifiedKFold function. All available data (13,455 "BAMcheckr’d" lanelets) were used as input, the target
+variable could be one of three classes; pass, fail or warn. The subsets are referred to as "folds" (of which we
+used 10) and for each fold a DecisionTreeClassifier was trained and tested. Table 5.1 outlines the average
+cross validation scores across each such experiment.
+Set
+
+Nº
+
+CV ± SD
+
+SCV ± SD
+
+Depth
+
+ALL
+
+86
+
+90 ± 4
+
+97 ± 1
+
+38
+
+T-percent-max-baseline-deviation (27%)
+
+AQC
+AQCN
+
+27
+21
+
+87 ± 4
+86 ± 4
+
+95 ± 1
+95 ± 1
+
+36
+39
+
+T-percent-max-baseline-deviation (31%)
+max-max-baseline-deviation (31%)
+
+ERROR
+
+1
+
+60 ± 6
+
+61 ± 2
+
+53
+
+error-rate (100%)
+
+NO_ERROR
+
+85
+
+90 ± 4
+
+97 ± 1
+
+38
+
+T-percent-max-above-baseline(27%)
+
+BASELINE
+
+34
+
+82 ± 5
+
+89 ± 1
+
+46
+
+T-percent-max-above-baseline(28%)
+
+NOBASELINE
+
+52
+
+72 ± 10
+
+91 ± 1
+
+31
+
+error-rate (24%)
+
+MARP
+
+47
+
+87 ± 4
+
+95 ± 1
+
+39
+
+T-percent-max-above-baseline (27%)
+
+Most Important Feature
+
+39
+75 ± 7
+87 ± 1
+38
+max-max-baseline-deviation (34%)
+NO_MARP
+Table 5.1 Parameter Set Cross Validation Scores: Results of classifying testing data in to one of three
+classes; pass, fail or warn. Columns left to right; parameter set name, number of parameters included, average
+cross-validation score (max 100) ± std. deviation, average stratified cross-validation score (max 100) ± std.
+deviation, average depth of the generated tree and the most important parameter by Gini importance (max
+100). Tree depth and parameter importance was estimated on experiments using the stratified data.
+
 Whilst these parameter sets are certainly crude – a majority of them having been constructed without close
 examination just by matching or excluding substrings using Frontier’s parameter inspection functions – we
 can learn quite a lot about the available data.
 Firstly it should be of no surprise that the ALL model scores highly in both cross-validation and stratified
 cross-validation testing. The feature group is a superset over the same parameters used by auto_qc itself.
 Similarly the NO_ERROR set which uses all but one parameter (error-rate) scores highly.
-It’s interesting to compare the scores between the AQC and AQCN parameter sets against ALL. Both of the
-former score highly despite having significantly fewer parameters. This appears to indicate that many of the
-parameters in the ALL model are redundant for use in classification. This should of course be expected, you’d
-hope to see that the parameters used in attempting to replicate the current auto_qc system
+
 26
 
 5.3 Parameter Sets and Selection
-...it does tell us quite a lot about the data set... the smallest set; AQC, had 27 parameters and was still able to
-maintain a 95% cross-validation score, impressive given that the best models scored 97%. This would appear
-to indicate that many of the parameters in the ALL model are possibly redundant.
-It’s interesting to
+It’s interesting to compare the scores between the AQC and AQCN parameter sets against ALL. Both of the
+former score highly despite having significantly fewer parameters. This appears to indicate that many of the
+parameters in the ALL model are redundant for use in classification. This should of course be expected, you’d
+hope to see that a set that includes parameters known to be used by the current auto_qc system is capable of
+replicating results made by that system.
+In general the other models perform reasonably well, potentially reflecting the simple linear nature of the
+decisions made by the auto_qc system.
+Stratified cross-validation scores are consistently better and less variable (smaller standard deviations) than
+their non-stratified counterparts. It is possible that this is due to the more "balanced" training and testing sets
+gained by assigning observations to folds to match their proportions in the whole data set. The differences
+between the pairs of validation scores is predictable – averaging 8.66 percentage points – but the NOBASELINE
+set presents a difference of almost 20pp and exhibits more variable behaviour. This suggests that excluding
+the baseline related parameters is problematic for one (or two) of the three class labels (as the only difference
+expected between the experiments will be the proportions of the classes).
 ...highlights the shortcomings of using a decision tree... overfitting... gini coefficient not a real measure of
 importance...
 
@@ -1519,14 +1579,12 @@ have, it was necessary to obtain more deliberate decisions for parameters to uti
 [WARN] quality-dropoff-runmed-k parameter has 0 variance (with mean 25.00)
 Listing 6 Frontier Variance Warnings: Warnings issued for auto_qc parameters that have been found to
 have no variance by one of Frontier’s sanity checking procedures.
-
-Parameters with no variance will have constant value across all observations regardless of their class label and
-will thus be unhelpful in predicting class membership for future observations. Such parameters can be safely
-discarded, Listing 6 displays warnings issued by Frontier for several of the auto_qc
-
 27
 
 5.4 Trees
+Parameters with no variance will have constant value across all observations regardless of their class label and
+will thus be unhelpful in predicting class membership for future observations. Such parameters can be safely
+discarded, Listing 6 displays warnings issued by Frontier for several of the auto_qc
 
 5.3.3
 

@@ -103,12 +103,14 @@ needed to better represent the decisions made by the current system.
 %TODO Cite dtc
 For each parameter set, data and targets were extracted via \textbf{Frontier}'s
 API before being subset by \textbf{scikit-learn}'s \textbf{StratifiedKFold}
-function. These subsets are referred to as "folds" (of which we used 10) and for
+function. All available data (13,455 "BAMcheckr'd" lanelets) were used as input,
+the target variable could be one of three classes; pass, fail or warn.
+The subsets are referred to as "folds" (of which we used 10) and for
 each fold a \textbf{DecisionTreeClassifier} was trained and tested.
-Table~\ref{tab:pset-cv} outlines the cross validation scores for each such
-experiment.
+Table~\ref{tab:pset-cv} outlines the average cross validation scores across each
+such experiment.
 
-\begin{table}
+\begin{table}[H]
     \centering
     \begin{tabular}{l | c  c  c  c  r}
         Set           & Nº & CV ± SD & SCV ± SD & Depth & Most Important Feature\\
@@ -123,13 +125,16 @@ experiment.
         MARP          & 47 & 87 ± 4 & 95 ± 1 & 39 & T-percent-max-above-baseline (27\%)\\
         NO\_MARP      & 39 & 75 ± 7 & 87 ± 1 & 38 & max-max-baseline-deviation (34\%)\\
     \end{tabular}
-    \caption[pset-cv]{\textbf{Parameter Set Cross Validation Scores}: Columns
-        left to right; parameter set name, number of parameters included,
-        average cross-validation score (max 100) ± std. deviation,
+
+    \caption[pset-cv]{\textbf{Parameter Set Cross Validation Scores}: Results of
+        classifying testing data in to one of three classes; pass, fail or warn.
+        Columns left to right; parameter set name, number of parameters
+        included, average cross-validation score (max 100) ± std. deviation,
         average stratified cross-validation score (max 100) ± std. deviation,
         average depth of the generated tree and the most important parameter by
         Gini importance (max 100). Tree depth and parameter importance was
-        estimated on experiments using the stratified data.}
+    estimated on experiments using the stratified data.}
+
     \label{tab:pset-cv}
 \end{table}
 
@@ -149,9 +154,22 @@ It's interesting to compare the scores between the \textbf{AQC} and
 highly despite having significantly fewer parameters. This appears to indicate
 that many of the parameters in the \textbf{ALL} model are redundant for use in
 classification. This should of course be expected, you'd hope to see that a set
-that include parameters known to be used by the current \textbf{auto\_qc} system
-are capable of replicating results made by that system.
+that includes parameters known to be used by the current \textbf{auto\_qc} system
+is capable of replicating results made by that system.
 
+In general the other models perform reasonably well, potentially reflecting the
+simple linear nature of the decisions made by the \textbf{auto\_qc} system.
+
+Stratified cross-validation scores are consistently better and less variable
+(smaller standard deviations) than their non-stratified counterparts. This
+should be due to the more "balanced" training and testing sets
+gained by assigning observations to folds to match their proportions in the
+whole data set. The differences between the pairs of validation scores is
+predictable -- averaging 8.66 percentage points -- but the \textbf{NOBASELINE}
+set presents a difference of almost 20pp and exhibits more variable behaviour.
+This suggests that excluding the baseline related parameters is problematic for
+one (or two) of the three class labels (as the only difference expected between the
+experiments will be the proportions of the classes).
 
 
 ...highlights the shortcomings of using a decision tree...
