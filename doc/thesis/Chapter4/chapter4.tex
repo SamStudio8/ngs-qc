@@ -22,9 +22,7 @@
 * ...actually data was 0... gg
 
 
-\section{Trees}
-\subsection{Initial Trees}
-\subsection{Parameter Sets}
+\section{Parameter Sets and Selection}
 
 Identified a series of parameter sets for initial training and testing purposes:
 
@@ -61,6 +59,14 @@ use in our analysis. Ultimately, \textbf{bamcheckr} performed too slowly and it
 was possible to use \textbf{Frontier} itself to extract the additional features
 needed to better represent the decisions made by the current system.
 
+%TODO Cite dtc
+For each parameter set, data and targets were extracted via \textbf{Frontier}'s
+API before being subset by \textbf{scikit-learn}'s \textbf{StratifiedKFold}
+function. These subsets are referred to as "folds" (of which we used 10) and for
+each fold a \textbf{DecisionTreeClassifier} was trained and tested.
+Table~\ref{tab:pset-cv} outlines the cross validation scores for each such
+experiment.
+
 \begin{table}
     \centering
     \begin{tabular}{l | c  c  c  c  r}
@@ -76,23 +82,23 @@ needed to better represent the decisions made by the current system.
         MARP          & 47 & 95 & 1 & 39 & T-percent-max-above-baseline (27\%)\\
         NO\_MARP      & 39 & 87 & 1 & 38 & max-max-baseline-deviation (34\%)\\
     \end{tabular}
-
     \caption[pset-cv]{\textbf{Parameter Set Cross Validation Scores}: Columns
         left to right; parameter set name, number of parameters included,
         average cross-validation score (max 100), standard deviation of scores,
         average depth of the generated tree and the most important parameter by
-    Gini importance (max 100).}
-
+        Gini importance (max 100).}
     \label{tab:pset-cv}
 \end{table}
 
-%TODO Cite dtc
-For each parameter set, data and targets were extracted via \textbf{Frontier}'s
-API before being subset by \textbf{scikit-learn}'s \textbf{StratifiedKFold}
-function. These subsets are referred to as "folds" (of which we used 10) and for
-each fold a \textbf{DecisionTreeClassifier} was trained and tested.
-Table~\ref{tab:pset-cv} outlines the cross validation scores for each such
-experiment.
+Whilst these sets could be considered crude -- a majority of them were
+constructed using \textbf{Frontier}'s parameter inspection API functions...
+
+...it does tell us quite a lot about the data set...
+the smallest set; \textbf{AQC}, had 27 parameters and was still able to maintain
+a 95\% cross-validation score, impressive given that the best models scored
+97\%. This would appear to indicate that many of the parameters in the
+\textbf{ALL} model are possibly redundant.
+
 
 ...highlights the shortcomings of using a decision tree...
 overfitting... gini coefficient not a real measure of importance...
@@ -126,12 +132,14 @@ regardless of their class label and will thus be unhelpful in predicting class
 membership for future observations. Such parameters can be safely discarded,
 Listing~\ref{list:frontier-warnings} displays warnings issued by
 \textbf{Frontier} for several of the \textbf{auto\_qc}
-
 \subsection{Parameter Selection}
 
 Whilst the crude parameter sets of the previous section were useful to gain
 understanding of the data that we have, it was necessary to obtain more
 deliberate decisions for parameters to utilise in the model.
+
+\section{Trees}
+\subsection{Initial Trees}
 
 \subsection{Ignoring Warnings}
 
