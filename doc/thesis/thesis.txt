@@ -1356,6 +1356,58 @@ Identified a series of parameter sets for initial training and testing purposes:
 24
 
 5.3 Trees
+Set
+Nº CV ± SD Depth
+Most Important Feature
+ALL
+86 97
+1
+38
+T-percent-max-baseline-deviation (27%)
+27 95
+1
+36
+T-percent-max-baseline-deviation (31%)
+AQC
+AQCN
+21 95
+1
+39
+max-max-baseline-deviation (31%)
+1
+61
+2
+53
+error-rate (100%)
+ERROR
+NO_ERROR
+85 97
+1
+38
+T-percent-max-above-baseline(27%)
+BASELINE
+34 89
+1
+46
+T-percent-max-above-baseline(28%)
+1
+31
+error-rate (24%)
+NOBASELINE 52 91
+MARP
+47 95
+1
+39
+T-percent-max-above-baseline (27%)
+39 87
+1
+38
+max-max-baseline-deviation (34%)
+NO_MARP
+Table 5.1 Parameter Set Cross Validation Scores: Columns left to right; parameter set name, number of
+parameters included, average cross-validation score (max 100), standard deviation of scores, average depth of
+the generated tree and the most important parameter by Gini importance (max 100).
+
 • AQC
 A set consisting of all available parameters used by auto_qc.
 • AQCN
@@ -1372,6 +1424,23 @@ Exclude any parameter which include "baseline" as a substring.
 Include any parameter which includes one of the following substrings: mean, percent, rate or average.
 • NO_MARP
 Exclude any parameter which includes one of the following substrings: mean, percent, rate or average.
+Of note in particular is the AQC set, constructed from the parameters available from the "BAMcheckr’d" data
+that are taken in to account by the current auto_qc system. It should be noted however that not all these
+parameters were initially available in the input files and auto_qc relies upon data made available from vr-pipe
+where the rules of auto_qc are actually applied. Appendix F.2 discusses contributions I made to bamcheckr
+for recovering these parameters for use in our analysis. Ultimately, bamcheckr performed too slowly and it
+was possible to use Frontier itself to extract the additional features needed to better represent the decisions
+made by the current system.
+For each parameter set, data and targets were extracted via Frontier’s API before being subset by scikit-learn’s
+StratifiedKFold function. These subsets are referred to as "folds" (of which we used 10) and for each fold
+
+25
+
+5.3 Trees
+a DecisionTreeClassifier was trained and tested. Table 5.1 outlines the cross validation scores for each such
+experiment.
+...highlights the shortcomings of using a decision tree... overfitting... gini coefficient not a real measure of
+importance...
 /pools/encrypted/sanger/frontier/data/bamcheck_2013dec25_ratios_out/(13455 files)
 [WARN] bases-trimmed parameter has 0 variance (with mean 0.00)
 [WARN] filtered-sequences parameter has 0 variance (with mean 0.00)
@@ -1388,10 +1457,6 @@ have no variance by one of Frontier’s sanity checking procedures.
 Parameters with no variance will have constant value across all observations regardless of their class label and
 will thus be unhelpful in predicting class membership for future observations. Such parameters can be safely
 discarded, Listing 6 displays warnings issued by Frontier for several of the auto_qc
-
-25
-
-5.3 Trees
 
 5.3.3
 

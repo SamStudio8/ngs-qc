@@ -50,6 +50,53 @@ Identified a series of parameter sets for initial training and testing purposes:
         mean, percent, rate or average.
 \end{itemize}
 
+Of note in particular is the \textbf{AQC} set, constructed from the parameters
+available from the "BAMcheckr'd" data that are taken in to account by the
+current \textbf{auto\_qc} system. It should be noted however that not all these
+parameters were initially available in the input files and \textbf{auto\_qc}
+relies upon data made available from \textbf{vr-pipe} where the rules of
+\textbf{auto\_qc} are actually applied. Appendix~\ref{app:ratios} discusses
+contributions I made to \textbf{bamcheckr} for recovering these parameters for
+use in our analysis. Ultimately, \textbf{bamcheckr} performed too slowly and it
+was possible to use \textbf{Frontier} itself to extract the additional features
+needed to better represent the decisions made by the current system.
+
+\begin{table}
+    \centering
+    \begin{tabular}{l | c  c  c  c  r}
+        Set           & Nº & CV  & ± SD & Depth & Most Important Feature\\
+        \hline
+        ALL           & 86 & 97 & 1 & 38 & T-percent-max-baseline-deviation (27\%)\\
+        AQC           & 27 & 95 & 1 & 36 & T-percent-max-baseline-deviation (31\%)\\
+        AQCN          & 21 & 95 & 1 & 39 & max-max-baseline-deviation (31\%)\\
+        ERROR         & 1  & 61 & 2 & 53 & error-rate (100\%)\\
+        NO\_ERROR     & 85 & 97 & 1 & 38 & T-percent-max-above-baseline(27\%)\\
+        BASELINE      & 34 & 89 & 1 & 46 & T-percent-max-above-baseline(28\%)\\
+        NOBASELINE    & 52 & 91 & 1 & 31 & error-rate (24\%)\\
+        MARP          & 47 & 95 & 1 & 39 & T-percent-max-above-baseline (27\%)\\
+        NO\_MARP      & 39 & 87 & 1 & 38 & max-max-baseline-deviation (34\%)\\
+    \end{tabular}
+
+    \caption[pset-cv]{\textbf{Parameter Set Cross Validation Scores}: Columns
+        left to right; parameter set name, number of parameters included,
+        average cross-validation score (max 100), standard deviation of scores,
+        average depth of the generated tree and the most important parameter by
+    Gini importance (max 100).}
+
+    \label{tab:pset-cv}
+\end{table}
+
+%TODO Cite dtc
+For each parameter set, data and targets were extracted via \textbf{Frontier}'s
+API before being subset by \textbf{scikit-learn}'s \textbf{StratifiedKFold}
+function. These subsets are referred to as "folds" (of which we used 10) and for
+each fold a \textbf{DecisionTreeClassifier} was trained and tested.
+Table~\ref{tab:pset-cv} outlines the cross validation scores for each such
+experiment.
+
+...highlights the shortcomings of using a decision tree...
+overfitting... gini coefficient not a real measure of importance...
+
 \begin{listing}[H]
     \caption[frontier-warnings]{\textbf{Frontier Variance Warnings}:
         Warnings issued for \textbf{auto\_qc} parameters that have been found to
