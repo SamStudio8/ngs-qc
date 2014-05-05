@@ -1,28 +1,69 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Results}
+
+This chapter examines the main results from application of \textbf{Frontier} and
+\textbf{scikit-learn} to our \textbf{auto\_qc} learning task.
+
 \section{Introduction}
-\subsection{Why Decision Trees?}
-\subsection{CART}
 
-\section{Parameter Selection}
-...important to find the "best" parameters
-...what is best? scikit-learn uses total gini information
+To recap...
 
-...frontier uses two methods:
 \begin{itemize}
-    \item Backward elimination; pruning parameters with the lowest total gini
-    \item Call scikit-learn's SelectKBest
+    \item Set up environment for decision tree classification...
+    \item Select an appropriate set of parameters to use...
+    \item Minimise decision tree...
+    \item Apply best practice..
+    \item Best parameters...?
+    \item Identified any parameters that match or not?
 \end{itemize}
 
+\section{Introduction}
+\subsection{Why Decision Trees?}
+%TODO Citations...
 
-* incorrect degrees of freedom
-* warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
-* Replaced univariate\_selection with version from master
-* needed use force np.float64
-* ...actually data was 0... gg
+...each node represents a test on the value of an attribute or feature
+
+...single discrete target
+...primarily human readable rule set... like a flow chart...
+...simple to interpret, can be statistically verified
+...robust to noise
+...realistic applications in medicine and risk
+...algorithm capable of scaling to relatively large sets such as ours
+...at this time we're not looking for a "black box"
+...want to be able to see whether the current rule set can be extracted with
+machine learning methods...
+
+...decisions tree however are prone to overfitting -- failing to generalise...
+...cannot promise optimality
+...duplicated subtrees
+...cannot be applied to first order logic, only one parameter can be tested at a
+time, future tests are not "aware" of previous tests
+
+\subsection{DecisionTreeClassifier}
+% TODO Cite
+% http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+...gini impruty or information gain... scikit seems to favour gini...
+...
+
+\begin{itemize}
+    \item \textbf{max\_depth} \hfill\\
+        ...
+    \item \textbf{min\_samples\_split} \hfill\\
+        ...
+    \item \textbf{min\_samples\_leaf} \hfill\\
+        ...
+    \item \textbf{min\_features} \hfill\\
+        ...
+\end{itemize}
+
+...Classification And Regression Tree (CART)
+
+
+
 
 
 \section{Parameter Sets and Selection}
+\subsection{Naive Parameter Sets}
 
 Identified a series of parameter sets for initial training and testing purposes:
 
@@ -70,38 +111,66 @@ experiment.
 \begin{table}
     \centering
     \begin{tabular}{l | c  c  c  c  r}
-        Set           & Nº & CV  & ± SD & Depth & Most Important Feature\\
+        Set           & Nº & CV ± SD & SCV ± SD & Depth & Most Important Feature\\
         \hline
-        ALL           & 86 & 97 & 1 & 38 & T-percent-max-baseline-deviation (27\%)\\
-        AQC           & 27 & 95 & 1 & 36 & T-percent-max-baseline-deviation (31\%)\\
-        AQCN          & 21 & 95 & 1 & 39 & max-max-baseline-deviation (31\%)\\
-        ERROR         & 1  & 61 & 2 & 53 & error-rate (100\%)\\
-        NO\_ERROR     & 85 & 97 & 1 & 38 & T-percent-max-above-baseline(27\%)\\
-        BASELINE      & 34 & 89 & 1 & 46 & T-percent-max-above-baseline(28\%)\\
-        NOBASELINE    & 52 & 91 & 1 & 31 & error-rate (24\%)\\
-        MARP          & 47 & 95 & 1 & 39 & T-percent-max-above-baseline (27\%)\\
-        NO\_MARP      & 39 & 87 & 1 & 38 & max-max-baseline-deviation (34\%)\\
+        ALL           & 86 & 90 ± 4 & 97 ± 1 & 38 & T-percent-max-baseline-deviation (27\%)\\
+        AQC           & 27 & 87 ± 4 & 95 ± 1 & 36 & T-percent-max-baseline-deviation (31\%)\\
+        AQCN          & 21 & 86 ± 4 & 95 ± 1 & 39 & max-max-baseline-deviation (31\%)\\
+        ERROR         & 1  & 60 ± 6 & 61 ± 2 & 53 & error-rate (100\%)\\
+        NO\_ERROR     & 85 & 90 ± 4 & 97 ± 1 & 38 & T-percent-max-above-baseline(27\%)\\
+        BASELINE      & 34 & 82 ± 5 & 89 ± 1 & 46 & T-percent-max-above-baseline(28\%)\\
+        NOBASELINE    & 52 & 72 ± 10 & 91 ± 1 & 31 & error-rate (24\%)\\
+        MARP          & 47 & 87 ± 4 & 95 ± 1 & 39 & T-percent-max-above-baseline (27\%)\\
+        NO\_MARP      & 39 & 75 ± 7 & 87 ± 1 & 38 & max-max-baseline-deviation (34\%)\\
     \end{tabular}
     \caption[pset-cv]{\textbf{Parameter Set Cross Validation Scores}: Columns
         left to right; parameter set name, number of parameters included,
-        average cross-validation score (max 100), standard deviation of scores,
+        average cross-validation score (max 100) ± std. deviation,
+        average stratified cross-validation score (max 100) ± std. deviation,
         average depth of the generated tree and the most important parameter by
-        Gini importance (max 100).}
+        Gini importance (max 100). Tree depth and parameter importance was
+        estimated on experiments using the stratified data.}
     \label{tab:pset-cv}
 \end{table}
 
-Whilst these sets could be considered crude -- a majority of them were
-constructed using \textbf{Frontier}'s parameter inspection API functions...
+Whilst these parameter sets are certainly crude -- a majority of them having
+been constructed without close examination just by matching or excluding
+substrings using \textbf{Frontier}'s parameter inspection functions -- we can
+learn quite a lot about the available data.
 
-...it does tell us quite a lot about the data set...
-the smallest set; \textbf{AQC}, had 27 parameters and was still able to maintain
-a 95\% cross-validation score, impressive given that the best models scored
-97\%. This would appear to indicate that many of the parameters in the
-\textbf{ALL} model are possibly redundant.
+Firstly it should be of no surprise that the \textbf{ALL} model scores highly in
+both cross-validation and stratified cross-validation testing. The feature group
+is a superset over the same parameters used by \textbf{auto\_qc} itself.
+Similarly the \textbf{NO\_ERROR} set which uses all but one parameter
+(\textbf{error-rate}) scores highly.
+
+It's interesting to compare the scores between the \textbf{AQC} and
+\textbf{AQCN} parameter sets against \textbf{ALL}. Both of the former score
+highly despite having significantly fewer parameters. This appears to indicate
+that many of the parameters in the \textbf{ALL} model are redundant for use in
+classification. This should of course be expected, you'd hope to see that a set
+that include parameters known to be used by the current \textbf{auto\_qc} system
+are capable of replicating results made by that system.
+
 
 
 ...highlights the shortcomings of using a decision tree...
 overfitting... gini coefficient not a real measure of importance...
+
+\subsection{Informed Parameter Selection}
+
+Whilst the crude parameter sets of the previous section were useful to gain
+understanding of the data that we have, it was necessary to obtain more
+deliberate decisions for parameters to utilise in the model.
+
+...important to find the "best" parameters
+...what is best? scikit-learn uses total gini information
+
+...frontier uses two methods:
+\begin{itemize}
+    \item Backward elimination; pruning parameters with the lowest total gini
+    \item Call scikit-learn's SelectKBest
+\end{itemize}
 
 \begin{listing}[H]
     \caption[frontier-warnings]{\textbf{Frontier Variance Warnings}:
@@ -134,10 +203,6 @@ Listing~\ref{list:frontier-warnings} displays warnings issued by
 \textbf{Frontier} for several of the \textbf{auto\_qc}
 \subsection{Parameter Selection}
 
-Whilst the crude parameter sets of the previous section were useful to gain
-understanding of the data that we have, it was necessary to obtain more
-deliberate decisions for parameters to utilise in the model.
-
 \section{Trees}
 \subsection{Initial Trees}
 
@@ -153,4 +218,13 @@ deliberate decisions for parameters to utilise in the model.
 
 \subsubsection{Confusion Matrices}
 "Normal" confusion matrix and "Warnings" confusion matrix...
+
+...
+...
+
+* incorrect degrees of freedom
+* warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
+* Replaced univariate\_selection with version from master
+* needed use force np.float64
+* ...actually data was 0... gg
 
