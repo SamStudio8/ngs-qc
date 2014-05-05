@@ -119,8 +119,6 @@ Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 4
 
-5
-
 auto_qc Decision Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 7
@@ -153,328 +151,316 @@ Tools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
 
-Pre-Implementation
+Frontier
+4.1
 
 13
 
-4.1
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+4.1.1
+4.1.2
 
-Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
-
-4.2
-
-Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
-
-Frontier
-
-17
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
 Contents
-5.1
+4.1.3
+4.2
+
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+4.3
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+4.4
+4.5
+
+5
 
 6
 
-7
+4.3.2
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+4.3.3
+
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
+4.3.4
+
+Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+
+4.3.5
+
+Logging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+
+Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+4.5.1
+
+AQCReader and BamcheckReader . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+
+4.5.2
+
+Frontier Utilities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+
+4.5.3
+
+Frontier API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+23
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+5.1.1
+
+Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 5.1.2
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+CART . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
-5.1.3
-
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
-
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 5.3
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 5.3.1
 
-Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
 5.3.2
 
-Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
 5.3.3
-5.3.4
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
-Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
-
-5.3.5
-
-Logging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
-
-5.4
-
-Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
-
-5.5
-
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
-5.5.1
-
-AQCReader and BamcheckReader . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
-
-5.5.2
-
-Frontier Utilities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
-
-5.5.3
-
-Frontier API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
-
-Results
-
-27
-
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
-6.1.1
-
-Why Decision Trees? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
-
-6.1.2
-
-CART . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
-
-6.2
-
-Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
-
-6.3
-
-Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
-6.3.1
-
-Initial Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
-
-6.3.2
-
-Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
-
-6.3.3
-
-Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
 
-29
-30
-
-7.1
-
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
-
-7.2
-
-Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
-
-7.3
-8
-
-5.1.1
-
-5.2
+25
+26
 
 6.1
 
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+
+6.2
+
+Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+6.2.1
+
+GWAS and iCHIP Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+
+6.2.2
+
+The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+Materials and Methods
+7.1
+
+7.2
+
+8
+
+Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+5.2
+
+6.3
+7
+
+4.3.1
+
+Results
+5.1
+
 II
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
+28
+
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+7.1.1
+
+Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+
+7.1.2
+7.1.3
+
+Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+
+Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 7.2.1
 
-GWAS and iCHIP Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
 7.2.2
 
-The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
 
-Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Goldilocks
 
-Materials and Methods
+30
+iii
+
+Contents
 8.1
 
 8.2
 
-32
+8.3
+9
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 8.1.1
 
-Variant Call Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 8.1.2
 
-Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 8.1.3
 
-Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
-Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+8.1.4
+
+Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 8.2.1
 
-Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
-iii
-
-Contents
-
-9
+Parsing Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 8.2.2
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Loading Variant Query Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
-Goldilocks
+8.2.3
+8.2.4
 
-34
+Storage and Recall of Variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Searching for Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
-9.1
+8.2.5
 
-9.2
+Filtering and Ranking Candidates for Selection . . . . . . . . . . . . . . . . . . . . . 34
 
-9.3
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
-9.1.1
+Results
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+36
 
-9.1.2
+10 Analysis Pipeline
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+39
 
-9.1.3
-
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
-
-9.1.4
-
-Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
-
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
-9.2.1
-
-Parsing Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
-
-9.2.2
-
-Loading Variant Query Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
-
-9.2.3
-
-Storage and Recall of Variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
-
-9.2.4
-
-Searching for Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
-
-9.2.5
-
-Filtering and Ranking Candidates for Selection . . . . . . . . . . . . . . . . . . . . . 38
-
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
-
-10 Results
-
-40
-
-11 Analysis Pipeline
-
-43
-
-11.1 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
-11.2 Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
-11.3 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
-11.3.1 Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
-11.3.2 Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
-11.4 Pileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
-11.5 Merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
-11.6 Calling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
-11.7 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+10.1 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+10.2 Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+10.3 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+10.3.1 Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+10.3.2 Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+10.4 Pileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+10.5 Merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+10.6 Calling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+10.7 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 III
 
 Discussions and Conclusions
 
-48
+44
 
-12 Current Status
+11 Current Status
 
-49
+45
 
-13 Critical Evaluation
+12 Critical Evaluation
 
-50
+46
 
-14 Conclusions
+13 Conclusions
 
-51
+47
 
 Appendix A Concept Glossary
 
-54
+50
 
-A.1 Part I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
-A.1.1 Bases, DNA and Variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
-A.1.2 Next Generation Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
-A.1.3 Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
-A.1.4 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
-A.1.5 Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+A.1 Part I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+A.1.1 Bases, DNA and Variants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+A.1.2 Next Generation Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+A.1.3 Variants and SNPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+A.1.4 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+A.1.5 Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+A.1.6 Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+A.1.7 Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+A.1.8 Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
 iv
 
 Contents
-A.1.6 Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
-A.1.7 Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
-A.1.8 Training and Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
-A.1.9 Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
-A.2 Part II: Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
-A.2.1 Group . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
-A.2.2 Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
-A.2.3 Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.2.4 Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.3 Part II: Pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.3.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.3.2 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.3.3 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.3.4 SAM and BAM Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.3.5 "The Farm" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
-A.3.6 GWAS Data Set . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+A.1.9 Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+A.2 Part II: Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+A.2.1 Group . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+A.2.2 Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+A.2.3 Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.2.4 Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.3 Part II: Pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.3.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.3.2 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.3.3 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.3.4 SAM and BAM Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.3.5 "The Farm" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+A.3.6 GWAS Data Set . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
 Appendix B Input Examples
 
-60
+56
 
-B.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
-B.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
-B.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+B.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+B.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
+B.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
 Appendix C Output Examples
 
-65
+61
 
-C.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+C.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
 Appendix D Tool Installation
 
-68
+64
 
-D.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
-D.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
-D.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
-D.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+D.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+D.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+D.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+D.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
 Appendix E Scaling Difficulties with samtools merge
+
+66
+
+E.1 Memory Leak . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+E.2 Memory Leak in Test Harnesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+E.3 Poor Time Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+E.4 The Red Herring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+E.5 The Plot Thickens . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+Appendix F Pre-Frontier Implementation
 
 70
 
-E.1 Memory Leak . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
-E.2 Memory Leak in Test Harnesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
-E.3 Poor Time Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
-E.4 The Red Herring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
-E.5 The Plot Thickens . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+F.1
+
+Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+
+F.2
+
+Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
 
 v
 
@@ -896,117 +882,14 @@ searched and processed with command line tools such as awk.
 
 Chapter 4
 
-Pre-Implementation
-4.1
-
-Classification Correlation
-
-An important consideration for statistical analysis is the relation between observations. The "bamcheckr’d"
-input data described in Chapter 3.1.1 is available per lanelet, however as shown in Chapter A.1.4 a lane may
-contain more than one lanelet. Herein lies the trouble: if during a sequencing run the flowcell is somehow
-subjected to abnormal conditions (e.g. a temperature increase due to an air conditioning failure) or the device
-is depleted of reagents then every lane (and thus all lanelets within) will be of considerably poor quality.
-
-Fig. 4.1 Heatmap of lanelet QC status by lane: Lanes are vertical bars with each lanelet cell coloured red to
-represent a failure, yellow for a warning and grey for a pass.
-In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
-13
-
-4.2 Recovering Ratios
-a lane as well as each lane in a sequencing run. To examine this further, an R script utilising ggplot2 was
-authored to visually inspect whether correlation existed and if so to what degree that data is affected.
-Figure 4.1 displays a plot of auto_qc classification for each lanelet in a lane. The plot itself is a dense heatmap
-where each lane stands as a vertical bar, broken in to horizontal cells, each of which represents a lanelet that
-was sequenced in that particular lane. These lanelets are colour coded using; red for failures, yellow for
-warnings and grey for passes (to allow the other two classes to be more easily seen).
-Therefore an unbroken vertical red line indicates that all lanelets that comprise of that line failed to pass some
-aspect of the current auto_qc thresholds. In reality there are few conditions under which a lanelet would fail
-irrespective of the status of the rest of the lanelets in the same lane which typically involve an error during
-the preparation of the sample (an easy to spot result as it will cause poor quality across all lanelets using that
-sample).
-Overall there are a series of instances appearing to support correlation for whole-lane failures and warnings
-but despite this there do appear to be occasions where a lanelet has failed where the remainder of the lane
-has not. Having discussed this with the project supervisor and contacts at the Sanger Institute we decided to
-continue to the implementation stage, agreeing that whilst some evidence of correlation between lanelets in
-the same lane has emerged, we will still be able to recover parameters that will be useful to quality control and
-statistical testing may be required following this analysis to describe how powerful such parameters are taking
-this possible correlation in to account.
-It should be noted that the proportion of failures and warnings is considerably smaller than passes and so care
-will need to be taken to find a balance; for example it would not be feasible to merely discard lanelets from
-lanes that have failed entirely as there’d hardly be any data on which to train a classifier. Indeed other solutions
-may be possible, perhaps weighting observations which exhibit similar behaviour to other lanelets in their lane
-so as to give their parameter values less priority during the construction of the classifier itself.
-It is worth noting that although the plot does not make a particular distinction between lanes in the same flow
-cell, lanes are sequentially identified so the red bars of thicker-width arguably display some failures across
-entire flow cells.
-As a final note it should be stressed that this plot should be regarded as a diagnostic rather than an experiment
-with a direct conclusion. Given more time it would be useful to investigate the nature of these possible
-correlations, given a lane that has failed across all lanelets: do those lanelets actually express similar quality
-metrics?
-
-4.2
-
-Recovering Ratios
-
-An initial scan of the summary numbers available in the "bamcheckr’d" files introduced in Chapter 3.1.1
-revealed 82 different parameters. However, when comparing this parameter set to the threshold rules of
-auto_qc, it appeared that some parameters were "missing".
-In the pursuit of replicating the decisions of the existing system, it is ideal to have all the parameters used
-
-14
-
-4.2 Recovering Ratios
-in the making of those decisions at hand. In particular, the missing parameters were of a normalised nature,
-typically in the form of a ratio or percentage which should make them more valuable than a parameter that
-just represents a raw count of some property.
-It was found that these missing parameters are calculated in a step preceeding auto_qc as part of the vr-pipe
-pipeline1 .
-Whilst I could have attempted to set-up my own instance of vr-pipe to recover this data, speaking with
-contacts at the Sanger Institute, it was decided that this would prove troublesome work; requiring an involved
-deployment to a cloud based facility such as Amazon’s Elastic Compute Cloud and installation of various Perl
-dependencies as well as requiring access to many controlled databases within the institute.
-Most of the functions that calculated these parameters turned out to be straightforward and could easily be
-ported to another application. At first it was intended to add these functions to the program authored for this
-part of the project, but the Sanger Institute suggested it would be more useful to implement such functionality
-in bamcheckr directly, removing some of auto_qc’s dependence on its position in vr-pipe.
-# Install and include the ‘devtools’ package
-install.packages("devtools")
-library(devtools)
-# Install package directly from Github repository
-install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
-# Install package from local directory
-install("/home/sam/Projects/seq_autoqc/bamcheckr")
-Listing 1 : Installing an in-development R package with devtools
-
-With the help of devtools[31] (see Listing 1) it was simple to develop and test contributions to bamcheckr
-locally without needing to re-publish the package after changes. An additional script was added to bamcheckr’s
-NAMESPACE... to recover the missing ratio and percentage based parameters...
-...unfortunately, the performance of the script was poor, taking 5.5s on average and increasing to 16.1s when
-enabling a complex function containing many vector operations (potentially inefficient due to my lack of R
-experience)... for overlapping_base_duplicate_percentage
-...utilising the program designed and implemented in the following chapter... loaded required information and
-used the API to calculate the missing parameters...
-...Morandat[32]
-...with such an intriguing difference in performance with significantly more time it would be appealing to
-explore the idiosyncrasies of each implementation ...although such an investigation would quite likely sufficiently
-1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm
-
-15
-
-4.2 Recovering Ratios
-generate an entire project of its own.
-
-16
-
-Chapter 5
-
 Frontier
 This chapter introduces Frontier: the main programming effort for this part of the project. Frontier is a Python
 package that serves as a data manager, providing both interfaces to read inputs into structures in memory and
 to retrieve them in formats acceptable to a machine learning framework.
+Appendix F describes some analysis performed before implementation of Frontier.
 
-5.1
-5.1.1
+4.1
+4.1.1
 
 Design
 Purpose
@@ -1027,11 +910,11 @@ If possible, Frontier could also handle any objects returned, displaying or logg
 information pertaining to a returned classifier’s accuracy to assist a user in the ongoing performance monitoring
 of changes to used data subsets or parameters.
 
-17
+13
 
-5.2 Concepts
+4.2 Concepts
 
-5.1.2
+4.1.2
 
 Format
 
@@ -1040,7 +923,7 @@ result of this project’s technical output could almost be considered as two se
 the package designed to ease user interaction with scikit-learn and Front, a Python script which implements
 Frontier’s functionality in order to interact with scikit-learn to conduct analysis on the auto_qc data.
 
-5.1.3
+4.1.3
 
 Method
 
@@ -1049,14 +932,14 @@ current auto_qc system. Whilst scripts initially hard-coded to suit the specific
 coded classes and encodings – Frontier followed an evolutionary design process and grew to become a more
 generic framework applicable to learning tasks outside of this study.
 
-5.2
+4.2
 
 Concepts
 
 Appendix A.1 introduces some ideas that will assist understanding of the application’s purpose and terminology
 used in the following implementation section.
 
-5.3
+4.3
 
 Implementation
 
@@ -1066,7 +949,7 @@ This section investigates the implementation of Frontier’s major components:
 • Storage of read data in memory
 • Retrieval of stored data for interaction with scikit-learn
 
-5.3.1
+4.3.1
 
 Class Definitions
 
@@ -1077,12 +960,12 @@ decoding of the pass, fail and warn classes.
 However this implementation was clearly esoteric and held little to no further use outside the domain of the
 project’s learning task. What would happen if a class label were to be added or removed in future? Most likely
 many lines of code would need to be re-written to handle such cases; the package was inflexible.
-18
+14
 
-5.3 Implementation
+4.3 Implementation
 To counter this, Frontier was refactored to remove hard coded label definitions enabling its use as a more
 general purpose tool where users can specify the domain’s classes and their associated labels and encodings.
-Listing 2 shows the definitions used by Front to work with the auto_qc data.
+Listing 1 shows the definitions used by Front to work with the auto_qc data.
 CLASSES = {
 "pass": {
 "names": ["pass", "passed"],
@@ -1097,9 +980,9 @@ CLASSES = {
 "code": 0,
 },
 }
-Listing 2 : Class definitions for auto_qc as passed to Frontier
+Listing 1 : Class definitions for auto_qc as passed to Frontier
 
-As per Listing 2, to define classes a user must provide a Python dict containing the following for each label:
+As per Listing 1, to define classes a user must provide a Python dict containing the following for each label:
 • class String
 The dictionary key is used as the canonical name of the class label
 • names [String]
@@ -1117,9 +1000,9 @@ minimum input from the end user. Additional utilities provided by the Frontier u
 structure to automatically classify and encode labels without user intervention with the following functions:
 • classify_label
 Attempt to classify a label by comparing a given string to each set of names, locating an exact match
-19
+15
 
-5.3 Implementation
+4.3 Implementation
 will return the relevant canonical class label
 • encode_class
 Given a canonical class label, return its code
@@ -1130,7 +1013,7 @@ Increment the _count for a particular class given its canonical label
 These functions are put to use throughout Frontier and are essential for reader classes (detailed in the next
 chapter) to parse, classify and then encode observation targets automatically from relevant files.
 
-5.3.2
+4.3.2
 
 Input Handling
 
@@ -1155,11 +1038,11 @@ to follow.
 The AbstractReader class is designed to simplify the process of reading in observations and their targets for
 end users, however it is still up to the author of the dervied class to set up any structures to store data (which
 cannot be done automatically without likely enforcing potentially unhelpful constraints) before initialisation
-of the inherited base class (via the call to super) as shown in Listing 3.
+of the inherited base class (via the call to super) as shown in Listing 2.
 
-20
+16
 
-5.3 Implementation
+4.3 Implementation
 
 class BamcheckReader(AbstractReader):
 [...]
@@ -1168,10 +1051,10 @@ self.summary = SummaryNumbers()
 self.indel = IndelDistribution()
 super(BamcheckReader, self).__init__(filepath, CLASSES, auto_close, 0)
 [...]
-Listing 3 : Extract from BamcheckReader class documenting initialisation of necessary data structures and
+Listing 2 : Extract from BamcheckReader class documenting initialisation of necessary data structures and
 calling for initialisation of its inherited base class
 
-As shown in Listing 3, the initialisation of the AbstractReader allows four arguments:
+As shown in Listing 2, the initialisation of the AbstractReader allows four arguments:
 • filepath String
 A relative or absolute path to a file from which to extract data or targets
 • CLASSES Dictionary
@@ -1199,9 +1082,9 @@ much information for successful classification as their values are equal for all
 
 a pointer to the address of the extracted data’s dictionary hashmap will be copied to memory inside a Frontier class
 
-21
+17
 
-5.3 Implementation
+4.3 Implementation
 In future it would be useful to investigate whether it would be feasible to perform such sanity checking in a
 generic manner to ensure it could be applied to a wide enough range of scenarios to make it worth including
 functionality in the AbstractReader directly.
@@ -1210,7 +1093,7 @@ format of a file in a string that can be parsed by Frontier’s IO subpackage, r
 derived class. Classes could also list file extensions they are capable of processing which could potentially be
 used to automatically determine which readers to use without requiring the user to explicitly specify.
 
-5.3.3
+4.3.3
 
 Storage
 
@@ -1224,11 +1107,11 @@ identifier is then used as a key in both the _data and _targets dictionaries to 
 another dictionary or an arbitrary class) that stores that observation’s parameters and its known target (encoded
 class label), respectively.
 Although these attributes can be manipulated directly (and indeed they are for testing purposes) the leading
-underscore follows a popular convention defined in Python’s style guideline, PEP8[33], where class members
+underscore follows a popular convention defined in Python’s style guideline, PEP8[31], where class members
 with leading underscores should be treated as non-public. Python doesn’t have private variables such as those
 that may be found in other languages like Java, indeed the Python style guide points out that "no attribute is
-really private in Python"[33]. In an interesting StackOverflow answer on the subject, a user describes that this
-is "cultural"[34] and that Python programmers are trusted not to circumvent convention and "mess around with
+really private in Python"[31]. In an interesting StackOverflow answer on the subject, a user describes that this
+is "cultural"[32] and that Python programmers are trusted not to circumvent convention and "mess around with
 those private members". Users are therefore expected to use the functionality Frontier provides for controlled
 getting and setting of data stored in these pseudo-private _data and _targets members.
 load_data, for example, should be used exclusively when populating the two dictionaries and is automatically
@@ -1245,9 +1128,9 @@ read and so memory cannot be reserved to prevent these operations. The potential
 
 somewhat contrived contraction of ’Statistics Multiplexer’
 
-22
+18
 
-5.3 Implementation
+4.3 Implementation
 reading through the data once to reserve the right amount of memory for a second read-through impractical in
 terms of time.
 It is arguable that despite this, the data could be unloaded from the _data and _targets dictionaries in to some
@@ -1269,7 +1152,7 @@ It should be noted that the Statplexer stores a copy of the user defined CLASSES
 member _classes), which is an argument to its construction, allowing the Statplexer to share this information
 with any readers or utility functions who require it.
 
-5.3.4
+4.3.4
 
 Retrieval
 
@@ -1280,7 +1163,7 @@ parameters of interest from the internal Statplexer representation.
 The previous section suggests that directly accessing elements of the Statplexer’s _data and _targets member
 dictionaries, whilst possible, would violate the psuedo-private nature of the variables and even so, this would
 hardly be a user friendly way in which to obtain data from the Statplexer.
-As described in Section 5.1.3, development of Frontier was evolutionary, growing to meet the needs and
+As described in Section 4.1.3, development of Frontier was evolutionary, growing to meet the needs and
 requirements of the underlying machine learning problem that this project strives to solve. It became clear that
 in trying many combinations of observation and parameter subsets that Frontier would need to provide not just
 a function to return the contents of _data and _targets but to assist in retreiving similar subsets automatically
@@ -1292,9 +1175,9 @@ still require use of sorted when creating a result matrix via the API
 
 4 Dictionaries
 
-23
+19
 
-5.3 Implementation
+4.3 Implementation
 But how can a user make an informed decision on parameters to subset? Though this is primarily the role of
 feature selection, which will be discussed later in this chapter, firstly a user will need to have a feeling for what
 parameters are actually present and ideally be offered functionality to allow for quick elementary exploration
@@ -1321,7 +1204,7 @@ represents a parameter (or feature). By default both dimensions are ordered alph
 by their observation ID, columns by the parameter name5 . Targets are also returned in a NumPy array, with
 each index of the target array mapping 1:1 with the observation row of the same index in the Results Matrix.
 
-5.3.5
+4.3.5
 
 Logging
 
@@ -1332,16 +1215,16 @@ Frontier provides functions such as write_log to dump Statplexer parameters to a
 with cross-validation performance associated with a particular training and prediction run of a decision tree
 classifier. Such files can easily be manipulated with common command line tools such as grep and the text
 processing language, awk.
-5 Typically the ’cleaned’ or otherwise sanitised parameter name, as noted in Section 5.3.2 for example where the BamcheckReader
+5 Typically the ’cleaned’ or otherwise sanitised parameter name, as noted in Section 4.3.2 for example where the BamcheckReader
 class will automatically convert spaces and other predefined characters to hyphens.
 
-24
+20
 
-5.4 Usage Example
+4.4 Usage Example
 Given the time to create specialised software for storing and comparing different runs of the classifier in future,
 it would be trivial to import old Frontier log files.
 
-5.4
+4.4
 
 Usage Example
 
@@ -1364,7 +1247,7 @@ target_path,
 CLASSES,
 DataReader,
 TargetReader)
-Listing 4 : Example usage of Frontier
+Listing 3 : Example usage of Frontier
 
 Constructing the Statplexer requires the following arguments:
 • data_dir String
@@ -1372,32 +1255,32 @@ Root data directory under which all files will be parsed for observation data
 • target_path String
 Path to file to be parsed for observation targets
 • CLASSES Dictionary
-A dictionary of user specified class labels defined as described in Chapter 5.3.1
+A dictionary of user specified class labels defined as described in Chapter 4.3.1
 • DataReader Module
-25
+21
 
-5.5 Testing
+4.5 Testing
 Module containing the class (of the same name) to be used to parse each file in the data_dir tree for
 observation data
 • TargetReader Module
 Module containing the class (of the same name) to be used to parse the target_path file for target data
 
-5.5
+4.5
 
 Testing
 
 Frontier is bundled with a small testing suite designed to flex the functionality of the two included readers
 (AQCReader and BamcheckReader) as well as both the Frontier utilities and the Frontier API itself. The
-suite consists of three Python scripts which utilise the unittest[35] package in the Python standard library.
+suite consists of three Python scripts which utilise the unittest[33] package in the Python standard library.
 The scripts are located in the tests directory of the Frontier package.
-Listing 5 displays the commands necessary to execute each test script. Note the -m option to the Python
+Listing 4 displays the commands necessary to execute each test script. Note the -m option to the Python
 command instructs the interpreter to load the module named as a script.
 python -m tests/frontier
 python -m tests/aqcreader
 python -m tests/bamcheckreader
-Listing 5 Execution of the Frontier Testing Suite
+Listing 4 Execution of the Frontier Testing Suite
 
-5.5.1
+4.5.1
 
 AQCReader and BamcheckReader
 
@@ -1406,14 +1289,14 @@ particular functionality of that reader.
 * Test cleaning of data * Test duplicates warning * Test duplicates exception * BC Tests that some hardcoded
 expected values are returned * AQC Tests that number of labels were as expected...
 
-5.5.2
+4.5.2
 
 Frontier Utilities
 
 * Test both encoding and decoding of class labels and class codes * Ensures that exceptions are thrown when
 unknown class labels or codes are encountered (as this should not happen!)
 
-5.5.3
+4.5.3
 
 Frontier API
 
@@ -1421,24 +1304,24 @@ Frontier API
 the data expected * ...including when parameters are incorrect or unknown * ...ensures parameters should be
 excluded or included... * actually found a problem with excluding! * Ensures targets map correctly to data
 
-26
+22
 
-Chapter 6
+Chapter 5
 
 Results
-6.1
+5.1
 
 Introduction
 
-6.1.1
+5.1.1
 
 Why Decision Trees?
 
-6.1.2
+5.1.2
 
 CART
 
-6.2
+5.2
 
 Parameter Selection
 
@@ -1451,23 +1334,23 @@ Parameter Selection
 RuntimeWarning: invalid value encountered in divide, causing NaN * Replaced univariate_selection with
 version from master * needed use force np.float64 * ...actually data was 0... gg
 
-27
+23
 
-6.3 Trees
+5.3 Trees
 
-6.3
+5.3
 
 Trees
 
-6.3.1
+5.3.1
 
 Initial Trees
 
-6.3.2
+5.3.2
 
 Parameter Sets
 
-6.3.3
+5.3.3
 
 Ignoring Warnings
 
@@ -1479,19 +1362,19 @@ smaller classes...
 Confusion Matrices
 "Normal" confusion matrix and "Warnings" confusion matrix...
 
-28
+24
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-29
+25
 
-Chapter 7
+Chapter 6
 
 Introduction and Motivation
-7.1
+6.1
 
 Introduction
 
@@ -1502,8 +1385,8 @@ The second part of the project can be outlined as follows:
 • Establishment of leave-one-out analysis pipeline
 • Comparison of concordance between pipeline results and SNP chip
 
-7.2
-7.2.1
+6.2
+6.2.1
 
 Background
 GWAS and iCHIP Data Sets
@@ -1520,14 +1403,14 @@ Only particular bases of interest in the genome of the sample has been sequenced
 
 Association Study
 
-30
+26
 
-7.3 Concepts and Terminology
+6.3 Concepts and Terminology
 Each sample will thus have a corresponding result from each of the two studies. A result in this context refers
-to the output from a variant calling pipeline at the Sanger Institute – a VCF file (introduced in Chapter 8.1)
+to the output from a variant calling pipeline at the Sanger Institute – a VCF file (introduced in Chapter 7.1)
 detailing variant sites that were located during analysis of the sequenced sample.
 
-7.2.2
+6.2.2
 
 The ‘Goldilocks’ Region
 
@@ -1548,19 +1431,19 @@ sequence samples and thus we must focus on a smaller region of the human genome.
 It is for this reason we are looking for what Sanger described as a "representative autosomal region". The
 region must not have too many variants, or too few: a "Goldilocks genome".
 
-7.3
+6.3
 
 Concepts and Terminology
 
 In the search for the aforementioned "Goldilocks genome", we define the terminology found in Appendix A.2.
 
-31
+27
 
-Chapter 8
+Chapter 7
 
 Materials and Methods
-8.1
-8.1.1
+7.1
+7.1.1
 
 Input Data and Format
 Variant Call Format
@@ -1568,7 +1451,7 @@ Variant Call Format
 Variant Call Format (VCF) is a (typically compressed) text file... ...containing records ...developed for the
 1000 Genomes Project
 
-8.1.2
+7.1.2
 
 Variant Query File
 
@@ -1577,26 +1460,26 @@ for populating the candidate searching script with variants. The file is formed 
 entries where the first field consists of a colon-delimited pair representing a chromosome and position respectively
 (e.g. 1:5000 is the base at position 5000 on the first chromosome). Other fields may be provided but are
 currently ignored.
-The Query File is generated by the vcf-query command (demonstrated in Listing 6) which is a member of
+The Query File is generated by the vcf-query command (demonstrated in Listing 5) which is a member of
 the vcftools collection – a tool set designed... specifically... for handling VCF files.
 ...although having found this tool, it turns out that bcftools implements a more performance efficient query
 function, thanks to the performance gains as a result of using htslib... ...the command uses exactly the same
-syntax, as shown in Listing 7.
+syntax, as shown in Listing 6.
 Note that information on downloading and installing both tool sets can be found in Appendix D.
 vcf-query cd.ichip.vcf.gz -f ’%CHROM:%POS\t%REF\t%ALT\n’
-Listing 6 : Extracting variant positions from a VCF file with vcftools
+Listing 5 : Extracting variant positions from a VCF file with vcftools
 
-32
+28
 
-8.2 Development Environment
+7.2 Development Environment
 
 http://vcftools.sourceforge.net/perl_module.html http://www.biostars.org/p/51076/ http://vcftools.sourceforge.net/htslib.html#qu
 bcftools query -f ’%CHROM:%POS\t%REF\t%ALT\n’ cd-seq.vcf.gz > cd-seq.vcf.gz.q
 # ! A faster alternative to using vcftools exists in bcftools ! #
 # Complains about lack of tabix index but still makes the file...
-Listing 7 : Extracting variant positions from a VCF file with bcftools
+Listing 6 : Extracting variant positions from a VCF file with bcftools
 
-8.1.3
+7.1.3
 
 Paths File
 
@@ -1609,14 +1492,14 @@ It is an error to provide a file entry before the first group definition. An exc
 defines a group more than once or uses a duplicate slug due to the ambiguity this introduces.
 An example can be found in Appendix B.3.
 
-8.2
+7.2
 
 Development Environment
 
 Many of the features of the development environment for Part I are just as applicable to Part II. Differences
 and additions to the environment described in Chapter 3.2 are outlined below.
 
-8.2.1
+7.2.1
 
 Language
 
@@ -1627,30 +1510,30 @@ script in a short time span.
 Although performance was more of a concern, with the use of NumPy (whose mathematical functions are
 typically wrappers around C or Fortran implementations) reasonable efficiency was expected to be obtainable.
 
-8.2.2
+7.2.2
 
 Testing
 
 Given the more traditional development methodology, testing need not follow a continuous integration style
 roadmap. A test suite would need to be written to ensure the components of the script work as intended,
 simulating input variants and ensuring the correct candidate region densities are found.
-33
+29
 
-Chapter 9
+Chapter 8
 
 Goldilocks
 This chapter introduces Goldilocks; the first programming hurdle for this part of the project. Goldilocks is
 a Python script designed specifically to read in and store locations of user-selected variants on the human
 genome and to then find regions of a given size on the genome where variants are of a desired density.
 
-9.1
-9.1.1
+8.1
+8.1.1
 
 Design
 Purpose
 
 Expanding on the introduction, Goldilocks is responsible for parsing input files that contain chromosome and
-base position entries (in the format described in Section 8.1.2). These files can be grouped to pool the set of
+base position entries (in the format described in Section 7.1.2). These files can be grouped to pool the set of
 unique variants between each file group to treat them as one search space.
 For each group, a list of positions for each chromosome is stored in memory. Once all variants have been
 loaded Goldilocks is designed to iterate over each chromosome1 and load all of the variants from the lists in
@@ -1660,7 +1543,7 @@ This combination of a start and end position and the counts of variants present 
 of a candidate. Having performed this search over all the autosomes, candidates can then be ranked by
 user-specified criteria related to the density of the counted variants.
 
-9.1.2
+8.1.2
 
 Format
 
@@ -1670,13 +1553,13 @@ module to be imported in to other programs. Whilst the use case is certainly mor
 
 speaking we are only handling the 22 autosomes and ignoring the remaining 2 sex chromsomes (allosomes)
 
-34
+30
 
-9.2 Implementation
+8.2 Implementation
 made the choice to modularise the functionality, in the hope that if an end user were to find some function of
 the script particularly useful they may call it as part of their own program.
 
-9.1.3
+8.1.3
 
 Method
 
@@ -1687,7 +1570,7 @@ checking of input files to ensure results were as expected.
 Development was akin to a more traditional methodology; requirements were simple and available up front
 and formal testing was scheduled to be completed following the completion of a working prototype.
 
-9.1.4
+8.1.4
 
 Pitfalls
 
@@ -1698,13 +1581,13 @@ method that is used does not matter so much as consistency; it is trivially easy
 when handling genomic data.
 Of note also; after a discussion with the Sanger Institute it has been decided to exclude candidates located on
 chromosome 6 from being utilised as a "Goldilocks region". Chromosome 6 contains a system of genes called
-the Human Leukocyte Antigen (HLA)2 which encode for Major Histocompatibility Complex (MHC)[38]: a
+the Human Leukocyte Antigen (HLA)2 which encode for Major Histocompatibility Complex (MHC)[36]: a
 critical component of the body’s immune system and of particular importance to anyone requiring an organ
 transplant. The HLA can cause difficulties during the variant calling process due to the high level of variability
 expressed between samples in these areas and could thus give less accurate results if we were to measure
 concordance using candidates that include these genes.
 
-9.2
+8.2
 
 Implementation
 
@@ -1713,21 +1596,21 @@ This section considers the implementation of the major components of Goldilocks:
 • Loading variants from specified Variant Query Files
 • Storage and recall of variant groups in memory
 • Searching for candidates with user specified length and stride
-2 A much younger version of me was introduced to this concept via the partwork How Your Body Works[36], which also distributed
-English dubs of a 1987 French television show titled Il était une fois... la vie (Once upon a time... Life)[37] a relevant episode can be
+2 A much younger version of me was introduced to this concept via the partwork How Your Body Works[34], which also distributed
+English dubs of a 1987 French television show titled Il était une fois... la vie (Once upon a time... Life)[35] a relevant episode can be
 viewed here: http://www.youtube.com/watch?v=yvhU2UyRv-Q
 
-35
+31
 
-9.2 Implementation
+8.2 Implementation
 • Ranking suitable candidates based on variant density
 
-9.2.1
+8.2.1
 
 Parsing Paths File
 
 Goldilocks requires the user provide their own valid Paths File, meeting the specification introduced in
-Section 8.1.3 (an actual example of such a file can be found in Appendix B.3).
+Section 7.1.3 (an actual example of such a file can be found in Appendix B.3).
 As previously described the file merely documents the locations of the Variant Query Files to be loaded,
 along with the desired grouping of those files. Any variant location that appears in at least one file of a group
 will be added to the pooled set of variants for that group.
@@ -1750,7 +1633,7 @@ A Paths File which violates the specification will raise an exception during exe
 the end user of their error. This was decided to ensure ambiguous input did not cause confusion later, for
 example should defining a file group twice merge or override the first definition?
 
-9.2.2
+8.2.2
 
 Loading Variant Query Files
 
@@ -1762,9 +1645,9 @@ proportionally for the size of the list). However as examined in Section A.1.9, 
 of items to a list will likely induce costly memory operations as the list is resized. Thus use of a set might
 have been more appropriate (especially considering the container forbids duplicate entries) but a set must be
 constructed from an existing iterable such as a list anyway!
-36
+32
 
-9.2 Implementation
+8.2 Implementation
 Indeed the container does specify an update function but this could in itself be a source of overhead as the
 structure ensures that the no duplicate condition has not been violated on every call. Given more time it would
 be interesting to compare performance differences between container implementations.
@@ -1774,13 +1657,13 @@ are not constructed beyond where the last variant on a chromosome lies (as by de
 and searching over them would waste resources) and secondly to normalize the candidate regions across all
 groups to allow for easy comparison between them.
 
-9.2.3
+8.2.3
 
 Storage and Recall of Variants
 
 ...
 
-9.2.4
+8.2.4
 
 Searching for Candidate Regions
 
@@ -1795,7 +1678,7 @@ positions. The function will then take slices of these arrays of the user define
 variants contained within by summing across the slice (elements with variants contain a 1, otherwise 0). The
 next region is sliced by moving the first base of the current region forward by the user defined stride.
 Each valid region will be entered in to the regions dictionary using the current region counter (region_i) as
-the key, mapping to an arbitrary object (a dictionary) as defined in Listing 8 below:
+the key, mapping to an arbitrary object (a dictionary) as defined in Listing 7 below:
 regions[region_i] = {
 "ichr": i,
 
@@ -1819,15 +1702,15 @@ regions[region_i] = {
 # The last base on this region (inclusive)
 
 }
-Listing 8 : Candidate Region Data Structure
+Listing 7 : Candidate Region Data Structure
 
-37
+33
 
-9.3 Testing
+8.3 Testing
 Regions will also have their respective group densities appended to the appropriate group_counts list and its
-region_i added to the relevant group_buckets structure as established in Section 9.2.1.
+region_i added to the relevant group_buckets structure as established in Section 8.2.1.
 
-9.2.5
+8.2.5
 
 Filtering and Ranking Candidates for Selection
 
@@ -1844,7 +1727,7 @@ dictionary whose density fall inside the upper and lower bounds of the window ar
 Sorts the output of initial_filter by the desired ranking variant group (in our case, iCHIP). The function
 will prioritise candidates with the closest absolute value to the filter group’s median and ensure that the
 density of the ranking group is higher than the filtering group. Returns a ranked list of candidates in the
-format displayed in Listing 8 for manual inspection.
+format displayed in Listing 7 for manual inspection.
 Currently ranking and filtering criteria are still hard coded to meet the needs of our analysis. In future it would
 be useful to generalise the Goldilocks API to allow more operations such as filtering by a given percentile
 rather than only the median and to provide more ’enrichment’ options such as ranking by minimum.
@@ -1853,7 +1736,7 @@ to chain together these methods to compound filtering and ranking operations as 
 Whilst in this state the script proposes little re-use value, we at least have a basis for repeating results in future
 with different data sets or additional variant groups.
 
-9.3
+8.3
 
 Testing
 
@@ -1865,9 +1748,9 @@ To acheive this the testing suite is designed to generate valid Variant Query Fi
 dictionary, which defines test groups and variant locations on test chromosomes and can easily be altered for
 future testing. Test files are re-generated from this dictionary each time the test suite is instantiated using the
 setUpClass classmethod provided by the unittest library.
-38
+34
 
-9.3 Testing
+8.3 Testing
 Checking both the Paths File and generated Variant Query Files were loaded successfully is trivial and the
 suite goes on to test whether the input files and all generated variants within are mapped to the specified
 chromosome of the correct group, both in memory and also when loaded in to the NumPy array structure.
@@ -1957,12 +1840,12 @@ i
 26
 27
 
-Listing 9 Testing Expected Candidates with Goldilocks: The test suite defines the locations of variants
+Listing 8 Testing Expected Candidates with Goldilocks: The test suite defines the locations of variants
 across many files in two groups, the figure represents the expected regions for GROUP0. The horizontal line
 represents a particular chromosome on which a * signals the location of a variant (= otherwise). The expected
 size column tabulates the number of variants that should appear as a member of region i (start-end inclusive).
 
-As discussed, testing the discovery of correct regions is more complex. Listing 9 details the regions expected
+As discussed, testing the discovery of correct regions is more complex. Listing 8 details the regions expected
 for the variants specified in TEST_DATA. The test suite checks that the number of regions located and their
 content is correct for each chromosome in each variant group. Tests also ensure that the previously mentioned
 group_counts and group_buckets structures are populated appropriately.
@@ -1973,13 +1856,13 @@ improve coverage, possibly generating larger (or even random) data sets. Results
 manual inspection both by myself and the Sanger Institute and the regions described in the following chapter
 are considered legitimate.
 
-39
+35
 
-Chapter 10
+Chapter 9
 
 Results
-Listing 10 lists the top 25 candidate regions selected by Goldilocks for inspection. Regions were constructed
-using a length of 1Mnt1 (mega nucleotides) and a stride of 0.5Mnt2 . As detailed in Section 9.2.5, candidates
+Listing 9 lists the top 25 candidate regions selected by Goldilocks for inspection. Regions were constructed
+using a length of 1Mnt1 (mega nucleotides) and a stride of 0.5Mnt2 . As detailed in Section 8.2.5, candidates
 for this study were filtered to include regions with a GWAS density within ±12.5% of the median GWAS
 density (i.e. in the middle 25%) before being ranked firstly by absolute difference from the median GWAS,
 then by iCHIP variant density, descending.
@@ -1993,7 +1876,7 @@ results and the candidate that was actually selected as the Goldilocks region ap
 bases
 bases
 
-40
+36
 
 i
 0234
@@ -2130,7 +2013,7 @@ POSITIONS
 88500001 89500000
 160000001 - 161000000
 
-Listing 10 Goldilocks Results: "Top 25" Candidate Regions using a length of 1Mnt and a stride of 0.5Mnt.
+Listing 9 Goldilocks Results: "Top 25" Candidate Regions using a length of 1Mnt and a stride of 0.5Mnt.
 Candidates are filtered by median GWAS density and ranked by maximum iCHIP density.
 
 Candidate 1074 (marked by *) was selected as the region with the closest absolute difference between the
@@ -2142,27 +2025,27 @@ implemented to prevent candidates with a significantly low iCHIP density (≤100
 following ’enrichment’; these regions would give us little to compare when it comes to measuring the concordance
 between variants called in our leave-one-out study and the original iCHIP data set.
 Curious about the wide range and presence of so many low resolution iCHIP candidates, I authored an R
-script (making use of ggplot2[24] for graphing) to plot figures 10.1 and 10.2 as a means of visual inspection
-to confirm such results should be anticipated.
-Figure 10.1 shows a large range in the densities of variants in the iCHIP regions, between 0 and almost 3000,
-with a significant baseline below 100. Figure 10.2 plots the same data set but also facetting by chromosome,
+script (making use of ggplot2[24] for graphing) to plot figures 9.1 and 9.2 as a means of visual inspection to
+confirm such results should be anticipated.
+Figure 9.1 shows a large range in the densities of variants in the iCHIP regions, between 0 and almost 3000,
+with a significant baseline below 100. Figure 9.2 plots the same data set but also facetting by chromosome,
 again it can be seen that the iCHIP variant group counts are well spread when compared to the rather constant
 variance of their GWAS counterparts.
 This isn’t a surprise when you consider that the GWAS data set represents the variants sequenced from
 whole-genome analysis of our samples, whereas the iCHIP set consists of the variants output from SNP
 genotyping, a process that focuses on particular genomic locations of interest.
 
-41
+37
 
-Fig. 10.1 Goldilocks Candidate Plot A: Candidate regions of one megabase length are arranged along the x
+Fig. 9.1 Goldilocks Candidate Plot A: Candidate regions of one megabase length are arranged along the x
 axis (coloured by chromosome) against the number of variants contained within that region.
 
-Fig. 10.2 Goldilocks Candidate Plot B: Candidates of one megabase length are arranged along the x axis
+Fig. 9.2 Goldilocks Candidate Plot B: Candidates of one megabase length are arranged along the x axis
 (coloured and facetted by allosome) and plotted against the number of variants contained within that region.
 
-42
+38
 
-Chapter 11
+Chapter 10
 
 Analysis Pipeline
 Having selected the Goldilocks region (Chromosome 3: 46,000,001—47,000,000) via Goldilocks, we must
@@ -2170,7 +2053,7 @@ now begin constructing the pipeline that will conduct the leave-one-out analysis
 and compare the called variants to the appropriate iCHIP sample.
 This chapter introduces the various components of the pipeline, their purpose and any difficulties encountered.
 
-11.1
+10.1
 
 Overview
 
@@ -2190,42 +2073,42 @@ the Goldilocks regions.
 • Compare
 For each pair of GWAS and iCHIP samples, measure the concordance of called variants.
 
-43
+39
 
-11.2 Concepts and Terminology
+10.2 Concepts and Terminology
 
-11.2
+10.2
 
 Concepts and Terminology
 
 See Appendix A.3
 
-11.3
+10.3
 
 Region Extraction and Indexing
 
-11.3.1
+10.3.1
 
 Extraction
 
 Now the Goldilocks region has been found, it must be extracted for each GWAS sample in our study. The
 Sanger Institute currently stores the electronic samples in the BAM format at one of their in-house data centres,
-storage and retrieval is managed by iRODS[39]: the Integrated Rule-Oriented Data System.
+storage and retrieval is managed by iRODS[37]: the Integrated Rule-Oriented Data System.
 iRODS is a BSD licensed, C++ based data management application, describing itself as "middleware for
-your critical data"[40]. The system was deployed at the institute in 2011 to cope with the data deluge
+your critical data"[38]. The system was deployed at the institute in 2011 to cope with the data deluge
 brought on by constantly improving next-generation sequencing technologies. "[T]raditional data management
 methods [became] saturated" and other more advanced file systems did not provide the desired support for
 customised metadata such as project information or sequencing specific fields like sample and lanelet ID to be
-automatically added to files[41] which iRODS does support, along with improved data replication and access
+automatically added to files[39] which iRODS does support, along with improved data replication and access
 control policy management.
 Once I had been added to the relevant access group, it was possible to extract the regions from iRODS
-via samtools_irods[42] which provides wrappers around both samtools and iRODS functionality to allow
+via samtools_irods[40] which provides wrappers around both samtools and iRODS functionality to allow
 samtools commands to directly support interaction with samples stored in iRODS.
 samtools_irods view -bh irods:\${file} 3:46000001-47000000
 > \$(basename \${file}).goldilocks.bam
-Listing 11 BAM Extraction: Retrieve Goldilocks region for a particular sample ($file) from iRODS.
+Listing 10 BAM Extraction: Retrieve Goldilocks region for a particular sample ($file) from iRODS.
 
-11.3.2
+10.3.2
 
 Indexing
 
@@ -2235,16 +2118,16 @@ blocks of a BAM file without conducting costly searches.
 Whilst indexing of BAM files is a somewhat optional step, many tools will emit warnings or errors if one is
 not available. The process itself requires little resources in terms of time and memory and can significantly
 improve the efficiency of later commands which are capable of reading and using the index.
-Both the commands in Listing 11 and 12 can be executed in parallel for extracting and indexing many samples.
+Both the commands in Listing 10 and 11 can be executed in parallel for extracting and indexing many samples.
 
-44
+40
 
-11.4 Pileup
+10.4 Pileup
 
 samtools index \$(basename \${file}).goldilocks.bam
-Listing 12 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[43]
+Listing 11 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[41]
 
-11.4
+10.4
 
 Pileup
 
@@ -2259,7 +2142,7 @@ bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o
 bash -c ’samtools mpileup -b ../goldilocks-3:46000001-47000000.fofn -g -I -f
 /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa
 > ~/goldilocks/all.withref.bcf’
-Listing 13 Pileup: Submission of samtools mpileup[44] task to LSF for execution on the Farm. Note the
+Listing 12 Pileup: Submission of samtools mpileup[42] task to LSF for execution on the Farm. Note the
 request to increase the memory allocation and how the pileup command is passed as a string to bash -c.
 
 However, performing a pileup is a rather intensive process, with initial test runs requiring 6.5 hours of
@@ -2271,21 +2154,21 @@ required to reduce the strain on the file server before the job could be submitt
 of the samtools collection provides functionality to merge a list of given input files such as those extracted
 Goldilocks regions.
 
-11.5
+10.5
 
 Merge
 
-samtools merge[43] is a utility for merging two or more sorted BAM files in to one sorted output. After
+samtools merge[41] is a utility for merging two or more sorted BAM files in to one sorted output. After
 viewing the source of the command I found an undocumented feature that allowed an end user to provide a
 file of filenames to merge rather than being required to list all inputs on the command line.
 Various issues with use of samtools merge at scale were encountered during the assembly of the analysis
 pipeline. Ultimately I ran out of time attempting to overcome these problems before being able to put the
 pipeline to use. The difficulties experienced with samtools merge specifically are detailed in Appendix ??.
-45
+41
 
-11.6 Calling
+10.6 Calling
 
-11.6
+10.6
 
 Calling
 
@@ -2295,13 +2178,13 @@ The genotype likelihoods calculated by samtools mpileup in the previous step of 
 probability distribution of the bases seen across all piledup samples at a particular location (site). This allows
 variant calling algorithms to make an informed decision as to whether particular sites actually contain a SNP
 or if a differing base is statistically unlikely to be a real variant3 with the current data.
-bcftools call[48][49] is the successor to the ’consensus’ variant caller included with the samtools package and
+bcftools call[46][47] is the successor to the ’consensus’ variant caller included with the samtools package and
 utilises htslib for improved file handling efficiency with common genomic data formats.
 Unfortunately during the initial testing of this step, using a pileup of all the Goldilocks regions, the output
 contained only the standard header information generated by bcftools and not a single record detailing a
 called variant. I discovered this was due to the samtools mpileup job being completed without including a
 reference sequence, causing the REF (reference) column of the resulting BCF file to be populated with ’N’:
-an ambiguity code which translates to ’any base’[50][51].
+an ambiguity code which translates to ’any base’[48][49].
 bcftools call does provide the –M flag for this scenario, where the reference is described as a "masked
 reference". However attempting to repeat calling with the flag set merely caused the command to produce
 a segmentation fault instead of an empty output file. This appeared to be due to a compatibility issue between
@@ -2314,24 +2197,24 @@ and storage resource use if at all possible. In future runs, output size could b
 of variants that appear in both the GWAS and iCHIP Goldilocks regions (as these are the only variants we
 are interested in anyway), bcftools call will then discard records pertaining to variants that do not appear in
 the targets list. This "targets" file actually uses the same format as the Variant Query Files described in
-Section 8.1.2 and should be provided to bcftools call’s –T (––targets-file) option.
+Section 7.1.2 and should be provided to bcftools call’s –T (––targets-file) option.
 
-11.7
+10.7
 
 Measuring Concordance
 
 The terminal step of the Goldilocks pipeline consists of analysing the differences between variants called
 from the left-one-out GWAS data and the iCHIP study. The two data sets will form matched pairs where
-1 Our analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[45]. hs37d5 extends the b37
+1 Our analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[43]. hs37d5 extends the b37
 genomic reference with "decoy sequences" that are designed to reduce false positives (incorrectly mapping to poorly referenced areas
-around centromeres for example[46]), optimising it for variant calling[47].
+around centromeres for example[44]), optimising it for variant calling[45].
 2 Technically to be confident you have an actual SNP as opposed to a variant (or incorrect read!), you’ll need to see whether such
 variation occurs through a population of different samples rather than just one.
 3 Although it could also be a very low frequency variant...
 
-46
+42
 
-11.7 Measuring Concordance
+10.7 Measuring Concordance
 an individual’s DNA has been sequenced and processed by our pipeline (possibly with one of that sample’s
 lanelets ignored) and alternatively via SNP genotyping. The pipeline will measure the concordance between
 the variants called for each individual, this measure will then be used to determine the effect of the lanelet that
@@ -2342,25 +2225,25 @@ the difficulties encountered in assembling the pipeline (particularly with samto
 to adequately test the pipeline and thus the concordance script with the time that we had. Considering this and
 for the sake of brevity, discussion on the design and implementation is considered outside the scope of this
 write-up.
-Another option for this component was SnpSift Concordance[52], a Java based package which can also
+Another option for this component was SnpSift Concordance[50], a Java based package which can also
 calculate concordances between two VCF files. However I was concerned with the possible performance of
 using Java to process thousands of concordances.
 
-47
+43
 
 Part III
 
 Discussions and Conclusions
 
-48
+44
 
-Chapter 12
+Chapter 11
 
 Current Status
 
-49
+45
 
-Chapter 13
+Chapter 12
 
 Critical Evaluation
 ...Section 3.2.3 The SciPy Stack also includes the "Python Data Analysis Library" (pandas), which is designed
@@ -2370,21 +2253,21 @@ of having to switch to a more analysis focused language such as R.
 was designed to complement the machine learning experiments and provides
 ...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
 their own data regardless of how esoteric or cryptic the file format is...
-Whilst a 2003 paper[53]1 that analysed the spread of SNPs across the human genome to assert whether variants
+Whilst a 2003 paper[51]1 that analysed the spread of SNPs across the human genome to assert whether variants
 could be modelled with a statistical distribution, divided chromosomes in to equally sized bins (a concept akin
 to candidates of uniform length)
 
 1 Titled
 
-An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[53]
+An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[51]
 
-50
+46
 
-Chapter 14
+Chapter 13
 
 Conclusions
 
-51
+47
 
 [12] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
@@ -2496,7 +2379,7 @@ Recursive Partitioning, 2013, r package version
 4.1-3. [Online]. Available: http://CRAN.R-project.
 org/package=rpart
 
-52
+48
 
 [26] M. Fowler, “Continuous Integration,” 2006.
 [Online]. Available: http://www.martinfowler.com/
@@ -2507,63 +2390,19 @@ articles/continuousIntegration.html
 Available:
 https://wiki.jenkins-ci.org/display/
 JENKINS/Meet+Jenkins
+
+[44] zam.iqbal.genome (https://www.biostars.org/u/5152/).
+(2013) Decoy In Reference Assembly. [Online].
+Available: https://www.biostars.org/p/73100/#73120
+
 [28] Jenkins Usage Statistics. [Online]. Available:
 http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
-[29] Getting
-Started:
-[Online]. Available:
-getting-started/
-
 Travis
 CI
 Overview.
 http://docs.travis-ci.com/user/
 
-[30] Introduction to wercker. [Online]. Available:
-http://devcenter.wercker.com/articles/introduction/
-[31] Hadley Wickham and Winston Chang, devtools:
-Tools to make developing R code easier, 2013,
-r package version 1.4.1. [Online]. Available:
-http://CRAN.R-project.org/package=devtools
-[32] Morandat, Floréal and Hill, Brandon and Osvald,
-Leo and Vitek, Jan, “Evaluating the design of
-the R language,” in ECOOP 2012–Object-Oriented
-Programming. Springer, 2012, pp. 104–131.
-[33] W. B. Van Rossum, Guido and N. Coghlan,
-“PEP 8 – Style Guide for Python Code,” Python
-Enhancement Proposals, 2001. [Online]. Available:
-http://legacy.python.org/dev/peps/pep-0008/
-[34]
-
-[35]
-
-[36]
-[37]
-[38]
-
-[39]
-[40]
-[41]
-
-[43] Manual Reference Pages - samtools (1): Samtools
-Commands And Options, SAM tools Project. [Online].
-Available: http://samtools.sourceforge.net/samtools.
-shtml#3
-[44] Calling SNPs/INDELs with SAMtools/BCFtools.
-SAM tools Project. [Online]. Available: http:
-//samtools.sourceforge.net/mpileup.shtml
-[45] 1000
-Genomes.
-1000
-Genomes
-FAQ:
-Which reference assembly do you use?
-[Online]. Available: http://www.1000genomes.org/
-faq/which-reference-assembly-do-you-use
-[46] zam.iqbal.genome (https://www.biostars.org/u/5152/).
-(2013) Decoy In Reference Assembly. [Online].
-Available: https://www.biostars.org/p/73100/#73120
-[47] Heng
+[45] Heng
 Li.
 (2011)
 The
@@ -2573,85 +2412,130 @@ sequences (version 5). [Online]. Available:
 ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/
 reference/phase2_reference_assembly_sequence/
 hs37d5.slides.pdf
-[48] The bcftools/htslib VCF commands:
+
+[30] Introduction to wercker. [Online]. Available:
+http://devcenter.wercker.com/articles/introduction/
+
+[46] The bcftools/htslib VCF commands:
 bcftools
 call, VCFTools Project. [Online]. Available:
 http://vcftools.sourceforge.net/htslib.html#call
 
-[49] bcftools call, Genome Research Ltd. [Online].
+[31] W. B. Van Rossum, Guido and N. Coghlan,
+“PEP 8 – Style Guide for Python Code,” Python
+Enhancement Proposals, 2001. [Online]. Available:
+http://legacy.python.org/dev/peps/pep-0008/
+
+[47] bcftools call, Genome Research Ltd. [Online].
 Available: http://samtools.github.io/bcftools/bcftools.
 html#call
-Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
+
+[29] Getting
+Started:
+[Online]. Available:
+getting-started/
+
+[48] A. Cornish-Bowden, “Nomenclature for Incompletely
+[32] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
+Specified Bases in Nucleic Acid Sequences:
 “Does
 python
 have
 ’private’
-variables [50] A. Cornish-Bowden, “Nomenclature for Incompletely
-Specified Bases in Nucleic Acid Sequences:
+variables
+Recommendations 1984.” Nucleic Acids Research,
 in
 classes?”
 [Online].
 Available:
-Recommendations 1984.” Nucleic Acids Research,
-http://stackoverflow.com/questions/1641219/
 vol. 13, no. 9, p. 3021, 1985.
+http://stackoverflow.com/questions/1641219/
 does-python-have-private-variables-in-classes
-[51] C. Liébecq, Biochemical Nomenclature and Related
-Python Software Foundation. unittest — Unit
+[49] C. Liébecq, Biochemical Nomenclature and Related
 Documents. Portland Press, 1992.
+[33] Python Software Foundation. unittest — Unit
 testing framework. [Online]. Available:
-https:
-[52] Pablo Cingolani, SnpSift Concordance, 2013.
+https: [50] Pablo Cingolani, SnpSift Concordance, 2013.
 //docs.python.org/2/library/unittest.html
 [Online]. Available: http://snpeff.sourceforge.net/
 SnpSift.html#concordance
-Orbis Play and Learn, Albert Barillé, “How My Body
+[34] Orbis Play and Learn, Albert Barillé, “How My Body
 Works,” 1992–1994.
-[53] W. S. Kendal, “An Exponential Dispersion Model
-for the Distribution of Human Single Nucleotide
-Procidis and Albert Barillé, “Once upon a time...
-Polymorphisms,” Molecular Biology and Evolution,
+[35] Procidis and Albert Barillé, “Once upon a time...
 Life,” 1987, [Television broadcast].
-vol. 20, no. 4, pp. 579–590, 2003.
-U.S. National Library of Medicine. (2009) [54] Maggie Bartlett. (2011) Illumina HiSeq Flow
+[36] U.S. National Library of Medicine. (2009)
 HLA Gene Family. [Online]. Available: http:
-Cell. National Human Genome Research Institute.
 //ghr.nlm.nih.gov/geneFamily/hla
+[37] iRODS Consortium. iRODS:
+Available: http://irods.org/about/
+
+About.
+
+[Online].
+
+[38] irods: Middleware for your critical data [Github].
+[39] G.-T. Chiang, P. Clapham, G. Qi, K. Sale,
+and G. Coates, “Implementing a genomic data
+management system using iRODS in the Wellcome
+Trust Sanger Institute,” BMC Bioinformatics,
+vol. 12, no. 1, p. 361, 2011. [Online]. Available:
+http://www.biomedcentral.com/1471-2105/12/361
+[40] K. Lewis. samtools_irods [Github]. WTSI. [Online].
+Available:
+https://github.com/wtsi-npg/samtools_
+irods
+[41] Manual Reference Pages - samtools (1): Samtools
+Commands And Options, SAM tools Project. [Online].
+Available: http://samtools.sourceforge.net/samtools.
+shtml#3
+[42] Calling SNPs/INDELs with SAMtools/BCFtools.
+SAM tools Project. [Online]. Available: http:
+//samtools.sourceforge.net/mpileup.shtml
+[43] 1000
+Genomes.
+1000
+Genomes
+FAQ:
+Which reference assembly do you use?
+[Online]. Available: http://www.1000genomes.org/
+faq/which-reference-assembly-do-you-use
+
+49
+
+[51] W. S. Kendal, “An Exponential Dispersion Model
+for the Distribution of Human Single Nucleotide
+Polymorphisms,” Molecular Biology and Evolution,
+vol. 20, no. 4, pp. 579–590, 2003.
+[52] Maggie Bartlett. (2011) Illumina HiSeq Flow
+Cell. National Human Genome Research Institute.
 Image. [Online]. Available: http://www.genome.gov/
 dmd/img.cfm?node=Photos/Technology/Genome%
-iRODS Consortium. iRODS: About. [Online].
 20analysis%20technology&id=80102
-Available: http://irods.org/about/
-[55] Python Software Foundation. More on Lists.
+[53] Python Software Foundation. More on Lists.
 [Online]. Available:
 https://docs.python.org/2/
-irods: Middleware for your critical data [Github].
 tutorial/datastructures.html#more-on-lists
-G.-T. Chiang, P. Clapham, G. Qi, K. Sale,
-and G. Coates, “Implementing a genomic data [56] ——. Dictionaries. [Online]. Available: https://docs.
+[54] ——. Dictionaries. [Online]. Available: https://docs.
 python.org/2/tutorial/datastructures.html#dictionaries
-management system using iRODS in the Wellcome
-Trust Sanger Institute,” BMC Bioinformatics, [57] Python
+[55] Python
 Wiki.
 (2012)
 Time
 Complexity.
-vol. 12, no. 1, p. 361, 2011. [Online]. Available:
 [Online]. Available: https://wiki.python.org/moin/
-http://www.biomedcentral.com/1471-2105/12/361
 TimeComplexity
-
-[42] K. Lewis. samtools_irods [Github]. WTSI. [Online].
-Available:
-https://github.com/wtsi-npg/samtools_
-irods
-
-53
-
-[58] Python Software Foundation. Sets. [Online].
+[56] Python Software Foundation. Sets. [Online].
 Available:
 https://docs.python.org/2/tutorial/
 datastructures.html#sets
+[57] Hadley Wickham and Winston Chang, devtools:
+Tools to make developing R code easier, 2013,
+r package version 1.4.1. [Online]. Available:
+http://CRAN.R-project.org/package=devtools
+[58] Morandat, Floréal and Hill, Brandon and Osvald,
+Leo and Vitek, Jan, “Evaluating the design of
+the R language,” in ECOOP 2012–Object-Oriented
+Programming. Springer, 2012, pp. 104–131.
 
 Appendix A
 
@@ -2690,13 +2574,13 @@ Samples, Lanes and Lanelets
 
 A sample is a distinct DNA specimen extracted from a particular person. For the purpose of sequencing,
 samples are pipetted in to a flowcell such as the one in Figure A.1 – a glass slide containing a series of very
-54
+50
 
 A.1 Part I
 thin tubules known as lanes. It is throughout these lanes that the chemical reactions involved in sequencing
 take place.
 
-Fig. A.1 An Illumina HiSeq Flowcell[54]
+Fig. A.1 An Illumina HiSeq Flowcell[52]
 Once inserted, samples are amplified in situ, in the flowcell itself. A process in which the genetic material
 of each sample is caused to multiply in magnitude to form a dense cluster of the sample around the original.
 Millions of clusters will be created throughout each lane of the flowcell.
@@ -2728,7 +2612,7 @@ Data and Targets
 Data will be used somewhat generically to refer to a matrix in which observations act as rows and their
 parameters act as columns. It is expected that all observations will have the same set of parameters.
 
-55
+51
 
 A.1 Part I
 For problems of a classification nature such as ours, an observation’s target is the known classification of that
@@ -2766,7 +2650,7 @@ three such structures below to assist the reader in understanding some of the im
 in the following section:
 
 List
-A list[55] essentially represents an ordered sequence of elements. Lists are incredibly versatile, allowing
+A list[53] essentially represents an ordered sequence of elements. Lists are incredibly versatile, allowing
 elements of any data type, including lists and other container structures or arbitrary objects. Elements in a list
 are accessed by their index (location) in the sequence. Lists permit duplicate values.
 Lists are represented in memory as a contiguous block and so great expense is incurred if the list grows beyond
@@ -2774,23 +2658,23 @@ its bounds and must be relocated elsewhere in memory to resize to a larger conti
 be appended to or popped from anywhere in the container, performing those actions on a location that is not at
 the end of the list will require the contents of the structure to be moved in memory to maintain the contiguous
 layout.
-56
+52
 
 A.2 Part II: Goldilocks
 Checking whether an item is in a list requires iterating over all n elements in the container until either a match
 is found or there are no elements left to check.
 
 Dictionary
-A dict[56] or dictionary is a structure containing key-value pairs in which string or numeric keys1 are mapped
+A dict[54] or dictionary is a structure containing key-value pairs in which string or numeric keys1 are mapped
 to an arbitrary value or object through a hashing function. Keys in a dictionary are unique; attempting to add
 a key-value pair where the key already exists will overwrite the original entry.
 Python dictionaries offer constant lookup access and more importantly, unlike a list, querying the structure
-for whether it contains a particular key can be performed in constant time[57]. However it is important to note
+for whether it contains a particular key can be performed in constant time[55]. However it is important to note
 that a dictionary does not maintain order, keys are not sorted alphanumerically nor are they sorted by insertion
 time. Ordering is determined arbitrarily by the dict’s underlying hash table2 .
 
 Set
-Sets[58] represent a collection of elements and are similar to a dict in that they are allowed to contain any
+Sets[56] represent a collection of elements and are similar to a dict in that they are allowed to contain any
 immutable (thus hashable) elements but entries are not mapped to a value or object. Sets are forbidden from
 containing duplicate objects and do not maintain order.
 Like dict, checking for membership of an item in a set completes in constant time, making the structure
@@ -2820,10 +2704,10 @@ Sensible choices for these parameters will need to be selected after considering
 1 Any
 2 This
 
-type can actually be used as a dictionary key providing it is immutable, including tuples[56]
+type can actually be used as a dictionary key providing it is immutable, including tuples[54]
 is probably the question I see most often from users new to Python on StackOverflow
 
-57
+53
 
 A.3 Part II: Pipeline
 
@@ -2892,9 +2776,9 @@ bsub -R"select[mem>4000] rusage[mem=4000]" -M4000 ...
 #
 
 | Only run on a node with more than 4000mb memory
-Listing 14 LSF Resource Syntax: bsub flags required to raise memory allocation for a job.
+Listing 13 LSF Resource Syntax: bsub flags required to raise memory allocation for a job.
 
-58
+54
 
 A.3 Part II: Pipeline
 
@@ -2905,7 +2789,7 @@ GWAS Data Set
 ...the GWAS is made up two studies... ...one of which used 2x, the other 4x ...due to time constraints we had
 to discard the smaller 4x study...
 
-59
+55
 
 Appendix B
 
@@ -3027,7 +2911,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-60
+56
 
 B.1 BAMcheckR’d Example Output
 
@@ -3259,7 +3143,7 @@ FFQ
 0
 0
 
-61
+57
 
 1609
 
@@ -3601,7 +3485,7 @@ IS
 2
 0
 
-62
+58
 
 B.1 BAMcheckR’d Example Output
 
@@ -3880,7 +3764,7 @@ GCD
 0.101
 0.101
 
-63
+59
 
 B.2 auto_qc Decision Matrix
 
@@ -4029,7 +3913,7 @@ Goldilocks Paths File
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-64
+60
 
 ...
 ...
@@ -4115,7 +3999,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-65
+61
 
 C.1 Frontier Log Example
 
@@ -4185,7 +4069,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-66
+62
 
 C.1 Frontier Log Example
 
@@ -4211,7 +4095,7 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
-67
+63
 
 Appendix D
 
@@ -4237,7 +4121,7 @@ cd bcftools/
 make #(requires htslib to be above samtools/bcftools dir)
 sudo cp bcftools usr/local/bin
 
-68
+64
 
 D.3 samtools
 
@@ -4272,7 +4156,7 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 
-69
+65
 
 Appendix E
 
@@ -4288,7 +4172,7 @@ a 32kB buffer to read data from each file also. Yet executing the job with 500MB
 scheduler to forceably terminate the process for exceeding the maximum allocated memory limit.
 Assuming that the intermediate structures for storing and sorting the input data must have been greater than
 expected, the job’s memory limit was generously increased with the syntax previously demonstrated by
-Listing 14 only to meet the same fate, even when reserving 16GB of memory. Even considering the thousands
+Listing 13 only to meet the same fate, even when reserving 16GB of memory. Even considering the thousands
 of input files this is an absurd amount of memory, I’d discovered a memory leak, a leak that appeared to
 drastically increase in severity in proportion to the number of input files.
 Once reported, the leak was fixed by the author; several large variables constructed when translating the input
@@ -4303,7 +4187,7 @@ Wanting to brush up on finding memory leaks with valgrind, I volunteered to find
 reported leaks. The results of this investigation are detailed in Appendix ??.
 ...getline ...regcomp...
 
-70
+66
 
 E.3 Poor Time Performance
 
@@ -4335,7 +4219,7 @@ by 0x40C6FA: check_test_2 (test_trans_tbl_init.c:124)
 ==30464==
 by 0x402CC4: main (test_trans_tbl_init.c:348)
 
-Listing 15 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
+Listing 14 : Example of valgrind locating a memory leak in one of the samtools test harnesses following the
 failure to release memory allocated to a compiled regular expression
 
 ...following this, further samtools merge jobs were submitted only to also be repeatedly terminated by the
@@ -4363,7 +4247,7 @@ line called not during the process of deflating the input files (as I had expect
 compression of the output!
 Looking at a brief explanation of the deflate algorithm, it seems reasonable to conclude the computational
 
-71
+67
 
 E.4 The Red Herring
 
@@ -4399,7 +4283,7 @@ int x = (int)s[0]<<8 | s[1];
 s += 2;
 if (x == y) return s;
 s = skip_aux(s);
-72
+68
 
 E.5 The Plot Thickens
 }
@@ -4419,6 +4303,110 @@ The Plot Thickens
 ...as we increase the number of input files, the time taken to read them in becomes non-linearly slower.
 Currently my money is on the seemingly inefficient trans_tbl_init that appears to be called for each file, with
 the current table of all previous files as an input...
+
+69
+
+Appendix F
+
+Pre-Frontier Implementation
+F.1
+
+Classification Correlation
+
+An important consideration for statistical analysis is the relation between observations. The "bamcheckr’d"
+input data described in Chapter 3.1.1 is available per lanelet, however as shown in Chapter A.1.4 a lane may
+contain more than one lanelet. Herein lies the trouble: if during a sequencing run the flowcell is somehow
+subjected to abnormal conditions (e.g. a temperature increase due to an air conditioning failure) or the device
+is depleted of reagents then every lane (and thus all lanelets within) will be of considerably poor quality.
+
+Fig. F.1 Heatmap of lanelet QC status by lane: Lanes are vertical bars with each lanelet cell coloured red to
+represent a failure, yellow for a warning and grey for a pass.
+In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
+70
+
+F.2 Recovering Ratios
+a lane as well as each lane in a sequencing run. To examine this further, an R script utilising ggplot2 was
+authored to visually inspect whether correlation existed and if so to what degree that data is affected.
+Figure F.1 displays a plot of auto_qc classification for each lanelet in a lane. The plot itself is a dense heatmap
+where each lane stands as a vertical bar, broken in to horizontal cells, each of which represents a lanelet
+that was sequenced in that particular lane. These lanelets are colour coded using; red for failures, yellow for
+warnings and grey for passes (to allow the other two classes to be more easily seen).
+Therefore an unbroken vertical red line indicates that all lanelets that comprise of that line failed to pass some
+aspect of the current auto_qc thresholds. In reality there are few conditions under which a lanelet would fail
+irrespective of the status of the rest of the lanelets in the same lane which typically involve an error during
+the preparation of the sample (an easy to spot result as it will cause poor quality across all lanelets using that
+sample).
+Overall there are a series of instances appearing to support correlation for whole-lane failures and warnings
+but despite this there do appear to be occasions where a lanelet has failed where the remainder of the lane
+has not. Having discussed this with the project supervisor and contacts at the Sanger Institute we decided to
+continue to the implementation stage, agreeing that whilst some evidence of correlation between lanelets in
+the same lane has emerged, we will still be able to recover parameters that will be useful to quality control and
+statistical testing may be required following this analysis to describe how powerful such parameters are taking
+this possible correlation in to account.
+It should be noted that the proportion of failures and warnings is considerably smaller than passes and so care
+will need to be taken to find a balance; for example it would not be feasible to merely discard lanelets from
+lanes that have failed entirely as there’d hardly be any data on which to train a classifier. Indeed other solutions
+may be possible, perhaps weighting observations which exhibit similar behaviour to other lanelets in their lane
+so as to give their parameter values less priority during the construction of the classifier itself.
+It is worth noting that although the plot does not make a particular distinction between lanes in the same flow
+cell, lanes are sequentially identified so the red bars of thicker-width arguably display some failures across
+entire flow cells.
+As a final note it should be stressed that this plot should be regarded as a diagnostic rather than an experiment
+with a direct conclusion. Given more time it would be useful to investigate the nature of these possible
+correlations, given a lane that has failed across all lanelets: do those lanelets actually express similar quality
+metrics?
+
+F.2
+
+Recovering Ratios
+
+An initial scan of the summary numbers available in the "bamcheckr’d" files introduced in Chapter 3.1.1
+revealed 82 different parameters. However, when comparing this parameter set to the threshold rules of
+auto_qc, it appeared that some parameters were "missing".
+In the pursuit of replicating the decisions of the existing system, it is ideal to have all the parameters used
+
+71
+
+F.2 Recovering Ratios
+in the making of those decisions at hand. In particular, the missing parameters were of a normalised nature,
+typically in the form of a ratio or percentage which should make them more valuable than a parameter that
+just represents a raw count of some property.
+It was found that these missing parameters are calculated in a step preceeding auto_qc as part of the vr-pipe
+pipeline1 .
+Whilst I could have attempted to set-up my own instance of vr-pipe to recover this data, speaking with
+contacts at the Sanger Institute, it was decided that this would prove troublesome work; requiring an involved
+deployment to a cloud based facility such as Amazon’s Elastic Compute Cloud and installation of various Perl
+dependencies as well as requiring access to many controlled databases within the institute.
+Most of the functions that calculated these parameters turned out to be straightforward and could easily be
+ported to another application. At first it was intended to add these functions to the program authored for this
+part of the project, but the Sanger Institute suggested it would be more useful to implement such functionality
+in bamcheckr directly, removing some of auto_qc’s dependence on its position in vr-pipe.
+# Install and include the ‘devtools’ package
+install.packages("devtools")
+library(devtools)
+# Install package directly from Github repository
+install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
+# Install package from local directory
+install("/home/sam/Projects/seq_autoqc/bamcheckr")
+Listing 15 : Installing an in-development R package with devtools
+
+With the help of devtools[57] (see Listing 15) it was simple to develop and test contributions to bamcheckr
+locally without needing to re-publish the package after changes. An additional script was added to bamcheckr’s
+NAMESPACE... to recover the missing ratio and percentage based parameters...
+...unfortunately, the performance of the script was poor, taking 5.5s on average and increasing to 16.1s when
+enabling a complex function containing many vector operations (potentially inefficient due to my lack of R
+experience)... for overlapping_base_duplicate_percentage
+...utilising the program designed and implemented in the following chapter... loaded required information and
+used the API to calculate the missing parameters...
+...Morandat[58]
+...with such an intriguing difference in performance with significantly more time it would be appealing to
+explore the idiosyncrasies of each implementation ...although such an investigation would quite likely sufficiently
+1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm
+
+72
+
+F.2 Recovering Ratios
+generate an entire project of its own.
 
 73
 
