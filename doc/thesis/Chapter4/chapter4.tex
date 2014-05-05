@@ -25,6 +25,67 @@
 \section{Trees}
 \subsection{Initial Trees}
 \subsection{Parameter Sets}
+
+Identified a series of parameter sets for initial training and testing purposes:
+
+\begin{itemize}
+    \item \textbf{AQC} \hfill\\
+        A set consisting of all available parameters used by \textbf{auto\_qc}.
+    \item \textbf{AQCN} \hfill\\
+        Replaces groups of the \textbf{AQC} set with aggregated parameters.
+    \item \textbf{ERROR} \hfill\\
+        An experimental toy set consisting of only the "error-rate" parameter.
+    \item \textbf{NO\_ERROR} \hfill\\
+        Another toy set designed to test results gained by excluding the
+        "error-rate" parameter.
+    \item \textbf{BASELINE} \hfill\\
+        Include any parameter which include "baseline" as a substring.
+    \item \textbf{NOBASELINE} \hfill\\
+        Exclude any parameter which include "baseline" as a substring.
+    \item \textbf{MARP} \hfill\\
+        Include any parameter which includes one of the following substrings:
+        mean, percent, rate or average.
+    \item \textbf{NO\_MARP} \hfill\\
+        Exclude any parameter which includes one of the following substrings:
+        mean, percent, rate or average.
+\end{itemize}
+
+\begin{listing}[H]
+    \caption[frontier-warnings]{\textbf{Frontier Variance Warnings}:
+        Warnings issued for \textbf{auto\_qc} parameters that have been found to
+        have no variance by one of \textbf{Frontier}'s sanity checking procedures.}
+    \label{list:frontier-warnings}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=0,
+                frame=lines,
+                framesep=2mm]{bash}
+/pools/encrypted/sanger/frontier/data/bamcheck_2013dec25_ratios_out/(13455 files)
+[WARN] bases-trimmed parameter has 0 variance (with mean 0.00)
+[WARN] filtered-sequences parameter has 0 variance (with mean 0.00)
+[WARN] is-paired parameter has 0 variance (with mean 1.00)
+[WARN] is-sorted parameter has 0 variance (with mean 1.00)
+[WARN] maximum-length parameter has 0 variance (with mean 100.00)
+[WARN] non-primary-alignments parameter has 0 variance (with mean 0.00)
+[WARN] quality-dropoff-high-iqr-threshold parameter has 0 variance (with mean 10.00)
+[WARN] quality-dropoff-ignore-edge-cycles parameter has 0 variance (with mean 3.00)
+[WARN] quality-dropoff-runmed-k parameter has 0 variance (with mean 25.00)
+    \end{minted}
+\end{listing}
+
+Parameters with no variance will have constant value across all observations
+regardless of their class label and will thus be unhelpful in predicting class
+membership for future observations. Such parameters can be safely discarded,
+Listing~\ref{list:frontier-warnings} displays warnings issued by
+\textbf{Frontier} for several of the \textbf{auto\_qc}
+
+\subsection{Parameter Selection}
+
+Whilst the crude parameter sets of the previous section were useful to gain
+understanding of the data that we have, it was necessary to obtain more
+deliberate decisions for parameters to utilise in the model.
+
 \subsection{Ignoring Warnings}
 
 \subsubsection{Cross Validation}

@@ -73,6 +73,7 @@ understanding of the application's purpose and terminology used in the following
 implementation section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{Implementation}
 
 This section investigates the implementation of Frontier's major components:
@@ -483,7 +484,8 @@ different runs of the classifier in future, it would be trivial to import old
 \section{Usage Example}
 
 \begin{listing}[H]
-    \caption[callstatplexer]{: Example usage of Frontier}
+    \caption[callstatplexer]{\textbf{Constructing a Statplexer}: Syntax for
+    instantiation of \textbf{Frontier}'s \textbf{Statplexer}.}
     \label{list:callstatplexer}
     \begin{minted}[mathescape,
                 %linenos,
@@ -534,6 +536,21 @@ Constructing the Statplexer requires the following arguments:
         Module containing the class (of the same name) to be used to parse the
         \textit{target\_path} file for target data
 \end{itemize}
+
+%TODO Add to example
+\begin{listing}[H]
+    \caption[callstatplexer]{\textbf{Retrieving Data}: Example usage of
+    \textbf{Frontier}'s \textbf{Statplexer} API.}
+    \label{list:callstatplexer}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                framesep=2mm]{python}
+        statplexer.find_regressors(["mean", "percent", "rate", "average"])
+    \end{minted}
+\end{listing}
 
 
 \section{Testing}

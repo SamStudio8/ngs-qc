@@ -96,6 +96,10 @@ Variant Call Format (\textbf{VCF}) is a (typically compressed) text file...
 ...containing records
 ...developed for the 1000 Genomes Project
 
+\subsection{(Binary) Sequence Alignment Map Format}
+
+...
+
 \subsection{Variant Query File}
 \label{sec:vqf}
 %TODO
@@ -319,7 +323,7 @@ itself, using the group name as a key:
 
 \begin{itemize}
     \item \textbf{groups} \textit{Dictionary}\hfill\\
-        Keys refer to a particular allosome number, mapped to a list structure
+        Keys refer to a particular autosome number, mapped to a list structure
         which will later be populated with the positions of all variants that
         appear on that chromosome in at least one \textbf{Query File} of
         the group. It is from this structure that chromosome \textbf{NumPy}
@@ -426,7 +430,7 @@ below:
             "ichr": i,              # The i'th region on the current chromosome
             "group_counts": {},     # A dictionary mapping variant group names to
                                     # the number of variants counted for that group
-            "chr": chrno,           # The allosome number
+            "chr": chrno,           # The autosome number
             "pos_start": region_s,  # The first base of this region (inclusive)
             "pos_end": region_e     # The last base on this region (inclusive)
         }
@@ -687,7 +691,7 @@ chromosome) against the number of variants contained within that region.}
     \includegraphics[width=0.8\textwidth]{megabase_plot_split}
     \caption[megabaseplotsplit]{\textbf{Goldilocks Candidate Plot B}: Candidates
         of one megabase length are arranged along the x axis (coloured
-        and facetted by allosome) and plotted against the number of variants contained
+        and facetted by autosome) and plotted against the number of variants contained
     within that region.}
     \label{fig:megabaseplotsplit}
 \end{figure}
@@ -880,7 +884,7 @@ Various issues with use of \textbf{samtools merge} at scale were encountered
 during the assembly of the analysis pipeline. Ultimately I ran out of time
 attempting to overcome these problems before being able to put the pipeline to
 use. The difficulties experienced with \textbf{samtools merge} specifically are
-detailed in Appendix~\ref{app:test-leaks}.
+detailed in Appendix~\ref{app:merge-leaks}.
 
 
 
