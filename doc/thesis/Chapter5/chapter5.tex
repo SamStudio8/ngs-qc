@@ -601,6 +601,24 @@ candidates. However repeating the experiment including empty regions
 leads to highly similar results and the candidate that was actually selected as
 the Goldilocks region appears in both sets of results.
 
+%TODO Possible all returned variants?
+Candidate 1074 (marked by \textbf{*}) was selected as the region with the
+closest absolute difference between the median \textbf{GWAS} density of 297,
+whilst also offering the highest \textbf{iCHIP} density of the top 25 returned
+candidates.
+
+
+The implementation of the filtering and ranking functions in the previous
+chapter noted that during final ranking, the \textbf{enrich} function will
+discard candidates if the number of variants in the ranking group is less than
+the filtering group -- in this case, if the \textbf{iCHIP} density is lower than
+the \textbf{GWAS}. This was a crude rule implemented to prevent candidates with
+a significantly low \textbf{iCHIP} density ($\le$100) from being put forward following
+'enrichment'; these regions would give us little to compare when it comes to
+measuring the concordance between variants called in our leave-one-out study and
+the original \textbf{iCHIP} data set.
+
+
 %TODO Results don't actually sub-sort by iCHIP...
 \begin{listing}[H]
     \caption[resultsp2]{\textbf{Goldilocks Results}: "Top 25" Candidate Regions
@@ -643,23 +661,6 @@ the Goldilocks region appears in both sets of results.
     \end{minted}
 \end{listing}
 
-%TODO Possible all returned variants?
-Candidate 1074 (marked by \textbf{*}) was selected as the region with the
-closest absolute difference between the median \textbf{GWAS} density of 297,
-whilst also offering the highest \textbf{iCHIP} density of the top 25 returned
-candidates.
-
-
-The implementation of the filtering and ranking functions in the previous
-chapter noted that during final ranking, the \textbf{enrich} function will
-discard candidates if the number of variants in the ranking group is less than
-the filtering group -- in this case, if the \textbf{iCHIP} density is lower than
-the \textbf{GWAS}. This was a crude rule implemented to prevent candidates with
-a significantly low \textbf{iCHIP} density ($\le$100) from being put forward following
-'enrichment'; these regions would give us little to compare when it comes to
-measuring the concordance between variants called in our leave-one-out study and
-the original \textbf{iCHIP} data set.
-
 Curious about the wide range and presence of so many low resolution
 \textbf{iCHIP} candidates, I authored an R script (making use of
 \textbf{ggplot2}\citep{ggplot2} for graphing) to plot
@@ -697,6 +698,7 @@ chromosome) against the number of variants contained within that region.}
     \label{fig:megabaseplotsplit}
 \end{figure}
 
+%TODO Conclude
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Analysis Pipeline}

@@ -6,43 +6,66 @@
     \graphicspath{{Chapter4/Figs/Vector/}{Chapter4/Figs/}}
 \fi
 
-This chapter examines the main results from application of \textbf{Frontier} and
-\textbf{scikit-learn} to our \textbf{auto\_qc} learning task.
+This chapter examines some of the main results encountered from application of
+\textbf{Frontier} and \textbf{scikit-learn} to the task of replicating
+classification results from the current \textbf{auto\_qc} system.
+Following this chapter, Part II will begin exploring the effects lanelet quality
+carries to downstream variant calling analysis.
 
 \section{Introduction}
+\subsection{Objectives}
 
-To recap...
+The investigation considers of the following main objectives:
 
 \begin{itemize}
-    \item Set up environment for decision tree classification...
-    \item Select an appropriate set of parameters to use...
-    \item Minimise decision tree...
-    \item Apply best practice..
-    \item Best parameters...?
-    \item Identified any parameters that match or not?
+    \item Set up an environment for the training and testing of decision trees
+    \item Outline some parameter sets for initial examination
+    \item Use parameter selection for more rigorous modelling
+    \item Attempt to minimise generated trees
+    \item Investigate application of best practice for tree construction
+    \item Identify particular parameters that are of use for classification
 \end{itemize}
 
-\section{Introduction}
-\subsection{Why Decision Trees?}
+\subsection{Decision Trees}
 %TODO Citations...
 
-...each node represents a test on the value of an attribute or feature
+A \textbf{decision tree} is a structure of \textbf{nodes} where each node
+represents a test on the value of a particular feature or parameter of an
+observation. The layout of a decision tree resembles a flow chart where
+'decisions' at each node (\textit{e.g.} is parameter x greater than or equal to
+value y) choose the path an observation will take through the tree. Once an
+observation has reached a \textbf{leaf} node -- a node with no test to be
+applied -- it is considered classified (typically the leaf will either be
+trained to contain observations of just one class, or the classification will be
+the most frequent class in that leaf).
 
-...single discrete target
-...primarily human readable rule set... like a flow chart...
-...simple to interpret, can be statistically verified
-...robust to noise
-...realistic applications in medicine and risk
-...algorithm capable of scaling to relatively large sets such as ours
-...at this time we're not looking for a "black box"
-...want to be able to see whether the current rule set can be extracted with
-machine learning methods...
+Our primary motivation for using a decision tree is its interpretability; trees
+create human-readable rule sets and are very easy to explain and understand. The
+current \textbf{auto\_qc} system performs logical tests of simple rules in a
+similar fashion and thus it seemed sensible to compare results from both systems
+by using a decision tree as output. A "black box" machine learning
+classifier such as a neural network would not produce any tangible rules that
+could be explained to another human. Whilst the first goal is to briefly
+investigate whether \textbf{auto\_qc}'s rules actually can be recovered, future work may
+wish to make improved rules that could still be interpreted by lab technicians,
+which would be impossible with a "black box" algorithm.
 
-...decisions tree however are prone to overfitting -- failing to generalise...
-...cannot promise optimality
-...duplicated subtrees
-...cannot be applied to first order logic, only one parameter can be tested at a
-time, future tests are not "aware" of previous tests
+%TODO Cite robustness
+Decision trees are robust to noise and missing data (within reason) and can be
+realistically deployed in a variety of applications including medicine and
+finance. Decision trees also scale well to large inputs, which is useful given
+the size of the data set (approximately 1.15 million observation-parameter
+combinations).
+
+%TODO Cite cross val, cite overfitting
+However, trees are prone to a process called \textbf{overfitting}, where
+decisions have too much basis on the data seen so far and don't generalise well
+to future observations. \textbf{Cross-validation} can help overcome this barrier
+by splitting the available data and targets into training and testing subsets.
+The tree will be constructed using the training set and the accuracy of the tree
+is then measured on the unseen testing data (\textit{i.e.} did classifications
+made by the tree match the known targets for those observations?).
+
 
 \subsection{DecisionTreeClassifier}
 % TODO Cite
@@ -54,7 +77,17 @@ time, future tests are not "aware" of previous tests
 ...Classification And Regression Tree (CART)
 
 
+\section{Interaction with scikit-learn}
+\subsection{Cross Validation}
 
+...method in which to measure classification accuracy...
+...potentially use a weighting to penalise mistakes in smaller classes...
+
+...K fold cross validation
+...using stratified K fold cross validation...
+
+\subsection{Confusion Matrices}
+"Normal" confusion matrix and "Warnings" confusion matrix...
 
 
 \section{Naive Parameter Sets}
@@ -189,22 +222,6 @@ should be reassessed.
 
 \subsection{Summary of Trees}
 
-\begin{sidewaysfigure}[htbp!]
-    \centering
-    \includegraphics[width=\textheight,height=4cm]{ALL_BASELINE_1}
-    \caption[all-baseline-1]{\textbf{BASELINE Set Decision Tree}: A
-    decision tree trained using the \textbf{BASELINE} set.}
-    \label{fig:all-baseline-1}
-
-    \vspace{20mm}
-
-    \includegraphics[width=\textheight,height=1cm]{ALL_ERROR_1}
-    \caption[all-error-1]{\textbf{ERROR Set Decision Tree}: A highly
-        overfit decision tree trained on the single parameter \textbf{ERROR}
-        set. Each node forms an arbitrary decision on the \textbf{error-rate}
-        parameter.}
-    \label{fig:all-error-1}
-\end{sidewaysfigure}
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=1\textwidth]{ALL_AQC_1}
@@ -220,8 +237,6 @@ should be reassessed.
     \label{fig:all-aqc-2}
 \end{figure}
 
-Figure~\ref{fig:all-error-1} is a highly overfit tree... and would require 42m
-of A4!
 
 \begin{figure}[htbp!]
     \centering
@@ -238,8 +253,32 @@ of A4!
     \label{fig:all-all-2}
 \end{figure}
 
+Figures~\ref{fig:all-baseline-1} and~\ref{fig:all-error-1} are examples of
+overfit decision trees. Splitting decisions are overly complex...
+...rules will be difficult to extract and likely represent little meaning...
+Figure~\ref{fig:all-error-1} is a highly overfit tree... and would require 42m
+of A4!
+
+\begin{sidewaysfigure}[htbp!]
+    \centering
+    \includegraphics[width=\textheight,height=4cm]{ALL_BASELINE_1}
+    \caption[all-baseline-1]{\textbf{BASELINE Set Decision Tree}: A
+    decision tree trained using the \textbf{BASELINE} set.}
+    \label{fig:all-baseline-1}
+
+    \vspace{20mm}
+
+    \includegraphics[width=\textheight,height=1cm]{ALL_ERROR_1}
+    \caption[all-error-1]{\textbf{ERROR Set Decision Tree}: A highly
+        overfit decision tree trained on the single parameter \textbf{ERROR}
+        set. Each node forms an arbitrary decision on the \textbf{error-rate}
+        parameter.}
+    \label{fig:all-error-1}
+\end{sidewaysfigure}
+
 
 \section{Informed Parameter Selection}
+\subsection{Introduction}
 
 Whilst the crude parameter sets of the previous section were useful to gain
 understanding of the data that we have, it was necessary to obtain more
@@ -283,10 +322,21 @@ regardless of their class label and will thus be unhelpful in predicting class
 membership for future observations. Such parameters can be safely discarded,
 Listing~\ref{list:frontier-warnings} displays warnings issued by
 \textbf{Frontier} for several of the \textbf{auto\_qc}
-\subsection{Parameter Selection}
 
-\section{Trees}
-\subsection{Application of Best Practice}
+
+\section{Filtering of Data Sets}
+\subsection{Ignoring Warnings}
+\textbf{IGNWARN}
+
+\subsection{Treating Warnings as Passes}
+\textbf{WARNPASS}
+...the Sanger Institute often treats lanelets classified as a warning as a
+pass... ...wanting to see whether this would affect the results...
+...recode classes...
+
+\subsection{Seperating Studies}
+
+\section{Application of Best Practice}
 ...scikit has no post pruning...
 
 \textbf{DecisionTreeClassifier} accepts the following optional arguments upon
@@ -303,20 +353,6 @@ concstruction:
         leaf smaller than the required minimum.
 \end{itemize}
 
-\subsection{Initial Trees}
-
-\subsection{Ignoring Warnings}
-
-\subsubsection{Cross Validation}
-
-...method in which to measure classification accuracy...
-...potentially use a weighting to penalise mistakes in smaller classes...
-
-...K fold cross validation
-...using stratified K fold cross validation...
-
-\subsubsection{Confusion Matrices}
-"Normal" confusion matrix and "Warnings" confusion matrix...
 
 ...
 ...
