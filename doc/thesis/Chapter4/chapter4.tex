@@ -144,7 +144,7 @@ each fold a \textbf{DecisionTreeClassifier} was trained and tested.
 Table~\ref{tab:pset-cv} outlines the average cross validation scores across each
 such experiment.
 
-\begin{table}[H]
+\begin{table}
     \centering
     \begin{tabular}{l | c  c  c  c  r}
         Set           & Nº & CV ± SD & SCV ± SD & Depth & Most Important Feature\\
@@ -223,42 +223,72 @@ should be reassessed.
 
 \subsection{Summary of Trees}
 
-\begin{figure}[htbp!]
-    \centering
-    \includegraphics[width=1\textwidth]{ALL_AQC_1}
-    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree}: A more reasonably sized
-    decision tree trained on the \textbf{AQC} set.}
-    \label{fig:all-aqc-1}
-\end{figure}
-\begin{figure}[htbp!]
-    \centering
-    \includegraphics[width=1\textwidth]{ALL_AQC_2}
-    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree}: A more reasonably sized
-    decision tree trained on the \textbf{AQC} set.}
-    \label{fig:all-aqc-2}
-\end{figure}
+Figures~\ref{fig:all-all-1} and~\ref{fig:all-all-2} are two of the ten trees
+constructed (one per fold) during the testing of the \textbf{ALL} paramter set.
+The breadth and depth of the trees are somewhat reasonable and stand up to
+scrutiny by cross validation (stratified or not). The depth of the trees appear
+to be a result of a paticular decision path consisting of a large number of
+observations passing through nodes and splitting off a small subset of
+observations each time, akin to a busy train dropping small groups of
+passengers off at small stations. This linear behaviour matches the role of
+\textbf{auto\_qc}...
+
 
 
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=1\textwidth]{ALL_ALL_1}
-    \caption[all-all-1]{\textbf{ALL Set Decision Tree}: A more reasonably sized
-    decision tree trained on the \textbf{ALL} set.}
+    \caption[all-all-1]{\textbf{ALL Set Decision Tree A}}
     \label{fig:all-all-1}
-\end{figure}
-\begin{figure}[htbp!]
-    \centering
+    
+    \vspace{20mm}
+
     \includegraphics[width=1\textwidth]{ALL_ALL_2}
-    \caption[all-all-2]{\textbf{ALL Set Decision Tree}: A more reasonably sized
-    decision tree trained on the \textbf{ALL} set.}
+    \caption[all-all-2]{\textbf{ALL Set Decision Tree B}}
     \label{fig:all-all-2}
 \end{figure}
 
+Figures~\ref{fig:all-aqc-1} and~\ref{fig:all-aqc-2} are two of the ten trees
+generated via training and testing of the significantly smaller \textbf{AQC}
+parameter set. Whilst the size of these trees has grown (though the average
+depth for the \textbf{AQC} set is in fact lower than \textbf{ALL}), they also
+exhbit the linear \textbf{auto\_qc} behaviour.
+
+It is interesting to note the apparent difference in size between these two
+trees, although they were generated using parameters from the same set, the
+results of training the trees are more variable. This could hint that there are
+parameters we have excluded (that are present in \textbf{ALL}) that may
+be useful in maintaining tree stability.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1\textwidth]{ALL_AQC_1}
+    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree A}}
+    \label{fig:all-aqc-1}
+
+    \vspace{20mm}
+
+    \includegraphics[width=1\textwidth]{ALL_AQC_2}
+    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree B}}
+    \label{fig:all-aqc-2}
+\end{figure}
+
+
 Figures~\ref{fig:all-baseline-1} and~\ref{fig:all-error-1} are examples of
-overfit decision trees. Splitting decisions are overly complex...
-...rules will be difficult to extract and likely represent little meaning...
-Figure~\ref{fig:all-error-1} is a highly overfit tree... and would require 42m
-of A4!
+poor decision trees. Splitting decisions are overly complicated, creating an
+uninterpretable sprawl of nodes and leaves. Rules will be incredible difficult
+to extract, if not impossible and will be very unlikely to offer any real
+meaning. Figure~\ref{fig:all-error-1} in particular is a highly overfit tree,
+constructed on just one parameter (\textbf{error-rate}); every node in the tree
+is an arbitrary decision, classifying the trained observations exactly.
+
+The \textbf{ERROR} set however acheives a cross-validation score of 60\%.
+Highlighting the necessity of examining created trees and not just blindly
+accepting the validation scores. Despite its somewhat acceptable performance
+(60\% accuracy in a three class problem), no
+useful rules can be extracted. In addition, you would require a 42m wide
+wall to hang it on if you wanted a handy classification guide in a lab.
+
 
 \begin{sidewaysfigure}[htbp!]
     \centering
@@ -272,8 +302,7 @@ of A4!
     \includegraphics[width=\textheight,height=1cm]{ALL_ERROR_1}
     \caption[all-error-1]{\textbf{ERROR Set Decision Tree}: A highly
         overfit decision tree trained on the single parameter \textbf{ERROR}
-        set. Each node forms an arbitrary decision on the \textbf{error-rate}
-        parameter.}
+    set.}
     \label{fig:all-error-1}
 \end{sidewaysfigure}
 
