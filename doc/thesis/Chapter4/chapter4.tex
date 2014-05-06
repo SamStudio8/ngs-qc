@@ -373,6 +373,8 @@ outlier observations that will be excluded from a study.
 previously...) to specify use of one of the sets below... by default it will use
 \texttt{--dALL}...
 
+...warnigns no longer exist!
+
 \subsection{Ignoring Warnings}
 
 The aim of \textbf{FrontAQC} is to firstly mimic the \textbf{auto\_qc} system by
@@ -410,19 +412,51 @@ warnings as passes.
 
 \subsection{Seperating Studies}
 
+%FUTURE
+...The "BAMcheckr'd" data set is made up of 13,455 lanelets...
+...from two different studies...
+...whilst the rule set \textbf{auto\_qc} remained the same for both studies it
+would be interesting to investigate whether there are any underlying effects
+from study...
+Time did not permit exploration of this idea...
+
+
 \section{Combining Data Filtering and Parameter Selection}
 
-\begin{table}
+\begin{table}[H]
     \centering
     \begin{tabular}{l l | c  c  c  c  r}
         PSet & DSet          & Nº & CV ± SD & SCV ± SD & Depth & Most Important Feature\\
         \hline
-        R\_TOP9 & ALL         & 9  & 87 ± 6  & 95 ± 1 & 32 & max-max-baseline-deviation (32\%)\\
-        R\_TOP9 & IGNWARN     & 9  & 98 ± 1  & 99 ± 0 & 20 & rev-percent-insertions-above-baseline (38\%)\\
-        R\_TOP9 & WARNPASS    & 9 & 95 ± 3 & . & . & . \\
+        RTOP9 & ALL         & 9  & 87 ± 6  & 95 ± 1 & 32 & max-max-baseline-deviation (32\%)\\
+        RTOP9 & IGNWARN     & 9  & 98 ± 1  & 99 ± 0 & 20 & rev-pct-insertions-above-baseline (38\%)\\
+        RTOP9 & WARNPASS    & 9 & 95 ± 3 & 99 ± 1 & 24 &
+                                                    quality-dropoff-rev-mean-runmed\\
+                                                    &&&&&&-decline-low-value (34\%)\\
     \end{tabular}
 
-    \caption[pset-cv]{\textbf{Parameter Set Cross Validation Scores}: Results of
+    \caption[pset-cv]{\textbf{Backward Elimination Parameter Set Cross Validation Scores}:
+        Results of classifying testing data.
+        Columns left to right; parameter set name, data set name, number of parameters
+        included, average cross-validation score (max 100) ± std. deviation,
+        average stratified cross-validation score (max 100) ± std. deviation,
+        average depth of the generated tree and the most important parameter by
+        Gini importance (max 100). Tree depth and parameter importance was
+        estimated on experiments using the stratified data. \textit{N.B.}
+    \textbf{IGNWARN} and \textbf{WARNPASS} data sets perform classifications on
+two classes (pass and fail) rather than three.}
+
+    \label{tab:be-pset-cv}
+\end{table}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l l | c  c  c  c  r}
+        PSet & DSet          & Nº & CV ± SD & SCV ± SD & Depth & Most Important Feature\\
+        \hline
+        KTOP9 & WARNPASS    & 9 & 95 ± 3 & . & . & . \\
+    \end{tabular}
+
+    \caption[pset-cv]{\textbf{SelectKBest Parameter Set Cross Validation Scores}: Results of
         classifying testing data into one of three classes; pass, fail or warn.
         Columns left to right; parameter set name, number of parameters
         included, average cross-validation score (max 100) ± std. deviation,
@@ -431,7 +465,7 @@ warnings as passes.
         Gini importance (max 100). Tree depth and parameter importance was
     estimated on experiments using the stratified data.}
 
-    \label{tab:pset-cv}
+    \label{tab:ks-pset-cv}
 \end{table}
 
 

@@ -289,7 +289,7 @@ Combining Data Filtering and Parameter Selection . . . . . . . . . . . . . . . .
 
 5.7
 
-Application of Best Practice . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Application of Best Practice . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
 
 5.8
 
@@ -1542,7 +1542,7 @@ cross-validation score (max 100) ± std. deviation, average stratified cross-val
 deviation, average depth of the generated tree and the most important parameter by Gini importance (max
 100). Tree depth and parameter importance was estimated on experiments using the stratified data.
 
-we used 10) and for each fold a DecisionTreeClassifier was trained and tested. Table 5.2 outlines the average
+we used 10) and for each fold a DecisionTreeClassifier was trained and tested. Table 5.1 outlines the average
 cross validation scores across each such experiment.
 Whilst these parameter sets are certainly crude – a majority of them having been constructed without close
 examination just by matching or excluding substrings using Frontier’s parameter inspection functions – we
@@ -1682,33 +1682,6 @@ mark it otherwise, such classifications could essentially be considered as auto_
 32
 
 5.6 Combining Data Filtering and Parameter Selection
-PSet
-DSet
-Nº CV ± SD SCV ± SD Depth
-Most Important Feature
-R_TOP9 ALL
-9
-87 ± 6
-95 ± 1
-32
-max-max-baseline-deviation (32%)
-9
-98 ± 1
-99 ± 0
-20
-rev-percent-insertions-above-baseline (38%)
-R_TOP9 IGNWARN
-R_TOP9 WARNPASS 9
-95 ± 3
-.
-.
-.
-Table 5.2 Parameter Set Cross Validation Scores: Results of classifying testing data into one of three
-classes; pass, fail or warn. Columns left to right; parameter set name, number of parameters included, average
-cross-validation score (max 100) ± std. deviation, average stratified cross-validation score (max 100) ± std.
-deviation, average depth of the generated tree and the most important parameter by Gini importance (max
-100). Tree depth and parameter importance was estimated on experiments using the stratified data.
-
 After manual inspection a lanelet flagged as a warning will be categorised as a "pass" or "fail" by a human
 operator. So for all Frontier and scikit-learn know, a sample with an auto_qc "warning" could be eiher a
 pass or a fail.
@@ -1729,11 +1702,104 @@ functionality, a user may specify –dWARNPASS to FrontAQC to recode all warning
 
 5.5.3
 
-Seperating Studies
-
 5.6
 
+Seperating Studies
+
 Combining Data Filtering and Parameter Selection
+
+PSet
+
+DSet
+
+Nº
+
+CV ± SD
+
+SCV ± SD
+
+Depth
+
+RTOP9
+
+ALL
+
+9
+
+87 ± 6
+
+95 ± 1
+
+32
+
+max-max-baseline-deviation (32%)
+
+RTOP9
+
+IGNWARN
+
+9
+
+98 ± 1
+
+99 ± 0
+
+20
+
+rev-pct-insertions-above-baseline (38%)
+
+RTOP9
+
+WARNPASS
+
+9
+
+95 ± 3
+
+99 ± 1
+
+24
+
+quality-dropoff-rev-mean-runmed
+
+Most Important Feature
+
+-decline-low-value (34%)
+Table 5.2 Backward Elimination Parameter Set Cross Validation Scores: Results of classifying testing data
+into one of three classes; pass, fail or warn. Columns left to right; parameter set name, number of parameters
+included, average cross-validation score (max 100) ± std. deviation, average stratified cross-validation score
+(max 100) ± std. deviation, average depth of the generated tree and the most important parameter by Gini
+importance (max 100). Tree depth and parameter importance was estimated on experiments using the stratified
+data.
+
+PSet
+
+DSet
+
+Nº
+
+CV ± SD
+
+SCV ± SD
+
+Depth
+
+Most Important Feature
+
+KTOP9 WARNPASS 9
+95 ± 3
+.
+.
+.
+Table 5.3 SelectKBest Parameter Set Cross Validation Scores: Results of classifying testing data into one
+of three classes; pass, fail or warn. Columns left to right; parameter set name, number of parameters included,
+average cross-validation score (max 100) ± std. deviation, average stratified cross-validation score (max 100)
+± std. deviation, average depth of the generated tree and the most important parameter by Gini importance
+(max 100). Tree depth and parameter importance was estimated on experiments using the stratified data.
+
+33
+
+5.7 Application of Best Practice
 
 5.7
 
@@ -1745,9 +1811,6 @@ DecisionTreeClassifier accepts the following optional arguments upon concstructi
 Prevent the tree from growing beyond a specified depth.
 • min_samples_split
 Prevent a node in the tree from being split further if it does not contain enough observations.
-33
-
-5.8 Conclusion
 • min_samples_leaf
 Prevent a node in the tree from being split further if it would create a leaf smaller than the required
 minimum.
