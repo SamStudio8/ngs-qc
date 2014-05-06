@@ -14,7 +14,7 @@ Dr. Amanda Clare afc
 
 Draft
 
-May 6, 2014
+May 7, 2014
 
 Declaration
 
@@ -249,14 +249,14 @@ Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
-Alternative Handling of Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Alternative Handling of Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 5.3.1
 
-Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 5.3.2
 
-Treating Warnings as Passes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Treating Warnings as Passes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 5.3.3
 
@@ -1569,17 +1569,25 @@ Fig. 5.2 ALL Set Decision Tree B
 
 5.2 Naive Parameter Sets
 
-Fig. 5.3 AQC Set Decision Tree A
+Fig. 5.3 AQC Set Decision Tree (a)
 
-Fig. 5.4 AQC Set Decision Tree B
+Fig. 5.4 AQC Set Decision Tree (b)
 
 29
 
+30
+
+Fig. 5.6 ERROR Set Decision Tree: A highly overfit decision tree trained on the single parameter ERROR set.
+
+Fig. 5.5 BASELINE Set Decision Tree: A decision tree trained using the BASELINE set.
+
+5.2 Naive Parameter Sets
+
 5.3 Alternative Handling of Data Sets
-The ERROR set however acheives a cross-validation score of 60%, highlighting the necessity of examining
-created trees and not just blindly accepting the validation scores. Despite its somewhat acceptable performance
-(60% accuracy in a three class problem), no useful rules can be extracted. In addition, you would require a
-42m wide wall to hang it on if you wanted a handy classification guide in a lab.
+The ERROR set in Table 5.1 however acheives a cross-validation score of 60%, highlighting the necessity of
+examining created trees and not just blindly accepting the validation scores. Despite its somewhat acceptable
+performance (60% accuracy in a three class problem), no useful rules can be extracted. In addition, you would
+require a 42m wide wall to hang it on if you wanted a handy classification guide in a lab.
 
 5.3
 
@@ -1619,15 +1627,7 @@ analysis – as if they were a pass.
 If auto_qc is technically treating warnings as passes, then why shouldn’t we? Thus, using Frontier’s recode
 functionality, a user may specify –dWARNPASS to recode all warnings as passes.
 
-30
-
-31
-
-Fig. 5.6 ERROR Set Decision Tree: A highly overfit decision tree trained on the single parameter ERROR set.
-
-Fig. 5.5 BASELINE Set Decision Tree: A decision tree trained using the BASELINE set.
-
-5.3 Alternative Handling of Data Sets
+31
 
 5.4 Informed Parameter Selection
 
@@ -1827,9 +1827,9 @@ be plotted.
 
 5.4 Informed Parameter Selection
 
-Fig. 5.8 TOP9 Set Decision Tree with IGNWARN Data A
+Fig. 5.8 TOP9 Set Decision Tree with IGNWARN Data (a)
 
-Fig. 5.9 TOP9 Set Decision Tree with IGNWARN Data B
+Fig. 5.9 TOP9 Set Decision Tree with IGNWARN Data (b)
 
 34
 
@@ -1851,9 +1851,10 @@ rules of the current system; it’s certainly possible that auto_qc’s rule set
 learning techniques.
 An important part of building decision trees that hasn’t been covered in this chapter is pruning; scikit-learn
 doesn’t provide any pruning functionality and instead recommends use of ensemble methods such as random
-forests. For interpretability I continued using the single tree classifier and implementing my own pruning
-algorithms were outside the scope of this project. Pruning would certainly have assisted with some of the
-earlier trees but our warning-augmented, minimal-parameter trees were well sized even without post-pruning.
+forests. For interpretability I continued using the single tree classifier and regardless, implementing my own
+pruning algorithms would haven fallen outside the scope of this project. Pruning would certainly have assisted
+with some of the earlier trees but our warning-augmented, minimal-parameter trees were well sized even
+without post-pruning.
 From here, Part II will undertake an investigation in to lanelet quality, identifying lanelets that improve or
 detriment downstream analysis. Searching for relationships or trends in the parameters of these particular
 lanelets will fuel further investigation of some of the lines in inquiry introduced in this chapter.

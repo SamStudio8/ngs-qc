@@ -232,33 +232,15 @@ be useful in maintaining tree stability.
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=1\textwidth]{ALL_AQC_1}
-    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree A}}
+    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree (a)}}
     \label{fig:all-aqc-1}
 
     \vspace{20mm}
 
     \includegraphics[width=1\textwidth]{ALL_AQC_2}
-    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree B}}
+    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree (b)}}
     \label{fig:all-aqc-2}
 \end{figure}
-
-
-Figures~\ref{fig:all-baseline-1} and~\ref{fig:all-error-1} are examples of
-poor decision trees. Splitting decisions are overly complicated, creating an
-uninterpretable sprawl of nodes and leaves. Rules will be incredible difficult
-to extract, if not impossible and will be very unlikely to offer any real
-meaning. Figure~\ref{fig:all-error-1} in particular is a highly overfit tree,
-constructed on just one parameter (\textbf{error-rate}); every node in the tree
-is an arbitrary decision, classifying the trained observations exactly.
-
-The \textbf{ERROR} set however acheives a cross-validation score of 60\%,
-highlighting the necessity of examining created trees and not just blindly
-accepting the validation scores. Despite its somewhat acceptable performance
-(60\% accuracy in a three class problem), no
-useful rules can be extracted. In addition, you would require a 42m wide
-wall to hang it on if you wanted a handy classification guide in a lab.
-
-
 \begin{sidewaysfigure}[htbp!]
     \centering
     \includegraphics[width=\textheight,height=4cm]{ALL_BASELINE_1}
@@ -274,6 +256,24 @@ wall to hang it on if you wanted a handy classification guide in a lab.
     set.}
     \label{fig:all-error-1}
 \end{sidewaysfigure}
+
+
+Figures~\ref{fig:all-baseline-1} and~\ref{fig:all-error-1} are examples of
+poor decision trees. Splitting decisions are overly complicated, creating an
+uninterpretable sprawl of nodes and leaves. Rules will be incredible difficult
+to extract, if not impossible and will be very unlikely to offer any real
+meaning. Figure~\ref{fig:all-error-1} in particular is a highly overfit tree,
+constructed on just one parameter (\textbf{error-rate}); every node in the tree
+is an arbitrary decision, classifying the trained observations exactly.
+
+The \textbf{ERROR} set in Table~\ref{tab:pset-cv} however acheives a
+cross-validation score of 60\%, highlighting the necessity of examining created
+trees and not just blindly accepting the validation scores. Despite its somewhat
+acceptable performance (60\% accuracy in a three class problem), no useful rules
+can be extracted. In addition, you would require a 42m wide wall to hang it on
+if you wanted a handy classification guide in a lab.
+
+
 
 
 \section{Alternative Handling of Data Sets}
@@ -448,13 +448,15 @@ node of their own to be plotted.
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=0.8\textwidth]{TOP9_IGNWARN_1}
-    \caption[top9-ignwarn-1]{\textbf{TOP9 Set Decision Tree with IGNWARN Data A}}
+    \caption[top9-ignwarn-1]{\textbf{TOP9 Set Decision Tree with IGNWARN Data
+    (a)}}
     \label{fig:top9-ignwarn-1}
 
     \vspace{10mm}
 
     \includegraphics[width=0.8\textwidth]{TOP9_IGNWARN_5}
-    \caption[top9-ignwarn-2]{\textbf{TOP9 Set Decision Tree with IGNWARN Data B}}
+    \caption[top9-ignwarn-2]{\textbf{TOP9 Set Decision Tree with IGNWARN Data
+    (b)}}
     \label{fig:top9-ignwarn-2}
 \end{figure}
 
@@ -483,10 +485,10 @@ An important part of building decision trees that hasn't been covered in this
 chapter is \textbf{pruning}; \textbf{scikit-learn} doesn't provide any pruning
 functionality and instead recommends use of ensemble methods such as
 \textbf{random forests}. For interpretability I continued using the single tree
-classifier and implementing my own pruning algorithms were outside the scope of
-this project. Pruning would certainly have assisted with some of the earlier
-trees but our warning-augmented, minimal-parameter trees were well sized even
-without post-pruning.
+classifier and regardless, implementing my own pruning algorithms would haven
+fallen outside the scope of this project. Pruning would certainly have assisted
+with some of the earlier trees but our warning-augmented, minimal-parameter
+trees were well sized even without post-pruning.
 
 From here, Part II will undertake an investigation in to lanelet quality,
 identifying lanelets that improve or detriment downstream analysis. Searching
