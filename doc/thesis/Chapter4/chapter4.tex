@@ -1,5 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Results}
+\ifpdf
+    \graphicspath{{Chapter4/Figs/Raster/}{Chapter4/Figs/PDF/}{Chapter4/Figs/}}
+\else
+    \graphicspath{{Chapter4/Figs/Vector/}{Chapter4/Figs/}}
+\fi
 
 This chapter examines the main results from application of \textbf{Frontier} and
 \textbf{scikit-learn} to our \textbf{auto\_qc} learning task.
@@ -45,16 +50,6 @@ time, future tests are not "aware" of previous tests
 ...gini impruty or information gain... scikit seems to favour gini...
 ...
 
-\begin{itemize}
-    \item \textbf{max\_depth} \hfill\\
-        ...
-    \item \textbf{min\_samples\_split} \hfill\\
-        ...
-    \item \textbf{min\_samples\_leaf} \hfill\\
-        ...
-    \item \textbf{min\_features} \hfill\\
-        ...
-\end{itemize}
 
 ...Classification And Regression Tree (CART)
 
@@ -62,12 +57,16 @@ time, future tests are not "aware" of previous tests
 
 
 
-\section{Parameter Sets and Selection}
-\subsection{Naive Parameter Sets}
+\section{Naive Parameter Sets}
+\subsection{Introduction}
 
-Identified a series of parameter sets for initial training and testing purposes:
+For initial training and testing purposes, the following arbitrary parameter
+sets were created as a starting point:
 
 \begin{itemize}
+    \item \textbf{ALL} \hfill\\
+        A parameter set consisting of all the summary numbers in a "BAMcheckr'd"
+        file
     \item \textbf{AQC} \hfill\\
         A set consisting of all available parameters used by \textbf{auto\_qc}.
     \item \textbf{AQCN} \hfill\\
@@ -78,33 +77,34 @@ Identified a series of parameter sets for initial training and testing purposes:
         Another toy set designed to test results gained by excluding the
         "error-rate" parameter.
     \item \textbf{BASELINE} \hfill\\
-        Include any parameter which include "baseline" as a substring.
+        Include any parameter which includes "baseline" as a substring.
     \item \textbf{NOBASELINE} \hfill\\
-        Exclude any parameter which include "baseline" as a substring.
+        Exclude any parameter which includes "baseline" as a substring.
     \item \textbf{MARP} \hfill\\
-        Include any parameter which includes one of the following substrings:
-        mean, percent, rate or average.
+        Include any parameter which includes any of the following as substrings:
+        mean, average, rate or percent.
     \item \textbf{NO\_MARP} \hfill\\
-        Exclude any parameter which includes one of the following substrings:
-        mean, percent, rate or average.
+        Exclude any parameter which includes any of the following as substrings:
+        mean, average, rate or percent.
 \end{itemize}
 
-Of note in particular is the \textbf{AQC} set, constructed from the parameters
-available from the "BAMcheckr'd" data that are taken in to account by the
-current \textbf{auto\_qc} system. It should be noted however that not all these
+Of particular note is the \textbf{AQC} set, constructed from the parameters
+available from the "BAMcheckr'd" data that are taken into account by the
+current \textbf{auto\_qc} system. However not all these
 parameters were initially available in the input files and \textbf{auto\_qc}
 relies upon data made available from \textbf{vr-pipe} where the rules of
-\textbf{auto\_qc} are actually applied. Appendix~\ref{app:ratios} discusses
+\textbf{auto\_qc} are actually applied; Appendix~\ref{app:ratios} discusses
 contributions I made to \textbf{bamcheckr} for recovering these parameters for
 use in our analysis. Ultimately, \textbf{bamcheckr} performed too slowly and it
 was possible to use \textbf{Frontier} itself to extract the additional features
 needed to better represent the decisions made by the current system.
 
-%TODO Cite dtc
+\subsection{Experiment Results}
+%TODO Cite dtc, skfold
 For each parameter set, data and targets were extracted via \textbf{Frontier}'s
 API before being subset by \textbf{scikit-learn}'s \textbf{StratifiedKFold}
-function. All available data (13,455 "BAMcheckr'd" lanelets) were used as input,
-the target variable could be one of three classes; pass, fail or warn.
+function. All available data (13,455 "BAMcheckr'd" lanelets) were used as input
+and the target variable could be one of three classes; pass, fail or warn.
 The subsets are referred to as "folds" (of which we used 10) and for
 each fold a \textbf{DecisionTreeClassifier} was trained and tested.
 Table~\ref{tab:pset-cv} outlines the average cross validation scores across each
@@ -127,7 +127,7 @@ such experiment.
     \end{tabular}
 
     \caption[pset-cv]{\textbf{Parameter Set Cross Validation Scores}: Results of
-        classifying testing data in to one of three classes; pass, fail or warn.
+        classifying testing data into one of three classes; pass, fail or warn.
         Columns left to right; parameter set name, number of parameters
         included, average cross-validation score (max 100) ± std. deviation,
         average stratified cross-validation score (max 100) ± std. deviation,
@@ -153,7 +153,7 @@ It's interesting to compare the scores between the \textbf{AQC} and
 \textbf{AQCN} parameter sets against \textbf{ALL}. Both of the former score
 highly despite having significantly fewer parameters. This appears to indicate
 that many of the parameters in the \textbf{ALL} model are redundant for use in
-classification. This should of course be expected, you'd hope to see that a set
+classification. This should of course be expected; you'd hope to see that a set
 that includes parameters known to be used by the current \textbf{auto\_qc} system
 is capable of replicating results made by that system.
 
@@ -171,11 +171,75 @@ This suggests that excluding the baseline related parameters is problematic for
 one (or two) of the three class labels (as the only difference expected between the
 experiments will be the proportions of the classes).
 
+The average tree depth -- ranging between 31 and 53 splits -- may be
+highlighting a possible shortcoming of using a decision tree classifier;
+complexity could be indicative that a tree may have been overfitted on the training
+data. Later sections will apply best practice in an attempt to minimise this
+effect.
 
-...highlights the shortcomings of using a decision tree...
-overfitting... gini coefficient not a real measure of importance...
+%TODO Gini importance
+Whilst \textbf{T-percent-max-baseline-deviation} is a parameter used by
+\textbf{auto\_qc}, it was not believed to be a parameter of
+particularly major importance and yet it is ranked as the \textit{Most
+Important Feature} by \textbf{scikit-learn}'s feature importance algorithm
+for all parameter sets it was a member of. Further investigation will yield a
+more authoritative conclusion as to whether the influence of this parameter
+should be reassessed.
 
-\subsection{Informed Parameter Selection}
+
+\subsection{Summary of Trees}
+
+\begin{sidewaysfigure}[htbp!]
+    \centering
+    \includegraphics[width=\textheight,height=4cm]{ALL_BASELINE_1}
+    \caption[all-baseline-1]{\textbf{BASELINE Set Decision Tree}: A
+    decision tree trained using the \textbf{BASELINE} set.}
+    \label{fig:all-baseline-1}
+
+    \vspace{20mm}
+
+    \includegraphics[width=\textheight,height=1cm]{ALL_ERROR_1}
+    \caption[all-error-1]{\textbf{ERROR Set Decision Tree}: A highly
+        overfit decision tree trained on the single parameter \textbf{ERROR}
+        set. Each node forms an arbitrary decision on the \textbf{error-rate}
+        parameter.}
+    \label{fig:all-error-1}
+\end{sidewaysfigure}
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1\textwidth]{ALL_AQC_1}
+    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree}: A more reasonably sized
+    decision tree trained on the \textbf{AQC} set.}
+    \label{fig:all-aqc-1}
+\end{figure}
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1\textwidth]{ALL_AQC_2}
+    \caption[all-aqc-1]{\textbf{AQC Set Decision Tree}: A more reasonably sized
+    decision tree trained on the \textbf{AQC} set.}
+    \label{fig:all-aqc-2}
+\end{figure}
+
+Figure~\ref{fig:all-error-1} is a highly overfit tree... and would require 42m
+of A4!
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1\textwidth]{ALL_ALL_1}
+    \caption[all-all-1]{\textbf{ALL Set Decision Tree}: A more reasonably sized
+    decision tree trained on the \textbf{ALL} set.}
+    \label{fig:all-all-1}
+\end{figure}
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1\textwidth]{ALL_ALL_2}
+    \caption[all-all-2]{\textbf{ALL Set Decision Tree}: A more reasonably sized
+    decision tree trained on the \textbf{ALL} set.}
+    \label{fig:all-all-2}
+\end{figure}
+
+
+\section{Informed Parameter Selection}
 
 Whilst the crude parameter sets of the previous section were useful to gain
 understanding of the data that we have, it was necessary to obtain more
@@ -222,6 +286,23 @@ Listing~\ref{list:frontier-warnings} displays warnings issued by
 \subsection{Parameter Selection}
 
 \section{Trees}
+\subsection{Application of Best Practice}
+...scikit has no post pruning...
+
+\textbf{DecisionTreeClassifier} accepts the following optional arguments upon
+concstruction:
+
+\begin{itemize}
+    \item \textbf{max\_depth} \hfill\\
+        Prevent the tree from growing beyond a specified depth.
+    \item \textbf{min\_samples\_split} \hfill\\
+        Prevent a node in the tree from being split further if it does not
+        contain enough observations.
+    \item \textbf{min\_samples\_leaf} \hfill\\
+        Prevent a node in the tree from being split further if it would create a
+        leaf smaller than the required minimum.
+\end{itemize}
+
 \subsection{Initial Trees}
 
 \subsection{Ignoring Warnings}
