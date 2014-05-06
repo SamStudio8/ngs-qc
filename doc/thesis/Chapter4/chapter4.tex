@@ -54,14 +54,6 @@ The tree will be constructed using the training set and the accuracy of the tree
 is then measured on the unseen testing data (\textit{i.e.} did classifications
 made by the tree match the known targets for those observations?).
 
-% TODO Cite
-% http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
-
-\textbf{scikit-learn} provides the \textbf{DecisionTreeClassifier} class as an
-interface to creating decision tree objects.
-...gini impruty or information gain... scikit seems to favour gini...
-...Classification And Regression Tree (CART)
-
 
 \section{Naive Parameter Sets}
 \subsection{Introduction}
@@ -107,6 +99,7 @@ needed to better represent the decisions made by the current system.
 
 \subsection{Experiment Results}
 %TODO Cite dtc, skfold
+% http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
 For each parameter set, data and targets were extracted via \textbf{Frontier}'s
 API before being subset by \textbf{scikit-learn}'s \textbf{StratifiedKFold}
 function. All available data (13,455 "BAMcheckr'd" lanelets) were used as input
@@ -202,8 +195,9 @@ scrutiny by cross validation (stratified or not). The depth of the trees appear
 to be a result of a paticular decision path consisting of a large number of
 observations passing through nodes and splitting off a small subset of
 observations each time, akin to a busy train dropping small groups of
-passengers off at small stations. This linear behaviour matches the role of
-\textbf{auto\_qc}...
+passengers off at small stations. This behaviour matches the \textbf{auto\_qc}
+process where all observations pass through the same tests and failed
+observations are left behind.
 
 
 
@@ -439,6 +433,7 @@ of the number of parameters, cross-validation score and maximum depth).
     \label{fig:top9-all-1}
 \end{figure}
 
+
 A drastic change is however apparent in Figures~\ref{fig:top9-ignwarn-1}
 and~\ref{fig:top9-ignwarn-2}. The graphs are far more simple and linear than
 previous figures; both width and depth are of manageable size. It would
@@ -446,12 +441,6 @@ certainly appear that augmenting the treatment of the warnings class assists in
 reducing the amount of noise and thus inhibiting overfitting -- there are no
 longer hundreds of uncommon combinations of parameter values that each need a
 node of their own to be plotted.
-
-Given the results in Tables~\ref{tab:all-pset-cv} and~\ref{tab:be-pset-cv}, it
-is arguable that treatment of warnings has a greater influence over cross
-validation score than the parameter set does. But it should be noted that
-decreasing the number of parameters used does appear to cause a difference in
-the average maximum tree depth between the experiments.
 
 
 \begin{figure}[htbp!]
@@ -466,6 +455,13 @@ the average maximum tree depth between the experiments.
     \caption[top9-ignwarn-2]{\textbf{TOP9 Set Decision Tree with IGNWARN Data B}}
     \label{fig:top9-ignwarn-2}
 \end{figure}
+
+
+Given the results in Tables~\ref{tab:all-pset-cv} and~\ref{tab:be-pset-cv}, it
+is arguable that treatment of warnings has a greater influence over cross
+validation score than the parameter set does. But it should be noted that
+decreasing the number of parameters used does appear to cause a difference in
+the average maximum tree depth between the experiments.
 
 
 \section{Conclusion}

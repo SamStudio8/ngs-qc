@@ -243,14 +243,14 @@ Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
-Alternative Handling of Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Alternative Handling of Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 5.3.1
 
-Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 5.3.2
 
-Treating Warnings as Passes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Treating Warnings as Passes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 5.3.3
 
@@ -267,7 +267,7 @@ Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
-Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
@@ -1388,8 +1388,6 @@ so far and don’t generalise well to future observations. Cross-validation can 
 splitting the available data and targets into training and testing subsets. The tree will be constructed using the
 training set and the accuracy of the tree is then measured on the unseen testing data (i.e. did classifications
 made by the tree match the known targets for those observations?).
-scikit-learn provides the DecisionTreeClassifier class as an interface to creating decision tree objects. ...gini
-impruty or information gain... scikit seems to favour gini... ...Classification And Regression Tree (CART)
 
 5.2
 5.2.1
@@ -1416,6 +1414,9 @@ Exclude any parameter which includes "baseline" as a substring.
 Include any parameter which includes any of the following as substrings: mean, average, rate or percent.
 • NO_MARP
 Exclude any parameter which includes any of the following as substrings: mean, average, rate or percent.
+Of particular note is the AQC set, constructed from the parameters available from the "BAMcheckr’d" data that
+are taken into account by the current auto_qc system. However not all these parameters were initially available
+in the input files and auto_qc relies upon data made available from vr-pipe where the rules of auto_qc are
 
 25
 
@@ -1482,9 +1483,6 @@ cross-validation score (max 100) ± std. deviation, average stratified cross-val
 deviation, average depth of the generated tree and the most important parameter by Gini importance (max
 100). Tree depth and parameter importance was estimated on experiments using the stratified data.
 
-Of particular note is the AQC set, constructed from the parameters available from the "BAMcheckr’d" data that
-are taken into account by the current auto_qc system. However not all these parameters were initially available
-in the input files and auto_qc relies upon data made available from vr-pipe where the rules of auto_qc are
 actually applied; Appendix F.2 discusses contributions I made to bamcheckr for recovering these parameters
 for use in our analysis. Ultimately, bamcheckr performed too slowly and it was possible to use Frontier itself
 to extract the additional features needed to better represent the decisions made by the current system.
@@ -1509,13 +1507,12 @@ former score highly despite having significantly fewer parameters. This appears 
 parameters in the ALL model are redundant for use in classification. This should of course be expected; you’d
 hope to see that a set that includes parameters known to be used by the current auto_qc system is capable of
 replicating results made by that system.
-
-26
-
-5.2 Naive Parameter Sets
 In general the other models perform reasonably well, potentially reflecting the simple linear nature of the
 decisions made by the auto_qc system.
 Stratified cross-validation scores are consistently better and less variable (smaller standard deviations) than
+26
+
+5.2 Naive Parameter Sets
 their non-stratified counterparts. This should be due to the more "balanced" training and testing sets gained
 by assigning observations to folds to match their proportions in the whole data set. The differences between
 the pairs of validation scores is predictable – averaging 8.66 percentage points – but the NOBASELINE set
@@ -1538,8 +1535,8 @@ Figures 5.1 and 5.2 are two of the ten trees constructed (one per fold) during t
 set. The breadth and depth of the trees are somewhat reasonable and stand up to scrutiny by cross validation
 (stratified or not). The depth of the trees appear to be a result of a paticular decision path consisting of a large
 number of observations passing through nodes and splitting off a small subset of observations each time, akin
-to a busy train dropping small groups of passengers off at small stations. This linear behaviour matches the
-role of auto_qc...
+to a busy train dropping small groups of passengers off at small stations. This behaviour matches the auto_qc
+process where all observations pass through the same tests and failed observations are left behind.
 Figures 5.3 and 5.4 are two of the ten trees generated via training and testing of the significantly smaller AQC
 parameter set. Whilst the size of these trees has grown (though the average depth for the AQC set is in fact
 lower than ALL), they also exhbit the linear auto_qc behaviour.
@@ -1553,6 +1550,9 @@ on just one parameter (error-rate); every node in the tree is an arbitrary decis
 observations exactly.
 The ERROR set however acheives a cross-validation score of 60%, highlighting the necessity of examining
 created trees and not just blindly accepting the validation scores. Despite its somewhat acceptable performance
+(60% accuracy in a three class problem), no useful rules can be extracted. In addition, you would require a
+42m wide wall to hang it on if you wanted a handy classification guide in a lab.
+
 27
 
 5.2 Naive Parameter Sets
@@ -1571,9 +1571,15 @@ Fig. 5.4 AQC Set Decision Tree B
 
 29
 
+30
+
+Fig. 5.6 ERROR Set Decision Tree: A highly overfit decision tree trained on the single parameter ERROR set.
+
+Fig. 5.5 BASELINE Set Decision Tree: A decision tree trained using the BASELINE set.
+
+5.2 Naive Parameter Sets
+
 5.3 Alternative Handling of Data Sets
-(60% accuracy in a three class problem), no useful rules can be extracted. In addition, you would require a
-42m wide wall to hang it on if you wanted a handy classification guide in a lab.
 
 5.3
 
@@ -1613,15 +1619,7 @@ analysis – as if they were a pass.
 If auto_qc is technically treating warnings as passes, then why shouldn’t we? Thus, using Frontier’s recode
 functionality, a user may specify –dWARNPASS to FrontAQC to recode all warnings as passes.
 
-30
-
-31
-
-Fig. 5.6 ERROR Set Decision Tree: A highly overfit decision tree trained on the single parameter ERROR set.
-
-Fig. 5.5 BASELINE Set Decision Tree: A decision tree trained using the BASELINE set.
-
-5.3 Alternative Handling of Data Sets
+31
 
 5.4 Informed Parameter Selection
 
@@ -1819,6 +1817,14 @@ be plotted.
 
 33
 
+5.4 Informed Parameter Selection
+
+Fig. 5.8 TOP9 Set Decision Tree with IGNWARN Data A
+
+Fig. 5.9 TOP9 Set Decision Tree with IGNWARN Data B
+
+34
+
 5.5 Conclusion
 Given the results in Tables 5.2 and 5.3, it is arguable that treatment of warnings has a greater influence over
 cross validation score than the parameter set does. But it should be noted that decreasing the number of
@@ -1843,14 +1849,6 @@ earlier trees but our warning-augmented, minimal-parameter trees were well sized
 From here, Part II will undertake an investigation in to lanelet quality, identifying lanelets that improve or
 detriment downstream analysis. Searching for relationships or trends in the parameters of these particular
 lanelets will fuel further investigation of some of the lines in inquiry introduced in this chapter.
-
-34
-
-5.5 Conclusion
-
-Fig. 5.8 TOP9 Set Decision Tree with IGNWARN Data A
-
-Fig. 5.9 TOP9 Set Decision Tree with IGNWARN Data B
 
 35
 
