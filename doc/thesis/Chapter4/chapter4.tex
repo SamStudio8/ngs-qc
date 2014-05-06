@@ -445,11 +445,14 @@ Time did not permit exploration of this idea...
         average depth of the generated tree and the most important parameter by
         Gini importance (max 100). Tree depth and parameter importance was
         estimated on experiments using the stratified data. \textit{N.B.}
-    \textbf{IGNWARN} and \textbf{WARNPASS} data sets perform classifications on
-two classes (pass and fail) rather than three.}
-
+        \textbf{IGNWARN} and \textbf{WARNPASS} data sets perform classifications on
+        two classes (pass and fail) rather than three.}
     \label{tab:be-pset-cv}
 \end{table}
+
+Table~\ref{tab:be-pset-cv}... impressive cross validation results...
+...especially for the \textbf{WARNPASS} set...
+
 \begin{table}[H]
     \centering
     \begin{tabular}{l l | c  c  c  c  r}
@@ -472,12 +475,23 @@ two classes (pass and fail) rather than three.}
 
 \subsection{Summary of Trees}
 
+Figure~\ref{fig:top9-all-1} displays a tree generated with the backward
+elimination \textbf{TOP9} parameter set against all available data. Note how the
+tree is more complex and sprawling than Figure~\ref{fig:all-all-1}... ...perhaps
+there are some parameters we could ideally add back in to the set...
+
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=1\textwidth]{TOP9_ALL_1}
     \caption[top9-all-1]{\textbf{TOP9 Set Decision Tree with ALL Data}}
     \label{fig:top9-all-1}
 \end{figure}
+
+However a drastic change has appeared in Figures~\ref{fig:top9-ignwarn-1}
+and~\ref{fig:top9-ignwarn-2}! The graphs are far more simple and linear...
+...the wide sprawls have been traded in for relatively uniform decisions...
+...it would appear that ignoring warnings removes a lot of noisy data that
+becomes overfit... learning particular circumstances for rare events...
 
 \begin{figure}[htbp!]
     \centering
