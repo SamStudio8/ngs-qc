@@ -243,14 +243,14 @@ Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
 
-Alternative Handling of Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Alternative Handling of Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 5.3.1
 
-Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 5.3.2
 
-Treating Warnings as Passes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Treating Warnings as Passes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 5.3.3
 
@@ -1352,6 +1352,8 @@ Results
 This chapter examines some of the main results encountered from application of Frontier and scikit-learn to
 the task of replicating classification results from the current auto_qc system. Following this chapter, Part II
 will begin exploring the effects lanelet quality carries to downstream variant calling analysis.
+Note that the figures of constructed decision tree in this chapter are presented for illustration of size and shape
+only and full figures may be found in the project repository[35].
 
 5.1
 5.1.1
@@ -1374,12 +1376,12 @@ and are very easy to explain and understand. The current auto_qc system performs
 rules in a similar fashion and thus it seemed sensible to compare results from both systems by using a decision
 tree as output. A "black box" machine learning classifier such as a neural network would not produce any
 tangible rules that could be explained to another human. Whilst the first goal is to briefly investigate whether
-auto_qc’s rules actually can be recovered, future work may wish to make improved rules that could still be
-interpreted by lab technicians, which would be impossible with a "black box" algorithm.
 
 24
 
 5.2 Naive Parameter Sets
+auto_qc’s rules actually can be recovered, future work may wish to make improved rules that could still be
+interpreted by lab technicians, which would be impossible with a "black box" algorithm.
 Decision trees are robust to noise and missing data (within reason) and can be realistically deployed in a
 variety of applications including medicine and finance. Decision trees also scale well to large inputs, which is
 useful given the size of the data set (approximately 1.15 million observation-parameter combinations).
@@ -1414,9 +1416,6 @@ Exclude any parameter which includes "baseline" as a substring.
 Include any parameter which includes any of the following as substrings: mean, average, rate or percent.
 • NO_MARP
 Exclude any parameter which includes any of the following as substrings: mean, average, rate or percent.
-Of particular note is the AQC set, constructed from the parameters available from the "BAMcheckr’d" data that
-are taken into account by the current auto_qc system. However not all these parameters were initially available
-in the input files and auto_qc relies upon data made available from vr-pipe where the rules of auto_qc are
 
 25
 
@@ -1483,6 +1482,9 @@ cross-validation score (max 100) ± std. deviation, average stratified cross-val
 deviation, average depth of the generated tree and the most important parameter by Gini importance (max
 100). Tree depth and parameter importance was estimated on experiments using the stratified data.
 
+Of particular note is the AQC set, constructed from the parameters available from the "BAMcheckr’d" data that
+are taken into account by the current auto_qc system. However not all these parameters were initially available
+in the input files and auto_qc relies upon data made available from vr-pipe where the rules of auto_qc are
 actually applied; Appendix F.2 discusses contributions I made to bamcheckr for recovering these parameters
 for use in our analysis. Ultimately, bamcheckr performed too slowly and it was possible to use Frontier itself
 to extract the additional features needed to better represent the decisions made by the current system.
@@ -1492,10 +1494,10 @@ to extract the additional features needed to better represent the decisions made
 Experiment Results
 
 For each parameter set, data and targets were extracted via Frontier’s API before being subset by scikit-learn’s
-StratifiedKFold function. All available data (13,455 "BAMcheckr’d" lanelets) were used as input and the
+StratifiedKFold[36] function. All available data (13,455 "BAMcheckr’d" lanelets) were used as input and the
 target variable could be one of three classes; pass, fail or warn. The subsets are referred to as "folds" (of which
-we used 10) and for each fold a DecisionTreeClassifier was trained and tested. Table 5.1 outlines the average
-cross validation scores across each such experiment.
+we used 10) and for each fold a DecisionTreeClassifier[37] was trained and tested. Table 5.1 outlines the
+average cross validation scores across each such experiment.
 Whilst these parameter sets are certainly crude – a majority of them having been constructed without close
 examination just by matching or excluding substrings using Frontier’s parameter inspection functions – we
 can learn quite a lot about the available data.
@@ -1507,12 +1509,13 @@ former score highly despite having significantly fewer parameters. This appears 
 parameters in the ALL model are redundant for use in classification. This should of course be expected; you’d
 hope to see that a set that includes parameters known to be used by the current auto_qc system is capable of
 replicating results made by that system.
-In general the other models perform reasonably well, potentially reflecting the simple linear nature of the
-decisions made by the auto_qc system.
-Stratified cross-validation scores are consistently better and less variable (smaller standard deviations) than
+
 26
 
 5.2 Naive Parameter Sets
+In general the other models perform reasonably well, potentially reflecting the simple linear nature of the
+decisions made by the auto_qc system.
+Stratified cross-validation scores are consistently better and less variable (smaller standard deviations) than
 their non-stratified counterparts. This should be due to the more "balanced" training and testing sets gained
 by assigning observations to folds to match their proportions in the whole data set. The differences between
 the pairs of validation scores is predictable – averaging 8.66 percentage points – but the NOBASELINE set
@@ -1550,9 +1553,6 @@ on just one parameter (error-rate); every node in the tree is an arbitrary decis
 observations exactly.
 The ERROR set however acheives a cross-validation score of 60%, highlighting the necessity of examining
 created trees and not just blindly accepting the validation scores. Despite its somewhat acceptable performance
-(60% accuracy in a three class problem), no useful rules can be extracted. In addition, you would require a
-42m wide wall to hang it on if you wanted a handy classification guide in a lab.
-
 27
 
 5.2 Naive Parameter Sets
@@ -1571,15 +1571,9 @@ Fig. 5.4 AQC Set Decision Tree B
 
 29
 
-30
-
-Fig. 5.6 ERROR Set Decision Tree: A highly overfit decision tree trained on the single parameter ERROR set.
-
-Fig. 5.5 BASELINE Set Decision Tree: A decision tree trained using the BASELINE set.
-
-5.2 Naive Parameter Sets
-
 5.3 Alternative Handling of Data Sets
+(60% accuracy in a three class problem), no useful rules can be extracted. In addition, you would require a
+42m wide wall to hang it on if you wanted a handy classification guide in a lab.
 
 5.3
 
@@ -1597,16 +1591,16 @@ passes and failures.
 
 Ignoring Warnings
 
-The aim of FrontAQC is to firstly mimic the auto_qc system by training and testing on data sets with
+The aim of the chapter is to firstly mimic the auto_qc system by training and testing on data sets with
 known targets as classified by auto_qc. However, attempting to learn what auto_qc doesn’t know might
 be counter-intuitive. Lanelets are classed as warnings because the current system doesn’t have the rules to
 mark it otherwise, such classifications could be considered as auto_qc reporting "I don’t know".
 After manual inspection a lanelet flagged as a warning will be categorised as a "pass" or "fail" by a human
 operator. So for all Frontier and scikit-learn know, a sample with an auto_qc "warning" could be eiher a
 pass or a fail.
-In other words, the set of warnings is actually a union between some unknown subset of the passes and
-failure. Training on this now seems impractical and inherently noisy. Users may now specify –dIGNWARN to
-FrontAQC to discard all warnings from the data set.
+In other words, the set of warnings is actually a union between some unknown subset of the passes and failure.
+Training on this now seems impractical and inherently noisy. Users may now specify –dIGNWARN to discard
+all warnings from the data set.
 
 5.3.2
 
@@ -1617,9 +1611,17 @@ lanelets for manual inspection. Many of these flagged lanelets are approved afte
 degree where by default, lanelets classified with a warning are allowed to proceed downstream for further
 analysis – as if they were a pass.
 If auto_qc is technically treating warnings as passes, then why shouldn’t we? Thus, using Frontier’s recode
-functionality, a user may specify –dWARNPASS to FrontAQC to recode all warnings as passes.
+functionality, a user may specify –dWARNPASS to recode all warnings as passes.
 
-31
+30
+
+31
+
+Fig. 5.6 ERROR Set Decision Tree: A highly overfit decision tree trained on the single parameter ERROR set.
+
+Fig. 5.5 BASELINE Set Decision Tree: A decision tree trained using the BASELINE set.
+
+5.3 Alternative Handling of Data Sets
 
 5.4 Informed Parameter Selection
 
@@ -2081,7 +2083,7 @@ method that is used does not matter so much as consistency; it is trivially easy
 when handling genomic data.
 Of note also; after a discussion with the Sanger Institute it has been decided to exclude candidates located on
 chromosome 6 from being utilised as a "Goldilocks region". Chromosome 6 contains a system of genes called
-the Human Leukocyte Antigen (HLA)2 which encode for Major Histocompatibility Complex (MHC)[37]: a
+the Human Leukocyte Antigen (HLA)2 which encode for Major Histocompatibility Complex (MHC)[40]: a
 critical component of the body’s immune system and of particular importance to anyone requiring an organ
 transplant. The HLA can cause difficulties during the variant calling process due to the high level of variability
 expressed between samples in these areas and could thus give less accurate results if we were to measure
@@ -2096,8 +2098,8 @@ This section considers the implementation of the major components of Goldilocks:
 • Loading variants from specified Variant Query Files
 • Storage and recall of variant groups in memory
 • Searching for candidates with user specified length and stride
-2 A much younger version of me was introduced to this concept via the partwork How Your Body Works[35], which also distributed
-English dubs of a 1987 French television show titled Il était une fois... la vie (Once upon a time... Life)[36] a relevant episode can be
+2 A much younger version of me was introduced to this concept via the partwork How Your Body Works[38], which also distributed
+English dubs of a 1987 French television show titled Il était une fois... la vie (Once upon a time... Life)[39] a relevant episode can be
 viewed here: http://www.youtube.com/watch?v=yvhU2UyRv-Q
 
 43
@@ -2587,16 +2589,16 @@ Extraction
 
 Now the Goldilocks region has been found, it must be extracted for each GWAS sample in our study. The
 Sanger Institute currently stores the electronic samples in the BAM format at one of their in-house data centres,
-storage and retrieval is managed by iRODS[38]: the Integrated Rule-Oriented Data System.
+storage and retrieval is managed by iRODS[41]: the Integrated Rule-Oriented Data System.
 iRODS is a BSD licensed, C++ based data management application, describing itself as "middleware for
-your critical data"[39]. The system was deployed at the institute in 2011 to cope with the data deluge
+your critical data"[42]. The system was deployed at the institute in 2011 to cope with the data deluge
 brought on by constantly improving next-generation sequencing technologies. "[T]raditional data management
 methods [became] saturated" and other more advanced file systems did not provide the desired support for
 customised metadata such as project information or sequencing specific fields like sample and lanelet ID to be
-automatically added to files[40] which iRODS does support, along with improved data replication and access
+automatically added to files[43] which iRODS does support, along with improved data replication and access
 control policy management.
 Once I had been added to the relevant access group, it was possible to extract the regions from iRODS
-via samtools_irods[41] which provides wrappers around both samtools and iRODS functionality to allow
+via samtools_irods[44] which provides wrappers around both samtools and iRODS functionality to allow
 samtools commands to directly support interaction with samples stored in iRODS.
 samtools_irods view -bh irods:\${file} 3:46000001-47000000
 > \$(basename \${file}).goldilocks.bam
@@ -2614,7 +2616,7 @@ not available. The process itself requires little resources in terms of time and
 improve the efficiency of later commands which are capable of reading and using the index.
 Both the commands in Listing 11 and 12 can be executed in parallel for extracting and indexing many samples.
 samtools index \$(basename \${file}).goldilocks.bam
-Listing 12 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[42]
+Listing 12 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[45]
 
 52
 
@@ -2635,7 +2637,7 @@ bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o
 bash -c ’samtools mpileup -b ../goldilocks-3:46000001-47000000.fofn -g -I -f
 /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa
 > ~/goldilocks/all.withref.bcf’
-Listing 13 Pileup: Submission of samtools mpileup[43] task for execution on the Farm. Note the request to
+Listing 13 Pileup: Submission of samtools mpileup[46] task for execution on the Farm. Note the request to
 increase the memory allocation with the –R flag and how the pileup command is passed as a string to bash
 –c.
 
@@ -2652,7 +2654,7 @@ Goldilocks regions.
 
 Merge
 
-samtools merge[42] is a utility for merging two or more sorted BAM files in to one sorted output. After
+samtools merge[45] is a utility for merging two or more sorted BAM files in to one sorted output. After
 viewing the source of the command I found an undocumented feature that allowed an end user to provide a
 file of filenames to merge rather than being required to list all inputs on the command line.
 Various issues with use of samtools merge at scale were encountered during the assembly of the analysis
@@ -2673,14 +2675,14 @@ The genotype likelihoods calculated by samtools mpileup in the previous step of 
 probability distribution of the bases seen across all piled up samples at a particular location (site). This allows
 variant calling algorithms to make an informed decision as to whether particular sites actually contain a SNP
 or if a differing base is statistically unlikely to be a real variant3 with the current data.
-bcftools call[47][48] is the successor to the ’consensus’ variant caller included with the samtools package
+bcftools call[50][51] is the successor to the ’consensus’ variant caller included with the samtools package
 and utilises htslib: a high-throughput sequencing library for improved file handling efficiency with common
 genomic data formats.
 Unfortunately during the initial testing of this step, using a pileup of all the Goldilocks regions, the output
 contained only the standard header information generated by bcftools and not a single record detailing a
 called variant. I discovered this was due to the samtools mpileup job being completed without including a
 reference sequence, causing the REF (reference) column of the resulting BCF file to be populated with ’N’:
-an ambiguity code which translates to ’any base’[49][50].
+an ambiguity code which translates to ’any base’[52][53].
 bcftools call does provide the –M flag for this scenario, where the reference is described as a "masked
 reference". However attempting to repeat calling with the flag set merely caused the command to produce
 a segmentation fault instead of an empty output file. This appeared to be due to a compatibility issue between
@@ -2694,9 +2696,9 @@ of variants that appear in both the GWAS and iCHIP Goldilocks regions (as these 
 are interested in anyway), bcftools call will then discard records pertaining to variants that do not appear in
 the targets list. This "targets" file actually uses the same format as the Variant Query Files described in
 Section 7.1.3 and should be provided to bcftools call’s –T (––targets-file) option.
-1 Our analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[44]. hs37d5 extends the b37
+1 Our analysis maps to the hs37d5 reference sequence, used by the 1000 Genomes Project Phase II[47]. hs37d5 extends the b37
 genomic reference with "decoy sequences" that are designed to reduce false positives (incorrectly mapping to poorly referenced areas
-around centromeres for example[45]), optimising it for variant calling[46].
+around centromeres for example[48]), optimising it for variant calling[49].
 2 Technically to be confident you have an actual SNP as opposed to a variant (or incorrect read!), you’ll need to see whether such
 variation occurs through a population of different samples rather than just one.
 3 Although it could also be a very low frequency variant...
@@ -2721,7 +2723,7 @@ the difficulties encountered in assembling the pipeline (particularly with samto
 to adequately test the pipeline and thus the concordance script with the time that we had. Considering this and
 for the sake of brevity, discussion on the design and implementation is considered outside the scope of this
 write-up.
-Another option for this component was SnpSift Concordance[51], a Java based package which can also
+Another option for this component was SnpSift Concordance[54], a Java based package which can also
 calculate concordances between two VCF files. However I was concerned with the possible performance of
 using Java to process thousands of concordances.
 
@@ -2752,13 +2754,13 @@ of having to switch to a more analysis focused language such as R.
 was designed to complement the machine learning experiments and provides
 ...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
 their own data regardless of how esoteric or cryptic the file format is...
-Whilst a 2003 paper[52]1 that analysed the spread of SNPs across the human genome to assert whether variants
+Whilst a 2003 paper[55]1 that analysed the spread of SNPs across the human genome to assert whether variants
 could be modelled with a statistical distribution, divided chromosomes in to equally sized bins (a concept akin
 to candidates of uniform length)
 
 1 Titled
 
-An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[52]
+An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[55]
 
 58
 
@@ -2892,25 +2894,8 @@ articles/continuousIntegration.html
 Available:
 https://wiki.jenkins-ci.org/display/
 JENKINS/Meet+Jenkins
-
-[45] zam.iqbal.genome (https://www.biostars.org/u/5152/).
-(2013) Decoy In Reference Assembly. [Online].
-Available: https://www.biostars.org/p/73100/#73120
-
 [29] Jenkins Usage Statistics. [Online]. Available:
 http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
-
-[46] Heng
-Li.
-(2011)
-The
-missing
-human
-sequences (version 5). [Online]. Available:
-ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/
-reference/phase2_reference_assembly_sequence/
-hs37d5.slides.pdf
-
 [30] Getting
 Started:
 [Online]. Available:
@@ -2924,123 +2909,161 @@ http://docs.travis-ci.com/user/
 [31] Introduction to wercker. [Online]. Available:
 http://devcenter.wercker.com/articles/introduction/
 
-[47] The bcftools/htslib VCF commands:
-bcftools
-call, VCFTools Project. [Online]. Available:
-http://vcftools.sourceforge.net/htslib.html#call
+[45] Manual Reference Pages - samtools (1): Samtools
+Commands And Options, SAM tools Project. [Online].
+Available: http://samtools.sourceforge.net/samtools.
+shtml#3
+[46] Calling SNPs/INDELs with SAMtools/BCFtools.
+SAM tools Project. [Online]. Available: http:
+//samtools.sourceforge.net/mpileup.shtml
+[47] 1000
+Genomes.
+1000
+Genomes
+FAQ:
+Which reference assembly do you use?
+[Online]. Available: http://www.1000genomes.org/
+faq/which-reference-assembly-do-you-use
 
 [32] W. B. Van Rossum, Guido and N. Coghlan,
 “PEP 8 – Style Guide for Python Code,” Python
 Enhancement Proposals, 2001. [Online]. Available:
 http://legacy.python.org/dev/peps/pep-0008/
 
-[48] bcftools call, Genome Research Ltd. [Online].
-Available: http://samtools.github.io/bcftools/bcftools.
-html#call
+[48] zam.iqbal.genome (https://www.biostars.org/u/5152/).
+(2013) Decoy In Reference Assembly. [Online].
+Available: https://www.biostars.org/p/73100/#73120
 
-[49] A. Cornish-Bowden, “Nomenclature for Incompletely
+[41] iRODS Consortium. iRODS:
+Available: http://irods.org/about/
+
+[57] ——, Human Molecular Genetics, 4th ed. Garland
+Science, 2011, p. 30.
+Continuing from [56], introduces the
+concept of Chromosomes.
+
+[49] Heng
+Li.
+(2011)
+The
+missing
+human
+sequences (version 5). [Online]. Available:
 [33] Kirk Strauser (http://stackoverflow.com/users/32538/kirk-strauser),
-Specified Bases in Nucleic Acid Sequences:
+ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/
 “Does
 python
 have
 ’private’
 variables
-Recommendations 1984.” Nucleic Acids Research,
+reference/phase2_reference_assembly_sequence/
 in
 classes?”
 [Online].
 Available:
-vol. 13, no. 9, p. 3021, 1985.
+hs37d5.slides.pdf
 http://stackoverflow.com/questions/1641219/
 does-python-have-private-variables-in-classes
-[50] C. Liébecq, Biochemical Nomenclature and Related
-Documents. Portland Press, 1992.
+[50] The bcftools/htslib VCF commands:
+bcftools
+call, VCFTools Project. [Online]. Available:
 [34] Python Software Foundation. unittest — Unit
+http://vcftools.sourceforge.net/htslib.html#call
 testing framework. [Online]. Available:
 https:
-[51] Pablo Cingolani, SnpSift Concordance, 2013.
+[51] bcftools call, Genome Research Ltd. [Online].
 //docs.python.org/2/library/unittest.html
+Available: http://samtools.github.io/bcftools/bcftools.
+[35] Frontier [Github]. [Online]. Available:
+https:
+html#call
+//github.com/SamStudio8/Frontier
+[52] A. Cornish-Bowden, “Nomenclature for Incompletely
+[36] scikit-learn
+developers.
+Specified Bases in Nucleic Acid Sequences:
+sklearn.cross_validation.StratifiedKFold.
+[Online].
+Recommendations 1984.” Nucleic Acids Research,
+Available:
+http://scikit-learn.org/stable/modules/
+vol. 13, no. 9, p. 3021, 1985.
+generated/sklearn.cross_validation.StratifiedKFold.
+[53] C. Liébecq, Biochemical Nomenclature and Related
+html
+Documents. Portland Press, 1992.
+[37] ——. sklearn.tree.DecisionTreeClassifier. [Online].
+[54] Pablo Cingolani, SnpSift Concordance, 2013.
+Available:
+http://scikit-learn.org/stable/modules/
 [Online]. Available: http://snpeff.sourceforge.net/
+generated/sklearn.tree.DecisionTreeClassifier.html
 SnpSift.html#concordance
-[35] Orbis Play and Learn, Albert Barillé, “How My Body
+[38] Orbis Play and Learn, Albert Barillé, “How My Body [55] W. S. Kendal, “An Exponential Dispersion Model
 Works,” 1992–1994.
-[52] W. S. Kendal, “An Exponential Dispersion Model
-[36] Procidis and Albert Barillé, “Once upon a time...
 for the Distribution of Human Single Nucleotide
-Life,” 1987, [Television broadcast].
 Polymorphisms,” Molecular Biology and Evolution,
+[39] Procidis and Albert Barillé, “Once upon a time...
 vol. 20, no. 4, pp. 579–590, 2003.
-[37] U.S. National Library of Medicine. (2009)
-HLA Gene Family. [Online]. Available: http: [53] T. Strachan and A. Read, Human Molecular Genetics,
-//ghr.nlm.nih.gov/geneFamily/hla
+Life,” 1987, [Television broadcast].
+[56] T. Strachan and A. Read, Human Molecular Genetics,
+[40] U.S. National Library of Medicine. (2009)
 4th ed. Garland Science, 2011, pp. 2–5.
+HLA Gene Family. [Online]. Available: http:
 An excellent introduction to DNA and
-[38] iRODS Consortium. iRODS: About. [Online].
+//ghr.nlm.nih.gov/geneFamily/hla
 RNA.
-Available: http://irods.org/about/
-[54] ——, Human Molecular Genetics, 4th ed. Garland
-[39] irods: Middleware for your critical data [Github].
-Science, 2011, p. 30.
-Continuing from [53], introduces the
-[40] G.-T. Chiang, P. Clapham, G. Qi, K. Sale,
-concept of Chromosomes.
+About.
+
+[Online].
+
+[42] irods: Middleware for your critical data [Github].
+[43] G.-T. Chiang, P. Clapham, G. Qi, K. Sale,
 and G. Coates, “Implementing a genomic data
 management system using iRODS in the Wellcome
-Trust Sanger Institute,” BMC Bioinformatics, [55] Kris Wetterstrand. DNA Sequencing Costs: Data
-from the NHGRI Genome Sequencing Program
+Trust Sanger Institute,” BMC Bioinformatics,
 vol. 12, no. 1, p. 361, 2011. [Online]. Available:
-(GSP). [Online]. Available: http://www.genome.gov/
 http://www.biomedcentral.com/1471-2105/12/361
-sequencingcosts/
-[41] K. Lewis. samtools_irods [Github]. WTSI. [Online].
+[44] K. Lewis. samtools_irods [Github]. WTSI. [Online].
 Available:
-https://github.com/wtsi-npg/samtools_ [56] Maggie Bartlett. (2011) Illumina HiSeq Flow
-Cell. National Human Genome Research Institute.
+https://github.com/wtsi-npg/samtools_
 irods
+
+61
+
+[58] Kris Wetterstrand. DNA Sequencing Costs: Data
+from the NHGRI Genome Sequencing Program
+(GSP). [Online]. Available: http://www.genome.gov/
+sequencingcosts/
+[59] Maggie Bartlett. (2011) Illumina HiSeq Flow
+Cell. National Human Genome Research Institute.
 Image. [Online]. Available: http://www.genome.gov/
 dmd/img.cfm?node=Photos/Technology/Genome%
-[42] Manual Reference Pages - samtools (1): Samtools
 20analysis%20technology&id=80102
-Commands And Options, SAM tools Project. [Online].
-Available: http://samtools.sourceforge.net/samtools.
-[57] Python Software Foundation. More on Lists.
-shtml#3
+
+References
+[60] Python Software Foundation. More on Lists.
 [Online]. Available:
 https://docs.python.org/2/
-[43] Calling SNPs/INDELs with SAMtools/BCFtools.
 tutorial/datastructures.html#more-on-lists
-SAM tools Project. [Online]. Available: http:
-[58] ——. Dictionaries. [Online]. Available: https://docs.
-//samtools.sourceforge.net/mpileup.shtml
+[61] ——. Dictionaries. [Online]. Available: https://docs.
 python.org/2/tutorial/datastructures.html#dictionaries
-[44] 1000
-Genomes.
-1000
-Genomes
-FAQ:
-Which reference assembly do you use? [59] Python
+[62] Python
 Wiki.
 (2012)
 Time
 Complexity.
-[Online]. Available: http://www.1000genomes.org/
 [Online]. Available: https://wiki.python.org/moin/
-faq/which-reference-assembly-do-you-use
 TimeComplexity
-
-61
-
-References
-[60] Python Software Foundation. Sets. [Online].
+[63] Python Software Foundation. Sets. [Online].
 Available:
 https://docs.python.org/2/tutorial/
 datastructures.html#sets
-[61] Hadley Wickham and Winston Chang, devtools:
+[64] Hadley Wickham and Winston Chang, devtools:
 Tools to make developing R code easier, 2013,
 r package version 1.4.1. [Online]. Available:
 http://CRAN.R-project.org/package=devtools
-[62] Morandat, Floréal and Hill, Brandon and Osvald,
+[65] Morandat, Floréal and Hill, Brandon and Osvald,
 Leo and Vitek, Jan, “Evaluating the design of
 the R language,” in ECOOP 2012–Object-Oriented
 Programming. Springer, 2012, pp. 104–131.
@@ -3061,14 +3084,14 @@ DNA, Bases and Sequencing
 Practically every cell in a living organism contains deoxyribonucleic acid (DNA). DNA provides a coded
 template essential for the construction of proteins vital for ongoing development and function of a living
 organism. DNA is a polymer (long molecule) made up of a sequence of just four nucleic acids called
-nucleotides or bases[53]:
+nucleotides or bases[56]:
 • G guanine,
 • C cytosine,
 • T thymine and
 • A adenine.
 DNA is arranged in to linear structures called chromosomes, of which humans have 23 pairs; consisting of
 22 hereditary trait carrying autosomes (numbered from 1–22) and a pair of sex-determining allosomes (a
-combination of X and Y)[54]. The human genome is approximately three billion bases long.
+combination of X and Y)[57]. The human genome is approximately three billion bases long.
 
 A.1.2
 
@@ -3078,7 +3101,7 @@ Sequencing is the process of recovering or extracting the sequence of these nucl
 particular organism’s DNA.
 Next Generation Sequencing (NGS) is a somewhat generic term used to refer to improving sequencing
 hardware and methods introduced from 2008 onwards, bringing a massive decrease in both the time and
-cost involved in the sequencing of an entire human genome[55].
+cost involved in the sequencing of an entire human genome[58].
 
 63
 
@@ -3093,7 +3116,7 @@ samples are pipetted in to a flowcell such as the one in Figure A.1 – a glass 
 thin tubules known as lanes. It is throughout these lanes that the chemical reactions involved in sequencing
 take place.
 
-Fig. A.1 An Illumina HiSeq Flowcell[56]
+Fig. A.1 An Illumina HiSeq Flowcell[59]
 Once inserted, samples are amplified in situ, in the flowcell itself. A process in which the genetic material
 of each sample is caused to multiply in magnitude to form a dense cluster of the sample around the original.
 Millions of clusters will be created throughout each lane of the flowcell.
@@ -3160,7 +3183,7 @@ three such structures below to assist the reader in understanding some of the im
 in the following section:
 
 List
-A list[57] essentially represents an ordered sequence of elements. Lists are incredibly versatile, allowing
+A list[60] essentially represents an ordered sequence of elements. Lists are incredibly versatile, allowing
 elements of any data type, including lists and other container structures or arbitrary objects. Elements in a list
 are accessed by their index (location) in the sequence. Lists permit duplicate values.
 Lists are represented in memory as a contiguous block and so great expense is incurred if the list grows beyond
@@ -3175,16 +3198,16 @@ Checking whether an item is in a list requires iterating over all n elements in 
 is found or there are no elements left to check.
 
 Dictionary
-A dict[58] or dictionary is a structure containing key-value pairs in which string or numeric keys1 are mapped
+A dict[61] or dictionary is a structure containing key-value pairs in which string or numeric keys1 are mapped
 to an arbitrary value or object through a hashing function. Keys in a dictionary are unique; attempting to add
 a key-value pair where the key already exists will overwrite the original entry.
 Python dictionaries offer constant lookup access and more importantly, unlike a list, querying the structure
-for whether it contains a particular key can be performed in constant time[59]. However it is important to note
+for whether it contains a particular key can be performed in constant time[62]. However it is important to note
 that a dictionary does not maintain order, keys are not sorted alphanumerically nor are they sorted by insertion
 time. Ordering is determined arbitrarily by the dict’s underlying hash table2 .
 
 Set
-Sets[60] represent a collection of elements and are similar to a dict in that they are allowed to contain any
+Sets[63] represent a collection of elements and are similar to a dict in that they are allowed to contain any
 immutable (thus hashable) elements but entries are not mapped to a value or object. Sets are forbidden from
 containing duplicate objects and do not maintain order.
 Like dict, checking for membership of an item in a set completes in constant time, making the structure
@@ -3214,7 +3237,7 @@ Sensible choices for these parameters will need to be selected after considering
 1 Any
 2 This
 
-type can actually be used as a dictionary key providing it is immutable, including tuples[58]
+type can actually be used as a dictionary key providing it is immutable, including tuples[61]
 is probably the question I see most often from users new to Python on StackOverflow
 
 66
@@ -4840,7 +4863,7 @@ install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
 Listing 15 : Installing an in-development R package with devtools
 
-With the help of devtools[61] (see Listing 15) it was simple to develop and test contributions to bamcheckr
+With the help of devtools[64] (see Listing 15) it was simple to develop and test contributions to bamcheckr
 locally without needing to re-publish the package after changes. An additional script was added to bamcheckr’s
 NAMESPACE... to recover the missing ratio and percentage based parameters...
 ...unfortunately, the performance of the script was poor, taking 5.5s on average and increasing to 16.1s when
@@ -4848,7 +4871,7 @@ enabling a complex function containing many vector operations (potentially ineff
 experience)... for overlapping_base_duplicate_percentage
 ...utilising the program designed and implemented in the following chapter... loaded required information and
 used the API to calculate the missing parameters...
-...Morandat[62]
+...Morandat[65]
 ...with such an intriguing difference in performance with significantly more time it would be appealing to
 explore the idiosyncrasies of each implementation ...although such an investigation would quite likely sufficiently
 1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm

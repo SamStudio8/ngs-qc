@@ -12,6 +12,11 @@ classification results from the current \textbf{auto\_qc} system.
 Following this chapter, Part II will begin exploring the effects lanelet quality
 carries to downstream variant calling analysis.
 
+Note that the figures of constructed decision tree in this chapter are presented
+for illustration of size and shape only and full figures may be found in the
+project repository\citep{github:frontier}.
+
+
 \section{Introduction}
 \subsection{Objectives}
 
@@ -25,7 +30,6 @@ The investigation considers the following main objectives:
 \end{itemize}
 
 \subsection{Decision Trees}
-%TODO Citations...
 
 Our primary motivation for using a decision tree is its interpretability; trees
 create human-readable rule sets and are very easy to explain and understand. The
@@ -98,14 +102,13 @@ was possible to use \textbf{Frontier} itself to extract the additional features
 needed to better represent the decisions made by the current system.
 
 \subsection{Experiment Results}
-%TODO Cite dtc, skfold
-% http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
 For each parameter set, data and targets were extracted via \textbf{Frontier}'s
-API before being subset by \textbf{scikit-learn}'s \textbf{StratifiedKFold}
+API before being subset by \textbf{scikit-learn}'s
+\textbf{StratifiedKFold}\citep{sl:skf}
 function. All available data (13,455 "BAMcheckr'd" lanelets) were used as input
 and the target variable could be one of three classes; pass, fail or warn.
 The subsets are referred to as "folds" (of which we used 10) and for
-each fold a \textbf{DecisionTreeClassifier} was trained and tested.
+each fold a \textbf{DecisionTreeClassifier}\citep{sl:dtc} was trained and tested.
 Table~\ref{tab:pset-cv} outlines the average cross validation scores across each
 such experiment.
 
@@ -288,7 +291,7 @@ the problem of predicting passes and failures.
 
 \subsection{Ignoring Warnings}
 
-The aim of \textbf{FrontAQC} is to firstly mimic the \textbf{auto\_qc} system by
+The aim of the chapter is to firstly mimic the \textbf{auto\_qc} system by
 training and testing on data sets with known targets as classified by
 \textbf{auto\_qc}. However, attempting to learn what \textbf{auto\_qc} doesn't
 know might be counter-intuitive. Lanelets are classed as warnings because the
@@ -302,7 +305,7 @@ be eiher a pass or a fail.
 
 In other words, the set of warnings is actually a union between some unknown
 subset of the passes and failure. Training on this now seems impractical and
-inherently noisy. Users may now specify \texttt{--dIGNWARN} to \textbf{FrontAQC}
+inherently noisy. Users may now specify \texttt{--dIGNWARN}
 to discard all warnings from the data set.
 
 
@@ -317,7 +320,7 @@ pass.
 
 If \textbf{auto\_qc} is technically treating warnings as passes, then why
 shouldn't we? Thus, using \textbf{Frontier}'s \textit{recode} functionality, a
-user may specify \texttt{--dWARNPASS} to \textbf{FrontAQC} to recode all
+user may specify \texttt{--dWARNPASS} to recode all
 warnings as passes.
 
 
