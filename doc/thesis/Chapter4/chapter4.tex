@@ -42,21 +42,19 @@ investigate whether \textbf{auto\_qc}'s rules actually can be recovered, future 
 wish to make improved rules that could still be interpreted by lab technicians,
 which would be impossible with a "black box" algorithm.
 
-%TODO Cite robustness
 Decision trees are robust to noise and missing data (within reason) and can be
 realistically deployed in a variety of applications including medicine and
 finance. Decision trees also scale well to large inputs, which is useful given
 the size of the data set (approximately 1.15 million observation-parameter
 combinations).
 
-%TODO Cite cross val, cite overfitting
 However, trees are prone to a process called \textbf{overfitting}, where
 decisions have too much basis on the data seen so far and don't generalise well
 to future observations. \textbf{Cross-validation} can help overcome this barrier
 by splitting the available data and targets into training and testing subsets.
 The tree will be constructed using the training set and the accuracy of the tree
 is then measured on the unseen testing data (\textit{i.e.} did classifications
-made by the tree match the known targets for those observations?).
+made by the tree match the known targets for those observations?)\citep{sl:trees}.
 
 
 \section{Naive Parameter Sets}
@@ -179,11 +177,12 @@ complexity could be indicative that a tree may have been overfitted on the train
 data. Later sections will apply best practice in an attempt to minimise this
 effect.
 
-%TODO Gini importance
 Whilst \textbf{T-percent-max-baseline-deviation} is a parameter used by
 \textbf{auto\_qc}, it was not believed to be a parameter of
 particularly major importance and yet it is ranked as the \textit{Most
-Important Feature} by \textbf{scikit-learn}'s feature importance algorithm
+Important Feature} by \textbf{scikit-learn}'s feature importance
+algorithm\footnote{\textbf{scikit-learn} measures this using \textbf{Total Gini
+Importance}\citep{gini}}
 for all parameter sets it was a member of. Further investigation will yield a
 more authoritative conclusion as to whether the influence of this parameter
 should be reassessed.
@@ -365,7 +364,6 @@ classifier.
 
 \section{Informed Parameter Selection}
 \subsection{Introduction}
-%TODO Cite total gini
 
 Whilst the crude parameter sets of the previous section were useful to gain
 understanding of the data that we have, it was necessary to obtain more

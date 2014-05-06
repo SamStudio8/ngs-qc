@@ -278,12 +278,13 @@ handling, Frontier will call its \textbf{get\_data} function to
 dictionary hashmap will be copied to memory inside a Frontier class} the
 extracted data to its own storage.
 
-%TODO Cite algorithm
-At this point Frontier will also check the integrity of the data, primarily that
-all parameters have a non-zero variance. Users will be warned when this
-requirement is violated; parameters with no variance cannot provide much
-information for successful classification as their values are equal for all
-class labels!
+At this point Frontier will also check the integrity of the data, primarily
+that all parameters have a non-zero variance\footnote{Using an algorithm for
+accurately computing running variance introduced in Donald Knuth's \textit{Art
+of Computer Programming}\citep{knuth1998art-variance}}. Users will be warned
+when this requirement is violated; parameters with no variance cannot provide
+much information for successful classification as their values are equal for
+all class labels!
 
 %FUTURE
 In future it would be useful to investigate whether it would be feasible to

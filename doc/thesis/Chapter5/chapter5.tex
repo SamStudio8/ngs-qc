@@ -251,7 +251,6 @@ it as part of their own program.
 
 
 \subsection{Method}
-%TODO Add more here?
 
 \textbf{Goldilocks} had to be constructed quickly but carefully. Although
 avoiding a quick and dirty solution, the early codebase was arguably cluttered
@@ -379,7 +378,6 @@ itself be a source of overhead as the structure ensures that the no duplicate
 condition has not been violated on every call. Given more time it would be
 interesting to compare performance differences between container implementations.
 
-%TODO Sound ok?
 \textbf{load\_variants\_from\_file} has another responsibility in keeping track
 of the "furthest along" variant position for each chromosome across all groups,
 this is used in the search step later, firstly to ensure that candidates are not
@@ -601,7 +599,6 @@ candidates. However repeating the experiment including empty regions
 leads to highly similar results and the candidate that was actually selected as
 the Goldilocks region appears in both sets of results.
 
-%TODO Possible all returned variants?
 Candidate 1074 (marked by \textbf{*}) was selected as the region with the
 closest absolute difference between the median \textbf{GWAS} density of 297,
 whilst also offering the highest \textbf{iCHIP} density of the top 25 returned
@@ -919,7 +916,6 @@ successor to the 'consensus' variant caller included with the \textbf{samtools}
 package and utilises \textbf{htslib}: a \textit{high-throughput sequencing
 library} for improved file handling efficiency with common genomic data formats.
 
-%TODO writing is naff?
 
 Unfortunately during the initial testing of this step, using a pileup of all the
 Goldilocks regions, the output contained only the standard header information

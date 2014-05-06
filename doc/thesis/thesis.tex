@@ -163,13 +163,18 @@ Draft\\
 \end{center}
 \end{titlepage}
 
-%TODO Wordcount includes declaration and abstract
+%TC:ignore
+
 %\include{Dedication/dedication}
 \include{Declaration/declaration}
-%\include{Acknowledgement/acknowledgement}
-%\include{Abstract/abstract}
+\include{Acknowledgement/acknowledgement}
+\include{Abstract/abstract}
+
+%TC:endignore
 
 % *********************** Adding TOC and List of Figures ***********************
+
+%TC:ignore
 
 \tableofcontents
 %\listoffigures
@@ -179,12 +184,15 @@ Draft\\
 % description
 %\printnomencl
 
+%TC:endignore
+
 % ******************************** Main Matter *********************************
 \mainmatter
 
 %TC:group minted 0 0
 % Ignore codeblocks for texcount
 
+% P0
 \include{Chapter1/chapter1}
 
 % P1
