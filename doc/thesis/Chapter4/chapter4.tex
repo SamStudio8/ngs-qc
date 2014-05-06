@@ -473,25 +473,26 @@ the average maximum tree depth between the experiments.
 In conclusion we have investigated the cross-validation accuracy of decision
 tree classifiers for a series of parameter sets, examined the effects of
 handling the warnings label class differently and conducted parameter selection
-to ...
+using backward elimination to reduce the number of parameters required.
 
-...pruning
+Initial results seem to indicate that ignoring warnings or treating them as
+passes significantly improves validation scores by removing the noise of
+\textbf{auto\_qc}'s indecisiveness. Later trees more closely resemble
+the simple linear rules of the current system; it's certainly possible that
+\textbf{auto\_qc}'s rule set can be recovered using machine learning techniques.
 
-...Part II will undertake an investigation in to lanelet quality...
-...locate lanelets that are known to improve or detriment analysis
-...and look for patterns in the quality control parameters of these particular
-observations to better fuel the search...
+An important part of building decision trees that hasn't been covered in this
+chapter is \textbf{pruning}; \textbf{scikit-learn} doesn't provide any pruning
+functionality and instead recommends use of ensemble methods such as
+\textbf{random forests}. For interpretability I continued using the single tree
+classifier and implementing my own pruning algorithms were outside the scope of
+this project. Pruning would certainly have assisted with some of the earlier
+trees but our warning-augmented, minimal-parameter trees were well sized even
+without post-pruning.
 
-\textbf{DecisionTreeClassifier} accepts the following optional arguments upon
-concstruction:
+From here, Part II will undertake an investigation in to lanelet quality,
+identifying lanelets that improve or detriment downstream analysis. Searching
+for relationships or trends in the parameters of these particular lanelets will
+fuel further investigation of some of the lines in inquiry introduced in this
+chapter.
 
-\begin{itemize}
-    \item \textbf{max\_depth} \hfill\\
-        Prevent the tree from growing beyond a specified depth.
-    \item \textbf{min\_samples\_split} \hfill\\
-        Prevent a node in the tree from being split further if it does not
-        contain enough observations.
-    \item \textbf{min\_samples\_leaf} \hfill\\
-        Prevent a node in the tree from being split further if it would create a
-        leaf smaller than the required minimum.
-\end{itemize}

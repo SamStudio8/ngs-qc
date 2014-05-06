@@ -633,10 +633,10 @@ sorting and filtering. For various personal projects and the second year group p
 Ruby-based web application designed for bug tracking. However over time I have come to find keeping the
 task information stored in Redmine a task in itself. Attempts to extend the platform to implement additional
 functionality have been fruitless.
-Out of frustration with thus and other alternatives – including TaskWarrior whose simple but effective
-command line interface was overshadowed by its occasional storage corruptions, I wrote my own open source
-web based task management application; Triage[6]. This will be useful in keeping track of current objectives
-and allow prioritisation in a quick and simple manner.
+Other alternatives included TaskWarrior, whose simple but effective command line interface was overshadowed
+by its occasional storage corruptions. For a lack of other options that met my requirements, I wrote my own
+open source web based task management application; Triage[6]. This will be useful in keeping track of current
+objectives and allow prioritisation in a quick and simple manner.
 The list used to organise my project is also publicly available[7] for transparent progress tracking by my
 supervisor and those interested at the Sanger Institute.
 
@@ -695,7 +695,7 @@ Input Data and Format
 As part of the project I have been granted access to significant data sets at the Sanger Institute, unlocking
 quality control data for two of the largest studies currently undergoing analysis. A wide array of quality
 metrics are available for each and every lanelet that forms part of either of the two studies, totalling 13,455
-files.
+files: 9154 (68%) passes, 1542 (11%) fails and 2759 (21%) warnings.
 The files are created by samtools stats – part of a collection of widely used open-source utilities for post-processing
 and manipulation of large alignments such as those produced by next-generation sequencers that are released
 under the umbrella name of "SAMtools"[8] (Sequence Alignment and Map Tools). samtools stats collects
@@ -1369,16 +1369,6 @@ The investigation considers the following main objectives:
 
 Decision Trees
 
-A decision tree is a structure of nodes where each node represents a test on the value of a particular feature
-or parameter of an observation. The layout of a decision tree resembles a flow chart where ’decisions’ at each
-node (e.g. is parameter x greater than or equal to value y) choose the path an observation will take through
-the tree. Once an observation has reached a leaf node – a node with no test to be applied – it is considered
-classified (typically the leaf will either be trained to contain observations of just one class, or the classification
-will be the most frequent class in that leaf).
-
-24
-
-5.2 Naive Parameter Sets
 Our primary motivation for using a decision tree is its interpretability; trees create human-readable rule sets
 and are very easy to explain and understand. The current auto_qc system performs logical tests of simple
 rules in a similar fashion and thus it seemed sensible to compare results from both systems by using a decision
@@ -1386,6 +1376,10 @@ tree as output. A "black box" machine learning classifier such as a neural netwo
 tangible rules that could be explained to another human. Whilst the first goal is to briefly investigate whether
 auto_qc’s rules actually can be recovered, future work may wish to make improved rules that could still be
 interpreted by lab technicians, which would be impossible with a "black box" algorithm.
+
+24
+
+5.2 Naive Parameter Sets
 Decision trees are robust to noise and missing data (within reason) and can be realistically deployed in a
 variety of applications including medicine and finance. Decision trees also scale well to large inputs, which is
 useful given the size of the data set (approximately 1.15 million observation-parameter combinations).
@@ -1416,6 +1410,12 @@ An experimental toy set consisting of only the "error-rate" parameter.
 Another toy set designed to test results gained by excluding the "error-rate" parameter.
 • BASELINE
 Include any parameter which includes "baseline" as a substring.
+• NOBASELINE
+Exclude any parameter which includes "baseline" as a substring.
+• MARP
+Include any parameter which includes any of the following as substrings: mean, average, rate or percent.
+• NO_MARP
+Exclude any parameter which includes any of the following as substrings: mean, average, rate or percent.
 
 25
 
@@ -1482,12 +1482,6 @@ cross-validation score (max 100) ± std. deviation, average stratified cross-val
 deviation, average depth of the generated tree and the most important parameter by Gini importance (max
 100). Tree depth and parameter importance was estimated on experiments using the stratified data.
 
-• NOBASELINE
-Exclude any parameter which includes "baseline" as a substring.
-• MARP
-Include any parameter which includes any of the following as substrings: mean, average, rate or percent.
-• NO_MARP
-Exclude any parameter which includes any of the following as substrings: mean, average, rate or percent.
 Of particular note is the AQC set, constructed from the parameters available from the "BAMcheckr’d" data that
 are taken into account by the current auto_qc system. However not all these parameters were initially available
 in the input files and auto_qc relies upon data made available from vr-pipe where the rules of auto_qc are
@@ -1509,15 +1503,16 @@ examination just by matching or excluding substrings using Frontier’s paramete
 can learn quite a lot about the available data.
 Firstly it should be of no surprise that the ALL model scores highly in both cross-validation and stratified
 cross-validation testing. The feature group is a superset over the same parameters used by auto_qc itself.
-26
-
-5.2 Naive Parameter Sets
 Similarly the NO_ERROR set which uses all but one parameter (error-rate) scores highly.
 It’s interesting to compare the scores between the AQC and AQCN parameter sets against ALL. Both of the
 former score highly despite having significantly fewer parameters. This appears to indicate that many of the
 parameters in the ALL model are redundant for use in classification. This should of course be expected; you’d
 hope to see that a set that includes parameters known to be used by the current auto_qc system is capable of
 replicating results made by that system.
+
+26
+
+5.2 Naive Parameter Sets
 In general the other models perform reasonably well, potentially reflecting the simple linear nature of the
 decisions made by the auto_qc system.
 Stratified cross-validation scores are consistently better and less variable (smaller standard deviations) than
@@ -1551,7 +1546,13 @@ lower than ALL), they also exhbit the linear auto_qc behaviour.
 It is interesting to note the apparent difference in size between these two trees, although they were generated
 using parameters from the same set, the results of training the trees are more variable. This could hint that there
 are parameters we have excluded (that are present in ALL) that may be useful in maintaining tree stability.
-
+Figures 5.5 and 5.6 are examples of poor decision trees. Splitting decisions are overly complicated, creating
+an uninterpretable sprawl of nodes and leaves. Rules will be incredible difficult to extract, if not impossible
+and will be very unlikely to offer any real meaning. Figure 5.6 in particular is a highly overfit tree, constructed
+on just one parameter (error-rate); every node in the tree is an arbitrary decision, classifying the trained
+observations exactly.
+The ERROR set however acheives a cross-validation score of 60%, highlighting the necessity of examining
+created trees and not just blindly accepting the validation scores. Despite its somewhat acceptable performance
 27
 
 5.2 Naive Parameter Sets
@@ -1571,13 +1572,6 @@ Fig. 5.4 AQC Set Decision Tree B
 29
 
 5.3 Alternative Handling of Data Sets
-Figures 5.5 and 5.6 are examples of poor decision trees. Splitting decisions are overly complicated, creating
-an uninterpretable sprawl of nodes and leaves. Rules will be incredible difficult to extract, if not impossible
-and will be very unlikely to offer any real meaning. Figure 5.6 in particular is a highly overfit tree, constructed
-on just one parameter (error-rate); every node in the tree is an arbitrary decision, classifying the trained
-observations exactly.
-The ERROR set however acheives a cross-validation score of 60%, highlighting the necessity of examining
-created trees and not just blindly accepting the validation scores. Despite its somewhat acceptable performance
 (60% accuracy in a three class problem), no useful rules can be extracted. In addition, you would require a
 42m wide wall to hang it on if you wanted a handy classification guide in a lab.
 
@@ -1614,6 +1608,10 @@ Treating Warnings as Passes
 
 auto_qc’s rule set is typically able to catch the worst quality lanelets the system will overcautiously flag other
 lanelets for manual inspection. Many of these flagged lanelets are approved after human intervention, to the
+degree where by default, lanelets classified with a warning are allowed to proceed downstream for further
+analysis – as if they were a pass.
+If auto_qc is technically treating warnings as passes, then why shouldn’t we? Thus, using Frontier’s recode
+functionality, a user may specify –dWARNPASS to FrontAQC to recode all warnings as passes.
 
 30
 
@@ -1626,10 +1624,6 @@ Fig. 5.5 BASELINE Set Decision Tree: A decision tree trained using the BASELINE 
 5.3 Alternative Handling of Data Sets
 
 5.4 Informed Parameter Selection
-degree where by default, lanelets classified with a warning are allowed to proceed downstream for further
-analysis – as if they were a pass.
-If auto_qc is technically treating warnings as passes, then why shouldn’t we? Thus, using Frontier’s recode
-functionality, a user may specify –dWARNPASS to FrontAQC to recode all warnings as passes.
 
 5.3.3
 
@@ -1648,32 +1642,27 @@ SCV ± SD
 Depth
 
 ALL
-
-IGNWARN
-
-86
-
-96 ± 3
-
-99 ± 0
-
-22
-
-error-rate (43%)
-
 ALL
 
+IGNWARN
 WARNPASS
 
 86
+86
 
+96 ± 3
 95 ± 3
 
 99 ± 0
+99 ± 0
 
+22
 33
 
+Most Important Feature
+error-rate (43%)
 quality-dropoff-rev-mean-runmed
+-decline-low-value (32%)
 
 AQC
 
@@ -1703,10 +1692,6 @@ WARNPASS
 
 quality-dropoff-rev-mean-runmed
 
-Most Important Feature
-
--decline-low-value (32%)
-
 -decline-low-value (33%)
 Table 5.2 Parameter Set Cross Validation Scores using Alternative Warning Handling: Results of
 classifying testing data. Columns left to right; parameter set name, data set name, number of parameters
@@ -1734,12 +1719,12 @@ backward elimination – a method borrowed from statistical model design – the
 after removing the least important feature (as calculated by scikit-learn using total Gini information).
 The smallest parameter set that could be used for training and testing before cross-validation fell by more than
 1% below the running average was selected as the "winner". For our purposes the winner will be referred to
+as TOP9. All data was provided, rather than using the IGNWARN or WARNPASS augmentations for this
+process. In future it would be interesting to repeat the selection experiment with augmentations activated.
 
 32
 
 5.4 Informed Parameter Selection
-as TOP9. All data was provided, rather than using the IGNWARN or WARNPASS augmentations for this
-process. In future it would be interesting to repeat the selection experiment with augmentations activated.
 
 5.4.2
 
@@ -1828,12 +1813,13 @@ parameters, cross-validation score and maximum depth).
 Fig. 5.7 TOP9 Set Decision Tree with ALL Data
 A drastic change is however apparent in Figures 5.8 and 5.9. The graphs are far more simple and linear than
 previous figures; both width and depth are of manageable size. It would certainly appear that augmenting the
-33
-
-5.5 Conclusion
 treatment of the warnings class assists in reducing the amount of noise and thus inhibiting overfitting – there
 are no longer hundreds of uncommon combinations of parameter values that each need a node of their own to
 be plotted.
+
+33
+
+5.5 Conclusion
 Given the results in Tables 5.2 and 5.3, it is arguable that treatment of warnings has a greater influence over
 cross validation score than the parameter set does. But it should be noted that decreasing the number of
 parameters used does appear to cause a difference in the average maximum tree depth between the experiments.
@@ -1844,21 +1830,19 @@ Conclusion
 
 In conclusion we have investigated the cross-validation accuracy of decision tree classifiers for a series of
 parameter sets, examined the effects of handling the warnings label class differently and conducted parameter
-selection to
-...when choosing best parameters... Alternatively could have used SelectKBest...
-...concludes a brief investigation in to the parameters available...
-...able to extract the parameters used... ...cross-validates strongly...
-...Part II will undertake an investigation in to lanelet quality... ...locate lanelets that are known to improve or
-detriment analysis ...and look for patterns in the quality control parameters of these particular observations to
-better fuel the search...
-DecisionTreeClassifier accepts the following optional arguments upon concstruction:
-• max_depth
-Prevent the tree from growing beyond a specified depth.
-• min_samples_split
-Prevent a node in the tree from being split further if it does not contain enough observations.
-• min_samples_leaf
-Prevent a node in the tree from being split further if it would create a leaf smaller than the required
-minimum.
+selection using backward elimination to reduce the number of parameters required.
+Initial results seem to indicate that ignoring warnings or treating them as passes significantly improves validation
+scores by removing the noise of auto_qc’s indecisiveness. Later trees more closely resemble the simple linear
+rules of the current system; it’s certainly possible that auto_qc’s rule set can be recovered using machine
+learning techniques.
+An important part of building decision trees that hasn’t been covered in this chapter is pruning; scikit-learn
+doesn’t provide any pruning functionality and instead recommends use of ensemble methods such as random
+forests. For interpretability I continued using the single tree classifier and implementing my own pruning
+algorithms were outside the scope of this project. Pruning would certainly have assisted with some of the
+earlier trees but our warning-augmented, minimal-parameter trees were well sized even without post-pruning.
+From here, Part II will undertake an investigation in to lanelet quality, identifying lanelets that improve or
+detriment downstream analysis. Searching for relationships or trends in the parameters of these particular
+lanelets will fuel further investigation of some of the lines in inquiry introduced in this chapter.
 
 34
 
@@ -2762,6 +2746,7 @@ Current Status
 Critical Evaluation
 Decision trees also cannot promise optimality... ...try random forests in future ...would also like to experiment
 with other algorithms (even black box) and frameworks...
+...when choosing best parameters... Alternatively could have used SelectKBest...
 ...Section 3.2.3 The SciPy Stack also includes the "Python Data Analysis Library" (pandas), which is designed
 to provide tools to supplement the Python environment, allowing users to perform analysis in Python instead
 of having to switch to a more analysis focused language such as R.
