@@ -267,7 +267,7 @@ Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
-Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
@@ -1820,30 +1820,31 @@ prediction without requiring to use each and every parameter at our disposal.
 Summary of Trees
 
 Figure 5.7 displays a tree generated with the backward elimination TOP9 parameter set against all available
-data. Note how the tree is more complex and sprawling than Figure 5.1... ...perhaps there are some parameters
-we could ideally add back in to the set...
+data. Note how the tree is more complex and than Figure 5.1 that uses all data and all parameters. Perhaps there
+are some parameters we could ideally add back in to the set. Further experimentation with the stopping criteria
+for backward elimination could be considered (perhaps looking at a weighted combination of the number of
+parameters, cross-validation score and maximum depth).
 
 Fig. 5.7 TOP9 Set Decision Tree with ALL Data
-However a drastic change has appeared in Figures 5.8 and 5.9! The graphs are far more simple and linear...
-...the wide sprawls have been traded in for relatively uniform decisions... ...it would appear that ignoring
-warnings removes a lot of noisy data that becomes overfit... learning particular circumstances for rare events...
-
+A drastic change is however apparent in Figures 5.8 and 5.9. The graphs are far more simple and linear than
+previous figures; both width and depth are of manageable size. It would certainly appear that augmenting the
 33
 
-5.4 Informed Parameter Selection
-
-Fig. 5.8 TOP9 Set Decision Tree with IGNWARN Data A
-
-Fig. 5.9 TOP9 Set Decision Tree with IGNWARN Data B
-
-34
-
 5.5 Conclusion
+treatment of the warnings class assists in reducing the amount of noise and thus inhibiting overfitting – there
+are no longer hundreds of uncommon combinations of parameter values that each need a node of their own to
+be plotted.
+Given the results in Tables 5.2 and 5.3, it is arguable that treatment of warnings has a greater influence over
+cross validation score than the parameter set does. But it should be noted that decreasing the number of
+parameters used does appear to cause a difference in the average maximum tree depth between the experiments.
 
 5.5
 
 Conclusion
 
+In conclusion we have investigated the cross-validation accuracy of decision tree classifiers for a series of
+parameter sets, examined the effects of handling the warnings label class differently and conducted parameter
+selection to
 ...when choosing best parameters... Alternatively could have used SelectKBest...
 ...concludes a brief investigation in to the parameters available...
 ...able to extract the parameters used... ...cross-validates strongly...
@@ -1858,6 +1859,14 @@ Prevent a node in the tree from being split further if it does not contain enoug
 • min_samples_leaf
 Prevent a node in the tree from being split further if it would create a leaf smaller than the required
 minimum.
+
+34
+
+5.5 Conclusion
+
+Fig. 5.8 TOP9 Set Decision Tree with IGNWARN Data A
+
+Fig. 5.9 TOP9 Set Decision Tree with IGNWARN Data B
 
 35
 

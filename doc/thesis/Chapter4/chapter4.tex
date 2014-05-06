@@ -436,8 +436,11 @@ disposal.
 
 Figure~\ref{fig:top9-all-1} displays a tree generated with the backward
 elimination \textbf{TOP9} parameter set against all available data. Note how the
-tree is more complex and sprawling than Figure~\ref{fig:all-all-1}... ...perhaps
-there are some parameters we could ideally add back in to the set...
+tree is more complex and than Figure~\ref{fig:all-all-1} that uses all data and
+all parameters. Perhaps there are some parameters we could ideally add back in
+to the set. Further experimentation with the stopping criteria for backward
+elimination could be considered (perhaps looking at a weighted combination
+of the number of parameters, cross-validation score and maximum depth).
 
 \begin{figure}[htbp!]
     \centering
@@ -446,11 +449,20 @@ there are some parameters we could ideally add back in to the set...
     \label{fig:top9-all-1}
 \end{figure}
 
-However a drastic change has appeared in Figures~\ref{fig:top9-ignwarn-1}
-and~\ref{fig:top9-ignwarn-2}! The graphs are far more simple and linear...
-...the wide sprawls have been traded in for relatively uniform decisions...
-...it would appear that ignoring warnings removes a lot of noisy data that
-becomes overfit... learning particular circumstances for rare events...
+A drastic change is however apparent in Figures~\ref{fig:top9-ignwarn-1}
+and~\ref{fig:top9-ignwarn-2}. The graphs are far more simple and linear than
+previous figures; both width and depth are of manageable size. It would
+certainly appear that augmenting the treatment of the warnings class assists in
+reducing the amount of noise and thus inhibiting overfitting -- there are no
+longer hundreds of uncommon combinations of parameter values that each need a
+node of their own to be plotted.
+
+Given the results in Tables~\ref{tab:all-pset-cv} and~\ref{tab:be-pset-cv}, it
+is arguable that treatment of warnings has a greater influence over cross
+validation score than the parameter set does. But it should be noted that
+decreasing the number of parameters used does appear to cause a difference in
+the average maximum tree depth between the experiments.
+
 
 \begin{figure}[htbp!]
     \centering
@@ -467,6 +479,11 @@ becomes overfit... learning particular circumstances for rare events...
 
 
 \section{Conclusion}
+
+In conclusion we have investigated the cross-validation accuracy of decision
+tree classifiers for a series of parameter sets, examined the effects of
+handling the warnings label class differently and conducted parameter selection
+to 
 
 %TODO Cite KSelect
 ...when choosing best parameters...
