@@ -282,8 +282,8 @@ meaning. Figure~\ref{fig:all-error-1} in particular is a highly overfit tree,
 constructed on just one parameter (\textbf{error-rate}); every node in the tree
 is an arbitrary decision, classifying the trained observations exactly.
 
-The \textbf{ERROR} set however acheives a cross-validation score of 60\%.
-Highlighting the necessity of examining created trees and not just blindly
+The \textbf{ERROR} set however acheives a cross-validation score of 60\%,
+highlighting the necessity of examining created trees and not just blindly
 accepting the validation scores. Despite its somewhat acceptable performance
 (60\% accuracy in a three class problem), no
 useful rules can be extracted. In addition, you would require a 42m wide
@@ -313,6 +313,13 @@ wall to hang it on if you wanted a handy classification guide in a lab.
 Whilst the crude parameter sets of the previous section were useful to gain
 understanding of the data that we have, it was necessary to obtain more
 deliberate decisions for parameters to utilise in the model.
+
+\textbf{Frontier} uses two methods for the selection of 'best' parameters:
+
+\begin{itemize}
+    \item Backward elimination; pruning parameters with the lowest total gini
+    \item Call scikit-learn's SelectKBest
+\end{itemize}
 
 ...important to find the "best" parameters
 ...what is best? scikit-learn uses total gini information
@@ -355,16 +362,78 @@ Listing~\ref{list:frontier-warnings} displays warnings issued by
 
 
 \section{Filtering of Data Sets}
+
+The presentation of data to \textbf{scikit-learn} will greatly influence the
+outcome of the classifier. For example, one may choose to determine criteria to identify
+outlier observations that will be excluded from a study.
+
+...present here two alternative ways to present our data and targets...
+
+...the \texttt{--d} flag may be used on the \textbf{FrontAQC} script (discussed
+previously...) to specify use of one of the sets below... by default it will use
+\texttt{--dALL}...
+
 \subsection{Ignoring Warnings}
-\textbf{IGNWARN}
+
+The aim of \textbf{FrontAQC} is to firstly mimic the \textbf{auto\_qc} system by
+training and testing on data sets with known targets as classified by
+\textbf{auto\_qc}. However, attempting to learn what \textbf{auto\_qc} doesn't
+know might be counter-intuitive. Lanelets are classes as warnings because the
+current system doesn't have the rules to mark it otherwise, such classifications
+could essentially  be considered as \textbf{auto\_qc} reporting "I don't know".
+
+After manual inspection a lanelet flagged as a warning will be categorised as a
+"pass" or "fail" by a human operator. So for all \textbf{Frontier} and
+\textbf{scikit-learn} know, a sample with an \textbf{auto\_qc} "warning" could
+be eiher a pass or a fail.
+
+In other words, the set of warnings is actually a union between some unknown
+subset of the passes and failure. Training on this now seems impractical and
+inherently noisy. Users may now specify \texttt{--dIGNWARN} to \textbf{FrontAQC}
+to discard all warnings from the data set.
+
 
 \subsection{Treating Warnings as Passes}
-\textbf{WARNPASS}
-...the Sanger Institute often treats lanelets classified as a warning as a
-pass... ...wanting to see whether this would affect the results...
-...recode classes...
+
+\textbf{auto\_qc}'s rule set is typically able to catch the worst quality
+lanelets the system will overcautiously flag other lanelets for manual
+inspection. Many of these flagged lanelets are approved after human
+intervention, to the degree where by default, lanelets classified with a warning
+are allowed to proceed downstream for further analysis -- as if they were a
+pass.
+
+If \textbf{auto\_qc} is technically treating warnings as passes, then why
+shouldn't we? Thus, using \textbf{Frontier}'s \textit{recode} functionality, a
+user may specify \texttt{--dWARNPASS} to \textbf{FrontAQC} to recode all
+warnings as passes.
+
 
 \subsection{Seperating Studies}
+
+\section{Combining Data Filtering and Parameter Selection}
+
+\begin{table}
+    \centering
+    \begin{tabular}{l l | c  c  c  c  r}
+        PSet & DSet          & Nº & CV ± SD & SCV ± SD & Depth & Most Important Feature\\
+        \hline
+        R\_TOP9 & ALL         & 9  & 87 ± 6  & 95 ± 1 & 32 & max-max-baseline-deviation (32\%)\\
+        R\_TOP9 & IGNWARN     & 9  & 98 ± 1  & 99 ± 0 & 20 & rev-percent-insertions-above-baseline (38\%)\\
+        R\_TOP9 & WARNPASS    & 9 & 95 ± 3 & . & . & . \\
+    \end{tabular}
+
+    \caption[pset-cv]{\textbf{Parameter Set Cross Validation Scores}: Results of
+        classifying testing data into one of three classes; pass, fail or warn.
+        Columns left to right; parameter set name, number of parameters
+        included, average cross-validation score (max 100) ± std. deviation,
+        average stratified cross-validation score (max 100) ± std. deviation,
+        average depth of the generated tree and the most important parameter by
+        Gini importance (max 100). Tree depth and parameter importance was
+    estimated on experiments using the stratified data.}
+
+    \label{tab:pset-cv}
+\end{table}
+
 
 \section{Application of Best Practice}
 ...scikit has no post pruning...
@@ -393,3 +462,14 @@ concstruction:
 * needed use force np.float64
 * ...actually data was 0... gg
 
+\section{Conclusion}
+
+...concludes a brief investigation in to the parameters available...
+
+...able to extract the parameters used...
+...cross-validates strongly...
+
+...Part II will undertake an investigation in to lanelet quality...
+...locate lanelets that are known to improve or detriment analysis
+...and look for patterns in the quality control parameters of these particular
+observations to better fuel the search...
