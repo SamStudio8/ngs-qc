@@ -28,6 +28,8 @@ Sam Nicholls
 
 Abstract
 
+...introduce Frontier ...Goldilocks
+
 Contents
 Contents
 
@@ -422,15 +424,11 @@ Discussions and Conclusions
 
 56
 
-11 Current Status
+11 Critical Evaluation
 
 57
 
-12 Critical Evaluation
-
-58
-
-13 Conclusions
+12 Conclusions
 
 59
 
@@ -439,14 +437,13 @@ Appendix A Concept Glossary
 63
 
 A.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
-vi
-
-Contents
 A.1.1 DNA, Bases and Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
 A.1.2 NGS
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+vi
 
+Contents
 A.1.3 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
 A.2 Part I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
 A.2.1 Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
@@ -545,9 +542,6 @@ different rules entirely. During this analysis it is hoped the classifier may be
 quality metrics that improve labelling accuracy. An investigation on the possibility of aggregating or otherwise
 reducing the dimensions of some of the more detailed quality statistics to create new parameters will also be
 conducted.
-The goal is to improve efficiency of quality control classification, whether by improving accuracy of pass
-and fail predictions over the current system or merely being able to provide additional information to a lab
-technician inspecting samples labelled with a warning to reduce arbitrary decisions.
 
 1.1.2
 
@@ -577,12 +571,13 @@ Methodology
 Clearly some team-based practices invited by agile methodologies – pair programming immediately comes
 to mind – are not applicable in a solo project. It is also unreasonable to expect an "on-site" customer
 for this particular project. In The Case Against Extreme Programming, Matt Stephens describes a "self
-2
-
-1.2 Project Method
 referential safety net" where the perceived traps in each practice are supported and "made safe" by other
 extreme programming (XP) practices. This would rule out XP as a viable methodology for a solo project
 as cutting out some of the processes that allow this form of evolutionary design to work (and flatten that
+
+2
+
+1.2 Project Method
 cost-of-change curve) can introduce serious flaws to the management of a project and potentially result
 in failure. In the same breath it is important to remember that not all agile processes need be discarded
 just because XP seems incompatible. Indeed, some processes are common sense, for example: frequent
@@ -620,11 +615,12 @@ attempt to prove this null hypothesis false in favour of an alternative hypothes
 become the project’s acceptance tests (providing we have an empirical definition of what "more accurate"
 means in terms of this system) and any modification can be classed as an experiment ("Do these parameters
 allow us to reject the null hypothesis?"). Although care must be taken not to let this descend into unstructured
+cycles of mere hack-and-test, code-and-fix style programming.
+Overall it is rather difficult to select a methodology for a project such as this as the research element makes it
+
 3
 
 1.2 Project Method
-cycles of mere hack-and-test, code-and-fix style programming.
-Overall it is rather difficult to select a methodology for a project such as this as the research element makes it
 almost impossible to draw on previous personal experience for ideas of what development processes would be
 effective.
 
@@ -2747,15 +2743,43 @@ Discussions and Conclusions
 
 Chapter 11
 
-Current Status
-
+Critical Evaluation
+Unfortunately time constraints cut the project short, the time required to assemble the pipeline outlined in
+Chapter 10 was massively inflated due to difficulties encountered in the tools used, this was unexpected both
+by myself and the Sanger Institute. Whilst this prevented completion of the Part II objectives outlined in
+Section 1.1.2, I was still able to collate variant data from the samples, identify the "Goldilocks Region"
+and make contributions ranging from documentation fixes to the patching of memory leaks in highly popular
+open-source bioinformatics tools.
+In retrospect, despite the unexpected complications, Part II was probably overly ambituous for the amount
+of time I had. Given the project again I think I would more seriously weigh up the benefits of extending the
+analysis downstream, although it should be remembered that it is this element of the project that makes the
+research novel.
+Looking at Part I, I think the requirements were more correctly balanced and Frontier assists greatly in
+achieving the objectives outlined in Chapter 2. I am confident the correct development choices were made
+in the construction of Frontier and the scripts used to actually conduct analyses. One of the most influential
+decisions on this part of the project was that of the machine learning framework: scikit-learn, whose integration
+with Python’s scientific computing packages like NumPy was incredibly helpful, unlike other available packages
+which may have required time consuming wrapper functions to be created to mangle data in to an obscure
+format. The framework also included subpackages that were useful for cross-validation testing and parameter
+selection which saved time and simplified interaction between various components of the scripts.
+The machine learning analysis of Part I was quick and easy to set-up and document thanks to the functionality
+provided by Frontier for the storage and retrieval of data and targets. Frontier is still in its infancy (though
+that is not to say it is lacking in core function) and I plan to continue its development after the project ends.
+The analysis presented in Chapter 5 introduces many interesting avenues of investigation, too many to be
+written up as only one part of this project! In brief I’ve demonstrated that the decision trees generated
+exhibit behaviours similar to the current auto_qc system and presented cross-validation results for a range
+of classifiers built on various parameter sets which improve as we obtain a better idea of the observations and
+their features.
 57
 
-Chapter 12
-
-Critical Evaluation
-Decision trees also cannot promise optimality... ...try random forests in future ...would also like to experiment
-with other algorithms (even black box) and frameworks...
+It should be noted that the results presented are the result of an initial not exhaustive study. Given more
+time I’d use other machine learning classifiers starting with random forests – collections of decision trees
+– to see whether similar decisions are created; decision trees cannot promise optimality as it does not use
+’backtracking’ (i.e. an optimal decision )
+and thus random forests...
+It would also be interesting to also experiment with other algorithms (even black box methods such as neural
+networks) and frameworks.
+If I were to perform the first part of the project again, I would definitely consider investing time
 ...when choosing best parameters... Alternatively could have used SelectKBest... best practice...[58]
 ...Section 3.2.3 The SciPy Stack also includes the "Python Data Analysis Library" (pandas), which is designed
 to provide tools to supplement the Python environment, allowing users to perform analysis in Python instead
@@ -2774,7 +2798,7 @@ An Exponential Dispersion Model for the Distribution of Human Single Nucleotide 
 
 58
 
-Chapter 13
+Chapter 12
 
 Conclusions
 
@@ -3084,19 +3108,22 @@ dmd/img.cfm?node=Photos/Technology/Genome%
 [Online]. Available:
 https://docs.python.org/2/
 tutorial/datastructures.html#more-on-lists
-[65] ——. Dictionaries. [Online]. Available: https://docs.
-python.org/2/tutorial/datastructures.html#dictionaries
-[66] Python
+[65] Python
 Wiki.
 (2012)
 Time
 Complexity.
 [Online]. Available: https://wiki.python.org/moin/
 TimeComplexity
-[67] Python Software Foundation. Sets. [Online].
-Available:
-https://docs.python.org/2/tutorial/
-datastructures.html#sets
+[66] Python
+Software
+Foundation.
+Dictionaries.
+[Online]. Available:
+https://docs.python.org/2/
+tutorial/datastructures.html#dictionaries
+[67] ——. Sets. [Online]. Available: https://docs.python.
+org/2/tutorial/datastructures.html#sets
 [68] Hadley Wickham and Winston Chang, devtools:
 Tools to make developing R code easier, 2013,
 r package version 1.4.1. [Online]. Available:
@@ -3233,14 +3260,14 @@ layout.
 
 A.3 Part II: Goldilocks
 Checking whether an item is in a list requires iterating over all n elements in the container until either a match
-is found or there are no elements left to check.
+is found or there are no elements left to check[65].
 
 Dictionary
-A dict[65] or dictionary is a structure containing key-value pairs in which string or numeric keys1 are mapped
+A dict[66] or dictionary is a structure containing key-value pairs in which string or numeric keys1 are mapped
 to an arbitrary value or object through a hashing function. Keys in a dictionary are unique; attempting to add
 a key-value pair where the key already exists will overwrite the original entry.
 Python dictionaries offer constant lookup access and more importantly, unlike a list, querying the structure
-for whether it contains a particular key can be performed in constant time[66]. However it is important to note
+for whether it contains a particular key can be performed in constant time[65]. However it is important to note
 that a dictionary does not maintain order, keys are not sorted alphanumerically nor are they sorted by insertion
 time. Ordering is determined arbitrarily by the dict’s underlying hash table2 .
 
@@ -3275,7 +3302,7 @@ Sensible choices for these parameters will need to be selected after considering
 1 Any
 2 This
 
-type can actually be used as a dictionary key providing it is immutable, including tuples[65]
+type can actually be used as a dictionary key providing it is immutable, including tuples[66]
 is probably the question I see most often from users new to Python on StackOverflow
 
 66

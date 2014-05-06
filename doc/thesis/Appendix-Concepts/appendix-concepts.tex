@@ -165,10 +165,9 @@ performing those actions on a location that is not at the end of the
 \textit{list} will require the contents of the structure to be moved in memory
 to maintain the contiguous layout.
 
-%TODO Cite time
 Checking whether an item is in a \textit{list} requires iterating over all $n$
 elements in the container until either a match is found or there are no elements
-left to check.
+left to check\citep{py:timecomplexity}.
 
 
 \subsubsection{Dictionary}
@@ -180,7 +179,6 @@ tuples\citep{py-dict}} are mapped to an arbitrary value or object through a
 hashing function. Keys in a \textit{dictionary} are unique; attempting to add a
 key-value pair where the key already exists will overwrite the original entry.
 
-%TODO Cite time
 Python \textit{dictionaries} offer constant lookup access and more importantly,
 unlike a list, querying the structure for whether it contains a particular key
 can be performed in constant time\citep{py:timecomplexity}.

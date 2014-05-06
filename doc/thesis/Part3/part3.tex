@@ -1,14 +1,73 @@
 %*******************************************************************************
 \part{Discussions and Conclusions}
-\chapter{Current Status}
 
 \chapter{Critical Evaluation}
+
+Unfortunately time constraints cut the project short, the time required to
+assemble the pipeline outlined in Chapter~\ref{chap:pipeline}
+was massively inflated due to difficulties encountered in the tools used,
+this was unexpected both by myself and the Sanger Institute.
+Whilst this prevented completion of the Part II objectives outlined in
+Section~\ref{sec:intro-part2}, I was still able to collate variant data from the
+samples, identify the "\textbf{Goldilocks Region}" and make contributions
+ranging from documentation fixes to the patching of memory leaks in
+highly popular open-source bioinformatics tools.
+
+In retrospect, despite the unexpected complications, Part II was probably overly
+ambituous for the amount of time I had. Given the project again I think I would
+more seriously weigh up the benefits of extending the analysis downstream,
+although it should be remembered that it is this element of the project that
+makes the research novel.
+
+Looking at Part I, I think the requirements were more correctly balanced and
+\textbf{Frontier} assists greatly in achieving the objectives outlined in
+Chapter~\ref{chap:autoqc}. I am confident the correct development choices were
+made in the construction of \textbf{Frontier} and the scripts used to actually
+conduct analyses. One of the most influential decisions on this part of the
+project was that of the machine learning framework: \textbf{scikit-learn}, whose
+integration with Python's scientific computing packages like \textbf{NumPy} was
+incredibly helpful, unlike other available packages which may have required time
+consuming wrapper functions to be created to mangle data in to an obscure
+format. The framework also included subpackages that were useful for
+cross-validation testing and parameter selection which saved time and simplified
+interaction between various components of the scripts.
+
+The machine learning analysis of Part I was quick and easy to set-up and
+document thanks to the functionality provided by \textbf{Frontier} for the
+storage and retrieval of data and targets. \textbf{Frontier} is still in its
+infancy (though that is not to say it is lacking in core function) and I plan to
+continue its development after the project ends.
+
+The analysis presented in Chapter~\ref{chap:p1-results} introduces many
+interesting avenues of investigation, too many to be written up as only one part
+of this project! In brief I've demonstrated that the decision trees generated
+exhibit behaviours similar to the current \textbf{auto\_qc} system and presented
+cross-validation results for a range of classifiers built on various parameter
+sets which improve as we obtain a better idea of the observations and their
+features.
+
+It should be noted that the results presented are the result of an initial not
+exhaustive study. Given more time I'd use other machine learning classifiers
+starting with random forests -- collections of decision trees -- to see whether
+similar decisions are created; decision trees cannot promise optimality as it
+does not use 'backtracking' (\textit{i.e.} an optimal decision )
+
+and thus
+random forests...
+
+It would also be interesting to also experiment with other algorithms (even black
+box methods such as neural networks) and frameworks.
+
+If I were to perform the first part of the project again, I would definitely
+consider investing time 
+
+
+
+
+
 %TODO Search for FUTURE tags
 %TODO pandas looks like Frontier on steroids...
 %TODO Mention FeatureForge?
-Decision trees also cannot promise optimality...
-...try random forests in future
-...would also like to experiment with other algorithms (even black box) and frameworks...
 
 %TODO Cite KSelect
 ...when choosing best parameters...
