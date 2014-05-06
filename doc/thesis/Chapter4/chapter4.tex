@@ -18,7 +18,6 @@ carries to downstream variant calling analysis.
 The investigation considers of the following main objectives:
 
 \begin{itemize}
-    \item Set up an environment for the training and testing of decision trees
     \item Outline some parameter sets for initial examination
     \item Use parameter selection for more rigorous modelling
     \item Attempt to minimise generated trees
@@ -66,18 +65,19 @@ The tree will be constructed using the training set and the accuracy of the tree
 is then measured on the unseen testing data (\textit{i.e.} did classifications
 made by the tree match the known targets for those observations?).
 
-
+\section{Interaction with scikit-learn}
 \subsection{DecisionTreeClassifier}
 % TODO Cite
 % http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+
+\textbf{scikit-learn} provides the \textbf{DecisionTreeClassifier} class as an
+interface to creating decision tree objects. 
+
 ...gini impruty or information gain... scikit seems to favour gini...
 ...
-
-
 ...Classification And Regression Tree (CART)
 
 
-\section{Interaction with scikit-learn}
 \subsection{Cross Validation}
 
 ...method in which to measure classification accuracy...
@@ -85,6 +85,7 @@ made by the tree match the known targets for those observations?).
 
 ...K fold cross validation
 ...using stratified K fold cross validation...
+
 
 \subsection{Confusion Matrices}
 "Normal" confusion matrix and "Warnings" confusion matrix...
