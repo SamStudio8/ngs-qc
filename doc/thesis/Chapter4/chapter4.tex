@@ -27,16 +27,6 @@ The investigation considers the following main objectives:
 \subsection{Decision Trees}
 %TODO Citations...
 
-A \textbf{decision tree} is a structure of \textbf{nodes} where each node
-represents a test on the value of a particular feature or parameter of an
-observation. The layout of a decision tree resembles a flow chart where
-'decisions' at each node (\textit{e.g.} is parameter x greater than or equal to
-value y) choose the path an observation will take through the tree. Once an
-observation has reached a \textbf{leaf} node -- a node with no test to be
-applied -- it is considered classified (typically the leaf will either be
-trained to contain observations of just one class, or the classification will be
-the most frequent class in that leaf).
-
 Our primary motivation for using a decision tree is its interpretability; trees
 create human-readable rule sets and are very easy to explain and understand. The
 current \textbf{auto\_qc} system performs logical tests of simple rules in a
@@ -483,16 +473,9 @@ the average maximum tree depth between the experiments.
 In conclusion we have investigated the cross-validation accuracy of decision
 tree classifiers for a series of parameter sets, examined the effects of
 handling the warnings label class differently and conducted parameter selection
-to 
+to ...
 
-%TODO Cite KSelect
-...when choosing best parameters...
-Alternatively could have used \textbf{SelectKBest}...
-
-...concludes a brief investigation in to the parameters available...
-
-...able to extract the parameters used...
-...cross-validates strongly...
+...pruning
 
 ...Part II will undertake an investigation in to lanelet quality...
 ...locate lanelets that are known to improve or detriment analysis
