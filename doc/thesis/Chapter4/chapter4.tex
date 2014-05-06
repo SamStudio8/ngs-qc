@@ -15,14 +15,13 @@ carries to downstream variant calling analysis.
 \section{Introduction}
 \subsection{Objectives}
 
-The investigation considers of the following main objectives:
+The investigation considers the following main objectives:
 
 \begin{itemize}
     \item Outline some parameter sets for initial examination
+    \item Investigate other potential data handling methods
     \item Use parameter selection for more rigorous modelling
     \item Attempt to minimise generated trees
-    \item Investigate application of best practice for tree construction
-    \item Identify particular parameters that are of use for classification
 \end{itemize}
 
 \subsection{Decision Trees}
@@ -65,30 +64,13 @@ The tree will be constructed using the training set and the accuracy of the tree
 is then measured on the unseen testing data (\textit{i.e.} did classifications
 made by the tree match the known targets for those observations?).
 
-\section{Interaction with scikit-learn}
-\subsection{DecisionTreeClassifier}
 % TODO Cite
 % http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
 
 \textbf{scikit-learn} provides the \textbf{DecisionTreeClassifier} class as an
-interface to creating decision tree objects. 
-
+interface to creating decision tree objects.
 ...gini impruty or information gain... scikit seems to favour gini...
-...
 ...Classification And Regression Tree (CART)
-
-
-\subsection{Cross Validation}
-
-...method in which to measure classification accuracy...
-...potentially use a weighting to penalise mistakes in smaller classes...
-
-...K fold cross validation
-...using stratified K fold cross validation...
-
-
-\subsection{Confusion Matrices}
-"Normal" confusion matrix and "Warnings" confusion matrix...
 
 
 \section{Naive Parameter Sets}
@@ -194,7 +176,7 @@ is capable of replicating results made by that system.
 In general the other models perform reasonably well, potentially reflecting the
 simple linear nature of the decisions made by the \textbf{auto\_qc} system.
 
-Stratified cross-validation scores are consistently better and less variable
+\textbf{Stratified cross-validation} scores are consistently better and less variable
 (smaller standard deviations) than their non-stratified counterparts. This
 should be due to the more "balanced" training and testing sets
 gained by assigning observations to folds to match their proportions in the
@@ -307,82 +289,27 @@ wall to hang it on if you wanted a handy classification guide in a lab.
 \end{sidewaysfigure}
 
 
-\section{Informed Parameter Selection}
-\subsection{Introduction}
-
-Whilst the crude parameter sets of the previous section were useful to gain
-understanding of the data that we have, it was necessary to obtain more
-deliberate decisions for parameters to utilise in the model.
-
-\textbf{Frontier} uses two methods for the selection of 'best' parameters:
-
-\begin{itemize}
-    \item Backward elimination; pruning parameters with the lowest total gini
-    \item Call scikit-learn's SelectKBest
-\end{itemize}
-
-...important to find the "best" parameters
-...what is best? scikit-learn uses total gini information
-
-...frontier uses two methods:
-\begin{itemize}
-    \item Backward elimination; pruning parameters with the lowest total gini
-    \item Call scikit-learn's SelectKBest
-\end{itemize}
-
-\begin{listing}[H]
-    \caption[frontier-warnings]{\textbf{Frontier Variance Warnings}:
-        Warnings issued for \textbf{auto\_qc} parameters that have been found to
-        have no variance by one of \textbf{Frontier}'s sanity checking procedures.}
-    \label{list:frontier-warnings}
-    \begin{minted}[mathescape,
-                %linenos,
-                numbersep=5pt,
-                gobble=0,
-                frame=lines,
-                framesep=2mm]{bash}
-/pools/encrypted/sanger/frontier/data/bamcheck_2013dec25_ratios_out/(13455 files)
-[WARN] bases-trimmed parameter has 0 variance (with mean 0.00)
-[WARN] filtered-sequences parameter has 0 variance (with mean 0.00)
-[WARN] is-paired parameter has 0 variance (with mean 1.00)
-[WARN] is-sorted parameter has 0 variance (with mean 1.00)
-[WARN] maximum-length parameter has 0 variance (with mean 100.00)
-[WARN] non-primary-alignments parameter has 0 variance (with mean 0.00)
-[WARN] quality-dropoff-high-iqr-threshold parameter has 0 variance (with mean 10.00)
-[WARN] quality-dropoff-ignore-edge-cycles parameter has 0 variance (with mean 3.00)
-[WARN] quality-dropoff-runmed-k parameter has 0 variance (with mean 25.00)
-    \end{minted}
-\end{listing}
-
-Parameters with no variance will have constant value across all observations
-regardless of their class label and will thus be unhelpful in predicting class
-membership for future observations. Such parameters can be safely discarded,
-Listing~\ref{list:frontier-warnings} displays warnings issued by
-\textbf{Frontier} for several of the \textbf{auto\_qc}
-
-
-\section{Filtering of Data Sets}
+\section{Alternative Handling of Data Sets}
 
 The presentation of data to \textbf{scikit-learn} will greatly influence the
-outcome of the classifier. For example, one may choose to determine criteria to identify
-outlier observations that will be excluded from a study.
+predictions made by the resulting classifier. For example, one may choose to
+determine criteria to identify outlier observations that will be excluded from a
+study to prevent the creating rules from anomalous results.
 
-...present here two alternative ways to present our data and targets...
-
-...the \texttt{--d} flag may be used on the \textbf{FrontAQC} script (discussed
-previously...) to specify use of one of the sets below... by default it will use
-\texttt{--dALL}...
-
-...warnigns no longer exist!
+The following subsections introduce alternative ways to present the data and
+targets to \textbf{scikit-learn}, in particular these methods dictate handling
+of the warnings class label. It is important to note that when using these
+suggestions the "warnings" class no longer exists and the learning task becomes
+the problem of predicting passes and failures.
 
 \subsection{Ignoring Warnings}
 
 The aim of \textbf{FrontAQC} is to firstly mimic the \textbf{auto\_qc} system by
 training and testing on data sets with known targets as classified by
 \textbf{auto\_qc}. However, attempting to learn what \textbf{auto\_qc} doesn't
-know might be counter-intuitive. Lanelets are classes as warnings because the
+know might be counter-intuitive. Lanelets are classed as warnings because the
 current system doesn't have the rules to mark it otherwise, such classifications
-could essentially  be considered as \textbf{auto\_qc} reporting "I don't know".
+could be considered as \textbf{auto\_qc} reporting "I don't know".
 
 After manual inspection a lanelet flagged as a warning will be categorised as a
 "pass" or "fail" by a human operator. So for all \textbf{Frontier} and
@@ -410,18 +337,63 @@ user may specify \texttt{--dWARNPASS} to \textbf{FrontAQC} to recode all
 warnings as passes.
 
 
-\subsection{Seperating Studies}
+\subsection{Classifier Performance}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l l | c  c  c  c  r}
+        PSet & DSet          & Nº & CV ± SD & SCV ± SD & Depth & Most Important Feature\\
+        \hline
+        ALL & IGNWARN    & 86 & 96 ± 3 & 99 ± 0 & 22 & error-rate (43\%)\\
+        ALL & WARNPASS   & 86 & 95 ± 3 & 99 ± 0 & 33 & quality-dropoff-rev-mean-runmed\\
+                                                       &&&&&&-decline-low-value (32\%)\\
+        AQC & IGNWARN    & 27 & 94 ± 4 & 98 ± 1 & 26 & error-rate (44\%)\\
+        AQC & WARNPASS   & 27 & 92 ± 4 & 98 ± 1 & 33 & quality-dropoff-rev-mean-runmed\\
+                                                       &&&&&&-decline-low-value (33\%)\\
+    \end{tabular}
 
-%FUTURE
-...The "BAMcheckr'd" data set is made up of 13,455 lanelets...
-...from two different studies...
-...whilst the rule set \textbf{auto\_qc} remained the same for both studies it
-would be interesting to investigate whether there are any underlying effects
-from study...
-Time did not permit exploration of this idea...
+    \caption[all-pset-cv]{\textbf{Parameter Set Cross Validation Scores using
+        Alternative Warning Handling}:
+        Results of classifying testing data.
+        Columns left to right; parameter set name, data set name, number of parameters
+        included, average cross-validation score (max 100) ± std. deviation,
+        average stratified cross-validation score (max 100) ± std. deviation,
+        average depth of the generated tree and the most important parameter by
+        Gini importance (max 100). Tree depth and parameter importance was
+        estimated on experiments using the stratified data. \textit{N.B.}
+        \textbf{IGNWARN} and \textbf{WARNPASS} data sets perform classifications on
+        two classes (pass and fail) rather than three.}
+    \label{tab:all-pset-cv}
+\end{table}
+
+Table~\ref{tab:all-pset-cv} details the cross-validation and depth data for
+classifiers built using the naive \textbf{ALL} and \textbf{AQC}
+parameter sets in conjunction with the aforementioned data set augmentations.
+We can instantly see a major improvement in scores and a reduction in average
+maximum depth when compared to the results in Table~\ref{tab:pset-cv}.
+
+At first glance it would certainly appear that the method in which warnings are
+handled has great influence over the performance of the decision tree
+classifier.
 
 
-\section{Combining Data Filtering and Parameter Selection}
+\section{Informed Parameter Selection}
+\subsection{Introduction}
+%TODO Cite total gini
+
+Whilst the crude parameter sets of the previous section were useful to gain
+understanding of the data that we have, it was necessary to obtain more
+deliberate decisions for parameters to utilise in the model. Using
+\textbf{backward elimination} -- a method borrowed from statistical model design
+-- the trees were repeatedly refitted after removing the least important
+feature (as calculated by \textbf{scikit-learn} using total Gini information).
+
+The smallest parameter set that could be used for training and testing before
+cross-validation fell by more than 1\% below the running average was selected as
+the "winner". For our purposes the winner will be referred to as \textbf{TOP9}.
+All data was provided, rather than using the \textbf{IGNWARN} or
+\textbf{WARNPASS} augmentations for this process. In future it would be
+interesting to repeat the selection experiment with augmentations activated.
+
 
 \subsection{Experiment Results}
 
@@ -437,7 +409,7 @@ Time did not permit exploration of this idea...
                                                     &&&&&&-decline-low-value (34\%)\\
     \end{tabular}
 
-    \caption[pset-cv]{\textbf{Backward Elimination Parameter Set Cross Validation Scores}:
+    \caption[be-pset-cv]{\textbf{Backward Elimination Parameter Set Cross Validation Scores}:
         Results of classifying testing data.
         Columns left to right; parameter set name, data set name, number of parameters
         included, average cross-validation score (max 100) ± std. deviation,
@@ -450,28 +422,15 @@ Time did not permit exploration of this idea...
     \label{tab:be-pset-cv}
 \end{table}
 
-Table~\ref{tab:be-pset-cv}... impressive cross validation results...
-...especially for the \textbf{WARNPASS} set...
+Table~\ref{tab:be-pset-cv} lists some quite impressive cross-validation results
+(particularly for classifiers which augment the warnings class data) considering
+only nine parameters were used in the training and testing.  The average maximum
+tree depths range between 20 and 32, the upper bound now briefly overlapping the
+lower bound of the depth range of the naive sets found in
+Table~\ref{tab:pset-cv}. Clearly we are able to gain substantial accuracy on
+class prediction without requiring to use each and every parameter at our
+disposal.
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{l l | c  c  c  c  r}
-        PSet & DSet          & Nº & CV ± SD & SCV ± SD & Depth & Most Important Feature\\
-        \hline
-        KTOP9 & WARNPASS    & 9 & 95 ± 3 & . & . & . \\
-    \end{tabular}
-
-    \caption[pset-cv]{\textbf{SelectKBest Parameter Set Cross Validation Scores}: Results of
-        classifying testing data into one of three classes; pass, fail or warn.
-        Columns left to right; parameter set name, number of parameters
-        included, average cross-validation score (max 100) ± std. deviation,
-        average stratified cross-validation score (max 100) ± std. deviation,
-        average depth of the generated tree and the most important parameter by
-        Gini importance (max 100). Tree depth and parameter importance was
-    estimated on experiments using the stratified data.}
-
-    \label{tab:ks-pset-cv}
-\end{table}
 
 \subsection{Summary of Trees}
 
@@ -507,8 +466,21 @@ becomes overfit... learning particular circumstances for rare events...
 \end{figure}
 
 
-\section{Application of Best Practice}
-...scikit has no post pruning...
+\section{Conclusion}
+
+%TODO Cite KSelect
+...when choosing best parameters...
+Alternatively could have used \textbf{SelectKBest}...
+
+...concludes a brief investigation in to the parameters available...
+
+...able to extract the parameters used...
+...cross-validates strongly...
+
+...Part II will undertake an investigation in to lanelet quality...
+...locate lanelets that are known to improve or detriment analysis
+...and look for patterns in the quality control parameters of these particular
+observations to better fuel the search...
 
 \textbf{DecisionTreeClassifier} accepts the following optional arguments upon
 concstruction:
@@ -523,25 +495,3 @@ concstruction:
         Prevent a node in the tree from being split further if it would create a
         leaf smaller than the required minimum.
 \end{itemize}
-
-
-...
-...
-
-* incorrect degrees of freedom
-* warnings: /usr/lib64/python2.7/site-packages/sklearn/feature\_selection/univariate\_selection.py:256: RuntimeWarning: invalid value encountered in divide, causing NaN
-* Replaced univariate\_selection with version from master
-* needed use force np.float64
-* ...actually data was 0... gg
-
-\section{Conclusion}
-
-...concludes a brief investigation in to the parameters available...
-
-...able to extract the parameters used...
-...cross-validates strongly...
-
-...Part II will undertake an investigation in to lanelet quality...
-...locate lanelets that are known to improve or detriment analysis
-...and look for patterns in the quality control parameters of these particular
-observations to better fuel the search...
