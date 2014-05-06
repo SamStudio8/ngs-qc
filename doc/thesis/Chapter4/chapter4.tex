@@ -205,7 +205,7 @@ This suggests that excluding the baseline related parameters is problematic for
 one (or two) of the three class labels (as the only difference expected between the
 experiments will be the proportions of the classes).
 
-The average tree depth -- ranging between 31 and 53 splits -- may be
+The average maximum tree depth -- ranging between 31 and 53 splits -- may be
 highlighting a possible shortcoming of using a decision tree classifier;
 complexity could be indicative that a tree may have been overfitted on the training
 data. Later sections will apply best practice in an attempt to minimise this
@@ -240,7 +240,7 @@ passengers off at small stations. This linear behaviour matches the role of
     \includegraphics[width=1\textwidth]{ALL_ALL_1}
     \caption[all-all-1]{\textbf{ALL Set Decision Tree A}}
     \label{fig:all-all-1}
-    
+
     \vspace{20mm}
 
     \includegraphics[width=1\textwidth]{ALL_ALL_2}
@@ -423,6 +423,8 @@ Time did not permit exploration of this idea...
 
 \section{Combining Data Filtering and Parameter Selection}
 
+\subsection{Experiment Results}
+
 \begin{table}[H]
     \centering
     \begin{tabular}{l l | c  c  c  c  r}
@@ -467,6 +469,28 @@ two classes (pass and fail) rather than three.}
 
     \label{tab:ks-pset-cv}
 \end{table}
+
+\subsection{Summary of Trees}
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=1\textwidth]{TOP9_ALL_1}
+    \caption[top9-all-1]{\textbf{TOP9 Set Decision Tree with ALL Data}}
+    \label{fig:top9-all-1}
+\end{figure}
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{TOP9_IGNWARN_1}
+    \caption[top9-ignwarn-1]{\textbf{TOP9 Set Decision Tree with IGNWARN Data A}}
+    \label{fig:top9-ignwarn-1}
+
+    \vspace{10mm}
+
+    \includegraphics[width=0.8\textwidth]{TOP9_IGNWARN_5}
+    \caption[top9-ignwarn-2]{\textbf{TOP9 Set Decision Tree with IGNWARN Data B}}
+    \label{fig:top9-ignwarn-2}
+\end{figure}
 
 
 \section{Application of Best Practice}
