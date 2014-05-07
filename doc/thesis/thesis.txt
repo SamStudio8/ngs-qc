@@ -167,18 +167,18 @@ Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 Frontier
 4.1
 
-13
+12
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 4.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 
 4.1.2
 4.1.3
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 Contents
 
@@ -186,36 +186,36 @@ Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 4.2
 
-Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Concepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 4.3
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
-Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Input Handling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
 
 4.3.3
 
-Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 4.3.4
 
-Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Retrieval . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
 
 4.3.5
 
-Logging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Logging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 
 4.5
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
-4.5.1 AQCReader and BamcheckReader . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+4.5.1 AQCReader and BamcheckReader . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 4.5.2
 
-Frontier Utilities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Frontier Utilities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 4.5.3
 
-Frontier API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Frontier API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 Results
 
@@ -225,84 +225,84 @@ Results
 
 5.5
 
-24
+23
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 5.1.1
 
-Objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+Objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 5.1.2
 
-Decision Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+Decision Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
-Naive Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Naive Parameter Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 5.2.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
 
 5.2.2
 
-Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
 
 5.2.3
 
-Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
 
-Alternative Handling of Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Alternative Handling of Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 5.3.1
 
-Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Ignoring Warnings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 5.3.2
 
-Treating Warnings as Passes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Treating Warnings as Passes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 5.3.3
 
-Classifier Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Classifier Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
-Informed Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Informed Parameter Selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 5.4.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
 
 5.4.2
 
-Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
 5.4.3
 
-Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
-Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
 
+35
 36
-37
 
 6.1
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 6.2
 
-Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 6.3
 7
 
 4.3.2
 
-Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Usage Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
 
 5.2
 
 6
 
-Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Class Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
 4.4
 
@@ -314,23 +314,23 @@ II
 
 6.2.1
 
-GWAS and iCHIP Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+GWAS and iCHIP Data Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
 
 6.2.2
 
-The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+The ‘Goldilocks’ Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
-Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Concepts and Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
 
 Materials and Methods
 7.1
 
-39
+38
 
-Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Input Data and Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 7.1.1
 
-Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Variant Query File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 v
 
 Contents
@@ -339,18 +339,18 @@ v
 
 8
 
-Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 7.2.1
 
-Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 7.2.2
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
 
 Goldilocks
 
-41
+40
 
 8.1
 
@@ -359,125 +359,125 @@ Goldilocks
 8.3
 9
 
-Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
 
-Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 8.1.1
 
-Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 8.1.2
 
-Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
 
 8.1.3
 
-Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
 8.1.4
 
-Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Pitfalls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 
-Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
 8.2.1
 
-Parsing Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Parsing Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 8.2.2
 
-Loading Variant Query Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Loading Variant Query Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
 
 8.2.3
 
-Searching for Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+Searching for Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
 
 8.2.4
 
-Filtering and Ranking Candidates for Selection . . . . . . . . . . . . . . . . . . . . . 44
+Filtering and Ranking Candidates for Selection . . . . . . . . . . . . . . . . . . . . . 43
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
 
 Results
 
-47
+46
 
 10 Analysis Pipeline
 
-50
+49
 
-10.1 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
-10.2 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
-10.2.1 Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
-10.2.2 Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
-10.3 Pileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
-10.4 Merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
-10.5 Calling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
-10.6 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+10.1 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+10.2 Region Extraction and Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+10.2.1 Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+10.2.2 Indexing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+10.3 Pileup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+10.4 Merge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+10.5 Calling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+10.6 Measuring Concordance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
 
 III
 
 Discussions and Conclusions
 
-55
+54
 
 11 Critical Evaluation
 
-56
+55
 
 12 Conclusions
 
-58
+57
 
 Appendix A Concept Glossary
 
-63
+62
 
-A.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
-A.1.1 DNA, Bases and Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+A.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+A.1.1 DNA, Bases and Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
 A.1.2 NGS
 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
 
-A.1.3 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
-A.2 Part I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
-A.2.1 Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
-A.2.2 Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.1.3 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+A.2 Part I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+A.2.1 Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+A.2.2 Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
 vi
 
 Contents
-A.2.3 Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
-A.2.4 Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
-A.3 Part II: Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
-A.3.1 Group . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
-A.3.2 Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
-A.3.3 Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
-A.3.4 Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+A.2.3 Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+A.2.4 Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+A.3 Part II: Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.3.1 Group . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.3.2 Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.3.3 Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+A.3.4 Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
 Appendix B Input Examples
 
-68
+67
 
-B.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
-B.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
-B.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+B.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+B.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+B.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
 Appendix C Output Examples
 
-73
+72
 
-C.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+C.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
 Appendix D Tool Installation
 
-76
+75
 
-D.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
-D.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
-D.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
-D.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+D.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
+D.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
+D.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
+D.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
 Appendix E Pre-Frontier Implementation
 
-78
+77
 
-E.1 Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
-E.2 Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+E.1 Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+E.2 Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
 
 vii
 
@@ -801,9 +801,6 @@ array of tools to work with many different types of problems. Setting it apart f
 is the inclusion of a graphical user interface (GUI) that presents drag-and-drop-esque access to widgets from
 which users assemble a workflow to apply to their data. The GUI also allows visualisation of elements such
 as decision trees or confusion matrix plots without any effort from the end user.
-Despite the repository commit history stretching back to mid 90s, only recent improvements including a major
-redesign of the GUI, significant changes to its object hierarchy and its 2013 academic publication have brought
-more attention to the framework.
 At first glance Orange appears to offer a larger collection of functions to work specifically with classification
 tasks when compared to scikit-learn. Indeed it would later be discovered that it ships with features useful to
 the project that have not been implemented in scikit-learn including tree pruning and printing.
@@ -829,18 +826,18 @@ array and matrix data containers; and SciPy[21], which provides a multitude of o
 Whilst the stack also includes Matplotlib, a highly popular graphing package, I typically prefer to use the R
 package ggplot2[24] for creating graphs. However it is useful to note that Matplotlib integrates easily with
 the data structures of NumPy (and thus scikit-learn too).
+argparse is a third-party Python library5 used for specifying the arguments and options of a command line
+interface via a simple API. argparse spares the developer from having to check the presence and validity of a
 3 Some
 
 full time developer positions are funded by INRIA, the French Institute for Research in Computer Science and Automation
 of the SciPy Stack are distributed under the 3-clause Modified BSD License[22][23]
-
+5 Although since Python 2.7, argparse has been included as part of the standard library[25]
 4 Components
 
 10
 
 3.2 Development Environment
-argparse is a third-party Python library5 used for specifying the arguments and options of a command line
-interface via a simple API. argparse spares the developer from having to check the presence and validity of a
 user’s arguments to a Python program themselves whilst also automatically generating a friendly interface to
 the program for the end user based on the definitions provided by the developer.
 
@@ -877,17 +874,10 @@ of both bandwidth and time and would more than likely constitute unreasonable us
 "fair use" terms and conditions too.
 It would seem that none of the widely available solutions would provide an environment suitable for the testing
 of this project. I wanted to provide my own platform for this problem but given the time constraints of the
-5 Although
-
-since Python 2.7, argparse has been included as part of the standard library[25]
-
-11
-
-3.2 Development Environment
 project this was simply not practical and in the end we settled for well formatted log files which could be
 searched and processed with command line tools such as awk.
 
-12
+11
 
 Chapter 4
 
@@ -919,7 +909,7 @@ If possible, Frontier could also handle any objects returned, displaying or logg
 information pertaining to a returned classifier’s accuracy to assist a user in the ongoing performance monitoring
 of changes to used data subsets or parameters.
 
-13
+12
 
 4.2 Concepts
 
@@ -948,7 +938,7 @@ Concepts
 Appendix A.2 introduces some ideas that will assist understanding of the application’s purpose and terminology
 used in the following implementation section.
 
-14
+13
 
 4.3 Implementation
 
@@ -992,7 +982,7 @@ CLASSES = {
 }
 Listing 1 : Class definitions for auto_qc as passed to Frontier
 
-15
+14
 
 4.3 Implementation
 As per Listing 1, to define classes a user must provide a Python dict containing the following for each label:
@@ -1033,7 +1023,7 @@ in Appendix B.1 and the auto_qc decisions matrix briefly demonstrated in Appendi
 These classes are described as Readers and implement a common base class, AbstractReader which takes
 care of setting up the file handler, including functions to both close and iterate over the file’s contents. It will
 
-16
+15
 
 4.3 Implementation
 also automatically call its own process_file function that skips over any header lines before passing each line
@@ -1071,7 +1061,7 @@ A dictionary of user specified class labels defined as described in the previous
 • auto_close Boolean, Optional
 Whether or not to close the file handle immediately after executing process_file, this is True by default
 to prevent either memory leaking when users are reading in a large number of files and are perhaps
-17
+16
 
 4.3 Implementation
 unaware that they require closing or the throwing of an IOError caused by having too many file handles
@@ -1119,7 +1109,7 @@ an algorithm for accurately computing running variance introduced in Donald Knut
 3 A somewhat contrived contraction of ’Statistics Multiplexer’
 2 Using
 
-18
+17
 
 4.3 Implementation
 Although these attributes can be manipulated directly (and indeed they are for testing purposes) the leading
@@ -1165,7 +1155,7 @@ still require use of sorted when creating a result matrix via the API
 
 5 Dictionaries
 
-19
+18
 
 4.3 Implementation
 member _classes), which is an argument to its construction, allowing the Statplexer to share this information
@@ -1207,7 +1197,7 @@ Return data for each observation, but only include columns for each parameter in
 • get_data_by_target
 Return data for each observation that have been classified in one of the targets specified and additionally
 only return columns for the parameters in the given list
-20
+19
 
 4.3 Implementation
 The prior section first introduces the format in which data is returned, the two-dimensional NumPy array –
@@ -1234,7 +1224,7 @@ it would be trivial to import old Frontier log files.
 the ’cleaned’ or otherwise sanitised parameter name, as noted in Section 4.3.2 for example where the BamcheckReader
 class will automatically convert spaces and other predefined characters to hyphens.
 
-21
+20
 
 4.4 Usage Example
 
@@ -1275,7 +1265,7 @@ Module containing the class (of the same name) to be used to parse each file in 
 observation data
 • TargetReader Module
 Module containing the class (of the same name) to be used to parse the target_path file for target data
-22
+21
 
 4.5 Testing
 
@@ -1318,7 +1308,7 @@ the results of the various API calls to ensure that each returned set of data an
 observations as expected. Tests also ensure that the API behaves appropriately for incorrect user input,
 including incorrect or completely unknown parameters and targets.
 
-23
+22
 
 Chapter 5
 
@@ -1351,7 +1341,7 @@ rules in a similar fashion and thus it seemed sensible to compare results from b
 tree as output. A "black box" machine learning classifier such as a neural network would not produce any
 tangible rules that could be explained to another human. Whilst the first goal is to briefly investigate whether
 
-24
+23
 
 5.2 Naive Parameter Sets
 auto_qc’s rules actually can be recovered, future work may wish to make improved rules that could still be
@@ -1391,7 +1381,7 @@ Include any parameter which includes any of the following as substrings: mean, a
 • NO_MARP
 Exclude any parameter which includes any of the following as substrings: mean, average, rate or percent.
 
-25
+24
 
 5.2 Naive Parameter Sets
 Set
@@ -1484,7 +1474,7 @@ parameters in the ALL model are redundant for use in classification. This should
 hope to see that a set that includes parameters known to be used by the current auto_qc system is capable of
 replicating results made by that system.
 
-26
+25
 
 5.2 Naive Parameter Sets
 In general the other models perform reasonably well, potentially reflecting the simple linear nature of the
@@ -1529,7 +1519,7 @@ observations exactly.
 
 measures this using Total Gini Importance[39]
 
-27
+26
 
 5.2 Naive Parameter Sets
 
@@ -1537,7 +1527,7 @@ Fig. 5.1 ALL Set Decision Tree A
 
 Fig. 5.2 ALL Set Decision Tree B
 
-28
+27
 
 5.2 Naive Parameter Sets
 
@@ -1545,9 +1535,9 @@ Fig. 5.3 AQC Set Decision Tree (a)
 
 Fig. 5.4 AQC Set Decision Tree (b)
 
-29
+28
 
-30
+29
 
 Fig. 5.6 ERROR Set Decision Tree: A highly overfit decision tree trained on the single parameter ERROR set.
 
@@ -1599,7 +1589,7 @@ analysis – as if they were a pass.
 If auto_qc is technically treating warnings as passes, then why shouldn’t we? Thus, using Frontier’s recode
 functionality, a user may specify –dWARNPASS to recode all warnings as passes.
 
-31
+30
 
 5.4 Informed Parameter Selection
 
@@ -1700,7 +1690,7 @@ The smallest parameter set that could be used for training and testing before cr
 as TOP9. All data was provided, rather than using the IGNWARN or WARNPASS augmentations for this
 process. In future it would be interesting to repeat the selection experiment with augmentations activated.
 
-32
+31
 
 5.4 Informed Parameter Selection
 
@@ -1795,7 +1785,7 @@ treatment of the warnings class assists in reducing the amount of noise and thus
 are no longer hundreds of uncommon combinations of parameter values that each need a node of their own to
 be plotted.
 
-33
+32
 
 5.4 Informed Parameter Selection
 
@@ -1803,7 +1793,7 @@ Fig. 5.8 TOP9 Set Decision Tree with IGNWARN Data (a)
 
 Fig. 5.9 TOP9 Set Decision Tree with IGNWARN Data (b)
 
-34
+33
 
 5.5 Conclusion
 Given the results in Tables 5.2 and 5.3, it is arguable that treatment of warnings has a greater influence over
@@ -1831,14 +1821,14 @@ From here, Part II will undertake an investigation in to lanelet quality, identi
 detriment downstream analysis. Searching for relationships or trends in the parameters of these particular
 lanelets will fuel further investigation of some of the lines in inquiry introduced in this chapter.
 
-35
+34
 
 Part II
 
 Identification of Qualitative Sample
 Properties
 
-36
+35
 
 Chapter 6
 
@@ -1872,7 +1862,7 @@ Only particular bases of interest in the genome of the sample has been sequenced
 
 Association Study
 
-37
+36
 
 6.3 Concepts and Terminology
 Each sample will thus have a corresponding result from each of the two studies. A result in this context refers
@@ -1906,7 +1896,7 @@ Concepts and Terminology
 
 In the search for the aforementioned "Goldilocks genome", we define the terminology found in Appendix A.3.
 
-38
+37
 
 Chapter 7
 
@@ -1939,7 +1929,7 @@ is simple, using lines beginning with a ’#’ to delimit desired file groups. 
 next group definition) are considered to be a member of that group. Entries are line-seperated, tab-delimited
 and consist of only two fields: a unique slug that serves only for simple user identification of a file, followed
 by the the actual file path (relative or absolute).
-39
+38
 
 7.2 Development Environment
 It is an error to provide a file entry before the first group definition. An exception will also be raised if a user
@@ -1972,7 +1962,7 @@ Given the more traditional development methodology, testing need not follow a co
 roadmap. A test suite would need to be written to ensure the components of the script work as intended,
 simulating input variants and ensuring the correct candidate region densities are found.
 
-40
+39
 
 Chapter 8
 
@@ -2008,7 +1998,7 @@ module to be imported in to other programs. Whilst the use case is certainly mor
 
 speaking we are only handling the 22 autosomes and ignoring the remaining 2 sex chromosomes (allosomes)
 
-41
+40
 
 8.2 Implementation
 made the choice to modularise the functionality, in the hope that if an end user were to find some function of
@@ -2055,7 +2045,7 @@ This section considers the implementation of the major components of Goldilocks:
 English dubs of a 1987 French television show titled Il était une fois... la vie (Once upon a time... Life)[44] a relevant episode can be
 viewed here: http://www.youtube.com/watch?v=yvhU2UyRv-Q
 
-42
+41
 
 8.2 Implementation
 
@@ -2101,7 +2091,7 @@ have been more appropriate (especially considering the container forbids duplica
 constructed from an existing iterable such as a list anyway!
 Indeed the container does specify an update function but this could in itself be a source of overhead as the
 structure ensures that the no duplicate condition has not been violated on every call. Given more time it would
-43
+42
 
 8.2 Implementation
 be interesting to compare performance differences between container implementations.
@@ -2161,7 +2151,7 @@ Filtering and Ranking Candidates for Selection
 
 For the purpose of this project we’re looking to filter candidates by their absolute distance from the median
 density of variants located in the GWAS variant group (the median density will give the most representative
-44
+43
 
 8.3 Testing
 regions) and then rank those by their corresponding iCHIP variant group densities, descending (enriching the
@@ -2203,7 +2193,7 @@ Once regions have been searched (or more accurately, once a a candidate census h
 dictionary via search_regions), additional tests ensure that all candidate regions are of the correct length and
 begin on a valid stride.
 
-45
+44
 
 8.3 Testing
 
@@ -2306,7 +2296,7 @@ improve coverage, possibly generating larger (or even random) data sets. Results
 manual inspection both by myself and the Sanger Institute and the regions described in the following chapter
 are considered legitimate.
 
-46
+45
 
 Chapter 9
 
@@ -2334,7 +2324,7 @@ between variants called in our leave-one-out study and the original iCHIP data s
 bases
 bases
 
-47
+46
 
 i
 0234
@@ -2485,7 +2475,7 @@ This isn’t a surprise when you consider that the GWAS data set represents the 
 whole-genome analysis of our samples, whereas the iCHIP set consists of the variants output from SNP
 genotyping, a process that focuses on particular genomic locations of interest.
 
-48
+47
 
 Fig. 9.1 Goldilocks Candidate Plot A: Candidate regions of one megabase length are arranged along the x
 axis (coloured by chromosome) against the number of variants contained within that region.
@@ -2493,7 +2483,7 @@ axis (coloured by chromosome) against the number of variants contained within th
 Fig. 9.2 Goldilocks Candidate Plot B: Candidates of one megabase length are arranged along the x axis
 (coloured and facetted by autosome) and plotted against the number of variants contained within that region.
 
-49
+48
 
 Chapter 10
 
@@ -2523,7 +2513,7 @@ the Goldilocks regions.
 • Compare
 For each pair of GWAS and iCHIP samples, measure the concordance of called variants.
 
-50
+49
 
 10.2 Region Extraction and Indexing
 
@@ -2567,7 +2557,7 @@ Both the commands in Listing 9 and 10 can be executed in parallel for extracting
 samtools index \$(basename \${file}).goldilocks.bam
 Listing 10 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[51]
 
-51
+50
 
 10.3 Pileup
 
@@ -2611,7 +2601,7 @@ pipeline. Ultimately I ran out of time attempting to overcome these problems bef
 the pipeline to use. The difficulties experienced with samtools merge specifically (including tracking and
 patching of memory leaks) are detailed on the Frontier blog[53].
 
-52
+51
 
 10.5 Calling
 
@@ -2653,7 +2643,7 @@ around centromeres for example[55]), optimising it for variant calling[56].
 variation occurs through a population of different samples rather than just one.
 3 Although it could also be a very low frequency variant...
 
-53
+52
 
 10.6 Measuring Concordance
 
@@ -2677,13 +2667,13 @@ Another option for this component was SnpSift Concordance[61], a Java based pack
 calculate concordances between two VCF files. However I was concerned with the possible performance of
 using Java to process thousands of concordances.
 
-54
+53
 
 Part III
 
 Discussions and Conclusions
 
-55
+54
 
 Chapter 11
 
@@ -2714,7 +2704,7 @@ written up as only one part of this project! In brief I’ve demonstrated that t
 exhibit behaviours similar to the current auto_qc system and presented cross-validation results for a range
 of classifiers built on various parameter sets which improve as we obtain a better idea of the observations and
 their features.
-56
+55
 
 It should be noted that the results presented consist an initial not exhaustive study. Decision trees cannot
 promise optimality and given more time I’d have investigated use of other machine learning classifiers, starting
@@ -2731,7 +2721,7 @@ Overall I am pleased with the outcomes of this project; I feel both Frontier and
 and more than meet their original design requirements. The Pipeline, although incomplete, has been defined
 and work can be continued outside of this project in conjunction with the Sanger Institute.
 
-57
+56
 
 Chapter 12
 
@@ -2761,7 +2751,7 @@ bamcheckr for the recovery of additional parameters.
 This project has produced a potentially wide reaching Python package in the form of Frontier, applicable to
 a variety of statistical or machine learning problems. Although Goldilocks may not appear to have much of
 
-58
+57
 
 an audience a 2003 paper[63]1 analysed the spread of SNPs across regions of the human genome to assert
 whether variants could be modelled with a statistical distribution, a clear use case for Goldilocks.
@@ -2770,7 +2760,7 @@ whether variants could be modelled with a statistical distribution, a clear use 
 
 An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[63]
 
-59
+58
 
 [12] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
@@ -2882,7 +2872,7 @@ Recursive Partitioning, 2013, r package version
 4.1-3. [Online]. Available: http://CRAN.R-project.
 org/package=rpart
 
-60
+59
 
 [26] M. Fowler, “Continuous Integration,” 2006.
 [Online]. Available: http://www.martinfowler.com/
@@ -3023,7 +3013,7 @@ Goncalo and Albers, Cornelis A. and Banks, Eric
 and DePristo, Mark A. and Handsaker, Robert E.
 and Lunter, Gerton and Marth, Gabor T. and Sherry,
 
-61
+60
 
 [56] Heng
 Li.
@@ -3109,7 +3099,7 @@ Tools to make developing R code easier, 2013,
 r package version 1.4.1. [Online]. Available:
 http://CRAN.R-project.org/package=devtools
 
-62
+61
 
 Appendix A
 
@@ -3144,7 +3134,7 @@ Next Generation Sequencing (NGS) is a somewhat generic term used to refer to imp
 hardware and methods introduced from 2008 onwards, bringing a massive decrease in both the time and
 cost involved in the sequencing of an entire human genome[66].
 
-63
+62
 
 A.2 Part I
 
@@ -3185,7 +3175,7 @@ that observation. Traditionally these may be described as features but it was fe
 have connotations with discrete data. Early versions of Frontier referred to parameters as regressors, using
 terminology from statistical modelling. This wording was dropped to remove any confusion between regression
 and classification machine learning problems.
-64
+63
 
 A.2 Part I
 
@@ -3232,7 +3222,7 @@ its bounds and must be relocated elsewhere in memory to resize to a larger conti
 be appended to or popped from anywhere in the container, performing those actions on a location that is not at
 the end of the list will require the contents of the structure to be moved in memory to maintain the contiguous
 layout.
-65
+64
 
 A.3 Part II: Goldilocks
 Checking whether an item is in a list requires iterating over all n elements in the container until either a match
@@ -3281,7 +3271,7 @@ Sensible choices for these parameters will need to be selected after considering
 type can actually be used as a dictionary key providing it is immutable, including tuples[70]
 is probably the question I see most often from users new to Python on StackOverflow
 
-66
+65
 
 A.3 Part II: Goldilocks
 
@@ -3303,7 +3293,7 @@ Candidates must meet all (any any additional) criteria to be considered. For exa
 position falls on a base in such a way that the chromosome ends before a region of length can be constructed
 will violate the size criteria.
 
-67
+66
 
 Appendix B
 
@@ -3425,7 +3415,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-68
+67
 
 B.1 BAMcheckR’d Example Output
 
@@ -3657,7 +3647,7 @@ FFQ
 0
 0
 
-69
+68
 
 1609
 
@@ -3999,7 +3989,7 @@ IS
 2
 0
 
-70
+69
 
 B.1 BAMcheckR’d Example Output
 
@@ -4278,7 +4268,7 @@ GCD
 0.101
 0.101
 
-71
+70
 
 B.2 auto_qc Decision Matrix
 
@@ -4427,7 +4417,7 @@ Goldilocks Paths File
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-72
+71
 
 ...
 ...
@@ -4513,7 +4503,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-73
+72
 
 C.1 Frontier Log Example
 
@@ -4583,7 +4573,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-74
+73
 
 C.1 Frontier Log Example
 
@@ -4609,7 +4599,7 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
-75
+74
 
 Appendix D
 
@@ -4635,7 +4625,7 @@ cd bcftools/
 make #(requires htslib to be above samtools/bcftools dir)
 sudo cp bcftools usr/local/bin
 
-76
+75
 
 D.3 samtools
 
@@ -4670,7 +4660,7 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 
-77
+76
 
 Appendix E
 
@@ -4688,7 +4678,7 @@ is depleted of reagents then every lane (and thus all lanelets within) will be o
 Fig. E.1 Heatmap of lanelet QC status by lane: Lanes are vertical bars with each lanelet cell coloured red to
 represent a failure, yellow for a warning and grey for a pass.
 In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
-78
+77
 
 E.2 Recovering Ratios
 a lane as well as each lane in a sequencing run. To examine this further, an R script utilising ggplot2 was
@@ -4731,7 +4721,7 @@ revealed 82 different parameters. However, when comparing this parameter set to 
 auto_qc, it appeared that some parameters were "missing".
 In the pursuit of replicating the decisions of the existing system, it is ideal to have all the parameters used
 
-79
+78
 
 E.2 Recovering Ratios
 in the making of those decisions at hand. In particular, the missing parameters were of a normalised nature,
@@ -4770,6 +4760,6 @@ would be interesting to explore the idiosyncrasies of each implementation.
 
 1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm
 
-80
+79
 
 
