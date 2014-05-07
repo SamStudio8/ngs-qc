@@ -95,7 +95,7 @@ terminology found in Appendix~\ref{app:concepts-p2-1}.
 
 Named such for the command that creates it, the \textbf{Variant Query File} (or
 \textit{Query File}) is an input format for populating the candidate searching
-script with variants. The file is formed of line-delimited, tab-seperated
+script with variants. The file is formed of line-delimited, tab-separated
 entries where the first field consists of a colon-delimited pair representing a
 chromosome and position respectively (\textit{e.g.} 1:5000 is the base at
 position 5000 on the first chromosome). Other fields may be provided but are
@@ -135,7 +135,7 @@ The \textbf{Paths File} is a trivial and esoteric file type used to handle
 grouping of \textbf{Variant Query Files}. The format is simple, using lines
 beginning with a '\#' to delimit desired file groups. Entries following that
 line (until the next group definition) are considered to be a member of that
-group. Entries are line-seperated, tab-delimited and consist of only two fields:
+group. Entries are line-separated, tab-delimited and consist of only two fields:
 a unique slug that serves only for simple user identification of a file,
 followed by the the actual file path (relative or absolute).
 
@@ -542,8 +542,6 @@ the following chapter are considered legitimate.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Results}
 %TODO Mnt or Mb?
-%TODO Tabulate
-%TODO Listing 11 lists...
 
 Table~\ref{tab:resultsp2} lists the top 25 candidate regions selected by
 \textbf{Goldilocks} for inspection. Regions were constructed using a
@@ -582,34 +580,34 @@ the original \textbf{iCHIP} data set.
 %TODO Results don't actually sub-sort by iCHIP...
 \begin{table}[H]
     \centering
-    \begin{tabular}{l | c  c  c  l  r}
+    \begin{tabular}{l | c  c  c  r  r}
         i & GWAS & iCHIP & Chr & Start & End \\
         \hline
-        0234&297&470&1& 117000001 &  118000000\\
-        1074*&294&1540&3&  46000001 &   47000000\\
-        5222&294&336&21&  16500001 &   17500000\\
-        3125&298&310&10&  60000001 &   61000000\\
-        0880&293&344&2& 191500001 &  192500000\\
-        3560&299&772&12&   9000001 &   10000000\\
-        4407&299&512&15&  78500001 &   79500000\\
-        1036&292&300&3&  27000001 &   28000000\\
-        2734&300&515&9&   5000001&    6000000\\
-        3426&300&486&11&  76000001 &   77000000\\
-        0015&291&1029&1&   7500001 &    8500000\\
-        0365&301&487&1& 182500001 &  183500000\\
-        3415&301&419&11&  70500001 &   71500000\\
-        1581&290&802&4& 102500001 &  103500000\\
-        3554&290&403&12&   6000001 &    7000000\\
-        3184&302&449&10&  89500001 &   90500000\\
-        1580&289&603&4& 102000001 &  103000000\\
-        1948&288&1297&5&  96000001 &   97000000\\
-        2215&288&622&7&  49500001 &   50500000\\
-        0414&288&346&1& 207000001&  208000000\\
-        2055&304&1377&5& 149500001 &  150500000\\
-        0384&287&827&1& 192000001 &  193000000\\
-        0959&306&406&2& 231000001 &  232000000\\
-        4214&286&393&14&  88500001 &   89500000\\
-        0320&307&620&1& 160000001 &  161000000\\
+        0234&297&470&1& 117,000,001 &  118,000,000\\
+        1074*&294&1540&3&  46,000,001 &   47,000,000\\
+        5222&294&336&21&  16,500,001 &   17,500,000\\
+        3125&298&310&10&  60,000,001 &   61,000,000\\
+        0880&293&344&2& 191,500,001 &  192,500,000\\
+        3560&299&772&12&   9,000,001 &   10,000,000\\
+        4407&299&512&15&  78,500,001 &   79,500,000\\
+        1036&292&300&3&  27,000,001 &   28,000,000\\
+        2734&300&515&9&   5,000,001&    6,00,0000\\
+        3426&300&486&11&  76,000,001 &   77,000,000\\
+        0015&291&1029&1&   7,500,001 &    8,500,000\\
+        0365&301&487&1& 182,500,001 &  183,500,000\\
+        3415&301&419&11&  70,500,001 &   71,500,000\\
+        1581&290&802&4& 102,500,001 &  103,500,000\\
+        3554&290&403&12&   6,000,001 &    7,000,000\\
+        3184&302&449&10&  89,500,001 &   90,500,000\\
+        1580&289&603&4& 102,000,001 &  103,000,000\\
+        1948&288&1297&5&  96,000,001 &   97,000,000\\
+        2215&288&622&7&  49,500,001 &   50,500,000\\
+        0414&288&346&1& 207,000,001&  208,000,000\\
+        2055&304&1377&5& 149,500,001 &  150,500,000\\
+        0384&287&827&1& 192,000,001 &  193,000,000\\
+        0959&306&406&2& 231,000,001 &  232,000,000\\
+        4214&286&393&14&  88,500,001 &   89,500,000\\
+        0320&307&620&1& 160,000,001 &  161,000,000\\
     \end{tabular}
 
     \caption[resultsp2]{\textbf{Goldilocks Results}: "Top 25" Candidate Regions

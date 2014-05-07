@@ -79,7 +79,7 @@ implementation section.
 This section investigates the implementation of \textbf{Frontier}'s major components:
 
 \begin{itemize}
-    \item Informing the package of the problem domain...
+    \item Informing the package of the problem domain
     \item Interfaces provided for reading in data
     \item Storage of read data in memory
     \item Retrieval of stored data for interaction with \textbf{scikit-learn}
@@ -400,7 +400,7 @@ interest from the internal \textbf{Statplexer} representation.
 
 The previous section suggests that directly accessing elements of the
 \textbf{Statplexer}'s \textbf{\_data} and \textbf{\_targets} member dictionaries,
-whilst possible, would violate the psuedo-private nature of the variables and even
+whilst possible, would violate the pseudo-private nature of the variables and even
 so, this would hardly be a user friendly way in which to obtain data from the
 \textbf{Statplexer}.
 
@@ -537,21 +537,6 @@ Constructing the Statplexer requires the following arguments:
         Module containing the class (of the same name) to be used to parse the
         \textit{target\_path} file for target data
 \end{itemize}
-
-%TODO Add to example
-\begin{listing}[H]
-    \caption[callstatplexer]{\textbf{Retrieving Data}: Example usage of
-    \textbf{Frontier}'s \textbf{Statplexer} API.}
-    \label{list:callstatplexer}
-    \begin{minted}[mathescape,
-                %linenos,
-                numbersep=5pt,
-                gobble=8,
-                frame=lines,
-                framesep=2mm]{python}
-        statplexer.find_regressors(["mean", "percent", "rate", "average"])
-    \end{minted}
-\end{listing}
 
 
 \section{Testing}
