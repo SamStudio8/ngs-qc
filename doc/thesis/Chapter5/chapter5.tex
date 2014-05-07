@@ -266,7 +266,6 @@ This section considers the implementation of the major components of
 \begin{itemize}
     \item Handling user defined Paths File
     \item Loading variants from specified Variant Query Files
-    \item Storage and recall of variant groups in memory
     \item Searching for candidates with user specified length and stride
     \item Ranking suitable candidates based on variant density
 \end{itemize}
@@ -354,10 +353,6 @@ they would be empty and searching over them would waste resources) and secondly
 to normalize the candidate regions across all groups to allow for easy
 comparison between them.
 
-
-\subsection{Storage and Recall of Variants}
-
-...
 
 \subsection{Searching for Candidate Regions}
 
@@ -853,8 +848,9 @@ the command line.
 Various issues with use of \textbf{samtools merge} at scale were encountered
 during the assembly of the analysis pipeline. Ultimately I ran out of time
 attempting to overcome these problems before being able to put the pipeline to
-use. The difficulties experienced with \textbf{samtools merge} specifically are
-detailed on the \textbf{Frontier} blog\ref{frontier-blog}.
+use. The difficulties experienced with \textbf{samtools merge} specifically
+(including tracking and patching of memory leaks) are
+detailed on the \textbf{Frontier} blog\citep{frontier}.
 
 
 
