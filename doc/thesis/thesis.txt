@@ -28,7 +28,18 @@ Sam Nicholls
 
 Abstract
 
-...introduce Frontier ...Goldilocks
+Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
+parallel DNA sequencing, allowing potentially billions of chemical reactions to occur simultaneously, reducing
+both time and cost required to perform genetic analysis[1]. However, these "next-generation" processes are
+complex and open to error[2], thus quality control is an essential step to assure confidence in any downstream
+analyses performed.
+This project investigates the accuracy of a range of decision tree classifiers for a series of quality control data
+sets and shows it is possible to generate minimal yet accurate models, creating trees which closely resemble
+the behaviour of an already existing QC system.
+This project also introduces Frontier, a Python package which provides users with interfaces for the reading,
+storage and retrieval of large machine learning data sets; Goldilocks, a Python class which can be used to find
+a region on a genome that expresses a desired density of variants across different studies; and bug fixes to an
+internal tool used as the Sanger Institute and existing widely used open-source bioinformatics software.
 
 Contents
 Contents
@@ -893,15 +904,15 @@ Design
 Purpose
 
 Frontier’s purpose is to supplement analysis with scikit-learn by allowing a user to read in and parameterise
-data in a format that can then be used for analysis by the scikit-learn library. Frontier was designed to
-simplify the process of setting up machine learning tasks and enable experiment repeatability by removing the
-need for users to spend time constructing classes and functions to parse their input data and to just get on with
-analysis using scikit-learn.
+data in a format that can then be used for analysis by the scikit-learn library. Frontier is designed to simplify
+the process of setting up machine learning tasks and enable experiment repeatability by removing the need for
+users to spend time constructing classes and functions to parse their input data and to just get on with analysis
+using scikit-learn.
 Initially Frontier was to act as a wrapper around scikit-learn, essentially removing the end user’s interaction
 with the library and merely providing an interface for data to be passed in and some sort of classifier to be
 returned. However this quite clearly limited Frontier’s audience by tying it to a particular framework and
 would quickly become unmanageable in the task of providing wrappers for all aspects of an external library.
-Instead it was decided that Frontier would be used alongside a user’s chosen machine learning framework,
+Instead is far better to allow Frontier to be used alongside a user’s chosen machine learning framework,
 providing a useful API to parse and extract observations and variables from input data and arrange them in
 structures suitable for processing with scikit-learn.
 If possible, Frontier could also handle any objects returned, displaying or logging any textual or graphical
@@ -925,7 +936,7 @@ Frontier’s functionality in order to interact with scikit-learn to conduct ana
 
 Method
 
-Frontier was the result of abstracting code and tools created during the use of scikit-learn for analysis of the
+Frontier is the result of abstracting code and tools created during the use of scikit-learn for analysis of the
 current auto_qc system. Whilst scripts initially hard-coded to suit the specific needs of the project – with hard
 coded classes and encodings – Frontier followed an evolutionary design process and grew to become a more
 generic framework applicable to learning tasks outside of this study.
@@ -955,10 +966,10 @@ This section investigates the implementation of Frontier’s major components:
 
 Class Definitions
 
-Frontier was designed to support classification machine learning problems, to adequately support this task,
-the package must be aware of each of the possible classes in the problem space. Early versions of Frontier
-were specifically designed for training and testing data from auto_qc and could only support encoding and
-decoding of the pass, fail and warn classes.
+Frontier is designed to support classification machine learning problems, to adequately support this task, the
+package must be aware of each of the possible classes in the problem space. Early versions of Frontier were
+specifically designed for training and testing data from auto_qc and could only support encoding and decoding
+of the pass, fail and warn classes.
 However this implementation was clearly esoteric and held little to no further use outside the domain of the
 project’s learning task. What would happen if a class label were to be added or removed in future? Most likely
 many lines of code would need to be re-written to handle such cases; the package was inflexible.

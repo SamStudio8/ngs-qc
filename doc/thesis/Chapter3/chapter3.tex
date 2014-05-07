@@ -20,7 +20,7 @@ implementation of \textbf{Frontier}.
 
 \textbf{Frontier}'s purpose is to supplement analysis with \textbf{scikit-learn} by
 allowing a user to read in and parameterise data in a format that can then be
-used for analysis by the \textbf{scikit-learn} library.  \textbf{Frontier} was designed
+used for analysis by the \textbf{scikit-learn} library.  \textbf{Frontier} is designed
 to simplify the process of setting up machine learning tasks and enable
 experiment repeatability by removing the need for users to spend time
 constructing classes and functions to parse their input data and to just get on
@@ -33,7 +33,7 @@ be returned. However this quite clearly limited \textbf{Frontier}'s audience by 
 to a particular framework and would quickly become unmanageable in the task of
 providing wrappers for all aspects of an external library.
 
-Instead it was decided that \textbf{Frontier} would be used alongside a user's chosen
+Instead is far better to allow \textbf{Frontier} to be used alongside a user's chosen
 machine learning framework, providing a useful API to parse and extract
 observations and variables from input data and arrange them in structures
 suitable for processing with \textbf{scikit-learn}.
@@ -57,7 +57,7 @@ with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
 \subsection{Method}
 \label{sec:frontier-method}
 
-\textbf{Frontier} was the result of abstracting code and tools created during
+\textbf{Frontier} is the result of abstracting code and tools created during
 the use of \textbf{scikit-learn} for analysis of the current \textbf{auto\_qc}
 system. Whilst scripts initially hard-coded to suit the specific needs of the
 project -- with hard coded classes and encodings -- \textbf{Frontier} followed
@@ -89,7 +89,7 @@ This section investigates the implementation of \textbf{Frontier}'s major compon
 \subsection{Class Definitions}
 \label{chap:classes}
 
-\textbf{Frontier} was designed to support classification machine learning problems, to
+\textbf{Frontier} is designed to support classification machine learning problems, to
 adequately support this task, the package must be aware of each of the possible
 classes in the problem space. Early versions of \textbf{Frontier} were specifically
 designed for training and testing data from \textbf{auto\_qc} and could only
