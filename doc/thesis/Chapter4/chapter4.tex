@@ -192,10 +192,10 @@ should be reassessed.
 \subsection{Summary of Trees}
 
 Figures~\ref{fig:all-all-1} and~\ref{fig:all-all-2} are two of the ten trees
-constructed (one per fold) during the testing of the \textbf{ALL} paramter set.
+constructed (one per fold) during the testing of the \textbf{ALL} parameter set.
 The breadth and depth of the trees are somewhat reasonable and stand up to
 scrutiny by cross validation (stratified or not). The depth of the trees appear
-to be a result of a paticular decision path consisting of a large number of
+to be a result of a particular decision path consisting of a large number of
 observations passing through nodes and splitting off a small subset of
 observations each time, akin to a busy train dropping small groups of
 passengers off at small stations. This behaviour matches the \textbf{auto\_qc}
@@ -221,7 +221,7 @@ Figures~\ref{fig:all-aqc-1} and~\ref{fig:all-aqc-2} are two of the ten trees
 generated via training and testing of the significantly smaller \textbf{AQC}
 parameter set. Whilst the size of these trees has grown (though the average
 depth for the \textbf{AQC} set is in fact lower than \textbf{ALL}), they also
-exhbit the linear \textbf{auto\_qc} behaviour.
+exhibit the linear \textbf{auto\_qc} behaviour.
 
 It is interesting to note the apparent difference in size between these two
 trees, although they were generated using parameters from the same set, the
@@ -266,7 +266,7 @@ meaning. Figure~\ref{fig:all-error-1} in particular is a highly overfit tree,
 constructed on just one parameter (\textbf{error-rate}); every node in the tree
 is an arbitrary decision, classifying the trained observations exactly.
 
-The \textbf{ERROR} set in Table~\ref{tab:pset-cv} however acheives a
+The \textbf{ERROR} set in Table~\ref{tab:pset-cv} however achieves a
 cross-validation score of 60\%, highlighting the necessity of examining created
 trees and not just blindly accepting the validation scores. Despite its somewhat
 acceptable performance (60\% accuracy in a three class problem), no useful rules
@@ -301,7 +301,7 @@ could be considered as \textbf{auto\_qc} reporting "I don't know".
 After manual inspection a lanelet flagged as a warning will be categorised as a
 "pass" or "fail" by a human operator. So for all \textbf{Frontier} and
 \textbf{scikit-learn} know, a sample with an \textbf{auto\_qc} "warning" could
-be eiher a pass or a fail.
+be either a pass or a fail.
 
 In other words, the set of warnings is actually a union between some unknown
 subset of the passes and failure. Training on this now seems impractical and

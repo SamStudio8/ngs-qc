@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 This chapter introduces \textbf{Frontier}: the main programming effort for this
-part of the project. Frontier is a Python package that serves as a data manager,
+part of the project. \textbf{Frontier} is a Python package that serves as a data manager,
 providing both interfaces to read inputs into structures in memory and to
 retrieve them in formats acceptable to a machine learning framework.
 
@@ -18,27 +18,27 @@ implementation of \textbf{Frontier}.
 \section{Design}
 \subsection{Purpose}
 
-Frontier's purpose is to supplement analysis with \textbf{scikit-learn} by
+\textbf{Frontier}'s purpose is to supplement analysis with \textbf{scikit-learn} by
 allowing a user to read in and parameterise data in a format that can then be
-used for analysis by the \textbf{scikit-learn} library.  Frontier was designed
+used for analysis by the \textbf{scikit-learn} library.  \textbf{Frontier} was designed
 to simplify the process of setting up machine learning tasks and enable
 experiment repeatability by removing the need for users to spend time
 constructing classes and functions to parse their input data and to just get on
 with analysis using \textbf{scikit-learn}.
 
-Initially Frontier was to act as a wrapper around \textbf{scikit-learn},
+Initially \textbf{Frontier} was to act as a wrapper around \textbf{scikit-learn},
 essentially removing the end user's interaction with the library and merely
 providing an interface for data to be passed in and some sort of classifier to
-be returned. However this quite clearly limited Frontier's audience by tying it
+be returned. However this quite clearly limited \textbf{Frontier}'s audience by tying it
 to a particular framework and would quickly become unmanageable in the task of
 providing wrappers for all aspects of an external library.
 
-Instead it was decided that Frontier would be used alongside a user's chosen
+Instead it was decided that \textbf{Frontier} would be used alongside a user's chosen
 machine learning framework, providing a useful API to parse and extract
 observations and variables from input data and arrange them in structures
 suitable for processing with \textbf{scikit-learn}.
 
-If possible, Frontier could also handle any objects returned, displaying or
+If possible, \textbf{Frontier} could also handle any objects returned, displaying or
 logging any textual or graphical information pertaining to a returned
 classifier's accuracy to assist a user in the ongoing performance monitoring of
 changes to used data subsets or parameters.
@@ -46,11 +46,11 @@ changes to used data subsets or parameters.
 
 \subsection{Format}
 
-Frontier is designed as a Python package, allowing a user to import its
+\textbf{Frontier} is designed as a Python package, allowing a user to import its
 functionality into other programs. The result of this project's technical
-output could almost be considered as two separate entities: Frontier itself, the
+output could almost be considered as two separate entities: \textbf{Frontier} itself, the
 package designed to ease user interaction with scikit-learn and \textbf{Front},
-a Python script which implements Frontier's functionality in order to interact
+a Python script which implements \textbf{Frontier}'s functionality in order to interact
 with scikit-learn to conduct analysis on the \textbf{auto\_qc} data.
 
 
@@ -76,7 +76,7 @@ implementation section.
 \pagebreak
 \section{Implementation}
 
-This section investigates the implementation of Frontier's major components:
+This section investigates the implementation of \textbf{Frontier}'s major components:
 
 \begin{itemize}
     \item Informing the package of the problem domain...
@@ -89,9 +89,9 @@ This section investigates the implementation of Frontier's major components:
 \subsection{Class Definitions}
 \label{chap:classes}
 
-Frontier was designed to support classification machine learning problems, to
+\textbf{Frontier} was designed to support classification machine learning problems, to
 adequately support this task, the package must be aware of each of the possible
-classes in the problem space. Early versions of Frontier were specifically
+classes in the problem space. Early versions of \textbf{Frontier} were specifically
 designed for training and testing data from \textbf{auto\_qc} and could only
 support encoding and decoding of the pass, fail and warn classes.
 
@@ -101,14 +101,14 @@ class label were to be added or removed in future? Most likely many lines of
 code would need to be re-written to handle such cases; the package was
 inflexible.
 
-To counter this, Frontier was refactored to remove hard coded label definitions
+To counter this, \textbf{Frontier} was refactored to remove hard coded label definitions
 enabling its use as a more general purpose tool where users can specify the
 domain's classes and their associated labels and encodings.
 Listing~\ref{list:FrontierClasses} shows the definitions used by Front to work
 with the \textbf{auto\_qc} data.
 
 \begin{listing}[H]
-    \caption[FrontierClasses]{: Class definitions for \textbf{auto\_qc} as passed to Frontier}
+    \caption[FrontierClasses]{: Class definitions for \textbf{auto\_qc} as passed to \textbf{Frontier}}
     \label{list:FrontierClasses}
     \begin{minted}[mathescape,
                 %linenos,
@@ -153,9 +153,9 @@ a Python dict containing the following for each label:
         outputting logging information -- A user should not set this manually
 \end{itemize}
 
-This simple structure allows Frontier to be compatible with almost any
+This simple structure allows \textbf{Frontier} to be compatible with almost any
 classification learning task with minimum input from the end user. Additional
-utilities provided by the Frontier utils subpackage use this structure to
+utilities provided by the \textbf{Frontier} utils subpackage use this structure to
 automatically classify and encode labels without user intervention with the
 following functions:
 
@@ -174,7 +174,7 @@ following functions:
         canonical label
 \end{itemize}
 
-These functions are put to use throughout Frontier and are essential for reader
+These functions are put to use throughout \textbf{Frontier} and are essential for reader
 classes (detailed in the next chapter) to parse, classify and then encode
 observation targets automatically from relevant files.
 
@@ -182,7 +182,7 @@ observation targets automatically from relevant files.
 \subsection{Input Handling}
 \label{sec:frontier-input}
 
-Frontier's modular nature allows users to write their own Python classes to read
+\textbf{Frontier}'s modular nature allows users to write their own Python classes to read
 data from any form of input file or stream. Two examples of which are the
 classes used to read from the "bamcheckr'd files" documented in
 Appendix~\ref{app:bamcheckr} and the \textbf{auto\_qc} decisions matrix briefly
@@ -197,7 +197,7 @@ each line in the file stripped of any newline characters to \textbf{process\_lin
 
 It is expected that derived classes will at least provide their own
 implementations for \textbf{process\_line} and \textbf{get\_data}. Failing to do
-so will cause Frontier to throw a \textbf{NotImplementedError} when attempting
+so will cause \textbf{Frontier} to throw a \textbf{NotImplementedError} when attempting
 to use the class to read data.
 
 \textbf{process\_line} defines the line handling operations that extract and store
@@ -207,14 +207,14 @@ sanitisation (the \textbf{BamcheckReader} for example makes use of a utility
 function to translate spaces, underscores and dots to hyphens).
 
 \textbf{get\_data} must return any read in data in a suitable structure for
-storage by Frontier. Typically this will be a Python dictionary using some
+storage by \textbf{Frontier}. Typically this will be a Python dictionary using some
 unique identifier for each observation as a key, mapping to an arbitrary value
 or object containing that observation's parameters. Further discussion on
-Frontier's storage of data and targets is to follow.
+\textbf{Frontier}'s storage of data and targets is to follow.
 
 The \textbf{AbstractReader} class is designed to simplify the process of reading
 in observations and their targets for end users, however it is still up to the
-author of the dervied class to set up any structures to store data (which cannot
+author of the derived class to set up any structures to store data (which cannot
 be done automatically without likely enforcing potentially unhelpful
 constraints) before initialisation of the inherited base class (via the call to
 \textbf{super}) as shown in Listing~\ref{list:superreader}.
@@ -271,14 +271,14 @@ differing values, upon which an exception is thrown and the process is halted.
 
 Once a reader has been defined for a particular file format, a user need only
 provide a directory of files to be parsed and the name of the class designed to
-complete the parsing. Frontier will then take care of executing the parsing
+complete the parsing. \textbf{Frontier} will then take care of executing the parsing
 process on all files in the directory. After a derived reader has completed file
-handling, Frontier will call its \textbf{get\_data} function to
+handling, \textbf{Frontier} will call its \textbf{get\_data} function to
 "move"\footnote{Rather, a pointer to the address of the extracted data's
-dictionary hashmap will be copied to memory inside a Frontier class} the
+dictionary hashmap will be copied to memory inside a \textbf{Frontier} class} the
 extracted data to its own storage.
 
-At this point Frontier will also check the integrity of the data, primarily
+At this point \textbf{Frontier} will also check the integrity of the data, primarily
 that all parameters have a non-zero variance\footnote{Using an algorithm for
 accurately computing running variance introduced in Donald Knuth's \textit{Art
 of Computer Programming}\citep{knuth1998art-variance}}. Users will be warned
@@ -294,7 +294,7 @@ the \textbf{AbstractReader} directly.
 
 With more time, future improvements could overhaul the reader interfaces
 to allow users to simply specify the format of a file in a string that can be
-parsed by Frontier's IO subpackage, rather than having to write their own derived
+parsed by \textbf{Frontier}'s IO subpackage, rather than having to write their own derived
 class. Classes could also list file extensions they are capable of processing
 which could potentially be used to automatically determine which readers to use
 without requiring the user to explicitly specify.
@@ -302,7 +302,7 @@ without requiring the user to explicitly specify.
 
 \subsection{Storage}
 
-Frontier specifies a class called the \textbf{Statplexer}\footnote{A somewhat
+\textbf{Frontier} specifies a class called the \textbf{Statplexer}\footnote{A somewhat
 contrived contraction of 'Statistics Multiplexer'} which provides users with a
 single point of access to all read in data. The reader interfaces described in
 the previous chapter implement their own loading functions to populate the
@@ -329,7 +329,7 @@ Python"\citep{pep8}. In an interesting StackOverflow answer on the subject, a
 user describes that this is "cultural"\citep{so:pythonprivate} and that Python
 programmers are trusted not to circumvent convention and "mess around with those
 private members". Users are therefore expected to use the functionality
-Frontier provides for controlled getting and setting of data stored in these
+\textbf{Frontier} provides for controlled getting and setting of data stored in these
 pseudo-private \textbf{\_data} and \textbf{\_targets} members.
 
 \textbf{load\_data}, for example, should be used exclusively when populating
@@ -410,7 +410,7 @@ of the underlying machine learning problem that this project strives to solve.
 It became clear that in trying many combinations of observation and parameter
 subsets that \textbf{Frontier} would need to provide not just a function to
 return the contents of \textbf{\_data} and \textbf{\_targets} but to assist in
-retreiving similar subsets automatically with as little effort from the end user
+retrieving similar subsets automatically with as little effort from the end user
 as possible.
 
 But how can a user make an informed decision on parameters to subset?
@@ -593,7 +593,7 @@ modest test suite, designed to test the particular functionality of that reader.
 * Test cleaning of data
 * Test duplicates warning
 * Test duplicates exception
-* BC Tests that some hardcoded expected values are returned
+* BC Tests that some hard coded expected values are returned
 * AQC Tests that number of labels were as expected...
 
 \subsection{Frontier Utilities}

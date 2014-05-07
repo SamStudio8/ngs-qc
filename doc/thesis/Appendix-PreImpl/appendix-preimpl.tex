@@ -95,13 +95,9 @@ normalised nature, typically in the form of a ratio or percentage which should
 make them more valuable than a parameter that just represents a raw count of
 some property.
 
-It was found that these missing parameters are calculated in a step preceeding
+It was found that these missing parameters are calculated in a step preceding
 \textbf{auto\_qc} as part of the \textbf{vr-pipe}
 pipeline\footnote{https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack\_auto\_qc\_hgi\_3.pm}.
-
-%...It is actually here that the hard-coded thresholds for warnings and failures
-% are applied and the target decision is made too!
-
 Whilst I could have attempted to set-up my own instance of \textbf{vr-pipe} to
 recover this data, speaking with contacts at the Sanger Institute, it was
 decided that this would prove troublesome work; requiring an involved
@@ -141,25 +137,22 @@ implement such functionality in \textbf{bamcheckr} directly, removing some of
 With the help of \textbf{devtools}\citep{man:devtools} (see
 Listing~\ref{list:r-dev}) it was simple to develop and test contributions to
 \textbf{bamcheckr} locally without needing to re-publish the package after
-changes. An additional script was added to \textbf{bamcheckr}'s NAMESPACE... to
-recover the missing ratio and percentage based parameters...
+changes. An additional script was added to \textbf{bamcheckr}'s NAMESPACE to
+recover the missing ratio and percentage based parameters.
 
-...unfortunately, the performance of the script was poor, taking 5.5s on average
+Unfortunately, the performance of the new script was poor, taking 5.5s on average
 and increasing to 16.1s when enabling a complex function containing many vector
-operations (potentially inefficient due to my lack of R experience)...
-for overlapping\_base\_duplicate\_percentage
+operations -- potentially inefficient due to my lack of R experience. It was
+simply impractical to use \textbf{bamcheckr} to update thousands of files and
+thus I instead used \textbf{Frontier} to load the "BAMcheckr'd" files and used
+its API to calculate the missing parameters and write them back to the files.
+An impressive feat for \textbf{Frontier} considering how simple it was to use it
+for something it was not actually intended for.
 
-...utilising the program designed and implemented in the following chapter...
-loaded required information and used the API to calculate the missing
-parameters...
-
-...Morandat\citep{morandat-rperf}
-
-%FUTURE
-...with such an intriguing difference in performance with significantly more
-time it would be appealing to explore the idiosyncrasies of each implementation
-...although such an investigation would quite likely sufficiently generate an
-entire project of its own.
-
-
+An evaluation of the R language\citep{morandat-rperf} compares the language's
+performance to both Python and C.
+With such an intriguing difference in performance between \textbf{bamcheckr} and
+\textbf{Frontier}, with significantly more
+time it would be interesting to explore the idiosyncrasies of each
+implementation.
 
