@@ -347,7 +347,7 @@ does \textbf{Frontier} not just store the read in data in such a structure to
 begin with?
 
 This is primarily due to the underlying layout of a list structure as introduced
-in Section~\ref{sec:python-structures}. Given the nature of input data,
+in Appendix~\ref{sec:python-structures}. Given the nature of input data,
 the number of observations and parameters are unknown before the input
 data is actually read and so memory cannot be reserved to prevent these operations.
 The potential number of input files renders reading through the data once to
@@ -362,7 +362,7 @@ increasingly expensive resizing operations as the list continues to expand but
 the sanity checking that takes place in \textbf{load\_data} involves checking
 for membership of a given ID in \textbf{\_data} and \textbf{\_targets} which is
 constant for dictionaries and significantly slower for large lists (see
-Section~\ref{sec:python-structures}).
+Appendix~\ref{sec:python-structures}).
 
 It is possible that an implementation could use both a dictionary and an array;
 appending the observations to the array and entering a mapping between the

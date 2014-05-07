@@ -464,20 +464,15 @@ Appendix C Output Examples
 73
 
 C.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
-Appendix D Tool Installation
+Appendix D Pre-Frontier Implementation
 
 76
 
-D.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
-D.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
-D.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
-D.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
-Appendix E Pre-Frontier Implementation
+D.1 Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
+D.2 Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+Appendix E Third Party Libraries
 
-78
-
-E.1 Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
-E.2 Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+79
 
 vii
 
@@ -885,7 +880,7 @@ Frontier
 This chapter introduces Frontier: the main programming effort for this part of the project. Frontier is a
 Python package that serves as a data manager, providing both interfaces to read inputs into structures in
 memory and to retrieve them in formats acceptable to a machine learning framework.
-Appendix E describes some analysis performed before implementation of Frontier.
+Appendix D describes some analysis performed before implementation of Frontier.
 
 4.1
 4.1.1
@@ -1127,7 +1122,7 @@ variances are non-zero and also warns users if new observations are overwriting 
 does not appear to have a corresponding target.
 The following section details the retrieval of data and targets from the Statplexer which are returned to the
 user in NumPy arrays. Why does Frontier not just store the read in data in such a structure to begin with?
-This is primarily due to the underlying layout of a list structure as introduced in Section A.2.4. Given the
+This is primarily due to the underlying layout of a list structure as introduced in Appendix A.2.4. Given the
 nature of input data, the number of observations and parameters are unknown before the input data is actually
 read and so memory cannot be reserved to prevent these operations. The potential number of input files renders
 reading through the data once to reserve the right amount of memory for a second read-through impractical in
@@ -1136,7 +1131,7 @@ It is arguable that despite this, the data could be unloaded from the _data and 
 form of array at the end of the call to load_data. However as the Statplexer allows loading of additional data at
 any time, which would not only risk increasingly expensive resizing operations as the list continues to expand
 but the sanity checking that takes place in load_data involves checking for membership of a given ID in _data
-and _targets which is constant for dictionaries and significantly slower for large lists (see Section A.2.4).
+and _targets which is constant for dictionaries and significantly slower for large lists (see Appendix A.2.4).
 It is possible that an implementation could use both a dictionary and an array; appending the observations to
 the array and entering a mapping between the observation ID and its index in the array. Though this would
 still not avoid the issue of relocating the array once it grows beyond its bound in memory.
@@ -1449,7 +1444,7 @@ deviation, average depth of the generated tree and the most important parameter 
 Of particular note is the AQC set, constructed from the parameters available from the "BAMcheckr’d" data that
 are taken into account by the current auto_qc system. However not all these parameters were initially available
 in the input files and auto_qc relies upon data made available from vr-pipe where the rules of auto_qc are
-actually applied; Appendix E.2 discusses contributions I made to bamcheckr for recovering these parameters
+actually applied; Appendix D.2 discusses contributions I made to bamcheckr for recovering these parameters
 for use in our analysis. Ultimately, bamcheckr performed too slowly and it was possible to use Frontier itself
 to extract the additional features needed to better represent the decisions made by the current system.
 
@@ -2096,10 +2091,10 @@ load_variants_from_file is responsible for loading a given Variant Query File an
 each record contained within to the appropriate group-chromosome list pair in the groups structure.
 It is important to note that this function is not responsible for ensuring the positions added to the list are unique
 to avoid performance penalties in checking whether a variant is already a member of the list (which increase
-proportionally for the size of the list). However as examined in Section A.2.4, appending a significant number
-of items to a list will likely induce costly memory operations as the list is resized. Thus use of a set might
-have been more appropriate (especially considering the container forbids duplicate entries) but a set must be
-constructed from an existing iterable such as a list anyway!
+proportionally for the size of the list). However as examined in Appendix A.2.4, appending a significant
+number of items to a list will likely induce costly memory operations as the list is resized. Thus use of a set
+might have been more appropriate (especially considering the container forbids duplicate entries) but a set
+must be constructed from an existing iterable such as a list anyway!
 Indeed the container does specify an update function but this could in itself be a source of overhead as the
 structure ensures that the no duplicate condition has not been violated on every call. Given more time it would
 42
@@ -2312,7 +2307,7 @@ are considered legitimate.
 Chapter 9
 
 Results
-Listing 8 lists the top 25 candidate regions selected by Goldilocks for inspection. Regions were constructed
+Table 9.1 lists the top 25 candidate regions selected by Goldilocks for inspection. Regions were constructed
 using a length of 1Mnt1 (mega nucleotides) and a stride of 0.5Mnt2 . As detailed in Section 8.2.4, candidates
 for this study were filtered to include regions with a GWAS density within ±12.5% of the median GWAS
 density (i.e. in the middle 25%) before being ranked firstly by absolute difference from the median GWAS,
@@ -2338,141 +2333,304 @@ bases
 46
 
 i
-0234
-1074*
-5222
-3125
-0880
-3560
-4407
-1036
-2734
-3426
-0015
-0365
-3415
-1581
-3554
-3184
-1580
-1948
-2215
-0414
-2055
-0384
-0959
-4214
-0320
 
 GWAS
-297
-294
-294
-298
-293
-299
-299
-292
-300
-300
-291
-301
-301
-290
-290
-302
-289
-288
-288
-288
-304
-287
-306
-286
-307
 
 iCHIP
+
+Chr
+
+Start
+
+0234
+
+297
+
 470
+
+1
+
+1074*
+
+294
+
 1540
+
+3
+
+46000001
+
+47000000
+
+5222
+
+294
+
 336
+
+21
+
+16500001
+
+17500000
+
+3125
+
+298
+
 310
+
+10
+
+60000001
+
+61000000
+
+0880
+
+293
+
 344
+
+2
+
+191500001
+
+192500000
+
+3560
+
+299
+
 772
+
+12
+
+9000001
+
+10000000
+
+4407
+
+299
+
 512
+
+15
+
+78500001
+
+79500000
+
+1036
+
+292
+
 300
+
+3
+
+27000001
+
+28000000
+
+2734
+
+300
+
 515
+
+9
+
+5000001
+
+6000000
+
+3426
+
+300
+
 486
+
+11
+
+76000001
+
+77000000
+
+0015
+
+291
+
 1029
+
+1
+
+7500001
+
+8500000
+
+0365
+
+301
+
 487
+
+1
+
+182500001
+
+3415
+
+301
+
 419
+
+11
+
+70500001
+
+71500000
+
+1581
+
+290
+
 802
+
+4
+
+102500001
+
+103500000
+
+3554
+
+290
+
 403
+
+12
+
+6000001
+
+7000000
+
+3184
+
+302
+
 449
+
+10
+
+89500001
+
+90500000
+
+1580
+
+289
+
 603
+
+4
+
+102000001
+
+103000000
+
+1948
+
+288
+
 1297
+
+5
+
+96000001
+
+97000000
+
+2215
+
+288
+
 622
+
+7
+
+49500001
+
+50500000
+
+0414
+
+288
+
 346
+
+1
+
+207000001
+
+208000000
+
+2055
+0384
+
+304
+287
+
 1377
 827
+
+5
+1
+
+149500001
+192000001
+
+150500000
+193000000
+
+0959
+
+306
+
 406
+
+2
+
+231000001
+
+232000000
+
+4214
+
+286
+
 393
-620
 
-CHR
-1
-3
-21
-10
-2
-12
-15
-3
-9
-11
-1
-1
-11
-4
-12
-10
-4
-5
-7
-1
-5
-1
-2
 14
+
+88500001
+
+89500000
+
+117000001
+
+End
+118000000
+
+183500000
+
+0320
+307
+620
 1
-
-POSITIONS
-117000001 - 118000000
-46000001 47000000
-16500001 17500000
-60000001 61000000
-191500001 - 192500000
-9000001 10000000
-78500001 79500000
-27000001 28000000
-5000001 6000000
-76000001 77000000
-7500001 8500000
-182500001 - 183500000
-70500001 71500000
-102500001 - 103500000
-6000001 7000000
-89500001 90500000
-102000001 - 103000000
-96000001 97000000
-49500001 50500000
-207000001 - 208000000
-149500001 - 150500000
-192000001 - 193000000
-231000001 - 232000000
-88500001 89500000
-160000001 - 161000000
-
-Listing 8 Goldilocks Results: "Top 25" Candidate Regions using a length of 1Mnt and a stride of 0.5Mnt.
+160000001 161000000
+Table 9.1 Goldilocks Results: "Top 25" Candidate Regions using a length of 1Mnt and a stride of 0.5Mnt.
 Candidates are filtered by median GWAS density and ranked by maximum iCHIP density.
 
 Curious about the wide range and presence of so many low resolution iCHIP candidates, I authored an R
@@ -2552,7 +2710,7 @@ via samtools_irods[51] which provides wrappers around both samtools and iRODS fu
 samtools commands to directly support interaction with samples stored in iRODS.
 samtools_irods view -bh irods:\${file} 3:46000001-47000000
 > \$(basename \${file}).goldilocks.bam
-Listing 9 BAM Extraction: Retrieve Goldilocks region for a particular sample ($file) from iRODS.
+Listing 8 BAM Extraction: Retrieve Goldilocks region for a particular sample ($file) from iRODS.
 
 10.2.2
 
@@ -2564,9 +2722,9 @@ blocks of a BAM file without conducting costly searches.
 Whilst indexing of BAM files is a somewhat optional step, many tools will emit warnings or errors if one is
 not available. The process itself requires little resources in terms of time and memory and can significantly
 improve the efficiency of later commands which are capable of reading and using the index.
-Both the commands in Listing 9 and 10 can be executed in parallel for extracting and indexing many samples.
+Both the commands in Listing 8 and 9 can be executed in parallel for extracting and indexing many samples.
 samtools index \$(basename \${file}).goldilocks.bam
-Listing 10 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[52]
+Listing 9 BAM Indexing: Creation of a BAM Index (BAI) for a sample ($file). with samtools index[52]
 
 50
 
@@ -2587,7 +2745,7 @@ bsub -o ~/goldilocks/joblog/samtools_mpileup.%J.o
 bash -c ’samtools mpileup -b ../goldilocks-3:46000001-47000000.fofn -g -I -f
 /lustre/scratch113/resources/ref/Homo_sapiens/1000Genomes_hs37d5/hs37d5.fa
 > ~/goldilocks/all.withref.bcf’
-Listing 11 Pileup: Submission of samtools mpileup[53] task for execution on the Farm. Note the request to
+Listing 10 Pileup: Submission of samtools mpileup[53] task for execution on the Farm. Note the request to
 increase the memory allocation with the –R flag and how the pileup command is passed as a string to bash
 –c.
 
@@ -4628,38 +4786,33 @@ Frontier
 ********
 Data Dir
 AQC File
-
-/pools/encypted/sanger/frontier/data/bamcheck_2013dec25/uc
-/pools/encypted/sanger/frontier/data/crohns-uc-table-a.2013dec25.manual_qc_update.txt
-
 Class Def
 Class Read
 Class Used
-
-fail
-1542
-234
-
 Total Read
 Total Used
-
-3947
-3371
-
 Param Set
 Param Count
 Param List:
 
+/pools/encrypted/sanger/frontier/data/bamcheck_2013dec25_ratios_out/
+/pools/encrypted/sanger/frontier/data/crohns-uc-table-a.2013dec25.manual_qc_update.txt
+fail
+1542
+1542
+
 pass
 9154
-3137
+9154
 
 warn
 2759
-576
+2759
 
+13455
+13455
 ALL
-82
+86
 1st-fragments
 A-percent-max-above-baseline
 A-percent-max-baseline-deviation
@@ -4696,18 +4849,22 @@ bases-duplicated
 bases-mapped
 bases-mapped-(cigar)
 bases-trimmed
+duplicate-mapped-ratio
 error-rate
 filtered-sequences
 fwd-percent-deletions-above-baseline
 fwd-percent-deletions-below-baseline
 fwd-percent-insertions-above-baseline
 fwd-percent-insertions-below-baseline
+indel-ratio
 insert-size-average
 insert-size-standard-deviation
 inward-oriented-pairs
 is-paired
 is-sorted
 last-fragments
+max-max-baseline-deviation
+max-total-mean-baseline-deviation
 maximum-length
 mismatches
 non-primary-alignments
@@ -4747,106 +4904,60 @@ rev-percent-insertions-above-baseline
 rev-percent-insertions-below-baseline
 sequences
 total-length
-Feature Importances:
-0.32
-0.20
-
-T-percent-mean-above-baseline
-T-percent-mean-below-baseline
 
 74
 
 C.1 Frontier Log Example
 
-0.14
-0.14
+Feature Importances:
+0.27
+0.12
+0.09
+0.07
+0.07
 0.05
-0.05
+0.04
 0.03
 0.02
+0.02
+0.02
+0.02
+0.02
+0.02
+0.02
+0.01
 0.01
 CV Score (Fld)
 Decision PDF
 ********
 
+T-percent-max-above-baseline
 rev-percent-insertions-above-baseline
-T-percent-total-mean-baseline-deviation
-bases-duplicated
 fwd-percent-insertions-above-baseline
-reads-duplicated
+quality-dropoff-rev-mean-runmed-decline-low-value
 insert-size-average
+quality-dropoff-fwd-mean-runmed-decline-low-value
+max-max-baseline-deviation
 insert-size-standard-deviation
-1.00 +/- 0.01 (10)
+reads-duplicated
+fwd-percent-deletions-above-baseline
+duplicate-mapped-ratio
+rev-percent-insertions-below-baseline
+max-total-mean-baseline-deviation
+bases-duplicated
+T-percent-max-baseline-deviation
+average-quality
+A-percent-max-above-baseline
+0.97 +/- 0.01 (10)
 
-pdf/2014-03-23_2151__IGNWARN_ALL_/
+pdf/2014-05-05_2031__ALL_ALL_/
 
 75
 
 Appendix D
 
-Tool Installation
-D.1
-
-htslib
-
-# Download repositories from Github
-git clone htslib
-cd htslib/
-make
-
-D.2
-
-bcftools
-
-Prerequisites: htslib(Appendix D.1)
-# Download repositories from Github
-git clone bcftools
-cd bcftools/
-# Build bcftools
-make #(requires htslib to be above samtools/bcftools dir)
-sudo cp bcftools usr/local/bin
-
-76
-
-D.3 samtools
-
-D.3
-
-samtools
-
-Prerequisites: htslib(Appendix D.1)
-# Download repositories from Github
-git clone samtools
-cd samtools/
-# Build samtools
-make #(requires htslib to be above samtools/samtools dir)
-sudo cp samtools usr/local/bin
-
-D.4
-
-tabix
-
-# Tabix
-# Download from sourceforge
-# http://sourceforge.net/projects/samtools/files/tabix/
-make
-sudo cp tabix /usr/local/bin
-# Generate an index (vcfidx) (not necessary)
-vcftools --gzvcf cd.ichip.vcf.gz
-# Index with tabix
-# "The input data file must be position sorted and compressed by bgzip
-# which has a gzip(1) like interface"
-tabix -p vcf file.vcf.gz
-diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
-# Shows no difference :)
-# http://samtools.sourceforge.net/tabix.shtml
-
-77
-
-Appendix E
-
 Pre-Frontier Implementation
-E.1
+D.1
 
 Classification Correlation
 
@@ -4856,15 +4967,15 @@ contain more than one lanelet. Herein lies the trouble: if during a sequencing r
 subjected to abnormal conditions (e.g. a temperature increase due to an air conditioning failure) or the device
 is depleted of reagents then every lane (and thus all lanelets within) will be of considerably poor quality.
 
-Fig. E.1 Heatmap of lanelet QC status by lane: Lanes are vertical bars with each lanelet cell coloured red to
-represent a failure, yellow for a warning and grey for a pass.
+Fig. D.1 Heatmap of lanelet QC status by lane: Lanes are vertical bars with each lanelet cell coloured red
+to represent a failure, yellow for a warning and grey for a pass.
 In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
-78
+76
 
-E.2 Recovering Ratios
+D.2 Recovering Ratios
 a lane as well as each lane in a sequencing run. To examine this further, an R script utilising ggplot2 was
 authored to visually inspect whether correlation existed and if so to what degree that data is affected.
-Figure E.1 displays a plot of auto_qc classification for each lanelet in a lane. The plot itself is a dense heatmap
+Figure D.1 displays a plot of auto_qc classification for each lanelet in a lane. The plot itself is a dense heatmap
 where each lane stands as a vertical bar, broken in to horizontal cells, each of which represents a lanelet that
 was sequenced in that particular lane. These lanelets are colour coded using; red for failures, yellow for
 warnings and grey for passes (to allow the other two classes to be more easily seen).
@@ -4893,7 +5004,7 @@ with a direct conclusion. Given more time it would be useful to investigate the 
 correlations, given a lane that has failed across all lanelets: do those lanelets actually express similar quality
 metrics?
 
-E.2
+D.2
 
 Recovering Ratios
 
@@ -4902,9 +5013,9 @@ revealed 82 different parameters. However, when comparing this parameter set to 
 auto_qc, it appeared that some parameters were "missing".
 In the pursuit of replicating the decisions of the existing system, it is ideal to have all the parameters used
 
-79
+77
 
-E.2 Recovering Ratios
+D.2 Recovering Ratios
 in the making of those decisions at hand. In particular, the missing parameters were of a normalised nature,
 typically in the form of a ratio or percentage which should make them more valuable than a parameter that
 just represents a raw count of some property.
@@ -4924,9 +5035,9 @@ library(devtools)
 install_github("samstudio8/seq_autoqc", subdir="bamcheckr")
 # Install package from local directory
 install("/home/sam/Projects/seq_autoqc/bamcheckr")
-Listing 12 : Installing an in-development R package with devtools
+Listing 11 : Installing an in-development R package with devtools
 
-With the help of devtools[73] (see Listing 12) it was simple to develop and test contributions to bamcheckr
+With the help of devtools[73] (see Listing 11) it was simple to develop and test contributions to bamcheckr
 locally without needing to re-publish the package after changes. An additional script was added to bamcheckr’s
 NAMESPACE to recover the missing ratio and percentage based parameters.
 Unfortunately, the performance of the new script was poor, taking 5.5s on average and increasing to 16.1s
@@ -4941,6 +5052,12 @@ would be interesting to explore the idiosyncrasies of each implementation.
 
 1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm
 
-80
+78
+
+Appendix E
+
+Third Party Libraries
+
+79
 
 

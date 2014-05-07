@@ -197,7 +197,7 @@ For each group, a list of positions for each chromosome is stored in
 memory. Once all variants have been loaded \textbf{Goldilocks} is designed to
 iterate over each chromosome\footnote{Strictly speaking we are only handling the
 22 \textit{autosomes} and ignoring the remaining 2 sex chromosomes
-(\textit{allosomes})} and load all of the variants from the lists in to an array
+(\textit{allosomes})} and load all of the variants from the lists into an array
 and essentially count the number of variants present (in each group) between a
 given start and end position, determined by the arguments specified by the user
 as described in Section~\ref{sec:lengthstride}.
@@ -211,7 +211,7 @@ criteria related to the density of the counted variants.
 \subsection{Format}
 
 \textbf{Goldilocks} is a modestly sized but elegantly complex Python script
-which can also serve as a stand-alone module to be imported in to other
+which can also serve as a stand-alone module to be imported into other
 programs. Whilst the use case is certainly more esoteric than \textbf{Frontier},
 I made the choice to modularise the functionality, in the hope that if an end
 user were to find some function of the script particularly useful they may call
@@ -334,7 +334,7 @@ It is important to note that this function is not responsible for
 ensuring the positions added to the list are unique to avoid performance
 penalties in checking whether a variant is already a member of the list (which
 increase proportionally for the size of the list).
-However as examined in Section~\ref{sec:python-structures}, appending a
+However as examined in Appendix~\ref{sec:python-structures}, appending a
 significant number of items to a list will likely induce costly memory
 operations as the list is resized. Thus use of a set might have been more
 appropriate (especially considering the container forbids duplicate entries)
@@ -374,7 +374,7 @@ variants contained within by summing across the slice (elements with variants
 contain a 1, otherwise 0). The next region is sliced by moving the first base of
 the current region forward by the user defined \textit{stride}.
 
-Each valid region will be entered in to the \textbf{regions} dictionary using
+Each valid region will be entered into the \textbf{regions} dictionary using
 the current region counter (\textbf{region\_i}) as the key, mapping to an
 arbitrary object (a dictionary) as defined in Listing~\ref{list:candidate-dict}
 below:
@@ -454,7 +454,7 @@ variant groups.
 \section{Testing}
 
 The testing of \textbf{Goldilocks} presented a challenge; we'd not only like
-to simply ensure that the correct query files are located and loaded in to
+to simply ensure that the correct query files are located and loaded into
 memory but also that the expected candidates are found, filtered and selected.
 It is thus not practical to conduct testing on a large data set such as the two
 we have for analysis, we need a smaller, well defined set with known results.
@@ -469,7 +469,7 @@ classmethod provided by the \textbf{unittest} library.
 Checking both the \textbf{Paths File} and generated \textbf{Variant Query Files}
 were loaded successfully is trivial and the suite goes on to test whether the
 input files and all generated variants within are mapped to the specified
-chromosome of the correct group, both in memory and also when loaded in to the
+chromosome of the correct group, both in memory and also when loaded into the
 \textbf{NumPy} array structure. Once regions have been searched (or more
 accurately, once a a candidate census has populated the \textbf{regions}
 dictionary via \textbf{search\_regions}), additional tests ensure that all
@@ -545,7 +545,7 @@ the following chapter are considered legitimate.
 %TODO Tabulate
 %TODO Listing 11 lists...
 
-Listing~\ref{list:resultsp2} lists the top 25 candidate regions selected by
+Table~\ref{tab:resultsp2} lists the top 25 candidate regions selected by
 \textbf{Goldilocks} for inspection. Regions were constructed using a
 \textit{length} of 1Mnt\footnote{1,000,000 bases}(mega nucleotides) and a
 \textit{stride} of 0.5Mnt\footnote{500,000 bases}. As detailed in
@@ -580,46 +580,44 @@ the original \textbf{iCHIP} data set.
 
 
 %TODO Results don't actually sub-sort by iCHIP...
-\begin{listing}[H]
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l | c  c  c  l  r}
+        i & GWAS & iCHIP & Chr & Start & End \\
+        \hline
+        0234&297&470&1& 117000001 &  118000000\\
+        1074*&294&1540&3&  46000001 &   47000000\\
+        5222&294&336&21&  16500001 &   17500000\\
+        3125&298&310&10&  60000001 &   61000000\\
+        0880&293&344&2& 191500001 &  192500000\\
+        3560&299&772&12&   9000001 &   10000000\\
+        4407&299&512&15&  78500001 &   79500000\\
+        1036&292&300&3&  27000001 &   28000000\\
+        2734&300&515&9&   5000001&    6000000\\
+        3426&300&486&11&  76000001 &   77000000\\
+        0015&291&1029&1&   7500001 &    8500000\\
+        0365&301&487&1& 182500001 &  183500000\\
+        3415&301&419&11&  70500001 &   71500000\\
+        1581&290&802&4& 102500001 &  103500000\\
+        3554&290&403&12&   6000001 &    7000000\\
+        3184&302&449&10&  89500001 &   90500000\\
+        1580&289&603&4& 102000001 &  103000000\\
+        1948&288&1297&5&  96000001 &   97000000\\
+        2215&288&622&7&  49500001 &   50500000\\
+        0414&288&346&1& 207000001&  208000000\\
+        2055&304&1377&5& 149500001 &  150500000\\
+        0384&287&827&1& 192000001 &  193000000\\
+        0959&306&406&2& 231000001 &  232000000\\
+        4214&286&393&14&  88500001 &   89500000\\
+        0320&307&620&1& 160000001 &  161000000\\
+    \end{tabular}
+
     \caption[resultsp2]{\textbf{Goldilocks Results}: "Top 25" Candidate Regions
     using a \textit{length} of 1Mnt and a \textit{stride} of 0.5Mnt. Candidates
     are filtered by median \textbf{GWAS} density and ranked by maximum
     \textbf{iCHIP} density.}
-    \label{list:resultsp2}
-    \begin{minted}[%mathescape,
-                %linenos,
-                gobble=8,
-                frame=lines,
-                fontsize=\scriptsize,
-                framesep=2mm]{text}
-        i	GWAS	iCHIP	CHR	POSITIONS
-        0234	297	470	1	 117000001 -  118000000
-        1074*	294	1540	3	  46000001 -   47000000
-        5222	294	336	21	  16500001 -   17500000
-        3125	298	310	10	  60000001 -   61000000
-        0880	293	344	2	 191500001 -  192500000
-        3560	299	772	12	   9000001 -   10000000
-        4407	299	512	15	  78500001 -   79500000
-        1036	292	300	3	  27000001 -   28000000
-        2734	300	515	9	   5000001 -    6000000
-        3426	300	486	11	  76000001 -   77000000
-        0015	291	1029	1	   7500001 -    8500000
-        0365	301	487	1	 182500001 -  183500000
-        3415	301	419	11	  70500001 -   71500000
-        1581	290	802	4	 102500001 -  103500000
-        3554	290	403	12	   6000001 -    7000000
-        3184	302	449	10	  89500001 -   90500000
-        1580	289	603	4	 102000001 -  103000000
-        1948	288	1297	5	  96000001 -   97000000
-        2215	288	622	7	  49500001 -   50500000
-        0414	288	346	1	 207000001 -  208000000
-        2055	304	1377	5	 149500001 -  150500000
-        0384	287	827	1	 192000001 -  193000000
-        0959	306	406	2	 231000001 -  232000000
-        4214	286	393	14	  88500001 -   89500000
-        0320	307	620	1	 160000001 -  161000000
-    \end{minted}
-\end{listing}
+    \label{tab:resultsp2}
+\end{table}
 
 Curious about the wide range and presence of so many low resolution
 \textbf{iCHIP} candidates, I authored an R script (making use of
@@ -678,7 +676,7 @@ and any difficulties encountered.
 %TODO Design section?
 %TODO Flow chart!
 
-The pipeline can be divided up in to the following analysis steps:
+The pipeline can be divided up into the following analysis steps:
 
 %TODO Are we taking these from the lanelets?
 %TODO What file formats?
@@ -694,7 +692,7 @@ The pipeline can be divided up in to the following analysis steps:
         efficiency for tools which require random access to variants inside the
         region.
     \item \textbf{Merge} \hfill\\
-        Merge the data from each extracted region in to one file to reduce file
+        Merge the data from each extracted region into one file to reduce file
         handling overhead in later analysis.
     \item \textbf{Pileup} \hfill\\
         %TODO Mention probabilities...
@@ -840,7 +838,7 @@ Goldilocks regions.
 \section{Merge}
 
 \textbf{samtools merge}\citep{man:samtools} is a utility for merging two or more
-sorted \textbf{BAM} files in to one sorted output. After viewing the source of
+sorted \textbf{BAM} files into one sorted output. After viewing the source of
 the command I found an undocumented feature that allowed an end user to provide
 a file of filenames to merge rather than being required to list all inputs on
 the command line.

@@ -1,17 +1,17 @@
 Frontier
 ********
-Data Dir	/pools/encypted/sanger/frontier/data/bamcheck_2013dec25/uc
-AQC File	/pools/encypted/sanger/frontier/data/crohns-uc-table-a.2013dec25.manual_qc_update.txt
+Data Dir	/pools/encrypted/sanger/frontier/data/bamcheck_2013dec25_ratios_out/
+AQC File	/pools/encrypted/sanger/frontier/data/crohns-uc-table-a.2013dec25.manual_qc_update.txt
 
 Class Def	fail	pass	warn
 Class Read	1542	9154	2759
-Class Used	234	3137	576
+Class Used	1542	9154	2759
 
-Total Read	3947
-Total Used	3371
+Total Read	13455
+Total Used	13455
 
 Param Set	ALL
-Param Count	82
+Param Count	86
 Param List:
 		1st-fragments
 		A-percent-max-above-baseline
@@ -44,18 +44,22 @@ Param List:
 		bases-mapped
 		bases-mapped-(cigar)
 		bases-trimmed
+		duplicate-mapped-ratio
 		error-rate
 		filtered-sequences
 		fwd-percent-deletions-above-baseline
 		fwd-percent-deletions-below-baseline
 		fwd-percent-insertions-above-baseline
 		fwd-percent-insertions-below-baseline
+		indel-ratio
 		insert-size-average
 		insert-size-standard-deviation
 		inward-oriented-pairs
 		is-paired
 		is-sorted
 		last-fragments
+		max-max-baseline-deviation
+		max-total-mean-baseline-deviation
 		maximum-length
 		mismatches
 		non-primary-alignments
@@ -97,17 +101,25 @@ Param List:
 		total-length
 
 Feature Importances:
-		0.32	T-percent-mean-above-baseline
-		0.20	T-percent-mean-below-baseline
-		0.14	rev-percent-insertions-above-baseline
-		0.14	T-percent-total-mean-baseline-deviation
-		0.05	bases-duplicated
-		0.05	fwd-percent-insertions-above-baseline
-		0.03	reads-duplicated
-		0.02	insert-size-average
-		0.01	insert-size-standard-deviation
+		0.27	T-percent-max-above-baseline
+		0.12	rev-percent-insertions-above-baseline
+		0.09	fwd-percent-insertions-above-baseline
+		0.07	quality-dropoff-rev-mean-runmed-decline-low-value
+		0.07	insert-size-average
+		0.05	quality-dropoff-fwd-mean-runmed-decline-low-value
+		0.04	max-max-baseline-deviation
+		0.03	insert-size-standard-deviation
+		0.02	reads-duplicated
+		0.02	fwd-percent-deletions-above-baseline
+		0.02	duplicate-mapped-ratio
+		0.02	rev-percent-insertions-below-baseline
+		0.02	max-total-mean-baseline-deviation
+		0.02	bases-duplicated
+		0.02	T-percent-max-baseline-deviation
+		0.01	average-quality
+		0.01	A-percent-max-above-baseline
 
-CV Score (Fld)	1.00 +/- 0.01 (10)
+CV Score (Fld)	0.97 +/- 0.01 (10)
 
-Decision PDF	pdf/2014-03-23_2151__IGNWARN_ALL_/
+Decision PDF	pdf/2014-05-05_2031__ALL_ALL_/
 ********
