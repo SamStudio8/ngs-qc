@@ -3,17 +3,17 @@
 
 \chapter{Critical Evaluation}
 
-Unfortunately time constraints cut the project short, the time required to
+Unfortunately time constraints cut the project short; the time required to
 assemble the pipeline outlined in Chapter~\ref{chap:pipeline}
 was massively inflated due to difficulties encountered in the tools used,
-this was unexpected both by myself and the Sanger Institute.
+which was unexpected both by myself and the Sanger Institute.
 Whilst this prevented completion of the Part II objectives outlined in
 Section~\ref{sec:intro-part2}, I was still able to collate variant data from the
 samples, identify the "\textbf{Goldilocks Region}" and make contributions
 ranging from documentation fixes to the patching of memory leaks in
 highly popular open-source bioinformatics tools.
 
-In retrospect, despite the unexpected complications, Part II was probably overly
+In retrospect, despite the complications, Part II was probably overly
 ambituous for the amount of time I had. Given the project again I think I would
 more seriously weigh up the benefits of extending the analysis downstream,
 although it should be remembered that it is this element of the project that
@@ -26,10 +26,10 @@ made in the construction of \textbf{Frontier} and the scripts used to actually
 conduct analyses. One of the most influential decisions on this part of the
 project was that of the machine learning framework: \textbf{scikit-learn}, whose
 integration with Python's scientific computing packages like \textbf{NumPy} was
-incredibly helpful, unlike other available packages which may have required time
-consuming wrapper functions to be created to mangle data in to an obscure
+incredibly helpful, unlike other available packages which may have required
+time-consuming wrapper functions to be created to mangle data in to an obscure
 format. The framework also included subpackages that were useful for
-cross-validation testing and parameter selection which saved time and simplified
+cross-validation testing and parameter selection saving time and simplifying
 interaction between various components of the scripts.
 
 The machine learning analysis of Part I was quick and easy to set-up and
@@ -46,55 +46,85 @@ cross-validation results for a range of classifiers built on various parameter
 sets which improve as we obtain a better idea of the observations and their
 features.
 
-It should be noted that the results presented are the result of an initial not
-exhaustive study. Given more time I'd use other machine learning classifiers
-starting with random forests -- collections of decision trees -- to see whether
-similar decisions are created; decision trees cannot promise optimality as it
-does not use 'backtracking' (\textit{i.e.} an optimal decision )
-
-and thus
-random forests...
-
+It should be noted that the results presented consist an initial not
+exhaustive study. Decision trees cannot promise optimality and given more time
+I'd have investigated use of other machine learning classifiers,
+starting with random forests -- collections of decision trees -- to test whether
+sets of similar trees are created. Although \textbf{scikit-learn}'s does not
+provide methods to prune, future trees should consider best practice provided by
+the framework's developers\citep{sl:tips}.
 It would also be interesting to also experiment with other algorithms (even black
 box methods such as neural networks) and frameworks.
 
-If I were to perform the first part of the project again, I would definitely
-consider investing time 
+Although \textbf{Frontier} documented experiments in a useful format, I do
+regret the lack of a more advanced testing platform. My search for
+a suitable application (see Section~\ref{sec:part1:testing}) for managing
+results of machine learning classifiers unfortunately turned up nothing. With
+time I'd like to take the opportunity to fill this gap and provide a front-end
+to \textbf{Frontier} for users to generate graphs of classification performance
+over time and keep track of their various parameter and data sets.
+
+Overall I am pleased with the outcomes of this project; I feel both
+\textbf{Frontier} and \textbf{Goldilocks} are fit for purpose and more than meet
+their original design requirements. The \textbf{Pipeline}, although incomplete,
+has been defined and work can be continued outside of this project in
+conjunction with the Sanger Institute.
 
 
-
-
-
-%TODO Search for FUTURE tags
-%TODO pandas looks like Frontier on steroids...
-%TODO Mention FeatureForge?
-
-%TODO Cite KSelect
-...when choosing best parameters...
-Alternatively could have used \textbf{SelectKBest}...
-best practice...\citep{sl:tips}
-
-...Section~\ref{sec:additional-libs}
-The \textbf{SciPy Stack} also includes the "Python Data Analysis Library"
-(\textbf{pandas}), which is designed to provide tools to supplement the Python
-environment, allowing users to perform analysis in Python instead of having to
-switch to a more analysis focused language such as R.
-
-...at first glance appears to be a far more developed Frontier...
-...however it should be considered that Frontier was designed to complement the
-machine learning experiments and provides 
-
-...whilst also providing the \textbf{AbstractReader} framework to allow users to
-quickly define methods to read in their own data regardless of how esoteric or
-cryptic the file format is...
-
-
-Whilst a 2003 paper\citep{kendal2003exponential}\footnote{Titled \textit{An Exponential
-Dispersion Model for the Distribution of Human Single Nucleotide
-Polymorphisms}\citep{kendal2003exponential}} that analysed the spread of SNPs
-across the human genome to assert whether variants could be modelled with a
-statistical distribution, divided chromosomes in to equally sized bins (a
-concept akin to candidates of uniform length)
-
+%*******************************************************************************
 \chapter{Conclusions}
+
+This project introduces \textbf{Frontier}, a Python package which provides users
+with interfaces for the reading, storage and retrieval of large machine learning
+data sets.  \textbf{Frontier} provides users with interfaces allowing for simple
+definition of readers, enabling any file (no matter how esoteric) to be used as
+input. \textbf{Frontier} also presents an API for manipulation and extraction of
+stored data-target pairs based on lists of parameters or desired target classes.
+The package also effectively supports any machine learning task by providing users
+the ability to specify their own class labels and codes.
+
+The project went on to utilise \textbf{Frontier} and \textbf{scikit-learn} in a
+script to investigate the accuracy of a range of decision tree classifiers for a
+series of quality control parameter sets. I also examined the effects of
+augmenting the handling of observations classified by \textbf{auto\_qc} as a
+warning and experimented with backward elimination to generate minimal yet
+accurate models, creating trees which closely resemble the behaviour of the
+simple linear rules of \textbf{auto\_qc}
+
+This part of the project left off on an excellent starting point for continuing
+analysis with the identification of lanelets which cause changes in the results
+of downstream experiments. The hope was to examine the parameters of those
+lanelets to motivate further lines of inquiry, picking up from the end of Part
+I.
+
+Part II introduced \textbf{Goldilocks}, a Python script used to find a
+representative genomic region that expressed a desired density of variants
+across different studies, nicknamed the "Goldilocks genome". Alongside this, a
+\textbf{pipeline} was outlined for analysis of thousands of samples of the
+Goldilocks region. Whilst the \textbf{pipeline} is still in the process of being
+developed, I've already made several contributions to \textbf{samtools};
+updating documentation, patching minor memory leaks and conducting an
+investigation on poor time performance.
+
+In addition to this, as part of the project I also submitted bug fixes and
+minor contributions to Sanger's \textbf{bamcheckr} tool which are now in place
+at the institute. \textbf{Frontier} even turned out to be more efficient than
+\textbf{bamcheckr} for the recovery of additional parameters.
+
+
+Overall this project has produced a potentially wide reaching Python package in
+the form of \textbf{Frontier}, applicable to a variety of statistical or machine
+learning problems. Although \textbf{Goldilocks} may not appear to have much of
+an audience a 2003 paper\citep{kendal2003exponential}\footnote{Titled \textit{An Exponential
+Dispersion Model for the Distribution of Human Single Nucleotide
+Polymorphisms}\citep{kendal2003exponential}} analysed the spread of SNPs
+across regions of the human genome to assert whether variants could be modelled
+with a statistical distribution, a clear use case for \textbf{Goldilocks}.
+
+
+
+%*******************************************************************************
+
+
+
 

@@ -434,67 +434,67 @@ Discussions and Conclusions
 
 Appendix A Concept Glossary
 
-63
+64
 
-A.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
-A.1.1 DNA, Bases and Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+A.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+A.1.1 DNA, Bases and Sequencing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
 A.1.2 NGS
 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
 vi
 
 Contents
-A.1.3 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
-A.2 Part I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
-A.2.1 Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
-A.2.2 Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
-A.2.3 Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
-A.2.4 Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
-A.3 Part II: Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
-A.3.1 Group . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
-A.3.2 Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
-A.3.3 Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
-A.3.4 Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+A.1.3 Samples, Lanes and Lanelets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.2 Part I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.2.1 Observations and Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+A.2.2 Data and Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+A.2.3 Class Labels and Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+A.2.4 Python Data Structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+A.3 Part II: Goldilocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+A.3.1 Group . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+A.3.2 Length and Stride . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+A.3.3 Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+A.3.4 Candidate Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
 Appendix B Input Examples
 
-68
+69
 
-B.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
-B.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
-B.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+B.1 BAMcheckR’d Example Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+B.2 auto_qc Decision Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+B.3 Goldilocks Paths File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
 Appendix C Output Examples
 
-73
+74
 
-C.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+C.1 Frontier Log Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
 Appendix D Tool Installation
 
-76
+77
 
-D.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
-D.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
-D.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
-D.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+D.1 htslib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+D.2 bcftools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+D.3 samtools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
+D.4 tabix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
 Appendix E Scaling Difficulties with samtools merge
 
-78
+79
 
-E.1 Memory Leak . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
-E.2 Memory Leak in Test Harnesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
-E.3 Poor Time Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
-E.4 The Red Herring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80
-E.5 The Plot Thickens . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 81
+E.1 Memory Leak . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+E.2 Memory Leak in Test Harnesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+E.3 Poor Time Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80
+E.4 The Red Herring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 81
+E.5 The Plot Thickens . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 82
 Appendix F Pre-Frontier Implementation
 
-82
+83
 
 F.1
 
-Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 82
+Classification Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 83
 
 F.2
 
-Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 83
+Recovering Ratios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 84
 
 vii
 
@@ -2745,24 +2745,24 @@ Discussions and Conclusions
 Chapter 11
 
 Critical Evaluation
-Unfortunately time constraints cut the project short, the time required to assemble the pipeline outlined in
-Chapter 10 was massively inflated due to difficulties encountered in the tools used, this was unexpected both
-by myself and the Sanger Institute. Whilst this prevented completion of the Part II objectives outlined in
-Section 1.1.2, I was still able to collate variant data from the samples, identify the "Goldilocks Region"
+Unfortunately time constraints cut the project short; the time required to assemble the pipeline outlined in
+Chapter 10 was massively inflated due to difficulties encountered in the tools used, which was unexpected
+both by myself and the Sanger Institute. Whilst this prevented completion of the Part II objectives outlined
+in Section 1.1.2, I was still able to collate variant data from the samples, identify the "Goldilocks Region"
 and make contributions ranging from documentation fixes to the patching of memory leaks in highly popular
 open-source bioinformatics tools.
-In retrospect, despite the unexpected complications, Part II was probably overly ambituous for the amount
-of time I had. Given the project again I think I would more seriously weigh up the benefits of extending the
-analysis downstream, although it should be remembered that it is this element of the project that makes the
-research novel.
+In retrospect, despite the complications, Part II was probably overly ambituous for the amount of time I
+had. Given the project again I think I would more seriously weigh up the benefits of extending the analysis
+downstream, although it should be remembered that it is this element of the project that makes the research
+novel.
 Looking at Part I, I think the requirements were more correctly balanced and Frontier assists greatly in
 achieving the objectives outlined in Chapter 2. I am confident the correct development choices were made
 in the construction of Frontier and the scripts used to actually conduct analyses. One of the most influential
 decisions on this part of the project was that of the machine learning framework: scikit-learn, whose integration
 with Python’s scientific computing packages like NumPy was incredibly helpful, unlike other available packages
-which may have required time consuming wrapper functions to be created to mangle data in to an obscure
+which may have required time-consuming wrapper functions to be created to mangle data in to an obscure
 format. The framework also included subpackages that were useful for cross-validation testing and parameter
-selection which saved time and simplified interaction between various components of the scripts.
+selection saving time and simplifying interaction between various components of the scripts.
 The machine learning analysis of Part I was quick and easy to set-up and document thanks to the functionality
 provided by Frontier for the storage and retrieval of data and targets. Frontier is still in its infancy (though
 that is not to say it is lacking in core function) and I plan to continue its development after the project ends.
@@ -2773,37 +2773,61 @@ of classifiers built on various parameter sets which improve as we obtain a bett
 their features.
 57
 
-It should be noted that the results presented are the result of an initial not exhaustive study. Given more
-time I’d use other machine learning classifiers starting with random forests – collections of decision trees
-– to see whether similar decisions are created; decision trees cannot promise optimality as it does not use
-’backtracking’ (i.e. an optimal decision )
-and thus random forests...
-It would also be interesting to also experiment with other algorithms (even black box methods such as neural
-networks) and frameworks.
-If I were to perform the first part of the project again, I would definitely consider investing time
-...when choosing best parameters... Alternatively could have used SelectKBest... best practice...[58]
-...Section 3.2.3 The SciPy Stack also includes the "Python Data Analysis Library" (pandas), which is designed
-to provide tools to supplement the Python environment, allowing users to perform analysis in Python instead
-of having to switch to a more analysis focused language such as R.
-...at first glance appears to be a far more developed Frontier... ...however it should be considered that Frontier
-was designed to complement the machine learning experiments and provides
-...whilst also providing the AbstractReader framework to allow users to quickly define methods to read in
-their own data regardless of how esoteric or cryptic the file format is...
-Whilst a 2003 paper[59]1 that analysed the spread of SNPs across the human genome to assert whether variants
-could be modelled with a statistical distribution, divided chromosomes in to equally sized bins (a concept akin
-to candidates of uniform length)
-
-1 Titled
-
-An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[59]
+It should be noted that the results presented consist an initial not exhaustive study. Decision trees cannot
+promise optimality and given more time I’d have investigated use of other machine learning classifiers, starting
+with random forests – collections of decision trees – to test whether sets of similar trees are created. Although
+scikit-learn’s does not provide methods to prune, future trees should consider best practice provided by the
+framework’s developers[58]. It would also be interesting to also experiment with other algorithms (even black
+box methods such as neural networks) and frameworks.
+Although Frontier documented experiments in a useful format, I do regret the lack of a more advanced testing
+platform. My search for a suitable application (see Section 3.2.5) for managing results of machine learning
+classifiers unfortunately turned up nothing. With time I’d like to take the opportunity to fill this gap and
+provide a front-end to Frontier for users to generate graphs of classification performance over time and keep
+track of their various parameter and data sets.
+Overall I am pleased with the outcomes of this project; I feel both Frontier and Goldilocks are fit for purpose
+and more than meet their original design requirements. The Pipeline, although incomplete, has been defined
+and work can be continued outside of this project in conjunction with the Sanger Institute.
 
 58
 
 Chapter 12
 
 Conclusions
+This project introduces Frontier, a Python package which provides users with interfaces for the reading,
+storage and retrieval of large machine learning data sets. Frontier provides users with interfaces allowing
+for simple definition of readers, enabling any file (no matter how esoteric) to be used as input. Frontier also
+presents an API for manipulation and extraction of stored data-target pairs based on lists of parameters or
+desired target classes. The package also effectively supports any machine learning task by providing users the
+ability to specify their own class labels and codes.
+The project went on to utilise Frontier and scikit-learn in a script to investigate the accuracy of a range of
+decision tree classifiers for a series of quality control parameter sets. I also examined the effects of augmenting
+the handling of observations classified by auto_qc as a warning and experimented with backward elimination
+to generate minimal yet accurate models, creating trees which closely resemble the behaviour of the simple
+linear rules of auto_qc
+This part of the project left off on an excellent starting point for continuing analysis with the identification
+of lanelets which cause changes in the results of downstream experiments. The hope was to examine the
+parameters of those lanelets to motivate further lines of inquiry, picking up from the end of Part I.
+Part II introduced Goldilocks, a Python script used to find a representative genomic region that expressed a
+desired density of variants across different studies, nicknamed the "Goldilocks genome". Alongside this, a
+pipeline was outlined for analysis of thousands of samples of the Goldilocks region. Whilst the pipeline
+is still in the process of being developed, I’ve already made several contributions to samtools; updating
+documentation, patching minor memory leaks and conducting an investigation on poor time performance.
+In addition to this, as part of the project I also submitted bug fixes and minor contributions to Sanger’s
+bamcheckr tool which are now in place at the institute. Frontier even turned out to be more efficient than
+bamcheckr for the recovery of additional parameters.
+Overall this project has produced a potentially wide reaching Python package in the form of Frontier, applicable
+to a variety of statistical or machine learning problems. Although Goldilocks may not appear to have much
 
 59
+
+of an audience a 2003 paper[59]1 analysed the spread of SNPs across regions of the human genome to assert
+whether variants could be modelled with a statistical distribution, a clear use case for Goldilocks.
+
+1 Titled
+
+An Exponential Dispersion Model for the Distribution of Human Single Nucleotide Polymorphisms[59]
+
+60
 
 [12] R Core Team, R: A Language and Environment for
 Statistical Computing, R Foundation for Statistical
@@ -2871,7 +2895,7 @@ Recursive Partitioning, 2013, r package version
 4.1-3. [Online]. Available: http://CRAN.R-project.
 org/package=rpart
 
-60
+61
 
 [17] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
@@ -3087,7 +3111,7 @@ About.
 
 [Online].
 
-61
+62
 
 References
 An excellent introduction to DNA and
@@ -3134,7 +3158,7 @@ Leo and Vitek, Jan, “Evaluating the design of
 the R language,” in ECOOP 2012–Object-Oriented
 Programming. Springer, 2012, pp. 104–131.
 
-62
+63
 
 Appendix A
 
@@ -3169,7 +3193,7 @@ Next Generation Sequencing (NGS) is a somewhat generic term used to refer to imp
 hardware and methods introduced from 2008 onwards, bringing a massive decrease in both the time and
 cost involved in the sequencing of an entire human genome[62].
 
-63
+64
 
 A.2 Part I
 
@@ -3210,7 +3234,7 @@ that observation. Traditionally these may be described as features but it was fe
 have connotations with discrete data. Early versions of Frontier referred to parameters as regressors, using
 terminology from statistical modelling. This wording was dropped to remove any confusion between regression
 and classification machine learning problems.
-64
+65
 
 A.2 Part I
 
@@ -3257,7 +3281,7 @@ its bounds and must be relocated elsewhere in memory to resize to a larger conti
 be appended to or popped from anywhere in the container, performing those actions on a location that is not at
 the end of the list will require the contents of the structure to be moved in memory to maintain the contiguous
 layout.
-65
+66
 
 A.3 Part II: Goldilocks
 Checking whether an item is in a list requires iterating over all n elements in the container until either a match
@@ -3306,7 +3330,7 @@ Sensible choices for these parameters will need to be selected after considering
 type can actually be used as a dictionary key providing it is immutable, including tuples[66]
 is probably the question I see most often from users new to Python on StackOverflow
 
-66
+67
 
 A.3 Part II: Goldilocks
 
@@ -3328,7 +3352,7 @@ Candidates must meet all (any any additional) criteria to be considered. For exa
 position falls on a base in such a way that the chromosome ends before a region of length can be constructed
 will violate the size criteria.
 
-67
+68
 
 Appendix B
 
@@ -3450,7 +3474,7 @@ rev percent insertions above baseline:
 rev percent insertions below baseline:
 0.457290262062496
 
-68
+69
 
 B.1 BAMcheckR’d Example Output
 
@@ -3682,7 +3706,7 @@ FFQ
 0
 0
 
-69
+70
 
 1609
 
@@ -4024,7 +4048,7 @@ IS
 2
 0
 
-70
+71
 
 B.1 BAMcheckR’d Example Output
 
@@ -4303,7 +4327,7 @@ GCD
 0.101
 0.101
 
-71
+72
 
 B.2 auto_qc Decision Matrix
 
@@ -4452,7 +4476,7 @@ Goldilocks Paths File
 /pools/encrypted/sanger/vcf/cd.ichip.vcf.gz.q
 /pools/encrypted/sanger/vcf/uc.ichip.vcf.gz.q
 
-72
+73
 
 ...
 ...
@@ -4538,7 +4562,7 @@ T-percent-max-baseline-deviation
 T-percent-max-below-baseline
 T-percent-mean-above-baseline
 
-73
+74
 
 C.1 Frontier Log Example
 
@@ -4608,7 +4632,7 @@ Feature Importances:
 T-percent-mean-above-baseline
 T-percent-mean-below-baseline
 
-74
+75
 
 C.1 Frontier Log Example
 
@@ -4634,7 +4658,7 @@ insert-size-standard-deviation
 
 pdf/2014-03-23_2151__IGNWARN_ALL_/
 
-75
+76
 
 Appendix D
 
@@ -4660,7 +4684,7 @@ cd bcftools/
 make #(requires htslib to be above samtools/bcftools dir)
 sudo cp bcftools usr/local/bin
 
-76
+77
 
 D.3 samtools
 
@@ -4695,7 +4719,7 @@ diff cd-seq.vcf.gz.tbi diff cd-seq.vcf.gz.tbi.sanger
 # Shows no difference :)
 # http://samtools.sourceforge.net/tabix.shtml
 
-77
+78
 
 Appendix E
 
@@ -4726,7 +4750,7 @@ Wanting to brush up on finding memory leaks with valgrind, I volunteered to find
 reported leaks. The results of this investigation are detailed in Appendix ??.
 ...getline ...regcomp...
 
-78
+79
 
 E.3 Poor Time Performance
 
@@ -4786,7 +4810,7 @@ line called not during the process of deflating the input files (as I had expect
 compression of the output!
 Looking at a brief explanation of the deflate algorithm, it seems reasonable to conclude the computational
 
-79
+80
 
 E.4 The Red Herring
 
@@ -4822,7 +4846,7 @@ int x = (int)s[0]<<8 | s[1];
 s += 2;
 if (x == y) return s;
 s = skip_aux(s);
-80
+81
 
 E.5 The Plot Thickens
 }
@@ -4843,7 +4867,7 @@ The Plot Thickens
 Currently my money is on the seemingly inefficient trans_tbl_init that appears to be called for each file, with
 the current table of all previous files as an input...
 
-81
+82
 
 Appendix F
 
@@ -4861,7 +4885,7 @@ is depleted of reagents then every lane (and thus all lanelets within) will be o
 Fig. F.1 Heatmap of lanelet QC status by lane: Lanes are vertical bars with each lanelet cell coloured red to
 represent a failure, yellow for a warning and grey for a pass.
 In such a case there would appear to exist a relationship between the respective qualities of each lanelet in
-82
+83
 
 F.2 Recovering Ratios
 a lane as well as each lane in a sequencing run. To examine this further, an R script utilising ggplot2 was
@@ -4904,7 +4928,7 @@ revealed 82 different parameters. However, when comparing this parameter set to 
 auto_qc, it appeared that some parameters were "missing".
 In the pursuit of replicating the decisions of the existing system, it is ideal to have all the parameters used
 
-83
+84
 
 F.2 Recovering Ratios
 in the making of those decisions at hand. In particular, the missing parameters were of a normalised nature,
@@ -4942,11 +4966,11 @@ used the API to calculate the missing parameters...
 explore the idiosyncrasies of each implementation ...although such an investigation would quite likely sufficiently
 1 https://github.com/wtsi-hgi/vr-pipe/blob/hgi-release/modules/VRPipe/Steps/vrtrack_auto_qc_hgi_3.pm
 
-84
+85
 
 F.2 Recovering Ratios
 generate an entire project of its own.
 
-85
+86
 
 
