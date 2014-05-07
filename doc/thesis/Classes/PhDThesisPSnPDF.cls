@@ -565,12 +565,9 @@ font in the preamble.tex file by specifying `customfont' in the class options}
 \newenvironment{declaration}{
 \cleardoublepage
 \setsinglecolumn
-\chapter*{\centering \Large Declaration}
+\chapter*{\centering \Large Declaration of Originality}
 \thispagestyle{empty}
 }{
-\flushright
-\@author{}\\
-\@degreedate{}
 \vfill
 }
 

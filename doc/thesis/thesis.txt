@@ -12,19 +12,53 @@ Sam Nicholls msn
 Supervisor:
 Dr. Amanda Clare afc
 
-Draft
+This report was submitted as partial fulfilment of a BSc degree
+in Computer Science and Statistics (GG34)
 
-May 7, 2014
+May 2014
 
-Declaration
+Declaration of Originality
 
-I certify that except where indicated, all material in this thesis is the result of my own investigation and
-references used in preparation of the text have been cited. The work has not previously been submitted as part
-of any other assessed module, or submitted for any other degree or diploma.
-Sam Nicholls
-2014
+In signing below, I confirm that:
+• This submission is my own work, except where clearly indicated.
+• I understand that there are severe penalties for plagiarism and other unfair practice, which can lead to
+loss of marks or even the withholding of a degree.
+• I have read the sections on unfair practice in the Students’ Examinations Handbook and the relevant
+sections of the current Student Handbook of the Department of Computer Science.
+• I understand and agree to abide by the University’s regulations governing these issues.
+
+Signature
+
+Date
+
+Consent to Share Work
+In signing below, I hereby agree to this dissertation being made available to other students and academic staff
+of the Aberystwyth Computer Science Department.
+
+Signature
+
+Date
 
 Acknowledgements
+
+This project is my most substantial piece of work and I’ve learned an incredible amount from this all too short
+period. I am greatly looking forward to continuing development of the software packages that this project
+created and hope to pick up the analysis where this project leaves off over summer.
+I owe a massive thank you to both my dissertation supervisor, Amanda Clare at Aberystwyth and my contact at
+the Sanger Institute, Joshua Randall for their excellent guidance, suggestions and general advice which helped
+me steer the project through the unknown.
+Additionally I’d like to express my gratitude to the Wellcome Trust Sanger Institute for supporting the project
+and granting me access to their data sets and computational resources without which the project would not
+have been possible.
+I would like to thank my best friend and ladyfiend for keeping me sane and putting up with me for the duration
+of the project, despite irrationally holding her personally responsible for the fundamental quirks of biology.
+Thank you Louise, I wouldn’t have finished this without you.
+Thanks also to Emily and Dan of Cat House for delivering my daily dose of caffeine and for joining in on
+pizza evenings, at least we were able to enjoy the stress in good company.
+To my fellow constituents of ##zuzakistan, thanks for the occasional distribution of tea, muffins and typewriters
+and the distracting discussions on the wonders of space travel.
+Finally thank you to my family and friends for all your support and confidence in me, throughout my degree.
+It’s been an excellent experience and I look forward to continuing my adventures at Aberystwyth.
 
 Abstract
 
@@ -39,6 +73,8 @@ This project also introduces Frontier, a Python package which provides users wit
 storage and retrieval of large machine learning data sets; Goldilocks, a Python class which can be used to find
 a region on a genome that expresses a desired density of variants across different studies; and contributions to
 internal tools used as the Sanger Institute and existing widely used open-source bioinformatics software.
+
+Words 15,999
 
 Contents
 Contents
@@ -657,7 +693,8 @@ accuracy is improved
 
 Concepts and Terminology
 
-See Appendix A.1.
+See Appendix A.1 for an introduction to terminology used throughout Part I including; next-generation
+sequencing, samples, lanes and lanelets.
 
 6
 
@@ -931,7 +968,8 @@ generic framework applicable to learning tasks outside of this study.
 Concepts
 
 Appendix A.2 introduces some ideas that will assist understanding of the application’s purpose and terminology
-used in the following implementation section.
+used in the following implementation section, including definitions for data, targets and classes in the context
+of machine learning tasks.
 
 13
 
@@ -1897,7 +1935,8 @@ region must not have too many variants, or too few: a "Goldilocks genome".
 
 Concepts and Terminology
 
-In the search for the aforementioned "Goldilocks genome", we define the terminology found in Appendix A.3.
+In the search for the aforementioned "Goldilocks genome", we define some specific terminology to refer to
+the properties of the desired region. This terminology can be found in Appendix A.3.
 
 37
 
@@ -2845,7 +2884,10 @@ Discussions and Conclusions
 Chapter 11
 
 Critical Evaluation
-Unfortunately time constraints cut the project short; the time required to assemble the pipeline outlined in
+This project sought conclusions to novel questions; machine learning had not been applied to next-generation
+sequencing data like this before. Answering the question of whether we can identify lanelet properties
+that improve downstream analysis after sequencing was difficult work and whilst progress was encouraging,
+unfortunately time constraints cut the project short; the time required to assemble the pipeline outlined in
 Chapter 10 was massively inflated due to difficulties encountered in the tools used, which was unexpected
 both by myself and the Sanger Institute. Whilst this prevented completion of the Part II objectives outlined
 in Section 1.1.2, I was still able to collate variant data from the samples, identify the "Goldilocks Region"
@@ -2868,15 +2910,15 @@ provided by Frontier for the storage and retrieval of data and targets. Frontier
 that is not to say it is lacking in core function) and I plan to continue its development after the project ends.
 The analysis presented in Chapter 5 introduces many interesting avenues of investigation, too many to be
 written up as only one part of this project! In brief I’ve demonstrated that the decision trees generated
-exhibit behaviours similar to the current auto_qc system and presented cross-validation results for a range
-of classifiers built on various parameter sets which improve as we obtain a better idea of the observations and
-their features.
 55
 
-It should be noted that the results presented consist an initial not exhaustive study. Decision trees cannot
+exhibit behaviours similar to the current auto_qc system and presented cross-validation results for a range
+of classifiers built on various parameter sets which improve as we obtain a better idea of the observations and
+their features.
+It should be noted that the results presented consist an initial not exhaustive study. Decision trees cannot
 promise optimality and given more time I’d have investigated use of other machine learning classifiers, starting
 with random forests – collections of decision trees – to test whether sets of similar trees are created. Although
-scikit-learn’s does not provide methods to prune, future trees should consider best practice provided by the
+scikit-learn does not provide methods to prune, future trees should consider best practice provided by the
 framework’s developers[65]. It would also be interesting to also experiment with other algorithms (even black
 box methods such as neural networks) and frameworks.
 Although Frontier documented experiments in a useful format, I do regret the lack of a more advanced testing
@@ -2903,25 +2945,37 @@ The project went on to utilise Frontier and scikit-learn in a script to investig
 decision tree classifiers for a series of quality control parameter sets. I also examined the effects of augmenting
 the handling of observations classified by auto_qc as a warning and experimented with backward elimination
 to generate minimal yet accurate models, creating trees which closely resemble the behaviour of the simple
-linear rules of auto_qc
+linear rules of auto_qc.
+My analysis has been able to identify sets of quality control parameters that contribute to accurate classification
+of a lanelet’s quality status and demonstrates it is possible to recover the behaviours of the Sanger Institute’s
+existing auto_qc system. The results of this part of the study also open up ideas for future research, for
+example, how to best handle observations with warnings and methods to measure parameters importance to
+inform selection of best features.
 This part of the project left off on an excellent starting point for continuing analysis with the identification
 of lanelets which cause changes in the results of downstream experiments. The hope was to examine the
 parameters of those lanelets to motivate further lines of inquiry, picking up from the end of Part I.
-Part II introduced Goldilocks, a Python script used to find a representative genomic region that expressed a
-desired density of variants across different studies, nicknamed the "Goldilocks genome". Alongside this, a
-pipeline was outlined for analysis of thousands of samples of the Goldilocks region. Whilst the pipeline
-is still in the process of being developed, I’ve already made several contributions to samtools; updating
-documentation, patching minor memory leaks and conducting an investigation on poor time performance.
-In addition to this, as part of the project I also submitted bug fixes and minor contributions to Sanger’s
-bamcheckr tool which are now in place at the institute. Frontier even turned out to be more efficient than
-bamcheckr for the recovery of additional parameters.
-This project has produced a potentially wide reaching Python package in the form of Frontier, applicable to
-a variety of statistical or machine learning problems. Although Goldilocks may not appear to have much of
-
+Part II introduced Goldilocks, a Python script used to find a representative genomic region that expressed
+a desired density of variants across different studies, nicknamed the "Goldilocks genome". My analysis
+located an optimal region for our study on chromosome three, as described in Chapter 9. Alongside this,
+a pipeline was outlined for analysis of thousands of samples of the Goldilocks region. Whilst the pipeline is
+still in the process of being developed, I’ve already made several contributions to samtools – a widely used
+collection of bioinformatics tools – by updating documentation, patching minor memory leaks and conducting
+an investigation on the poor time performance of the sample merging algorithm.
 57
 
-an audience a 2003 paper[66]1 analysed the spread of SNPs across regions of the human genome to assert
-whether variants could be modelled with a statistical distribution, a clear use case for Goldilocks.
+In addition to this, as part of the project I also submitted bug fixes and made minor contributions to Sanger’s
+internal bamcheckr tool which is responsible for the generation of the "BAMcheckr’d" input data used by
+Frontier for analysis. These changes are now in place at the institute. Frontier even turned out to be more
+efficient than bamcheckr for the recovery of additional parameters as discussed in Appendix D.2!
+This project has produced a potentially wide reaching Python package in the form of Frontier, applicable to
+a variety of statistical or machine learning problems. Although Goldilocks may not appear to have much of
+an audience, a 2003 paper[66]1 analysed the spread of SNPs across regions of the human genome to assert
+whether variants could be modelled with a statistical distribution, a clear use case for the functionality of
+Goldilocks.
+The studies conducted provide immediately useful results for teams at the Sanger Institute, identifying some
+lanelet features in the TOP9 set that were previously unexpected to have much impact on quality and also
+offering a comparison on the results gained by augmenting the handling of auto_qc’s warnings. These findings
+can go on to update the current system in place and lead to further studies in the future.
 
 1 Titled
 
@@ -2935,9 +2989,6 @@ management application.
 https://triage.ironowl.io/sam/dissertation/
 Public facing todo list outlining tasks for
 this project.
-
-References
-
 [10] H. Li, B. Handsaker, A. Wysoker, T. Fennell, J. Ruan,
 N. Homer, G. Marth, G. Abecasis, R. Durbin, and
 G. Subgroup, “The Sequence Alignment/Map format
@@ -2946,6 +2997,7 @@ and SAMtools.” Bioinformatics, vol. 25, p. 2078,
 Paper outling the SAM/BAM file formats
 and introducing the samtools project.
 
+References
 [1] T. Strachan and A. Read, Human Molecular Genetics,
 4th ed. Garland Science, 2011, pp. 214–254.
 A concise introduction to the processes
@@ -3038,22 +3090,23 @@ A machine learning framework for C++
 vol. 9, pp. 993–996, 2008.
 A machine learning framework for C++
 [18] Python Wiki. (2014) Python for Artificial Intelligence.
+[Online]. Available: https://wiki.python.org/moin/
+PythonForArtificialIntelligence
+Python Wiki page listing many
+recommended packages for handling
+artificial intelligence and machine
+learning problems.
+
+References
 [19] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel,
 B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer,
 R. Weiss, V. Dubourg, J. Vanderplas, A. Passos,
 D. Cournapeau, M. Brucher, M. Perrot, and
-
-References
 E. Duchesnay, “Scikit-learn: Machine learning in
 Python,” Journal of Machine Learning Research,
 vol. 12, pp. 2825–2830, 2011.
 A machine learning framework for
 Python.
-
-[30] Jenkins Usage Statistics. [Online]. Available:
-http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
-Recent Jenkins usage statistics
-
 ˇ Gorup, T. Hoˇcevar,
 [20] J. Demšar, T. Curk, A. Erjavec, Crt
 M. Milutinoviˇc, M. Možina, M. Polajnar, M. Toplak,
@@ -3095,6 +3148,14 @@ A book introducing the ggplot2 graphing
 package for R. Of particular use for new
 users to the syntax of the package.
 
+[29] Kohsuke Kawaguchi. Meet jenkins. [Online].
+Available:
+https://wiki.jenkins-ci.org/display/
+JENKINS/Meet+Jenkins
+About the Jenkins CI platform.
+[30] Jenkins Usage Statistics. [Online]. Available:
+http://stats.jenkins-ci.org/jenkins-stats/svg/svgs.html
+Recent Jenkins usage statistics
 [31] Getting
 Started:
 Travis
@@ -3154,11 +3215,6 @@ articles/continuousIntegration.html
 Article detailing experiences with
 continuous integration and the practices
 required to make it work for a team.
-[29] Kohsuke Kawaguchi. Meet jenkins. [Online].
-Available:
-https://wiki.jenkins-ci.org/display/
-JENKINS/Meet+Jenkins
-About the Jenkins CI platform.
 
 60
 
@@ -3177,14 +3233,14 @@ http://scikit-learn.org/stable/
 modules/tree.html
 scikit-learn’s introduction to trees
 including benefits and disadvantages.
+
+References
 [40] ——.
 (2010–2013)
 sklearn.cross_validation.StratifiedKFold.
 [Online].
 Available:
 http://scikit-learn.org/stable/modules/
-
-References
 generated/sklearn.cross_validation.StratifiedKFold.
 html
 scikit-learn manual entry for usage of
@@ -3246,11 +3302,11 @@ children to the biology of the human body.
 [48] U.S. National Library of Medicine. (2009)
 HLA Gene Family. [Online]. Available: http:
 //ghr.nlm.nih.gov/geneFamily/hla
-Information on HLA and its relationship
-with chromosome six.
 
 61
 
+Information on HLA and its relationship
+with chromosome six.
 [49] The SAM/BAM Format Specification Working
 Group. (2014) Sequence Alignment/Map Format
 Specification. [Online]. Available: http://samtools.
@@ -3264,6 +3320,9 @@ Available: http://irods.org/about/
 About the iRODS data management
 platform.
 [51] irods: Middleware for your critical data [Github].
+[Online]. Available: https://github.com/irods/irods
+Github repository for the iRODS data
+management platform.
 [52] G.-T. Chiang, P. Clapham, G. Qi, K. Sale,
 and G. Coates, “Implementing a genomic data
 management system using iRODS in the Wellcome
@@ -3308,6 +3367,8 @@ Which reference assembly do you use?
 faq/which-reference-assembly-do-you-use
 Discussion of the reference genomes used
 by the 1000 Genomes Project.
+
+References
 [58] zam.iqbal.genome (https://www.biostars.org/u/5152/).
 (2013) Decoy In Reference Assembly. [Online].
 Available: https://www.biostars.org/p/73100/#73120
@@ -3315,8 +3376,6 @@ A BioStar question related to the usage
 of ’decoy’ sequences in the reference
 sequence used by the second phase of the
 1000 Genomes Project.
-
-References
 [59] Heng
 Li.
 (2011)
@@ -3337,10 +3396,18 @@ http://vcftools.sourceforge.net/htslib.html#call
 Manual reference page for the bcftools
 call command.
 
+An excellent introduction to DNA and
+RNA.
+[68] ——, Human Molecular Genetics, 4th ed. Garland
+Science, 2011, p. 30.
+Continuing from [67], introduces the
+concept of Chromosomes.
 [69] Kris Wetterstrand. DNA Sequencing Costs: Data
 from the NHGRI Genome Sequencing Program
 (GSP). [Online]. Available: http://www.genome.gov/
 sequencingcosts/
+Widely cited resource detailing the drop
+in sequencing costs over the past decade.
 [70] Maggie Bartlett. (2011) Illumina HiSeq Flow
 Cell. National Human Genome Research Institute.
 Image. [Online]. Available: http://www.genome.gov/
@@ -3370,6 +3437,29 @@ ambiguous or missing.
 Documents. Portland Press, 1992.
 Specification for the nomenclature of
 nucleotide bases.
+[64] Pablo Cingolani, SnpSift Concordance, 2013.
+[Online]. Available: http://snpeff.sourceforge.net/
+SnpSift.html#concordance
+SnpSift Concordance software for
+measuring concordance between two
+VCF files.
+[65] scikit-learn developers. (2010–2013) Decision
+Trees – Tips on practical use. [Online].
+Available: http://scikit-learn.org/stable/modules/tree.
+html#tips-on-practical-use
+Helpful tips on the practical use of the
+scikit-learn DecisionTreeClassifier class.
+[66] W. S. Kendal, “An Exponential Dispersion Model
+for the Distribution of Human Single Nucleotide
+Polymorphisms,” Molecular Biology and Evolution,
+vol. 20, no. 4, pp. 579–590, 2003.
+A paper investigation the density of SNPs
+across regions of the human genome.
+Presented as a use case for Goldilocks.
+[67] T. Strachan and A. Read, Human Molecular Genetics,
+4th ed. Garland Science, 2011, pp. 2–5.
+
+62
 
 [72] Python
 Wiki.
@@ -3393,27 +3483,11 @@ data structure.
 org/2/tutorial/datastructures.html#sets
 Python documentation for the set data
 structure.
-
-[64] Pablo Cingolani, SnpSift Concordance, 2013.
-[Online]. Available: http://snpeff.sourceforge.net/
-SnpSift.html#concordance
-SnpSift Concordance software for
-measuring concordance between two
-VCF files.
-
 [75] Hadley Wickham and Winston Chang, devtools:
 Tools to make developing R code easier, 2013,
 r package version 1.4.1. [Online]. Available:
 http://CRAN.R-project.org/package=devtools
 R manual for the devtools package.
-
-[65] scikit-learn developers. (2010–2013) Decision
-Trees – Tips on practical use. [Online].
-Available: http://scikit-learn.org/stable/modules/tree.
-html#tips-on-practical-use
-Helpful tips on the practical use of the
-scikit-learn DecisionTreeClassifier class.
-
 [76] Morandat, Floréal and Hill, Brandon and Osvald,
 Leo and Vitek, Jan, “Evaluating the design of
 the R language,” in ECOOP 2012–Object-Oriented
@@ -3421,25 +3495,6 @@ Programming. Springer, 2012, pp. 104–131.
 A thorough investigation in to the
 performance of the R programming
 language as compared to C and Python.
-
-[66] W. S. Kendal, “An Exponential Dispersion Model
-for the Distribution of Human Single Nucleotide
-Polymorphisms,” Molecular Biology and Evolution,
-vol. 20, no. 4, pp. 579–590, 2003.
-A paper investigation the density of SNPs
-across regions of the human genome.
-Presented as a use case for Goldilocks.
-[67] T. Strachan and A. Read, Human Molecular Genetics,
-4th ed. Garland Science, 2011, pp. 2–5.
-An excellent introduction to DNA and
-RNA.
-[68] ——, Human Molecular Genetics, 4th ed. Garland
-Science, 2011, p. 30.
-Continuing from [67], introduces the
-concept of Chromosomes.
-
-62
-
 [77] bcftools [Github]. [Online]. Available:
 https:
 //github.com/samtools/bcftools

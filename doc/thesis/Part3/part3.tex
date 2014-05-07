@@ -3,15 +3,19 @@
 
 \chapter{Critical Evaluation}
 
-Unfortunately time constraints cut the project short; the time required to
-assemble the pipeline outlined in Chapter~\ref{chap:pipeline}
-was massively inflated due to difficulties encountered in the tools used,
-which was unexpected both by myself and the Sanger Institute.
-Whilst this prevented completion of the Part II objectives outlined in
-Section~\ref{sec:intro-part2}, I was still able to collate variant data from the
-samples, identify the "\textbf{Goldilocks Region}" and make contributions
-ranging from documentation fixes to the patching of memory leaks in
-highly popular open-source bioinformatics tools.
+This project sought conclusions to novel questions; machine learning had not
+been applied to next-generation sequencing data like this before.  Answering the
+question of whether we can identify lanelet properties that improve downstream
+analysis after sequencing was difficult work and whilst progress was
+encouraging, unfortunately time constraints cut the project short; the time
+required to assemble the pipeline outlined in Chapter~\ref{chap:pipeline} was
+massively inflated due to difficulties encountered in the tools used, which was
+unexpected both by myself and the Sanger Institute.  Whilst this prevented
+completion of the Part II objectives outlined in Section~\ref{sec:intro-part2},
+I was still able to collate variant data from the samples, identify the
+"\textbf{Goldilocks Region}" and make contributions ranging from documentation
+fixes to the patching of memory leaks in highly popular open-source
+bioinformatics tools.
 
 In retrospect, despite the complications, Part II was probably overly
 ambitious for the amount of time I had. Given the project again I think I would
@@ -50,7 +54,7 @@ It should be noted that the results presented consist an initial not
 exhaustive study. Decision trees cannot promise optimality and given more time
 I'd have investigated use of other machine learning classifiers,
 starting with random forests -- collections of decision trees -- to test whether
-sets of similar trees are created. Although \textbf{scikit-learn}'s does not
+sets of similar trees are created. Although \textbf{scikit-learn} does not
 provide methods to prune, future trees should consider best practice provided by
 the framework's developers\citep{sl:tips}.
 It would also be interesting to also experiment with other algorithms (even black
@@ -89,7 +93,15 @@ series of quality control parameter sets. I also examined the effects of
 augmenting the handling of observations classified by \textbf{auto\_qc} as a
 warning and experimented with backward elimination to generate minimal yet
 accurate models, creating trees which closely resemble the behaviour of the
-simple linear rules of \textbf{auto\_qc}
+simple linear rules of \textbf{auto\_qc}.
+
+My analysis has been able to identify sets of quality control parameters that
+contribute to accurate classification of a lanelet's quality status and
+demonstrates it is possible to recover the behaviours of the Sanger Institute's
+existing \textbf{auto\_qc} system. The results of this part of the study also
+open up ideas for future
+research, for example, how to best handle observations with warnings and methods
+to measure parameters importance to inform selection of best features.
 
 This part of the project left off on an excellent starting point for continuing
 analysis with the identification of lanelets which cause changes in the results
@@ -99,33 +111,37 @@ I.
 
 Part II introduced \textbf{Goldilocks}, a Python script used to find a
 representative genomic region that expressed a desired density of variants
-across different studies, nicknamed the "Goldilocks genome". Alongside this, a
-\textbf{pipeline} was outlined for analysis of thousands of samples of the
-Goldilocks region. Whilst the \textbf{pipeline} is still in the process of being
-developed, I've already made several contributions to \textbf{samtools};
-updating documentation, patching minor memory leaks and conducting an
-investigation on poor time performance.
+across different studies, nicknamed the "Goldilocks genome". My analysis located
+an optimal region for our study on chromosome three, as described in
+Chapter~\ref{chap:goldi-results}. Alongside this, a \textbf{pipeline} was
+outlined for analysis of thousands of samples of the Goldilocks region.  Whilst
+the \textbf{pipeline} is still in the process of being developed, I've already
+made several contributions to \textbf{samtools} -- a widely used
+collection of bioinformatics tools -- by updating documentation,
+patching minor memory leaks and conducting an investigation on the poor time
+performance of the sample merging algorithm.
 
 In addition to this, as part of the project I also submitted bug fixes and
-minor contributions to Sanger's \textbf{bamcheckr} tool which are now in place
+made minor contributions to Sanger's internal \textbf{bamcheckr} tool which is
+responsible for the generation of the "BAMcheckr'd" input data used by
+\textbf{Frontier} for analysis. These changes are now in place
 at the institute. \textbf{Frontier} even turned out to be more efficient than
-\textbf{bamcheckr} for the recovery of additional parameters.
+\textbf{bamcheckr} for the recovery of additional parameters as discussed in
+Appendix~\ref{app:ratios}!
 
 This project has produced a potentially wide reaching Python package in
 the form of \textbf{Frontier}, applicable to a variety of statistical or machine
 learning problems. Although \textbf{Goldilocks} may not appear to have much of
-an audience a 2003 paper\citep{kendal2003exponential}\footnote{Titled \textit{An Exponential
+an audience, a 2003 paper\citep{kendal2003exponential}\footnote{Titled \textit{An Exponential
 Dispersion Model for the Distribution of Human Single Nucleotide
 Polymorphisms}\citep{kendal2003exponential}} analysed the spread of SNPs
 across regions of the human genome to assert whether variants could be modelled
-with a statistical distribution, a clear use case for \textbf{Goldilocks}.
+with a statistical distribution, a clear use case for the functionality of
+\textbf{Goldilocks}.
 
-
-
-
-
-%*******************************************************************************
-
-
-
-
+The studies conducted provide immediately useful results for
+teams at the Sanger Institute, identifying some lanelet features in the
+\textbf{TOP9} set that were previously unexpected to have much impact on
+quality and also offering a comparison on the results gained by augmenting the handling
+of \textbf{auto\_qc}'s warnings. These findings can go on to update the current
+system in place and lead to further studies in the future.
