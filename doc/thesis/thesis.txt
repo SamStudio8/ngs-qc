@@ -29,17 +29,16 @@ Sam Nicholls
 Abstract
 
 Over the past few years advances in genetic sequencing hardware have introduced the concept of massively
-parallel DNA sequencing, allowing potentially billions of chemical reactions to occur simultaneously, reducing
-both time and cost required to perform genetic analysis[1]. However, these "next-generation" processes are
-complex and open to error[2], thus quality control is an essential step to assure confidence in any downstream
-analyses performed.
+parallel DNA sequencing, reducing both the time and cost involved in performing genetic analysis. However,
+these "next-generation" processes are complicated and open to error, thus quality control is an essential step
+to assure confidence in any downstream analyses carried out.
 This project investigates the accuracy of a range of decision tree classifiers for a series of quality control data
 sets and shows it is possible to generate minimal yet accurate models, creating trees which closely resemble
 the behaviour of an already existing QC system.
 This project also introduces Frontier, a Python package which provides users with interfaces for the reading,
 storage and retrieval of large machine learning data sets; Goldilocks, a Python class which can be used to find
-a region on a genome that expresses a desired density of variants across different studies; and bug fixes to an
-internal tool used as the Sanger Institute and existing widely used open-source bioinformatics software.
+a region on a genome that expresses a desired density of variants across different studies; and contributions to
+internal tools used as the Sanger Institute and existing widely used open-source bioinformatics software.
 
 Contents
 Contents
@@ -596,13 +595,12 @@ become the project’s acceptance tests (providing we have an empirical definiti
 means in terms of this system) and any modification can be classed as an experiment ("Do these parameters
 allow us to reject the null hypothesis?"). Although care must be taken not to let this descend into unstructured
 cycles of mere hack-and-test, code-and-fix style programming.
-Overall it is difficult to select a methodology for a project such as this as the research element makes it
-almost impossible to draw on previous personal experience for ideas of what development processes would be
+Overall it is difficult to select a methodology for a project such as this as the research element makes it almost
+impossible to draw on previous personal experience for ideas of what development processes are effective.
 
 3
 
 1.2 Project Method
-effective.
 
 1.2.2
 
