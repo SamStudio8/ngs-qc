@@ -380,6 +380,28 @@ All data was provided, rather than using the \textbf{IGNWARN} or
 \textbf{WARNPASS} augmentations for this process. In future it would be
 interesting to repeat the selection experiment with augmentations activated.
 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l}
+        A-percent-mean-below-baseline                     \\
+        duplicate-mapped-ratio                            \\
+        fwd-percent-insertions-above-baseline             \\
+        insert-size-average                               \\
+        max-max-baseline-deviation                        \\
+        quality-dropoff-fwd-mean-runmed-decline-low-value \\
+        quality-dropoff-rev-mean-runmed-decline-low-value \\
+        rev-percent-insertions-above-baseline             \\
+        rev-percent-insertions-below-baseline             \\
+    \end{tabular}
+
+    \caption[top9-params]{\textbf{TOP9 Parameter Set}: Features selected by a
+        backward elimination experiment providing all observations to an
+        iterative decision tree classifier and removing the least important
+        feature until cross-validation fell below a threshold.
+    }
+    \label{tab:top9-params}
+\end{table}
+
 
 \subsection{Experiment Results}
 

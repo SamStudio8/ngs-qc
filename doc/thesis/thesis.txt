@@ -275,7 +275,7 @@ Experiment Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Summary of Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
 
-Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
 
 Identification of Qualitative Sample Properties
 Introduction and Motivation
@@ -1693,6 +1693,18 @@ process. In future it would be interesting to repeat the selection experiment wi
 31
 
 5.4 Informed Parameter Selection
+A-percent-mean-below-baseline
+duplicate-mapped-ratio
+fwd-percent-insertions-above-baseline
+insert-size-average
+max-max-baseline-deviation
+quality-dropoff-fwd-mean-runmed-decline-low-value
+quality-dropoff-rev-mean-runmed-decline-low-value
+rev-percent-insertions-above-baseline
+rev-percent-insertions-below-baseline
+Table 5.3 TOP9 Parameter Set: Features selected by a backward elimination experiment providing
+all observations to an iterative decision tree classifier and removing the least important feature until
+cross-validation fell below a threshold.
 
 5.4.2
 
@@ -1755,14 +1767,14 @@ quality-dropoff-rev-mean-runmed
 Most Important Feature
 
 -decline-low-value (34%)
-Table 5.3 Backward Elimination Parameter Set Cross Validation Scores: Results of classifying testing
+Table 5.4 Backward Elimination Parameter Set Cross Validation Scores: Results of classifying testing
 data. Columns left to right; parameter set name, data set name, number of parameters included, average
 cross-validation score (max 100) ± std. deviation, average stratified cross-validation score (max 100) ± std.
 deviation, average depth of the generated tree and the most important parameter by Gini importance (max 100).
 Tree depth and parameter importance was estimated on experiments using the stratified data. N.B. IGNWARN
 and WARNPASS data sets perform classifications on two classes (pass and fail) rather than three.
 
-Table 5.3 lists some quite impressive cross-validation results (particularly for classifiers which augment the
+Table 5.4 lists some quite impressive cross-validation results (particularly for classifiers which augment the
 warnings class data) considering only nine parameters were used in the training and testing. The average
 maximum tree depths range between 20 and 32, the upper bound now briefly overlapping the lower bound of
 the depth range of the naive sets found in Table 5.1. Clearly we are able to gain substantial accuracy on class
@@ -1777,6 +1789,9 @@ data. Note how the tree is more complex and than Figure 5.1 that uses all data a
 are some parameters we could ideally add back in to the set. Further experimentation with the stopping criteria
 for backward elimination could be considered (perhaps looking at a weighted combination of the number of
 parameters, cross-validation score and maximum depth).
+32
+
+5.5 Conclusion
 
 Fig. 5.7 TOP9 Set Decision Tree with ALL Data
 A drastic change is however apparent in Figures 5.8 and 5.9. The graphs are far more simple and linear than
@@ -1784,19 +1799,7 @@ previous figures; both width and depth are of manageable size. It would certainl
 treatment of the warnings class assists in reducing the amount of noise and thus inhibiting overfitting – there
 are no longer hundreds of uncommon combinations of parameter values that each need a node of their own to
 be plotted.
-
-32
-
-5.4 Informed Parameter Selection
-
-Fig. 5.8 TOP9 Set Decision Tree with IGNWARN Data (a)
-
-Fig. 5.9 TOP9 Set Decision Tree with IGNWARN Data (b)
-
-33
-
-5.5 Conclusion
-Given the results in Tables 5.2 and 5.3, it is arguable that treatment of warnings has a greater influence over
+Given the results in Tables 5.2 and 5.4, it is arguable that treatment of warnings has a greater influence over
 cross validation score than the parameter set does. But it should be noted that decreasing the number of
 parameters used does appear to cause a difference in the average maximum tree depth between the experiments.
 
@@ -1820,6 +1823,14 @@ without post-pruning.
 From here, Part II will undertake an investigation in to lanelet quality, identifying lanelets that improve or
 detriment downstream analysis. Searching for relationships or trends in the parameters of these particular
 lanelets will fuel further investigation of some of the lines in inquiry introduced in this chapter.
+
+33
+
+5.5 Conclusion
+
+Fig. 5.8 TOP9 Set Decision Tree with IGNWARN Data (a)
+
+Fig. 5.9 TOP9 Set Decision Tree with IGNWARN Data (b)
 
 34
 
