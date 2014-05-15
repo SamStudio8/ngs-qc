@@ -1,0 +1,32 @@
+\frametitle{Frontier Example Usage}
+    \begin{minted}[mathescape,
+                %linenos,
+                numbersep=5pt,
+                gobble=8,
+                frame=lines,
+                fontsize=\tiny,
+                framesep=2mm]{python}
+
+        from Frontier import frontier
+        from Frontier.IO import DataReader, TargetReader
+
+        data_dir = "/home/sam/Projects/owl_classifier/data/"
+        target_path = "/home/sam/Projects/owl_classifier/targets.txt"
+
+        CLASSES = {
+                "hoot": {
+                    "names": ["owl", "owls"],
+                    "code": 1,
+                },
+                "unhoot": {
+                    "names": ["cat", "dog", "pancake"],
+                    "code": 0,
+                },
+        }
+
+        statplexer = frontier.Statplexer(data_dir,
+                                        target_path,
+                                        CLASSES,
+                                        DataReader,
+                                        TargetReader)
+    \end{minted}

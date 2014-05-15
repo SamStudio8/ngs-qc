@@ -1,0 +1,1654 @@
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Final Project Demonstration
+Application of Machine Learning Techniques
+to Next Generation Sequencing Quality Control
+
+Sam Nicholls
+msn
+
+Department of Computer Science
+Aberystwyth University
+
+May 15, 2014
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+1 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Aims
+Report on state of the current quality control system at Sanger
+Working with the Wellcome Trust Sanger Institute’s Human
+Genetics Informatics Team
+auto_qc classifies samples as pass, fail or warn
+Current classifier consists of hard-coded simple thresholds
+auto_qc also requires timely human intervention
+
+Goals
+Apply learning techniques to replicate current human rules
+Attempt to improve efficiency of current "warning" handling
+Identify new or unused parameters that improve classification
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+2 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Aims
+Report on state of the current quality control system at Sanger
+Working with the Wellcome Trust Sanger Institute’s Human
+Genetics Informatics Team
+auto_qc classifies samples as pass, fail or warn
+Current classifier consists of hard-coded simple thresholds
+auto_qc also requires timely human intervention
+
+Goals
+Apply learning techniques to replicate current human rules
+Attempt to improve efficiency of current "warning" handling
+Identify new or unused parameters that improve classification
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+2 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Input Data and Format
+Input: Lanelet QC Data
+Access to two of the largest studies at the institute
+13,455 "lanelets"; aggregated clusters of a sample in one lane
+auto_qc pass 9,154 (68%), fail 1,542 (11%) warn 2,759 (21%)
+
+Input Format: "BAMcheckR’d" Text Files
+Key-value statistical summary numbers from samtools stats
+samtools stats also generates tab-delimited dataframes
+measuring some metrics over cycle time
+Additional summary numbers gained by passing output of
+samtools stats through internal Sanger tool, bamcheckr
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+3 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Handling Data
+Introducing Frontier
+A Python package providing interfaces for reading, storage and
+retrieval of machine learning data sets
+Users write their own reader classes but need only provide
+implementations of two functions so any file can be used as input
+Presents an API for manipulation and extraction of stored
+data-target pairs, allowing filter by parameters or classes
+Supports ’any’ machine learning problem – user merely provides
+simple definitions of the labels
+Returns data via the API in efficient NumPy containers for direct
+use with the scikit-learn framework
+Quick and easy logging of machine learning experiments
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+4 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Frontier Example Usage
+
+from Frontier import frontier
+from Frontier.IO import DataReader, TargetReader
+data_dir = "/home/sam/Projects/owl_classifier/data/"
+target_path = "/home/sam/Projects/owl_classifier/targets.txt"
+CLASSES = {
+"hoot": {
+"names": ["owl", "owls"],
+"code": 1,
+},
+"unhoot": {
+"names": ["cat", "dog", "pancake"],
+"code": 0,
+},
+}
+statplexer = frontier.Statplexer(data_dir,
+target_path,
+CLASSES,
+DataReader,
+TargetReader)
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+5 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Introduction to the Frontier API
+Data-Target Extraction
+
+Feature Inspection
+list_parameters
+Return a sorted list of all
+parameters
+find_parameters
+Return parameters which
+contain any of the input
+strings as a substring
+exclude_parameters
+Return parameters which
+do not contain any of the
+input strings as a substring
+Sam Nicholls (Aberystwyth University)
+
+get_data_by_parameters
+Return data for all
+observations, but only
+include columns for each
+parameter in a given list
+get_data_by_target
+Return data for
+observations that have
+been classified as one of
+the targets specified and
+only return columns for the
+parameters in the given list
+
+Final Project Demonstration
+
+May 15, 2014
+
+6 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Contributions to Current QC System
+bamcheckr; an in-house tool written in R
+Supplements samtools stats key-value summary numbers
+which are then used by the current auto_qc system
+What did I do?
+Patched a bug that prevented plotting of diagnostic graphs
+Authored additional routines to recover "missing" percentage and
+ratio based quality parameters that were typically calculated
+outside of bamcheckr...
+...although Frontier turned out to be more efficient for this task
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+7 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Testing Parameter Sets
+Set
+ALL
+AQC
+AQCN
+ERROR
+NO_ERROR
+BASELINE
+NOBASELINE
+MARP
+NO_MARP
+
+#
+86
+27
+21
+1
+85
+34
+52
+47
+39
+
+CV ± SD
+90 ± 4
+87 ± 4
+86 ± 4
+60 ± 6
+90 ± 4
+82 ± 5
+72 ± 10
+87 ± 4
+75 ± 7
+
+SCV ± SD
+97 ± 1
+95 ± 1
+95 ± 1
+61 ± 2
+97 ± 1
+89 ± 1
+91 ± 1
+95 ± 1
+87 ± 1
+
+Depth
+38
+36
+39
+53
+38
+46
+31
+39
+38
+
+Most Important Feature
+T-percent-max-baseline-deviation (27%)
+T-percent-max-baseline-deviation (31%)
+max-max-baseline-deviation (31%)
+error-rate (100%)
+T-percent-max-above-baseline(27%)
+T-percent-max-above-baseline(28%)
+error-rate (24%)
+T-percent-max-above-baseline (27%)
+max-max-baseline-deviation (34%)
+
+Table :
+
+Parameter Set Cross Validation Scores: Results of classifying testing data into one of three classes; pass, fail or
+warn. Columns left to right; parameter set name, number of parameters included, average cross-validation score (max 100) ±
+std. deviation, average stratified cross-validation score (max 100) ± std. deviation, average depth of the generated tree and
+the most important parameter by Gini importance (max 100). Tree depth and parameter importance was estimated on
+experiments using the stratified data.
+
+No surprise that parameter superset ALL validates well
+AQC and AQCN score highly despite far smaller models
+Generally good performance, possibly reflecting simple linear
+nature of underlying rules or possible bias (lots of passes)
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+8 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+ALL vs. AQC
+
+Figure : ALL Set Decision Tree
+
+Figure : AQC Set Decision Tree
+https://github.com/SamStudio8/frontier/tree/master/results/front/
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+9 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Overfitting
+
+Figure : BASELINE Set Decision Tree
+
+Figure : ERROR Set Decision Tree
+https://github.com/SamStudio8/frontier/tree/master/results/front/
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+10 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Augmenting Warning Handling
+PSet
+ALL
+ALL
+
+DSet
+IGNWARN
+WARNPASS
+
+#
+86
+86
+
+CV ± SD
+96 ± 3
+95 ± 3
+
+SCV ± SD
+99 ± 0
+99 ± 0
+
+Depth
+22
+33
+
+AQC
+AQC
+
+IGNWARN
+WARNPASS
+
+27
+27
+
+94 ± 4
+92 ± 4
+
+98 ± 1
+98 ± 1
+
+26
+33
+
+Most Important Feature
+error-rate (43%)
+quality-dropoff-rev-mean-runmed
+-decline-low-value (32%)
+error-rate (44%)
+quality-dropoff-rev-mean-runmed
+-decline-low-value (33%)
+
+Table :
+
+Parameter Set Cross Validation Scores using Alternative Warning Handling: Results of classifying testing
+data. Columns left to right; parameter set name, data set name, number of parameters included, average cross-validation
+score (max 100) ± std. deviation, average stratified cross-validation score (max 100) ± std. deviation, average depth of the
+generated tree and the most important parameter by Gini importance (max 100). Tree depth and parameter importance was
+estimated on experiments using the stratified data. N.B. IGNWARN and WARNPASS data sets perform classifications on two
+classes (pass and fail) rather than three.
+
+IGNWARN discards, WARNPASS recodes as pass
+Very high validation, appears noise has been significant reduced
+when compared to the previously tabulated results
+Average maximum depth reduced
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+11 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Backward Elimination
+A-percent-mean-below-baseline
+duplicate-mapped-ratio
+fwd-percent-insertions-above-baseline
+insert-size-average
+max-max-baseline-deviation
+quality-dropoff-fwd-mean-runmed-decline-low-value
+quality-dropoff-rev-mean-runmed-decline-low-value
+rev-percent-insertions-above-baseline
+rev-percent-insertions-below-baseline
+
+Table :
+
+TOP9 Parameter Set: Features selected
+by a backward elimination experiment providing all
+observations to an iterative decision tree classifier
+and removing the least important feature until
+cross-validation fell below a threshold.
+
+Sam Nicholls (Aberystwyth University)
+
+Borrowed a method from statistical
+model design
+Repeatedly refitted trees after
+removing the least important feature
+until cross-validation fell below some
+percentage of the running average
+Would be very interesting to repeat
+this process for various
+augmentations of the warnings class
+handling
+
+Final Project Demonstration
+
+May 15, 2014
+
+12 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+TOP9 Experiment Results
+PSet
+RTOP9
+RTOP9
+RTOP9
+
+DSet
+ALL
+IGNWARN
+WARNPASS
+
+#
+9
+9
+9
+
+CV ± SD
+87 ± 6
+98 ± 1
+95 ± 3
+
+SCV ± SD
+95 ± 1
+99 ± 0
+99 ± 1
+
+Depth
+32
+20
+24
+
+Most Important Feature
+max-max-baseline-deviation (32%)
+rev-pct-insertions-above-baseline (38%)
+quality-dropoff-rev-mean-runmed
+-decline-low-value (34%)
+
+Table :
+
+Backward Elimination Parameter Set Cross Validation Scores: Results of classifying testing data. Columns left
+to right; parameter set name, data set name, number of parameters included, average cross-validation score (max 100) ± std.
+deviation, average stratified cross-validation score (max 100) ± std. deviation, average depth of the generated tree and the
+most important parameter by Gini importance (max 100). Tree depth and parameter importance was estimated on experiments
+using the stratified data. N.B. IGNWARN and WARNPASS data sets perform classifications on two classes (pass and fail)
+rather than three.
+
+Impressive validation results considering only 9 parameters
+Average maximum tree depth upper bound briefly overlaps the
+lower bound of the results found from the naive parameter sets
+Clearly we can gain accuracy on class prediction without the
+need for including every parameter in the model, TOP9 is even
+smaller than the AQC set!
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+13 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+TOP9 Decision Tree with All Data
+
+Figure : TOP9 Set Decision Tree with ALL Data
+https://github.com/SamStudio8/frontier/tree/master/results/front/
+
+More complex structure and larger size than previous figures that
+include all parameters
+Further experimentation with the stopping criteria of the
+backward elimination process should be considered
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+14 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+TOP9 Decision Trees with Warning Augmentations
+
+Figure : TOP9 Set Decision Tree
+with IGNWARN Data
+
+Figure : TOP9 Set Decision Tree
+with WARNPASS Data
+
+https://github.com/SamStudio8/frontier/tree/master/results/front/
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+15 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+TOP9 Example Decision Path
+
+Paths still exhibit some
+element of arbitrariness
+Need to further investigate
+criteria for backward
+elimination
+Surprised that the set is much
+smaller than AQC
+
+Figure : TOP9 Set Decision Tree
+with IGNWARN Data
+
+Sensible to investigate some
+form of pruning to further
+remove smaller leaves
+
+https://github.com/SamStudio8/frontier/tree/master/results/front/
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+16 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Aims
+Identify lanelet properties that affect downstream variant calling
+For better QC we need an idea of "good" and "bad"
+How does quality affect analyses performed after sequencing?
+
+Goals
+Will leaving out a sample during variant calling affect the result?
+Select a "representative" region of the human genome for
+analysis
+Compare calls on whole genome samples to "SNP chips"
+Determine what is actually "good" and "bad" for QC
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+17 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Aims
+Identify lanelet properties that affect downstream variant calling
+For better QC we need an idea of "good" and "bad"
+How does quality affect analyses performed after sequencing?
+
+Goals
+Will leaving out a sample during variant calling affect the result?
+Select a "representative" region of the human genome for
+analysis
+Compare calls on whole genome samples to "SNP chips"
+Determine what is actually "good" and "bad" for QC
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+17 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Searching for Goldilocks
+Introducing Goldilocks
+Need to locate an appropriate region for the pipeline to minimise
+computational time and resources
+Representative region – not too many or too few variants
+Need to handle variant data from two different types of study
+A Python module capable of parsing files containing
+chromosome-position pairs and conducting a variant census
+Filter and ranks censused regions of a genome based on the
+number of variants contained
+Presents an API to allow users to call any desired part of the
+module from other programs and scripts
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+18 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Top 25 1Mnt Goldilocks Regions
+i
+0234
+1074*
+5222
+3125
+0880
+3560
+4407
+1036
+2734
+3426
+0015
+0365
+3415
+1581
+3554
+3184
+1580
+1948
+2215
+0414
+2055
+0384
+0959
+4214
+0320
+
+GWAS
+297
+294
+294
+298
+293
+299
+299
+292
+300
+300
+291
+301
+301
+290
+290
+302
+289
+288
+288
+288
+304
+287
+306
+286
+307
+
+iCHIP
+470
+1540
+336
+310
+344
+772
+512
+300
+515
+486
+1029
+487
+419
+802
+403
+449
+603
+1297
+622
+346
+1377
+827
+406
+393
+620
+
+Chr
+1
+3
+21
+10
+2
+12
+15
+3
+9
+11
+1
+1
+11
+4
+12
+10
+4
+5
+7
+1
+5
+1
+2
+14
+1
+
+Sam Nicholls (Aberystwyth University)
+
+Start
+117,000,001
+46,000,001
+16,500,001
+60,000,001
+191,500,001
+9,000,001
+78,500,001
+27,000,001
+5,000,001
+76,000,001
+7,500,001
+182,500,001
+70,500,001
+102,500,001
+6,000,001
+89,500,001
+102,000,001
+96,000,001
+49,500,001
+207,000,001
+149,500,001
+192,000,001
+231,000,001
+88,500,001
+160,000,001
+
+End
+118,000,000
+47,000,000
+17,500,000
+61,000,000
+192,500,000
+10,000,000
+79,500,000
+28,000,000
+6,00,0000
+77,000,000
+8,500,000
+183,500,000
+71,500,000
+103,500,000
+7,000,000
+90,500,000
+103,000,000
+97,000,000
+50,500,000
+208,000,000
+150,500,000
+193,000,000
+232,000,000
+89,500,000
+161,000,000
+
+Final Project Demonstration
+
+Filtered by median
+GWAS (297), ranked by
+maximum iCHIP
+Initially required over an
+hour to process the
+human genome, now
+completes the task in
+less than 20 seconds
+Avoided chromosome 6
+due to presence of HLA
+system
+Suitable candidate
+1074(*) located on
+chromosome 3
+May 15, 2014
+
+19 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+GWAS vs. iCHIP Variant Densities
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+20 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+GWAS vs. iCHIP Variant Densities
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+21 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Components
+Extraction
+Extract the Goldilocks region for all GWAS study lanelets
+Indexing
+Create indexes for the extracted Goldilocks regions
+Merge
+Merge the data from each extracted region into one file
+Pileup
+Calculate genotype likelihoods based on the reads seen across
+all the extracted regions
+Call
+Use the genotype likelihood scores to call the variants for each
+position of interest in each of the Goldilocks regions
+Compare
+For each pair of GWAS and iCHIP samples, measure the
+concordance of called variants
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+22 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Components
+Extraction
+Extract the Goldilocks region for all GWAS study lanelets
+Indexing
+Create indexes for the extracted Goldilocks regions
+Merge
+Merge the data from each extracted region into one file
+Pileup
+Calculate genotype likelihoods based on the reads seen across
+all the extracted regions
+Call
+Use the genotype likelihood scores to call the variants for each
+position of interest in each of the Goldilocks regions
+Compare
+For each pair of GWAS and iCHIP samples, measure the
+concordance of called variants
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+22 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Components
+Extraction
+Extract the Goldilocks region for all GWAS study lanelets
+Indexing
+Create indexes for the extracted Goldilocks regions
+Merge
+Merge the data from each extracted region into one file
+Pileup
+Calculate genotype likelihoods based on the reads seen across
+all the extracted regions
+Call
+Use the genotype likelihood scores to call the variants for each
+position of interest in each of the Goldilocks regions
+Compare
+For each pair of GWAS and iCHIP samples, measure the
+concordance of called variants
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+22 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Components
+Extraction
+Extract the Goldilocks region for all GWAS study lanelets
+Indexing
+Create indexes for the extracted Goldilocks regions
+Merge
+Merge the data from each extracted region into one file
+Pileup
+Calculate genotype likelihoods based on the reads seen across
+all the extracted regions
+Call
+Use the genotype likelihood scores to call the variants for each
+position of interest in each of the Goldilocks regions
+Compare
+For each pair of GWAS and iCHIP samples, measure the
+concordance of called variants
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+22 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Components
+Extraction
+Extract the Goldilocks region for all GWAS study lanelets
+Indexing
+Create indexes for the extracted Goldilocks regions
+Merge
+Merge the data from each extracted region into one file
+Pileup
+Calculate genotype likelihoods based on the reads seen across
+all the extracted regions
+Call
+Use the genotype likelihood scores to call the variants for each
+position of interest in each of the Goldilocks regions
+Compare
+For each pair of GWAS and iCHIP samples, measure the
+concordance of called variants
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+22 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Components
+Extraction
+Extract the Goldilocks region for all GWAS study lanelets
+Indexing
+Create indexes for the extracted Goldilocks regions
+Merge
+Merge the data from each extracted region into one file
+Pileup
+Calculate genotype likelihoods based on the reads seen across
+all the extracted regions
+Call
+Use the genotype likelihood scores to call the variants for each
+position of interest in each of the Goldilocks regions
+Compare
+For each pair of GWAS and iCHIP samples, measure the
+concordance of called variants
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+22 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Difficulties: Pileup and Calling
+Scaling samtools mpileup
+Executing a pileup is a performance intensive task
+Initial test runs required 6.5 hours of CPU time with 1GB RAM
+Significant overhead with thousands of sample files, couldn’t
+have performed this step multiple times without merging
+Compatibility with bcftools call
+Produced only standard header information and no data as the
+pileup task had not included an appropriate reference sequence
+Using -M flag for masked reference caused software to
+segmentation fault instead
+Needed to rebuild all libraries due to compatibility trouble
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+23 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Difficulties: Pileup and Calling
+Scaling samtools mpileup
+Executing a pileup is a performance intensive task
+Initial test runs required 6.5 hours of CPU time with 1GB RAM
+Significant overhead with thousands of sample files, couldn’t
+have performed this step multiple times without merging
+Compatibility with bcftools call
+Produced only standard header information and no data as the
+pileup task had not included an appropriate reference sequence
+Using -M flag for masked reference caused software to
+segmentation fault instead
+Needed to rebuild all libraries due to compatibility trouble
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+23 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Difficulties: Merging
+Documentation for samtools merge
+Filed pull request to document feature allowing a file of filenames
+to be provided as an input instead of listing on command line
+Memory Leaks in samtools merge
+Merge jobs repeatedly killed for excessive memory use by LSF
+Discovered several memory leaks whose severity increased
+proportionally to the number of input files – fixed by author
+During testing I tracked down and patched several memory leaks
+in both the merge and split testing harnesses using valgrind
+Merge jobs then repeatedly killed for exceeding time limits
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+24 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Difficulties: Merging
+Documentation for samtools merge
+Filed pull request to document feature allowing a file of filenames
+to be provided as an input instead of listing on command line
+Memory Leaks in samtools merge
+Merge jobs repeatedly killed for excessive memory use by LSF
+Discovered several memory leaks whose severity increased
+proportionally to the number of input files – fixed by author
+During testing I tracked down and patched several memory leaks
+in both the merge and split testing harnesses using valgrind
+Merge jobs then repeatedly killed for exceeding time limits
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+24 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Pipeline Difficulties: Merging
+Time Sinks in samtools merge
+Experimented with callgrind to search for heavily used functions
+or particularly costly calls
+Found many expensive calls to zlib – an open source
+compression library – when compressing the output
+Turned out to be proportionally insignificant, using
+uncompressed output still led to long execution times
+Tried gprof to look at actual execution time rather than CPU
+instruction count, found 50% of execution time was spent
+searching for tags in data structures
+Number of files causes non-linear increase in time, now currently
+believe implementation of header parsing is very inefficient and
+just cannot scale in current form
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+25 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Conclusion
+Critical Evaluation
+Frontier greatly assisted the analysis conducted in Part I
+Happy with choice of Python and scikit-learn, project benefits
+from mutual use of NumPy containers and functions
+Many interesting lines of questioning introduced in Part I results
+Demonstrated in brief that decision trees generated exhibit
+similar behaviour to the currently existing auto_qc system
+Encouraging progress in both Part I and II but ultimately cut
+short due to unexpected difficulties with the pipeline components
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+26 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Conclusion
+In summary this project...
+Introduced Frontier, a Python package providing users with
+interfaces for reading, storage and retrieval of large machine
+learning data sets
+Used Frontier and scikit-learn to conduct preliminary analysis
+as to whether behaviour of the current QC system could be
+recovered via machine learning
+Identified parameters (TOP9) that contribute to accurate
+classification and showed ignoring warnings reduces noise
+Created Goldilocks for locating an appropriate genomic region
+for use in Part II analysis
+Outlined a pipeline for processing thousands of samples
+Produced contributions to widely used bioinformatics tools
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+27 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Conclusion
+Future Plans
+Complete the assembly of the analysis pipeline (most likely
+requiring substantial additions to samtools merge)
+Use concordance results from Part II to inform new lines of
+inquiry where Part I left off
+Continue development of Frontier and submit to PyPi
+Explore use of other machine learning algorithms and
+frameworks and their application to the task of quality control
+classification
+Investigate post-pruning algorithms and ensemble methods as
+decision trees cannot promise optimality
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+28 / 29
+
+Part I
+
+Frontier
+
+AQC
+
+Part II
+
+Goldilocks
+
+Pipeline
+
+Conclusion
+
+Conclusion
+
+Questions?
+
+Sam Nicholls (Aberystwyth University)
+
+Final Project Demonstration
+
+May 15, 2014
+
+29 / 29
+
+
